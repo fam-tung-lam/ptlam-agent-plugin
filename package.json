@@ -1,0 +1,39 @@
+{
+  "name": "ptlam-agent-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pham Tung Lam's portable agent plugin and skill catalog.",
+  "scripts": {
+    "plugin:check": "plugin-compiler check",
+    "plugin:compile": "plugin-compiler generate",
+    "plugin:consumer": "vitest run tests/plugin-compiler-consumer/integration-tests/installed-plugin-compiler.test.ts",
+    "plugin:validate": "plugin-compiler validate",
+    "plugin:verify": "npm run plugin:validate && npm run plugin:check",
+    "code:check": "biome check .",
+    "code:format": "biome check --write .",
+    "code:typecheck": "tsc --project tsconfig.json",
+    "markdown:check": "npm run markdown:format:check && npm run markdown:lint",
+    "markdown:format": "prettier --write \"**/*.{md,mdx}\"",
+    "markdown:format:check": "prettier --check \"**/*.{md,mdx}\"",
+    "markdown:lint": "markdownlint-cli2",
+    "markdown:lint:fix": "markdownlint-cli2 --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.7",
+    "@fam-tung-lam/ptlam-agent-plugin-compiler": "0.1.0-alpha.1",
+    "@types/node": "22.20.1",
+    "@vitest/coverage-v8": "4.1.10",
+    "markdownlint-cli2": "0.23.2",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2",
+    "vite": "6.4.3",
+    "vitest": "4.1.10"
+  }
+}

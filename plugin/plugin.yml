@@ -1,0 +1,180 @@
+# Version of the plugin.yml structure understood by the compiler.
+# Change only when the manifest schema becomes incompatible.
+schema_version: 1
+
+name: ptlam-agent-plugin
+description:
+  A curated collection of portable agent skills for engineering, productivity,
+  and utility workflows.
+
+# Plugin version. Build metadata after "+" does not affect SemVer
+# precedence.
+version: "0.1.0-alpha.4"
+
+author:
+  name: Pham Tung Lam
+  email: fam.tung.lam@gmail.com
+  url: https://github.com/fam-tung-lam
+homepage: https://github.com/fam-tung-lam/ptlam-agent-plugin#readme
+repository: https://github.com/fam-tung-lam/ptlam-agent-plugin
+license: MIT
+keywords:
+  - agent-skills
+  - engineering
+  - productivity
+  - utilities
+
+marketplace:
+  name: ptlam
+  description:
+    PTLam's portable agent skills as an installable Claude Code plugin.
+  plugin_description:
+    Portable agent skills for engineering, productivity, and utility workflows.
+  category: development
+  keywords:
+    - agent-skills
+    - engineering
+    - productivity
+
+categories:
+  - id: engineering
+    name: Engineering
+    description: Skills for reviewing and delivering software changes.
+  - id: productivity
+    name: Productivity
+    description: Skills for planning work and communicating ideas clearly.
+  - id: utilities
+    name: Utilities
+    description: Focused helpers for small, repeatable transformations.
+
+skills:
+  - id: ptlam-git
+    description:
+      Apply PTLam's commit-message preferences and maintain project-local Git
+      context. Use for repository-tied Git work that should load current facts
+      or preferences from CONTEXT.md; for recording, refreshing, or
+      consolidating durable Git context; and for creating or changing a commit
+      message. Apply current user, repository, and CONTEXT.md preferences before
+      the portable defaults.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-testing
+    description:
+      Design, write, update, run, review, and diagnose automated tests at unit,
+      integration, and end-to-end levels. Use when an agent needs to select a
+      test level, add or repair tests, improve testability, assess test quality,
+      audit test code for compliance, maintain or refresh project-local testing
+      context, resolve a project's testing environment, select or
+      recommend compatible test tools, or follow an explicitly requested
+      test-first or Red-Green-Refactor workflow. Do not infer TDD merely from a
+      request for tests or integration testing.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-testing-typescript
+    description:
+      Design, write, update, run, audit, and diagnose tests for framework-free,
+      browser-free TypeScript libraries, Node.js code, CLIs, and tooling with
+      Vite, Vitest, and Vitest V8 coverage. Use when such a project needs test
+      implementation, Vitest configuration, coverage, mocking, Node
+      environments, type tests, or stack-specific testing review. Apply
+      ptlam-testing first for testing scope, level, behavior, placement, test
+      doubles, TDD, and audit authority. Do not use this specialization for web
+      frameworks, DOM code, or browser-runtime testing.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-testing
+        reason: Provides the universal testing workflow and mandatory rules.
+        instructions: |-
+          Read and apply ptlam-testing first.
+          Let it own scope, level, public seam, behavior, doubles, TDD, audit
+          authority, and verification depth.
+          Use this skill's source-adjacent placement instead of the foundation's
+          generic test-root placement.
+          Apply it only to framework-free, browser-free TypeScript, Vite, Vitest,
+          and coverage mechanics left open by the foundation.
+  - id: ptlam-creating-skill
+    description:
+      Create, review, or refactor predictable agent skills through explicit
+      invocation, distinct branches, information hierarchy, completion criteria,
+      context pointers, and single-source package design. Use when the user asks
+      to turn a workflow or reference set into a new skill, revise an existing
+      SKILL.md, or audit a skill without editing it. Resolve target-specific
+      authored and generated boundaries and verify the package statically.
+      Tests, evals, benchmarks, grading, comparisons, and trigger optimization
+      remain outside this skill's scope.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-grilling
+    description:
+      Conduct a persistent, interactive stress test of a plan, decision, or idea
+      through one user-owned decision at a time. Use when the user explicitly
+      requests a sequential grilling interview or explicitly asks to resume a
+      prior grilling session; handle ordinary critique or risk-review requests as
+      direct analysis. Research discoverable facts independently, expose
+      assumptions, contradictions, risks, and trade-offs, recommend an answer for
+      every decision, wait after each question, and require confirmed shared
+      understanding before any resulting action.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-creating-atomic-note
+    description:
+      Create, review, split, or merge atomic notes for Zettelkasten, evergreen
+      notes, Obsidian, and other personal knowledge systems. Use when the user
+      wants to capture an idea or source as a durable note, turn highlights or
+      rough writing into self-contained notes, sharpen a vague note title,
+      assess whether a note contains one independently linkable claim, split a
+      broad note, or merge duplicate notes. Preserve local vault conventions,
+      paraphrase source material with attribution, and annotate why links exist.
+      Do not use for meeting minutes, task lists, project status notes, general
+      journaling, or note-app support without knowledge-development intent.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-explaining-with-analogy
+    description:
+      Explain an unfamiliar, abstract, or complex concept through one coherent
+      real-life analogy, a stable mapping table, a short story, and explicit
+      caveats. Use only when the user explicitly asks for an analogy to help
+      them understand or learn a concept. Do not invoke for a general request
+      to explain, define, simplify, or break down a concept unless that same
+      request explicitly asks for an analogy.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-visualization-with-html
+    description:
+      Create or revise portable, polished, interactive HTML explainers and
+      learning artifacts with native HTML, CSS, JavaScript, SVG, and one
+      Material 3 Expressive design system. Use when a user asks to visualize
+      architecture, workflows, state changes, sequences, entity relationships,
+      semantic zoom, or step-by-step behavior in an HTML file; when a learner
+      should manipulate or observe a diagram rather than read long prose; or
+      when a top-to-bottom visual field guide or simulator is requested. Apply
+      the analogy dependency first only when the user explicitly asks to create
+      an analogy. Use a general application or site workflow for ordinary pages,
+      dashboards, and app-shell UI.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining-with-analogy
+        reason:
+          Owns analogy selection and explanation semantics before HTML rendering.
+        instructions: |-
+          Apply ptlam-explaining-with-analogy only when the user explicitly asks
+          to create an analogy and has not already supplied or chosen one.
+          Let it own the literal model, candidates, user choice, stable mapping,
+          story, and caveats. Resume this visualization skill after the choice
+          and let it own only the portable HTML rendering and visual interaction.

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
+  "globs": ["**/*.{md,mdx}"],
+  "ignores": [
+    ".agents/**",
+    ".lavish/**",
+    ".ptlam/**",
+    "local/**",
+    "node_modules/**",
+    "skills/**",
+    "tests/**/integration-tests/results/**",
+  ],
+  "config": {
+    "default": true,
+    "MD013": {
+      "line_length": 80,
+      "code_blocks": false,
+      "tables": false,
+    },
+  },
+}

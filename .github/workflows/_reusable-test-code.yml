@@ -1,0 +1,24 @@
+name: Test code
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test_code:
+    name: Test code and collect coverage
+    if: >-
+      github.event_name != 'pull_request' || !github.event.pull_request.draft
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js and dependencies
+        uses: ./.github/actions/set-up-node
+      - name: Run tests with coverage
+        run: npm run test:coverage

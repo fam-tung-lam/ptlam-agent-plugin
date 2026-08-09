@@ -1,14 +1,15 @@
 {
-  "name": "ptlam-skills",
-  "version": "0.1.0",
+  "name": "ptlam-agent-plugin",
+  "version": "0.1.0-alpha.4",
   "description": "A curated collection of portable agent skills for engineering, productivity, and utility workflows.",
   "author": {
     "name": "Pham Tung Lam",
     "email": "fam.tung.lam@gmail.com",
     "url": "https://github.com/fam-tung-lam"
   },
-  "homepage": "https://github.com/fam-tung-lam/ptlam-skills#readme",
-  "repository": "https://github.com/fam-tung-lam/ptlam-skills",
+  "homepage": "https://github.com/fam-tung-lam/ptlam-agent-plugin#readme",
+  "repository": "https://github.com/fam-tung-lam/ptlam-agent-plugin",
+  "license": "MIT",
   "keywords": [
     "agent-skills",
     "engineering",
@@ -16,8 +17,13 @@
     "utilities"
   ],
   "skills": [
-    "./skills/engineering/test-review-change",
-    "./skills/productivity/test-plan-task",
-    "./skills/utilities/test-format-text"
+    "./skills/ptlam-git",
+    "./skills/ptlam-testing",
+    "./skills/ptlam-testing-typescript",
+    "./skills/ptlam-creating-skill",
+    "./skills/ptlam-grilling",
+    "./skills/ptlam-creating-atomic-note",
+    "./skills/ptlam-explaining-with-analogy",
+    "./skills/ptlam-visualization-with-html"
   ]
 }
