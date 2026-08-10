@@ -98,8 +98,9 @@ use the committed manifest selection.
 6. Run the full local quality gates before opening a pull request.
 7. Commit only the files that belong to the change.
 
-During normal active development, keep the plugin version unchanged. This
-repository currently has no continuous-delivery or publication workflow.
+During normal active development, keep the plugin version unchanged. A
+maintainer preparing a GitHub Release follows the separate
+[release guide](RELEASE.md).
 
 ## Commands
 
@@ -117,6 +118,7 @@ Run all commands from the repository root.
 | `npm run code:format`     | Apply Biome fixes                                     | Yes    |
 | `npm run markdown:check`  | Check Markdown formatting and lint rules              | No     |
 | `npm run markdown:format` | Format project Markdown                               | Yes    |
+| `npm run release:check`   | Validate version and GitHub Release metadata          | No     |
 | `npm test`                | Run the Vitest suite once                             | No     |
 | `npm run test:coverage`   | Run tests and enforce coverage thresholds             | Yes\*  |
 | `npm run test:watch`      | Run Vitest in watch mode                              | No     |
@@ -147,6 +149,7 @@ list, such as `--provider claude,codex`. Do not repeat `--provider`. The
 Run the same gates used by continuous integration:
 
 ```bash
+npm run release:check
 npm run plugin:verify
 npm run plugin:consumer
 npm run code:typecheck
@@ -155,6 +158,11 @@ npm run markdown:check
 npm run test:coverage
 git diff --check
 ```
+
+GitHub Actions runs these gates in one `CI Required` job for pull requests and
+pushes to `main`. A successful `main` push then triggers CD. CD creates a tag
+and GitHub Release only when that version has not already been released; it
+never publishes this private package to npm.
 
 Run focused tests first when practical, but do not substitute them for the full
 pre-pull-request gates. Test paths put the source scope before the test level.
@@ -224,8 +232,3 @@ Markdown workflows.
 
 When adding, removing, or changing a direct dependency, update `package.json`,
 `package-lock.json`, and this rationale together.
-
-## Architecture references
-
-- [Standalone plugin compiler](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler)
-- [Plugin manifest v1 schema](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler/blob/main/src/core/validation/schemas/plugin-manifest-v1.schema.ts)

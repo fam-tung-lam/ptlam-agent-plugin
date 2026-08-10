@@ -61,8 +61,10 @@ repository. Changes here may update the exact package pin, installed-package
 consumer test, package scripts, authored catalog, or generated output. Do not
 copy compiler source into the repository.
 
-Do not change the plugin version during normal feature or maintenance work. This
-repository does not currently automate publication.
+Do not change the plugin version during normal feature or maintenance work.
+Maintainers prepare version changes through the documented
+[GitHub Release workflow](docs/RELEASE.md); this project is not published to
+npm.
 
 If automation or generative AI helped produce the change, review every line and
 artifact yourself. You remain responsible for correctness, licensing, privacy,

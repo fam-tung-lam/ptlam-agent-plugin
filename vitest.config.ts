@@ -8,7 +8,7 @@ export default defineConfig({
     restoreMocks: true,
     coverage: {
       provider: "v8",
-      exclude: ["tests/**", "**/*.config.ts"],
+      exclude: ["tests/**", ".github/scripts/**", "**/*.config.ts"],
       include: ["plugin/**/*.ts"],
       reporter: ["text", "json-summary", "html"],
       reportsDirectory: "coverage",

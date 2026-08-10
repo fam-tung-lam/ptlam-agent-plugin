@@ -2,7 +2,7 @@
 schema_version: 1
 skill: ptlam-git
 canonical_path: skills/engineering/ptlam-git
-updated_at: 2026-08-09
+updated_at: 2026-08-10
 ---
 
 # Project Git Context
@@ -22,12 +22,15 @@ updated_at: 2026-08-09
 ## Git flow
 
 - Start focused work on a descriptive short-lived branch from current `main`.
-- Change authored catalog sources under `../../../../plugin`; run the plugin compiler and
-  review its generated `../../../../skills`, host metadata, and catalog output in the same
-  change.
+- Change authored catalog sources under `../../../../plugin`; run the plugin
+  compiler and review its generated `../../../../skills`, host metadata, and
+  catalog output in the same change.
 - Keep the plugin version unchanged during normal feature and maintenance work.
-- The repository currently uses CI only. It has no CD or automated publication
-  workflow.
+- A version change merged to `main` is the GitHub Release signal. After the
+  merged commit passes `CI Required`, CD creates or verifies the annotated
+  `v<version>` tag and a matching GitHub Release. It does not publish to npm.
+- [The release guide](../../../../docs/RELEASE.md) owns the release preparation,
+  tag, changelog, source-archive, and failure-recovery workflow.
 - Run the repository quality gates before requesting review.
 
 ## Git preferences

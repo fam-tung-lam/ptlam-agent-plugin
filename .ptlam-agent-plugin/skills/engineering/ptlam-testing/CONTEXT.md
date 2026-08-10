@@ -2,14 +2,15 @@
 schema_version: 1
 skill: ptlam-testing
 canonical_path: skills/engineering/ptlam-testing
-updated_at: 2026-08-09
+updated_at: 2026-08-10
 ---
 
 # Project Testing Context
 
 ## Project profile
 
-- Scope: TypeScript skill tooling under `../../../../plugin` and repository tests.
+- Scope: TypeScript skill tooling under `../../../../plugin`, GitHub Release
+  validation under `../../../../.github/scripts`, and repository tests.
 - Runtime: Node.js 22.6 or newer in an ESM package. Use npm with the committed
   root lockfile. TypeScript entry points executed directly by Node use erasable
   syntax supported by the strip-only runtime.
@@ -18,8 +19,8 @@ updated_at: 2026-08-09
 - [`../../../../package.json`](../../../../package.json),
   [`../../../../tsconfig.json`](../../../../tsconfig.json),
   [`../../../../vitest.config.ts`](../../../../vitest.config.ts), and
-  [`../../../../biome.json`](../../../../biome.json) own the active runtime, toolchain, test,
-  coverage, type-checking, lint, and formatting configuration.
+  [`../../../../biome.json`](../../../../biome.json) own the active runtime,
+  toolchain, test, coverage, type-checking, lint, and formatting configuration.
 - Revalidate this context when any governing file, CI workflow, supported Node
   version, test root, or quality command changes.
 
@@ -27,36 +28,45 @@ updated_at: 2026-08-09
 
 ### Repository TypeScript
 
-- Applies to canonical TypeScript under `../../../../plugin`, with tests under `../../../../tests`.
-  Compiler-generated `../../../../skills`,
-  `../../../../.claude-plugin`, and `../../../../.codex-plugin` outputs are validated through the
-  installed compiler package's drift checks rather than counted as a second
-  tested implementation. The root `../../../../README.md` is human-owned and outside
+- Applies to canonical TypeScript under `../../../../plugin` and
+  `../../../../.github/scripts`, with tests under `../../../../tests`.
+  Compiler-generated `../../../../skills`, `../../../../.claude-plugin`, and
+  `../../../../.codex-plugin` outputs are validated through the installed
+  compiler package's drift checks rather than counted as a second tested
+  implementation. The root `../../../../README.md` is human-owned and outside
   compiler access.
 - Use strict `tsc --noEmit` for static analysis, Vitest for tests, lifecycle,
-  spies, and mocks, V8 for coverage, and Biome for TypeScript linting and
-  formatting. The root package manifest and lockfile own exact versions.
+  spies, and mocks, V8 for product-code coverage, and Biome for TypeScript
+  linting and formatting. The root package manifest and lockfile own exact
+  versions.
 - Put the production or capability scope before the test level. Use the
   repository names `unit-tests/`, `integration-tests/`, and
   `conformance-tests/`, then mirror deeper capability folders when useful. The
   installed compiler package boundary is exercised by
-  `../../../../tests/plugin-compiler-consumer/integration-tests`. This documented
-  repository layout is an explicit project-local override of the TypeScript
+  `../../../../tests/plugin-compiler-consumer/integration-tests`. GitHub Release
+  validation tests mirror `.github/scripts` under
+  `../../../../tests/.github/scripts/unit-tests`. This documented repository
+  layout is an explicit project-local override of the TypeScript
   specialization's general source-adjacent placement preference.
-- Treat `../../../../plugin/skills` as authored test input. The compiler creates one
-  provider-neutral `../../../../skills` tree, including `../../../../skills/README.md`, while plugin
-  drift checks cover each provider's exact manifest paths.
+- Treat `../../../../plugin/skills` as authored test input. The compiler creates
+  one provider-neutral `../../../../skills` tree, including
+  `../../../../skills/README.md`, while plugin drift checks cover each provider's
+  exact manifest paths.
 - Use explicit `GIVEN`, `WHEN`, and `THEN` comments in every test.
 - Keep reusable semantic fakes beside their nearest common test scope. Use
   `vi.fn` or `vi.spyOn` for one-off observable interactions.
 - `npm test` runs `tests/**/*.test.ts`; `npm run test:coverage` measures the
-  canonical TypeScript roots with global minimums of 90% for statements, lines,
-  and functions and 80% for branches.
-- Run the full gate sequence in repository order: `npm run plugin:verify`,
-  `npm run plugin:consumer`, `npm run code:typecheck`, `npm run code:check`,
-  `npm run markdown:check`, `npm run test:coverage`, and `git diff --check`.
-- CI runs plugin verification, the installed-package consumer gate, project
-  analysis, then tests and coverage on pull requests and pushes to `main`.
+  canonical `plugin/**/*.ts` product roots with global minimums of 90% for
+  statements, lines, and functions and 80% for branches. GitHub Release
+  automation has focused unit tests but stays outside the product coverage
+  denominator.
+- Run the full gate sequence in repository order: `npm run release:check`,
+  `npm run plugin:verify`, `npm run plugin:consumer`,
+  `npm run code:typecheck`, `npm run code:check`, `npm run markdown:check`,
+  `npm run test:coverage`, and `git diff --check`.
+- CI runs release metadata validation, plugin verification, the
+  installed-package consumer gate, project analysis, tests, and coverage in one
+  required job on pull requests and pushes to `main`.
 
 ## Testing preferences
 

@@ -1,0 +1,147 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Create GitHub Release
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Check out the validated commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: ./.github/actions/set-up-node-runtime
+      - name: Read and validate release metadata
+        id: release
+        run: >-
+          node --experimental-strip-types
+          .github/scripts/validate-release-metadata.ts
+      - name: Create or verify the GitHub Release
+        env:
+          PRERELEASE: ${{ steps.release.outputs.prerelease }}
+          RELEASE_TITLE: ${{ steps.release.outputs.title }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+          TAG_NAME: ${{ steps.release.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag_exists=false
+          if tag_ref="$(
+            gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG_NAME}" \
+              2>/dev/null
+          )"; then
+            tag_exists=true
+            tag_type="$(jq -r .object.type <<<"${tag_ref}")"
+            tag_sha="$(
+              gh api "repos/${GITHUB_REPOSITORY}/commits/${TAG_NAME}" --jq .sha
+            )"
+          fi
+
+          if release_json="$(
+            gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG_NAME}" \
+              2>/dev/null
+          )"; then
+            existing_title="$(jq -r .name <<<"${release_json}")"
+            existing_draft="$(jq -r .draft <<<"${release_json}")"
+            existing_prerelease="$(jq -r .prerelease <<<"${release_json}")"
+            existing_body="$(jq -r '.body // ""' <<<"${release_json}")"
+            if [[ "${existing_title}" != "${RELEASE_TITLE}" || \
+              "${existing_draft}" != "false" || \
+              "${existing_prerelease}" != "${PRERELEASE}" || \
+              -z "${existing_body}" ]]; then
+              echo "Existing ${TAG_NAME} release metadata is incompatible." >&2
+              exit 1
+            fi
+            if [[ "${tag_exists}" != "true" ]]; then
+              echo "Existing release ${TAG_NAME} has no matching Git tag." >&2
+              exit 1
+            fi
+            if [[ "${tag_type}" != "tag" ]]; then
+              echo "Existing ${TAG_NAME} is not an annotated Git tag." >&2
+              exit 1
+            fi
+            echo "${TAG_NAME} already exists with compatible release metadata."
+            release_state=verified
+          else
+            if [[ "${tag_exists}" == "true" ]]; then
+              if [[ "${tag_type}" != "tag" ]]; then
+                echo "Existing ${TAG_NAME} is not an annotated Git tag." >&2
+                exit 1
+              fi
+              if [[ "${tag_sha}" != "${RELEASE_SHA}" ]]; then
+                echo \
+                  "${TAG_NAME} points to ${tag_sha}, not ${RELEASE_SHA}." \
+                  >&2
+                exit 1
+              fi
+            else
+              tag_object_sha="$(
+                gh api --method POST \
+                  "repos/${GITHUB_REPOSITORY}/git/tags" \
+                  -f "tag=${TAG_NAME}" \
+                  -f "message=Release ${RELEASE_TITLE}" \
+                  -f "object=${RELEASE_SHA}" \
+                  -f type=commit \
+                  --jq .sha
+              )"
+              gh api --method POST \
+                "repos/${GITHUB_REPOSITORY}/git/refs" \
+                -f "ref=refs/tags/${TAG_NAME}" \
+                -f "sha=${tag_object_sha}" \
+                --silent
+              tag_sha="${RELEASE_SHA}"
+            fi
+
+            arguments=(
+              release create "${TAG_NAME}"
+              --fail-on-no-commits
+              --generate-notes
+              --target "${RELEASE_SHA}"
+              --title "${RELEASE_TITLE}"
+              --verify-tag
+            )
+            if [[ "${PRERELEASE}" == "true" ]]; then
+              arguments+=(--prerelease --latest=false)
+            else
+              arguments+=(--latest)
+            fi
+            gh "${arguments[@]}"
+            release_state=created
+          fi
+
+          {
+            echo "## ${RELEASE_TITLE}"
+            echo
+            echo "- Version: \`${RELEASE_VERSION}\`"
+            echo "- Tag: \`${TAG_NAME}\`"
+            echo "- Commit: \`${tag_sha}\`"
+            echo "- State: ${release_state}"
+            echo "- Source archives: ZIP and tar.gz generated by GitHub"
+          } >>"${GITHUB_STEP_SUMMARY}"

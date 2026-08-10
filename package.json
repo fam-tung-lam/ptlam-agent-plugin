@@ -18,6 +18,7 @@
     "markdown:format:check": "prettier --check \"**/*.{md,mdx}\"",
     "markdown:lint": "markdownlint-cli2",
     "markdown:lint:fix": "markdownlint-cli2 --fix",
+    "release:check": "node --experimental-strip-types .github/scripts/validate-release-metadata.ts",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"

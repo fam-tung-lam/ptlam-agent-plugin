@@ -81,6 +81,8 @@ npx skills@latest update
   expectations, and the contributor workflow.
 - [Development guide](docs/DEVELOPMENT.md): local setup, source and generated
   files, commands, maintenance workflows, and quality gates.
+- [Release guide](docs/RELEASE.md): version preparation, CI/CD behavior, Git
+  tags, changelog notes, and source archives.
 - [Plugin compiler](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler):
   sole implementation authority, package documentation, architecture,
   guarantees, and result contracts. This repository consumes the immutable
