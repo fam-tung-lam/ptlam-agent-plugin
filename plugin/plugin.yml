@@ -2,6 +2,10 @@
 # Change only when the manifest schema becomes incompatible.
 schema_version: 1
 
+providers:
+  - claude
+  - codex
+
 name: ptlam-agent-plugin
 description:
   A curated collection of portable agent skills for engineering, productivity,
@@ -23,18 +27,6 @@ keywords:
   - engineering
   - productivity
   - utilities
-
-marketplace:
-  name: ptlam
-  description:
-    PTLam's portable agent skills as an installable Claude Code plugin.
-  plugin_description:
-    Portable agent skills for engineering, productivity, and utility workflows.
-  category: development
-  keywords:
-    - agent-skills
-    - engineering
-    - productivity
 
 categories:
   - id: engineering

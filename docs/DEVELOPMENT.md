@@ -10,7 +10,7 @@ authored catalog for supported agent ecosystems; the compiler is not an
 installer.
 
 `package.json` pins the exact prerelease package
-`@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.0-alpha.1`. The standalone
+`@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.0-alpha.4`. The standalone
 repository has sole implementation custody: this repository contains no compiler
 implementation or focused implementation tests. Every compiler command resolves
 the installed package from the committed lockfile.
@@ -47,7 +47,7 @@ not manually edit `node_modules/` or commit it.
 
 ```text
 plugin/
-├── plugin.yml                         # authored catalog
+├── plugin.yml                         # authored catalog and provider selection
 └── skills/
     └── <skill-id>/                    # authored skill
         ├── SKILL.md
@@ -65,7 +65,7 @@ skills/
 ├── README.md                          # generated available-skills catalog
 └── <public-skill-id>/                 # generated public skill
     ├── SKILL.md
-    └── references/required-skills/
+    └── skills/
 ```
 
 Edit `plugin/plugin.yml` and `plugin/skills/`. The compiler owns the two host
@@ -79,6 +79,12 @@ metadata, not a path segment. The
 [plugin manifest v1 schema](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler/blob/main/src/core/validation/schemas/plugin-manifest-v1.schema.ts)
 defines the authored data contract; its JSON Schema is the machine-readable
 source of truth.
+
+The required top-level `providers` list in `plugin/plugin.yml` selects generated
+provider manifests. This repository selects `claude` and `codex`. Use an empty
+list only for a shared-skills-only plugin. A command-line `--provider` list or
+`--no-providers` is an explicit temporary override; normal repository commands
+use the committed manifest selection.
 
 ## Standard development flow
 
@@ -115,6 +121,10 @@ Run all commands from the repository root.
 | `npm run test:coverage`   | Run tests and enforce coverage thresholds             | Yes\*  |
 | `npm run test:watch`      | Run Vitest in watch mode                              | No     |
 
+For a new repository, `npm exec -- plugin-compiler init` creates only missing
+authored paths and leaves existing content unchanged. Use
+`plugin-compiler <command> --help` to inspect the installed CLI contract.
+
 \* `test:coverage` refreshes the ignored local `coverage/` report.
 
 `plugin:compile` invokes the compiler's generate operation and is the only
@@ -127,6 +137,10 @@ from the exact lockfile; `plugin:verify` chains validate and check. Do not use a
 global install, transient `npx`, or any repository-local compiler path. A
 compiler defect is fixed in the standalone repository and adopted here through a
 new immutable package version.
+
+When selecting providers explicitly for diagnosis, pass one comma-separated
+list, such as `--provider claude,codex`. Do not repeat `--provider`. The
+`--no-providers` option explicitly selects shared skills only.
 
 ## Quality gates
 
@@ -182,8 +196,11 @@ consumer repository.
 Implement the shared provider contract in the standalone compiler repository
 through a pure adapter with one stable ID and exact owned file paths. Add
 contract fixtures and conformance tests there, publish a new immutable package
-version, then adopt it here. Providers must not read files, own the shared
-`skills/` tree, or emit outside their exact ownership.
+version, then adopt it here and add the provider ID to `plugin/plugin.yml` when
+this plugin should emit that target. Providers must not read files, own the
+shared `skills/` tree, or emit outside their exact ownership. The installed
+compiler currently supports Claude Code, Codex, GitHub Copilot CLI, Gemini CLI,
+and Kimi Code CLI; this repository opts into only Claude and Codex.
 
 ## Development dependencies
 

@@ -84,6 +84,6 @@ npx skills@latest update
 - [Plugin compiler](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler):
   sole implementation authority, package documentation, architecture,
   guarantees, and result contracts. This repository consumes the immutable
-  prerelease package `@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.0-alpha.1`
+  prerelease package `@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.0-alpha.4`
   exactly.
 - [License](LICENSE): terms for using and contributing to this project.
