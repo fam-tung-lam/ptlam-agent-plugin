@@ -30,7 +30,7 @@ Let it own the literal model, candidates, user choice, stable mapping,
 story, and caveats. Resume this visualization skill after the choice
 and let it own only the portable HTML rendering and visual interaction.
 
-Read [ptlam-explaining-with-analogy](references/required-skills/ptlam-explaining-with-analogy/SKILL.md).
+Read [ptlam-explaining-with-analogy](skills/ptlam-explaining-with-analogy/SKILL.md).
 
 ## 1. Resolve the learning outcome and artifact
 

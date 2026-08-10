@@ -33,7 +33,7 @@ generic test-root placement.
 Apply it only to framework-free, browser-free TypeScript, Vite, Vitest,
 and coverage mechanics left open by the foundation.
 
-Read [ptlam-testing](references/required-skills/ptlam-testing/SKILL.md).
+Read [ptlam-testing](skills/ptlam-testing/SKILL.md).
 
 ## Resolve the foundation decisions
 
