@@ -13,7 +13,7 @@ description:
 
 # Plugin version. Build metadata after "+" does not affect SemVer
 # precedence.
-version: "0.1.0-alpha.4"
+version: "0.1.0-alpha.1"
 
 author:
   name: Pham Tung Lam
