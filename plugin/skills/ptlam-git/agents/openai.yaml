@@ -1,5 +1,0 @@
-interface:
-  display_name: "PTLam Git"
-  short_description: "Apply Git preferences and project context"
-  default_prompt:
-    "Use $ptlam-git to apply current Git preferences to this workflow."

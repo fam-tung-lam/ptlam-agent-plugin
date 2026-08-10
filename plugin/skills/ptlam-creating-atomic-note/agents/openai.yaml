@@ -1,6 +1,0 @@
-interface:
-  display_name: "PTLam Creating Atomic Notes"
-  short_description: "Create, review, split, or merge atomic notes"
-  default_prompt:
-    "Use $ptlam-creating-atomic-note to create, review, split, or merge this note
-    material as requested."
