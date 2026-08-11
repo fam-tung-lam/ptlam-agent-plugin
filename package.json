@@ -6,7 +6,7 @@
   "description": "Pham Tung Lam's portable agent plugin and skill catalog.",
   "scripts": {
     "plugin:check": "plugin-compiler check",
-    "plugin:compile": "plugin-compiler generate",
+    "plugin:compile": "plugin-compiler compile",
     "plugin:consumer": "vitest run tests/plugin-compiler-consumer/integration-tests/installed-plugin-compiler.test.ts",
     "plugin:validate": "plugin-compiler validate",
     "plugin:verify": "npm run plugin:validate && npm run plugin:check",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.7",
-    "@fam-tung-lam/ptlam-agent-plugin-compiler": "0.1.0-beta.1",
+    "@fam-tung-lam/ptlam-agent-plugin-compiler": "0.1.0",
     "@types/node": "22.20.1",
     "@vitest/coverage-v8": "4.1.10",
     "markdownlint-cli2": "0.23.2",
