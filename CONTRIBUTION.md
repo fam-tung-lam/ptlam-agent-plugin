@@ -57,9 +57,9 @@ why an existing skill does not cover it, and one or two representative requests.
    `npm run plugin:compile` in the same pull request.
 
 The compiler implementation and its focused tests are not part of this
-repository. Changes here may update the exact package pin, installed-package
-consumer test, package scripts, authored catalog, or generated output. Do not
-copy compiler source into the repository.
+repository. Changes here may update the exact package pin, package scripts,
+authored catalog, or generated output. Do not copy compiler source into the
+repository.
 
 Do not change the plugin version during normal feature or maintenance work.
 Maintainers prepare version changes through the documented

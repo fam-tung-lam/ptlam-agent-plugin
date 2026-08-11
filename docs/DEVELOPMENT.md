@@ -112,7 +112,6 @@ Run all commands from the repository root.
 | `npm run plugin:compile`  | Validate and replace stale compiler-owned outputs     | Yes    |
 | `npm run plugin:check`    | Report generated-output drift                         | No     |
 | `npm run plugin:verify`   | Run validation and generated-output drift checks      | No     |
-| `npm run plugin:consumer` | Prove exact installed-package custody                 | No     |
 | `npm run code:typecheck`  | Run strict TypeScript analysis without emitting files | No     |
 | `npm run code:check`      | Check formatting, lint rules, and imports with Biome  | No     |
 | `npm run code:format`     | Apply Biome fixes                                     | Yes    |
@@ -151,7 +150,6 @@ Run the same gates used by continuous integration:
 ```bash
 npm run release:check
 npm run plugin:verify
-npm run plugin:consumer
 npm run code:typecheck
 npm run code:check
 npm run markdown:check
@@ -166,9 +164,7 @@ never publishes this private package to npm.
 
 Run focused tests first when practical, but do not substitute them for the full
 pre-pull-request gates. Test paths put the source scope before the test level.
-The installed-package custody check lives at
-`tests/plugin-compiler-consumer/integration-tests/installed-plugin-compiler.test.ts`;
-compiler implementation tests live only in the standalone repository.
+Compiler implementation tests live only in the standalone repository.
 
 The ignored `local/` directory contains reference material and is intentionally
 outside project-wide formatting, linting, and publication.

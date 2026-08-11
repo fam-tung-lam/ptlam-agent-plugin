@@ -175,14 +175,33 @@ function requireRecord(
   return value;
 }
 
-async function readPreviousVersion(baseSha: string): Promise<string> {
+async function readPreviousVersion(
+  projectRoot: string,
+  baseSha: string,
+): Promise<string | undefined> {
   if (!/^[0-9a-f]{40}$/i.test(baseSha)) {
     throw new Error("BASE_SHA must be a full Git commit SHA.");
   }
-  const { stdout } = await execFileAsync("git", [
-    "show",
-    `${baseSha}:package.json`,
-  ]);
+  const gitOptions = { cwd: projectRoot };
+  await execFileAsync(
+    "git",
+    ["cat-file", "-e", `${baseSha}^{commit}`],
+    gitOptions,
+  );
+  try {
+    await execFileAsync(
+      "git",
+      ["cat-file", "-e", `${baseSha}:package.json`],
+      gitOptions,
+    );
+  } catch {
+    return undefined;
+  }
+  const { stdout } = await execFileAsync(
+    "git",
+    ["show", `${baseSha}:package.json`],
+    gitOptions,
+  );
   const manifest = requireRecord(
     JSON.parse(stdout) as unknown,
     `${baseSha}:package.json`,
@@ -218,7 +237,7 @@ export async function validateReleaseMetadataFiles(
   const previousVersion =
     baseSha === undefined || /^0{40}$/.test(baseSha)
       ? undefined
-      : await readPreviousVersion(baseSha);
+      : await readPreviousVersion(projectRoot, baseSha);
   return validateReleaseMetadata(
     {
       packageName: manifest["name"],

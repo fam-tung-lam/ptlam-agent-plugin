@@ -2,7 +2,7 @@
 schema_version: 1
 skill: ptlam-testing
 canonical_path: skills/engineering/ptlam-testing
-updated_at: 2026-08-10
+updated_at: 2026-08-11
 ---
 
 # Project Testing Context
@@ -41,10 +41,8 @@ updated_at: 2026-08-10
   versions.
 - Put the production or capability scope before the test level. Use the
   repository names `unit-tests/`, `integration-tests/`, and
-  `conformance-tests/`, then mirror deeper capability folders when useful. The
-  installed compiler package boundary is exercised by
-  `../../../../tests/plugin-compiler-consumer/integration-tests`. GitHub Release
-  validation tests mirror `.github/scripts` under
+  `conformance-tests/`, then mirror deeper capability folders when useful.
+  GitHub Release validation tests mirror `.github/scripts` under
   `../../../../tests/.github/scripts/unit-tests`. This documented repository
   layout is an explicit project-local override of the TypeScript
   specialization's general source-adjacent placement preference.
@@ -59,14 +57,14 @@ updated_at: 2026-08-10
   canonical `plugin/**/*.ts` product roots with global minimums of 90% for
   statements, lines, and functions and 80% for branches. GitHub Release
   automation has focused unit tests but stays outside the product coverage
-  denominator.
+  denominator. Release metadata has focused unit and Git-backed integration
+  tests under `../../../../tests/.github/scripts`.
 - Run the full gate sequence in repository order: `npm run release:check`,
-  `npm run plugin:verify`, `npm run plugin:consumer`,
-  `npm run code:typecheck`, `npm run code:check`, `npm run markdown:check`,
-  `npm run test:coverage`, and `git diff --check`.
-- CI runs release metadata validation, plugin verification, the
-  installed-package consumer gate, project analysis, tests, and coverage in one
-  required job on pull requests and pushes to `main`.
+  `npm run plugin:verify`, `npm run code:typecheck`, `npm run code:check`,
+  `npm run markdown:check`, `npm run test:coverage`, and `git diff --check`.
+- CI runs release metadata validation, plugin verification, project analysis,
+  tests, and coverage in one required job on pull requests and pushes to
+  `main`.
 
 ## Testing preferences
 

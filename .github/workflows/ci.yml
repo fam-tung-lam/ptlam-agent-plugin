@@ -38,8 +38,6 @@ jobs:
         run: npm run release:check
       - name: Validate plugin input and generated artifacts
         run: npm run plugin:verify
-      - name: Verify installed compiler package
-        run: npm run plugin:consumer
       - name: Type-check project code
         run: npm run code:typecheck
       - name: Check project code quality

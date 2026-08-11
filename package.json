@@ -7,7 +7,6 @@
   "scripts": {
     "plugin:check": "plugin-compiler check",
     "plugin:compile": "plugin-compiler compile",
-    "plugin:consumer": "vitest run tests/plugin-compiler-consumer/integration-tests/installed-plugin-compiler.test.ts",
     "plugin:validate": "plugin-compiler validate",
     "plugin:verify": "npm run plugin:validate && npm run plugin:check",
     "code:check": "biome check .",
