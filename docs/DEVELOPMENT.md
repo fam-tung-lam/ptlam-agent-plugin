@@ -9,11 +9,11 @@ The skills are the product. This repository consumes the installed
 authored catalog for supported agent ecosystems; the compiler is not an
 installer.
 
-`package.json` pins the exact prerelease package
-`@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.0-alpha.4`. The standalone
-repository has sole implementation custody: this repository contains no compiler
-implementation or focused implementation tests. Every compiler command resolves
-the installed package from the committed lockfile.
+`package.json` pins the exact stable package
+`@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.1`. The standalone repository has
+sole implementation custody: this repository contains no compiler implementation
+or focused implementation tests. Every compiler command resolves the installed
+package from the committed lockfile.
 
 ## Prerequisites
 
@@ -222,7 +222,7 @@ Markdown workflows.
 | Dependency                                  | Usage in this project                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `@biomejs/biome`                            | Formats, lints, and organizes imports in TypeScript source, tests, and configuration. |
-| `@fam-tung-lam/ptlam-agent-plugin-compiler` | Supplies the exact installed prerelease package used by every active plugin command.  |
+| `@fam-tung-lam/ptlam-agent-plugin-compiler` | Supplies the exact installed stable package used by every active plugin command.      |
 | `@types/node`                               | Supplies TypeScript declarations for Node.js APIs used by tests and skill tooling.    |
 | `@vitest/coverage-v8`                       | Collects V8 coverage and enforces configured thresholds.                              |
 | `markdownlint-cli2`                         | Enforces Markdown structure and style rules outside Prettier's responsibility.        |
