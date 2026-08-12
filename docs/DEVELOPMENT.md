@@ -60,6 +60,10 @@ plugin/
 .codex-plugin/
 └── plugin.json                       # generated host metadata
 
+plugin.json                           # generated Copilot host metadata
+gemini-extension.json                 # generated Gemini host metadata
+kimi.plugin.json                      # generated Kimi host metadata
+
 README.md                              # human-owned project documentation
 skills/
 ├── README.md                          # generated available-skills catalog
@@ -68,11 +72,12 @@ skills/
     └── skills/
 ```
 
-Edit `plugin/plugin.yml` and `plugin/skills/`. The compiler owns the two host
-manifests under `.claude-plugin/`, the Codex manifest, and the whole root
-`skills/` tree including its catalog. Never edit those generated surfaces
-manually. Root `README.md` remains normal human-owned project documentation and
-is never read or changed by compiler operations.
+Edit `plugin/plugin.yml` and `plugin/skills/`. The compiler owns the two Claude
+manifests under `.claude-plugin/`, the Codex manifest, the Copilot, Gemini, and
+Kimi manifests at the repository root, and the whole root `skills/` tree
+including its catalog. Never edit those generated surfaces manually. Root
+`README.md` remains normal human-owned project documentation and is never read
+or changed by compiler operations.
 
 Both authored and generated skill directories are flat. `category_id` is
 metadata, not a path segment. The
@@ -81,10 +86,10 @@ defines the authored data contract; its JSON Schema is the machine-readable
 source of truth.
 
 The required top-level `providers` list in `plugin/plugin.yml` selects generated
-provider manifests. This repository selects `claude` and `codex`. Use an empty
-list only for a shared-skills-only plugin. A command-line `--provider` list or
-`--no-providers` is an explicit temporary override; normal repository commands
-use the committed manifest selection.
+provider manifests. This repository selects `claude`, `codex`, `copilot`,
+`gemini`, and `kimi`. Use an empty list only for a shared-skills-only plugin. A
+command-line `--provider` list or `--no-providers` is an explicit temporary
+override; normal repository commands use the committed manifest selection.
 
 ## Standard development flow
 
@@ -204,7 +209,7 @@ version, then adopt it here and add the provider ID to `plugin/plugin.yml` when
 this plugin should emit that target. Providers must not read files, own the
 shared `skills/` tree, or emit outside their exact ownership. The installed
 compiler currently supports Claude Code, Codex, GitHub Copilot CLI, Gemini CLI,
-and Kimi Code CLI; this repository opts into only Claude and Codex.
+and Kimi Code CLI; this repository opts into all five providers.
 
 ## Development dependencies
 

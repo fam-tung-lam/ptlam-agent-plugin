@@ -22,6 +22,12 @@ function validInput(version = "0.1.0-alpha.1"): ReleaseMetadataInput {
     claudeVersion: version,
     codexName: "ptlam-agent-plugin",
     codexVersion: version,
+    copilotName: "ptlam-agent-plugin",
+    copilotVersion: version,
+    geminiName: "ptlam-agent-plugin",
+    geminiVersion: version,
+    kimiName: "ptlam-agent-plugin",
+    kimiVersion: version,
   };
 }
 
@@ -44,7 +50,7 @@ describe("GitHub release metadata", () => {
 
   it("rejects a version that disagrees with generated plugin metadata", () => {
     // GIVEN generated metadata with a different version
-    const input = { ...validInput(), codexVersion: "0.1.0-alpha.2" };
+    const input = { ...validInput(), kimiVersion: "0.1.0-alpha.2" };
 
     // WHEN the release metadata is validated
     const validate = () => validateReleaseMetadata(input);

@@ -30,6 +30,12 @@ export interface ReleaseMetadataInput {
   readonly claudeVersion: unknown;
   readonly codexName: unknown;
   readonly codexVersion: unknown;
+  readonly copilotName: unknown;
+  readonly copilotVersion: unknown;
+  readonly geminiName: unknown;
+  readonly geminiVersion: unknown;
+  readonly kimiName: unknown;
+  readonly kimiVersion: unknown;
 }
 
 export interface ReleaseMetadata {
@@ -131,6 +137,9 @@ export function validateReleaseMetadata(
     input.pluginName,
     input.claudeName,
     input.codexName,
+    input.copilotName,
+    input.geminiName,
+    input.kimiName,
   ];
   if (names.some((name) => name !== EXPECTED_PLUGIN_NAME)) {
     throw new Error("Release metadata contains inconsistent plugin names.");
@@ -142,6 +151,9 @@ export function validateReleaseMetadata(
     input.pluginVersion,
     input.claudeVersion,
     input.codexVersion,
+    input.copilotVersion,
+    input.geminiVersion,
+    input.kimiVersion,
   ];
   if (versions.some((candidate) => candidate !== version)) {
     throw new Error("Release metadata contains inconsistent versions.");
@@ -213,14 +225,25 @@ export async function validateReleaseMetadataFiles(
   projectRoot: string,
   baseSha?: string,
 ): Promise<ReleaseMetadata> {
-  const [manifestValue, lockfileValue, pluginSource, claudeValue, codexValue] =
-    await Promise.all([
-      readJson(path.join(projectRoot, "package.json")),
-      readJson(path.join(projectRoot, "package-lock.json")),
-      readFile(path.join(projectRoot, "plugin/plugin.yml"), "utf8"),
-      readJson(path.join(projectRoot, ".claude-plugin/plugin.json")),
-      readJson(path.join(projectRoot, ".codex-plugin/plugin.json")),
-    ]);
+  const [
+    manifestValue,
+    lockfileValue,
+    pluginSource,
+    claudeValue,
+    codexValue,
+    copilotValue,
+    geminiValue,
+    kimiValue,
+  ] = await Promise.all([
+    readJson(path.join(projectRoot, "package.json")),
+    readJson(path.join(projectRoot, "package-lock.json")),
+    readFile(path.join(projectRoot, "plugin/plugin.yml"), "utf8"),
+    readJson(path.join(projectRoot, ".claude-plugin/plugin.json")),
+    readJson(path.join(projectRoot, ".codex-plugin/plugin.json")),
+    readJson(path.join(projectRoot, "plugin.json")),
+    readJson(path.join(projectRoot, "gemini-extension.json")),
+    readJson(path.join(projectRoot, "kimi.plugin.json")),
+  ]);
   const manifest = requireRecord(manifestValue, "package.json");
   const lockfile = requireRecord(lockfileValue, "package-lock.json");
   const lockPackages = requireRecord(
@@ -234,6 +257,9 @@ export async function validateReleaseMetadataFiles(
   const plugin = parsePluginMetadata(pluginSource);
   const claude = requireRecord(claudeValue, ".claude-plugin/plugin.json");
   const codex = requireRecord(codexValue, ".codex-plugin/plugin.json");
+  const copilot = requireRecord(copilotValue, "plugin.json");
+  const gemini = requireRecord(geminiValue, "gemini-extension.json");
+  const kimi = requireRecord(kimiValue, "kimi.plugin.json");
   const previousVersion =
     baseSha === undefined || /^0{40}$/.test(baseSha)
       ? undefined
@@ -253,6 +279,12 @@ export async function validateReleaseMetadataFiles(
       claudeVersion: claude["version"],
       codexName: codex["name"],
       codexVersion: codex["version"],
+      copilotName: copilot["name"],
+      copilotVersion: copilot["version"],
+      geminiName: gemini["name"],
+      geminiVersion: gemini["version"],
+      kimiName: kimi["name"],
+      kimiVersion: kimi["version"],
     },
     previousVersion,
   );

@@ -1,0 +1,18 @@
+{
+  "name": "ptlam-agent-plugin",
+  "version": "0.1.0-alpha.1",
+  "description": "A curated collection of portable agent skills for engineering, productivity, and utility workflows.",
+  "keywords": [
+    "agent-skills",
+    "engineering",
+    "productivity",
+    "utilities"
+  ],
+  "author": {
+    "name": "Pham Tung Lam",
+    "email": "fam.tung.lam@gmail.com"
+  },
+  "homepage": "https://github.com/fam-tung-lam/ptlam-agent-plugin#readme",
+  "license": "MIT",
+  "skills": "./skills/"
+}

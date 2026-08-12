@@ -31,10 +31,10 @@ updated_at: 2026-08-11
 - Applies to canonical TypeScript under `../../../../plugin` and
   `../../../../.github/scripts`, with tests under `../../../../tests`.
   Compiler-generated `../../../../skills`, `../../../../.claude-plugin`, and
-  `../../../../.codex-plugin` outputs are validated through the installed
-  compiler package's drift checks rather than counted as a second tested
-  implementation. The root `../../../../README.md` is human-owned and outside
-  compiler access.
+  `../../../../.codex-plugin` outputs plus the root Copilot, Gemini, and Kimi
+  manifests are validated through the installed compiler package's drift
+  checks rather than counted as a second tested implementation. The root
+  `../../../../README.md` is human-owned and outside compiler access.
 - Use strict `tsc --noEmit` for static analysis, Vitest for tests, lifecycle,
   spies, and mocks, V8 for product-code coverage, and Biome for TypeScript
   linting and formatting. The root package manifest and lockfile own exact

@@ -79,6 +79,18 @@ async function createProjectWithoutHistoricalManifest(): Promise<{
       path.join(projectRoot, ".codex-plugin/plugin.json"),
       `${JSON.stringify(generatedManifest)}\n`,
     ),
+    writeFile(
+      path.join(projectRoot, "plugin.json"),
+      `${JSON.stringify(generatedManifest)}\n`,
+    ),
+    writeFile(
+      path.join(projectRoot, "gemini-extension.json"),
+      `${JSON.stringify(generatedManifest)}\n`,
+    ),
+    writeFile(
+      path.join(projectRoot, "kimi.plugin.json"),
+      `${JSON.stringify(generatedManifest)}\n`,
+    ),
   ]);
 
   return { baseSha: stdout.trim(), projectRoot };
