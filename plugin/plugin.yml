@@ -43,6 +43,14 @@ categories:
     description: Focused helpers for small, repeatable transformations.
 
 skills:
+  - id: ptlam
+    description:
+      Initialize or refresh a project with PTLam's general agent instructions.
+    disable_model_invocation: true
+    category_id: utilities
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-git
     description:
       Apply PTLam's commit-message preferences and maintain project-local Git
