@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "ptlam": {
+      "source": "fam-tung-lam/ptlam-agent-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ptlam/SKILL.md",
+      "computedHash": "781cef8252f28b3658cb542c61726c824cf63d2265eacdb410f46d4b059877bf"
+    },
     "ptlam-creating-atomic-note": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
