@@ -9,12 +9,6 @@ The skills are the product. This repository consumes the installed
 authored catalog for supported agent ecosystems; the compiler is not an
 installer.
 
-`package.json` pins the exact stable package
-`@fam-tung-lam/ptlam-agent-plugin-compiler@0.1.1`. The standalone repository has
-sole implementation custody: this repository contains no compiler implementation
-or focused implementation tests. Every compiler command resolves the installed
-package from the committed lockfile.
-
 ## Prerequisites
 
 - Git.
