@@ -1,4 +1,7 @@
 .agents/
+**/AGENTS.md
+**/AGENTS.override.md
+**/CLAUDE.md
 local/
 node_modules/
 skills/
