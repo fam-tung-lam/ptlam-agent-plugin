@@ -1,7 +1,11 @@
 ---
 name: ptlam
 description:
-  Initialize or refresh a project with PTLam's general agent instructions.
+  Initialize or refresh a project with PTLam's general agent instructions. Use
+  when the user asks to set up PTLam preferences, create AGENTS.override.md from
+  the bundled PTLAM_AGENTS.md, or wire AGENTS.md to always load and defer to
+  that override. Preserve project-specific guidance and unmarked pre-existing
+  overrides.
 disable-model-invocation: true
 ---
 
