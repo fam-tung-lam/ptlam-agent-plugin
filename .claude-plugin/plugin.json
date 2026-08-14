@@ -17,6 +17,7 @@
     "utilities"
   ],
   "skills": [
+    "./skills/ptlam",
     "./skills/ptlam-git",
     "./skills/ptlam-testing",
     "./skills/ptlam-testing-typescript",
