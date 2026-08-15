@@ -51,14 +51,48 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-git
+  - id: ptlam-managing-git-context
     description:
-      Apply PTLam's commit-message preferences and maintain project-local Git
-      context. Use for repository-tied Git work that should load current facts
-      or preferences from CONTEXT.md; for recording, refreshing, or
-      consolidating durable Git context; and for creating or changing a commit
-      message. Apply current user, repository, and CONTEXT.md preferences before
-      the portable defaults.
+      Resolve, create, refresh, review, or consolidate one repository's durable
+      Git facts and preferences in project-local CONTEXT.md. Use read-only when
+      another Git workflow needs current project context, and write only when
+      the user explicitly requests context maintenance.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-writing-commit-message
+    description:
+      Create or revise one commit message from the current change and verified
+      project Git preferences. Use when a repository-tied Git workflow needs a
+      commit subject, body, or issue reference.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-managing-git-context
+        reason: Provides verified repository facts and Git preferences.
+        instructions: |-
+          Read and apply ptlam-managing-git-context first in read-only mode.
+          Let it own repository resolution, context location, freshness, and
+          stored Git preferences. Do not maintain context while writing the
+          message; report suggested context changes separately.
+          Apply this skill only to the commit message and its verification.
+  - id: ptlam-managing-testing-context
+    description:
+      Resolve, create, refresh, review, or consolidate one project's durable
+      testing facts and preferences in project-local CONTEXT.md. Use read-only
+      when another testing workflow needs current project context, and write
+      only when the user explicitly requests context maintenance.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
+  - id: ptlam-resolving-testing-environment
+    description:
+      Resolve, evaluate, recommend, or apply one project's testing environment
+      and toolchain. Use when the current environment is ambiguous, unverified,
+      incompatible, missing, being replaced, or explicitly under review.
     category_id: engineering
     visibility: public
     status: active
@@ -68,15 +102,28 @@ skills:
       Design, write, update, run, review, and diagnose automated tests at unit,
       integration, and end-to-end levels. Use when an agent needs to select a
       test level, add or repair tests, improve testability, assess test quality,
-      audit test code for compliance, maintain or refresh project-local testing
-      context, resolve a project's testing environment, select or recommend
-      compatible test tools, or follow an explicitly requested test-first or
-      Red-Green-Refactor workflow. Do not infer TDD merely from a request for
-      tests or integration testing.
+      audit test code for compliance, diagnose failures, or follow an explicitly
+      requested test-first or Red-Green-Refactor workflow. Do not infer TDD
+      merely from a request for tests or integration testing.
     category_id: engineering
     visibility: public
     status: active
-    required_skills: []
+    required_skills:
+      - skill_id: ptlam-managing-testing-context
+        reason: Provides verified project testing facts and preferences.
+        instructions: |-
+          Read and apply ptlam-managing-testing-context first in read-only mode
+          for every project-tied task. Let it own the project root, context
+          path, freshness, and stored testing facts. Report suggested
+          maintenance without writing context during testing work.
+      - skill_id: ptlam-resolving-testing-environment
+        reason: Owns testing environment and toolchain resolution.
+        instructions: |-
+          Apply ptlam-resolving-testing-environment when the environment or
+          toolchain is ambiguous, unverified, incompatible, missing, being
+          replaced, or explicitly under review. Pass it the read-only
+          testing-context result, then consume its resolved environment, tools,
+          constraints, and authority without repeating its selection workflow.
   - id: ptlam-testing-typescript
     description:
       Design, write, update, run, audit, and diagnose tests for framework-free,
@@ -84,9 +131,10 @@ skills:
       Vite, Vitest, and Vitest V8 coverage. Use when such a project needs test
       implementation, Vitest configuration, coverage, mocking, Node
       environments, type tests, or stack-specific testing review. Apply
-      ptlam-testing first for testing scope, level, behavior, placement, test
-      doubles, TDD, and audit authority. Do not use this specialization for web
-      frameworks, DOM code, or browser-runtime testing.
+      ptlam-testing first for mode, write authority, testing scope, level,
+      behavior, placement, test doubles, TDD, audit, and diagnosis. Do not use
+      this specialization for web frameworks, DOM code, or browser-runtime
+      testing.
     category_id: engineering
     visibility: public
     status: active
@@ -95,8 +143,10 @@ skills:
         reason: Provides the universal testing workflow and mandatory rules.
         instructions: |-
           Read and apply ptlam-testing first.
-          Let it own scope, level, public seam, behavior, doubles, TDD, audit
-          authority, and verification depth.
+          Let it own mode, write authority, scope, level, public seam, behavior,
+          doubles, TDD, audit, diagnosis, and verification depth.
+          Consume the environment and toolchain decision carried by the
+          foundation; do not select replacement tools or versions here.
           Use the repository's established test layout when one exists;
           otherwise use this skill's source-adjacent fallback.
           Apply it only to framework-free, browser-free TypeScript, Vite, Vitest,
@@ -166,8 +216,9 @@ skills:
           analogy is built on.
         instructions: |-
           Read and apply ptlam-explaining first.
-          Let it own the learning goal, depth, the literal model, composition
-          order, and verification.
+          Let it own the learning goal, depth, literal answer, literal model,
+          overall composition order, and reconstruction verification. Start the
+          analogy workflow from those outputs instead of resolving them again.
           Enter this skill only when the learner explicitly asked for an
           analogy, and apply it only to analogy selection, the mapping gate, the
           story, and the stated limits.
@@ -184,11 +235,16 @@ skills:
     required_skills:
       - skill_id: ptlam-explaining-with-analogy
         reason:
-          Owns analogy selection and explanation semantics before HTML
-          rendering.
+          Carries the explanation foundation and owns optional analogy semantics
+          before rendering.
         instructions: |-
+          Read ptlam-explaining-with-analogy and its required ptlam-explaining
+          foundation for every artifact. Apply ptlam-explaining first and let it
+          own the learning goal, depth, literal answer, literal model,
+          explanatory structure, and reconstruction verification.
           Apply ptlam-explaining-with-analogy only when the user explicitly asks
           to create an analogy and has not already supplied or chosen one.
-          Let it own the literal model, candidates, user choice, stable mapping,
-          story, and caveats. Resume this visualization skill after the choice
-          and let it own only the portable HTML rendering and visual interaction.
+          Let it own candidates, user choice, stable mapping, story, and
+          caveats. Consume those outputs without building a parallel analogy.
+          Resume this visualization skill after the choice and let it own only
+          the portable HTML rendering and visual interaction.

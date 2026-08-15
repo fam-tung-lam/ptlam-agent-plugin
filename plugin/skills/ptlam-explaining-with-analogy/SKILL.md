@@ -1,8 +1,9 @@
 # PTLam Explaining with Analogy
 
-Explain one unfamiliar concept through one vivid, structurally faithful
-real-life analogy. The result contains a concise literal summary, stable
-mappings, a story that demonstrates the mechanism, and explicit limitations.
+Turn the learning goal and literal model produced by the required
+`ptlam-explaining` foundation into one vivid, structurally faithful real-life
+analogy. The result contains the foundation's literal summary, stable mappings,
+a story that demonstrates the mechanism, and explicit limitations.
 
 When another skill calls this one, return those four semantic components and
 let the caller own their rendering. When answering the learner directly, use
@@ -15,52 +16,30 @@ does not change files.
 
 ```mermaid
 flowchart LR
-    A[Resolve the learning goal] --> B[Establish the literal model]
-    B --> C[Evaluate analogy candidates]
-    C --> D{One candidate passes?}
-    D -- No --> E[Narrow the goal]
-    E --> B
-    D -- Yes --> F[Compose the four-part explanation]
-    F --> G[Verify mappings and limitations]
+    A[Receive the foundation result] --> B[Evaluate analogy candidates]
+    B --> C{One candidate passes?}
+    C -- No --> D[Narrow the goal through the foundation]
+    D --> A
+    C -- Yes --> E[Compose the four-part explanation]
+    E --> F[Verify mappings and limitations]
 ```
 
-## 1. Resolve the learning goal
+## 1. Start from the foundation result
 
-Identify:
+Use the required foundation's resolved learning goal, learner background,
+confusing mechanism, depth, language, output constraints, literal answer,
+literal model, and stated limits. Extract any analogy domain the learner
+supplied, required, or ruled out from that result.
 
-- the concept to explain;
-- the learner's background and existing knowledge;
-- the mechanism that is confusing;
-- any analogy domain the learner supplies, requires, or rules out; and
-- the requested depth, language, and output constraints.
+Do not resolve a competing learning goal or rebuild the literal model. When a
+material input is missing, return that gap to the foundation. Ask the learner
+only when the foundation cannot safely resolve it from available evidence.
 
-If the concept is missing or too vague to explain accurately, ask what the
-learner wants explained. Otherwise, infer ordinary presentation choices and
-continue.
+Complete this step when one foundation-owned learning goal, literal answer, and
+literal model supply every relationship and constraint needed to evaluate an
+analogy.
 
-Complete this step when the concept, learning goal, confusing mechanism, depth,
-language, analogy constraints, and output constraints are known or safely
-inferred.
-
-## 2. Establish the literal model
-
-Capture the minimum real structure needed for the learning goal before choosing
-an analogy:
-
-- essential actors, objects, and boundaries;
-- ownership, containment, dependencies, and cardinality;
-- inputs, outputs, order, handoffs, and causal rules;
-- relevant states, transitions, lifetimes, and failure behavior; and
-- exact constraints, exceptions, or facts that must remain literal.
-
-Cover only the mechanism needed at the requested depth. Verify claims when the
-request or risk requires it. Exclude uncertain details rather than inventing
-them to make an analogy fit.
-
-Complete this step when every material relationship and rule within scope is
-captured and uncertain claims are verified or excluded.
-
-## 3. Choose one faithful analogy
+## 2. Choose one faithful analogy
 
 For each candidate, build an internal mapping ledger:
 
@@ -115,7 +94,7 @@ Complete this step when one passing analogy is selected, every learner-supplied
 domain is honored or rejected for a named mismatch, and any required user choice
 is settled.
 
-## 4. Compose the explanation
+## 3. Compose the explanation
 
 Lock the selected analogy domain and use it throughout. Calibrate vocabulary and
 depth to the learner. Be vivid without weakening precision.
@@ -126,8 +105,8 @@ this shape without an extra introduction or conclusion.
 
 ### In a sentence
 
-Write one assertive, jargon-free sentence that captures the concept's essence.
-Avoid hedges such as “basically” or “kind of.” Format it as a blockquote:
+Reuse the foundation's one-sentence literal answer without changing its meaning.
+Format it as a blockquote:
 
 > [One-sentence literal summary]
 
@@ -154,7 +133,7 @@ are needed, reject the analogy and select a stronger candidate.
 Complete this step when all four components are present, fit the learner, and
 disclose every material limitation.
 
-## 5. Verify the explanation
+## 4. Verify the analogy
 
 Confirm that:
 
@@ -164,26 +143,28 @@ Confirm that:
 - no analogy element represents unrelated concepts;
 - the story demonstrates the mechanism instead of decorating it;
 - exact facts remain literal in the map or limitations; and
-- the learner can reconstruct the literal concept from the map without relying
-  on the story alone.
+- the learner can reconstruct the foundation's literal model from the map
+  without relying on the story alone.
 
 If drafting reveals a failed mapping, do not return it. For an automatically
 selected analogy, use the next strongest passing candidate. For a
 learner-selected analogy, explain the discovered limitation and offer fresh
 passing candidates instead of silently overriding the choice.
 
-Complete this step when the explanation passes every check and is ready for the
-caller to render or for direct delivery.
+Complete this step when the analogy-specific checks pass and the foundation's
+literal answer, composition order, and limits remain intact for caller rendering
+or direct delivery.
 
-## 6. Handle follow-ups
+## 5. Handle follow-ups
 
 | Learner asks for | Response |
 | --- | --- |
 | A different analogy | Offer at most three fresh passing candidates, excluding the analogy just used. |
-| More depth | Expand the literal model, then revalidate the analogy. Keep it only if it still passes. |
-| A simpler version | Narrow the learning goal, then choose a more everyday candidate that passes. |
-| A related concept | Start a new literal model and link back only where useful. |
+| More depth | Return to the foundation to expand the literal model, then revalidate the analogy. Keep it only if it still passes. |
+| A simpler version | Return to the foundation to narrow the learning goal, then choose a more everyday candidate that passes. |
+| A related concept | Return to the foundation for a new literal model, then link back only where useful. |
 | A challenge to the analogy | Name the limitation and structural rationale; offer fresh candidates when needed. |
 
-Complete a follow-up when its new scope passes the same literal-model, mapping,
-composition, and verification steps.
+Complete a follow-up when the foundation has verified any changed literal scope
+and the result passes the same analogy selection, mapping, story, and limitation
+checks.

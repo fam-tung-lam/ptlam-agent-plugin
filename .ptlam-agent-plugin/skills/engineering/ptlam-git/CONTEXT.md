@@ -2,7 +2,7 @@
 schema_version: 1
 skill: ptlam-git
 canonical_path: skills/engineering/ptlam-git
-updated_at: 2026-08-10
+updated_at: 2026-08-15
 ---
 
 # Project Git Context
@@ -53,6 +53,20 @@ updated_at: 2026-08-10
 - Before committing, reread the subject in isolation and rewrite it if it says
   only what changed rather than why the change matters.
   Evidence: user instruction on 2026-08-07.
+- Use Conventional Commits format for pull-request titles as well as commit
+  subjects, including a meaningful type and scope.
+  Evidence: user instruction on 2026-08-15.
+- Make commit and pull-request titles name the affected skills or capabilities
+  and the concrete outcome. Avoid abstract descriptions such as "make
+  capabilities atomic."
+  Evidence: user instruction on 2026-08-15.
+- Use commit and pull-request descriptions only to explain why the change is
+  needed. Keep implementation summaries and validation results out of the
+  description.
+  Evidence: user instruction on 2026-08-15.
+- When follow-up changes belong to the same logical pull-request commit, amend
+  that commit and force-push instead of adding another commit.
+  Evidence: user instruction on 2026-08-15.
 - For this repository, agents may maintain material durable Git-flow facts and
   explicitly stated Git preferences in this file during an already-authorized
   state-changing Git task or in response to an explicit context-maintenance

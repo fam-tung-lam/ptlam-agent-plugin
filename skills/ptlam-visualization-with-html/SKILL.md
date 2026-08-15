@@ -19,13 +19,18 @@ sibling file, or external runtime asset.
 
 ### `ptlam-explaining-with-analogy`
 
-**Reason:** Owns analogy selection and explanation semantics before HTML rendering.
+**Reason:** Carries the explanation foundation and owns optional analogy semantics before rendering.
 
-**Instructions:** Apply ptlam-explaining-with-analogy only when the user explicitly asks
+**Instructions:** Read ptlam-explaining-with-analogy and its required ptlam-explaining
+foundation for every artifact. Apply ptlam-explaining first and let it
+own the learning goal, depth, literal answer, literal model,
+explanatory structure, and reconstruction verification.
+Apply ptlam-explaining-with-analogy only when the user explicitly asks
 to create an analogy and has not already supplied or chosen one.
-Let it own the literal model, candidates, user choice, stable mapping,
-story, and caveats. Resume this visualization skill after the choice
-and let it own only the portable HTML rendering and visual interaction.
+Let it own candidates, user choice, stable mapping, story, and
+caveats. Consume those outputs without building a parallel analogy.
+Resume this visualization skill after the choice and let it own only
+the portable HTML rendering and visual interaction.
 
 Read [ptlam-explaining-with-analogy](skills/ptlam-explaining-with-analogy/SKILL.md).
 
@@ -33,7 +38,7 @@ Read [ptlam-explaining-with-analogy](skills/ptlam-explaining-with-analogy/SKILL.
 
 ```mermaid
 flowchart LR
-    A[Model the learning outcome] --> B[Resolve the analogy branch]
+    A[Consume the verified explanation] --> B[Resolve the optional analogy]
     B --> C[Select visual and interaction contracts]
     C --> D[Scaffold and compose static HTML]
     D --> E[Implement one synchronized state model]
@@ -57,29 +62,39 @@ Read the [design-system baseline](references/design-system/design-system.md),
 for every artifact. The scaffold owns exact baseline tokens, global CSS, and
 shell markup; these references own how to preserve and extend that baseline.
 
-## 1. Model the learning outcome
+## 1. Consume the explanation and resolve the artifact
 
-Identify the learner's question, background, confusing mechanism, requested
-depth, language, output path, and whether the task creates or revises an
-artifact. Inspect an existing artifact before changing it.
+Start from the `ptlam-explaining` foundation result carried by the required
+`ptlam-explaining-with-analogy` skill chain. Consume its learning goal, learner
+background, confusing mechanism, depth, language, literal answer, literal
+model, explanatory structure, and stated uncertainty. Do not rebuild or
+silently change them in this skill.
 
-Model the smallest complete literal system that answers the question. Include
-only material actors, boundaries, relationships, order, state, transitions,
-ownership, cardinality, and failure behavior. Verify uncertain facts when the
-risk requires it; do not fill gaps with plausible detail.
+Resolve the output path and whether the task creates or revises an artifact.
+Inspect an existing artifact before changing it. Identify whether the result is
+literal-only, needs a new analogy, or contains a user-supplied analogy.
 
-Complete this step when destination and authority are clear and the literal
-model contains every fact the artifact must teach.
+Complete this step when destination and change authority are clear, one verified
+foundation explanation supplies every literal fact, and the analogy branch is
+known.
 
-## 2. Resolve the analogy branch
+## 2. Resolve the optional analogy
 
 Use an analogy only when the user explicitly requests one or supplies an
 already selected analogy model.
 
 When the user requests a new analogy, apply the required
-`ptlam-explaining-with-analogy` skill first. Let it own the literal-to-everyday
-mapping, candidates, user choice, story, and caveats. Resume this workflow after
-one analogy passes its mapping gate; this skill owns only HTML rendering.
+`ptlam-explaining-with-analogy` skill to the foundation result. Resume this
+workflow from its approved mapping, story, and caveats. Return a material
+analogy gap to that skill rather than repairing it independently.
+
+For a literal-only artifact, use the foundation's literal model unchanged.
+
+For a supplied or selected analogy, treat its mapping as user-owned input and
+preserve the selected everyday domain. If it conflicts with the foundation's
+literal model or lacks a material mapping required for rendering, report the
+gap and request a decision instead of silently replacing or repairing it. Keep
+a visible boundary for every intentional mismatch.
 
 For a selected analogy, read
 [analogy mapping](references/design-system/patterns/content/analogy-mapping.md).
@@ -88,8 +103,9 @@ When two synchronized maps teach the mechanism, also read the
 When lifetime or change cadence is the lesson, read
 [layered lifetimes](references/design-system/patterns/content/layered-lifetimes.md).
 
-Complete this step when the artifact is literal-only or has one approved,
-structurally faithful analogy with a visible boundary.
+Complete this step when the artifact has one foundation-owned literal model and
+is either literal-only or has one approved or explicitly user-owned analogy
+with a visible boundary.
 
 ## 3. Select the visual and interaction contracts
 
