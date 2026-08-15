@@ -14,43 +14,17 @@ description:
 Test observable behavior through the smallest public seam that can establish
 the risk. This foundation owns testing scope, level, behavior, test-double
 boundaries, TDD activation, audit authority, verification depth, and the
-fallback placement model. Project evidence and active stack specializations own
-the mechanics they define more specifically.
-
-## Required skills
-
-### `ptlam-testing-managing-context`
-
-**Reason:** Provides verified project testing facts and preferences.
-
-**Instructions:** Read and apply ptlam-testing-managing-context first in read-only mode
-for every project-tied task. Let it own the project root, context
-path, freshness, and stored testing facts. Report suggested
-maintenance without writing context during testing work.
-
-Read [ptlam-testing-managing-context](skills/ptlam-testing-managing-context/SKILL.md).
-
-### `ptlam-testing-resolving-environment`
-
-**Reason:** Owns testing environment and toolchain resolution.
-
-**Instructions:** Apply ptlam-testing-resolving-environment when the environment or
-toolchain is ambiguous, unverified, incompatible, missing, being
-replaced, or explicitly under review. Pass it the read-only
-testing-context result, then consume its resolved environment, tools,
-constraints, and authority without repeating its selection workflow.
-
-Read [ptlam-testing-resolving-environment](skills/ptlam-testing-resolving-environment/SKILL.md).
+fallback placement model. Current user instructions and applicable `AGENTS.md`
+own project-specific requirements. Repository files supply facts about existing
+commands, configuration, code, and layout. Active stack specializations own the
+mechanics they define more specifically.
 
 ## At a glance
 
 ```mermaid
 flowchart LR
-    A[Consume project context and select testing mode] --> B[Define behavior, risk, level, and environment requirements]
-    B --> C{Environment and toolchain viable?}
-    C -- No --> D[Consume testing-environment result]
-    C -- Yes --> M{Testing mode}
-    D --> M
+    A[Resolve scope, rules, and testing mode] --> B[Define behavior, risk, and level]
+    B --> M{Testing mode}
     M -- Run or diagnose --> H[Execute existing tests and isolate the cause]
     M -- Write, fix, TDD, or audit --> E[Apply the universal behavior contract]
     E --> F[Resolve placement and doubles]
@@ -69,24 +43,22 @@ flowchart LR
 | Decision | Source of truth |
 | --- | --- |
 | Scope, behavior, level, doubles, TDD, audit, verification depth | This foundation skill |
-| Project root, durable testing facts, and context freshness | Required `ptlam-testing-managing-context` skill |
-| Environment and toolchain selection | Required `ptlam-testing-resolving-environment` skill when current evidence is insufficient |
-| Repository policy, established commands, and layout | Current repository evidence |
+| Project-specific requirements and permitted exceptions | Current user instructions, then applicable `AGENTS.md` |
+| Established commands, configuration, and layout | Current repository files |
 | Stack-specific mechanics left open by the repository | Active specialization skill |
-| API syntax, lifecycle, and version-sensitive options | Installed tool's official documentation |
+| API syntax, lifecycle, and stack defaults | The active specialization's bundled references |
 
 Universal behavior rules in this skill remain mandatory. Resolve mechanics that
-those rules leave open in this order: explicit user instructions, repository
-policy and established conventions, active specialization, this skill's
-fallbacks, then current official tool guidance. Report unresolved conflicts
-instead of choosing silently.
+those rules leave open in this order: explicit user instructions, applicable
+`AGENTS.md`, established repository commands and layout, active specialization,
+then this skill's fallbacks. Report unresolved conflicts instead of choosing
+silently. Repository files are evidence, not an additional preference store.
 
-## 1. Consume project context and select testing mode
+## 1. Resolve scope, rules, and testing mode
 
-1. Start from the required `ptlam-testing-managing-context` read-only result.
-   Use its project root, verified task-relevant facts and preferences, context
-   state, and reported uncertainty. Do not maintain context during this
-   workflow.
+1. Resolve the target project from the user's paths and current worktree. Read
+   current user instructions and every applicable `AGENTS.md` from the project
+   root to the files in scope.
 2. Choose one mode:
 
    | Mode | Authority |
@@ -96,14 +68,15 @@ instead of choosing silently.
    | Audit | Inspect and report; fixes require a separately selected write-or-fix mode |
    | TDD | Follow Red-Green-Refactor only when the user explicitly requests test-first work, TDD, or Red-Green-Refactor |
 
-3. Read repository instructions, relevant decision records,
-   manifests, test configuration, neighboring production code, existing tests,
-   and CI. Treat live repository evidence as authoritative over cached context.
+3. Read only the manifests, test configuration, neighboring production code,
+   existing tests, scripts, and CI needed to perform the selected mode. Use
+   these files to observe the current implementation, not to build or maintain
+   a separate project-context record.
 
-Complete this step when every project root, testing mode, change authority,
-context state, and governing repository source is known.
+Complete this step when the project, testing mode, change authority, applicable
+rules, and task-relevant repository evidence are known.
 
-## 2. Define behavior, risk, level, and environment requirements
+## 2. Define behavior, risk, and level
 
 1. State the observable behavior or failure risk in repository domain language.
 2. For write, fix, TDD, or audit mode, choose the smallest clear public seam.
@@ -114,16 +87,13 @@ context state, and governing repository source is known.
    [integration](references/test-levels/integration.md), or
    [end-to-end](references/test-levels/e2e.md). Load more than one only when each
    covers a distinct risk without duplicating assertions.
-4. Identify the execution environment, existing test tools, supported
-   platforms, commands, and configuration owner.
-5. Apply the required `ptlam-testing-resolving-environment` skill when the
-   environment or toolchain is ambiguous, unverified, incompatible, missing,
-   being replaced, or explicitly under review. Consume its environment,
-   toolchain, constraints, commands, and authority decision without repeating
-   its selection work.
+4. Select the active stack specialization. Let it own runner, configuration,
+   commands, and stack compatibility. When the task does not match an available
+   specialization, report the unsupported scope instead of inventing a new
+   toolchain workflow.
 
 Complete this step when the task has a supported behavior, public seam when
-applicable, primary level, environment, toolchain, and configuration owner.
+applicable, primary level, and active stack specialization.
 
 ## 3. Apply the universal behavior contract
 
@@ -204,8 +174,10 @@ Run-or-diagnose mode skips steps 3 and 4, then enters its branch below.
 ### Run or diagnose
 
 Keep project files read-only. Resolve the exact established command and run the
-smallest requested or failing scope first. Expand to a containing suite only
-when it distinguishes the cause or establishes the requested result.
+smallest requested or failing scope first. Use the active specialization's
+bundled command fallback when the repository defines no command. Expand to a
+containing suite only when it distinguishes the cause or establishes the
+requested result.
 
 For a failure, determine whether current evidence points to the test,
 production behavior, expectation, configuration, dependency, or execution
@@ -266,13 +238,12 @@ audit has one clear outcome and stays within its authority.
 2. In TDD, prove that Red fails for the expected reason before implementing
    Green.
 3. After focused tests pass, run the containing package or module suite.
-4. Run environment-specific and repository-wide checks in proportion to risk,
-   mode, and repository policy.
-5. Report the level, environment, tools, read-only context state, changed
-   behavior and files, exact commands and results, and every skipped or
-   unavailable check.
-6. Disclose remaining risks, migrations, conflicts, stale or provisional
-   context, and unresolved decisions.
+4. Run stack-specific and repository-wide checks in proportion to risk, mode,
+   and applicable user or `AGENTS.md` requirements.
+5. Report the level, active specialization, changed behavior and files, exact
+   commands and results, and every skipped or unavailable check.
+6. Disclose remaining risks, migrations, conflicts, unsupported scope, and
+   unresolved decisions.
 
 Complete the task when the selected branch has one verified outcome, every file
 effect stays within its mode authority, proportional checks are accounted for,

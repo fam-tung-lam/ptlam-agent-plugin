@@ -1,7 +1,7 @@
 # Commit Message Preferences
 
 Use these defaults only for choices left open by current user instructions,
-repository policy, and verified project Git context.
+applicable `AGENTS.md` rules, and any policy file the user explicitly names.
 
 - Use Conventional Commits with an outcome-focused subject:
   `<type>(<scope>): <description>`, omitting the scope only when it adds no
