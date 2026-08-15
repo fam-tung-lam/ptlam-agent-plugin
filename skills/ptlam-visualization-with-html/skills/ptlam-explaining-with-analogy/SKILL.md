@@ -3,10 +3,7 @@ name: ptlam-explaining-with-analogy
 description:
   Explain an unfamiliar, abstract, or complex concept through one coherent
   real-life analogy, a stable mapping table, a short story, and explicit
-  caveats. Use only when the user explicitly asks for an analogy to help them
-  understand or learn a concept. Do not invoke for a general request to explain,
-  define, simplify, or break down a concept unless that same request explicitly
-  asks for an analogy.
+  caveats.
 disable-model-invocation: true
 ---
 

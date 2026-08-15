@@ -32,24 +32,15 @@ Common constraints:
 - no XML tags; and
 - directory name matches the skill name.
 
-Prefer a short action-oriented name with a leading word users and agents already
-associate with the capability.
-
 ### `description`
 
 The model-facing context pointer for model-invoked skills and a human-facing
 summary for user-invoked skills. Common constraints include a 1024-character
 maximum and no XML tags.
 
-For model invocation:
-
-1. state the capability;
-2. add one trigger for each distinct branch;
-3. add a reach clause when another skill should invoke it; and
-4. remove synonymous triggers and identity already clear from the body.
-
-Use a negative boundary only when a material false invocation cannot be
-prevented with a positive target.
+Add a reach clause when another skill should invoke it. What the description
+must contain is owned by
+[naming and discovery](skill-best-practices.md#naming-and-discovery).
 
 ### `disable-model-invocation`
 

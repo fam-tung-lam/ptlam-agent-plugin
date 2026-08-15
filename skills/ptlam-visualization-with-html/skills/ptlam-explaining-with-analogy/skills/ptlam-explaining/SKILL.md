@@ -1,15 +1,8 @@
 ---
 name: ptlam-explaining
 description:
-  Explain a concept, mechanism, or system so the learner can use it, by
-  establishing the literal model first and then selecting the explanatory device
-  that fits the learner's difficulty. Use when the user asks to explain,
-  clarify, teach, or break down something; when an earlier explanation did not
-  land and needs a different approach; or when another skill needs a verified
-  literal model before rendering it. Owns the learning goal, depth, literal
-  model, device selection, composition order, and verification. Do not use for
-  reference documentation, API listings, status reporting, or answering a direct
-  factual question that needs no mental model.
+  Explain concepts, mechanisms, and systems through a verified literal model and
+  an explanatory device matched to the learner's difficulty.
 disable-model-invocation: true
 ---
 

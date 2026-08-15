@@ -1,14 +1,9 @@
 ---
 name: ptlam-creating-skill
 description:
-  Create, review, or refactor predictable agent skills through explicit
-  invocation, distinct branches, a visual workflow, progressive disclosure,
-  verifiable acceptance, and single-source package design. Use when the user
-  asks to turn a workflow or reference set into a new skill, revise an existing
-  SKILL.md, or audit a skill without editing it. Resolve target-specific
-  authored and generated boundaries and verify the package statically. Tests,
-  evals, benchmarks, grading, comparisons, and trigger optimization remain
-  outside this skill's scope.
+  Create, review, or refactor predictable agent skills with explicit invocation,
+  distinct workflow branches, progressive disclosure, verifiable acceptance, and
+  single-source package design.
 disable-model-invocation: true
 ---
 
@@ -22,13 +17,14 @@ resource one owner, and disclose branch detail only when that branch needs it.
 
 ### `ptlam`
 
-**Reason:** Provides the Human-First Work Contract for skill structure.
+**Reason:** Provides the working contract every authored skill inherits.
 
 **Instructions:** Read ptlam's bundled PTLAM_AGENTS.md reference before reviewing,
 designing, or materially revising a skill package. Do not run ptlam's
-initialization workflow unless the user explicitly requests it. Let
-the contract own structural scans, visual triggers, density, evidence,
-and handoff.
+initialization workflow unless the user explicitly requests it.
+Let the contract own voice, evidence, conduct, and handoff.
+Let this skill's document-craft rules own the shape of SKILL.md and
+its prose references.
 
 Read [ptlam](skills/ptlam/SKILL.md).
 
@@ -57,8 +53,7 @@ flowchart LR
 
 ## 1. Resolve the task and authority
 
-1. Identify whether the user wants to create, change, or review a skill. Keep a
-   review read-only unless the user also requests changes.
+1. Identify whether the user wants to create, change, or review a skill.
 2. Resolve the target repository, skill root, and host from explicit context and
    filesystem evidence. The current directory and this skill's installation
    directory are not automatically the target.
@@ -67,6 +62,9 @@ flowchart LR
 4. Identify the authored sources, generated surfaces, supported resource
    directories, metadata owner, and permitted side effects. Preserve foreign and
    in-progress changes.
+
+Complete this step when the operation, target, authority, authored surface,
+metadata owner, and available static checks are unambiguous.
 
 ## 2. Model the reusable behavior
 
@@ -81,6 +79,9 @@ Extract available evidence before asking questions. Define:
 Use examples to discover the general workflow, not as cases to optimize around.
 Ask only when an undiscoverable answer would materially change compatibility,
 scope, authority, or behavior.
+
+Complete this step when every branch has one distinct trigger, one observable
+outcome, and no unresolved material choice.
 
 ## 3. Choose invocation and skill boundaries
 
@@ -99,15 +100,21 @@ when later steps repeatedly cause premature completion. First make the current
 stage's action and output explicit. Split by sequence only if that does not
 solve the problem.
 
+Complete this step when invocation, skill boundaries, and every proposed split
+carry an explicit context-cost or completion rationale.
+
 ## 4. Design the package and reading order
 
 Read [skill authoring best practices](references/skill-best-practices.md) before
 reviewing, designing, or materially revising the package. It owns naming,
-package anatomy, progressive disclosure, reusable resources, executable
-resources, and the static quality checklist.
+package anatomy, progressive disclosure, document craft for skill packages,
+reusable resources, executable resources, content maintenance, and the static
+quality checklist.
 
-Use it with the required Human-First Work Contract to produce the package tree
-and reading order before writing detailed instructions.
+Produce the package tree and reading order before writing detailed instructions.
+
+Complete this step when every content item has one owner and one hierarchy rung,
+and every disclosed file has a precise context pointer from `SKILL.md`.
 
 ## 5. Write discovery metadata
 
@@ -120,9 +127,12 @@ pointer. For user invocation, keep its human-facing summary compact. Follow the
 resolved target schema instead of generic examples.
 
 When the target uses Claude-style inline YAML, read
-[skill frontmatter specification](references/skill-frontmatter-spec.md). Do not
-apply that host-specific schema when a manifest, generator, or another host owns
-metadata.
+[skill frontmatter specification](references/skill-frontmatter-spec.md). It owns
+the field names, limits, and host mechanics. Do not apply that host-specific
+schema when a manifest, generator, or another host owns metadata.
+
+Complete this step when the target accepts the metadata and each description
+phrase identifies a distinct branch or reach rule.
 
 ## 6. Write the instructions
 
@@ -138,12 +148,19 @@ example only when direct prose leaves the desired behavior ambiguous.
 Keep tests, evals, baselines, benchmarks, graders, comparison viewers, and
 trigger optimization outside this skill's static authoring scope.
 
+Complete this step when every branch can be followed without hidden context,
+every action stays within the resolved authority, and every ordered step ends in
+a checkable completion criterion.
+
 ## 7. Prune the package
 
 Apply the
 [content-maintenance rules](references/skill-best-practices.md#content-maintenance)
-after instructions and resources exist. Remove every rejected item before
-verification.
+after instructions and resources exist. They own the complete removal list for
+both prose and prompts.
+
+Complete this step when every retained line changes behavior, defines a needed
+concept, routes context, or establishes a completion criterion.
 
 ## 8. Verify and hand off
 

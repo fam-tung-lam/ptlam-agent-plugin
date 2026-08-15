@@ -45,7 +45,7 @@ categories:
 skills:
   - id: ptlam
     description:
-      Initialize or refresh a project with PTLam's general agent instructions.
+      Install or refresh PTLam's general agent instructions for a project.
     disable_model_invocation: true
     category_id: utilities
     visibility: public
@@ -103,37 +103,28 @@ skills:
           and coverage mechanics left open by the foundation.
   - id: ptlam-creating-skill
     description:
-      Create, review, or refactor predictable agent skills through explicit
-      invocation, distinct branches, a visual workflow, progressive disclosure,
-      verifiable acceptance, and single-source package design. Use when the user
-      asks to turn a workflow or reference set into a new skill, revise an
-      existing SKILL.md, or audit a skill without editing it. Resolve
-      target-specific authored and generated boundaries and verify the package
-      statically. Tests, evals, benchmarks, grading, comparisons, and trigger
-      optimization remain outside this skill's scope.
+      Create, review, or refactor predictable agent skills with explicit
+      invocation, distinct workflow branches, progressive disclosure,
+      verifiable acceptance, and single-source package design.
     disable_model_invocation: true
     category_id: engineering
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam
-        reason: Provides the Human-First Work Contract for skill structure.
+        reason: Provides the working contract every authored skill inherits.
         instructions: |-
           Read ptlam's bundled PTLAM_AGENTS.md reference before reviewing,
           designing, or materially revising a skill package. Do not run ptlam's
-          initialization workflow unless the user explicitly requests it. Let
-          the contract own structural scans, visual triggers, density, evidence,
-          and handoff.
+          initialization workflow unless the user explicitly requests it.
+          Let the contract own voice, evidence, conduct, and handoff.
+          Let this skill's document-craft rules own the shape of SKILL.md and
+          its prose references.
   - id: ptlam-grilling
     description:
-      Conduct a persistent, interactive stress test of a plan, decision, or idea
-      through one user-owned decision at a time. Use when the user explicitly
-      requests a sequential grilling interview or explicitly asks to resume a
-      prior grilling session; handle ordinary critique or risk-review requests
-      as direct analysis. Research discoverable facts independently, expose
-      assumptions, contradictions, risks, and trade-offs, recommend an answer
-      for every decision, wait after each question, and require confirmed shared
-      understanding before any resulting action.
+      Stress-test a plan, decision, or idea through a persistent interview that
+      resolves one user-owned decision at a time and records confirmed
+      understanding for later continuation.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -141,15 +132,9 @@ skills:
     required_skills: []
   - id: ptlam-creating-atomic-note
     description:
-      Create, review, split, or merge atomic notes for Zettelkasten, evergreen
-      notes, Obsidian, and other personal knowledge systems. Use when the user
-      wants to capture an idea or source as a durable note, turn highlights or
-      rough writing into self-contained notes, sharpen a vague note title,
-      assess whether a note contains one independently linkable claim, split a
-      broad note, or merge duplicate notes. Preserve local vault conventions,
-      paraphrase source material with attribution, and annotate why links exist.
-      Do not use for meeting minutes, task lists, project status notes, general
-      journaling, or note-app support without knowledge-development intent.
+      Create, review, split, or merge durable atomic notes with self-contained
+      claims, source attribution, and annotated links while preserving local
+      vault conventions.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -157,16 +142,8 @@ skills:
     required_skills: []
   - id: ptlam-explaining
     description:
-      Explain a concept, mechanism, or system so the learner can use it, by
-      establishing the literal model first and then selecting the explanatory
-      device that fits the learner's difficulty. Use when the user asks to
-      explain, clarify, teach, or break down something; when an earlier
-      explanation did not land and needs a different approach; or when another
-      skill needs a verified literal model before rendering it. Owns the
-      learning goal, depth, literal model, device selection, composition order,
-      and verification. Do not use for reference documentation, API listings,
-      status reporting, or answering a direct factual question that needs no
-      mental model.
+      Explain concepts, mechanisms, and systems through a verified literal model
+      and an explanatory device matched to the learner's difficulty.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -176,10 +153,7 @@ skills:
     description:
       Explain an unfamiliar, abstract, or complex concept through one coherent
       real-life analogy, a stable mapping table, a short story, and explicit
-      caveats. Use only when the user explicitly asks for an analogy to help
-      them understand or learn a concept. Do not invoke for a general request to
-      explain, define, simplify, or break down a concept unless that same
-      request explicitly asks for an analogy.
+      caveats.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -199,15 +173,9 @@ skills:
   - id: ptlam-visualization-with-html
     description:
       Create or revise portable, polished, interactive HTML explainers and
-      learning artifacts with native HTML, CSS, JavaScript, SVG, and one
-      Material 3 Expressive design system. Use when a user asks to visualize
-      architecture, workflows, state changes, sequences, entity relationships,
-      semantic zoom, or step-by-step behavior in an HTML file; when a learner
-      should manipulate or observe a diagram rather than read long prose; or
-      when a top-to-bottom visual field guide or simulator is requested. Apply
-      the analogy dependency first only when the user explicitly asks to create
-      an analogy. Use a general application or site workflow for ordinary pages,
-      dashboards, and app-shell UI.
+      learning artifacts for architecture, workflows, state changes, sequences,
+      entity relationships, semantic zoom, and step-by-step behavior using
+      native web technologies and Material 3 Expressive.
     disable_model_invocation: true
     category_id: productivity
     visibility: public

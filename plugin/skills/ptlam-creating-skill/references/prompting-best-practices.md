@@ -17,7 +17,6 @@ before depending on exact model names or runtime features.
 - [Reasoning calibration](#reasoning-calibration)
 - [Long context and state](#long-context-and-state)
 - [Agentic work](#agentic-work)
-- [Pruning](#pruning)
 - [Prompt review](#prompt-review)
 
 ## Clarity and context
@@ -97,10 +96,10 @@ calls whose side effects or cost exceed the task.
 
 ## Reasoning calibration
 
-Use high-level principles when the model can choose among safe approaches. Add
-an algorithm when a repeated decision otherwise varies. Reserve detailed
-step-by-step reasoning instructions for fragile operations where intermediate
-choices must be observable.
+Choose the level of detail with the specificity ladder in
+[skill authoring best practices](skill-best-practices.md#core-principles). Add
+step-by-step reasoning instructions only for fragile operations where
+intermediate choices must be observable.
 
 Constrain excessive exploration with a commitment rule:
 
@@ -140,20 +139,6 @@ decisions and conflict-prone edits.
 Use prompt chaining when a pipeline genuinely needs an inspected intermediate
 artifact. Prefer one coherent workflow when separate calls add no control or
 information boundary.
-
-## Pruning
-
-Remove prompt content that:
-
-- restates default model behavior without strengthening it;
-- repeats one meaning with synonyms;
-- introduces tools or variants without a decision rule;
-- preserves old model behavior as if it were current;
-- creates extra files, abstractions, or flexibility for hypothetical needs; or
-- specifies mechanics the resolved target already guarantees.
-
-Replace weak phrases such as "be thorough" with a checkable completion criterion
-that names what must be accounted for.
 
 ## Prompt review
 

@@ -2,14 +2,9 @@
 name: ptlam-visualization-with-html
 description:
   Create or revise portable, polished, interactive HTML explainers and learning
-  artifacts with native HTML, CSS, JavaScript, SVG, and one Material 3
-  Expressive design system. Use when a user asks to visualize architecture,
-  workflows, state changes, sequences, entity relationships, semantic zoom, or
-  step-by-step behavior in an HTML file; when a learner should manipulate or
-  observe a diagram rather than read long prose; or when a top-to-bottom visual
-  field guide or simulator is requested. Apply the analogy dependency first only
-  when the user explicitly asks to create an analogy. Use a general application
-  or site workflow for ordinary pages, dashboards, and app-shell UI.
+  artifacts for architecture, workflows, state changes, sequences, entity
+  relationships, semantic zoom, and step-by-step behavior using native web
+  technologies and Material 3 Expressive.
 disable-model-invocation: true
 ---
 

@@ -12,6 +12,7 @@ authoritative.
 - [Package anatomy](#package-anatomy)
 - [Naming and discovery](#naming-and-discovery)
 - [Progressive disclosure](#progressive-disclosure)
+- [Document craft for skill packages](#document-craft-for-skill-packages)
 - [Reusable resources](#reusable-resources)
 - [Workflow design](#workflow-design)
 - [Content maintenance](#content-maintenance)
@@ -121,6 +122,34 @@ compact contents list to reference files longer than roughly 100 lines.
 Co-locate a concept's definition, rules, examples, and caveats. Do not repeat the
 same meaning in `SKILL.md` and a reference.
 
+## Document craft for skill packages
+
+The loaded human-first contract owns voice, evidence, and handoff. This section
+owns the shape of `SKILL.md` and its prose references.
+
+Open `SKILL.md` with an `At a glance` block when the workflow has four or more
+ordered steps, a branch, or a loop. Use one Mermaid flowchart when the path
+branches and one compact table when it does not. The block replaces a prose
+walkthrough of the workflow; it never accompanies one.
+
+Hold every visual to the substitution test: a diagram or table earns its place
+only when it replaces prose. When a table and a paragraph carry the same content,
+delete one.
+
+Give each step one idea per sentence and per bullet. Split a sentence that
+carries two independent rules instead of compressing them. Replace prose with
+labeled bullets or a decision table when it holds several independent actions,
+conditions, owners, or failure cases.
+
+End every ordered step with a checkable completion criterion that names the
+observable result. Close the workflow with one final acceptance gate, and do not
+restate a step's criterion inside it.
+
+Before static validation, read back only the title, headings, table and diagram
+labels, and bold labels. When they do not reveal the outcome, the normal path,
+the authority boundary, and the finish condition, restructure before editing
+sentences.
+
 ## Reusable resources
 
 ### Scripts
@@ -146,8 +175,8 @@ version, and freshness rule.
 
 ## Workflow design
 
-Apply the loaded human-first contract to workflow order, progress gates,
-visuals, density, ownership, and handoff.
+Arrange steps by dependency and cause, and shape them with
+[document craft](#document-craft-for-skill-packages).
 
 Use conditional branches when creation, revision, review, or target hosts need
 different actions. Do not present equivalent tools as a menu; give a selection
@@ -163,18 +192,23 @@ Keep verification proportional to risk and within the user's authorized scope.
 
 ## Content maintenance
 
-Use one stable term per concept. Remove:
+Use one stable term per concept. This list owns removal for both prose and
+prompt content. Remove:
 
-- duplicated meaning;
-- stale instructions and outdated snapshots;
-- explanations a capable agent already knows;
+- duplicated meaning, including one meaning repeated with synonyms;
+- stale instructions, outdated snapshots, and old model behavior preserved as if
+  current;
+- explanations a capable agent already knows, and restatements of default model
+  behavior that do not strengthen it;
+- mechanics the resolved target already guarantees;
 - examples that do not clarify a branch or output;
+- tools or variants introduced without a decision rule;
 - scripts that merely move reasoning into another file; and
-- defensive flexibility for hypothetical requirements.
+- defensive flexibility, extra files, or abstractions for hypothetical
+  requirements.
 
-Prefer positive target behavior over prohibitions. Use a hard prohibition only
-when safety or authority requires it, then immediately state the permitted
-alternative.
+Replace a weak phrase such as "be thorough" with a checkable completion
+criterion that names what must be accounted for.
 
 ## Executable resources
 
@@ -195,9 +229,9 @@ until the resolved target confirms it.
 
 ## Static quality checklist
 
-Apply the loaded human-first contract's outline-only scan, visual triggers, and
-density limits to `SKILL.md` and every changed prose reference. Restructure
-every violation before static validation.
+Apply [document craft](#document-craft-for-skill-packages) to `SKILL.md` and
+every changed prose reference. Restructure every violation before static
+validation.
 
 | Area | Passes when |
 | --- | --- |

@@ -1,15 +1,9 @@
 ---
 name: ptlam-creating-atomic-note
 description:
-  Create, review, split, or merge atomic notes for Zettelkasten, evergreen
-  notes, Obsidian, and other personal knowledge systems. Use when the user wants
-  to capture an idea or source as a durable note, turn highlights or rough
-  writing into self-contained notes, sharpen a vague note title, assess whether
-  a note contains one independently linkable claim, split a broad note, or merge
-  duplicate notes. Preserve local vault conventions, paraphrase source material
-  with attribution, and annotate why links exist. Do not use for meeting
-  minutes, task lists, project status notes, general journaling, or note-app
-  support without knowledge-development intent.
+  Create, review, split, or merge durable atomic notes with self-contained
+  claims, source attribution, and annotated links while preserving local vault
+  conventions.
 disable-model-invocation: true
 ---
 

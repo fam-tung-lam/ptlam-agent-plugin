@@ -1,14 +1,9 @@
 ---
 name: ptlam-grilling
 description:
-  Conduct a persistent, interactive stress test of a plan, decision, or idea
-  through one user-owned decision at a time. Use when the user explicitly
-  requests a sequential grilling interview or explicitly asks to resume a prior
-  grilling session; handle ordinary critique or risk-review requests as direct
-  analysis. Research discoverable facts independently, expose assumptions,
-  contradictions, risks, and trade-offs, recommend an answer for every decision,
-  wait after each question, and require confirmed shared understanding before
-  any resulting action.
+  Stress-test a plan, decision, or idea through a persistent interview that
+  resolves one user-owned decision at a time and records confirmed understanding
+  for later continuation.
 disable-model-invocation: true
 ---
 

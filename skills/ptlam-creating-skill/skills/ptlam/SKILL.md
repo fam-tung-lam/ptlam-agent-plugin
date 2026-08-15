@@ -1,7 +1,7 @@
 ---
 name: ptlam
 description:
-  Initialize or refresh a project with PTLam's general agent instructions.
+  Install or refresh PTLam's general agent instructions for a project.
 disable-model-invocation: true
 ---
 
