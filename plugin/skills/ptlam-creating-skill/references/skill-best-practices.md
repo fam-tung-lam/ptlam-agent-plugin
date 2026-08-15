@@ -13,7 +13,7 @@ final checklist confirms all of them.
 
 | Section | Decides |
 | --- | --- |
-| [Core principles](#core-principles) | Who the package is written for, and how much of it to write |
+| [Core principles](#core-principles) | How Rule 1 governs the package, who it is written for, and how much to write |
 | [Package anatomy](#package-anatomy) | Which files and directories exist |
 | [Naming and discovery](#naming-and-discovery) | What everything is called |
 | [Progressive disclosure](#progressive-disclosure) | Which file owns which content |
@@ -24,6 +24,14 @@ final checklist confirms all of them.
 | [Static quality checklist](#static-quality-checklist) | Whether the package is finished |
 
 ## Core principles
+
+### Apply Rule 1 before package craft
+
+Prove that the target is one atomic, self-contained, composable capability
+before optimizing its files, metadata, or prose. This reference assumes the
+capability boundary and every composition edge already pass Rule 1. Return to
+that gate whenever package detail reveals another independently useful behavior
+or an undeclared prerequisite.
 
 ### Write for the maintainer first
 
@@ -99,6 +107,10 @@ Create no directory without a concrete consumer. Omit skill-local READMEs,
 installation guides, changelogs, quick references, process diaries, and other
 files that do not help the agent perform the skill.
 
+A directory is internal anatomy, not another capability boundary. Promote a
+resource to a composed skill when another consumer would invoke its workflow
+independently.
+
 ## Naming and discovery
 
 Follow the target schema. When it does not define stricter rules:
@@ -111,6 +123,7 @@ Follow the target schema. When it does not define stricter rules:
 
 Treat a model-facing description as a context pointer. State the capability and
 one trigger per distinct branch. Collapse synonyms that repeat one branch.
+Add a reach clause when another skill should compose the capability.
 Prefer a positive boundary that names the intended adjacent behavior; retain a
 negative boundary only when it prevents a material false invocation and cannot
 be expressed clearly as a positive target.
@@ -226,8 +239,10 @@ Arrange steps by dependency and cause, and shape them with
 [human-first document craft](#human-first-document-craft).
 
 Use conditional branches when creation, revision, review, or target hosts need
-different actions. Do not present equivalent tools as a menu; give a selection
-rule.
+different actions within the resolved capability. Keep lifecycle branches only
+when they act on the same primary artifact under the same acceptance standard.
+Split independently reusable behavior before writing branch detail. Do not
+present equivalent tools as a menu; give a selection rule.
 
 For critical transformations, use a static feedback loop:
 
@@ -270,6 +285,10 @@ Store domain rules, schemas, API contracts, platform details, and substantial
 examples in `references/`. Keep time-sensitive material labeled with its source,
 version, and freshness rule.
 
+Keep a reusable workflow in a reference only when it has no independent
+invocation. Promote it to a composed skill when it can produce a useful outcome
+for another consumer.
+
 How a reference opens and reads is owned by
 [reference files](#reference-files).
 
@@ -286,6 +305,8 @@ prompt content. Remove:
 - mechanics the resolved target already guarantees;
 - examples that do not clarify a branch or output;
 - tools or variants introduced without a decision rule;
+- adjacent capabilities bundled because they share a topic, tool, or sequence;
+- copied prerequisite behavior that should remain owned by a composed skill;
 - scripts that merely move reasoning into another file; and
 - defensive flexibility, extra files, or abstractions for hypothetical
   requirements.
@@ -301,6 +322,7 @@ validation.
 
 | Area | Passes when |
 | --- | --- |
+| Atomicity and composition | Rule 1 passes after the final edit. One capability owns the package, lifecycle branches share its primary artifact and acceptance standard, prerequisites are declared, and every composition rule has one owner. |
 | Human readability | The [read-back gate](#read-back-gate) passes. Names reveal which file owns which rule. Every term is defined before the step that uses it. Structure is proportional to the skill. |
 | Discovery and package | Name, directory, metadata, and invocation match the target. The description has one trigger per branch. Every script and asset has a consumer. |
 | Workflow and disclosure | Steps, necessary progress gates, and final acceptance are visible. Outcome, normal path, ownership, and authority precede branch detail. Each reference has a precise one-hop context pointer; a router owns its complete selection map. |
