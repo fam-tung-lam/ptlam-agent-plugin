@@ -1,9 +1,13 @@
 # Visual contract selection
 
-Use this routing reference after the literal learning model is stable. Select
-only contracts with a concrete consumer in the artifact. Each linked reference
-owns the detailed anatomy, states, accessibility, and Material 3 Expressive
-application for that concern.
+Use this routing reference after the literal learning model is stable. Each
+linked reference owns the detailed anatomy, states, accessibility, and Material
+3 Expressive application for that concern.
+
+Choose the smallest visual grammar that exposes the important relationship. Use
+one visual grammar per relationship. Load a contract only when the artifact's
+actual content or controls select it, and give every loaded contract a concrete
+consumer.
 
 ## Select the visual grammar
 

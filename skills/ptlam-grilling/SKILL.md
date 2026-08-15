@@ -36,30 +36,6 @@ flowchart LR
 | Later action | Implementation, Git operations, and publication require separate authority. |
 | Done | The user confirms the persisted decision map, or the record names each deferred choice and consequence. |
 
-## Session record contract
-
-Capture the task's initial workspace root and keep it fixed for the session. Do
-not replace it with a discovered repository root or a later shell directory.
-When the host exposes several workspace roots and ownership is ambiguous, ask
-which root should contain the record.
-
-Create new records at:
-
-```text
-<workspace-root>/.ptlam-agent-plugin/skills/productivity/ptlam-grilling/<YYYY-MM-DD>_<title>.md
-```
-
-Use the session's creation date and a short, filesystem-safe title that names
-the decision. Prefer the base filename when it is available; otherwise append
-the first free suffix before `.md`, such as `_2` or `_3`. Never overwrite or
-truncate a record.
-
-Invocation authorizes writes only to this session directory and the selected
-record. Obtain separate authority before staging, committing, publishing, or
-changing unrelated project files. The record stores conclusions and evidence,
-not hidden reasoning, a turn transcript, secrets, credentials, or unrelated
-personal data.
-
 ## 1. Resolve the session record
 
 1. Inspect the canonical directory, candidate path, and same-topic records.
@@ -67,9 +43,9 @@ personal data.
    several records plausibly match, ask which one to continue.
 3. Read a resumed record completely. Recheck drift-prone evidence and continue
    from its next unresolved decision without repeating settled questions.
-4. Read and follow the canonical
-   [grilling session schema](references/grilling-session-schema.md) before the
-   first write. It owns the record structure and status meanings.
+4. Read the [grilling session schema](references/grilling-session-schema.md)
+   before the first write. It owns where the record lives, what it holds, when
+   to rewrite it, and what the statuses mean.
 
 Complete this step when the fixed workspace root, schema, one unique new or
 resumable path, prior state, and write authority are known.
@@ -117,23 +93,7 @@ recommendation as the user's decision.
 Complete this step when no answerable outcome-changing decision remains and the
 record reflects every resolved, invalidated, deferred, or open branch.
 
-## 4. Keep the record current
-
-Do not let the file lag behind a materially changed decision map. Update it:
-
-- after a consequential answer or new evidence changes the map;
-- before yielding with the next substantive question;
-- before a summary or handoff; and
-- when the session becomes confirmation-pending, deferred, blocked, or
-  complete.
-
-Keep it concise and understandable without chat history. Replace stale state
-with current conclusions instead of appending a transcript.
-
-Complete this step whenever the record's status, evidence, decisions, open
-question, and resume instruction match the live session.
-
-## 5. Confirm shared understanding
+## 4. Confirm shared understanding
 
 Summarize the outcome, non-goals, resolved decisions, accepted assumptions,
 risks, deferred decisions, and next authorized action. Persist that summary,

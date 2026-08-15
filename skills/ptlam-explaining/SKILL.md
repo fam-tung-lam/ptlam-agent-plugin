@@ -9,9 +9,7 @@ disable-model-invocation: true
 # PTLam Explaining
 
 Build the learner's mental model of one concept, then check that they can use
-it. This foundation owns the learning goal, the literal model, device selection,
-composition order, and verification. A device specialization owns only the
-machinery of the device it names.
+it. A device specialization owns only the machinery of the device it names.
 
 ## Decision ownership
 

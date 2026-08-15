@@ -93,3 +93,10 @@ with separate authority and known targets.
 Complete merging when the result is self-contained and every destination,
 source-note disposition, connection, and backlink effect is unambiguous and
 authorized.
+
+## Naming a file with no local convention
+
+When the user asks for a file and the destination has no naming convention,
+derive a short, lowercase, hyphenated slug from the focal idea and use `.md`.
+
+Do not invent a folder taxonomy or a metadata schema on the user's behalf.

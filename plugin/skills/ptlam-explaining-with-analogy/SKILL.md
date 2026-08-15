@@ -2,13 +2,10 @@
 
 Turn the learning goal and literal model produced by the required
 `ptlam-explaining` foundation into one vivid, structurally faithful real-life
-analogy. The result contains the foundation's literal summary, stable mappings,
-a story that demonstrates the mechanism, and explicit limitations.
+analogy.
 
-When another skill calls this one, return those four semantic components and
-let the caller own their rendering. When answering the learner directly, use
-the compact Markdown shape defined below. This skill returns an explanation and
-does not change files.
+This skill returns an explanation and changes no files. When another skill
+calls it, that caller owns the rendering.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -35,9 +32,8 @@ Do not resolve a competing learning goal or rebuild the literal model. When a
 material input is missing, return that gap to the foundation. Ask the learner
 only when the foundation cannot safely resolve it from available evidence.
 
-Complete this step when one foundation-owned learning goal, literal answer, and
-literal model supply every relationship and constraint needed to evaluate an
-analogy.
+Complete this step when the foundation's learning goal, literal answer, and
+literal model supply everything needed to evaluate an analogy.
 
 ## 2. Choose one faithful analogy
 
@@ -96,64 +92,28 @@ is settled.
 
 ## 3. Compose the explanation
 
-Lock the selected analogy domain and use it throughout. Calibrate vocabulary and
-depth to the learner. Be vivid without weakening precision.
+Lock the selected analogy domain and use it throughout. Calibrate vocabulary
+and depth to the learner. Be vivid without weakening precision.
 
-Produce these four components in order. A calling skill may transform their
-presentation while preserving their meaning. For direct Markdown delivery, use
-this shape without an extra introduction or conclusion.
-
-### In a sentence
-
-Reuse the foundation's one-sentence literal answer without changing its meaning.
-Format it as a blockquote:
-
-> [One-sentence literal summary]
-
-### The map
-
-Translate each essential story element into exactly one real concept:
-
-| In the story | In [concept name] | Why it maps |
-| --- | --- | --- |
-| [analogy element] | [literal element] | [preserved relationship or behavior] |
-
-### The story
-
-Tell a short story entirely inside the analogy domain and in second person. Do
-not name the literal concept inside the story. Use an ordered list when sequence
-or causality matters; otherwise use concise prose or bullets.
-
-### Where it breaks
-
-Name every material way the analogy omits, oversimplifies, or misrepresents the
-literal concept. One or two limitations will usually be enough. If many caveats
-are needed, reject the analogy and select a stronger candidate.
-
-Complete this step when all four components are present, fit the learner, and
-disclose every material limitation.
+Follow [the explanation shape](references/explanation-shape.md). It owns the
+four components — the literal sentence, the map, the story, and the limitations
+— their order, their finish condition, and the Markdown a direct answer uses.
 
 ## 4. Verify the analogy
 
-Confirm that:
+Reapply the step 2 mapping gate to the drafted explanation. Then confirm that:
 
-- every essential literal concept has one stable counterpart;
-- ownership, direction, order, state, cardinality, lifetime, and causality are
-  preserved where relevant;
-- no analogy element represents unrelated concepts;
 - the story demonstrates the mechanism instead of decorating it;
-- exact facts remain literal in the map or limitations; and
+- exact facts stayed literal, in the map or in the limitations; and
 - the learner can reconstruct the foundation's literal model from the map
-  without relying on the story alone.
+  alone, without the story.
 
 If drafting reveals a failed mapping, do not return it. For an automatically
 selected analogy, use the next strongest passing candidate. For a
-learner-selected analogy, explain the discovered limitation and offer fresh
-passing candidates instead of silently overriding the choice.
+learner-supplied one, follow step 2's rule for a failed supplied domain.
 
-Complete this step when the analogy-specific checks pass and the foundation's
-literal answer, composition order, and limits remain intact for caller rendering
-or direct delivery.
+Complete this step when these checks pass and the foundation's literal answer,
+composition order, and limits remain intact.
 
 ## 5. Handle follow-ups
 
@@ -166,5 +126,4 @@ or direct delivery.
 | A challenge to the analogy | Name the limitation and structural rationale; offer fresh candidates when needed. |
 
 Complete a follow-up when the foundation has verified any changed literal scope
-and the result passes the same analogy selection, mapping, story, and limitation
-checks.
+and the result passes steps 2 through 4 again.

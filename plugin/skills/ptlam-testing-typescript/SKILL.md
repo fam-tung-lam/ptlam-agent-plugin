@@ -49,11 +49,8 @@ TypeScript-stack choices unresolved.
 4. Treat this skill's bundled references as the syntax and lifecycle authority.
    When installed types or command output contradict them, follow applicable
    `AGENTS.md` guidance or report the unsupported mismatch.
-5. Read
-   [TypeScript and Vitest stack](references/typescript-vitest-stack.md) whenever
-   configuring, writing, running, auditing, or diagnosing Vitest tests. It owns
-   stack defaults, placement fallback, API preferences, coverage rules, and
-   proof commands.
+5. Read [stack defaults](references/stack-defaults.md) for every task. It owns
+   the scope boundary, the tool choices, the placement fallback, and snapshots.
 
 Complete this step when the scope, package manager, configuration owner, Node
 test contract, and applicable stack preferences agree or an unsupported
@@ -86,11 +83,17 @@ its implementation rules.
 
 ## 4. Apply the owned TypeScript stack contract
 
-Apply the repository mechanics resolved in step 2, then the
-[TypeScript and Vitest stack](references/typescript-vitest-stack.md) fallbacks
-for every choice the repository leaves open. Apply each mechanism-specific
-reference selected in step 3 only to its named concern. Do not recreate stack
-defaults or API rules in this file; those references own them.
+Apply the repository mechanics resolved in step 2 first. For every choice the
+repository leaves open, read the file that owns it:
+
+| Doing | Read |
+| --- | --- |
+| Creating or changing Vite, Vitest, or coverage configuration | [Vitest configuration](references/vitest-configuration.md) |
+| Authoring or changing test code, doubles, or timers | [writing Vitest tests](references/writing-vitest-tests.md) |
+| Running tests, choosing scripts, or reporting proof | [running Vitest](references/running-vitest.md) |
+
+Apply each Vitest API reference selected in step 3 only to its named concern.
+Do not restate stack defaults or API rules here; those files own them.
 
 Complete this step when every stack choice follows current repository evidence
 or this skill's fallback, and each deviation has a concrete compatibility or
