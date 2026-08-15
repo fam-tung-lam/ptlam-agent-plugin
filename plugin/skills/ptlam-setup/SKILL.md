@@ -1,11 +1,4 @@
----
-name: ptlam
-description:
-  Install or refresh PTLam's general agent instructions for a project.
-disable-model-invocation: true
----
-
-# PTLam Project Initialization
+# PTLam Project Setup
 
 Install or refresh PTLam's general agent instructions in one project. Run this
 workflow only when the user explicitly asks to initialize or update those
@@ -13,6 +6,8 @@ instructions.
 
 The bundled `PTLAM_AGENTS.md` reference is the source of truth for the managed
 override. Project-specific guidance remains owned by `AGENTS.md`.
+
+<!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
 ## At a glance
 
