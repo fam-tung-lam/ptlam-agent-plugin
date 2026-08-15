@@ -1,112 +1,74 @@
 # Skill Atomicity and Composition
 
-Read this reference when defining or challenging a skill boundary. It owns the
-capability tests, keep-or-split decisions, self-contained contract, and
-foundation-specialization composition rules required by Rule 1.
+Read this when defining or challenging a skill boundary. It owns the capability
+tests, the keep-or-split decision, the self-contained contract, and the rules
+for composing a foundation with a specialization.
 
-This model translates the processing direction in Sascha's
+The model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
 retrieved on 2026-08-15, from knowledge building blocks to agent capabilities.
-The translation is specific to skill design: a skill must pass the contract
-before publication, even though its package may mature through rough drafts.
 
-## Contents
+## What counts as one capability
 
-| Section | Decides |
-| --- | --- |
-| [Define the capability atom](#define-the-capability-atom) | What counts as one skill capability |
-| [Apply the six tests](#apply-the-six-tests) | Whether the proposed boundary is atomic |
-| [Choose whether to keep, split, or route](#choose-whether-to-keep-split-or-route) | Where independently useful behavior belongs |
-| [Make the skill self-contained](#make-the-skill-self-contained) | Which contract makes the normal path complete |
-| [Compose without duplicating ownership](#compose-without-duplicating-ownership) | How foundations and specializations divide responsibility |
+One capability is the smallest behavior someone would invoke on its own. It has
+one responsibility, produces one kind of result, works on one primary artifact
+or decision, and passes one standard for being done.
 
-## Define the capability atom
+Judge this by behavior, not by file count, tool count, or step count. Internal
+files may sit together as long as they only serve that one behavior.
 
-A capability atom is the smallest independently useful behavior contract. It
-contains:
+## The six tests
 
-- one responsibility and outcome family;
-- the primary artifact or decision that responsibility acts on;
-- lifecycle branches that share one acceptance standard;
-- declared inputs, outputs, dependencies, authority, and side effects; and
-- a boundary that excludes adjacent responsibilities.
+1. **Naming.** Can one action-oriented name identify it?
+2. **Result.** Do all branches produce the same kind of result?
+3. **Standard.** Do they work on the same primary artifact under one standard
+   for being done?
+4. **Completeness.** Can the declared inputs and dependencies reach that
+   standard?
+5. **Independent reuse.** Would another caller invoke one branch on its own,
+   for a different responsibility? If yes, split it.
+6. **Composition.** Can another skill reuse this without copying its
+   instructions?
 
-Judge atomicity by capability, not by word count, file count, tool count, or the
-number of workflow steps. References, scripts, assets, host adapters, and
-validation steps may stay inside one package when they only support its focal
-capability.
+Several verbs in the name are a warning, not proof. Create, review, and repair
+belong together when the artifact, the responsibility, and the standard match.
 
-## Apply the six tests
-
-1. **Naming:** Can one action-oriented name identify the capability without a
-   list of unrelated responsibilities?
-2. **Outcome:** Do all branches belong to one independently useful outcome
-   family?
-3. **Acceptance:** Do all branches create, change, or evaluate the same primary
-   artifact under one acceptance standard?
-4. **Completeness:** Can a future agent reach that acceptance state from the
-   declared inputs and dependencies without hidden instructions?
-5. **Independent reuse:** Would another consumer invoke one branch for a
-   different responsibility or acceptance standard? If so, split it.
-6. **Composition:** Can another skill reuse this capability through a stable
-   contract without copying its rules?
-
-A name containing `and` or several verbs is a warning, not proof of mixed
-capabilities. Keep lifecycle operations together when they serve the same
-artifact, responsibility, and acceptance standard. Split them when their reuse,
-authority, or completion can vary independently.
-
-## Choose whether to keep, split, or route
+## Keep, split, or route
 
 | Evidence | Decision |
 | --- | --- |
-| Create, review, and repair branches apply one acceptance contract to the same artifact | Keep them as lifecycle branches. |
-| A branch has its own trigger, consumers, outcome family, or acceptance standard | Split it into another atomic skill. |
-| A domain or host adds specialized mechanics to a complete universal capability | Create a specialization that composes the foundation. |
-| Several skills are hard for a human to remember, but routing itself has one stable outcome | Create a router that delegates and owns no domain workflow. |
-| A script or reference is useful only inside the focal capability | Keep it as an internal resource. |
-| A resource contains a workflow another consumer would invoke independently | Promote it to a composed skill. |
+| Branches share one artifact and one standard for being done | Keep them together. |
+| A branch has its own callers, result, or standard | Split it. |
+| A domain or host adds mechanics to an already complete capability | Compose a specialization. |
+| Remembering several skills is the real problem, and routing has one result | Create a router. |
+| A file serves only this capability | Keep it internal. |
+| Another caller would invoke a file's workflow | Promote it to a skill. |
 
-When splitting, name the capability, trigger, output, acceptance standard, and
-boundary of every result. Record which skill owns shared behavior before writing
-packages. Shared topic, tool, input format, or implementation sequence is not
-enough reason to merge capabilities.
+For each split, name its capability, trigger, output, standard, boundary, and
+the edges that join it to the others. Give shared behavior exactly one owner.
 
-## Make the skill self-contained
+## Make the contract self-contained
 
-Self-contained means the capability's normal path is complete under explicit
-prerequisites. The package must expose:
+The package must state its invocation conditions and required inputs, its
+ordered actions and branch rules, its outputs and finish conditions, its
+authority and side-effect limits, its stop conditions, and the dependencies
+that supply what it does not own.
 
-- the invocation condition and required inputs;
-- the ordered actions and branch selection rules;
-- the expected output and completion criteria;
-- the authority and side-effect boundary;
-- the failure or stop conditions a consumer must handle; and
-- every external capability supplied by a declared dependency.
-
-Self-contained does not mean dependency-free. A specialization is
-self-contained when the host loads its declared foundation, the specialization
-states what the foundation owns, and its own instructions supply the complete
-delta. An undeclared prerequisite is a hidden gap, not composition.
+Self-contained does not mean dependency-free. A dependency is valid when the
+host loads it, its promises cover what the caller needs, and ownership stays
+explicit.
 
 ## Compose without duplicating ownership
 
-For every foundation-specialization edge:
+For each foundation-and-specialization pair:
 
-1. Keep the foundation complete and independently useful for its universal
-   responsibility.
-2. Give the specialization one independently useful domain or host capability.
-3. Let the foundation own shared scope, behavior, vocabulary, and acceptance.
-4. Let the specialization own only stricter or additional mechanics for its
-   domain.
-5. Declare load order, inputs, outputs, authority, and conflict precedence in
-   the host's verified dependency surface.
-6. Reference the owner instead of paraphrasing its rules in the consumer.
+1. The foundation stays complete for its own universal responsibility.
+2. The specialization owns one domain or host capability, and only that.
+3. The foundation owns the shared behavior, vocabulary, and standard.
+4. The specialization owns only the stricter or additional mechanics.
+5. Both declare load order, inputs, outputs, authority, and conflict
+   precedence.
+6. Each references the owner instead of paraphrasing its rules.
 
-Composition fails when the consumer silently weakens the foundation, requires
-an output the foundation does not promise, or copies enough of the foundation
-that the two versions can drift independently.
-
-Complete Rule 1 when all six tests pass, every retained branch serves the focal
-capability, every prerequisite is declared, and each composition edge has one
-owner per rule.
+Rule 1 passes when all six tests pass, every branch serves the one capability,
+every prerequisite is declared, and every shared rule has one owner.
