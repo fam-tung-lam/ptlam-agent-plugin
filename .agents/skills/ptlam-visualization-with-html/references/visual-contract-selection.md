@@ -1,9 +1,13 @@
 # Visual contract selection
 
-Use this routing reference after the literal learning model is stable. Select
-only contracts with a concrete consumer in the artifact. Each linked reference
-owns the detailed anatomy, states, accessibility, and Material 3 Expressive
-application for that concern.
+Use this routing reference after the literal learning model is stable. Each
+linked reference owns the detailed anatomy, states, accessibility, and Material
+3 Expressive application for that concern.
+
+Choose the smallest visual grammar that exposes the important relationship. Use
+one visual grammar per relationship. Load a contract only when the artifact's
+actual content or controls select it, and give every loaded contract a concrete
+consumer.
 
 ## Select the visual grammar
 
@@ -33,7 +37,7 @@ application for that concern.
 | --- | --- |
 | Primary and secondary actions | [Buttons](design-system/components/buttons/buttons.md) |
 | Grouped actions or connected selection | [Button groups](design-system/components/buttons/button-groups/button-groups.md) |
-| Existing legacy segmented control | [Segmented buttons](design-system/components/buttons/segmented-buttons/segmented-buttons.md) |
+| Existing segmented control | [Segmented buttons](design-system/components/buttons/segmented-buttons/segmented-buttons.md) |
 | Familiar action without a visible label | [Icon buttons](design-system/components/buttons/icon-buttons/icon-buttons.md) |
 | Independent choices or multi-selection | [Checkbox](design-system/components/checkbox/checkbox.md) |
 | Compact filters, selections, or contextual actions | [Chips](design-system/components/chips/chips.md) |
