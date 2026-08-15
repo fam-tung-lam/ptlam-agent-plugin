@@ -1,9 +1,9 @@
 ---
 name: ptlam-git-managing-context
 description:
-  Resolve, create, refresh, review, or consolidate one repository's durable Git
-  facts and preferences in project-local CONTEXT.md. Use read-only when another
-  Git workflow needs current project context, and write only when the user
+  Resolve, create, refresh, or review one repository's durable Git facts and
+  preferences in project-local CONTEXT.md. Use read-only when another Git
+  workflow needs current project context, and write only when the user
   explicitly requests context maintenance.
 ---
 
@@ -17,11 +17,11 @@ the same context artifact against current repository evidence.
 
 ```mermaid
 flowchart LR
-    A[Resolve repository and branch] --> B[Load canonical or earlier context]
+    A[Resolve repository and branch] --> B[Load canonical context]
     B --> C[Verify durable facts and preferences]
     C --> D{Selected branch}
     D -- Read-only --> E[Return verified context and suggested maintenance]
-    D -- Explicit maintenance --> F[Create, refresh, or consolidate context]
+    D -- Explicit maintenance --> F[Create, refresh, or review context]
     F --> G[Verify file and VCS treatment]
 ```
 
@@ -31,8 +31,8 @@ flowchart LR
 | --- | --- |
 | Primary artifact | `<repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-git-managing-context/CONTEXT.md` |
 | Read-only trigger | Another Git workflow needs verified repository facts or preferences |
-| Maintenance trigger | The user explicitly asks to create, refresh, review, or consolidate Git context |
-| Authority | Context maintenance changes only canonical context and explicitly authorized replaced context files; it never grants staging, commit, push, publication, or other Git authority |
+| Maintenance trigger | The user explicitly asks to create, refresh, or review Git context |
+| Authority | Context maintenance changes only canonical context; it never grants staging, commit, push, publication, or other Git authority |
 | Acceptance | Every returned or stored entry is durable, current, scoped, and supported by live repository evidence |
 
 ## 1. Resolve the repository and branch
@@ -50,7 +50,7 @@ flowchart LR
 Complete this step when every repository has one root and the context operation
 is explicitly read-only or writable.
 
-## 2. Load canonical or earlier context
+## 2. Load canonical context
 
 Use this canonical path:
 
@@ -58,26 +58,15 @@ Use this canonical path:
 <repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-git-managing-context/CONTEXT.md
 ```
 
-Load the canonical file when it exists. Treat current user instructions,
-repository policy, Git configuration, hooks, hosting configuration, and
-collaboration surfaces as the sources of truth. The context is a verified cache,
-not authority over live evidence.
+Load the file when it exists. Treat current user instructions, repository
+policy, Git configuration, hooks, hosting configuration, and collaboration
+surfaces as the sources of truth. The context is a verified cache, not authority
+over live evidence.
 
-When the canonical file is absent, check these earlier layouts in order:
+When the file is absent, return that state in read-only mode. In maintenance
+mode, proceed only when current evidence can establish content for a new file.
 
-```text
-.ptlam-agent-plugin/skills/engineering/ptlam-managing-git-context/CONTEXT.md
-.ptlam-agent-plugin/skills/engineering/ptlam-git/CONTEXT.md
-.ptlam-agent-plugin/skills/ptlam-git/profile.md
-.ptlam-agent-plugin/skills/engineering/ptlam-git/profile.md
-```
-
-Load relevant facts in place and report every earlier file. In maintenance mode,
-consolidate only verified current content into the canonical file. Remove a
-replaced file only when deletion is explicitly authorized.
-
-Complete this step when current information has one canonical destination and
-every retained earlier-layout file is known.
+Complete this step when the canonical path and current file state are known.
 
 ## 3. Keep one durable context artifact
 
@@ -116,7 +105,7 @@ infer one from a single accepted command, commit, or workflow.
 
 Never store permission grants, secrets, transient logs, machine-specific
 absolute paths, research notes, alternatives, or task history. Preserve unknown
-fields and require an explicit migration before changing an unsupported schema.
+fields. Stop without changing the file when its schema version is unsupported.
 
 Complete this step when every retained item is a durable project fact, Git-flow
 fact, or explicitly supported scoped preference.
@@ -153,8 +142,7 @@ treatment.
 
 Return the repository root, canonical path, selected branch, file state,
 verified task-relevant facts and preferences, stale or provisional entries,
-suggested maintenance, retained earlier files, and tracked, ignored, or
-untracked status.
+suggested maintenance, and tracked, ignored, or untracked status.
 
 Complete the task when another workflow can consume the result without
 rediscovering repository context and every file effect stays within the

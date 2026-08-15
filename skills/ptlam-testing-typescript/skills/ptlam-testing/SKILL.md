@@ -179,8 +179,8 @@ production or capability scope, then add the test-level segment.
 Use repository names for the roots, capability directories, level directories,
 and test filenames. Mirror remaining source directories and filenames when one
 test corresponds to one production file. For a user journey or capability with
-no single source file, organize by that capability before its level. Do not
-reorganize unrelated legacy tests as a side effect.
+no single source file, organize by that capability before its level. Leave
+unrelated existing tests in place.
 
 When a touched test violates the active placement owner, tell the user. Move it
 only when relocation is already in scope or separately authorized; then remove

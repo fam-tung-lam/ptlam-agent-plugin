@@ -1,7 +1,7 @@
 ---
 schema_version: 1
-skill: ptlam-git
-canonical_path: skills/engineering/ptlam-git
+skill: ptlam-git-managing-context
+canonical_path: skills/engineering/ptlam-git-managing-context
 updated_at: 2026-08-15
 ---
 

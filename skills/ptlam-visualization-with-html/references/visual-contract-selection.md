@@ -33,7 +33,7 @@ application for that concern.
 | --- | --- |
 | Primary and secondary actions | [Buttons](design-system/components/buttons/buttons.md) |
 | Grouped actions or connected selection | [Button groups](design-system/components/buttons/button-groups/button-groups.md) |
-| Existing legacy segmented control | [Segmented buttons](design-system/components/buttons/segmented-buttons/segmented-buttons.md) |
+| Existing segmented control | [Segmented buttons](design-system/components/buttons/segmented-buttons/segmented-buttons.md) |
 | Familiar action without a visible label | [Icon buttons](design-system/components/buttons/icon-buttons/icon-buttons.md) |
 | Independent choices or multi-selection | [Checkbox](design-system/components/checkbox/checkbox.md) |
 | Compact filters, selections, or contextual actions | [Chips](design-system/components/chips/chips.md) |

@@ -53,10 +53,10 @@ skills:
     required_skills: []
   - id: ptlam-git-managing-context
     description:
-      Resolve, create, refresh, review, or consolidate one repository's durable
-      Git facts and preferences in project-local CONTEXT.md. Use read-only when
-      another Git workflow needs current project context, and write only when
-      the user explicitly requests context maintenance.
+      Resolve, create, refresh, or review one repository's durable Git facts and
+      preferences in project-local CONTEXT.md. Use read-only when another Git
+      workflow needs current project context, and write only when the user
+      explicitly requests context maintenance.
     category_id: engineering
     visibility: internal
     status: active
@@ -80,10 +80,10 @@ skills:
           Apply this skill only to the commit message and its verification.
   - id: ptlam-testing-managing-context
     description:
-      Resolve, create, refresh, review, or consolidate one project's durable
-      testing facts and preferences in project-local CONTEXT.md. Use read-only
-      when another testing workflow needs current project context, and write
-      only when the user explicitly requests context maintenance.
+      Resolve, create, refresh, or review one project's durable testing facts
+      and preferences in project-local CONTEXT.md. Use read-only when another
+      testing workflow needs current project context, and write only when the
+      user explicitly requests context maintenance.
     category_id: engineering
     visibility: internal
     status: active

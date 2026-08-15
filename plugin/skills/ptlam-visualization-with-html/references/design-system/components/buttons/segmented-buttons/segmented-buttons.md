@@ -5,7 +5,7 @@ groups. For new artifacts, use the connected selection contract in
 `button-groups.md`. Retain this pattern only when revising an artifact whose
 existing segmented control must remain compatible.
 
-Limit the legacy control to two through five related view, sort, or selection
+Limit the existing control to two through five related view, sort, or selection
 options. Use `aria-pressed` for independent multi-select segments and a native
 radio group for exactly one selected value. For more options or richer labels,
 use chips or ordinary controls.

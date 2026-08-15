@@ -65,13 +65,9 @@ personal data.
 1. Inspect the canonical directory, candidate path, and same-topic records.
 2. Resume one clear non-complete match unless the user asks to start fresh. If
    several records plausibly match, ask which one to continue.
-3. Treat records under the earlier flat
-   `.ptlam-agent-plugin/skills/ptlam-grilling/` directory, including its
-   `sessions/` subdirectory, as resumable in place. Create new records only in
-   the canonical categorized directory.
-4. Read a resumed record completely. Recheck drift-prone evidence and continue
+3. Read a resumed record completely. Recheck drift-prone evidence and continue
    from its next unresolved decision without repeating settled questions.
-5. Read and follow the canonical
+4. Read and follow the canonical
    [grilling session schema](references/grilling-session-schema.md) before the
    first write. It owns the record structure and status meanings.
 

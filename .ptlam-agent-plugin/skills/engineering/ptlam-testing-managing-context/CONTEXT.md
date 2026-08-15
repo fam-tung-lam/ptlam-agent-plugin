@@ -1,8 +1,8 @@
 ---
 schema_version: 1
-skill: ptlam-testing
-canonical_path: skills/engineering/ptlam-testing
-updated_at: 2026-08-14
+skill: ptlam-testing-managing-context
+canonical_path: skills/engineering/ptlam-testing-managing-context
+updated_at: 2026-08-15
 ---
 
 # Project Testing Context

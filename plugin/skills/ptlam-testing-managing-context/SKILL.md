@@ -10,11 +10,11 @@ artifact against current repository evidence.
 
 ```mermaid
 flowchart LR
-    A[Resolve project and branch] --> B[Load canonical or earlier context]
+    A[Resolve project and branch] --> B[Load canonical context]
     B --> C[Verify project, environment, and preference facts]
     C --> D{Selected branch}
     D -- Read-only --> E[Return verified context and suggested maintenance]
-    D -- Explicit maintenance --> F[Create, refresh, or consolidate context]
+    D -- Explicit maintenance --> F[Create, refresh, or review context]
     F --> G[Verify file and VCS treatment]
 ```
 
@@ -24,8 +24,8 @@ flowchart LR
 | --- | --- |
 | Primary artifact | `<project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-testing-managing-context/CONTEXT.md` |
 | Read-only trigger | Another testing workflow needs verified project facts or preferences |
-| Maintenance trigger | The user explicitly asks to create, refresh, review, or consolidate testing context |
-| Authority | Context maintenance changes only canonical context and explicitly authorized replaced context files; it never grants dependency, test, production, staging, commit, or publication authority |
+| Maintenance trigger | The user explicitly asks to create, refresh, or review testing context |
+| Authority | Context maintenance changes only canonical context; it never grants dependency, test, production, staging, commit, or publication authority |
 | Acceptance | Every returned or stored entry is durable, current, scoped, and supported by live project evidence |
 
 ## 1. Resolve the project and branch
@@ -45,7 +45,7 @@ flowchart LR
 Complete this step when every project has one root and the context operation is
 explicitly read-only or writable.
 
-## 2. Load canonical or earlier context
+## 2. Load canonical context
 
 Use this canonical path:
 
@@ -53,27 +53,14 @@ Use this canonical path:
 <project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-testing-managing-context/CONTEXT.md
 ```
 
-Load the canonical file when it exists. Treat repository instructions,
-manifests, lockfiles, build and test configuration, CI, and existing tests as
-the sources of truth. The context is a verified cache, not authority over live
-evidence.
+Load the file when it exists. Treat repository instructions, manifests,
+lockfiles, build and test configuration, CI, and existing tests as the sources
+of truth. The context is a verified cache, not authority over live evidence.
 
-When the canonical file is absent, check these earlier layouts in order:
+When the file is absent, return that state in read-only mode. In maintenance
+mode, proceed only when current evidence can establish content for a new file.
 
-```text
-.ptlam-agent-plugin/skills/engineering/ptlam-managing-testing-context/CONTEXT.md
-.ptlam-agent-plugin/skills/engineering/ptlam-testing/CONTEXT.md
-.ptlam-agent-plugin/skills/ptlam-testing/CONTEXT.md
-.ptlam-agent-plugin/skills/ptlam-testing/profile.md
-.ptlam-agent-plugin/skills/engineering/ptlam-testing/profile.md
-```
-
-Load relevant facts in place and report every earlier file. In maintenance mode,
-consolidate only verified current content into the canonical file. Remove a
-replaced file only when deletion is explicitly authorized.
-
-Complete this step when current information has one canonical destination and
-every retained earlier-layout file is known.
+Complete this step when the canonical path and current file state are known.
 
 ## 3. Keep one durable context artifact
 
@@ -114,8 +101,8 @@ Record durable user or project testing preferences with their scope. Do not
 copy universal testing rules or store permission grants.
 
 Never store secrets, transient logs, machine-specific absolute paths, research
-notes, alternatives, rationale, or decision history. Preserve unknown fields
-and require an explicit migration before changing an unsupported schema.
+notes, alternatives, rationale, or decision history. Preserve unknown fields.
+Stop without changing the file when its schema version is unsupported.
 
 Complete this step when every retained item is a durable project fact,
 testing-context fact, or explicitly supported scoped preference.
@@ -153,8 +140,8 @@ treatment.
 
 Return the project root, canonical path, selected branch, file state, selected
 testing context, verified task-relevant facts and preferences, stale or
-provisional entries, suggested maintenance, retained earlier files, and
-tracked, ignored, or untracked status.
+provisional entries, suggested maintenance, and tracked, ignored, or untracked
+status.
 
 Complete the task when another testing workflow can consume the result without
 rediscovering project context and every file effect stays within the explicit
