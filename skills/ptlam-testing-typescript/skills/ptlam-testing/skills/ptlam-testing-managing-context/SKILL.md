@@ -1,5 +1,5 @@
 ---
-name: ptlam-managing-testing-context
+name: ptlam-testing-managing-context
 description:
   Resolve, create, refresh, review, or consolidate one project's durable testing
   facts and preferences in project-local CONTEXT.md. Use read-only when another
@@ -29,7 +29,7 @@ flowchart LR
 
 | Concern | Boundary |
 | --- | --- |
-| Primary artifact | `<project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-managing-testing-context/CONTEXT.md` |
+| Primary artifact | `<project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-testing-managing-context/CONTEXT.md` |
 | Read-only trigger | Another testing workflow needs verified project facts or preferences |
 | Maintenance trigger | The user explicitly asks to create, refresh, review, or consolidate testing context |
 | Authority | Context maintenance changes only canonical context and explicitly authorized replaced context files; it never grants dependency, test, production, staging, commit, or publication authority |
@@ -57,7 +57,7 @@ explicitly read-only or writable.
 Use this canonical path:
 
 ```text
-<project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-managing-testing-context/CONTEXT.md
+<project-root>/.ptlam-agent-plugin/skills/engineering/ptlam-testing-managing-context/CONTEXT.md
 ```
 
 Load the canonical file when it exists. Treat repository instructions,
@@ -68,6 +68,7 @@ evidence.
 When the canonical file is absent, check these earlier layouts in order:
 
 ```text
+.ptlam-agent-plugin/skills/engineering/ptlam-managing-testing-context/CONTEXT.md
 .ptlam-agent-plugin/skills/engineering/ptlam-testing/CONTEXT.md
 .ptlam-agent-plugin/skills/ptlam-testing/CONTEXT.md
 .ptlam-agent-plugin/skills/ptlam-testing/profile.md
@@ -88,8 +89,8 @@ Use compact identity and freshness frontmatter:
 ```yaml
 ---
 schema_version: 1
-skill: ptlam-managing-testing-context
-canonical_path: skills/engineering/ptlam-managing-testing-context
+skill: ptlam-testing-managing-context
+canonical_path: skills/engineering/ptlam-testing-managing-context
 updated_at: YYYY-MM-DD
 ---
 ```

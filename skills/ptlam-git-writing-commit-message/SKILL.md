@@ -1,5 +1,5 @@
 ---
-name: ptlam-writing-commit-message
+name: ptlam-git-writing-commit-message
 description:
   Create or revise one commit message from the current change and verified
   project Git preferences. Use when a repository-tied Git workflow needs a
@@ -14,17 +14,17 @@ This skill changes no Git state.
 
 ## Required skills
 
-### `ptlam-managing-git-context`
+### `ptlam-git-managing-context`
 
 **Reason:** Provides verified repository facts and Git preferences.
 
-**Instructions:** Read and apply ptlam-managing-git-context first in read-only mode.
+**Instructions:** Read and apply ptlam-git-managing-context first in read-only mode.
 Let it own repository resolution, context location, freshness, and
 stored Git preferences. Do not maintain context while writing the
 message; report suggested context changes separately.
 Apply this skill only to the commit message and its verification.
 
-Read [ptlam-managing-git-context](skills/ptlam-managing-git-context/SKILL.md).
+Read [ptlam-git-managing-context](skills/ptlam-git-managing-context/SKILL.md).
 
 ## At a glance
 
@@ -38,7 +38,7 @@ flowchart LR
 
 ## 1. Consume verified Git context
 
-Start from the required `ptlam-managing-git-context` result. Use its repository root,
+Start from the required `ptlam-git-managing-context` result. Use its repository root,
 verified facts, and scoped Git preferences. Keep context read-only and report a
 material missing preference as suggested maintenance rather than writing it.
 

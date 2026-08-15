@@ -1,5 +1,5 @@
 ---
-name: ptlam-managing-git-context
+name: ptlam-git-managing-context
 description:
   Resolve, create, refresh, review, or consolidate one repository's durable Git
   facts and preferences in project-local CONTEXT.md. Use read-only when another
@@ -29,7 +29,7 @@ flowchart LR
 
 | Concern | Boundary |
 | --- | --- |
-| Primary artifact | `<repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-managing-git-context/CONTEXT.md` |
+| Primary artifact | `<repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-git-managing-context/CONTEXT.md` |
 | Read-only trigger | Another Git workflow needs verified repository facts or preferences |
 | Maintenance trigger | The user explicitly asks to create, refresh, review, or consolidate Git context |
 | Authority | Context maintenance changes only canonical context and explicitly authorized replaced context files; it never grants staging, commit, push, publication, or other Git authority |
@@ -55,7 +55,7 @@ is explicitly read-only or writable.
 Use this canonical path:
 
 ```text
-<repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-managing-git-context/CONTEXT.md
+<repository-root>/.ptlam-agent-plugin/skills/engineering/ptlam-git-managing-context/CONTEXT.md
 ```
 
 Load the canonical file when it exists. Treat current user instructions,
@@ -66,6 +66,7 @@ not authority over live evidence.
 When the canonical file is absent, check these earlier layouts in order:
 
 ```text
+.ptlam-agent-plugin/skills/engineering/ptlam-managing-git-context/CONTEXT.md
 .ptlam-agent-plugin/skills/engineering/ptlam-git/CONTEXT.md
 .ptlam-agent-plugin/skills/ptlam-git/profile.md
 .ptlam-agent-plugin/skills/engineering/ptlam-git/profile.md
@@ -85,8 +86,8 @@ Use compact identity and freshness frontmatter:
 ```yaml
 ---
 schema_version: 1
-skill: ptlam-managing-git-context
-canonical_path: skills/engineering/ptlam-managing-git-context
+skill: ptlam-git-managing-context
+canonical_path: skills/engineering/ptlam-git-managing-context
 updated_at: YYYY-MM-DD
 ---
 ```

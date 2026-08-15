@@ -18,7 +18,7 @@ flowchart LR
 
 ## 1. Consume verified Git context
 
-Start from the required `ptlam-managing-git-context` result. Use its repository root,
+Start from the required `ptlam-git-managing-context` result. Use its repository root,
 verified facts, and scoped Git preferences. Keep context read-only and report a
 material missing preference as suggested maintenance rather than writing it.
 

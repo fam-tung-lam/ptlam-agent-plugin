@@ -71,7 +71,7 @@ TypeScript-stack choices unresolved.
    Vitest configuration, TypeScript configuration, scripts, CI, and neighboring
    tests.
 3. Consume the environment and toolchain decision resolved by the foundation's
-   `ptlam-resolving-testing-environment` dependency when that branch ran. Confirm that the
+   `ptlam-testing-resolving-environment` dependency when that branch ran. Confirm that the
    installed Vite, Vitest, TypeScript, runtime, and coverage versions match it.
    Return an absent or incompatible decision to that owner instead of selecting
    replacement tools or versions here.
