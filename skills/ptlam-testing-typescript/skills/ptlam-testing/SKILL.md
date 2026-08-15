@@ -19,28 +19,28 @@ the mechanics they define more specifically.
 
 ## Required skills
 
-### `ptlam-managing-testing-context`
+### `ptlam-testing-managing-context`
 
 **Reason:** Provides verified project testing facts and preferences.
 
-**Instructions:** Read and apply ptlam-managing-testing-context first in read-only mode
+**Instructions:** Read and apply ptlam-testing-managing-context first in read-only mode
 for every project-tied task. Let it own the project root, context
 path, freshness, and stored testing facts. Report suggested
 maintenance without writing context during testing work.
 
-Read [ptlam-managing-testing-context](skills/ptlam-managing-testing-context/SKILL.md).
+Read [ptlam-testing-managing-context](skills/ptlam-testing-managing-context/SKILL.md).
 
-### `ptlam-resolving-testing-environment`
+### `ptlam-testing-resolving-environment`
 
 **Reason:** Owns testing environment and toolchain resolution.
 
-**Instructions:** Apply ptlam-resolving-testing-environment when the environment or
+**Instructions:** Apply ptlam-testing-resolving-environment when the environment or
 toolchain is ambiguous, unverified, incompatible, missing, being
 replaced, or explicitly under review. Pass it the read-only
 testing-context result, then consume its resolved environment, tools,
 constraints, and authority without repeating its selection workflow.
 
-Read [ptlam-resolving-testing-environment](skills/ptlam-resolving-testing-environment/SKILL.md).
+Read [ptlam-testing-resolving-environment](skills/ptlam-testing-resolving-environment/SKILL.md).
 
 ## At a glance
 
@@ -69,8 +69,8 @@ flowchart LR
 | Decision | Source of truth |
 | --- | --- |
 | Scope, behavior, level, doubles, TDD, audit, verification depth | This foundation skill |
-| Project root, durable testing facts, and context freshness | Required `ptlam-managing-testing-context` skill |
-| Environment and toolchain selection | Required `ptlam-resolving-testing-environment` skill when current evidence is insufficient |
+| Project root, durable testing facts, and context freshness | Required `ptlam-testing-managing-context` skill |
+| Environment and toolchain selection | Required `ptlam-testing-resolving-environment` skill when current evidence is insufficient |
 | Repository policy, established commands, and layout | Current repository evidence |
 | Stack-specific mechanics left open by the repository | Active specialization skill |
 | API syntax, lifecycle, and version-sensitive options | Installed tool's official documentation |
@@ -83,7 +83,7 @@ instead of choosing silently.
 
 ## 1. Consume project context and select testing mode
 
-1. Start from the required `ptlam-managing-testing-context` read-only result.
+1. Start from the required `ptlam-testing-managing-context` read-only result.
    Use its project root, verified task-relevant facts and preferences, context
    state, and reported uncertainty. Do not maintain context during this
    workflow.
@@ -116,7 +116,7 @@ context state, and governing repository source is known.
    covers a distinct risk without duplicating assertions.
 4. Identify the execution environment, existing test tools, supported
    platforms, commands, and configuration owner.
-5. Apply the required `ptlam-resolving-testing-environment` skill when the
+5. Apply the required `ptlam-testing-resolving-environment` skill when the
    environment or toolchain is ambiguous, unverified, incompatible, missing,
    being replaced, or explicitly under review. Consume its environment,
    toolchain, constraints, commands, and authority decision without repeating

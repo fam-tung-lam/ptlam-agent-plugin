@@ -18,11 +18,7 @@
   ],
   "skills": [
     "./skills/ptlam-setup",
-    "./skills/ptlam-managing-git-context",
-    "./skills/ptlam-writing-commit-message",
-    "./skills/ptlam-managing-testing-context",
-    "./skills/ptlam-resolving-testing-environment",
-    "./skills/ptlam-testing",
+    "./skills/ptlam-git-writing-commit-message",
     "./skills/ptlam-testing-typescript",
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-grilling",

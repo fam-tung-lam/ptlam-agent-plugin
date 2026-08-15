@@ -30,12 +30,12 @@ flowchart LR
 | Primary decision | One execution environment and compatible testing toolchain for the required risks |
 | Trigger | The environment is ambiguous, unverified, incompatible, missing, being replaced, or explicitly under review |
 | Authority | Detection and recommendation are read-only; dependency or configuration changes require separate user or task authority |
-| Context effect | Project testing context remains read-only; return suggested maintenance to `ptlam-managing-testing-context` |
+| Context effect | Project testing context remains read-only; return suggested maintenance to `ptlam-testing-managing-context` |
 | Acceptance | The decision is compatible, viable, evidence-backed, and either verified in the project or clearly marked as an unapplied recommendation |
 
 ## 1. Resolve inputs and inspect the project
 
-Use a caller-provided `ptlam-managing-testing-context` read-only result when
+Use a caller-provided `ptlam-testing-managing-context` read-only result when
 available. Otherwise resolve the project root from explicit task paths and live
 repository evidence. Treat context as an optional verified cache and never
 write it from this skill.

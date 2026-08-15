@@ -79,6 +79,23 @@ metadata, not a path segment. The
 defines the authored data contract; its JSON Schema is the machine-readable
 source of truth.
 
+## Skill naming
+
+Name related skills with one shared concept prefix:
+`ptlam-<concept>-<capability>`. The shared prefix keeps a skill family adjacent
+in alphabetic listings and makes the relationship visible from its ID and
+directory alone.
+
+For example, use `ptlam-git-managing-context` and
+`ptlam-git-writing-commit-message` for Git capabilities. Use
+`ptlam-testing-managing-context`, `ptlam-testing-resolving-environment`, and
+`ptlam-testing-typescript` for testing capabilities. A family foundation may use
+the concept root itself, such as `ptlam-testing`.
+
+Keep the manifest ID and authored directory name identical. Use a standalone
+`ptlam-<capability>` name only when the skill does not belong to an established
+concept family.
+
 The required top-level `providers` list in `plugin/plugin.yml` selects generated
 provider manifests. This repository selects `claude`, `codex`, `copilot`,
 `gemini`, and `kimi`. Use an empty list only for a shared-skills-only plugin. A

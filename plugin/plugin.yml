@@ -51,17 +51,17 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-managing-git-context
+  - id: ptlam-git-managing-context
     description:
       Resolve, create, refresh, review, or consolidate one repository's durable
       Git facts and preferences in project-local CONTEXT.md. Use read-only when
       another Git workflow needs current project context, and write only when
       the user explicitly requests context maintenance.
     category_id: engineering
-    visibility: public
+    visibility: internal
     status: active
     required_skills: []
-  - id: ptlam-writing-commit-message
+  - id: ptlam-git-writing-commit-message
     description:
       Create or revise one commit message from the current change and verified
       project Git preferences. Use when a repository-tied Git workflow needs a
@@ -70,31 +70,31 @@ skills:
     visibility: public
     status: active
     required_skills:
-      - skill_id: ptlam-managing-git-context
+      - skill_id: ptlam-git-managing-context
         reason: Provides verified repository facts and Git preferences.
         instructions: |-
-          Read and apply ptlam-managing-git-context first in read-only mode.
+          Read and apply ptlam-git-managing-context first in read-only mode.
           Let it own repository resolution, context location, freshness, and
           stored Git preferences. Do not maintain context while writing the
           message; report suggested context changes separately.
           Apply this skill only to the commit message and its verification.
-  - id: ptlam-managing-testing-context
+  - id: ptlam-testing-managing-context
     description:
       Resolve, create, refresh, review, or consolidate one project's durable
       testing facts and preferences in project-local CONTEXT.md. Use read-only
       when another testing workflow needs current project context, and write
       only when the user explicitly requests context maintenance.
     category_id: engineering
-    visibility: public
+    visibility: internal
     status: active
     required_skills: []
-  - id: ptlam-resolving-testing-environment
+  - id: ptlam-testing-resolving-environment
     description:
       Resolve, evaluate, recommend, or apply one project's testing environment
       and toolchain. Use when the current environment is ambiguous, unverified,
       incompatible, missing, being replaced, or explicitly under review.
     category_id: engineering
-    visibility: public
+    visibility: internal
     status: active
     required_skills: []
   - id: ptlam-testing
@@ -106,20 +106,20 @@ skills:
       requested test-first or Red-Green-Refactor workflow. Do not infer TDD
       merely from a request for tests or integration testing.
     category_id: engineering
-    visibility: public
+    visibility: internal
     status: active
     required_skills:
-      - skill_id: ptlam-managing-testing-context
+      - skill_id: ptlam-testing-managing-context
         reason: Provides verified project testing facts and preferences.
         instructions: |-
-          Read and apply ptlam-managing-testing-context first in read-only mode
+          Read and apply ptlam-testing-managing-context first in read-only mode
           for every project-tied task. Let it own the project root, context
           path, freshness, and stored testing facts. Report suggested
           maintenance without writing context during testing work.
-      - skill_id: ptlam-resolving-testing-environment
+      - skill_id: ptlam-testing-resolving-environment
         reason: Owns testing environment and toolchain resolution.
         instructions: |-
-          Apply ptlam-resolving-testing-environment when the environment or
+          Apply ptlam-testing-resolving-environment when the environment or
           toolchain is ambiguous, unverified, incompatible, missing, being
           replaced, or explicitly under review. Pass it the read-only
           testing-context result, then consume its resolved environment, tools,
