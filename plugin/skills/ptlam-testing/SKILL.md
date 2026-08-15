@@ -12,16 +12,22 @@ the mechanics they define more specifically.
 
 ```mermaid
 flowchart LR
-    A[Resolve project, mode, and authority] --> B[Define behavior, risk, level, and environment]
-    B --> C[Apply the universal behavior contract]
-    C --> D[Resolve placement and doubles]
-    D --> E{Selected mode}
-    E -- Write or fix --> F[Implement the scoped tests]
-    E -- TDD --> G[Run Red-Green-Refactor slices]
-    E -- Audit --> H[Report evidence-backed findings]
-    F --> I[Verify and hand off]
-    G --> I
-    H --> I
+    A[Consume project context and select testing mode] --> B[Define behavior, risk, level, and environment requirements]
+    B --> C{Environment and toolchain viable?}
+    C -- No --> D[Consume testing-environment result]
+    C -- Yes --> M{Testing mode}
+    D --> M
+    M -- Run or diagnose --> H[Execute existing tests and isolate the cause]
+    M -- Write, fix, TDD, or audit --> E[Apply the universal behavior contract]
+    E --> F[Resolve placement and doubles]
+    F --> G{Testing mode}
+    G -- Write or fix --> I[Implement the scoped tests]
+    G -- TDD --> J[Run Red-Green-Refactor slices]
+    G -- Audit --> K[Report evidence-backed findings]
+    H --> L[Verify and hand off]
+    I --> L
+    J --> L
+    K --> L
 ```
 
 ## Decision ownership
@@ -29,7 +35,9 @@ flowchart LR
 | Decision | Source of truth |
 | --- | --- |
 | Scope, behavior, level, doubles, TDD, audit, verification depth | This foundation skill |
-| Repository policy, supported environments, established commands and layout | Current repository evidence |
+| Project root, durable testing facts, and context freshness | Required `ptlam-managing-testing-context` skill |
+| Environment and toolchain selection | Required `ptlam-resolving-testing-environment` skill when current evidence is insufficient |
+| Repository policy, established commands, and layout | Current repository evidence |
 | Stack-specific mechanics left open by the repository | Active specialization skill |
 | API syntax, lifecycle, and version-sensitive options | Installed tool's official documentation |
 
@@ -39,35 +47,34 @@ policy and established conventions, active specialization, this skill's
 fallbacks, then current official tool guidance. Report unresolved conflicts
 instead of choosing silently.
 
-## 1. Resolve the project, mode, and authority
+## 1. Consume project context and select testing mode
 
-1. Resolve every project root from explicit task and repository evidence. Do
-   not assume the current directory or this skill's installation directory is
-   the target.
+1. Start from the required `ptlam-managing-testing-context` read-only result.
+   Use its project root, verified task-relevant facts and preferences, context
+   state, and reported uncertainty. Do not maintain context during this
+   workflow.
 2. Choose one mode:
 
    | Mode | Authority |
    | --- | --- |
    | Write or fix | Create or change tests and make only authorized production changes |
-   | Audit | Inspect and report; remain read-only unless the user requests fixes |
+   | Run or diagnose | Execute existing tests or isolate a failure cause; keep project files read-only |
+   | Audit | Inspect and report; fixes require a separately selected write-or-fix mode |
    | TDD | Follow Red-Green-Refactor only when the user explicitly requests test-first work, TDD, or Red-Green-Refactor |
 
-3. For every project-tied task, read
-   [resolve project testing context](references/workflows/resolve-project-testing-context.md).
-   It owns the canonical `CONTEXT.md` path, freshness, write rules, legacy
-   layouts, and reporting.
-4. Read repository instructions, relevant context and decision records,
+3. Read repository instructions, relevant decision records,
    manifests, test configuration, neighboring production code, existing tests,
    and CI. Treat live repository evidence as authoritative over cached context.
 
-Complete this step when every project root, task mode, change authority,
-relevant context state, and governing repository source is known.
+Complete this step when every project root, testing mode, change authority,
+context state, and governing repository source is known.
 
-## 2. Define the behavior, risk, and environment
+## 2. Define behavior, risk, level, and environment requirements
 
 1. State the observable behavior or failure risk in repository domain language.
-2. Choose the smallest clear public seam. Ask only when materially different
-   seams would change behavior, cost, or confidence.
+2. For write, fix, TDD, or audit mode, choose the smallest clear public seam.
+   Ask only when materially different seams would change behavior, cost, or
+   confidence.
 3. Select exactly one primary level:
    [unit](references/test-levels/unit.md),
    [integration](references/test-levels/integration.md), or
@@ -75,17 +82,18 @@ relevant context state, and governing repository source is known.
    covers a distinct risk without duplicating assertions.
 4. Identify the execution environment, existing test tools, supported
    platforms, commands, and configuration owner.
-5. Read
-   [resolve testing environment](references/workflows/resolve-testing-environment.md)
-   when the environment or toolchain is ambiguous, unverified, incompatible, or
-   being added, replaced, evaluated, or recommended. Skip it only when current
-   repository evidence makes both the environment and established toolchain
-   unambiguous and viable.
+5. Apply the required `ptlam-resolving-testing-environment` skill when the
+   environment or toolchain is ambiguous, unverified, incompatible, missing,
+   being replaced, or explicitly under review. Consume its environment,
+   toolchain, constraints, commands, and authority decision without repeating
+   its selection work.
 
-Complete this step when the behavior, public seam, primary level, environment,
-toolchain, and configuration owner are supported by current evidence.
+Complete this step when the task has a supported behavior, public seam when
+applicable, primary level, environment, toolchain, and configuration owner.
 
 ## 3. Apply the universal behavior contract
+
+Apply this step only in write, fix, TDD, or audit mode.
 
 Every test must:
 
@@ -118,6 +126,8 @@ Complete this step when every planned test states one observable risk and
 satisfies the universal contract before stack-specific mechanics are chosen.
 
 ## 4. Resolve placement and test doubles
+
+Apply this step only in write, fix, TDD, or audit mode.
 
 Use the placement owner selected by the precedence above. An established
 repository layout wins over a specialization fallback. A specialization may
@@ -153,7 +163,23 @@ Complete this step when one source owns test placement, every new test has an
 unambiguous location, and every double has a justified boundary and nearest
 common owner.
 
-## 5. Execute the selected mode
+## 5. Execute the selected testing mode
+
+Run-or-diagnose mode skips steps 3 and 4, then enters its branch below.
+
+### Run or diagnose
+
+Keep project files read-only. Resolve the exact established command and run the
+smallest requested or failing scope first. Expand to a containing suite only
+when it distinguishes the cause or establishes the requested result.
+
+For a failure, determine whether current evidence points to the test,
+production behavior, expectation, configuration, dependency, or execution
+environment. Report the cause and smallest useful correction. Do not apply the
+correction unless the user separately authorizes a write or fix mode.
+
+Complete this branch when the requested test result is recorded or the failure
+cause is isolated as far as available evidence permits, with uncertainty named.
 
 ### Write or fix
 
@@ -174,8 +200,9 @@ for an ordinary request to add tests or integration coverage.
 
 ### Audit
 
-Keep the audit and project testing context read-only unless the user explicitly
-requests fixes.
+Keep the audit read-only. When the user also asks for fixes, finish the
+evidence-backed findings first, then enter write-or-fix mode with its separate
+authority.
 
 1. Define the reviewed scope and load every applicable reference.
 2. Inspect production code when needed to judge behavior, seams, placement, and
@@ -195,22 +222,24 @@ requests fixes.
 Do not demand tests for every line, branch, or method, and do not impose a
 numeric coverage threshold unless the user or repository defines one.
 
-Complete this step when the requested write, fix, TDD cycle, or audit has one
-clear outcome and stays within its authority.
+Complete this step when the requested run, diagnosis, write, fix, TDD cycle, or
+audit has one clear outcome and stays within its authority.
 
 ## 6. Verify and hand off
 
-1. Run the smallest focused test after each meaningful change.
+1. After test or production changes, run the smallest focused test after each
+   meaningful change.
 2. In TDD, prove that Red fails for the expected reason before implementing
    Green.
-3. Run the containing package or module suite after focused tests pass.
-4. Run environment-specific and repository-wide checks in proportion to risk
-   and repository policy.
-5. Report the selected level, environment, tools, relevant `CONTEXT.md` state,
-   changed behavior and files, exact commands and results, and every skipped or
+3. After focused tests pass, run the containing package or module suite.
+4. Run environment-specific and repository-wide checks in proportion to risk,
+   mode, and repository policy.
+5. Report the level, environment, tools, read-only context state, changed
+   behavior and files, exact commands and results, and every skipped or
    unavailable check.
 6. Disclose remaining risks, migrations, conflicts, stale or provisional
    context, and unresolved decisions.
 
-Complete the task when proportional checks pass, the result is supported by
-observable evidence, and the handoff does not imply that an unrun check passed.
+Complete the task when the selected branch has one verified outcome, every file
+effect stays within its mode authority, proportional checks are accounted for,
+and the handoff does not imply that an unrun check passed.

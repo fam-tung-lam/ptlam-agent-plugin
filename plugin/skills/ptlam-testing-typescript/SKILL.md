@@ -11,7 +11,7 @@ this skill owns only stack mechanics left open by current repository evidence.
 
 ```mermaid
 flowchart LR
-    A[Load foundation decisions] --> B[Resolve the installed TypeScript stack]
+    A[Load foundation decisions] --> B[Confirm the resolved TypeScript stack]
     B --> C[Load references for active mechanisms]
     C --> D[Apply repository mechanics or stack fallbacks]
     D --> E[Run focused and containing checks]
@@ -19,19 +19,21 @@ flowchart LR
 
 ## 1. Start from the foundation decisions
 
-1. Read the required `ptlam-testing` skill before choosing tools,
-   configuration, placement, or test code.
-2. Follow it to resolve the project root, mode, behavior, public seam, primary
-   level, test-double boundary, TDD activation, audit authority, and
-   verification depth.
+1. Read the required `ptlam-testing` skill before applying configuration,
+   placement, or test-code mechanics.
+2. Follow it to resolve the project root, mode, write authority, and branch
+   inputs. In a testing mode, also consume its behavior, public seam, primary
+   level, test-double boundary, TDD activation, audit or diagnosis authority,
+   and verification depth.
 3. Preserve every foundation invariant. Let an established repository layout
    own placement; use this specialization's source-adjacent rule only when the
    repository and user leave placement open.
 
-Complete this step when all behavioral decisions and higher-precedence project
-mechanics are explicit, leaving only TypeScript-stack choices unresolved.
+Complete this step when all applicable foundation decisions and
+higher-precedence project mechanics are explicit, leaving only
+TypeScript-stack choices unresolved.
 
-## 2. Resolve the installed stack
+## 2. Confirm the resolved TypeScript stack
 
 1. Confirm the target is framework-free and browser-free TypeScript. For a web
    framework, DOM API, or browser runtime, return to the foundation and use a
@@ -39,10 +41,11 @@ mechanics are explicit, leaving only TypeScript-stack choices unresolved.
 2. Inspect the package manifest, lockfile, package-manager declaration, Vite and
    Vitest configuration, TypeScript configuration, scripts, CI, and neighboring
    tests.
-3. Reuse an established Vite/Vitest toolchain when it is compatible and viable.
-   When setup or migration is in scope, select mutually compatible versions of
-   Vite, Vitest, TypeScript, the runtime, and coverage provider through the
-   repository's package manager and preserve its lockfile.
+3. Consume the environment and toolchain decision resolved by the foundation's
+   `ptlam-resolving-testing-environment` dependency when that branch ran. Confirm that the
+   installed Vite, Vitest, TypeScript, runtime, and coverage versions match it.
+   Return an absent or incompatible decision to that owner instead of selecting
+   replacement tools or versions here.
 4. Treat the installed Vitest version and matching official documentation as
    the syntax authority. Verify version-sensitive options against that version.
 5. Read
@@ -51,9 +54,9 @@ mechanics are explicit, leaving only TypeScript-stack choices unresolved.
    stack defaults, placement fallback, API preferences, coverage rules, and
    proof commands.
 
-Complete this step when the scope, package manager, runtime, installed versions,
-configuration owner, Node environment, and applicable stack preferences are
-known.
+Complete this step when the scope, package manager, runtime, resolved and
+installed versions, configuration owner, Node environment, and applicable stack
+preferences agree or one conflict has been returned to its decision owner.
 
 ## 3. Load references for active mechanisms
 
@@ -81,28 +84,13 @@ version's official documentation remains authoritative when they differ.
 Complete this step when each active Vitest mechanism has one loaded source for
 its implementation rules.
 
-## 4. Apply the TypeScript stack contract
+## 4. Apply the owned TypeScript stack contract
 
-- Use the repository's established placement. When no placement owner exists,
-  preserve the source basename and place runtime and type-contract tests beside
-  the source: `foo.ts` maps to `foo.test.ts` and `foo.test-d.ts`.
-- Group tests with `describe` and declare cases with `it`. Import used APIs
-  explicitly from `vitest`; translate the upstream `test` alias and modifiers
-  to `it`, such as `it.each` and `it.concurrent`.
-- Use Vite for transformation and module resolution. Reuse project aliases and
-  plugins without duplicating their definitions.
-- Use Vitest's `node` environment. Browser Mode, `jsdom`, `happy-dom`, and other
-  browser or DOM environments are outside this specialization.
-- Prefer `@vitest/coverage-v8` unless repository or runtime evidence requires
-  Istanbul compatibility.
-- Keep globals disabled unless an established globals-based convention makes a
-  migration disruptive or out of scope.
-- Use `toMatchSnapshot` only when a complex output's complete stable structure
-  is the behavior. Review the initial snapshot and every update.
-- For language-specific expected output, await `toMatchFileSnapshot` with an
-  explicit relative path and keep each language's golden file separate.
-- Run TypeScript analysis separately because Vite transformation and ordinary
-  Vitest execution do not prove whole-project type correctness.
+Apply the repository mechanics resolved in step 2, then the
+[TypeScript and Vitest stack](references/typescript-vitest-stack.md) fallbacks
+for every choice the repository leaves open. Apply each mechanism-specific
+reference selected in step 3 only to its named concern. Do not recreate stack
+defaults or API rules in this file; those references own them.
 
 Complete this step when every stack choice follows current repository evidence
 or this skill's fallback, and each deviation has a concrete compatibility or
@@ -110,15 +98,17 @@ project-convention reason.
 
 ## 5. Verify and hand off
 
-1. Run the smallest focused Vitest command in non-watch mode after each
-   meaningful change.
-2. Run the containing package or project suite, the repository's TypeScript
-   check, and coverage when it is in scope or required.
-3. Apply the foundation's broader verification and reporting contract.
+1. Apply the selected foundation branch's verification sequence and authority.
+2. After test, configuration, or production changes, run the smallest focused
+   Vitest command in non-watch mode after each meaningful change.
+3. Run the containing package or project suite, the repository's TypeScript
+   check, and coverage when the selected branch, risk, or repository requires
+   them.
 4. State the resolved Vite, Vitest, coverage provider, TypeScript, runtime, and
    package-manager versions; exact commands and results; placement owner; and
    every skipped or unavailable check.
 
-Complete the task when focused tests pass, proportional containing checks are
-complete, TypeScript analysis is accounted for, and the handoff does not imply
-that unrun coverage or type checks passed.
+Complete the task when the selected foundation branch has one outcome,
+proportional TypeScript-stack checks are complete, TypeScript analysis is
+accounted for when applicable, and the handoff does not imply that unrun
+coverage or type checks passed.
