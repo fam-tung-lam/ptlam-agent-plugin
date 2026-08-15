@@ -124,9 +124,9 @@ skills:
     required_skills: []
   - id: ptlam-creating-atomic-note
     description:
-      Create, review, split, or merge durable atomic notes with self-contained
-      claims, source attribution, and annotated links while preserving local
-      vault conventions.
+      Create, mature, review, split, or merge durable atomic notes by
+      identifying one knowledge building block, preserving useful context, and
+      following local vault conventions.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
