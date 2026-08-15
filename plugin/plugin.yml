@@ -132,6 +132,15 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-scrapping-urls
+    description:
+      Batch-scrape URLs supplied in a prompt or input file into cached local
+      Markdown files with configurable output, concurrency, and cache lifetime.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-explaining
     description:
       Explain concepts, mechanisms, and systems through a verified literal model
