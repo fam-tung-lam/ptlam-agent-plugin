@@ -1,5 +1,5 @@
 ---
-name: ptlam
+name: ptlam-setup
 description:
   Initialize or refresh a project with PTLam's general agent instructions. Use
   when the user asks to set up PTLam preferences, create AGENTS.override.md from
@@ -9,7 +9,7 @@ description:
 disable-model-invocation: true
 ---
 
-# PTLam Project Initialization
+# PTLam Project Setup
 
 Install PTLam's general working preferences into one project. This workflow
 creates or refreshes project instruction files, so run it only when the user

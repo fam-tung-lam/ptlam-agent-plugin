@@ -43,7 +43,7 @@ categories:
     description: Focused helpers for small, repeatable transformations.
 
 skills:
-  - id: ptlam
+  - id: ptlam-setup
     description:
       Install or refresh PTLam's general agent instructions for a project.
     disable_model_invocation: true
