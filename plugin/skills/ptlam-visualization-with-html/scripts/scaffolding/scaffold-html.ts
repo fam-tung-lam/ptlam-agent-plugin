@@ -1,6 +1,6 @@
 import { parseArgs } from "node:util";
 
-import { isDirectExecution } from "../utils/is-direct-execution.ts";
+import { isDirectExecution } from "../command-line/is-direct-execution.ts";
 import { createHtmlScaffold } from "./create-html-scaffold.ts";
 
 const USAGE =

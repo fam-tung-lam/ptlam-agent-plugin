@@ -69,10 +69,10 @@ skills:
       integration, and end-to-end levels. Use when an agent needs to select a
       test level, add or repair tests, improve testability, assess test quality,
       audit test code for compliance, maintain or refresh project-local testing
-      context, resolve a project's testing environment, select or
-      recommend compatible test tools, or follow an explicitly requested
-      test-first or Red-Green-Refactor workflow. Do not infer TDD merely from a
-      request for tests or integration testing.
+      context, resolve a project's testing environment, select or recommend
+      compatible test tools, or follow an explicitly requested test-first or
+      Red-Green-Refactor workflow. Do not infer TDD merely from a request for
+      tests or integration testing.
     category_id: engineering
     visibility: public
     status: active
@@ -97,33 +97,41 @@ skills:
           Read and apply ptlam-testing first.
           Let it own scope, level, public seam, behavior, doubles, TDD, audit
           authority, and verification depth.
-          Use this skill's source-adjacent placement instead of the foundation's
-          generic test-root placement.
+          Use the repository's established test layout when one exists;
+          otherwise use this skill's source-adjacent fallback.
           Apply it only to framework-free, browser-free TypeScript, Vite, Vitest,
           and coverage mechanics left open by the foundation.
   - id: ptlam-creating-skill
     description:
       Create, review, or refactor predictable agent skills through explicit
-      invocation, distinct branches, information hierarchy, completion criteria,
-      context pointers, and single-source package design. Use when the user asks
-      to turn a workflow or reference set into a new skill, revise an existing
-      SKILL.md, or audit a skill without editing it. Resolve target-specific
-      authored and generated boundaries and verify the package statically.
-      Tests, evals, benchmarks, grading, comparisons, and trigger optimization
-      remain outside this skill's scope.
+      invocation, distinct branches, a visual workflow, progressive disclosure,
+      verifiable acceptance, and single-source package design. Use when the user
+      asks to turn a workflow or reference set into a new skill, revise an
+      existing SKILL.md, or audit a skill without editing it. Resolve
+      target-specific authored and generated boundaries and verify the package
+      statically. Tests, evals, benchmarks, grading, comparisons, and trigger
+      optimization remain outside this skill's scope.
     category_id: engineering
     visibility: public
     status: active
-    required_skills: []
+    required_skills:
+      - skill_id: ptlam
+        reason: Provides the Human-First Work Contract for skill structure.
+        instructions: |-
+          Read ptlam's bundled PTLAM_AGENTS.md reference before reviewing,
+          designing, or materially revising a skill package. Do not run ptlam's
+          initialization workflow unless the user explicitly requests it. Let
+          the contract own structural scans, visual triggers, density, evidence,
+          and handoff.
   - id: ptlam-grilling
     description:
       Conduct a persistent, interactive stress test of a plan, decision, or idea
       through one user-owned decision at a time. Use when the user explicitly
       requests a sequential grilling interview or explicitly asks to resume a
-      prior grilling session; handle ordinary critique or risk-review requests as
-      direct analysis. Research discoverable facts independently, expose
-      assumptions, contradictions, risks, and trade-offs, recommend an answer for
-      every decision, wait after each question, and require confirmed shared
+      prior grilling session; handle ordinary critique or risk-review requests
+      as direct analysis. Research discoverable facts independently, expose
+      assumptions, contradictions, risks, and trade-offs, recommend an answer
+      for every decision, wait after each question, and require confirmed shared
       understanding before any resulting action.
     category_id: productivity
     visibility: public
@@ -149,8 +157,8 @@ skills:
       Explain an unfamiliar, abstract, or complex concept through one coherent
       real-life analogy, a stable mapping table, a short story, and explicit
       caveats. Use only when the user explicitly asks for an analogy to help
-      them understand or learn a concept. Do not invoke for a general request
-      to explain, define, simplify, or break down a concept unless that same
+      them understand or learn a concept. Do not invoke for a general request to
+      explain, define, simplify, or break down a concept unless that same
       request explicitly asks for an analogy.
     category_id: productivity
     visibility: public
@@ -174,7 +182,8 @@ skills:
     required_skills:
       - skill_id: ptlam-explaining-with-analogy
         reason:
-          Owns analogy selection and explanation semantics before HTML rendering.
+          Owns analogy selection and explanation semantics before HTML
+          rendering.
         instructions: |-
           Apply ptlam-explaining-with-analogy only when the user explicitly asks
           to create an analogy and has not already supplied or chosen one.

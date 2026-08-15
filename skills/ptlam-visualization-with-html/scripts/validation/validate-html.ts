@@ -1,8 +1,8 @@
 import { readFile, stat } from "node:fs/promises";
 import { parseArgs } from "node:util";
 
-import { isDirectExecution } from "../utils/is-direct-execution.ts";
-import { resolveUserPath } from "../utils/resolve-user-path.ts";
+import { isDirectExecution } from "../command-line/is-direct-execution.ts";
+import { resolveUserPath } from "../command-line/resolve-user-path.ts";
 import { validateHtmlDocument } from "./validate-html-document.ts";
 
 const USAGE =

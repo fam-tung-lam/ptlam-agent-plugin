@@ -1,187 +1,216 @@
 # PTLam Testing
 
-Test observable behavior through the smallest sufficient public seam. Keep the
-core workflow universal and load only the references required by the current
-test level, pattern, or workflow.
+Test observable behavior through the smallest public seam that can establish
+the risk. This foundation owns testing scope, level, behavior, test-double
+boundaries, TDD activation, audit authority, verification depth, and the
+fallback placement model. Project evidence and active stack specializations own
+the mechanics they define more specifically.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Resolve the context and mode
+## At a glance
 
-1. Resolve every project root in scope from explicit task and repository
-   evidence. Do not assume that the skill installation directory or current
-   working directory is the project root.
-2. Choose the mode, then follow the project-testing-context workflow to load the
-   relevant project context. Create or update `CONTEXT.md` only after durable
-   facts have been established and only in a writable mode:
-   - **Write or fix**: create or change tests and make only authorized
-     production changes.
-   - **Audit**: inspect and report without editing unless the user explicitly
-     requests fixes.
-   - **TDD**: use the TDD workflow only when the user explicitly requests
-     test-first development, TDD, or Red-Green-Refactor.
-3. Read repository instructions, relevant context documents and ADRs, manifests,
-   test configuration, neighboring production code, and existing tests. Verify
-   loaded context facts against this repository evidence.
-4. Identify the requested scope, execution environment, existing test tools, and
-   test level. Choose the smallest sufficient level unless the user explicitly
-   requests one.
-5. Follow the testing-environment workflow unless repository evidence makes the
-   execution environment and established toolchain both unambiguous and
-   currently viable. Viability includes compatibility with current versions,
-   platforms, and CI; maintenance suitability; and repository policy.
-6. Apply these mandatory invariants before resolving implementation mechanics.
-   Repository instructions, established conventions, selected references, and
-   tool documentation cannot override these invariants. Report a repository or
-   tool conflict and keep the invariant. If an explicit user instruction
-   conflicts, surface the conflict and obtain direction before proceeding:
-   - use Given-When-Then in every test;
-   - preserve the mirrored production or capability scope before the test-level
-     segment;
-   - place reusable test doubles at their nearest common test scope;
-   - keep audit mode read-only unless the user explicitly requests fixes;
-   - activate TDD only when the user explicitly requests it.
-7. Resolve only implementation mechanics not fixed by those invariants in this
-   order:
-   1. explicit user instructions;
-   2. repository instructions and established conventions;
-   3. the remaining universal rules in this file;
-   4. selected test-level, workflow, and pattern references;
-   5. current official SDK and tool documentation for implementation mechanics.
-8. Let official tool guidance refine syntax, setup, lifecycle, and commands, but
-   never silently replace the universal behavioral rules. Report unresolved
-   conflicts instead of choosing silently.
+```mermaid
+flowchart LR
+    A[Resolve project, mode, and authority] --> B[Define behavior, risk, level, and environment]
+    B --> C[Apply the universal behavior contract]
+    C --> D[Resolve placement and doubles]
+    D --> E{Selected mode}
+    E -- Write or fix --> F[Implement the scoped tests]
+    E -- TDD --> G[Run Red-Green-Refactor slices]
+    E -- Audit --> H[Report evidence-backed findings]
+    F --> I[Verify and hand off]
+    G --> I
+    H --> I
+```
 
-## Load only relevant references
+## Decision ownership
 
-- For every project-tied task, read
-  [resolve project testing context](references/workflows/resolve-project-testing-context.md)
-  to locate and load `CONTEXT.md`, preserve mode semantics, and decide whether
-  durable findings should be recorded.
-- Select exactly one primary test level: [unit](references/test-levels/unit.md),
-  [integration](references/test-levels/integration.md), or
-  [end-to-end](references/test-levels/e2e.md). Load multiple levels only when
-  they cover distinct risks without duplicating assertions.
-- For explicit test-first work, also read
-  [test-driven development](references/workflows/test-driven-development.md).
-- Read
-  [resolve testing environment](references/workflows/resolve-testing-environment.md)
-  whenever the execution environment or tools must be detected, evaluated,
-  added, replaced, or researched. Skip it only when repository evidence makes
-  the environment and established toolchain both unambiguous and currently
-  viable, including compatibility and maintenance suitability.
-- Whenever a test double is present or proposed, read
-  [test doubles](references/patterns/test-doubles.md).
+| Decision | Source of truth |
+| --- | --- |
+| Scope, behavior, level, doubles, TDD, audit, verification depth | This foundation skill |
+| Repository policy, supported environments, established commands and layout | Current repository evidence |
+| Stack-specific mechanics left open by the repository | Active specialization skill |
+| API syntax, lifecycle, and version-sensitive options | Installed tool's official documentation |
 
-## Apply the universal testing rules
+Universal behavior rules in this skill remain mandatory. Resolve mechanics that
+those rules leave open in this order: explicit user instructions, repository
+policy and established conventions, active specialization, this skill's
+fallbacks, then current official tool guidance. Report unresolved conflicts
+instead of choosing silently.
 
-- Verify behavior through a public interface. Do not test private methods,
-  internal call structure, or incidental implementation details.
-- Use Given-When-Then in every test. Use a test tool's native Given-When-Then
-  API when it provides one. Otherwise add explicit `Given`, `When`, and `Then`
-  comments; do not replace them with Arrange-Act-Assert.
-- Name a test as a behavior specification in repository domain language. Make
-  the expected result understandable without reading the implementation.
-- Derive expected values independently from a specification, worked example, or
-  known literal. Do not recompute them with the production algorithm.
-- Keep one coherent behavior or risk per test. Multiple assertions are valid
-  when they jointly describe that one outcome.
-- Prefer real collaborators inside the selected seam. Replace a collaborator
-  only at a justified boundary and follow the test-double references.
-- Choose an obvious public seam without interrupting the user. Ask only when
-  materially different seams would change the behavior, cost, or confidence of
-  the tests.
-- Avoid repeating the same assertion at several levels. Use each higher level to
-  cover integration or journey risks that lower levels cannot establish.
-- Keep tests deterministic and isolated. Control time, randomness, external
-  services, and mutable global state at their boundaries; clean up every
-  resource the test creates.
+## 1. Resolve the project, mode, and authority
 
-## Place tests
+1. Resolve every project root from explicit task and repository evidence. Do
+   not assume the current directory or this skill's installation directory is
+   the target.
+2. Choose one mode:
 
-- Use the test root and naming convention required by the repository, detected
-  execution environment, selected tool, and test level.
-- Resolve the production-root-to-test-root mapping first. Under the test root,
-  preserve the corresponding production or capability scope before adding the
-  selected test-level directory. The structural order is:
+   | Mode | Authority |
+   | --- | --- |
+   | Write or fix | Create or change tests and make only authorized production changes |
+   | Audit | Inspect and report; remain read-only unless the user requests fixes |
+   | TDD | Follow Red-Green-Refactor only when the user explicitly requests test-first work, TDD, or Red-Green-Refactor |
 
-  ```text
-  <production-root>/<capability-scope>/<source-file>
-  -> <test-root>/<capability-scope>/<test-level>/<test-file>
-  ```
+3. For every project-tied task, read
+   [resolve project testing context](references/workflows/resolve-project-testing-context.md).
+   It owns the canonical `CONTEXT.md` path, freshness, write rules, legacy
+   layouts, and reporting.
+4. Read repository instructions, relevant context and decision records,
+   manifests, test configuration, neighboring production code, existing tests,
+   and CI. Treat live repository evidence as authoritative over cached context.
 
-- Use the repository's names for the test root, capability directories, level
-  directories, and test files. Names such as `unit-tests` and
-  `integration-tests` are examples, not mandatory vocabulary.
-- Do not invert that hierarchy into a repository-wide
-  `<test-root>/<test-level>/<capability-scope>` layout. Keeping the capability
-  scope first makes all tests for one production area discoverable together.
-- When a test corresponds to production source code, mirror the remaining
-  relative directory and filename inside that capability's test-level directory.
-- When a test covers a capability or user journey without one corresponding
-  source file, organize it inside that capability or journey scope and then its
-  selected test-level directory.
-- Do not apply source mirroring to test doubles. Follow
-  [the test-double placement algorithm](references/patterns/test-doubles.md).
-- Apply the placement rules to new tests. Do not reorganize unrelated legacy
-  tests as a side effect.
-- When a touched test is misplaced, notify the user and offer to migrate it now,
-  leave it unchanged, or defer the migration. When moving it, remove the old
-  location, update imports and configuration, and rerun the relevant tests.
+Complete this step when every project root, task mode, change authority,
+relevant context state, and governing repository source is known.
 
-## Control production changes
+## 2. Define the behavior, risk, and environment
 
-- In a testing-only task, change test code freely within scope and allow only
-  small, behavior-preserving production refactors needed to expose a clean seam.
-- Do not change observable production behavior unless the request already
-  includes feature or bug-fix implementation, or the user confirms the change.
-- Do not weaken an assertion merely to make a failing test pass. Establish
-  whether the test, implementation, expectation, or environment is wrong.
+1. State the observable behavior or failure risk in repository domain language.
+2. Choose the smallest clear public seam. Ask only when materially different
+   seams would change behavior, cost, or confidence.
+3. Select exactly one primary level:
+   [unit](references/test-levels/unit.md),
+   [integration](references/test-levels/integration.md), or
+   [end-to-end](references/test-levels/e2e.md). Load more than one only when each
+   covers a distinct risk without duplicating assertions.
+4. Identify the execution environment, existing test tools, supported
+   platforms, commands, and configuration owner.
+5. Read
+   [resolve testing environment](references/workflows/resolve-testing-environment.md)
+   when the environment or toolchain is ambiguous, unverified, incompatible, or
+   being added, replaced, evaluated, or recommended. Skip it only when current
+   repository evidence makes both the environment and established toolchain
+   unambiguous and viable.
 
-## Audit existing tests
+Complete this step when the behavior, public seam, primary level, environment,
+toolchain, and configuration owner are supported by current evidence.
 
-Treat a request to check, audit, or review tests as read-only unless the user
-explicitly requests fixes. This includes the project testing context: report
-suggested `CONTEXT.md` changes without creating or updating the file.
+## 3. Apply the universal behavior contract
+
+Every test must:
+
+- verify behavior through a public interface rather than private methods,
+  internal calls, or incidental structure;
+- use Given-When-Then. Prefer the tool's native API; otherwise add explicit
+  `Given`, `When`, and `Then` comments rather than Arrange-Act-Assert;
+- read as a behavior specification in repository domain language;
+- derive expected values independently from a specification, worked example,
+  or known literal rather than the production algorithm;
+- cover one coherent behavior or risk, using several assertions only when they
+  jointly describe that outcome;
+- prefer real collaborators inside the selected seam and replace only a
+  justified boundary;
+- remain deterministic and isolated by controlling time, randomness, external
+  services, and mutable global state at their boundaries; and
+- clean up every resource it creates.
+
+Use higher levels only for risks lower levels cannot establish. Do not repeat
+the same assertion across levels or turn a coverage percentage into a substitute
+for behavior-based design.
+
+The following rules are invariant: Given-When-Then, public-seam behavior,
+independent expectations, deterministic cleanup, nearest-scope reusable doubles,
+read-only audit mode, and explicit-only TDD activation. Repository conventions,
+specializations, and tool documentation may refine mechanics but cannot remove
+these rules.
+
+Complete this step when every planned test states one observable risk and
+satisfies the universal contract before stack-specific mechanics are chosen.
+
+## 4. Resolve placement and test doubles
+
+Use the placement owner selected by the precedence above. An established
+repository layout wins over a specialization fallback. A specialization may
+define a stack default when repository evidence is silent.
+
+When no higher-precedence source defines placement, use this foundation
+fallback: map the production root to the repository's test root, preserve the
+production or capability scope, then add the test-level segment.
+
+```text
+<production-root>/<capability-scope>/<source-file>
+-> <test-root>/<capability-scope>/<test-level>/<test-file>
+```
+
+Use repository names for the roots, capability directories, level directories,
+and test filenames. Mirror remaining source directories and filenames when one
+test corresponds to one production file. For a user journey or capability with
+no single source file, organize by that capability before its level. Do not
+reorganize unrelated legacy tests as a side effect.
+
+When a touched test violates the active placement owner, tell the user. Move it
+only when relocation is already in scope or separately authorized; then remove
+the old location, update imports and configuration, and rerun the relevant
+tests.
+
+Whenever a double is present or proposed, read
+[test doubles](references/patterns/test-doubles.md). Place a reusable double at
+the nearest common scope within the resolved test layout; keep one-off setup in
+the test. The double reference owns semantic roles, dependency selection,
+placement, lifecycle, and false-confidence safeguards.
+
+Complete this step when one source owns test placement, every new test has an
+unambiguous location, and every double has a justified boundary and nearest
+common owner.
+
+## 5. Execute the selected mode
+
+### Write or fix
+
+Create or change tests freely within scope. In a testing-only task, make only
+small behavior-preserving production refactors needed to expose a clean seam.
+Change observable production behavior only when the request includes feature or
+bug-fix implementation or the user confirms that expansion.
+
+Establish whether the test, implementation, expectation, or environment is
+wrong before changing an assertion. Never weaken a valid assertion merely to
+make a failure pass.
+
+### TDD
+
+Read [test-driven development](references/workflows/test-driven-development.md)
+and follow it one vertical behavior slice at a time. Do not activate this branch
+for an ordinary request to add tests or integration coverage.
+
+### Audit
+
+Keep the audit and project testing context read-only unless the user explicitly
+requests fixes.
 
 1. Define the reviewed scope and load every applicable reference.
-2. Inspect corresponding production code when needed to judge behavior, seams,
-   placement, and implementation coupling.
-3. Identify both rule violations and materially missing scenarios at the public
-   seam. Tie every gap to expected behavior, a failure mode, or a concrete risk.
-   Do not demand tests for every line, branch, or method, and do not enforce a
-   numeric coverage threshold unless the user or repository defines one.
-4. Distinguish static findings from behavior verified by executed tests.
-5. Report each finding with its location, violated rule, evidence, impact, and
-   recommended correction. Include compliant aspects and unverified areas.
-6. Assign one scoped verdict:
-   - `Compliant`: no violations found.
-   - `Compliant with recommendations`: mandatory rules pass; optional
-     improvements remain.
-   - `Non-compliant`: at least one mandatory rule is violated.
-   - `Not fully verified`: evidence is insufficient for a complete conclusion.
-7. Classify findings as:
-   - `Critical`: creates false confidence or can conceal seriously broken
-     behavior.
-   - `Major`: violates a mandatory rule or misses material behavior.
-   - `Minor`: harms readability or maintainability without losing the core
-     behavioral check.
+2. Inspect production code when needed to judge behavior, seams, placement, and
+   implementation coupling.
+3. Identify mandatory violations and material missing scenarios at the public
+   seam. Tie each gap to expected behavior, a failure mode, or a concrete risk.
+4. Separate static findings from behavior verified by executed tests.
+5. Report each finding with location, violated rule, evidence, impact, smallest
+   useful correction, and uncertainty or trade-off. Include compliant aspects
+   and areas that could not be verified.
+6. Assign one scoped verdict: `Compliant`, `Compliant with recommendations`,
+   `Non-compliant`, or `Not fully verified`.
+7. Classify findings as `Critical` for false confidence or concealed severe
+   breakage, `Major` for a mandatory violation or missing material behavior, and
+   `Minor` for readability or maintenance harm.
 
-## Verify changes
+Do not demand tests for every line, branch, or method, and do not impose a
+numeric coverage threshold unless the user or repository defines one.
+
+Complete this step when the requested write, fix, TDD cycle, or audit has one
+clear outcome and stays within its authority.
+
+## 6. Verify and hand off
 
 1. Run the smallest focused test after each meaningful change.
-2. During TDD, prove that Red fails for the expected reason before implementing
+2. In TDD, prove that Red fails for the expected reason before implementing
    Green.
-3. Run the containing package or module suite after the focused test passes.
-4. Run the relevant environment-specific suite and repository-wide checks when
-   proportionate to the risk or required by repository instructions.
-5. Report exact commands and results. State every skipped or unavailable check
-   explicitly; never imply it passed.
+3. Run the containing package or module suite after focused tests pass.
+4. Run environment-specific and repository-wide checks in proportion to risk
+   and repository policy.
+5. Report the selected level, environment, tools, relevant `CONTEXT.md` state,
+   changed behavior and files, exact commands and results, and every skipped or
+   unavailable check.
+6. Disclose remaining risks, migrations, conflicts, stale or provisional
+   context, and unresolved decisions.
 
-## Report the result
-
-Lead with the outcome. State the selected level, detected execution environment,
-chosen tools, relevant `CONTEXT.md` information and its status, and the evidence
-supporting those choices; summarize changed behavior and files; list
-verification evidence; then disclose remaining risks, migrations, conflicts,
-stale or provisional context facts, and checks not run.
+Complete the task when proportional checks pass, the result is supported by
+observable evidence, and the handoff does not imply that an unrun check passed.

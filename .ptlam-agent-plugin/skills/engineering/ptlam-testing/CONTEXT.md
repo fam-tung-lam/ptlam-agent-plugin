@@ -2,7 +2,7 @@
 schema_version: 1
 skill: ptlam-testing
 canonical_path: skills/engineering/ptlam-testing
-updated_at: 2026-08-11
+updated_at: 2026-08-14
 ---
 
 # Project Testing Context
@@ -44,8 +44,8 @@ updated_at: 2026-08-11
   `conformance-tests/`, then mirror deeper capability folders when useful.
   GitHub Release validation tests mirror `.github/scripts` under
   `../../../../tests/.github/scripts/unit-tests`. This documented repository
-  layout is an explicit project-local override of the TypeScript
-  specialization's general source-adjacent placement preference.
+  layout owns placement for this project, so the TypeScript specialization's
+  source-adjacent fallback does not apply.
 - Treat `../../../../plugin/skills` as authored test input. The compiler creates
   one provider-neutral `../../../../skills` tree, including
   `../../../../skills/README.md`, while plugin drift checks cover each provider's

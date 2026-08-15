@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { resolveUserPath } from "../utils/resolve-user-path.ts";
+import { resolveUserPath } from "../command-line/resolve-user-path.ts";
 import { renderHtmlScaffold } from "./render-html-scaffold.ts";
 
 export interface CreateHtmlScaffoldRequest {

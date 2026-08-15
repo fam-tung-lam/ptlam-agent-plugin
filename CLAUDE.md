@@ -1,1 +1,3 @@
-See @[AGENTS.md](AGENTS.md)
+# CLAUDE.md
+
+Please follow the guidelines and project structure defined in ./AGENTS.md

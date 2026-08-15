@@ -94,11 +94,15 @@ be expressed clearly as a positive target.
 
 ## Progressive disclosure
 
-Protect the information hierarchy:
+Protect the information hierarchy and the reader's path:
 
-1. Put ordered actions and their completion criteria in `SKILL.md`.
-2. Keep definitions or rules inline when every branch needs them at that point.
-3. Put branch-specific reference behind a direct context pointer.
+1. Open `SKILL.md` with the outcome and scope boundary.
+2. Show the whole normal workflow before conditional detail when the workflow is
+   complex.
+3. Put ordered actions and necessary progress gates in `SKILL.md`, arranged by
+   dependency and cause.
+4. Keep definitions or rules inline when every branch needs them at that point.
+5. Put branch-specific detail behind a direct context pointer.
 
 The pointer wording controls whether the agent loads the material. Name both the
 condition and the reference's ownership:
@@ -108,9 +112,11 @@ When editing tracked changes, read [redlining](references/redlining.md). It owns
 the OOXML mutation and verification rules for revisions.
 ```
 
-Keep references one hop from `SKILL.md`. Avoid chains where one reference points
-to another required reference. Add a compact contents list to reference files
-longer than roughly 100 lines.
+Keep references one hop from `SKILL.md` by default. When a large, mutually
+exclusive catalog would bury the normal workflow, use one explicit routing
+reference. Let that file own the complete selection map and link directly to
+the selected implementation references; do not create a deeper chain. Add a
+compact contents list to reference files longer than roughly 100 lines.
 
 Co-locate a concept's definition, rules, examples, and caveats. Do not repeat the
 same meaning in `SKILL.md` and a reference.
@@ -140,12 +146,8 @@ version, and freshness rule.
 
 ## Workflow design
 
-Use numbered steps only when order matters. End every step with a completion
-criterion that is:
-
-- checkable: the agent can distinguish done from not done;
-- demanding enough to force the necessary legwork; and
-- scoped: it does not silently authorize adjacent work.
+Apply the loaded human-first contract to workflow order, progress gates,
+visuals, density, ownership, and handoff.
 
 Use conditional branches when creation, revision, review, or target hosts need
 different actions. Do not present equivalent tools as a menu; give a selection
@@ -193,16 +195,12 @@ until the resolved target confirms it.
 
 ## Static quality checklist
 
-Confirm that:
+Apply the loaded human-first contract's outline-only scan, visual triggers, and
+density limits to `SKILL.md` and every changed prose reference. Restructure
+every violation before static validation.
 
-- the name, directory, metadata, and invocation choice match the target;
-- the description names one trigger per distinct branch;
-- `SKILL.md` exposes the ordered steps and completion criteria;
-- every disclosed reference has a precise context pointer;
-- every meaning has one source of truth;
-- reference files are one hop from `SKILL.md`;
-- scripts and assets have concrete consumers;
-- terminology is consistent and time-sensitive claims have freshness rules;
-- no placeholders, no-op instructions, sediment, or unused resources remain;
-- local links resolve; and
-- static validators and generated-output checks are current.
+| Area | Passes when |
+| --- | --- |
+| Discovery and package | Name, directory, metadata, and invocation match the target. The description has one trigger per branch. Every script and asset has a consumer. |
+| Workflow and disclosure | Steps, necessary progress gates, and final acceptance are visible. Outcome, normal path, ownership, and authority precede branch detail. Each reference has a precise one-hop context pointer; a router owns its complete selection map. |
+| Ownership and validation | Each meaning has one owner. Terms and freshness rules are consistent. No placeholders, no-op instructions, sediment, or unused resources remain. Links, validators, and generated-output checks pass. |

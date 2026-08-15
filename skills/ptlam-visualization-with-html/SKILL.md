@@ -14,9 +14,10 @@ description:
 
 # PTLam Visualization with HTML
 
-Create or revise one self-contained HTML explainer. Use native HTML, CSS,
-JavaScript, and inline SVG; the delivered file runs without a framework, build
-step, CDN, web server, sibling file, or external runtime asset.
+Create or revise one portable HTML explainer that lets a learner see and, when
+useful, manipulate a system. The artifact uses native HTML, CSS, JavaScript, and
+inline SVG and opens directly without a framework, build step, CDN, web server,
+sibling file, or external runtime asset.
 
 ## Required skills
 
@@ -32,38 +33,24 @@ and let it own only the portable HTML rendering and visual interaction.
 
 Read [ptlam-explaining-with-analogy](skills/ptlam-explaining-with-analogy/SKILL.md).
 
-## 1. Resolve the learning outcome and artifact
+## At a glance
 
-Identify the learner's question, background, confusing mechanism, requested
-depth, language, output path, and whether the task creates or revises an
-artifact. Inspect an existing artifact before changing it. Model the smallest
-complete literal system that answers the question: actors, boundaries,
-relationships, order, state, transitions, ownership, cardinality, and failure
-behavior that materially affect the lesson.
+```mermaid
+flowchart LR
+    A[Model the learning outcome] --> B[Resolve the analogy branch]
+    B --> C[Select visual and interaction contracts]
+    C --> D[Scaffold and compose static HTML]
+    D --> E[Implement one synchronized state model]
+    E --> F[Validate and inspect the rendered artifact]
+    F --> G[Deliver one portable HTML file]
+```
 
-Complete this step when the destination and authority are clear and the literal
-model accounts for every fact the artifact must teach without speculative
-detail.
+## Artifact boundary
 
-## 2. Resolve the analogy branch
-
-Use an analogy only when the user explicitly requests one or supplies an
-already chosen analogy model. When the user requests a new analogy, apply the
-embedded `ptlam-explaining-with-analogy` skill first; let it own literal-to-
-everyday mapping, candidate selection, the user's choice, story, and caveats.
-Resume this workflow after the choice. This skill owns only the HTML rendering
-of that result.
-
-For a chosen analogy, read [analogy mapping](references/design-system/patterns/content/analogy-mapping.md).
-When two synchronized maps teach the mechanism, also read the
-[analogy-twin pattern](references/design-system/patterns/analogy-twin/analogy-twin.md).
-When lifetime or change cadence is the lesson, read
-[layered lifetimes](references/design-system/patterns/content/layered-lifetimes.md).
-
-Complete this step when the branch is literal-only or has one user-approved,
-structurally faithful analogy with an explicit boundary.
-
-## 3. Select the visual and interaction contracts
+For every artifact, read the
+[portable artifact contract](references/portable-artifact-contract.md). It owns
+the required file boundary, document semantics, accessibility baseline,
+progressive enhancement, interaction behavior, and verification conditions.
 
 Read the [design-system baseline](references/design-system/design-system.md),
 [accessibility](references/design-system/foundations/accessibility.md),
@@ -71,82 +58,61 @@ Read the [design-system baseline](references/design-system/design-system.md),
 [layout](references/design-system/foundations/layout.md),
 [usability](references/design-system/foundations/usability.md), and
 [document shell](references/design-system/patterns/layouts/document-shell.md)
-for every artifact. They own the universal M3 Expressive, accessibility,
-responsive, interaction, and page-flow contract.
+for every artifact. The scaffold owns exact baseline tokens, global CSS, and
+shell markup; these references own how to preserve and extend that baseline.
 
-Select the minimum visual grammar that exposes the important relationship:
+## 1. Model the learning outcome
 
-- Read [flowchart](references/design-system/components/diagrams/flowchart.md)
-  for order, branching, loops, or responsibility.
-- Read [state diagram](references/design-system/components/diagrams/state-diagram.md)
-  when allowed transitions matter more than work order.
-- Read [sequence diagram](references/design-system/components/diagrams/sequence-diagram.md)
-  for participants, messages, and timing.
-- Read [entity-relationship diagram](references/design-system/components/diagrams/erd.md)
-  for durable structure, keys, ownership, and cardinality.
-- Read [C4 semantic zoom](references/design-system/components/diagrams/c4-diagram.md)
-  for meaningful abstraction levels; each level is a distinct map.
-- Read [state panel](references/design-system/patterns/state-panel/state-panel.md)
-  when the learner must observe values changing.
-- Read [control plane](references/design-system/patterns/control-plane/control-plane.md)
-  when replay or stepwise observation is part of understanding.
-- Read [flowchart with state](references/design-system/patterns/interactive-flows/flowchart-with-state.md)
-  for synchronized flow and observable state without playback.
-- Read [flowchart with state and controls](references/design-system/patterns/interactive-flows/flowchart-with-state-and-control-plane.md)
-  for the default replayable learning flow.
-- Read [section layout](references/design-system/patterns/layouts/section-layout.md),
-  [field-guide navigation](references/design-system/patterns/navigation/field-guide-navigation.md),
-  or [callout](references/design-system/patterns/content/callout.md) only when
-  that page structure is present.
+Identify the learner's question, background, confusing mechanism, requested
+depth, language, output path, and whether the task creates or revises an
+artifact. Inspect an existing artifact before changing it.
 
-For a simulator or richer control surface, choose only the component families
-the learner will use. Each linked file owns that family's native HTML anatomy,
-states, accessibility, and M3 Expressive application:
+Model the smallest complete literal system that answers the question. Include
+only material actors, boundaries, relationships, order, state, transitions,
+ownership, cardinality, and failure behavior. Verify uncertain facts when the
+risk requires it; do not fill gaps with plausible detail.
 
-- Actions: [buttons and variants](references/design-system/components/buttons/buttons.md),
-  [button groups](references/design-system/components/buttons/button-groups/button-groups.md),
-  [segmented buttons](references/design-system/components/buttons/segmented-buttons/segmented-buttons.md),
-  and [icon buttons](references/design-system/components/buttons/icon-buttons/icon-buttons.md).
-- Inputs and selection: [checkbox](references/design-system/components/checkbox/checkbox.md),
-  [chips](references/design-system/components/chips/chips.md),
-  [radio button](references/design-system/components/radio-button/radio-button.md),
-  [sliders](references/design-system/components/sliders/sliders.md),
-  [switch](references/design-system/components/switch/switch.md),
-  and [text fields](references/design-system/components/text-fields/text-fields.md).
-- Content and feedback: [badges](references/design-system/components/badges/badges.md),
-  [cards](references/design-system/components/cards/cards.md),
-  [divider](references/design-system/components/divider/divider.md),
-  [lists](references/design-system/components/lists/lists.md),
-  [loading indicator](references/design-system/components/loading-indicator/loading-indicator.md),
-  [progress indicators](references/design-system/components/progress-indicators/progress-indicators.md),
-  [snackbar](references/design-system/components/snackbar/snackbar.md), and
-  [tooltips](references/design-system/components/tooltips/tooltips.md).
+Complete this step when destination and authority are clear and the literal
+model contains every fact the artifact must teach.
 
-This catalog intentionally excludes app-shell navigation, pickers, floating
-actions, menus, dialogs, and sheets. They belong to general application design,
-not the focused learning artifact this skill produces.
+## 2. Resolve the analogy branch
 
-Read [icons](references/design-system/styles/icons/icons.md) when icons appear.
-Read the affected semantic token contract when customizing
-[color](references/design-system/tokens/color.md),
-[typography](references/design-system/tokens/typography.md),
-[spacing](references/design-system/tokens/spacing.md),
-[shape](references/design-system/tokens/shape.md),
-[elevation](references/design-system/tokens/elevation.md),
-[motion](references/design-system/tokens/motion.md), or
-[state](references/design-system/tokens/state.md). Read
-[building for all](references/design-system/foundations/building-for-all.md),
-[content design](references/design-system/foundations/content-design.md),
-[customization](references/design-system/foundations/customization.md),
-[design tokens](references/design-system/foundations/design-tokens.md),
-[designing](references/design-system/foundations/designing.md),
-[writing](references/design-system/foundations/writing.md), or
-[platform adaptation](references/design-system/foundations/platform-adaptation.md)
-only when that concern materially changes the artifact.
+Use an analogy only when the user explicitly requests one or supplies an
+already selected analogy model.
 
-Complete this step when every selected file has a concrete consumer, every
-important relationship has one visual grammar, and no unselected contract is
-needed to implement the planned artifact.
+When the user requests a new analogy, apply the required
+`ptlam-explaining-with-analogy` skill first. Let it own the literal-to-everyday
+mapping, candidates, user choice, story, and caveats. Resume this workflow after
+one analogy passes its mapping gate; this skill owns only HTML rendering.
+
+For a selected analogy, read
+[analogy mapping](references/design-system/patterns/content/analogy-mapping.md).
+When two synchronized maps teach the mechanism, also read the
+[analogy-twin pattern](references/design-system/patterns/analogy-twin/analogy-twin.md).
+When lifetime or change cadence is the lesson, read
+[layered lifetimes](references/design-system/patterns/content/layered-lifetimes.md).
+
+Complete this step when the artifact is literal-only or has one approved,
+structurally faithful analogy with a visible boundary.
+
+## 3. Select the visual and interaction contracts
+
+Read [visual contract selection](references/visual-contract-selection.md). It
+maps each relationship, composition, control, component, and customization
+concern to the detailed contract that owns its implementation.
+
+Choose the smallest visual grammar that exposes the important relationship.
+Load only the contracts selected by the artifact's actual content and controls.
+Use one visual grammar per relationship, and give every selected contract a
+concrete consumer.
+
+This skill excludes app-shell navigation, pickers, floating actions, menus,
+dialogs, and sheets. Use a general application or site workflow when those
+surfaces, rather than a focused learning artifact, are the product.
+
+Complete this step when every material relationship has one visual grammar,
+every interactive element has one component contract, and no selected reference
+is unused.
 
 ## 4. Scaffold and compose the document
 
@@ -160,38 +126,37 @@ node --experimental-strip-types \
 ```
 
 The scaffold is the canonical source for baseline tokens, global CSS, and shell
-markup. Replace its instructional placeholders; do not deliver the untouched
-scaffold. For an existing artifact, preserve correct content and interaction
-state while bringing the file into the same contract.
+markup. Replace every instructional placeholder. For an existing artifact,
+preserve correct content and interaction state while bringing the file into the
+same contract.
 
-Compose a top-to-bottom learning sequence. Put the overview before the detailed
-mechanism and progressively deeper views. Keep the primary view on the left,
-observable state on the right, and shared controls below; stack them in that
-order on narrow screens. Keep the main sequence visible instead of hiding it
-behind tabs.
+Compose a top-to-bottom learning sequence: orientation before mechanism, then
+progressively deeper views. Keep the primary view before observable state and
+shared controls in both DOM and narrow-screen order. Keep the main sequence
+visible rather than hiding it behind tabs.
 
-Complete this step when the static HTML alone teaches the complete sequence,
-all selected components have their required DOM anatomy, and every placeholder
-has been replaced with subject-specific content.
+Complete this step when static HTML teaches the whole sequence, selected
+components use their required anatomy, and no instructional placeholder remains.
 
-## 5. Implement synchronized behavior
+## 5. Implement one synchronized state model
 
-When time or state is part of the lesson, provide Back, Next, Play/Pause, and
-Reset. Keep active nodes, active edges, observable state, caption, counter, and
-paired analogy/literal views driven by one step model. Never auto-play. Preserve
-the current step across viewport changes, stop playback when the document is
-hidden, and make the final step replayable.
+When time or state is part of the lesson, drive active nodes, active edges,
+observable values, captions, counters, and paired analogy/literal views from one
+step model. Provide Back, Next, Play/Pause, and Reset. Never auto-play.
 
-Use classic or module scripts according to the artifact's scoping needs. Keep
-module scripts inline and self-contained; do not import runtime dependencies.
-Write a useful default state into HTML and provide a complete ordered fallback
-for every step so JavaScript enhances rather than owns the explanation.
+Back restores the exact previous state. Reset restores step 1. Play stops at the
+end and can replay. Preserve the current step across viewport changes and stop
+playback while the document is hidden.
 
-Complete this step when every control produces one deterministic transition,
-Back restores the exact earlier state, Reset restores step 1, Play reaches the
-end and can replay, and scripts-disabled content still explains every step.
+Use inline classic or module scripts according to scoping needs; import no
+runtime dependency. Put a useful default state in the HTML and a complete
+ordered fallback for every step so JavaScript enhances rather than owns the
+explanation.
 
-## 6. Validate and inspect in a browser
+Complete this step when every control causes one deterministic transition and
+the scripts-disabled document still explains every step.
+
+## 6. Validate and inspect the rendered artifact
 
 Run the bundled static validator from any working directory:
 
@@ -202,35 +167,23 @@ node --experimental-strip-types \
 
 Fix every error. Then inspect the real document at narrow and wide widths,
 keyboard-only, reduced motion, scripts disabled, 320 px viewport width, and 200%
-text zoom. Static validation cannot detect rendered overflow; reflow every
-offending grid, flex item, label, SVG, code block, or badge instead of hiding
-document overflow. Check every interactive step and semantic zoom level.
+text zoom. Exercise every interactive step and semantic-zoom level.
 
-Complete this step when static validation passes and browser inspection proves
-that content, focus, controls, diagrams, and state remain visible and usable in
-every required mode.
+Static validation cannot detect rendered overflow. Reflow an offending grid,
+flex child, label, SVG, code block, or badge instead of hiding document
+overflow.
 
-## 7. Deliver the artifact
+Complete this step when validation passes and browser inspection shows that
+content, focus, controls, diagrams, and state remain visible and usable in every
+required condition.
 
-Return the single `.html` file at the resolved destination. Report the selected
-visual grammar, whether the analogy branch ran, the validator command, browser
-conditions inspected, and any requested behavior that could not be verified.
+## 7. Deliver and hand off
 
-Complete the task when the user can open the file directly, the explanation is
-complete without external runtime resources, and the report distinguishes
-static checks from browser-observed behavior.
+Return the single `.html` file at the resolved destination. Report what changed
+and where, the selected visual grammar, whether the analogy branch ran, the
+validator command and result, browser conditions inspected, and any behavior
+that remains unverified.
 
-## Non-negotiable output contract
-
-- Produce one portable `.html` file with embedded CSS and JavaScript.
-- Include a visible-on-focus skip link, descriptive `title`, `lang`, viewport
-  metadata, one `main`, and one clear `h1`.
-- Use native controls, visible focus, accessible names, and `aria-live` for
-  changing captions or state.
-- Scale SVGs through `viewBox`; give each one a concise accessible name.
-- Show direction with arrowheads and labels. Encode active state with color plus
-  outline, weight, shape, or text.
-- Honor `prefers-reduced-motion`; motion never carries the only meaning.
-- Use concise literal labels and place qualifications beside the visual they
-  constrain.
-- Add quizzes, checks, or scoring only when the user requests them.
+Complete the task when the file opens directly, teaches the lesson without
+external runtime resources, and the handoff distinguishes static checks from
+rendered browser evidence.

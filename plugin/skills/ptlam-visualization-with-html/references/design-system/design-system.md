@@ -1,24 +1,26 @@
 # HTML visualization design system
 
-Use one Material 3 Expressive system for every artifact. Apply expressive color,
-flexible type, contrasting shape, purposeful size, motion, and containment with
-task-appropriate intensity. Preserve Material roles, anatomy, states,
-accessibility, and hierarchy while expressing the subject's visual identity.
+Use one Material 3 Expressive system for every artifact. Apply color, type,
+shape, size, motion, and containment with task-appropriate intensity while
+preserving Material roles, anatomy, states, accessibility, and hierarchy.
 
 ## Ownership
 
-The scaffold renderer owns the exact baseline token values, document shell, and
-global CSS. Run the scaffolder for a new artifact; do not reconstruct that
-baseline from prose. Token references own semantic use and customization rules.
-Component references own reusable anatomy and states. Pattern references own
-learning-specific compositions.
+| Surface | Owns |
+| --- | --- |
+| Scaffold renderer | Exact baseline token values, document shell, and global CSS |
+| Token references | Semantic use and customization |
+| Component references | Reusable anatomy and states |
+| Pattern references | Learning-specific compositions |
+
+Run the scaffolder for a new artifact; do not reconstruct its baseline from
+prose.
 
 Do not name a base component after one artifact's workflow. Put a reusable UI
 primitive under `components/`; put a goal-specific assembly under `patterns/`.
 
 Material is adaptable rather than a requirement to imitate one Google product.
-Preserve Material roles, anatomy, states, accessibility, and hierarchy while
-expressing the subject's own visual identity.
+Express the subject's visual identity within the owned roles above.
 
 Do not create classic, standard, and expressive versions. Reduced-motion,
 high-contrast, narrow-screen, and no-JavaScript behavior are accessibility and

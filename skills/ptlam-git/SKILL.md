@@ -9,33 +9,35 @@ description:
   defaults.
 ---
 
-# PTLam Git preferences
+# PTLam Git Preferences
 
-Apply only project-local Git context and commit-message preferences. Assume the
-agent already knows general Git workflow mechanics.
+Apply project-local Git context and commit-message preferences to an existing
+Git workflow. This skill does not own general Git mechanics or grant authority
+for Git actions.
 
-## Load the relevant reference
+## 1. Load the branch-specific source of truth
 
-1. For repository-tied Git work, read
-   [project Git context](references/project-git-context.md). It owns the
-   `CONTEXT.md` location, contents, maintenance rules, and reporting contract.
-2. When creating or changing a commit message, read
-   [commit message preferences](references/commit-message-preferences.md). It
-   owns preference precedence and the portable defaults for subjects, bodies,
-   and issue references.
+| Task branch | Read | That reference owns |
+| --- | --- | --- |
+| Any repository-tied Git work | [Project Git context](references/project-git-context.md) | `CONTEXT.md` location, contents, maintenance, freshness, and reporting |
+| Creating or changing a commit message | [Commit message preferences](references/commit-message-preferences.md) | Preference precedence and portable subject, body, and issue-reference defaults |
 
-Complete this step when the task has loaded every reference its branch needs
-and no unrelated Git workflow instructions.
+Load both references when both branches apply. Do not load unrelated Git
+workflow instructions.
 
-## Apply the preferences
+Complete this step when every applicable preference source is loaded and its
+authority is clear.
 
-1. Treat current user instructions and repository policy as sources of truth.
-2. Apply verified task-relevant facts and preferences from `CONTEXT.md`.
+## 2. Apply preferences in precedence order
+
+1. Follow the current user's instructions and repository policy as the sources
+   of truth.
+2. Apply verified, task-relevant facts and preferences from `CONTEXT.md`.
 3. For commit-message choices still unconstrained, apply the portable defaults.
-4. Maintain `CONTEXT.md` only under its write and scope rules.
-5. Report the context status, preferences that affected the task, and any
+4. Maintain `CONTEXT.md` only under its documented write and scope rules.
+5. Report the context state, preferences that affected the result, and any
    stale, conflicting, or unavailable information.
 
-Complete the workflow when current preferences have been applied, any
-authorized context maintenance is verified, and the report accounts for the
-`CONTEXT.md` state.
+Complete the workflow when current preferences have been applied, authorized
+context maintenance is verified, and the handoff accounts for `CONTEXT.md` and
+every unresolved conflict.
