@@ -86,11 +86,9 @@ Name related skills with one shared concept prefix:
 in alphabetic listings and makes the relationship visible from its ID and
 directory alone.
 
-For example, use `ptlam-git-managing-context` and
-`ptlam-git-writing-commit-message` for Git capabilities. Use
-`ptlam-testing-managing-context`, `ptlam-testing-resolving-environment`, and
-`ptlam-testing-typescript` for testing capabilities. A family foundation may use
-the concept root itself, such as `ptlam-testing`.
+For example, use `ptlam-git-writing-commit-message` for a Git capability. Use
+`ptlam-testing` as the testing foundation and `ptlam-testing-typescript` for its
+TypeScript specialization.
 
 Keep the manifest ID and authored directory name identical. Use a standalone
 `ptlam-<capability>` name only when the skill does not belong to an established

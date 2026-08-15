@@ -15,10 +15,10 @@ application frameworks. Use scope-specific testing guidance under the
 `ptlam-testing` foundation when code requires a browser or web framework.
 
 The bundled Vitest API references have external provenance documented in
-[Acknowledgements](../ACKNOWLEDGEMENTS.md). Treat the reference snapshot as
-versioned API context rather than a version-agnostic contract. Match syntax to
-the target project's installed Vitest major version and consult its matching
-official documentation when the versions differ.
+[Acknowledgements](../ACKNOWLEDGEMENTS.md). Treat the bundled reference snapshot
+as this skill's API contract. When installed types or command output contradict
+it, follow applicable `AGENTS.md` guidance or report the unsupported mismatch;
+do not introduce a separate environment-selection workflow.
 
 ## Stack defaults
 
@@ -135,7 +135,7 @@ Adapt paths and syntax to repository evidence and the installed Vitest version.
   for complex stable outputs and awaited `toMatchFileSnapshot` with an explicit
   path for language-specific outputs; review and commit every snapshot update.
 - Do not commit `it.only`. Treat `skip`, `todo`, and expected-failure tests as
-  visible debt with a reason when repository policy permits them.
+  visible debt with a reason when applicable `AGENTS.md` permits them.
 
 ## Use doubles and mutable runtime controls
 
