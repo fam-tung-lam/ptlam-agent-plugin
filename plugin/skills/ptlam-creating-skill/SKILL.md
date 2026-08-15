@@ -1,35 +1,49 @@
 # PTLam Creating Skills
 
-Create, review, or refactor a skill so a human maintainer understands the
-package on one pass and a future agent follows one predictable, complete
-workflow. Keep the normal path in `SKILL.md`, give each supporting resource one
-owner, and disclose branch detail only when that branch needs it.
+Create, review, or refactor one agent-skill package so its capability boundary,
+normal workflow, composition contract, and acceptance state are clear to a
+human maintainer and executable by a future agent.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
+
+## Rule 1: Make one skill one reusable capability
+
+Treat a skill as an atomic capability building block: the smallest independently
+useful behavior contract with one responsibility, lifecycle branches that serve
+the same primary artifact and acceptance standard, and a complete path from
+invocation to verified outcome.
+
+Self-contained means complete under declared inputs and dependencies, not
+dependency-free. Composable means another skill can reuse the capability through
+an explicit invocation or dependency contract without copying its instructions.
+Atomicity outranks package convenience, shared tooling, and topical similarity.
+
+Read [skill atomicity and composition](references/skill-atomicity.md) when
+defining or challenging the boundary. It owns the capability tests, keep-or-split
+decisions, self-contained contract, and foundation-specialization composition
+rules.
 
 ## At a glance
 
 ```mermaid
 flowchart LR
-    A[Resolve operation, target, and authority] --> B[Model reusable behavior]
-    B --> C{Who should start it?}
-    C -- Agent discovers it --> D[Model invocation]
-    C -- Human starts it --> E[User invocation]
-    E --> F{Several skills hard to remember?}
-    F -- Yes --> G[Add a router]
-    F -- No --> H[Design the package]
-    D --> H
-    G --> H
-    H --> I[Write, prune, verify, and hand off]
+    A[Resolve operation, target, and authority] --> B[Model the capability and branches]
+    B --> C{Rule 1 passes?}
+    C -- No --> D[Split independent capabilities]
+    D --> B
+    C -- Yes --> E[Choose invocation and composition]
+    E --> F[Design, write, prune, and verify the package]
 ```
 
 | Concern | Boundary |
 | --- | --- |
+| Atomicity | One skill owns one independently useful capability; lifecycle branches share its primary artifact and acceptance standard. |
 | Operation | Review is read-only. Create and refactor may change the target package. |
 | Audience | A maintainer reads the package before any agent runs it. A package only an agent can follow is not finished. |
 | Authority | Target instructions and host schemas own mechanics; authored sources own generated surfaces. |
+| Composition | A foundation owns its complete universal contract; a specialization owns only its independently useful delta. |
 | File effect | Change only owned package files and required generated surfaces; preserve unrelated work. |
-| Done | Invocation, boundaries, reading order, and validation agree; a maintainer can name the outcome and normal path from the headings alone; the handoff names any remaining limit. |
+| Done | Rule 1, invocation, composition, reading order, and validation agree; the handoff names every remaining limit. |
 
 ## 1. Resolve the task and authority
 
@@ -46,54 +60,72 @@ flowchart LR
 Complete this step when the operation, target, authority, authored surface,
 metadata owner, and available static checks are unambiguous.
 
-## 2. Model the reusable behavior
+## 2. Prove the atomic capability
 
-Extract available evidence before asking questions. Define:
+Extract available evidence before asking questions. Define the target's
+capability contract:
 
-- the capability and observable outcome;
-- each distinct invocation branch;
-- the inputs, outputs, tools, dependencies, and side effects of each branch;
-- the boundary against adjacent work; and
-- the decisions a future agent should not need to rediscover.
+- the single responsibility and independently useful outcome family;
+- the primary artifact or decision it creates, changes, or evaluates;
+- each branch's trigger, inputs, output, and side effects;
+- the acceptance standard shared by all branches;
+- the boundary against adjacent capabilities; and
+- the declared dependencies that make the normal path complete.
 
-Use examples to discover the general workflow, not as cases to optimize around.
+Apply Rule 1 and the referenced atomicity tests. Keep create, review, repair, or
+other lifecycle branches together only when they operate on the same primary
+artifact and apply the same acceptance standard. Split a branch when another
+consumer would invoke it independently for a different responsibility, outcome
+family, or acceptance standard.
+
+Use examples to discover the general contract, not as cases to optimize around.
 Ask only when an undiscoverable answer would materially change compatibility,
 scope, authority, or behavior.
 
-Complete this step when every branch has one distinct trigger, one observable
-outcome, and no unresolved material choice.
+When Rule 1 fails, produce a split map that names each proposed skill's
+capability, trigger, output, boundary, and composition edge. Apply the rest of
+this workflow to each authorized skill separately.
 
-## 3. Choose invocation and skill boundaries
+Complete this step when Rule 1 passes for one capability or an explicit split
+map accounts for every independent capability without duplicated ownership.
 
-Resolve the target's invocation mechanics instead of assuming one host's
-fields. Where the target distinguishes them:
+## 3. Choose invocation and composition
 
-- choose model invocation when the agent or another skill must discover the
-  skill autonomously, accepting its permanent description cost;
-- choose user invocation when only the human should start the workflow,
+Resolve the target's invocation and dependency mechanics instead of assuming one
+host's fields. Where the target distinguishes them:
+
+- choose model invocation when an agent or another skill must discover the
+  capability autonomously, accepting its permanent description cost;
+- choose user invocation when only the human should begin the capability,
   accepting the human discovery cost; and
-- add a router only when several user-invoked skills are genuinely difficult to
-  remember.
+- add a router only when routing is itself one independently useful capability
+  and several user-invoked skills are genuinely difficult to remember.
 
-Split a branch into another skill only when it needs independent invocation or
-when later steps repeatedly cause premature completion. First make the current
-stage's action and output explicit. Split by sequence only if that does not
-solve the problem.
+When another skill will compose this capability, define the contract before
+package design:
 
-Complete this step when invocation, skill boundaries, and every proposed split
-carry an explicit context-cost or completion rationale.
+1. Keep this foundation independently invocable and complete for its own
+   responsibility.
+2. Let the consuming specialization own only domain- or host-specific behavior.
+3. Declare execution order, inputs, outputs, authority, and conflict precedence
+   through the host's verified dependency mechanism.
+4. Keep each rule with one owner; reference or require it instead of copying it.
+
+Complete this step when invocation, discoverability, every composition edge, and
+every proposed router carry an explicit capability and context-cost rationale.
 
 ## 4. Design the package and reading order
 
 Read [skill authoring best practices](references/skill-best-practices.md) before
-reviewing, designing, or materially revising the package. Its contents table maps
-each authoring decision to the section that owns it, from package anatomy and
-naming through document craft, workflow design, resources, pruning, and the
-static quality checklist.
+reviewing, designing, or materially revising the package. It owns package
+anatomy, naming, progressive disclosure, document craft, workflow structure,
+resources, pruning, and the static quality checklist.
 
 Produce the package tree and reading order before writing detailed instructions.
 Scale the structure to the skill: add a directory, reference, or hierarchy rung
-only when it removes real ambiguity for the reader.
+only when it removes real ambiguity for the reader. A file is an internal
+resource, not another capability; promote independently invocable behavior to a
+composed skill instead.
 
 Complete this step when every content item has one owner and one hierarchy rung,
 every disclosed file has a precise context pointer from `SKILL.md`, and a
@@ -102,12 +134,14 @@ maintainer can predict which file owns a rule from the tree and headings alone.
 ## 5. Write discovery metadata
 
 Use a compact leading word already present in user prompts, the domain, or the
-repository when it accurately anchors the skill. Write one trigger for each
-distinct branch; collapse synonymous triggers that only rename the same branch.
+repository when it accurately anchors the capability. Write one trigger for each
+distinct lifecycle branch. Collapse synonymous triggers that only rename the
+same branch.
 
 For model invocation, make the description a precise model-facing context
-pointer. For user invocation, keep its human-facing summary compact. Follow the
-resolved target schema instead of generic examples.
+pointer. For user invocation, keep its human-facing summary compact. Add a reach
+clause when another skill should compose this capability. Follow the resolved
+target schema instead of generic examples.
 
 When the target uses Claude-style inline YAML, read
 [skill frontmatter specification](references/skill-frontmatter-spec.md). It owns
@@ -115,7 +149,7 @@ the field names, limits, and host mechanics. Do not apply that host-specific
 schema when a manifest, generator, or another host owns metadata.
 
 Complete this step when the target accepts the metadata and each description
-phrase identifies a distinct branch or reach rule.
+phrase identifies one lifecycle branch, boundary, or composition reach rule.
 
 ## 6. Write the instructions
 
@@ -129,10 +163,10 @@ Read [prompting best practices](references/prompting-best-practices.md) when the
 skill must steer non-trivial reasoning, tool use, output shape, long context, or
 agentic behavior. Apply only the sections relevant to the target and branch.
 
-Write the positive target behavior first. Use a prohibition only for a hard
-guardrail that cannot be expressed positively, and pair it with the permitted
-behavior. Explain non-obvious reasons, calibrate specificity to risk, and use an
-example only when direct prose leaves the desired behavior ambiguous.
+Keep the entire normal path in `SKILL.md`. Put conditional mechanics behind
+one-hop context pointers. Write the positive target behavior first. Use a
+prohibition only for a hard guardrail that cannot be expressed positively, and
+pair it with the permitted behavior.
 
 Keep tests, evals, baselines, benchmarks, graders, comparison viewers, and
 trigger optimization outside this skill's static authoring scope.
@@ -146,23 +180,26 @@ criterion.
 
 Apply the
 [content-maintenance rules](references/skill-best-practices.md#content-maintenance)
-after instructions and resources exist. They own the complete removal list for
-both prose and prompts.
+after instructions and resources exist. Remove any adjacent capability bundled
+for convenience and replace copied prerequisite behavior with an explicit
+composition edge.
 
-Complete this step when every retained line changes behavior, defines a needed
-concept, routes context, or establishes a completion criterion.
+Complete this step when every retained line changes this capability's behavior,
+defines a needed concept, routes context, or establishes a completion criterion.
 
 ## 8. Verify and hand off
 
-1. Inspect the final tree and diff for unintended or generated-file edits.
-2. Apply the
+1. Reapply Rule 1 to the finished package. Confirm that new detail did not hide
+   a second independently useful capability or an undeclared prerequisite.
+2. Inspect the final tree and diff for unintended or generated-file edits.
+3. Apply the
    [static quality checklist](references/skill-best-practices.md#static-quality-checklist)
    to `SKILL.md` and every changed resource, including its human-readability
    read-back. Correct every violation.
-3. Report what changed, where it changed, the exact checks and results,
+4. Report what changed, where it changed, the exact checks and results,
    unavailable checks, generated effects, and remaining uncertainty. Do not
    claim unmeasured behavioral effectiveness.
 
-Complete the task when the authored package is structurally valid and readable
-on one pass, generated outputs are current, foreign work remains preserved, and
-the handoff accounts for every changed surface and verification boundary.
+Complete the task when the package is one atomic, self-contained, composable
+capability; its authored and generated surfaces are current; a maintainer can
+follow it on one pass; and the handoff accounts for every verification boundary.
