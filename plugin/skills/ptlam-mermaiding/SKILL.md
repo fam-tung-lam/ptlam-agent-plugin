@@ -32,9 +32,13 @@ a fenced `mermaid` block.
 
 ## 1. Resolve the visual question and target
 
-State the one question the diagram must answer. Identify its audience, required
-detail, evidence, destination, file authority, requested type, target renderer,
-and Mermaid version.
+State the one question the diagram must answer. Then identify:
+
+- who reads it, and how much detail they need;
+- the evidence the diagram draws on;
+- where it goes, and whether you may write that file;
+- the diagram type the user asked for, if any; and
+- the target renderer and its Mermaid version.
 
 | Syntax | Compatibility boundary |
 | --- | --- |
@@ -114,7 +118,7 @@ Apply the selected reference, then these shared rules.
 | Identifiers | Use stable descriptive ids without unexplained abbreviations; separate ids from labels when possible. |
 | Declarations | Declare important objects before relationships. |
 | Statements | Put one semantic statement on each line unless indentation defines structure. |
-| Text source | Use four-space nesting, protect grammar-sensitive labels, and comment only omitted authoring context. |
+| Text source | Use four-space nesting, protect grammar-sensitive labels, and add a comment only to explain context you left out. |
 | Notation | Give shape, line, arrow, cardinality, group, and position only the meaning owned by the type reference. |
 | Labels | Label relationships or conditions that endpoints do not make clear; keep node labels concise. |
 | Direction | Use left-to-right for pipelines or time and top-to-bottom for hierarchy unless the domain requires otherwise. |

@@ -100,9 +100,10 @@ skills:
           and coverage mechanics left open by the foundation.
   - id: ptlam-creating-skill
     description:
-      Create, review, or refactor atomic, self-contained agent skills with one
-      reusable capability, explicit composition contracts, predictable
-      workflows, progressive disclosure, and verifiable acceptance. Use as the
+      Create, review, or refactor one agent skill so that a human maintainer can
+      read it once and change it later. Use when turning a workflow or reference
+      set into a new skill, revising an existing SKILL.md, splitting a skill that
+      grew too broad, or auditing a package without editing it. Use as the
       foundation for skills that specialize skill authoring.
     disable_model_invocation: true
     category_id: engineering

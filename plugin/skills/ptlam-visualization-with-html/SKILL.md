@@ -2,8 +2,12 @@
 
 Create or revise one portable HTML explainer that lets a learner see and, when
 useful, manipulate a system. The artifact uses native HTML, CSS, JavaScript, and
-inline SVG and opens directly without a framework, build step, CDN, web server,
+inline SVG. It opens directly, with no framework, build step, CDN, web server,
 sibling file, or external runtime asset.
+
+This skill builds focused learning artifacts. App-shell navigation, pickers,
+floating actions, menus, dialogs, and sheets belong to a general application or
+site workflow instead.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -12,96 +16,59 @@ sibling file, or external runtime asset.
 ```mermaid
 flowchart LR
     A[Consume the verified explanation] --> B[Resolve the optional analogy]
-    B --> C[Select visual and interaction contracts]
-    C --> D[Scaffold and compose static HTML]
-    D --> E[Implement one synchronized state model]
-    E --> F[Validate and inspect the rendered artifact]
-    F --> G[Deliver one portable HTML file]
+    B --> C[Select contracts and compose static HTML]
+    C --> D[Implement the state model]
+    D --> E[Validate and inspect the rendered artifact]
+    E --> F[Deliver one portable HTML file]
 ```
 
-## Artifact boundary
+## Read for every artifact
 
-For every artifact, read the
-[portable artifact contract](references/portable-artifact-contract.md). It owns
-the required file boundary, document semantics, accessibility baseline,
-progressive enhancement, interaction behavior, and verification conditions.
-
-Read the [design-system baseline](references/design-system/design-system.md),
-[accessibility](references/design-system/foundations/accessibility.md),
-[interaction](references/design-system/foundations/interaction.md),
-[layout](references/design-system/foundations/layout.md),
-[usability](references/design-system/foundations/usability.md), and
-[document shell](references/design-system/patterns/layouts/document-shell.md)
-for every artifact. The scaffold owns exact baseline tokens, global CSS, and
-shell markup; these references own how to preserve and extend that baseline.
+| Reference | Owns |
+| --- | --- |
+| [portable artifact contract](references/portable-artifact-contract.md) | File boundary, document semantics, accessibility baseline, progressive enhancement, and verification conditions |
+| [design-system baseline](references/design-system/design-system.md) | The token and component system the scaffold emits, and how to extend it |
+| [accessibility](references/design-system/foundations/accessibility.md) | Contrast, focus, semantics, and assistive-technology behavior |
+| [interaction](references/design-system/foundations/interaction.md) | States, targets, and input handling |
+| [layout](references/design-system/foundations/layout.md) | Grid, spacing, and responsive structure |
+| [usability](references/design-system/foundations/usability.md) | Readability and comprehension defaults |
+| [document shell](references/design-system/patterns/layouts/document-shell.md) | Page frame, header, and section rhythm |
 
 ## 1. Consume the explanation and resolve the artifact
 
 Start from the `ptlam-explaining` foundation result carried by the required
-`ptlam-explaining-with-analogy` skill chain. Consume its learning goal, learner
-background, confusing mechanism, depth, language, literal answer, literal
-model, explanatory structure, and stated uncertainty. Do not rebuild or
-silently change them in this skill.
+`ptlam-explaining-with-analogy` chain. Consume its learning goal, learner
+background, confusing mechanism, depth, language, literal answer, literal model,
+explanatory structure, and stated uncertainty. Do not rebuild or quietly change
+any of them here.
 
-Resolve the output path and whether the task creates or revises an artifact.
-Inspect an existing artifact before changing it. Identify whether the result is
-literal-only, needs a new analogy, or contains a user-supplied analogy.
+Resolve the output path, and whether the task creates or revises an artifact.
+Inspect an existing artifact before changing it. Decide whether the result is
+literal-only, needs a new analogy, or already contains a user-supplied one.
 
-Complete this step when destination and change authority are clear, one verified
+Done when the destination and change authority are clear, one verified
 foundation explanation supplies every literal fact, and the analogy branch is
 known.
 
 ## 2. Resolve the optional analogy
 
-Use an analogy only when the user explicitly requests one or supplies an
-already selected analogy model.
+Use an analogy only when the user explicitly asks for one, or supplies an
+already selected analogy model. Otherwise use the foundation's literal model
+unchanged and go to step 3.
 
-When the user requests a new analogy, apply the required
-`ptlam-explaining-with-analogy` skill to the foundation result. Resume this
-workflow from its approved mapping, story, and caveats. Return a material
-analogy gap to that skill rather than repairing it independently.
+For either analogy case, follow
+[the analogy branch](references/analogy-branch.md). It owns how to obtain,
+accept, or reject an analogy, and which patterns to read.
 
-For a literal-only artifact, use the foundation's literal model unchanged.
+Done when the artifact is literal-only or carries one approved analogy.
 
-For a supplied or selected analogy, treat its mapping as user-owned input and
-preserve the selected everyday domain. If it conflicts with the foundation's
-literal model or lacks a material mapping required for rendering, report the
-gap and request a decision instead of silently replacing or repairing it. Keep
-a visible boundary for every intentional mismatch.
-
-For a selected analogy, read
-[analogy mapping](references/design-system/patterns/content/analogy-mapping.md).
-When two synchronized maps teach the mechanism, also read the
-[analogy-twin pattern](references/design-system/patterns/analogy-twin/analogy-twin.md).
-When lifetime or change cadence is the lesson, read
-[layered lifetimes](references/design-system/patterns/content/layered-lifetimes.md).
-
-Complete this step when the artifact has one foundation-owned literal model and
-is either literal-only or has one approved or explicitly user-owned analogy
-with a visible boundary.
-
-## 3. Select the visual and interaction contracts
+## 3. Select contracts and compose the document
 
 Read [visual contract selection](references/visual-contract-selection.md). It
 maps each relationship, composition, control, component, and customization
-concern to the detailed contract that owns its implementation.
+concern to the contract that owns it, and it owns how many to load.
 
-Choose the smallest visual grammar that exposes the important relationship.
-Load only the contracts selected by the artifact's actual content and controls.
-Use one visual grammar per relationship, and give every selected contract a
-concrete consumer.
-
-This skill excludes app-shell navigation, pickers, floating actions, menus,
-dialogs, and sheets. Use a general application or site workflow when those
-surfaces, rather than a focused learning artifact, are the product.
-
-Complete this step when every material relationship has one visual grammar,
-every interactive element has one component contract, and no selected reference
-is unused.
-
-## 4. Scaffold and compose the document
-
-For a new artifact, resolve `<skill-directory>` to the directory containing this
+For a new artifact, resolve `<skill-directory>` to the directory holding this
 `SKILL.md`, use Node.js 22.6 or newer, and run from any working directory:
 
 ```bash
@@ -110,38 +77,29 @@ node --experimental-strip-types \
   output.html --title "How the system works"
 ```
 
-The scaffold is the canonical source for baseline tokens, global CSS, and shell
-markup. Replace every instructional placeholder. For an existing artifact,
-preserve correct content and interaction state while bringing the file into the
-same contract.
+The scaffold, not the references above, is the source for exact baseline
+tokens, global CSS, and shell markup. Replace every instructional placeholder.
+For an existing artifact, preserve correct content and interaction state while
+bringing the file into this contract.
 
-Compose a top-to-bottom learning sequence: orientation before mechanism, then
-progressively deeper views. Keep the primary view before observable state and
-shared controls in both DOM and narrow-screen order. Keep the main sequence
-visible rather than hiding it behind tabs.
+Read [learning sequence](references/learning-sequence.md) for the order the
+document must teach in.
 
-Complete this step when static HTML teaches the whole sequence, selected
-components use their required anatomy, and no instructional placeholder remains.
+Done when static HTML teaches the whole sequence, every material relationship
+has one visual grammar, every interactive element has one component contract,
+and no instructional placeholder remains.
 
-## 5. Implement one synchronized state model
+## 4. Implement the state model
 
-When time or state is part of the lesson, drive active nodes, active edges,
-observable values, captions, counters, and paired analogy/literal views from one
-step model. Provide Back, Next, Play/Pause, and Reset. Never auto-play.
+Skip this step for a static artifact.
 
-Back restores the exact previous state. Reset restores step 1. Play stops at the
-end and can replay. Preserve the current step across viewport changes and stop
-playback while the document is hidden.
+When time or state is part of the lesson, follow
+[the synchronized state model](references/state-model.md). It owns the step
+model, the required controls, and the scripts-disabled fallback.
 
-Use inline classic or module scripts according to scoping needs; import no
-runtime dependency. Put a useful default state in the HTML and a complete
-ordered fallback for every step so JavaScript enhances rather than owns the
-explanation.
+Done when the artifact is static or its state model passes that file's checks.
 
-Complete this step when every control causes one deterministic transition and
-the scripts-disabled document still explains every step.
-
-## 6. Validate and inspect the rendered artifact
+## 5. Validate and inspect the rendered artifact
 
 Run the bundled static validator from any working directory:
 
@@ -150,25 +108,19 @@ node --experimental-strip-types \
   "<skill-directory>/scripts/validation/validate-html.ts" <artifact.html>
 ```
 
-Fix every error. Then inspect the real document at narrow and wide widths,
-keyboard-only, reduced motion, scripts disabled, 320 px viewport width, and 200%
-text zoom. Exercise every interactive step and semantic-zoom level.
+Fix every error. Then open the document and follow
+[rendered inspection](references/rendered-inspection.md). It owns the browser
+conditions the artifact must survive, and how to repair a failure.
 
-Static validation cannot detect rendered overflow. Reflow an offending grid,
-flex child, label, SVG, code block, or badge instead of hiding document
-overflow.
+Done when validation passes and every rendered condition holds.
 
-Complete this step when validation passes and browser inspection shows that
-content, focus, controls, diagrams, and state remain visible and usable in every
-required condition.
-
-## 7. Deliver and hand off
+## 6. Deliver and hand off
 
 Return the single `.html` file at the resolved destination. Report what changed
 and where, the selected visual grammar, whether the analogy branch ran, the
-validator command and result, browser conditions inspected, and any behavior
-that remains unverified.
+validator command and its result, the browser conditions you inspected, and any
+behavior that remains unverified.
 
-Complete the task when the file opens directly, teaches the lesson without
-external runtime resources, and the handoff distinguishes static checks from
+Complete the task when the file opens directly, teaches the lesson with no
+external runtime resource, and the handoff separates static checks from
 rendered browser evidence.

@@ -41,11 +41,9 @@ local rules for filenames, frontmatter, headings, tags, links, and citations.
 Keep authority over each destination and related file effect explicit.
 
 Ask only when a missing choice would materially change the knowledge captured
-or its destination. Otherwise, make reversible presentation choices and
+or its destination. Otherwise make reversible presentation choices and
 continue. Return Markdown in the response unless the user requested file
-changes. If a requested file has no naming convention, derive a short,
-lowercase, hyphenated slug from the focal idea and use `.md`; do not invent a
-folder taxonomy or metadata schema.
+changes.
 
 Complete this step when the operation, input, output, destination, local
 conventions, and file authority are known.
@@ -67,8 +65,7 @@ finished forever. Accept unfinished notes in the knowledge system when their
 state and next development path are clear; atomicity is a maturation direction,
 not an admission test.
 
-Complete this step when the note's role, current maturity, and intended next
-state are explicit.
+Complete this step when the note's role, maturity, and next state are explicit.
 
 ## 3. Refine toward one knowledge building block
 
@@ -87,9 +84,6 @@ Apply the model in two passes:
    decide which context belongs with it.
 
 Keep a narrow focus with as much background as future understanding requires.
-Split only when separate building blocks need independent reuse, purposes, or
-connection profiles. Merge only when notes develop the same building block or
-maintain redundant connections; topic overlap is not enough.
 
 Preserve attribution separately from the paraphrased idea. Use an exact
 quotation only when its wording matters, then mark it, attribute it, and explain
@@ -116,22 +110,21 @@ connection, destination, and requested file effect has an explicit disposition.
 
 ## 5. Verify and hand off
 
-Confirm that every produced or revised note:
+Check every produced or revised note:
 
-- has one identifiable focal knowledge building block or one declared
-  navigational purpose;
-- contains the context needed for that focus and no independently useful
-  adjacent building block;
-- makes sense without the original chat or source;
-- distinguishes source claims, the user's interpretation, and established fact
-  when that distinction changes the meaning;
-- explains why every included link matters and follows verified local syntax;
-- distinguishes suggested connections from verified existing notes;
-- exposes its maturity and next step when it remains unfinished;
-- preserves local storage and metadata conventions; and
-- accounts for every authorized file effect.
+| Check | The note must |
+| --- | --- |
+| Focus | Have one focal knowledge building block, or one declared navigational purpose |
+| Context | Carry the context that focus needs, and no independently useful adjacent block |
+| Standalone | Make sense without the original chat or source |
+| Attribution | Separate source claims, the user's interpretation, and established fact wherever that changes the meaning |
+| Links | Explain why each link matters, and use verified local syntax |
+| Honesty | Mark suggested connections apart from verified existing notes |
+| Maturity | Expose its current state and next step while it remains unfinished |
+| Conventions | Preserve local storage and metadata conventions |
+| File effects | Account for every authorized file effect |
 
-For a review, name each failed criterion and its evidence. For changed files,
+For a review, name each failed check and its evidence. For changed files,
 report what changed, where, how it was checked, and what remains unresolved.
 
 Complete the task when the output passes these criteria or the review identifies
