@@ -7,30 +7,57 @@ from Anthropic's
 Model-specific behavior can drift; verify the current target documentation
 before depending on exact model names or runtime features.
 
+Read only the sections that match what the skill must steer.
+
 ## Contents
 
-- [Clarity and context](#clarity-and-context)
-- [Examples](#examples)
-- [Prompt structure](#prompt-structure)
-- [Output control](#output-control)
-- [Tool use and action authority](#tool-use-and-action-authority)
-- [Reasoning calibration](#reasoning-calibration)
-- [Long context and state](#long-context-and-state)
-- [Agentic work](#agentic-work)
-- [Prompt review](#prompt-review)
+| Section | Decides |
+| --- | --- |
+| [Clarity and context](#clarity-and-context) | What the agent must be told outright |
+| [Prompt structure](#prompt-structure) | How instructions, inputs, and examples are separated |
+| [Examples](#examples) | Whether an example is needed, and what it must show |
+| [Output control](#output-control) | What the agent produces and in what shape |
+| [Tool use and action authority](#tool-use-and-action-authority) | Which actions the agent may take, and how |
+| [Reasoning calibration](#reasoning-calibration) | How much deliberation to ask for |
+| [Long context and state](#long-context-and-state) | How work survives a long or resumed session |
+| [Agentic work](#agentic-work) | How much autonomy the agent gets |
+| [Prompt review](#prompt-review) | Whether the instructions are ready to use |
 
 ## Clarity and context
 
-Write as if the agent is capable but new to the user's local norms. State the
-outcome, relevant context, constraints, authority, and output shape explicitly.
+Write as if the agent is capable but new to the user's local norms. State
+outright:
+
+- the outcome it must reach;
+- the context it cannot infer;
+- the constraints it must respect;
+- the authority it has to act; and
+- the shape of the output.
+
 Use ordered instructions when sequence or completeness matters.
 
-Explain the reason behind a non-obvious rule. A reason helps the model transfer
-the rule to unlisted cases; unexplained rigidity encourages literal compliance
-without judgment.
+Explain the reason behind a non-obvious rule. A reason lets the model apply the
+rule to cases the skill never lists; an unexplained rule invites literal
+compliance without judgment.
 
 Prefer one strong instruction over several restatements. Give each concept one
 name and use it consistently.
+
+## Prompt structure
+
+Use the smallest structure that removes ambiguity:
+
+- prose for one principle;
+- bullets for a peer set of rules;
+- numbered steps for ordered work;
+- explicit headings or tags when instructions, data, and examples could be
+  confused; and
+- templates when the output schema is strict.
+
+For large inputs, put the source material in a clearly bounded section and the
+task after it. Label each document when several must be told apart. Require the
+agent to ground its conclusions in the supplied material when the reader must be
+able to trace where a claim came from.
 
 ## Examples
 
@@ -48,22 +75,6 @@ preserves the tags before relying on them.
 Examples are reference, not the workflow's completion criteria. Avoid examples
 that teach accidental values, paths, or provider assumptions.
 
-## Prompt structure
-
-Use the smallest structure that removes ambiguity:
-
-- prose for one principle;
-- bullets for a peer set of rules;
-- numbered steps for ordered work;
-- explicit headings or tags when instructions, data, and examples could be
-  confused; and
-- templates when the output schema is strict.
-
-For large inputs, place the source material in a clearly bounded section and
-put the task after it. Include source metadata when several documents must be
-distinguished. Ask the agent to ground conclusions in the supplied material
-when provenance matters.
-
 ## Output control
 
 Describe what to produce rather than centering the unwanted form:
@@ -73,35 +84,36 @@ Write connected prose with short headings and use a list only for discrete
 items.
 ```
 
-Match the prompt's organization to the requested output when practical. State
-required fields, ordering, length constraints, language, and file destination.
-Use an exact template only when exactness is part of the contract.
+State the fields, ordering, length limit, language, and destination file the
+output must have. Use an exact template only when exactness is part of the
+contract. Match the prompt's own organization to the requested output when
+practical.
 
-Keep formatting rules subordinate to meaning. Do not let a presentation rule
-hide required evidence or produce an invalid artifact.
+A formatting rule never outranks meaning. Do not let one hide required evidence
+or produce an invalid artifact.
 
 ## Tool use and action authority
 
-Use action verbs when implementation is authorized and advisory verbs when the
-user wants analysis. Resolve ambiguity from local evidence before asking, but do
-not infer authority for destructive, externally visible, or materially broader
-actions.
+Match the verb to the authority the user granted: action verbs when
+implementation is authorized, advisory verbs when the user wants analysis.
+Resolve ambiguity from local evidence before asking. Do not infer authority for
+destructive, externally visible, or materially broader actions.
 
 Name a tool only when the target exposes it and the tool materially improves
 reliability. Use fully qualified identifiers when the host requires them.
 
 Request parallel operations only for independent work. Keep dependent actions
-sequential and resolve real parameters before calling tools. Avoid speculative
-calls whose side effects or cost exceed the task.
+sequential, and resolve real parameters before calling a tool. Avoid a
+speculative call whose side effects or cost exceed the task.
 
 ## Reasoning calibration
 
-Choose the level of detail with the specificity ladder in
-[skill authoring best practices](skill-best-practices.md#core-principles). Add
-step-by-step reasoning instructions only for fragile operations where
+Choose the level of detail with
+[match specificity to risk](skill-best-practices.md#match-specificity-to-risk).
+Add step-by-step reasoning instructions only for fragile operations where
 intermediate choices must be observable.
 
-Constrain excessive exploration with a commitment rule:
+Stop endless exploration with a commitment rule:
 
 ```text
 Choose the best-supported approach and continue until new evidence contradicts
@@ -122,15 +134,16 @@ For long-running work:
 - re-read controlling instructions after context restoration; and
 - continue from verified state instead of reconstructing it from memory.
 
-Use version control as a durable history mechanism only within the user's Git
-authority. Do not turn progress tracking into extra repository files unless the
-workflow needs them.
+Keep that record in version control only within the user's Git authority. Do not
+turn progress tracking into extra repository files unless the workflow needs
+them.
 
 ## Agentic work
 
-Balance autonomy with impact. Encourage reversible local actions inside the
-authorized scope. Require confirmation or an already explicit instruction for
-destructive, difficult-to-reverse, externally visible, or shared-system changes.
+Grant autonomy in proportion to how reversible the action is. Let the agent act
+on its own for reversible local work inside the authorized scope. Require
+confirmation, or an instruction that was already explicit, for destructive,
+hard-to-reverse, externally visible, or shared-system changes.
 
 Use subagents only when the host and user authorize them and the workstreams are
 independent or benefit from isolated context. Keep one owner for integrated

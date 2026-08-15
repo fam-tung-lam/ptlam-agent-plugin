@@ -10,14 +10,27 @@ source instead. For example, the `ptlam-agent-plugin` plugin compiler rejects
 frontmatter in authored `plugin/skills/*/SKILL.md` and generates it from
 `plugin/plugin.yml`.
 
-## Contents
+## Fields
 
-- [Invocation fields](#invocation-fields)
-- [Argument and visibility fields](#argument-and-visibility-fields)
-- [Tool and execution fields](#tool-and-execution-fields)
-- [Lifecycle hooks](#lifecycle-hooks)
-- [String substitutions](#string-substitutions)
-- [Static checks](#static-checks)
+Only `name` and `description` are needed by most skills. Add any other field only
+when the workflow cannot work without it.
+
+| Field | Answers | Required |
+| --- | --- | --- |
+| [`name`](#name) | What is the skill called? | Yes |
+| [`description`](#description) | When should it run? | Yes |
+| [`disable-model-invocation`](#disable-model-invocation) | May the model start it, or only the user? | No |
+| [`argument-hint`](#argument-hint) | Which arguments does the user pass? | No |
+| [`user-invocable`](#user-invocable) | Does it appear in the user's menu? | No |
+| [`allowed-tools`](#allowed-tools) | Which tools may it use? | No |
+| [`context`](#context) | Does it run in isolated context? | No |
+| [`agent`](#agent) | Which subagent runs it? | No |
+| [`model`](#model) | Which model runs it? | No |
+| [`hooks`](#lifecycle-hooks) | What runs around its tool calls? | No |
+
+Two more sections cover material that is not a field:
+[string substitutions](#string-substitutions) for argument values the host
+injects, and [static checks](#static-checks) for what to confirm before shipping.
 
 ## Invocation fields
 
@@ -44,13 +57,14 @@ must contain is owned by
 
 ### `disable-model-invocation`
 
-When the target supports this Boolean and it is `true`, the skill is available
-only through explicit user invocation. Use it when only the human should decide
-to begin the workflow, especially for side-effecting task skills.
+Set this Boolean to `true`, where the target supports it, to make the skill
+available only through explicit user invocation. Use it when only the human
+should decide to begin the workflow, especially when the skill changes files or
+external state.
 
 When omitted or `false`, the model may discover the skill from its description.
-Confirm exact host behavior because some products expose discovery and menu
-visibility through different fields.
+Confirm the exact host behavior: some products control discovery and menu
+visibility through separate fields.
 
 ## Argument and visibility fields
 
@@ -82,9 +96,9 @@ allowed-tools: Bash(uv run*), Read, Write
 
 ### `context`
 
-Set `context: fork` only when the target can run the skill in isolated context
-and the workflow benefits from hiding unrelated conversation or later steps.
-Confirm what inputs and tools the fork receives.
+Runs the skill in isolated context where the target supports it. Set
+`context: fork` only when hiding the unrelated conversation or later steps
+helps the workflow. Confirm what inputs and tools the fork receives.
 
 ### `agent`
 

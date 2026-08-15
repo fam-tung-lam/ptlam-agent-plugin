@@ -1,8 +1,9 @@
 # PTLam Creating Skills
 
-Create, review, or refactor a skill so future agents follow one predictable,
-complete workflow. Keep the normal path in `SKILL.md`, give each supporting
-resource one owner, and disclose branch detail only when that branch needs it.
+Create, review, or refactor a skill so a human maintainer understands the
+package on one pass and a future agent follows one predictable, complete
+workflow. Keep the normal path in `SKILL.md`, give each supporting resource one
+owner, and disclose branch detail only when that branch needs it.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -25,9 +26,10 @@ flowchart LR
 | Concern | Boundary |
 | --- | --- |
 | Operation | Review is read-only. Create and refactor may change the target package. |
+| Audience | A maintainer reads the package before any agent runs it. A package only an agent can follow is not finished. |
 | Authority | Target instructions and host schemas own mechanics; authored sources own generated surfaces. |
 | File effect | Change only owned package files and required generated surfaces; preserve unrelated work. |
-| Done | Invocation, boundaries, reading order, and validation agree; the handoff names any remaining limit. |
+| Done | Invocation, boundaries, reading order, and validation agree; a maintainer can name the outcome and normal path from the headings alone; the handoff names any remaining limit. |
 
 ## 1. Resolve the task and authority
 
@@ -84,15 +86,18 @@ carry an explicit context-cost or completion rationale.
 ## 4. Design the package and reading order
 
 Read [skill authoring best practices](references/skill-best-practices.md) before
-reviewing, designing, or materially revising the package. It owns naming,
-package anatomy, progressive disclosure, document craft for skill packages,
-reusable resources, executable resources, content maintenance, and the static
-quality checklist.
+reviewing, designing, or materially revising the package. Its contents table maps
+each authoring decision to the section that owns it, from package anatomy and
+naming through document craft, workflow design, resources, pruning, and the
+static quality checklist.
 
 Produce the package tree and reading order before writing detailed instructions.
+Scale the structure to the skill: add a directory, reference, or hierarchy rung
+only when it removes real ambiguity for the reader.
 
 Complete this step when every content item has one owner and one hierarchy rung,
-and every disclosed file has a precise context pointer from `SKILL.md`.
+every disclosed file has a precise context pointer from `SKILL.md`, and a
+maintainer can predict which file owns a rule from the tree and headings alone.
 
 ## 5. Write discovery metadata
 
@@ -114,6 +119,12 @@ phrase identifies a distinct branch or reach rule.
 
 ## 6. Write the instructions
 
+Shape `SKILL.md` and every prose reference with
+[human-first document craft](references/skill-best-practices.md#human-first-document-craft).
+It owns the reading order, visual choice, and sentence shape that keep a
+first-time maintainer on the path, and it holds a reference to the same standard
+as `SKILL.md`.
+
 Read [prompting best practices](references/prompting-best-practices.md) when the
 skill must steer non-trivial reasoning, tool use, output shape, long context, or
 agentic behavior. Apply only the sections relevant to the target and branch.
@@ -126,9 +137,10 @@ example only when direct prose leaves the desired behavior ambiguous.
 Keep tests, evals, baselines, benchmarks, graders, comparison viewers, and
 trigger optimization outside this skill's static authoring scope.
 
-Complete this step when every branch can be followed without hidden context,
-every action stays within the resolved authority, and every ordered step ends in
-a checkable completion criterion.
+Complete this step when every branch can be followed without hidden context, no
+step depends on a term or artifact introduced later, every action stays within
+the resolved authority, and every ordered step ends in a checkable completion
+criterion.
 
 ## 7. Prune the package
 
@@ -145,11 +157,12 @@ concept, routes context, or establishes a completion criterion.
 1. Inspect the final tree and diff for unintended or generated-file edits.
 2. Apply the
    [static quality checklist](references/skill-best-practices.md#static-quality-checklist)
-   to `SKILL.md` and every changed resource. Correct every violation.
+   to `SKILL.md` and every changed resource, including its human-readability
+   read-back. Correct every violation.
 3. Report what changed, where it changed, the exact checks and results,
    unavailable checks, generated effects, and remaining uncertainty. Do not
    claim unmeasured behavioral effectiveness.
 
-Complete the task when the authored package is structurally valid, generated
-outputs are current, foreign work remains preserved, and the handoff accounts
-for every changed surface and verification boundary.
+Complete the task when the authored package is structurally valid and readable
+on one pass, generated outputs are current, foreign work remains preserved, and
+the handoff accounts for every changed surface and verification boundary.

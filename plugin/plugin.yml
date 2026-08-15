@@ -103,23 +103,15 @@ skills:
           and coverage mechanics left open by the foundation.
   - id: ptlam-creating-skill
     description:
-      Create, review, or refactor predictable agent skills with explicit
-      invocation, distinct workflow branches, progressive disclosure,
-      verifiable acceptance, and single-source package design.
+      Create, review, or refactor predictable agent skills that a human
+      maintainer can follow on one pass, with explicit invocation, distinct
+      workflow branches, progressive disclosure, verifiable acceptance, and
+      single-source package design.
     disable_model_invocation: true
     category_id: engineering
     visibility: public
     status: active
-    required_skills:
-      - skill_id: ptlam
-        reason: Provides the working contract every authored skill inherits.
-        instructions: |-
-          Read ptlam's bundled PTLAM_AGENTS.md reference before reviewing,
-          designing, or materially revising a skill package. Do not run ptlam's
-          initialization workflow unless the user explicitly requests it.
-          Let the contract own voice, evidence, conduct, and handoff.
-          Let this skill's document-craft rules own the shape of SKILL.md and
-          its prose references.
+    required_skills: []
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that
