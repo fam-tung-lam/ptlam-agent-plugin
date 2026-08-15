@@ -11,43 +11,55 @@
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-creating-skill/SKILL.md",
-      "computedHash": "80ab55a52c60b87d5469ab7aefa922bde72d6e000b27b79d1b8d92573e78d84b"
+      "computedHash": "484cbff631af949befa18fc997ac33de393eba8a8188d7e4b5d44d9d6d69a4ba"
+    },
+    "ptlam-explaining": {
+      "source": "fam-tung-lam/ptlam-agent-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ptlam-explaining/SKILL.md",
+      "computedHash": "480db2ee02b0230d560c87c937ee79b2903565dd01c7cc4ce1cc7dcf2cd2657f"
     },
     "ptlam-explaining-with-analogy": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-explaining-with-analogy/SKILL.md",
-      "computedHash": "72575925d707cdce4e1f449e05df9623395f5adc1d4fe57b60ec69724fd58d22"
+      "computedHash": "e6fe3fc8c7fe72f5f5de7beceea2e3ba70d3219432292afd0537269d28926632"
     },
     "ptlam-git": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-git/SKILL.md",
-      "computedHash": "b04f76fea7aca056b693a7eb64a7cc2fb4f0195be783e4a6180bbb5a49180e0e"
+      "computedHash": "2e189b46938ba93bc173407e294889af4c17b1dcb13f118b1527371a94b28d11"
     },
     "ptlam-grilling": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-grilling/SKILL.md",
-      "computedHash": "bb25f5ae9c022b2ae0d128d2631d7a85025e18399df03de57862cda2e6c49b30"
+      "computedHash": "547f4e0adadc49d909ca2a778ede9f250a1ddb75c32fea0cb53da74775bb29d1"
+    },
+    "ptlam-scrapping-urls": {
+      "source": "fam-tung-lam/ptlam-agent-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ptlam-scrapping-urls/SKILL.md",
+      "computedHash": "4db3b93771c5a119e02e392dee49636574c6135d95709a0447837bec6b718334"
     },
     "ptlam-setup": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-setup/SKILL.md",
-      "computedHash": "f5319b4d9482760e54b51a0b0886a25b1cb0ab67064149451c29a76496df81e5"
+      "computedHash": "818f946d68e88c7a10d52f82160502b82fc123aa62276fd91b3c972ce1bdc05f"
     },
     "ptlam-testing": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-testing/SKILL.md",
-      "computedHash": "bd31cc1af539a23ad0039ba805e3cd754bb16b18083b42ce8f0a6f6678606888"
+      "computedHash": "b562cbb87e86530df55ea4844006cf3a256b8fa7f2d63c97a8dba7f8e7b6add1"
     },
     "ptlam-testing-typescript": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-testing-typescript/SKILL.md",
-      "computedHash": "7fdb964eb1ed05dd7ba9514c95750b8a491129629ad981875786e6a01fc3d70b"
+      "computedHash": "ed73f238675f7a5b70d49aba8aa7ac2546f75286a5d41f0cf6875b70bf4d1ba6"
     },
     "ptlam-visualization-with-html": {
       "source": "fam-tung-lam/ptlam-agent-plugin",

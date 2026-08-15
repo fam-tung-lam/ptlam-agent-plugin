@@ -2,8 +2,9 @@
 
 Use this reference for TypeScript, Vite, Vitest, and Vitest coverage mechanics.
 The foundation `ptlam-testing` skill remains authoritative for testing scope,
-level, observable behavior, placement, doubles, TDD, auditing, and verification
-depth.
+level, observable behavior, doubles, TDD, auditing, and verification depth.
+Current repository evidence owns established placement; this reference supplies
+the source-adjacent fallback when no higher-precedence source defines one.
 
 ## Scope boundary
 
@@ -26,8 +27,8 @@ official documentation when the versions differ.
 | Transformation | Vite | Reuse the project's aliases, plugins, and module resolution. |
 | Test runner | Vitest | Use the installed project version and repository scripts. |
 | Coverage | `@vitest/coverage-v8` | Prefer V8; choose Istanbul only for a demonstrated compatibility need. |
-| Runtime tests | `foo.ts` → `foo.test.ts` | Keep the test beside its source file. |
-| Type-contract tests | `foo.ts` → `foo.test-d.ts` | Keep the type test beside its source file. |
+| Runtime tests | `foo.ts` → `foo.test.ts` | Use beside-source placement when the repository has no established layout. |
+| Type-contract tests | `foo.ts` → `foo.test-d.ts` | Use beside-source placement when the repository has no established layout. |
 | Definition API | `describe` and `it` | Import explicitly; do not author cases with `test`. |
 | Complex output | `toMatchSnapshot` | Use when the complete stable structure is the behavior. |
 | Language-specific output | `toMatchFileSnapshot` | Await it and pass an explicit relative golden-file path. |
@@ -37,8 +38,8 @@ official documentation when the versions differ.
 
 ## Place test files and snapshots
 
-The owner-approved TypeScript placement rule intentionally overrides the
-foundation's generic test-root and test-level hierarchy for this specialization:
+Follow the repository's established test layout. When repository evidence and
+the user leave placement open, use this source-adjacent fallback:
 
 ```text
 src/domain/foo.ts

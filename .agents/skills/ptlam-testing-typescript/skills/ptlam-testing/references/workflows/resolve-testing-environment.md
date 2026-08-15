@@ -72,7 +72,7 @@ of languages, frameworks, SDKs, or testing packages in this skill.
   confirmation before modifying project files.
 - Let official tool guidance refine implementation mechanics only. Preserve the
   universal rules for Given-When-Then, public seams, independent expectations,
-  test levels, determinism, and test-double placement.
+  test levels, determinism, and nearest-scope test-double ownership.
 - Map a tool's own taxonomy to the risk-based unit, integration, or end-to-end
   level used by this skill; do not let labels alone choose the level.
 - In write, fix, or explicit TDD mode, update `CONTEXT.md` only with current

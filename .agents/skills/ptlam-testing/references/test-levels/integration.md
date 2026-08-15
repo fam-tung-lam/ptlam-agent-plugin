@@ -6,8 +6,7 @@ boundary.
 
 ## Rules
 
-- Place the repository-named integration-test directory inside the mirrored
-  production or capability scope, never before that scope.
+- Place the test according to the layout owner resolved by `ptlam-testing`.
 - Define the integration boundary and the behavior visible through its public
   entry point.
 - Run the real collaborators whose compatibility is the subject of the test.

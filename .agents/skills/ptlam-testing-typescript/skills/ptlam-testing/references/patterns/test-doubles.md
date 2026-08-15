@@ -1,111 +1,109 @@
 # Test Doubles
 
-Use a test double only at a justified boundary. When a double is required, use
-the repository-approved mocking dependency so the codebase uses one consistent
-mechanism. When no dependency is approved, follow the testing-environment
-workflow to research and recommend one before adding it.
+Use a test double only at a justified boundary. Prefer the real collaborator
+inside the selected seam when it is fast, deterministic, and safe. When a
+double is needed, use the repository-approved mocking dependency and give every
+reusable double one nearest common test owner.
 
 ## Choose the semantic role
 
-- **Dummy**: satisfies a required parameter but is never used.
-- **Stub**: supplies predetermined indirect input.
-- **Fake**: provides a simplified working implementation of a boundary.
-- **Spy**: records outgoing interactions for later assertions.
-- **Mock**: carries predetermined interaction expectations and verifies them.
+- **Dummy:** satisfies a required parameter but is never used.
+- **Stub:** supplies predetermined indirect input.
+- **Fake:** provides a simplified working implementation of a boundary.
+- **Spy:** records outgoing interactions for later assertions.
+- **Mock:** carries predetermined interaction expectations and verifies them.
 
-Name and discuss a double by the role it actually performs even when one mocking
-API creates every role through a class named `Mock`.
-
-Use a real collaborator when the selected test level requires it and it is fast,
-deterministic, and safe. Otherwise use the simplest double that expresses the
+Name and discuss a double by the role it performs even when one API creates all
+roles through a type named `Mock`. Use the simplest role that expresses the
 required behavior. Verify an interaction only when that interaction is part of
 the observable contract.
 
-## Use the approved mocking dependency
+## Resolve the mocking tool
 
 - Reuse the repository's approved mocking dependency.
 - In a read-only audit, report a missing or conflicting dependency without
   changing project files.
-- When no mocking dependency exists, research and recommend the best fit for the
-  detected environment before adding one. Add it only when dependency changes
-  are authorized by the task or the user accepts the recommendation.
-- When another mocking library already exists, do not add a second one silently.
-  Offer to migrate now, retain the current library, or defer.
-- Follow the selected tool's current official API and recommendations for its
-  implementation mechanics. Do not let tool terminology replace the semantic
-  role, boundary, or placement rules in this pattern.
+- When no dependency exists, follow the testing-environment workflow to research
+  and recommend one. Add it only within authorized dependency scope.
+- When another mocking library already exists, do not silently add a second one.
+  Recommend whether to retain, migrate, or defer, with the material trade-off.
+- Follow the selected tool's current official API for implementation mechanics.
+  Tool terminology does not replace the semantic role, boundary, or placement
+  rules in this reference.
 
-## Place a double at the nearest common test scope
+Complete tool selection when one repository-compatible mechanism owns every
+new double in scope.
 
-Place a double in the smallest scope containing every test that uses it. Move it
-up only after real reuse appears. Resolve the mirrored production or capability
-scope before considering the test level: level-specific doubles remain inside
-that level, while a genuinely shared cross-level double belongs directly in the
-capability's test scope.
+## Place a reusable double at the nearest common scope
+
+Start from the test layout resolved by `ptlam-testing`. Placement follows
+consumer ownership rather than a fixed repository-wide directory:
 
 ```text
 One test
--> keep its mocking configuration in that test
+-> keep its setup in that test
 
-Several tests in one test class or group
--> keep it inside or beside that class or group in the test file
-
-Several groups or the whole test file
--> create test_doubles/ in that test file's directory
+Several cases in one file
+-> keep the shared definition inside or beside that file's suite
 
 Several neighboring test files
--> create test_doubles/ in their nearest common test directory
+-> create the repository-named test-doubles directory in their nearest common
+   test-owned directory
 
-Several nested directories
--> move test_doubles/ only to their nearest common parent
+Several nested test directories
+-> move the definition only to their nearest common parent
 ```
 
-Apply the same algorithm across test levels:
+In a separate test-root layout, a level-specific double remains inside that
+level. An identical semantic double already reused across levels belongs at the
+nearest common capability scope:
 
 ```text
-<test-root>/
-└── <mirrored-production-or-capability-scope>/
-    ├── <test-doubles>/
-    │   └── <double-shared-by-multiple-levels>
-    ├── <unit-level>/
-    │   └── <test-doubles>/
-    │       └── <unit-only-double>
-    └── <integration-level>/
-        └── <test-doubles>/
-            └── <integration-only-double>
+<test-root>/<capability>/
+├── <test-doubles>/                 # genuinely shared across levels
+├── <unit-level>/
+│   └── <test-doubles>/             # unit-only
+└── <integration-level>/
+    └── <test-doubles>/             # integration-only
 ```
 
-Use the repository's established directory names, such as `test-doubles` or
-`test_doubles`, and its names for each test level. The diagram fixes scope
-ownership and nesting, not spelling.
-
-For reusable doubles:
+In a source-adjacent layout, keep the double beside the nearest common group of
+test files:
 
 ```text
-<nearest-common-test-directory>/
-├── test_doubles/
-│   └── <one-semantic-double-per-file>
-└── <tests that use the double>
+<source-root>/<capability>/
+├── <test-doubles>/                 # used by neighboring tests
+├── first.test.ts
+└── second.test.ts
 ```
 
-- Keep one reusable semantic double or generation declaration per file unless a
-  tool explicitly requires another layout.
-- Do not create suite-root `test_doubles/` speculatively.
-- Keep doubles for different test levels separate unless the exact same semantic
-  double is already reused by tests at those levels. Put that shared definition
-  at their nearest common capability scope, not at a repository-wide level root.
-- Let a fixture or lifecycle hook construct and clean up a reusable double, but
-  keep its definition in the nearest `test_doubles/` location.
-- Keep one-off mock, patch, or expectation configuration inside the test.
+Use the repository's established spelling, such as `test-doubles` or
+`test_doubles`. These examples fix ownership and locality, not vocabulary.
+
+- Keep one reusable semantic double or generation declaration per file unless
+  the tool requires another layout.
+- Do not create a suite-root double directory speculatively.
+- Keep doubles for different levels separate unless the exact same semantic
+  definition is already reused across them.
+- Let a fixture or hook construct and clean up a reusable double while its
+  definition remains at the nearest common scope.
+- Keep one-off mocks, patches, and expectations in the test.
 - When reuse expands, move the original definition rather than copying it. When
-  reuse contracts, move it back down when that improves locality.
-- Remove the old location and update all imports after a move.
+  reuse contracts, move it closer to the remaining consumers when that improves
+  locality.
+- Remove the old definition and update every import after a move.
+
+Complete placement when each definition has the smallest owner that contains
+all real consumers and no broader speculative copy remains.
 
 ## Avoid false confidence
 
-- Do not replace collaborators inside the implementation merely to assert call
-  counts or order.
-- Do not add conditional setup that reproduces the production algorithm.
-- Keep stubbing specific to the Given phase of the test.
+- Do not replace internal collaborators merely to assert call counts or order.
+- Do not reproduce the production algorithm in conditional setup.
+- Keep stubbing specific to the Given phase.
 - Prefer fresh doubles per test over shared mutable state and broad resets.
-- Fail or report when an unstubbed/default value affects the asserted outcome.
+- Fail or report when an unstubbed or default value affects the asserted
+  outcome.
+
+The double is valid only when breaking the boundary contract causes the test to
+fail while internal refactoring that preserves behavior does not.
