@@ -14,6 +14,21 @@ disable-model-invocation: true
 Create, review, or refactor one agent-skill package that a maintainer can read
 once and a future agent can execute.
 
+## Required skills
+
+### `ptlam-mermaiding`
+
+**Reason:** Owns every Mermaid diagram a skill package carries, from type selection to syntax verification.
+
+**Instructions:** Read and apply ptlam-mermaiding whenever a skill file needs a diagram,
+and skip it when no visual is warranted.
+Let it own the visual question, diagram type, notation, layout, and
+syntax verification for that diagram.
+Keep this skill's ownership of what the package says, which form
+carries each point, and which file holds it.
+
+Read [ptlam-mermaiding](skills/ptlam-mermaiding/SKILL.md).
+
 ## Two rules
 
 **Rule 1 — one skill, one capability.** A skill owns one responsibility, one
@@ -31,13 +46,13 @@ two ideas into one denser sentence.
 
 ```mermaid
 flowchart LR
-    A[Resolve the target] --> B[Prove one capability]
-    B --> C{Rule 1 passes?}
-    C -- No --> D[Split into separate skills]
-    D --> B
-    C -- Yes --> E[Design the package]
-    E --> F[Write it]
-    F --> G[Prune and verify]
+    ResolveTarget["Resolve the target"] --> ProveCapability["Prove one capability"]
+    ProveCapability --> RuleOneCheck{"Rule 1 passes?"}
+    RuleOneCheck -->|"No"| SplitSkills["Split into separate skills"]
+    SplitSkills --> ProveCapability
+    RuleOneCheck -->|"Yes"| DesignPackage["Design the package"]
+    DesignPackage --> WritePackage["Write it"]
+    WritePackage --> PruneAndVerify["Prune and verify"]
 ```
 
 ## 1. Resolve the target
@@ -91,7 +106,10 @@ every dependency edge is written down.
 ## 4. Write it
 
 Read [writing for maintainers](references/writing-for-maintainers.md) before
-any prose. It owns reading order, sentence shape, visuals, and what to cut.
+any prose. It owns reading order, sentence shape, the order to try visual
+forms in, and what to cut. When that order settles on a diagram, apply the
+required `ptlam-mermaiding` skill to author or judge it.
+
 Read [prompting best practices](references/prompting-best-practices.md) when
 the skill steers non-trivial reasoning, tool use, output shape, or autonomy.
 
@@ -121,6 +139,7 @@ tree and the diff, and check every changed file:
 | Layout | Every file has a consumer and fits its length limit. |
 | Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a named condition. |
 | Readability | Titles, headings, and visual labels alone reveal the path and how it ends. |
+| Visual form | Each point sits in the highest form that fits it, replaces the prose it stands in for, and passes `ptlam-mermaiding` when it is a diagram. |
 | Metadata | Name, directory, description, and invocation agree with the host. |
 | Freshness | Nothing duplicated, stale, unused, or placeholder remains; links resolve. |
 

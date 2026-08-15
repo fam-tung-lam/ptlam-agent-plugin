@@ -13,13 +13,13 @@ latest decision map without relying on chat history.
 
 ```mermaid
 flowchart LR
-    A[Resolve one session record] --> B[Build and persist the decision map]
-    B --> C[Ask one consequential question]
-    C --> D[Persist the answer and updated map]
-    D --> E{Outcome-changing choice remains?}
-    E -- Yes --> C
-    E -- No --> F[Confirm shared understanding]
-    F --> G[Complete or defer the session]
+    ResolveRecord["Resolve one session record"] --> BuildDecisionMap["Build and persist the decision map"]
+    BuildDecisionMap --> AskQuestion["Ask one consequential question"]
+    AskQuestion --> PersistAnswer["Persist the answer and updated map"]
+    PersistAnswer --> ChoiceRemains{"Outcome-changing choice remains?"}
+    ChoiceRemains -->|"Yes"| AskQuestion
+    ChoiceRemains -->|"No"| ConfirmUnderstanding["Confirm shared understanding"]
+    ConfirmUnderstanding --> CloseSession["Complete or defer the session"]
 ```
 
 | Concern | Boundary |

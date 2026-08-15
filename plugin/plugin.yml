@@ -109,7 +109,18 @@ skills:
     category_id: engineering
     visibility: public
     status: active
-    required_skills: []
+    required_skills:
+      - skill_id: ptlam-mermaiding
+        reason:
+          Owns every Mermaid diagram a skill package carries, from type
+          selection to syntax verification.
+        instructions: |-
+          Read and apply ptlam-mermaiding whenever a skill file needs a diagram,
+          and skip it when no visual is warranted.
+          Let it own the visual question, diagram type, notation, layout, and
+          syntax verification for that diagram.
+          Keep this skill's ownership of what the package says, which form
+          carries each point, and which file holds it.
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that
@@ -142,7 +153,12 @@ skills:
   - id: ptlam-explaining
     description:
       Explain concepts, mechanisms, and systems through a verified literal model
-      and an explanatory device matched to the learner's difficulty.
+      and an explanatory device matched to the learner's difficulty. Use when a
+      learner needs an unfamiliar, abstract, or complex concept made usable, and
+      when a request explicitly asks for a real-life analogy with a stable
+      mapping table, a short story, and explicit caveats. Select the analogy
+      device only on that explicit ask; a request to explain, define, simplify,
+      or break down a concept is not that ask.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -159,28 +175,6 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-explaining-with-analogy
-    description:
-      Explain an unfamiliar, abstract, or complex concept through one coherent
-      real-life analogy, a stable mapping table, a short story, and explicit
-      caveats.
-    disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-explaining
-        reason:
-          Provides the learning goal, literal model, and verification the
-          analogy is built on.
-        instructions: |-
-          Read and apply ptlam-explaining first.
-          Let it own the learning goal, depth, literal answer, literal model,
-          overall composition order, and reconstruction verification. Start the
-          analogy workflow from those outputs instead of resolving them again.
-          Enter this skill only when the learner explicitly asked for an
-          analogy, and apply it only to analogy selection, the mapping gate, the
-          story, and the stated limits.
   - id: ptlam-visualization-with-html
     description:
       Create or revise portable, polished, interactive HTML explainers and
@@ -192,18 +186,17 @@ skills:
     visibility: public
     status: active
     required_skills:
-      - skill_id: ptlam-explaining-with-analogy
+      - skill_id: ptlam-explaining
         reason:
-          Carries the explanation foundation and owns optional analogy semantics
-          before rendering.
+          Supplies the verified explanation the artifact renders, including its
+          optional analogy branch.
         instructions: |-
-          Read ptlam-explaining-with-analogy and its required ptlam-explaining
-          foundation for every artifact. Apply ptlam-explaining first and let it
-          own the learning goal, depth, literal answer, literal model,
-          explanatory structure, and reconstruction verification.
-          Apply ptlam-explaining-with-analogy only when the user explicitly asks
-          to create an analogy and has not already supplied or chosen one.
-          Let it own candidates, user choice, stable mapping, story, and
-          caveats. Consume those outputs without building a parallel analogy.
-          Resume this visualization skill after the choice and let it own only
-          the portable HTML rendering and visual interaction.
+          Read and apply ptlam-explaining for every artifact. Let it own the
+          learning goal, depth, literal answer, literal model, explanatory
+          structure, and reconstruction verification.
+          Enter its analogy branch only when the user explicitly asks for an
+          analogy or supplies one. Let that branch own candidates, user choice,
+          the stable mapping, the story, and the caveats. Consume those outputs
+          without building a parallel analogy.
+          Keep this visualization skill's ownership of the portable HTML
+          rendering and the visual interaction.

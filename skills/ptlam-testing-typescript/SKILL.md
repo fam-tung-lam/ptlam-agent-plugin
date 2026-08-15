@@ -39,10 +39,10 @@ Read [ptlam-testing](skills/ptlam-testing/SKILL.md).
 
 ```mermaid
 flowchart LR
-    A[Load foundation decisions] --> B[Confirm the TypeScript stack contract]
-    B --> C[Load references for active mechanisms]
-    C --> D[Apply repository mechanics or stack fallbacks]
-    D --> E[Run focused and containing checks]
+    FoundationDecisions["Load foundation decisions"] --> StackContract["Confirm the TypeScript stack contract"]
+    StackContract --> LoadReferences["Load references for active mechanisms"]
+    LoadReferences --> ApplyMechanics["Apply repository mechanics or stack fallbacks"]
+    ApplyMechanics --> RunChecks["Run focused and containing checks"]
 ```
 
 ## 1. Start from the foundation decisions

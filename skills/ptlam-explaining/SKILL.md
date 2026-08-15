@@ -2,27 +2,38 @@
 name: ptlam-explaining
 description:
   Explain concepts, mechanisms, and systems through a verified literal model and
-  an explanatory device matched to the learner's difficulty.
+  an explanatory device matched to the learner's difficulty. Use when a learner
+  needs an unfamiliar, abstract, or complex concept made usable, and when a
+  request explicitly asks for a real-life analogy with a stable mapping table, a
+  short story, and explicit caveats. Select the analogy device only on that
+  explicit ask; a request to explain, define, simplify, or break down a concept
+  is not that ask.
 disable-model-invocation: true
 ---
 
 # PTLam Explaining
 
-Build the learner's mental model of one concept, then check that they can use
-it. A device specialization owns only the machinery of the device it names.
+Build the learner's mental model of one concept, then check they can use it.
+
+## At a glance
+
+```mermaid
+flowchart LR
+    ResolveGoal["Resolve the learning goal"] --> LiteralModel["Establish the literal model"]
+    LiteralModel --> SelectDevice["Select the explanatory device"]
+    SelectDevice --> ComposeExplanation["Compose the explanation"]
+    ComposeExplanation --> ReconstructionTest{"Reconstruction test passes?"}
+    ReconstructionTest -->|"No"| LiteralModel
+    ReconstructionTest -->|"Yes"| HandleFollowUps["Deliver, then handle follow-ups"]
+```
 
 ## Decision ownership
 
 | Decision | Source of truth |
 | --- | --- |
-| Learning goal, depth, literal model, device selection, verification | This foundation skill |
+| Learning goal, depth, literal model, device selection, verification | This skill |
 | Facts about the concept | The authoritative source for that domain |
-| Internal rules of a selected device | That device's specialization skill |
 | Rendering and delivery format | The calling skill, or the learner's request |
-
-When a specialization and this skill disagree about the explanation's shape,
-follow this skill. When they disagree about the device's own rules, follow the
-specialization.
 
 ## 1. Resolve the learning goal
 
@@ -68,11 +79,17 @@ Choose from the learner's difficulty, not from the concept's subject:
 | Follow or operate the process | Walk the causal chain in execution order |
 | See why it is built this way | Name the constraint that forced it and the alternative it rejected |
 | Hold the whole system in mind | Whole first, then one level of parts at a time |
+| Reach the mechanism from anything they already know | One real-life analogy, mapped element by element |
 
 Honor a learner-requested device when it preserves the literal model. When it
 would distort a material relationship, name the mismatch and choose a faithful
 alternative. Combine two devices only when the first leaves a named gap the
 second closes.
+
+Select the analogy device only when the learner explicitly asked for an analogy;
+a request to explain, define, simplify, or break down a concept is not that ask.
+Then follow [the analogy device](references/analogy-device.md), which owns
+candidate generation, the mapping gate, the selection turn, and verification.
 
 Complete this step when one device is selected and any learner-supplied or
 learner-excluded device is honored, or refused for a named reason.
@@ -89,6 +106,10 @@ Order the material so every sentence is understandable from what came before it:
   toward paraphrase.
 - End with what the explanation does not cover.
 
+When the analogy device was selected, compose from
+[the analogy explanation shape](references/analogy-explanation-shape.md)
+instead. It owns the four components, their order, and their finish condition.
+
 When a calling skill invoked this one, return the literal answer, the body, and
 the limits as separate components, and let the caller own their rendering.
 
@@ -101,14 +122,10 @@ Run the reconstruction test: name a case the explanation did not cover, then
 check whether its own content predicts the behavior. When it does not, the model
 is incomplete — return to step 2 instead of adding more words.
 
-Then confirm that:
+Then confirm that exact facts survived the device intact, and that step 4's
+finish condition still holds.
 
-- every term is defined at first use;
-- no step depends on something introduced later;
-- exact facts survived the device intact; and
-- every material simplification is named as a limit.
-
-Complete this step when the reconstruction test passes and each check holds.
+Complete this step when the reconstruction test passes and both checks hold.
 
 ## 6. Handle follow-ups
 
@@ -117,6 +134,7 @@ Complete this step when the reconstruction test passes and each check holds.
 | More depth | Extend the literal model first, then re-select the device for the new depth |
 | A simpler version | Narrow the learning goal; do not delete the qualifiers |
 | A different device | Re-enter step 3 with the used device excluded |
+| A different analogy | Re-enter the analogy device with the used domain excluded |
 | A related concept | Build a new literal model, and link back only where the mechanism is shared |
 | A challenge to the explanation | Name the limitation and its structural reason, then offer the device that closes it |
 

@@ -10,9 +10,9 @@ the portable defaults bundled here. This skill changes no Git state.
 
 ```mermaid
 flowchart LR
-    A[Resolve repository and active rules] --> B[Inspect the current change]
-    B --> C[Compose subject, body, and issue references]
-    C --> D[Verify and return one commit message]
+    ResolveRules["Resolve repository and active rules"] --> InspectChange["Inspect the current change"]
+    InspectChange --> ComposeMessage["Compose subject, body, and issue references"]
+    ComposeMessage --> VerifyMessage["Verify and return one commit message"]
 ```
 
 ## 1. Resolve the repository and active rules

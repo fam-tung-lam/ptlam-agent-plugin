@@ -15,11 +15,15 @@ site workflow instead.
 
 ```mermaid
 flowchart LR
-    A[Consume the verified explanation] --> B[Resolve the optional analogy]
-    B --> C[Select contracts and compose static HTML]
-    C --> D[Implement the state model]
-    D --> E[Validate and inspect the rendered artifact]
-    E --> F[Deliver one portable HTML file]
+    ConsumeExplanation["Consume the verified explanation"] --> AnalogyBranch{"Analogy requested or supplied?"}
+    AnalogyBranch -->|"Yes"| ResolveAnalogy["Resolve one approved analogy"]
+    AnalogyBranch -->|"No"| ComposeDocument["Select contracts and compose static HTML"]
+    ResolveAnalogy --> ComposeDocument
+    ComposeDocument --> StateBranch{"Is state part of the lesson?"}
+    StateBranch -->|"Yes"| ImplementState["Implement the state model"]
+    StateBranch -->|"No"| InspectArtifact["Validate and inspect the rendered artifact"]
+    ImplementState --> InspectArtifact
+    InspectArtifact --> DeliverArtifact["Deliver one portable HTML file"]
 ```
 
 ## Read for every artifact
@@ -36,11 +40,10 @@ flowchart LR
 
 ## 1. Consume the explanation and resolve the artifact
 
-Start from the `ptlam-explaining` foundation result carried by the required
-`ptlam-explaining-with-analogy` chain. Consume its learning goal, learner
-background, confusing mechanism, depth, language, literal answer, literal model,
-explanatory structure, and stated uncertainty. Do not rebuild or quietly change
-any of them here.
+Start from the required `ptlam-explaining` skill's result. Consume its learning
+goal, learner background, confusing mechanism, depth, language, literal answer,
+literal model, explanatory structure, and stated uncertainty. Do not rebuild or
+quietly change any of them here.
 
 Resolve the output path, and whether the task creates or revises an artifact.
 Inspect an existing artifact before changing it. Decide whether the result is
@@ -53,12 +56,13 @@ known.
 ## 2. Resolve the optional analogy
 
 Use an analogy only when the user explicitly asks for one, or supplies an
-already selected analogy model. Otherwise use the foundation's literal model
-unchanged and go to step 3.
+already selected analogy model. Otherwise carry the `ptlam-explaining` literal
+model into step 3 unchanged.
 
 For either analogy case, follow
-[the analogy branch](references/analogy-branch.md). It owns how to obtain,
-accept, or reject an analogy, and which patterns to read.
+[the analogy branch](references/analogy-branch.md). It owns how to reach that
+skill's analogy branch, how to accept or reject an analogy, and which patterns
+to read.
 
 Done when the artifact is literal-only or carries one approved analogy.
 

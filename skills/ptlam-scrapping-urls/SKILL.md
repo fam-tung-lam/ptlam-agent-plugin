@@ -20,13 +20,13 @@ operations, publication, credential changes, or writes outside those paths.
 
 ```mermaid
 flowchart LR
-    A[Resolve workspace and configuration] --> B[Collect and validate URLs]
-    B --> C[Prepare output jobs]
-    C --> D{Fresh cached file?}
-    D -- Yes --> E[Record CACHED]
-    D -- No --> F[Scrape in bounded parallel batches]
-    E --> G[Report every result]
-    F --> G
+    ResolveConfiguration["Resolve workspace and configuration"] --> CollectUrls["Collect and validate URLs"]
+    CollectUrls --> PrepareJobs["Prepare output jobs"]
+    PrepareJobs --> CacheCheck{"Fresh cached file?"}
+    CacheCheck -->|"Yes"| RecordCached["Record CACHED"]
+    CacheCheck -->|"No"| ScrapeBatches["Scrape in bounded parallel batches"]
+    RecordCached --> ReportResults["Report every result"]
+    ScrapeBatches --> ReportResults
 ```
 
 | Concern | Owner |

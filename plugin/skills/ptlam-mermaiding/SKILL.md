@@ -11,13 +11,13 @@ the surrounding document owns its argument, prose, and placement.
 
 ```mermaid
 flowchart LR
-    Resolve[Resolve the question and renderer] --> Model[Model literal relationships]
-    Model --> Select{Select one diagram type}
-    Select --> Route[Read its reference]
-    Route --> Author[Author or revise Mermaid source]
-    Author --> Verify{Syntax and meaning pass?}
-    Verify -- No --> Author
-    Verify -- Yes --> Deliver[Deliver with verification state]
+    ResolveQuestion["Resolve the question and renderer"] --> ModelRelationships["Model literal relationships"]
+    ModelRelationships --> SelectType["Select one diagram type"]
+    SelectType --> ReadTypeReference["Read its reference"]
+    ReadTypeReference --> AuthorSource["Author or revise Mermaid source"]
+    AuthorSource --> VerifySource{"Syntax and meaning pass?"}
+    VerifySource -->|"No"| AuthorSource
+    VerifySource -->|"Yes"| DeliverDiagram["Deliver with verification state"]
 ```
 
 | Concern | Owner |

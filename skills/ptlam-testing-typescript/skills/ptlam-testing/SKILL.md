@@ -19,14 +19,14 @@ what a test must prove.
 
 ```mermaid
 flowchart LR
-    A[Resolve scope, rules, and mode] --> B[Define behavior, risk, and level]
-    B --> C{Mode}
-    C -- Run or diagnose --> H[Execute and isolate the cause]
-    C -- Write, fix, TDD, or audit --> E[Apply the behavior contract]
-    E --> F[Resolve placement and doubles]
-    F --> G[Run the selected mode]
-    H --> L[Verify and hand off]
-    G --> L
+    ResolveMode["Resolve scope, rules, and mode"] --> DefineBehavior["Define behavior, risk, and level"]
+    DefineBehavior --> ModeBranch{"Which mode?"}
+    ModeBranch -->|"Run or diagnose"| IsolateCause["Execute and isolate the cause"]
+    ModeBranch -->|"Write, fix, TDD, or audit"| BehaviorContract["Apply the behavior contract"]
+    BehaviorContract --> PlacementAndDoubles["Resolve placement and doubles"]
+    PlacementAndDoubles --> RunSelectedMode["Run the selected mode"]
+    RunSelectedMode --> VerifyAndHandOff["Verify and hand off"]
+    IsolateCause --> VerifyAndHandOff
 ```
 
 ## Who decides what

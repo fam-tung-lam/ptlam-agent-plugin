@@ -39,20 +39,12 @@ new double in scope.
 Start from the test layout resolved by `ptlam-testing`. Placement follows
 consumer ownership rather than a fixed repository-wide directory:
 
-```text
-One test
--> keep its setup in that test
-
-Several cases in one file
--> keep the shared definition inside or beside that file's suite
-
-Several neighboring test files
--> create the repository-named test-doubles directory in their nearest common
-   test-owned directory
-
-Several nested test directories
--> move the definition only to their nearest common parent
-```
+| Consumers | Where the definition lives |
+| --- | --- |
+| One test | Inside that test |
+| Several cases in one file | Inside or beside that file's suite |
+| Several neighboring test files | The repository-named test-doubles directory in their nearest common test-owned directory |
+| Several nested test directories | Their nearest common parent |
 
 In a separate test-root layout, a level-specific double remains inside that
 level. An identical semantic double already reused across levels belongs at the

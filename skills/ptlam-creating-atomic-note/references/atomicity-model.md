@@ -55,6 +55,21 @@ parts pass the completeness and independent-reuse tests on their own.
 
 ## Refine in four stages
 
+A note climbs this ladder only as far as its expected value carries it:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Capture : an idea worth keeping appears
+    Capture --> Clarify : [the idea is plausibly useful]
+    Clarify --> Identify : [durable reuse or sound reasoning matters]
+    Identify --> Develop : [leverage or error cost justifies the work]
+
+    note right of Capture
+        Every stage is a resting point.
+        Mark the state and the next question.
+    end note
+```
+
 1. **Capture:** Write the thought freely enough to preserve it. Do not require
    atomicity before the thinking exists.
 2. **Clarify:** Improve the title and content together. Add missing context,
@@ -64,11 +79,9 @@ parts pass the completeness and independent-reuse tests on their own.
    parts and their relationships instead of relying on brevity or intuition.
 4. **Develop:** Add evidence, implications, perspectives, or connections when
    the idea warrants deeper treatment. Extract any independently useful
-   building block revealed by this work.
+   building block revealed by this work, as a new note starting at capture.
 
-The stages describe maturation, not separate storage areas. A note may remain
-in the capture or clarification stage for as long as needed. Mark its state and
-record a concrete continuation path so unfinished thinking remains usable.
+The stages describe maturation, not separate storage areas.
 
 ## Match effort to expected value
 
@@ -81,10 +94,8 @@ the best available evidence about:
 - strength and availability of supporting evidence; and
 - the user's interest in developing the idea.
 
-Capture low-confidence material cheaply and preserve its provisional status.
-Clarify a plausibly useful idea until a future reader can act on it. Identify
-the building block when durable reuse or sound reasoning matters. Develop it
-deeply when its leverage or error cost justifies the work.
+Stop at the last stage whose guard the evidence supports, and preserve the
+provisional status of anything captured cheaply.
 
 Treat this choice as revisable. The value of an idea often becomes visible only
 while writing or after later connections appear.

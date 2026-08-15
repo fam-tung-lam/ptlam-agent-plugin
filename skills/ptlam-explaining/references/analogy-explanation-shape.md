@@ -1,15 +1,18 @@
-# Explanation Shape
+# The Analogy Explanation Shape
 
-Read this when composing the explanation. It owns the four components, their
-order, and the Markdown a direct answer uses.
+Read this when composing an explanation that uses the analogy device. It owns
+the four components, their order, and the Markdown a direct answer uses.
 
-A calling skill may render these components differently, but must preserve
-their meaning and their order.
+A calling skill may render these components differently, but must preserve their
+meaning and their order.
+
+Lock the selected analogy domain and use it throughout. Calibrate vocabulary and
+depth to the learner. Be vivid without weakening precision.
 
 ## 1. In a sentence
 
-Reuse the foundation's one-sentence literal answer without changing its
-meaning. Format it as a blockquote:
+Reuse the one-sentence literal answer without changing its meaning. Format it as
+a blockquote:
 
 > [One-sentence literal summary]
 
@@ -39,5 +42,5 @@ a stronger candidate.
 
 ## Finish
 
-Finish when all four components are present, fit the learner, and disclose
-every material limitation. Add no extra introduction or conclusion.
+Finish when all four components are present, fit the learner, and disclose every
+material limitation. Add no extra introduction or conclusion.

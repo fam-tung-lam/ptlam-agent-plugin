@@ -6,17 +6,29 @@ activate it.
 
 ## Work in vertical slices
 
-1. Select one public seam and one observable behavior. Choose an obvious seam
-   directly; ask only when alternatives materially change scope or design.
-2. **Red**: write one test, run it, and confirm it fails for the expected
-   reason. A compile failure is valid only when the next missing interface is
-   the behavior currently being introduced.
-3. **Green**: implement only enough production behavior to pass the test. Do not
-   anticipate future cases or write a horizontal batch of tests first.
-4. **Refactor**: improve the touched code while preserving behavior. Keep local,
-   low-risk refactoring inside the cycle and rerun the focused tests after every
-   change.
-5. Repeat with the next behavior informed by the previous cycle.
+```mermaid
+flowchart LR
+    SelectSlice["Select one public seam and one behavior"] --> WriteTest["Red: write and run one test"]
+    WriteTest --> ExpectedFailure{"Fails for the expected reason?"}
+    ExpectedFailure -->|"No"| WriteTest
+    ExpectedFailure -->|"Yes"| Implement["Green: implement just enough"]
+    Implement --> Refactor["Refactor the touched code"]
+    Refactor --> NextBehavior{"Another behavior in scope?"}
+    NextBehavior -->|"Yes"| SelectSlice
+    NextBehavior -->|"No"| CompletionChecks["Run the completion checks"]
+```
+
+Each cycle carries its own constraint:
+
+- **Select.** Choose an obvious seam directly. Ask only when the alternatives
+  materially change scope or design.
+- **Red.** A compile failure counts only when the missing interface is the
+  behavior you are introducing right now.
+- **Green.** Do not anticipate future cases, and do not write a horizontal
+  batch of tests first.
+- **Refactor.** Preserve behavior, keep the change local and low-risk, and
+  rerun the focused tests after each one.
+- **Repeat.** Let the previous cycle inform which behavior comes next.
 
 ## Guardrails
 

@@ -85,12 +85,33 @@ Main trade-off: <consequence or none>
 Resume from: <one exact instruction for the next agent>
 ```
 
-Use exactly one status:
+## Status lifecycle
 
-- `active`: work is progressing and no user answer is currently required;
-- `awaiting-user`: the current question has been asked;
-- `confirmation-pending`: the shared-understanding summary awaits confirmation;
-- `deferred`: the user intentionally postponed the session;
-- `blocked`: progress requires missing evidence, authority, or external change;
-  or
-- `complete`: shared understanding is confirmed and no grilling decision remains.
+Carry exactly one status, and move it only along an edge of this lifecycle:
+
+```mermaid
+stateDiagram-v2
+    direction LR
+
+    state "active" as Active
+    state "awaiting-user" as AwaitingUser
+    state "confirmation-pending" as ConfirmationPending
+    state "blocked" as Blocked
+    state "deferred" as Deferred
+    state "complete" as Complete
+
+    [*] --> Active : checkpoint written
+    Active --> AwaitingUser : question asked
+    AwaitingUser --> Active : answer given
+    Active --> Blocked : evidence or authority missing
+    Blocked --> Active : blocker cleared
+    Active --> ConfirmationPending : summary asked
+    ConfirmationPending --> Active : summary corrected
+    AwaitingUser --> Deferred : postponed
+    ConfirmationPending --> Deferred : postponed
+    Deferred --> Active : resumed
+    ConfirmationPending --> Complete : confirmed
+    Complete --> [*]
+```
+
+`complete` is the only status a later session may not resume.

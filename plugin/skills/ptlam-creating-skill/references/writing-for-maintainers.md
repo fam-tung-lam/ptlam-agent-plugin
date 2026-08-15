@@ -38,11 +38,25 @@ more than a principle that made the reader think.
 - End every numbered step with a result someone can observe.
 - Use one word per concept across the whole package. Never vary it for style.
 
-## Let a visual replace prose, never repeat it
+## Prefer a diagram, then a table, then prose
 
-Use a Mermaid diagram for a branching path, a table for exact mappings, a tree
-for hierarchy, and prose for linear steps. When a nearby paragraph says what
-the visual already says, delete one of them.
+Reach for the form that costs the reader least. When more than one form carries
+the point, take the highest one whose row fits.
+
+| Form | Fits when |
+| --- | --- |
+| Mermaid diagram | The point is a path, branch, hierarchy, lifecycle, or handoff |
+| Table | The point maps one key to one value |
+| Prose | The point is a single rule, definition, or caveat |
+
+Apply the required `ptlam-mermaiding` skill to every diagram you write or
+judge. It owns the diagram type, the notation, and the syntax check.
+
+A visual replaces the prose it stands in for; it never accompanies it. When a
+nearby paragraph says what the visual already says, delete one of them.
+
+Never force a diagram onto content with no shape. A padded diagram costs the
+reader more than the sentence it replaced.
 
 ## Cut instead of compressing
 

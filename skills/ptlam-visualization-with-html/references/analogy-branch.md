@@ -6,10 +6,10 @@ foundation's literal model unchanged.
 
 ## When the user requests a new analogy
 
-Apply the required `ptlam-explaining-with-analogy` skill to the foundation
-result. Resume the main workflow from its approved mapping, story, and caveats.
+Enter the required `ptlam-explaining` skill's analogy branch. Resume the main
+workflow from its approved mapping, story, and caveats.
 
-Return a material analogy gap to that skill. Do not repair it here.
+Return a material analogy gap to that branch. Do not repair it here.
 
 ## When the user supplies an analogy
 

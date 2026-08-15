@@ -18,11 +18,12 @@ override. Project-specific guidance remains owned by `AGENTS.md`.
 
 ```mermaid
 flowchart LR
-    A[Resolve one project and inspect current files] --> B{Override ownership}
-    B -- Missing or managed --> C[Create or refresh the managed override]
-    B -- Unmarked collision --> D[Preserve and report the collision]
-    C --> E[Create or refresh the managed AGENTS.md block]
-    E --> F[Verify the idempotent installation]
+    InspectProject["Resolve one project and inspect current files"] --> OverrideOwner{"Who owns AGENTS.override.md?"}
+    OverrideOwner -->|"Missing or managed"| RefreshOverride["Create or refresh the managed override"]
+    OverrideOwner -->|"Unmarked collision"| PreserveOverride["Preserve the file and report the collision"]
+    RefreshOverride --> LinkFromAgents["Create or refresh the managed AGENTS.md block"]
+    PreserveOverride --> LinkFromAgents
+    LinkFromAgents --> VerifyInstallation["Verify the idempotent installation"]
 ```
 
 ## Managed files

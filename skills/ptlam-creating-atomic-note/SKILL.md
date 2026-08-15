@@ -18,10 +18,10 @@ filenames, metadata, and link syntax.
 
 ```mermaid
 flowchart LR
-    A[Resolve operation, destination, and authority] --> B[Capture or inspect the thinking]
-    B --> C[Refine toward one knowledge building block]
-    C --> D[Complete the selected note operation]
-    D --> E[Verify meaning, connections, and file effects]
+    ResolveRequest["Resolve operation, destination, and authority"] --> CaptureThinking["Capture or inspect the thinking"]
+    CaptureThinking --> RefineBuildingBlock["Refine toward one knowledge building block"]
+    RefineBuildingBlock --> RunOperation["Complete the selected note operation"]
+    RunOperation --> VerifyNotes["Verify meaning, connections, and file effects"]
 ```
 
 | Operation | Result | Default file effect |

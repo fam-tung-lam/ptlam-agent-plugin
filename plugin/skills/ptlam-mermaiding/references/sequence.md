@@ -49,6 +49,10 @@ Use `loop` for repetition, `alt` and `else` for mutually exclusive outcomes,
 must-complete region, and `break` for an exception that stops the flow. Indent
 messages four spaces inside each block.
 
+Close an activation once, with `deactivate` after the block, rather than on a
+response inside every branch. Mermaid walks each branch in turn, so the second
+deactivation aborts the whole render.
+
 Use notes for a phase boundary, invariant, or state that messages cannot express.
 Do not use notes as a substitute for missing messages.
 
@@ -75,12 +79,14 @@ sequenceDiagram
 
     alt Order is valid
         OrderService ->> OrderStore: STORES accepted order
-        OrderService -->>- ApiGateway: RESPONDS with order identifier
+        OrderService -->> ApiGateway: RESPONDS with order identifier
         ApiGateway -->> Customer: RESPONDS with acceptance
     else Order is invalid
-        OrderService -->>- ApiGateway: RESPONDS with validation errors
+        OrderService -->> ApiGateway: RESPONDS with validation errors
         ApiGateway -->> Customer: RESPONDS with rejection
     end
+
+    deactivate OrderService
 ```
 
 ## Completion check
