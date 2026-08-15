@@ -59,16 +59,16 @@ Choose from the learner's difficulty, not from the concept's subject:
 
 | The learner cannot | Device |
 | --- | --- |
-| Picture the mechanism, and asked for an analogy | `ptlam-explaining-with-analogy` |
-| Picture the mechanism, with no analogy requested | One concrete instance, then generalize from it |
+| Picture the mechanism | One concrete instance, then generalize from it |
 | Tell two neighboring concepts apart | Contrast on the single dimension that separates them |
 | Follow or operate the process | Walk the causal chain in execution order |
 | See why it is built this way | Name the constraint that forced it and the alternative it rejected |
 | Hold the whole system in mind | Whole first, then one level of parts at a time |
 
-Route to the analogy specialization only when the learner explicitly asks for an
-analogy. Combine two devices only when the first leaves a named gap the second
-closes.
+Honor a learner-requested device when it preserves the literal model. When it
+would distort a material relationship, name the mismatch and choose a faithful
+alternative. Combine two devices only when the first leaves a named gap the
+second closes.
 
 Complete this step when one device is selected and any learner-supplied or
 learner-excluded device is honored, or refused for a named reason.
