@@ -200,6 +200,17 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-mermaiding
+    description:
+      Create, revise, or review Mermaid diagrams whose type, structure,
+      notation, and layout preserve the source relationships and remain readable
+      in raw Markdown. Use directly or from another skill when the output needs
+      a swimlane, flowchart, class, state, ER, sequence, quadrant, mindmap,
+      kanban, architecture, or tree-view diagram.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-explaining-with-analogy
     description:
       Explain an unfamiliar, abstract, or complex concept through one coherent
