@@ -10,6 +10,7 @@ description:
   field guide or simulator is requested. Apply the analogy dependency first only
   when the user explicitly asks to create an analogy. Use a general application
   or site workflow for ordinary pages, dashboards, and app-shell UI.
+disable-model-invocation: true
 ---
 
 # PTLam Visualization with HTML

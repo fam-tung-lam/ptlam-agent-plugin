@@ -10,6 +10,7 @@ description:
   with attribution, and annotate why links exist. Do not use for meeting
   minutes, task lists, project status notes, general journaling, or note-app
   support without knowledge-development intent.
+disable-model-invocation: true
 ---
 
 # PTLam Creating Atomic Notes

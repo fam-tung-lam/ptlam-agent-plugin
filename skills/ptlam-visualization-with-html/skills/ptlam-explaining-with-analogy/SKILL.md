@@ -7,6 +7,7 @@ description:
   understand or learn a concept. Do not invoke for a general request to explain,
   define, simplify, or break down a concept unless that same request explicitly
   asks for an analogy.
+disable-model-invocation: true
 ---
 
 # PTLam Explaining with Analogy

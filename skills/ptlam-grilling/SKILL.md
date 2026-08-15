@@ -9,6 +9,7 @@ description:
   contradictions, risks, and trade-offs, recommend an answer for every decision,
   wait after each question, and require confirmed shared understanding before
   any resulting action.
+disable-model-invocation: true
 ---
 
 # PTLam Grilling

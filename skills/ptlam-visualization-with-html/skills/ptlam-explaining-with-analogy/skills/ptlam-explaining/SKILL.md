@@ -10,6 +10,7 @@ description:
   model, device selection, composition order, and verification. Do not use for
   reference documentation, API listings, status reporting, or answering a direct
   factual question that needs no mental model.
+disable-model-invocation: true
 ---
 
 # PTLam Explaining

@@ -111,6 +111,7 @@ skills:
       target-specific authored and generated boundaries and verify the package
       statically. Tests, evals, benchmarks, grading, comparisons, and trigger
       optimization remain outside this skill's scope.
+    disable_model_invocation: true
     category_id: engineering
     visibility: public
     status: active
@@ -133,6 +134,7 @@ skills:
       assumptions, contradictions, risks, and trade-offs, recommend an answer
       for every decision, wait after each question, and require confirmed shared
       understanding before any resulting action.
+    disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active
@@ -148,6 +150,7 @@ skills:
       paraphrase source material with attribution, and annotate why links exist.
       Do not use for meeting minutes, task lists, project status notes, general
       journaling, or note-app support without knowledge-development intent.
+    disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active
@@ -164,6 +167,7 @@ skills:
       and verification. Do not use for reference documentation, API listings,
       status reporting, or answering a direct factual question that needs no
       mental model.
+    disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active
@@ -176,6 +180,7 @@ skills:
       them understand or learn a concept. Do not invoke for a general request to
       explain, define, simplify, or break down a concept unless that same
       request explicitly asks for an analogy.
+    disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active
@@ -203,6 +208,7 @@ skills:
       the analogy dependency first only when the user explicitly asks to create
       an analogy. Use a general application or site workflow for ordinary pages,
       dashboards, and app-shell UI.
+    disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active

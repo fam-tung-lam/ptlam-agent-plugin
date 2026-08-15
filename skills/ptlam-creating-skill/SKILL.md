@@ -9,6 +9,7 @@ description:
   authored and generated boundaries and verify the package statically. Tests,
   evals, benchmarks, grading, comparisons, and trigger optimization remain
   outside this skill's scope.
+disable-model-invocation: true
 ---
 
 # PTLam Creating Skills
