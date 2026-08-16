@@ -55,10 +55,10 @@ treeView-beta
     <test-root>/
         <capability>/
             <test-doubles>/ ## Genuinely shared across levels
-            <unit-level>/
-                <test-doubles>/ ## Unit only
-            <integration-level>/
-                <test-doubles>/ ## Integration only
+            <local-unit-level>/
+                <test-doubles>/ ## Local unit only
+            <local-integration-level>/
+                <test-doubles>/ ## Local integration only
 ```
 
 In a source-adjacent layout, keep the double beside the nearest common group of

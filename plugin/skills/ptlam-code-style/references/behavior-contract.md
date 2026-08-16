@@ -37,8 +37,8 @@ stand in for behavior-based design.
 ## Test-first work
 
 Write the test first only when the user asks for test-first work, TDD, or
-Red-Green-Refactor by name. A request for tests, or for integration tests, is
-not that ask.
+Red-Green-Refactor by name. A request for tests, or for local integration
+tests, is not that ask.
 
 When they do ask, work one behavior at a time: watch the test fail for the
 expected reason, implement just enough to pass, then refactor the code you

@@ -54,7 +54,7 @@ and owns its rules, its examples, and its caveats.
 | Writing a doc comment, or explaining why code is the way it is | [documentation.md](references/documentation.md) |
 | Emitting a log record, naming a logger, or picking a level | [logging.md](references/logging.md) |
 | Deciding what a test must prove before any tool is chosen | [behavior-contract.md](references/behavior-contract.md) |
-| Choosing one test level for a risk | [unit.md](references/test-levels/unit.md), [integration.md](references/test-levels/integration.md), [e2e.md](references/test-levels/e2e.md) |
+| Choosing one test level for a risk | [local-unit.md](references/test-levels/local-unit.md), [local-integration.md](references/test-levels/local-integration.md), [ui-golden.md](references/test-levels/ui-golden.md), [e2e.md](references/test-levels/e2e.md) |
 | Placing a new test file, or relocating a misplaced one | [test-placement.md](references/test-placement.md) |
 | Introducing, naming, or placing a test double | [test-doubles.md](references/test-doubles.md) |
 

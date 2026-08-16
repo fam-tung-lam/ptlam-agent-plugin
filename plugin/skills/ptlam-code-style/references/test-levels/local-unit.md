@@ -1,7 +1,11 @@
-# Unit Testing
+# Local Unit Testing
 
-Use a unit test for one function, class, state transition, or other small public
-behavior whose risk can be established without a real multi-component runtime.
+Use a local unit test for one function, class, state transition, or other small
+public behavior whose risk can be established without a real multi-component
+runtime.
+
+Local names the isolated test-harness boundary. It does not mean the test runs
+only on a developer workstation.
 
 ## Rules
 
@@ -16,8 +20,8 @@ behavior whose risk can be established without a real multi-component runtime.
 - Assert returned values, exposed state, emitted events, or contractually
   observable outgoing interactions.
 - Do not access disk, network, platform UI, or uncontrolled clocks and random
-  sources. Move to an integration test when those real collaborations are the
-  risk being tested.
+  sources. Move to a local integration test when those real collaborations are
+  the risk being tested.
 - Keep setup local to the test unless proven reuse justifies a broader fixture.
 
 ## Exit criteria
