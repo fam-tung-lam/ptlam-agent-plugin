@@ -32,6 +32,8 @@ files may sit together as long as they only serve that one behavior.
 
 Several verbs in the name are a warning, not proof. Create, review, and repair
 belong together when the artifact, the responsibility, and the standard match.
+Capability atomicity does not require one file per independently nameable
+subtopic; package layout owns when a file split earns its navigation cost.
 
 ## Keep, split, or route
 
@@ -60,7 +62,25 @@ explicit.
 
 ## Compose without duplicating ownership
 
-For each foundation-and-specialization pair:
+Before writing or reviewing a foundation-and-specialization pair, map every
+concern in scope:
+
+| Concern | Foundation owns | Specialization adds | Link and precedence |
+| --- | --- | --- | --- |
+| Test behavior | Observable behavior and double boundaries | `blocTest` and Flutter runner mechanics | Specialization points to the foundation; foundation wins |
+| Documentation | Public contract and explanatory-comment purpose | Dartdoc syntax and analyzer mechanics | Specialization points to the foundation; foundation wins |
+
+Classify every specialization rule as one of these:
+
+- an additional domain or host mechanic;
+- a stricter domain rule that does not weaken the foundation; or
+- a link to the foundation owner.
+
+A paraphrase of a foundation rule is none of the three. Remove it rather than
+keeping a local copy for completeness. Report a rule whose owner remains
+unclear instead of assigning it silently.
+
+Then confirm that:
 
 1. The foundation stays complete for its own universal responsibility.
 2. The specialization owns one domain or host capability, and only that.
@@ -71,4 +91,5 @@ For each foundation-and-specialization pair:
 6. Each references the owner instead of paraphrasing its rules.
 
 Rule 1 passes when all six tests pass, every branch serves the one capability,
-every prerequisite is declared, and every shared rule has one owner.
+every prerequisite is declared, every shared rule has one owner, and the
+ownership map contains no unclassified specialization rule.

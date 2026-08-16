@@ -107,8 +107,14 @@ Choose how the skill starts:
 For each skill this one depends on, state the load order, its inputs, its
 outputs, what it may change, and who wins on conflict.
 
-Done when the file tree and reading order exist, invocation is chosen, and
-every dependency edge is written down.
+When a foundation and specialization compose, build the ownership map required
+by [skill atomicity and composition](references/skill-atomicity.md#compose-without-duplicating-ownership).
+Classify every specialization rule before writing it; link to the foundation
+instead of paraphrasing shared behavior.
+
+Done when the file tree and reading order exist, invocation is chosen, every
+dependency edge is written down, and any foundation-specialization ownership
+map has no unclassified rule.
 
 ## 4. Write it
 
@@ -143,7 +149,8 @@ tree and the diff, and check every changed file:
 | Check | Passes when |
 | --- | --- |
 | Capability | Rule 1 holds and every dependency names its owner. |
-| Layout | Every file has a consumer and fits its length limit. |
+| Composition | The foundation stays complete; each specialization rule adds a mechanic, tightens the domain, or links to its owner. |
+| Layout | Every file has a consumer and fits its limit; each split earns its navigation cost through ownership, conditional loading, or readability. |
 | Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a condition named there and nowhere else. |
 | Readability | Titles, headings, and visual labels alone reveal the path and how it ends. |
 | Visual form | Each point sits in the highest form that fits it, replaces the prose it stands in for, and passes `ptlam-mermaiding` when it is a diagram. |

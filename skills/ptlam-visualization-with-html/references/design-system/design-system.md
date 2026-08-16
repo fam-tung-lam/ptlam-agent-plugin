@@ -40,6 +40,11 @@ Apply those dimensions selectively:
   interactions; and
 - adapt component size and layout to context without changing its meaning.
 
+Limit each page or stage to one primary task. Test whether its emphasis helps a
+learner find, understand, and complete that task; familiar component anatomy and
+predictable interaction behavior remain fixed while expressive intensity
+changes.
+
 The Material catalog groups components by action, containment, communication,
 navigation, selection, and text input. This skill intentionally selects only
 the families needed for focused learning artifacts. A component missing from
@@ -50,8 +55,9 @@ this local catalog is outside the contract, even when Material documents it.
 This local contract was reviewed on 2026-08-07 from Firecrawl snapshots of the
 official Material 3 home, foundations, styles, and components catalogs plus
 Google's Expressive design research. The research describes color, shape, size,
-motion, and containment as the main expressive dimensions and warns against
-breaking established interaction patterns.
+motion, and containment as the main expressive dimensions. Its evidence spans
+46 studies with more than 18,000 participants and warns against breaking
+established interaction patterns.
 
 This file and its local references are the operational source for artifact
 creation; agents do not need to open the web pages. A maintainer changing or

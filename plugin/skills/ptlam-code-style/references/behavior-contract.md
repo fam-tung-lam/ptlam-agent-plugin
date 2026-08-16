@@ -34,16 +34,6 @@ Use a higher level only for a risk the lower one cannot establish.
 Never repeat the same assertion across levels. Never let a coverage percentage
 stand in for behavior-based design.
 
-## Test-first work
-
-Write the test first only when the user asks for test-first work, TDD, or
-Red-Green-Refactor by name. A request for tests, or for local integration
-tests, is not that ask.
-
-When they do ask, work one behavior at a time: watch the test fail for the
-expected reason, implement just enough to pass, then refactor the code you
-touched and rerun the focused test.
-
 ## Finish
 
 Finish when every planned test states one observable risk and satisfies this

@@ -1,8 +1,7 @@
 # File Organization
 
-Where a file goes, what a feature publishes, and where its test lives. The
-`ptlam-code-style` foundation owns the published-surface rule and the
-create-structure-on-demand rule these paths satisfy.
+Where Flutter puts source and test files, and how a feature spells the
+published surface owned by the `ptlam-code-style` foundation.
 
 ## The source tree
 
@@ -41,9 +40,6 @@ treeView-beta
                         components/ ## Logical UI components for the page
                     models/ ## Domain models and failures
                     bloc/
-                        localization_bloc.dart
-                        localization_event.dart
-                        localization_state.dart
                     usecases/
                         dtos/ ## Every DTO owned by the feature
                     repositories/
@@ -56,9 +52,6 @@ treeView-beta
                         components/ ## Logical UI components for the page
                     models/ ## Domain models and failures
                     bloc/
-                        <feature_name>_bloc.dart
-                        <feature_name>_event.dart
-                        <feature_name>_state.dart
                     usecases/
                         dtos/ ## Every DTO owned by the feature
                     repositories/
@@ -78,14 +71,14 @@ treeView-beta
         tool/ ## Deterministic project scripts, when needed
 ```
 
-## A feature publishes one file
+## Flutter spells the published surface with one file
 
 `<feature_name>/<feature_name>.dart` exports everything another feature may use
 — usually the page, its route, and the models that cross the boundary.
 
-Another feature imports that file and nothing else. Importing
-`features/orders/bloc/orders_bloc.dart` from outside `orders/` is a defect even
-though Dart allows it.
+Another feature imports that file rather than reaching into the feature's
+directories. [state-management.md](state-management.md) owns the authored file
+layout inside `bloc/`.
 
 The same rule governs `packages/`: the barrel file at its root is the surface,
 and `src/` is private.
@@ -115,14 +108,3 @@ feature needs it, then move it to `constants/`.
 
 Prefer one public class per file, named after the file. A small private helper
 used only by that class may stay beside it.
-
-## Where its test goes
-
-Mirror the path from `lib/` into `test/`, then add the level segment:
-
-```text
-lib/features/orders/usecases/place_order.dart
--> test/features/orders/unit/place_order_test.dart
-```
-
-[testing.md](testing.md) owns the level choice and the naming.

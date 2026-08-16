@@ -16,9 +16,6 @@ button:disabled {
 }
 ```
 
-Never auto-play. Preserve the current step across viewport changes. Back must
-restore the exact previous state, and Reset must restore the first state.
-
 Support touch, keyboard, mouse, trackpad, and assistive input through the same
 state model. Every gesture-only operation needs a visible control or keyboard
 route. Respond immediately to pointer and touch input, keep text selectable,
