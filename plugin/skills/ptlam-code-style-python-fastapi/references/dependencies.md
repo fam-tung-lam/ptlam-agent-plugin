@@ -10,14 +10,17 @@ without calling it.
 
 Dependencies own framework concerns such as an authenticated principal, a
 request database session, settings, correlation context, and an external client
-borrowed for the request. Application and domain code receive ordinary typed
+borrowed for the request. A feature provider assembles its repository and use
+case from those capabilities. Use cases and domain code receive ordinary typed
 arguments and never import `Depends`.
 
 ## Own cleanup with yield
 
 A dependency that acquires a resource yields once. Put cleanup in `finally` or
-inside its context manager. Roll back a failed transaction when this dependency
-owns that policy, then close the session on every exit.
+inside its context manager. Roll back an unfinished transaction after a
+propagated failure and close the session on every exit. The use case still owns
+whether its operation commits; dependency cleanup does not choose business
+transaction policy.
 
 Select sync or async dependency syntax from the resource API. Match any
 dependency scope option to the installed FastAPI version and the response
