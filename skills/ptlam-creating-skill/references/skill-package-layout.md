@@ -38,8 +38,12 @@ A file that only fits after compression was two files.
 4. Use a routing reference only for a large catalog of mutually exclusive
    options.
 5. Keep a concept's definition, rules, examples, and caveats in one place.
+6. The reference opens with what it owns, never with when to read it. That
+   condition belongs at the pointer that sent the reader here.
 
-Every rule stays one hop from `SKILL.md`.
+Every rule stays one hop from `SKILL.md`, and every condition is written once.
+A reference that repeats its own trigger creates a second place to update when
+the routing changes, and the two drift apart.
 
 ## Name it after what it does
 
