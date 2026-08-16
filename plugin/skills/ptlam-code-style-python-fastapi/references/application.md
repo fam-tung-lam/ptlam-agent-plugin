@@ -3,10 +3,11 @@
 How the application owns lifespan, settings, router assembly, middleware, and
 framework-wide handlers.
 
-Keep one composition root: an application factory or the established entry
-module. It creates `FastAPI`, installs middleware and exception handlers,
-includes top-level routers, and exposes the ASGI application. Domain modules do
-not mutate the app during import.
+Keep one composition root. In the default new-service layout, `main.py` contains
+only `app = create_app()`, while `app.py` creates `FastAPI`, installs middleware
+and exception handlers, and includes every feature router once. Preserve an
+existing coherent factory location. Feature packages do not mutate the app
+during import.
 
 ## Own process lifetime
 
@@ -29,7 +30,10 @@ Starlette version changes.
 ## Compose once
 
 - Read settings through the project's settings owner. Do not scatter direct
-  environment reads across routers and services.
+  environment reads across routers and use cases. In a new service, define one
+  Pydantic Settings model and one cached accessor in `settings.py`.
+- Keep `/health`, `/ready`, and build information in one unversioned operations
+  router. Do not include operational endpoints under an API version prefix.
 - Give each shared path prefix, version prefix, tag, and dependency one router
   inclusion site.
 - Order middleware deliberately. A middleware that records a response must see
@@ -45,6 +49,17 @@ Starlette version changes.
 
 Importing a module for a unit test must not start a connection, dispatch a job,
 or perform remote registration.
+
+## Share infrastructure, not feature behavior
+
+Build one client or pool per external system under `integrations/` and expose it
+through a typed facade. Features receive that facade through dependencies; they
+do not construct a second Redis, S3, mail, payment, or queue client.
+
+Keep the Celery app under `integrations/celery_app.py`. Keep each task beside
+its feature and register or autodiscover it on that app. A task assembles and
+calls the same use case as the HTTP route; business policy stays in neither the
+integration facade nor the task shell.
 
 Finish when app construction is repeatable in tests, startup and shutdown own
 the same resources, and each router, handler, and middleware is installed once.

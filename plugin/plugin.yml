@@ -128,14 +128,15 @@ skills:
   - id: ptlam-code-style-python-fastapi
     description:
       Write, review, and fix FastAPI application code against conventions for
-      project and feature-module structure, application lifespan, routes,
-      request and response contracts, dependency injection, concurrency,
-      service boundaries, errors, observability, and API tests. Use when
-      starting or reorganizing a FastAPI service or module, adding or changing
-      endpoints, dependencies, exception handlers, middleware, schemas,
-      background handoffs, or tests, or fixing OpenAPI and runtime failures.
-      Apply ptlam-code-style-python first for the Python mechanics. Do not use
-      for Python services that do not use FastAPI.
+      service and feature-package structure, application lifespan, routes,
+      request and response contracts, dependency injection, use cases, feature
+      boundaries, model registration, concurrency, errors, observability, and
+      API tests. Use when starting or reorganizing a FastAPI service or feature,
+      adding or changing endpoints, use cases, dependencies, exception
+      handlers, middleware, schemas, SQLAlchemy registration, background
+      handoffs, or tests, or fixing OpenAPI and runtime failures. Apply
+      ptlam-code-style-python first for the Python mechanics. Do not use for
+      Python services that do not use FastAPI.
     category_id: engineering
     visibility: public
     status: active

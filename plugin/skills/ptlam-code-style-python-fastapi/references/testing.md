@@ -7,6 +7,23 @@ status, response body, important headers, authentication result, and externally
 observable database or job effect. Keep service and repository edge cases at
 their cheaper Python test level.
 
+## Mirror capability ownership
+
+For the default new-service layout, place use-case tests under
+`tests/<feature>/unit/usecases/` and real repository or router collaboration
+tests under `tests/<feature>/integration/`. Put fixtures owned by one feature in
+that feature's `conftest.py`.
+
+Put composed application, lifespan, and unversioned operations tests under
+`tests/app/integration/`. Keep a reusable test double at the nearest common
+feature and test-level scope. Use pytest markers for suite selection when the
+repository configures them; markers do not replace the ownership expressed by
+the test tree.
+
+Placement is the only architecture rule here. The active testing contract owns
+what each level proves. Preserve a coherent established test root and leave
+unrelated tests in place.
+
 ## Select the client
 
 - Use `TestClient` as a context manager for synchronous pytest tests so the app
