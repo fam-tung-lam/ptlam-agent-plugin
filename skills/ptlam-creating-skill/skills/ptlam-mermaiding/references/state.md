@@ -30,9 +30,9 @@ synchronize together.
 
 Use a composite `state Name { ... }` when its internal states share one external
 lifecycle boundary. Give each composite its own entry and terminal states only
-when its internal lifecycle has them. Mermaid cannot transition directly
-between internal states in different composite states; route through their
-composite boundary or revise the model.
+when its internal lifecycle has them. Mermaid cannot transition directly between
+internal states in different composite states; route through their composite
+boundary or revise the model.
 
 Use `--` inside a composite state for orthogonal concurrent regions. Use a note
 only for an invariant, timeout policy, or constraint that cannot be expressed as

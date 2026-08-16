@@ -16,7 +16,7 @@ answer; the user owns each outcome-changing decision.
 Every session has one persisted record so another agent can resume from the
 latest decision map without relying on chat history.
 
-## At a glance
+## How does one unresolved decision become persisted shared understanding?
 
 ```mermaid
 flowchart LR
@@ -29,23 +29,23 @@ flowchart LR
     ConfirmUnderstanding --> CloseSession["Complete or defer the session"]
 ```
 
-| Concern | Boundary |
-| --- | --- |
-| Decision | The agent recommends; the user owns every outcome-changing choice. |
-| File effect | This invocation may write only the selected session record and its canonical directory. |
-| Later action | Implementation, Git operations, and publication require separate authority. |
-| Done | The user confirms the persisted decision map, or the record names each deferred choice and consequence. |
+| Concern      | Boundary                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------- |
+| Decision     | The agent recommends; the user owns every outcome-changing choice.                                      |
+| File effect  | This invocation may write only the selected session record and its canonical directory.                 |
+| Later action | Implementation, Git operations, and publication require separate authority.                             |
+| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence. |
 
 ## 1. Resolve the session record
 
-1. Inspect the canonical directory, candidate path, and same-topic records.
-2. Resume one clear non-complete match unless the user asks to start fresh. If
+1. Read the [grilling session schema](references/grilling-session-schema.md). It
+   defines the fixed workspace root, canonical directory, record shape, and
+   status lifecycle.
+2. Inspect that directory, the candidate path, and same-topic records.
+3. Resume one clear non-complete match unless the user asks to start fresh. If
    several records plausibly match, ask which one to continue.
-3. Read a resumed record completely. Recheck drift-prone evidence and continue
+4. Read a resumed record completely. Recheck drift-prone evidence and continue
    from its next unresolved decision without repeating settled questions.
-4. Read the [grilling session schema](references/grilling-session-schema.md)
-   before the first write. It owns where the record lives, what it holds, when
-   to rewrite it, and what the statuses mean.
 
 Complete this step when the fixed workspace root, schema, one unique new or
 resumable path, prior state, and write authority are known.
@@ -65,7 +65,7 @@ resumable path, prior state, and write authority are known.
    Tell the user the record path after the write succeeds.
 
 If persistence fails, report the path and reason. Do not claim the session is
-resumable.
+resumable or ask the next substantive question.
 
 Complete this step when the map contains the outcome, non-goals, constraints,
 evidence, prerequisites, assumptions, conflicts, and known choices; the
@@ -96,8 +96,8 @@ record reflects every resolved, invalidated, deferred, or open branch.
 ## 4. Confirm shared understanding
 
 Summarize the outcome, non-goals, resolved decisions, accepted assumptions,
-risks, deferred decisions, and next authorized action. Persist that summary,
-ask whether it represents the shared understanding, and wait.
+risks, deferred decisions, and next authorized action. Persist that summary, ask
+whether it represents the shared understanding, and wait.
 
 If the user corrects it, update the map and resume from the highest-impact open
 decision. If the user asks to stop or act before confirmation, persist the
@@ -106,6 +106,9 @@ early action request is not confirmation. Treat later implementation as a
 separate task with new authority.
 
 Act on the result only after explicit confirmation. Complete the session when
-every outcome-changing decision is resolved or explicitly deferred, the user
-has confirmed the shared understanding, the confirmation is persisted, and the
+every outcome-changing decision is resolved or explicitly deferred, the user has
+confirmed the shared understanding, the confirmation is persisted, and the
 status is `complete`.
+
+See [acknowledgements](ACKNOWLEDGEMENTS.md) for the source that inspired this
+workflow.

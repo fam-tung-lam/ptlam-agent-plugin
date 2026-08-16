@@ -64,8 +64,8 @@ all describe one coherent outcome.
 
 ## 4. Commit and report
 
-Create the commit only when the user authorized it. Let repository hooks run.
-If a hook changes files or rejects the commit, inspect the resulting status and
+Create the commit only when the user authorized it. Let repository hooks run. If
+a hook changes files or rejects the commit, inspect the resulting status and
 report the failure instead of bypassing the hook or silently retrying.
 
 Verify the result with `git status --short --branch` and `git log -1 --oneline`.

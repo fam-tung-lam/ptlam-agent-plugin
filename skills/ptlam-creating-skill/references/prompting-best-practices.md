@@ -15,8 +15,8 @@ Tell the agent the outcome, the local context, the constraints, what it is
 allowed to change, and the shape of the output. Use ordered steps when sequence
 or completeness matters.
 
-Explain why a rule exists only when the reason helps the agent handle a case
-you did not list. Use one term per concept and one strong instruction per rule.
+Explain why a rule exists only when the reason helps the agent handle a case you
+did not list. Use one term per concept and one strong instruction per rule.
 
 ## Structure the prompt
 
@@ -30,8 +30,8 @@ it. Ask for traceable evidence when the reader has to verify a conclusion.
 ## Use examples only when needed
 
 Add an example only when direct instruction leaves the format, tone, boundary,
-or transformation ambiguous. Keep examples relevant, varied enough to reveal
-the rule behind them, and clearly separate from instructions and data.
+or transformation ambiguous. Keep examples relevant, varied enough to reveal the
+rule behind them, and clearly separate from instructions and data.
 
 Watch for values in an example that quietly become requirements.
 
@@ -44,8 +44,8 @@ done. Never let a formatting rule hide evidence or invalidate the artifact.
 ## Match tools to authority
 
 Use action verbs only where the agent is authorized to act. Never infer
-authority for destructive, external, or wider-reaching actions. Name a tool
-only when the target exposes it and naming it improves reliability.
+authority for destructive, external, or wider-reaching actions. Name a tool only
+when the target exposes it and naming it improves reliability.
 
 Run independent actions in parallel. Keep dependent actions sequential. Resolve
 real parameter values before any tool call.
@@ -81,8 +81,8 @@ information boundary.
 ## Prompt review
 
 Confirm that the outcome, the authority, and the output are explicit; that
-structure separates instructions, inputs, examples, and schema; that each
-branch carries the context it needs and no more; that tools and host mechanics
-are verified; that positive instruction outweighs negation; that freedom
-matches risk; that each example reveals a rule; and that every sentence changes
-behavior or supplies required context.
+structure separates instructions, inputs, examples, and schema; that each branch
+carries the context it needs and no more; that tools and host mechanics are
+verified; that positive instruction outweighs negation; that freedom matches
+risk; that each example reveals a rule; and that every sentence changes behavior
+or supplies required context.

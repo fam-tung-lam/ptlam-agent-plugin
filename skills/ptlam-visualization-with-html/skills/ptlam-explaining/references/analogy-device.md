@@ -37,16 +37,16 @@ and low explanation cost.
 
 These familiar domains are starting points, not defaults:
 
-| Concept pattern | Possible analogy domain |
-| --- | --- |
-| Ordered sequential work | Recipe or assembly line |
-| Fast storage and retrieval | Library or filing cabinet |
-| Broadcasting to unknown listeners | Radio station or newsletter |
-| Complexity behind a simple surface | Restaurant menu |
-| Concurrent work | Multiple cooks in one kitchen |
-| Agreed communication rules | Introductions or phone etiquette |
-| Adjustment from observed output | Thermostat |
-| Work distributed across resources | Traffic control |
+| Concept pattern                    | Possible analogy domain          |
+| ---------------------------------- | -------------------------------- |
+| Ordered sequential work            | Recipe or assembly line          |
+| Fast storage and retrieval         | Library or filing cabinet        |
+| Broadcasting to unknown listeners  | Radio station or newsletter      |
+| Complexity behind a simple surface | Restaurant menu                  |
+| Concurrent work                    | Multiple cooks in one kitchen    |
+| Agreed communication rules         | Introductions or phone etiquette |
+| Adjustment from observed output    | Thermostat                       |
+| Work distributed across resources  | Traffic control                  |
 
 ## Add a selection turn only when the choice is the learner's
 

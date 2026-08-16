@@ -10,35 +10,41 @@ command or its behavior differs from this reference.
 
 ## Choose the execution context
 
-| Situation | Decision |
-| --- | --- |
-| The user names a worktree or says to use the current checkout | Use it when it is safe and suitable. |
-| The task is read-only | Stay in the current worktree. |
-| The current worktree already has a clean, dedicated task branch | Reuse it. |
-| The current worktree contains unrelated changes | Create a linked worktree. |
-| The current branch must remain available for other work | Create a linked worktree. |
-| Another task or agent may run concurrently | Create a linked worktree. |
-| The task starts from a shared or protected branch and will write files | Create a linked worktree. |
-| The requested branch is already checked out elsewhere | Use that worktree or choose another branch with the user. |
+| Situation                                                              | Decision                                                  |
+| ---------------------------------------------------------------------- | --------------------------------------------------------- |
+| The user names a worktree or says to use the current checkout          | Use it when it is safe and suitable.                      |
+| The task is read-only                                                  | Stay in the current worktree.                             |
+| The current worktree already has a clean, dedicated task branch        | Reuse it.                                                 |
+| The current worktree contains unrelated changes                        | Create a linked worktree.                                 |
+| The current branch must remain available for other work                | Create a linked worktree.                                 |
+| Another task or agent may run concurrently                             | Create a linked worktree.                                 |
+| The task starts from a shared or protected branch and will write files | Create a linked worktree.                                 |
+| The requested branch is already checked out elsewhere                  | Use that worktree or choose another branch with the user. |
 
-Do not create a worktree merely because Git is available. When the user's
-chosen checkout risks unrelated work, explain the conflict and stop before
-changing state.
+Do not create a worktree merely because Git is available. When the user's chosen
+checkout risks unrelated work, explain the conflict and stop before changing
+state.
 
 ## Name and place a linked worktree
 
 Use the repository's documented location and branch convention first. Otherwise
-place linked worktrees at `<repo-root>/.worktrees/<task-slug>` and use the host's
-required branch prefix with the same short, descriptive slug.
+place linked worktrees at `<main-worktree-root>/.worktrees/<task-slug>` and use
+the host's required branch prefix with the same short, descriptive slug. The
+main-worktree root is stable even when this policy runs from a linked worktree.
 
 Before creation:
 
-1. Resolve `<repo-root>` with `git rev-parse --show-toplevel`.
+1. Resolve the current worktree with `git rev-parse --show-toplevel`. Resolve
+   `<main-worktree-root>` from the first `worktree` record in
+   `git worktree list --porcelain`; confirm that record uses the same Git common
+   directory returned by
+   `git rev-parse --path-format=absolute --git-common-dir`.
 2. Confirm `.worktrees/` is excluded with
-   `git check-ignore -q <repo-root>/.worktrees/` or an equivalent tracked-ignore
-   check. Ask before editing ignore rules when that change is outside the task.
-3. Inspect `git status --short --branch` and
-   `git worktree list --porcelain` for collisions and unrelated state.
+   `git check-ignore -q <main-worktree-root>/.worktrees/` or an equivalent
+   tracked-ignore check. Ask before editing ignore rules when that change is
+   outside the task.
+3. Inspect `git status --short --branch` and `git worktree list --porcelain` for
+   collisions and unrelated state.
 4. Validate the proposed branch with `git check-ref-format --branch <branch>`.
 5. Resolve an existing local base commit. Fetch only when the user authorized
    network access or current remote state is required by the request.
@@ -46,7 +52,7 @@ Before creation:
 Create a new task branch with:
 
 ```text
-git worktree add <repo-root>/.worktrees/<task-slug> -b <branch> <base>
+git worktree add <main-worktree-root>/.worktrees/<task-slug> -b <branch> <base>
 ```
 
 Use `git worktree add <path> <branch>` only for an existing branch not checked

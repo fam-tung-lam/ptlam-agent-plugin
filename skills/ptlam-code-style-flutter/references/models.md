@@ -8,23 +8,22 @@ A DTO mirrors an external shape — a JSON body, a stored record — field for
 field, including the parts you dislike. A domain model says what the application
 means, in the domain's words.
 
-Keep them separate types. Every feature DTO lives in
-`features/<name>/usecases/dtos/`; the domain model travels everywhere above the
-repository.
+Keep them separate types. A feature DTO lives beside the external boundary that
+owns its shape, under `features/<name>/data/<source>/dtos/`; the domain model
+travels everywhere above the repository.
 
 Map between them in the repository or the data source, never above it. That
 mapping is the only place that knows the API sends `"created_ts"` as an epoch
 integer, and it is where a contract change gets caught.
 
-Merging the two saves a file today and couples every page to the vendor's
-field names tomorrow.
+Merging the two saves a file today and couples every page to the vendor's field
+names tomorrow.
 
 ## Generate the JSON, write the meaning
 
-Annotate DTOs with
-[`json_annotation`](https://pub.dev/packages/json_annotation) and let
-[`json_serializable`](https://pub.dev/packages/json_serializable) produce the
-mapping through the shared code-generation command in
+Annotate DTOs with [`json_annotation`](https://pub.dev/packages/json_annotation)
+and let [`json_serializable`](https://pub.dev/packages/json_serializable)
+produce the mapping through the shared code-generation command in
 [SKILL.md](../SKILL.md#shared-toolchain). Hand-written `fromJson` drifts
 silently as fields are added.
 
@@ -46,7 +45,7 @@ the class declaration and the matching API changed across majors. The example
 follows the `abstract`/`sealed` form and Dart 3 pattern matching, which replaced
 `when` and `map`.
 
-[architecture.md](architecture.md#keep-one-bloc-library-in-three-authored-files)
+[state-management.md](state-management.md#keep-one-bloc-library-in-three-authored-files)
 owns the `part` and `part of` layout that combines a BLoC's event and state into
 one generated `*.freezed.dart` file.
 
@@ -77,8 +76,8 @@ Prefer an empty list to a nullable list.
 
 ## Failures cross the boundary, exceptions do not
 
-Below the repository, code throws whatever its library throws: `DioException`,
-a platform exception, a parse error.
+Below the repository, code throws whatever its library throws: `DioException`, a
+platform exception, a parse error.
 
 The repository catches those and returns a domain failure — a sealed type the
 use case and the BLoC can match on. Nothing above the repository ever sees a

@@ -3,11 +3,11 @@
 Use a card for content and actions about one subject. Do not make the entire
 card clickable when it contains multiple independent actions.
 
-Choose one containment level: filled for subtle grouping, elevated when the
-card must rise above a busy surface, or outlined when a visible boundary is
-needed. Content determines card height and may include media, a headline,
-supporting text, a list, and actions. Keep the reading order stable when the
-layout reflows.
+Choose one containment level: filled for subtle grouping, elevated when the card
+must rise above a busy surface, or outlined when a visible boundary is needed.
+Content determines card height and may include media, a headline, supporting
+text, a list, and actions. Keep the reading order stable when the layout
+reflows.
 
 ```html
 <article class="card">

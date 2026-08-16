@@ -15,7 +15,7 @@ unclear, ask which root owns the run.
 ## The canonical file
 
 ```text
-<workspace-root>/.ptlam-agent-plugin/skills/productivity/ptlam-scrapping-urls/CONFIG.yml
+<workspace-root>/.ptlam-agent-plugin/skills/utilities/ptlam-scraping-urls/CONFIG.yml
 ```
 
 On the first invocation, create the parent directory and copy
@@ -26,11 +26,11 @@ resolving effective values.
 
 ## The three keys
 
-| Key | Meaning | Valid value |
-| --- | --- | --- |
-| `OUTPUT_DIRECTORY` | Destination for scraped Markdown files | Non-empty absolute path, or a path relative to the workspace root |
-| `MAX_PARALLEL_TASKS` | Maximum simultaneous scrape jobs | Positive integer |
-| `CACHE_TTL_HOURS` | Age below which an existing output is reused | Non-negative number; `0` disables reuse |
+| Key                  | Meaning                                        | Valid value                                    |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `OUTPUT_DIRECTORY`   | Default destination for scraped Markdown files | Non-empty path contained by the workspace root |
+| `MAX_PARALLEL_TASKS` | Maximum simultaneous scrape jobs               | Positive integer                               |
+| `CACHE_TTL_HOURS`    | Age below which an existing output is reused   | Non-negative number; `0` disables reuse        |
 
 ## Resolving each key
 
@@ -49,5 +49,11 @@ https://docs.example.com/api
 A prompt override applies only to the current run. Change `CONFIG.yml` itself
 only when the user explicitly asks to save new defaults.
 
-Report an invalid effective value and stop before creating the output
-directory. Never silently replace a manually edited configuration.
+Canonicalize the effective output path before creating it. Reject `..`, symlink,
+or absolute-path escapes from the workspace unless the user explicitly names
+that external destination for this run. Never save an external path as the
+default. When external output is explicitly authorized, report that boundary
+before writing.
+
+Report an invalid effective value and stop before creating the output directory.
+Never silently replace a manually edited configuration.

@@ -5,7 +5,11 @@ often they change. The canonical three-layer vocabulary is stable, context, and
 volatile; rename only when the domain uses more accurate terms.
 
 ```html
-<div class="lifetime-twin" aria-label="Hotel and agent memory layers">
+<div
+  class="lifetime-twin"
+  role="group"
+  aria-label="Hotel and agent memory layers"
+>
   <section aria-labelledby="hotel-layers">
     <h3 id="hotel-layers">Everyday · hotel desk</h3>
     <div class="lifetime-layer lifetime-layer--stable">

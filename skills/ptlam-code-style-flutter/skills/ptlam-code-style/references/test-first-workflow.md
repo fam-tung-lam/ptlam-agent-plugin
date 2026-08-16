@@ -13,5 +13,5 @@ Work one observable behavior at a time:
 5. Refactor only the code touched by this behavior, then rerun the focused test.
 
 Finish when the selected behavior passes, the refactor preserves it, and every
-check required by the surrounding stack specialization has run or been named
-as unavailable.
+check required by the surrounding stack specialization has run or been named as
+unavailable.

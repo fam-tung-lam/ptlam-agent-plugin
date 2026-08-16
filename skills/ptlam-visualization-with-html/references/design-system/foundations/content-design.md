@@ -4,9 +4,9 @@ This reference owns visible wording, localization-safe meaning, alternative
 text, and access to any intentionally truncated content.
 
 Use direct verbs, concrete nouns, sentence case, and one action per control.
-Name the actor, action, state, or result with short labels. Keep essential labels
-visible rather than relying on a tooltip, and place qualifications beside the
-visual they constrain.
+Name the actor, action, state, or result with short labels. Keep essential
+labels visible rather than relying on a tooltip, and place qualifications beside
+the visual they constrain.
 
 Translate meaning rather than sentence structure. Avoid idioms in controls and
 labels that must survive localization. Keep notifications brief and actionable.

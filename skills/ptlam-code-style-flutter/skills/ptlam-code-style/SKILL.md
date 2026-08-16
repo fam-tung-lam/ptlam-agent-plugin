@@ -10,11 +10,11 @@ description:
 
 # PTLam Code Style
 
-Hold source and test code to one set of conventions, so the same standard
-applies in every language. This foundation owns the standard and the vocabulary;
-a stack specialization owns the mechanics that satisfy it.
+Route source and test concerns through one language-neutral standard. This
+foundation owns the shared behavior and vocabulary; a stack specialization owns
+the mechanics that satisfy them.
 
-## At a glance
+## How does a code concern reach one applicable standard?
 
 ```mermaid
 flowchart LR
@@ -30,40 +30,44 @@ flowchart LR
 For any mechanic these conventions leave open, take the first source that
 answers it:
 
-| Order | Source | Owns |
-| --- | --- | --- |
-| 1 | Current user instructions | Anything the user states for this task |
-| 2 | Applicable `AGENTS.md` | Project requirements and permitted exceptions |
-| 3 | Current repository files | Established commands, configuration, and layout |
-| 4 | The active stack specialization | Stack mechanics the repository leaves open |
-| 5 | This skill | The conventions below, and the fallbacks they point to |
+| Order | Source                          | Owns                                                   |
+| ----- | ------------------------------- | ------------------------------------------------------ |
+| 1     | Current user instructions       | Anything the user states for this task                 |
+| 2     | Applicable `AGENTS.md`          | Project requirements and permitted exceptions          |
+| 3     | Current repository files        | Established commands, configuration, and layout        |
+| 4     | The active stack specialization | Stack mechanics the repository leaves open             |
+| 5     | This skill                      | The conventions below, and the fallbacks they point to |
 
 Report an unresolved conflict instead of choosing silently. Repository files are
 evidence, not a second store of preferences.
 
-No source may remove a rule the references below state.
+When a higher-precedence source explicitly replaces a rule below, name that
+replacement in the handoff. Silence or an unrelated local example is not a
+replacement.
 
 ## Pick a reference
 
 Read the one reference for the concern you are touching. Each sits one hop away
 and owns its rules, its examples, and its caveats.
 
-| Concern | Reference |
-| --- | --- |
-| Deciding what is public, what is internal, and where a symbol lives | [visibility.md](references/visibility.md) |
-| Writing a doc comment, or explaining why code is the way it is | [documentation.md](references/documentation.md) |
-| Emitting a log record, naming a logger, or picking a level | [logging.md](references/logging.md) |
-| Deciding what a test must prove before any tool is chosen | [behavior-contract.md](references/behavior-contract.md) |
-| Working test-first after the user explicitly requests TDD or Red-Green-Refactor | [test-first-workflow.md](references/test-first-workflow.md) |
-| Choosing one test level for a risk | [local-unit.md](references/test-levels/local-unit.md), [local-integration.md](references/test-levels/local-integration.md), [ui-golden.md](references/test-levels/ui-golden.md), [e2e.md](references/test-levels/e2e.md) |
-| Placing a new test file, or relocating a misplaced one | [test-placement.md](references/test-placement.md) |
-| Introducing, naming, or placing a test double | [test-doubles.md](references/test-doubles.md) |
+| Concern                                                                         | Reference                                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deciding what is public, what is internal, and where a symbol lives             | [visibility.md](references/visibility.md)                                                                                                                                                                                                                                                       |
+| Writing a doc comment, or explaining why code is the way it is                  | [documentation.md](references/documentation.md)                                                                                                                                                                                                                                                 |
+| Emitting a log record, naming a logger, or picking a level                      | [logging.md](references/logging.md)                                                                                                                                                                                                                                                             |
+| Deciding what a test must prove before any tool is chosen                       | [behavior-contract.md](references/behavior-contract.md)                                                                                                                                                                                                                                         |
+| Working test-first after the user explicitly requests TDD or Red-Green-Refactor | [test-first-workflow.md](references/test-first-workflow.md)                                                                                                                                                                                                                                     |
+| Choosing one test level for a risk                                              | First [behavior-contract.md](references/behavior-contract.md), then [local-unit.md](references/test-levels/local-unit.md), [local-integration.md](references/test-levels/local-integration.md), [ui-golden.md](references/test-levels/ui-golden.md), or [e2e.md](references/test-levels/e2e.md) |
+| Placing a new test file, or relocating a misplaced one                          | [test-placement.md](references/test-placement.md)                                                                                                                                                                                                                                               |
+| Introducing, naming, or placing a test double                                   | [test-doubles.md](references/test-doubles.md)                                                                                                                                                                                                                                                   |
 
 ## Apply it
 
 1. Resolve the target project, then read the current user instructions and every
    applicable `AGENTS.md` from the project root down to the files in scope.
-2. Name the concern in front of you and read its one reference.
+2. Name the concern in front of you and read its one reference. For every test,
+   read the behavior contract before selecting a level, placement, workflow, or
+   double.
 3. Select the active stack specialization. When none of the available ones
    matches the project, say so rather than inventing a toolchain.
 4. Apply the standard, then let the specialization supply the mechanics.

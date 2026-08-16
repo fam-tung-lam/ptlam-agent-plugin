@@ -6,19 +6,20 @@ carries meaning. The shared workflow and acceptance rules remain in `SKILL.md`.
 
 ## Define the comparison before plotting
 
-Use `quadrantChart` only when both axes describe independent, ordered dimensions.
-Write the x-axis from low or left to high or right. Write the y-axis from low or
-bottom to high or top. Avoid axes whose endpoints mix several criteria.
+Use `quadrantChart` only when both axes describe independent, ordered
+dimensions. Write the x-axis from low or left to high or right. Write the y-axis
+from low or bottom to high or top. Avoid axes whose endpoints mix several
+criteria.
 
 Give the chart a specific `title`, both endpoint labels for each axis, and four
 quadrant labels. Name quadrant labels after the interpretation or action implied
 by that combination. Mermaid numbers quadrants clockwise from the top right:
 
-| Quadrant | Position |
-| --- | --- |
-| `quadrant-1` | Top right |
-| `quadrant-2` | Top left |
-| `quadrant-3` | Bottom left |
+| Quadrant     | Position     |
+| ------------ | ------------ |
+| `quadrant-1` | Top right    |
+| `quadrant-2` | Top left     |
+| `quadrant-3` | Bottom left  |
 | `quadrant-4` | Bottom right |
 
 ## Ground the coordinates
@@ -55,7 +56,7 @@ quadrantChart
 
 ## Completion check
 
-Confirm that the axes are independent and oriented correctly, each coordinate
-is traceable to a measure or declared rubric, every point lies within `0..1`,
-and each quadrant label matches its location. Flag qualitative coordinates as
+Confirm that the axes are independent and oriented correctly, each coordinate is
+traceable to a measure or declared rubric, every point lies within `0..1`, and
+each quadrant label matches its location. Flag qualitative coordinates as
 approximate rather than presenting them as measurements.

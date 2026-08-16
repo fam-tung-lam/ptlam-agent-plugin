@@ -1,7 +1,7 @@
 # The Analogy Explanation Shape
 
-This reference owns the four components of an analogy explanation, their
-order, and the Markdown a direct answer uses.
+This reference owns the four components of an analogy explanation, their order,
+and the Markdown a direct answer uses.
 
 A calling skill may render these components differently, but must preserve their
 meaning and their order.
@@ -20,8 +20,8 @@ a blockquote:
 
 Translate each essential story element into exactly one real concept:
 
-| In the story | In [concept name] | Why it maps |
-| --- | --- | --- |
+| In the story      | In [concept name] | Why it maps                          |
+| ----------------- | ----------------- | ------------------------------------ |
 | [analogy element] | [literal element] | [preserved relationship or behavior] |
 
 ## 3. The story

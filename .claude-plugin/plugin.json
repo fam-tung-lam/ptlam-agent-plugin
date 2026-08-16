@@ -23,7 +23,7 @@
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-grilling",
     "./skills/ptlam-creating-atomic-note",
-    "./skills/ptlam-scrapping-urls",
+    "./skills/ptlam-scraping-urls",
     "./skills/ptlam-explaining",
     "./skills/ptlam-mermaiding",
     "./skills/ptlam-visualization-with-html"

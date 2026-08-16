@@ -44,12 +44,12 @@ the release build reports to.
 
 ## Where to log
 
-| Layer | Logs |
-| --- | --- |
-| API client and data source | The request that failed, with its cause, at debug or warning |
-| Repository | The failure it is returning, once, with the cause attached |
-| Use case, BLoC | Nothing routine; a state transition is not an event |
-| Widget | Nothing |
+| Layer                                                                      | Logs                                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Boundary that converts an external cause to a domain failure               | The sanitized operation and cause, once, at debug or warning |
+| Other API clients, data sources, and repositories on the same failure path | Nothing; attach context without emitting a duplicate record  |
+| Use case, BLoC                                                             | Nothing routine; a state transition is not an event          |
+| Widget                                                                     | Nothing                                                      |
 
 Log a failure once, where it is converted into a domain failure.
 

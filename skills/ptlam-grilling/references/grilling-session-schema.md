@@ -20,17 +20,17 @@ Use the session's creation date and a short, filesystem-safe title naming the
 decision. Prefer the base filename; otherwise append the first free suffix
 before `.md`, such as `_2` or `_3`. Never overwrite or truncate a record.
 
-Invocation authorizes writes to this directory and the selected record only.
-Get separate authority before staging, committing, publishing, or changing any
-other project file.
+Invocation authorizes writes to this directory and the selected record only. Get
+separate authority before staging, committing, publishing, or changing any other
+project file.
 
 The record stores conclusions and evidence. It never stores a turn transcript,
 hidden reasoning, secrets, credentials, or unrelated personal data.
 
 ## When to rewrite it
 
-Rewrite the record after a consequential answer or new evidence changes the
-map, before yielding with the next substantive question, before any summary or
+Rewrite the record after a consequential answer or new evidence changes the map,
+before yielding with the next substantive question, before any summary or
 handoff, and whenever the status changes.
 
 Replace stale state with current conclusions. Never append a transcript. The
@@ -39,13 +39,14 @@ record must be understandable without the chat history.
 ## Structure
 
 Use this structure for every persisted session. Omit a section only when it
-truly does not apply. Keep entries concise and replace placeholders with
-current session facts.
+truly does not apply. Keep entries concise and replace placeholders with current
+session facts.
 
 ```markdown
 # Grilling session: <descriptive title>
 
-- Status: <active | awaiting-user | confirmation-pending | deferred | blocked | complete>
+- Status: <active | awaiting-user | confirmation-pending | deferred | blocked |
+  complete>
 - Created: <timestamp>
 - Updated: <timestamp>
 - Workspace root: <absolute initial workspace path>
@@ -78,11 +79,10 @@ current session facts.
 
 ## Current checkpoint
 
-Current question: <question or none>
-Recommendation: <answer and rationale or none>
-Strongest alternative: <alternative or none>
-Main trade-off: <consequence or none>
-Resume from: <one exact instruction for the next agent>
+Current question: <question or none> Recommendation:
+<answer and rationale or none> Strongest alternative: <alternative or none> Main
+trade-off: <consequence or none> Resume from:
+<one exact instruction for the next agent>
 ```
 
 ## Status lifecycle
@@ -105,6 +105,8 @@ stateDiagram-v2
     AwaitingUser --> Active : answer given
     Active --> Blocked : evidence or authority missing
     Blocked --> Active : blocker cleared
+    Active --> Deferred : postponed
+    Blocked --> Deferred : postponed
     Active --> ConfirmationPending : summary asked
     ConfirmationPending --> Active : summary corrected
     AwaitingUser --> Deferred : postponed

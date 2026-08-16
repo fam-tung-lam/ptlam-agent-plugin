@@ -18,8 +18,8 @@ button:disabled {
 
 Support touch, keyboard, mouse, trackpad, and assistive input through the same
 state model. Every gesture-only operation needs a visible control or keyboard
-route. Respond immediately to pointer and touch input, keep text selectable,
-and use familiar browser behavior for scrolling, zoom, focus, and activation.
+route. Respond immediately to pointer and touch input, keep text selectable, and
+use familiar browser behavior for scrolling, zoom, focus, and activation.
 
 Expressive feedback uses shape morph, spring-like motion, size, containment, or
 color emphasis according to the state. The state remains legible when motion is

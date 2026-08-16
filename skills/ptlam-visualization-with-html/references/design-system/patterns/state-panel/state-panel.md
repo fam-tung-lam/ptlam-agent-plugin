@@ -49,13 +49,11 @@ the current step.
 }
 .state-grid dt {
   color: var(--color-on-surface-variant);
-  font-size: 0.72rem;
+  font-size: var(--type-label-small);
 }
 .state-grid dd {
   margin: 0.2rem 0 0;
-  font:
-    700 0.95rem/1.35 ui-monospace,
-    monospace;
+  font: var(--type-code);
   overflow-wrap: anywhere;
 }
 .state-grid dd.is-changed {

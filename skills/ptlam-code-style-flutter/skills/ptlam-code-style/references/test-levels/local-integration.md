@@ -1,8 +1,8 @@
 # Local Integration Testing
 
 Use a local integration test when the risk lies in collaboration between real
-components, adapters, processes, storage, or framework services inside a
-chosen test-harness boundary.
+components, adapters, processes, storage, or framework services inside a chosen
+test-harness boundary.
 
 Local names the harness boundary, not where the test command runs. Classify by
 the exercised boundary rather than the framework's suite name. A suite called

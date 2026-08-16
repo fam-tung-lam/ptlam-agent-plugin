@@ -13,18 +13,18 @@ When a manifest or compiler owns the metadata, edit that source instead. The
 Most skills need only `name` and `description`. Add an optional field only when
 the workflow requires it and the target verifies it.
 
-| Field | Purpose |
-| --- | --- |
-| `name` | Skill and slash-command identifier |
-| `description` | Invocation pointer, or user-facing summary |
-| `disable-model-invocation` | Restrict starting the skill to the user |
-| `argument-hint` | Document slash-command arguments |
-| `user-invocable` | Control menu visibility where supported |
-| `allowed-tools` | Limit the tools available inside the skill |
-| `context` | Request isolated execution |
-| `agent` | Select a supported subagent |
-| `model` | Select a supported model |
-| `hooks` | Run commands around supported lifecycle events |
+| Field                      | Purpose                                        |
+| -------------------------- | ---------------------------------------------- |
+| `name`                     | Skill and slash-command identifier             |
+| `description`              | Invocation pointer, or user-facing summary     |
+| `disable-model-invocation` | Restrict starting the skill to the user        |
+| `argument-hint`            | Document slash-command arguments               |
+| `user-invocable`           | Control menu visibility where supported        |
+| `allowed-tools`            | Limit the tools available inside the skill     |
+| `context`                  | Request isolated execution                     |
+| `agent`                    | Select a supported subagent                    |
+| `model`                    | Select a supported model                       |
+| `hooks`                    | Run commands around supported lifecycle events |
 
 ## Name and description
 
@@ -32,17 +32,17 @@ Use the target's constraints. Common `name` constraints: lowercase letters,
 digits, and hyphens; 64 characters maximum; no XML tags; and a matching
 directory name.
 
-Treat `description` as a pointer the model reads, or a summary a person reads.
-A common maximum is 1024 characters. Write one trigger per branch, plus a reach
+Treat `description` as a pointer the model reads, or a summary a person reads. A
+common maximum is 1024 characters. Write one trigger per branch, plus a reach
 clause when another skill should compose this one. The naming and description
 rules live in
 [package layout](skill-package-layout.md#name-it-after-what-it-does).
 
 ## Invocation and visibility
 
-Set `disable-model-invocation: true` only when the user must start the
-workflow. Omitting it commonly permits model discovery. Check the host, because
-discovery and menu visibility can use separate fields.
+Set `disable-model-invocation: true` only when the user must start the workflow.
+Omitting it commonly permits model discovery. Check the host, because discovery
+and menu visibility can use separate fields.
 
 Use `argument-hint` to document expected arguments. Use `user-invocable` only
 after verifying how it interacts with model invocation.
@@ -66,12 +66,12 @@ clearly. Verify the matchers, commands, inputs, and failure behavior.
 
 Claude-style hosts may support:
 
-| Variable | Meaning |
-| --- | --- |
-| `$ARGUMENTS` | All arguments |
-| `$ARGUMENTS[N]` | One zero-based argument |
-| `$N` | Short positional form, where supported |
-| `${CLAUDE_SESSION_ID}` | Current session identifier |
+| Variable               | Meaning                                |
+| ---------------------- | -------------------------------------- |
+| `$ARGUMENTS`           | All arguments                          |
+| `$ARGUMENTS[N]`        | One zero-based argument                |
+| `$N`                   | Short positional form, where supported |
+| `${CLAUDE_SESSION_ID}` | Current session identifier             |
 
 Omit substitutions and argument hints when the skill consumes no arguments.
 Check how the host handles arguments the skill ignores.
