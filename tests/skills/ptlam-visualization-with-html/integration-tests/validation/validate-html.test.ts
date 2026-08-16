@@ -20,7 +20,7 @@ describe("validate HTML command", () => {
     // GIVEN: A valid portable document exists outside the skill installation.
     const root = await temporaryDirectory();
     const htmlPath = path.join(root, "guide.html");
-    await writeFile(htmlPath, renderHtmlScaffold(), "utf8");
+    await writeFile(htmlPath, completedScaffold(), "utf8");
 
     // WHEN: Native Node type stripping runs the validation entry point.
     const result = await runTypeScriptProcess(validateScript, [htmlPath], root);
@@ -37,7 +37,7 @@ describe("validate HTML command", () => {
     const linkedScript = path.join(root, "validate-html.ts");
     const htmlPath = path.join(root, "guide.html");
     await symlink(validateScript, linkedScript);
-    await writeFile(htmlPath, renderHtmlScaffold(), "utf8");
+    await writeFile(htmlPath, completedScaffold(), "utf8");
 
     // WHEN: Node executes the linked entry point.
     const result = await runTypeScriptProcess(linkedScript, [htmlPath], root);
@@ -78,3 +78,10 @@ describe("validate HTML command", () => {
     assert.equal(missing.stderr[0], `ERROR: file not found: ${missingPath}`);
   });
 });
+
+function completedScaffold(): string {
+  return renderHtmlScaffold({ language: "en" }).replaceAll(
+    " data-scaffold-placeholder",
+    "",
+  );
+}

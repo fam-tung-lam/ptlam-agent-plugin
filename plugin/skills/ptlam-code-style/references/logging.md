@@ -15,12 +15,12 @@ all of it with one call.
 
 ## Pick the level by who must act
 
-| Level | Use when |
-| --- | --- |
-| Error | The operation failed and a person must act |
-| Warning | The operation continued through a degraded or unexpected path |
-| Info | A significant lifecycle event happened that an operator would look for |
-| Debug | A maintainer diagnosing this code path needs the detail |
+| Level   | Use when                                                               |
+| ------- | ---------------------------------------------------------------------- |
+| Error   | The operation failed and a person must act                             |
+| Warning | The operation continued through a degraded or unexpected path          |
+| Info    | A significant lifecycle event happened that an operator would look for |
+| Debug   | A maintainer diagnosing this code path needs the detail                |
 
 Default to debug. Info is for events an operator would search for, not for
 tracing normal control flow. An error the code already handles is a warning.
@@ -28,8 +28,8 @@ tracing normal control flow. An error the code already handles is a warning.
 ## Say what happened and what it affected
 
 A record names the operation, its outcome, and the identifier a reader needs to
-find the affected thing. `Refresh failed` sends the reader hunting; `token
-refresh failed for session <id>` does not.
+find the affected thing. `Refresh failed` sends the reader hunting;
+`token refresh failed for session <id>` does not.
 
 Pass values as arguments where the facade supports it, so the message is only
 built when the level is enabled.

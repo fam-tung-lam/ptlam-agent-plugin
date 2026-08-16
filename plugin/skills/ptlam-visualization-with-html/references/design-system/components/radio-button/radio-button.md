@@ -13,6 +13,12 @@ state plus text or container treatment when needed.
 ```
 
 ```css
+label:has(> input[type="radio"]) {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  gap: var(--space-2);
+}
 input[type="radio"] {
   inline-size: 1.25rem;
   block-size: 1.25rem;

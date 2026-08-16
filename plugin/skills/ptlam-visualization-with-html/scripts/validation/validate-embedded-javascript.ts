@@ -17,6 +17,12 @@ export function validateEmbeddedJavaScript(
 
   scripts.forEach((script, index) => {
     if (!script.source.trim()) return;
+    const runtimeSpecifier = findRuntimeSpecifier(script.source);
+    if (runtimeSpecifier) {
+      errors.push(
+        `JavaScript block ${index + 1} loads an external runtime: ${runtimeSpecifier}`,
+      );
+    }
     if (script.type === "module") {
       const error = validateModuleJavaScript(script.source, index);
       if (error) errors.push(error);
@@ -37,6 +43,21 @@ export function validateEmbeddedJavaScript(
   });
 
   return Object.freeze(errors);
+}
+
+function findRuntimeSpecifier(source: string): string | undefined {
+  const patterns = [
+    /\bimport\s*\(\s*(["'])(.*?)\1\s*\)/g,
+    /\bimport\s+(?:[\s\S]*?\sfrom\s*)?(["'])(.*?)\1/g,
+    /\bexport\s+[\s\S]*?\sfrom\s*(["'])(.*?)\1/g,
+    /\bnew\s+(?:Shared)?Worker\s*\(\s*(["'])(.*?)\1/g,
+  ];
+  for (const pattern of patterns) {
+    const match = pattern.exec(source);
+    const specifier = match?.[2]?.trim();
+    if (specifier && !/^(?:data:|#)/i.test(specifier)) return specifier;
+  }
+  return undefined;
 }
 
 function validateModuleJavaScript(

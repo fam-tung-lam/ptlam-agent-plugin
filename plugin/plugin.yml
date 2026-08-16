@@ -76,10 +76,10 @@ skills:
   - id: ptlam-code-style-flutter
     description:
       Write, review, and fix Flutter application code against conventions for
-      the toolchain, layer boundaries, source tree, widgets, models,
-      networking, storage, localization, logging, doc comments, and tests. Use
-      when adding or changing Dart code in a Flutter project, choosing between
-      setState, Cubit, and Bloc, placing a new file or feature, wiring get_it or
+      the toolchain, layer boundaries, source tree, widgets, models, networking,
+      storage, localization, logging, doc comments, and tests. Use when adding
+      or changing Dart code in a Flutter project, choosing between setState,
+      Cubit, and Bloc, placing a new file or feature, wiring get_it or
       go_router, or fixing a flutter analyze, dart format, or build_runner
       failure. Apply ptlam-code-style first for the standard these mechanics
       satisfy. Do not use this specialization for Dart outside Flutter or for
@@ -90,8 +90,8 @@ skills:
     required_skills:
       - skill_id: ptlam-code-style
         reason:
-          Provides the language-neutral conventions and the testing doctrine
-          the Flutter mechanics satisfy.
+          Provides the language-neutral conventions and the testing doctrine the
+          Flutter mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
           Let it own the precedence order, the visibility, documentation, and
@@ -104,8 +104,8 @@ skills:
     description:
       Create, review, or refactor one agent skill so that a human maintainer can
       read it once and change it later. Use when turning a workflow or reference
-      set into a new skill, revising an existing SKILL.md, splitting a skill that
-      grew too broad, or auditing a package without editing it. Use as the
+      set into a new skill, revising an existing SKILL.md, splitting a skill
+      that grew too broad, or auditing a package without editing it. Use as the
       foundation for skills that specialize skill authoring.
     disable_model_invocation: true
     category_id: engineering
@@ -117,8 +117,9 @@ skills:
           Owns every Mermaid diagram a skill package carries, from type
           selection to syntax verification.
         instructions: |-
-          Read and apply ptlam-mermaiding whenever a skill file needs a diagram,
-          and skip it when no visual is warranted.
+          Read ptlam-mermaiding before judging an existing diagram or deciding
+          whether a new diagram is warranted.
+          Apply its authoring workflow only when the selected form is a diagram.
           Let it own the visual question, diagram type, notation, layout, and
           syntax verification for that diagram.
           Keep this skill's ownership of what the package says, which form
@@ -143,12 +144,12 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-scrapping-urls
+  - id: ptlam-scraping-urls
     description:
       Batch-scrape URLs supplied in a prompt or input file into cached local
       Markdown files with configurable output, concurrency, and cache lifetime.
     disable_model_invocation: true
-    category_id: productivity
+    category_id: utilities
     visibility: public
     status: active
     required_skills: []
@@ -179,10 +180,9 @@ skills:
     required_skills: []
   - id: ptlam-visualization-with-html
     description:
-      Create or revise portable, polished, interactive HTML explainers and
-      learning artifacts for architecture, workflows, state changes, sequences,
-      entity relationships, semantic zoom, and step-by-step behavior using
-      native web technologies and Material 3 Expressive.
+      Create or revise one portable HTML explainer that renders a verified
+      explanation as an accessible, optionally interactive artifact using native
+      web technologies and Material 3 Expressive.
     disable_model_invocation: true
     category_id: productivity
     visibility: public

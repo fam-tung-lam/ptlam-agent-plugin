@@ -12,25 +12,12 @@ Return a material analogy gap to that branch. Do not repair it here.
 
 ## When the user supplies an analogy
 
-Treat the supplied mapping as user-owned input, and preserve the everyday
-domain they selected.
-
-If it conflicts with the foundation's literal model, or lacks a mapping the
-rendering materially needs, report the gap and ask for a decision. Do not
-silently replace or repair it.
-
-Keep a visible boundary for every intentional mismatch.
-
-## Patterns to read
-
-| When | Read |
-| --- | --- |
-| Any selected analogy | [analogy mapping](design-system/patterns/content/analogy-mapping.md) |
-| Two synchronized maps teach the mechanism | [analogy twin](design-system/patterns/analogy-twin/analogy-twin.md) |
-| Lifetime or change cadence is the lesson | [layered lifetimes](design-system/patterns/content/layered-lifetimes.md) |
+Enter the required `ptlam-explaining` analogy branch with the supplied domain.
+Consume only the mapping, story, caveats, or alternatives that branch approves.
+Return a material gap to that owner; do not create a parallel acceptance rule or
+render a failed mapping as though it were explanatory evidence.
 
 ## Finish
 
 Finish when the artifact has one foundation-owned literal model, and either no
-analogy or one approved or explicitly user-owned analogy with a visible
-boundary.
+analogy or one analogy approved by the foundation's mapping gate.

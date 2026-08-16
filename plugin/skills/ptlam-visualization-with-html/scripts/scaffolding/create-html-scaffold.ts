@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { lstat, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { resolveUserPath } from "../command-line/resolve-user-path.ts";
@@ -6,6 +6,7 @@ import { renderHtmlScaffold } from "./render-html-scaffold.ts";
 
 export interface CreateHtmlScaffoldRequest {
   readonly outputPath: string;
+  readonly language: string;
   readonly title?: string;
   readonly overwrite?: boolean;
 }
@@ -24,6 +25,7 @@ export async function createHtmlScaffold(
   }
 
   await mkdir(path.dirname(outputPath), { recursive: true });
+  await rejectSymbolicLink(outputPath);
 
   try {
     await writeFile(outputPath, renderHtmlScaffold(request), {
@@ -38,6 +40,17 @@ export async function createHtmlScaffold(
   }
 
   return Object.freeze({ outputPath });
+}
+
+async function rejectSymbolicLink(outputPath: string): Promise<void> {
+  try {
+    if ((await lstat(outputPath)).isSymbolicLink()) {
+      throw new Error(`refusing to write through symbolic link: ${outputPath}`);
+    }
+  } catch (error: unknown) {
+    if (isNodeError(error) && error.code === "ENOENT") return;
+    throw error;
+  }
 }
 
 function isNodeError(error: unknown): error is NodeJS.ErrnoException {

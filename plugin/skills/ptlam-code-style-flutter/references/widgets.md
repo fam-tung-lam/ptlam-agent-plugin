@@ -32,12 +32,12 @@ reasons the widget cannot see.
 
 ## Rebuild the smallest subtree
 
-| Need | Use |
-| --- | --- |
-| Render on every state change | `BlocBuilder` |
-| Render on one field of the state | `BlocSelector` |
+| Need                                                 | Use            |
+| ---------------------------------------------------- | -------------- |
+| Render on every state change                         | `BlocBuilder`  |
+| Render on one field of the state                     | `BlocSelector` |
 | React without rendering — navigate, snackbar, dialog | `BlocListener` |
-| Both, on the same state | `BlocConsumer` |
+| Both, on the same state                              | `BlocConsumer` |
 
 Put the builder as deep in the tree as the state is actually used. Wrapping a
 whole page in one `BlocBuilder` rebuilds a static app bar to update a counter.

@@ -27,16 +27,16 @@ name the compatibility substitution.
 
 Use flowchart-style shapes with a small, stable vocabulary:
 
-| Shape | Meaning |
-| --- | --- |
-| `Task[Do work]` | Activity |
-| `Decision{Ready?}` | Decision owned by that lane |
-| `Start([Start])` | Process boundary |
-| `Marker((A))` | Connector only when it reduces crossing |
+| Shape              | Meaning                                 |
+| ------------------ | --------------------------------------- |
+| `Task[Do work]`    | Activity                                |
+| `Decision{Ready?}` | Decision owned by that lane             |
+| `Start([Start])`   | Process boundary                        |
+| `Marker((A))`      | Connector only when it reduces crossing |
 
-Use dashed arrows only for passive notification or observation. Use solid
-arrows for work progression and direct handoff. Route each decision outcome
-with a short condition label.
+Use dashed arrows only for passive notification or observation. Use solid arrows
+for work progression and direct handoff. Route each decision outcome with a
+short condition label.
 
 Add `accTitle` and `accDescr` when the destination renders Mermaid accessibility
 metadata. The description must name the starting owner, the main handoffs, and

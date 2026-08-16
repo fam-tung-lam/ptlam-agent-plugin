@@ -20,14 +20,14 @@ flowchart.
 
 Mermaid supports task metadata in an `@{ ... }` block:
 
-| Key | Rule |
-| --- | --- |
-| `assigned` | Use only the current verified assignee |
-| `ticket` | Preserve the source system's exact ticket id |
+| Key        | Rule                                          |
+| ---------- | --------------------------------------------- |
+| `assigned` | Use only the current verified assignee        |
+| `ticket`   | Preserve the source system's exact ticket id  |
 | `priority` | Use `Very High`, `High`, `Low`, or `Very Low` |
 
-Omit missing metadata rather than inserting `Unassigned`, a guessed priority,
-or a placeholder ticket. Add `ticketBaseUrl` frontmatter only when the target
+Omit missing metadata rather than inserting `Unassigned`, a guessed priority, or
+a placeholder ticket. Add `ticketBaseUrl` frontmatter only when the target
 ticket system and URL pattern are known. The `#TICKET#` placeholder must expand
 to the metadata value.
 

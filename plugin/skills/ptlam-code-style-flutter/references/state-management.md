@@ -7,11 +7,11 @@ event handler needs an explicit ordering policy.
 
 ## Choose the smallest state holder
 
-| Situation | Use |
-| --- | --- |
-| Ephemeral state no other widget or rule observes | `setState`, `ValueNotifier`, or a controller |
-| A small synchronous view model, such as one local form step | `Cubit` |
-| Multiple external event sources, cancellation, or recovery | `Bloc` |
+| Situation                                                   | Use                                          |
+| ----------------------------------------------------------- | -------------------------------------------- |
+| Ephemeral state no other widget or rule observes            | `setState`, `ValueNotifier`, or a controller |
+| A small synchronous view model, such as one local form step | `Cubit`                                      |
+| Multiple external event sources, cancellation, or recovery  | `Bloc`                                       |
 
 A simple one-shot action may stay a `Cubit`. Promote to `Bloc` when a second
 event source appears, not in anticipation of one.

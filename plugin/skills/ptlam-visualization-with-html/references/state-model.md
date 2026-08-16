@@ -1,7 +1,8 @@
 # Synchronized State Model
 
-This reference owns the synchronized step model for lessons with time or state.
-A static artifact has no state model to implement.
+This reference owns the synchronized step model for a replayable timeline. A
+static artifact, including one that only displays observable state, has no
+stepper to implement.
 
 ## One model drives everything
 
@@ -12,11 +13,11 @@ paired analogy and literal views from one step model.
 
 Provide Back, Next, Play/Pause, and Reset. Never auto-play.
 
-| Control | Must do |
-| --- | --- |
-| Back | Restore the exact previous state |
-| Reset | Restore step 1 |
-| Play | Stop at the end, and be able to replay |
+| Control | Must do                                |
+| ------- | -------------------------------------- |
+| Back    | Restore the exact previous state       |
+| Reset   | Restore step 1                         |
+| Play    | Stop at the end, and be able to replay |
 
 Preserve the current step across viewport changes. Stop playback while the
 document is hidden.

@@ -1,8 +1,8 @@
 # Atomicity Model
 
-This reference owns the definition of atomicity, the knowledge building
-blocks, the tests that separate focus from background, the maturation stages,
-and the rule for matching effort to expected value.
+This reference owns the definition of atomicity, the knowledge building blocks,
+the tests that separate focus from background, the maturation stages, and the
+rule for matching effort to expected value.
 
 This model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
@@ -18,14 +18,14 @@ future reader would reuse, test, or connect for one reason.
 
 Classify the focal building block before declaring a note atomic:
 
-| Building block | Identifying question |
-| --- | --- |
-| Concept | Which part of the world does this define or distinguish? |
-| Argument | Which premises are meant to support which conclusion? |
-| Counterargument | Which inference or conclusion does this challenge, and how? |
-| Model | Which entities and part-to-part or part-to-whole relationships does this represent? |
-| Hypothesis or theory | Which claim about reality could evidence support or disconfirm, and does it belong to a connected explanatory and methodological system? |
-| Empirical observation | What was observed, under which relevant conditions? |
+| Building block        | Identifying question                                                                                                                     |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Concept               | Which part of the world does this define or distinguish?                                                                                 |
+| Argument              | Which premises are meant to support which conclusion?                                                                                    |
+| Counterargument       | Which inference or conclusion does this challenge, and how?                                                                              |
+| Model                 | Which entities and part-to-part or part-to-whole relationships does this represent?                                                      |
+| Hypothesis or theory  | Which claim about reality could evidence support or disconfirm, and does it belong to a connected explanatory and methodological system? |
+| Empirical observation | What was observed, under which relevant conditions?                                                                                      |
 
 Use this classification as an inspection tool, not as mandatory metadata. A
 problem-and-solution pair, mechanism, comparison, or other coherent unit may
@@ -78,8 +78,8 @@ stateDiagram-v2
 3. **Identify:** Classify the focal knowledge building block. Check its internal
    parts and their relationships instead of relying on brevity or intuition.
 4. **Develop:** Add evidence, implications, perspectives, or connections when
-   the idea warrants deeper treatment. Extract any independently useful
-   building block revealed by this work as a new note starting at capture.
+   the idea warrants deeper treatment. Extract any independently useful building
+   block revealed by this work as a new note starting at capture.
 
 The stages describe maturation, not separate storage areas.
 

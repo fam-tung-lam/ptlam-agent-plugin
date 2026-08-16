@@ -21,12 +21,12 @@ implicit label.
 
 Use only the shape needed to distinguish semantics:
 
-| Shape | Syntax | Meaning |
-| --- | --- | --- |
-| Rectangle | `Process["Process"]` | Default object or action |
-| Diamond | `Decision{"Valid?"}` | Decision with routed outcomes |
-| Rounded | `Retry(["Retry"])` | Step in a loop or explicit boundary |
-| Cylinder | `OrderStore[("Order store")]` | Persistent storage |
+| Shape     | Syntax                        | Meaning                             |
+| --------- | ----------------------------- | ----------------------------------- |
+| Rectangle | `Process["Process"]`          | Default object or action            |
+| Diamond   | `Decision{"Valid?"}`          | Decision with routed outcomes       |
+| Rounded   | `Retry(["Retry"])`            | Step in a loop or explicit boundary |
+| Cylinder  | `OrderStore[("Order store")]` | Persistent storage                  |
 
 Use a Markdown string only for a label that needs a subtitle or controlled line
 break. Keep its opening and closing delimiters on separate lines:
@@ -39,21 +39,22 @@ Deployment["`
 ```
 
 Quote labels containing punctuation or Mermaid syntax. Avoid the lowercase word
-`end` as an unquoted label because the parser can treat it as a block terminator.
+`end` as an unquoted label because the parser can treat it as a block
+terminator.
 
 ## Connect and group
 
-| Edge | Meaning |
-| --- | --- |
-| `-->` | Direct action, creation, declaration, or progression |
-| `-.->` | Passive observation or notification |
-| `<-->` | Symmetric peer communication |
-| `<-.->` | Symmetric passive observation |
+| Edge    | Meaning                                              |
+| ------- | ---------------------------------------------------- |
+| `-->`   | Direct action, creation, declaration, or progression |
+| `-.->`  | Passive observation or notification                  |
+| `<-->`  | Symmetric peer communication                         |
+| `<-.->` | Symmetric passive observation                        |
 
 Add a concise verb or condition to an edge when its meaning is not obvious.
 Write decision labels from the decision's perspective, such as `Yes`, `No`, or
-`Invalid token`. Keep each edge on its own line; avoid Mermaid's chained and
-`&` shorthand when it hides individual relationships.
+`Invalid token`. Keep each edge on its own line; avoid Mermaid's chained and `&`
+shorthand when it hides individual relationships.
 
 Use a `subgraph StableId["Boundary label"]` only for a real owner, system,
 layer, or containment boundary. Indent its contents four spaces. Declare

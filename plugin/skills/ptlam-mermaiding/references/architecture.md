@@ -12,9 +12,9 @@ components, and service boundaries. Use a flowchart when the relationships need
 edge labels, process order, or decision semantics that architecture syntax
 cannot express.
 
-Architecture diagrams require Mermaid 11.1 or later. Built-in icons are
-`cloud`, `database`, `disk`, `internet`, and `server`. Use an Iconify icon only
-after confirming that the destination registers its icon pack.
+Architecture diagrams require Mermaid 11.1 or later. Built-in icons are `cloud`,
+`database`, `disk`, `internet`, and `server`. Use an Iconify icon only after
+confirming that the destination registers its icon pack.
 
 ## Declare topology before edges
 

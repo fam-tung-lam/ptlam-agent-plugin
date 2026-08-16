@@ -11,8 +11,8 @@ message check.
 3. Follow a repository policy file that those instructions identify.
 4. Use the portable defaults below for every remaining choice.
 
-Report a conflict instead of silently applying a lower-precedence preference.
-Do not treat neighboring commit history as policy unless the user or repository
+Report a conflict instead of silently applying a lower-precedence preference. Do
+not treat neighboring commit history as policy unless the user or repository
 instructions tell you to use it.
 
 ## Use portable defaults
@@ -40,6 +40,6 @@ the selected type and scope accurately, starts its description with a lowercase
 imperative verb, satisfies active length and style rules, and agrees with the
 body.
 
-Verify every issue reference from the request or repository evidence. Return
-the exact subject and body with real line breaks, and disclose anything not
-fully verified.
+Verify every issue reference from the request or repository evidence. Return the
+exact subject and body with real line breaks, and disclose anything not fully
+verified.

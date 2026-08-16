@@ -9,8 +9,8 @@ and client class, with its own base URL, timeouts, and interceptors. APIs do not
 share a client because their authentication and retry policies can diverge.
 
 An API client exposes one method per endpoint, takes and returns DTOs, and
-contains no business rules. Put cross-cutting headers, token refresh, retry,
-and request logging in interceptors so endpoint methods do not repeat them.
+contains no business rules. Put cross-cutting headers, token refresh, retry, and
+request logging in interceptors so endpoint methods do not repeat them.
 
 Set connect, send, and receive timeouts explicitly. Accept a `CancelToken` on
 any request whose caller can leave, and let that caller cancel through its own

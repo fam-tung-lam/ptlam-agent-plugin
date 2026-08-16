@@ -27,7 +27,7 @@ describe("validateHtmlDocument", () => {
     {
       name: "language",
       mutate: (source: string) => source.replace(' lang="en"', ""),
-      error: "html element needs a lang attribute",
+      error: "html element needs a non-empty BCP 47 lang attribute",
     },
     {
       name: "viewport",
@@ -36,7 +36,7 @@ describe("validateHtmlDocument", () => {
           '<meta name="viewport" content="width=device-width">',
           "",
         ),
-      error: "missing viewport meta tag",
+      error: "missing non-empty viewport meta tag",
     },
     {
       name: "document title",
@@ -83,6 +83,41 @@ describe("validateHtmlDocument", () => {
     assert.equal(result.errors.includes(error), true);
   });
 
+  it("rejects empty shell values and CSS requirements mentioned only as prose", () => {
+    // GIVEN: Required values are empty and policy tokens occur outside CSS.
+    const source = validHtmlDocument()
+      .replace('lang="en"', 'lang=""')
+      .replace('content="width=device-width"', 'content=""')
+      .replace(/<style>[\s\S]*?<\/style>/, "")
+      .replace(
+        "<body>",
+        "<body><p>:focus-visible prefers-reduced-motion: reduce</p>",
+      );
+
+    // WHEN: The shell and style contracts are validated.
+    const result = validateHtmlDocument(source);
+
+    // THEN: Prose cannot satisfy language, viewport, focus, or motion behavior.
+    assert.equal(
+      result.errors.includes(
+        "html element needs a non-empty BCP 47 lang attribute",
+      ),
+      true,
+    );
+    assert.equal(
+      result.errors.includes("missing non-empty viewport meta tag"),
+      true,
+    );
+    assert.equal(
+      result.errors.includes("missing prefers-reduced-motion handling"),
+      true,
+    );
+    assert.equal(
+      result.errors.includes("missing explicit keyboard focus style"),
+      true,
+    );
+  });
+
   it("reports duplicate identifiers and missing fragment targets in stable order", () => {
     // GIVEN: Internal references contain duplicate and unresolved identifiers.
     const source = validHtmlDocument()
@@ -114,7 +149,7 @@ describe("validateHtmlDocument", () => {
       '<img src="image.png" srcset="small.png 1x, large.png 2x" style="background:url(texture.png)">',
       '<video poster="poster.png"></video>',
       '<object data="diagram.svg"></object>',
-      '<svg role="img" aria-label="Inline"><use href="sprite.svg#icon"></use><image href="data:image/png;base64,AA"></image></svg>',
+      '<svg role="img" aria-labelledby="runtime-title"><title id="runtime-title">Inline</title><use href="sprite.svg#icon"></use><image xlink:href="legacy.svg"></image></svg>',
       '<img src="data:image/png;base64,AA">',
       '<style>@import "print.css"; .a{background:url(#gradient)} .b{background:url(data:image/png;base64,AA)}</style>',
     ].join("");
@@ -126,7 +161,7 @@ describe("validateHtmlDocument", () => {
     // THEN: One stable diagnostic names each non-embedded asset.
     assert.equal(
       result.errors.includes(
-        "runtime assets must be embedded: app.js, css-import:print.css, css-url:texture.png, diagram.svg, image.png, poster.png, sprite.svg#icon, srcset:large.png, srcset:small.png, theme.css",
+        "runtime assets must be embedded: app.js, css-import:print.css, css-url:texture.png, diagram.svg, image.png, legacy.svg, poster.png, sprite.svg#icon, srcset:large.png, srcset:small.png, theme.css",
       ),
       true,
     );
@@ -136,7 +171,7 @@ describe("validateHtmlDocument", () => {
     // GIVEN: One SVG lacks role=img and another points to an empty label.
     const source = validHtmlDocument().replace(
       "</main>",
-      '<svg aria-label="Missing role"></svg><p id="empty-label"></p><svg role="img" aria-labelledby="empty-label"></svg></main>',
+      '<svg aria-label="Missing role"></svg><svg role="img" aria-labelledby="empty-label"><title id="empty-label"></title></svg></main>',
     );
 
     // WHEN: SVG accessibility is validated.
@@ -145,7 +180,7 @@ describe("validateHtmlDocument", () => {
     // THEN: The diagnostic reports the accessible and total counts.
     assert.equal(
       result.errors.includes(
-        "all SVGs need role=img plus a non-empty aria-label or resolvable aria-labelledby (1/3)",
+        "all SVGs need role=img and aria-labelledby whose first target is a local non-empty title (1/3)",
       ),
       true,
     );
@@ -321,6 +356,56 @@ describe("validateHtmlDocument", () => {
     assert.deepEqual(result.errors, []);
   });
 
+  it.each([
+    'import "https://example.invalid/runtime.js";',
+    'export { value } from "./runtime.js";',
+    'const module = import("./runtime.js");',
+    'const worker = new Worker("worker.js");',
+  ])("rejects an external JavaScript runtime: %s", (runtimeSource) => {
+    // GIVEN: Executable inline JavaScript loads a separate runtime resource.
+    const source = validHtmlDocument().replace(
+      "</body>",
+      `<script type="module">${runtimeSource}</script></body>`,
+    );
+
+    // WHEN: Portability is validated.
+    const result = validateHtmlDocument(source);
+
+    // THEN: Syntax validity cannot hide an external runtime dependency.
+    assert.equal(
+      result.errors.some((error) =>
+        error.includes("loads an external runtime"),
+      ),
+      true,
+    );
+  });
+
+  it("rejects unfinished scaffold markers for delivery", () => {
+    // GIVEN: A document still contains one explicit scaffold marker.
+    const source = validHtmlDocument().replace(
+      "<h1>Guide</h1>",
+      "<h1 data-scaffold-placeholder>Guide</h1>",
+    );
+
+    // WHEN: It is checked as a deliverable and as a scaffold.
+    const delivery = validateHtmlDocument(source);
+    const scaffold = validateHtmlDocument(source, { mode: "scaffold" });
+
+    // THEN: Only deliverable validation rejects the known marker.
+    assert.equal(
+      delivery.errors.includes(
+        "replace all scaffold placeholders before delivery (1)",
+      ),
+      true,
+    );
+    assert.equal(
+      scaffold.errors.includes(
+        "replace all scaffold placeholders before delivery (1)",
+      ),
+      false,
+    );
+  });
+
   it("reports invalid inline JavaScript modules with a stable block number", () => {
     // GIVEN: A module script contains invalid module grammar.
     const source = validHtmlDocument().replace(
@@ -386,8 +471,7 @@ function validHtmlDocument(): string {
   <a class="skip-link" href="#main">Skip</a>
   <h1>Guide</h1>
   <main id="main">
-    <p id="svg-title">Accessible flow</p>
-    <svg role="img" aria-labelledby="svg-title"></svg>
+    <svg role="img" aria-labelledby="svg-title svg-description"><title id="svg-title">Accessible flow</title><desc id="svg-description">A two-step request flow.</desc></svg>
     <section data-stepper="flow">
       <button data-action="next">Next</button>
       <button data-action="back">Back</button>
