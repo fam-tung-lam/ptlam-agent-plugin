@@ -102,16 +102,13 @@ skills:
           This specialization may be stricter than the foundation, never looser.
   - id: ptlam-code-style-python
     description:
-      Write, review, and fix Python source and pytest code against conventions
-      for a uv, Ruff, ty, and pytest toolchain with pytest-mock, pytest-cov, and
-      pytest-asyncio; package boundaries; imports; typing; async work; Pydantic
-      models; docstrings; logging; and tests. Use when starting or standardizing
-      a Python project, changing dependencies or CI, adding or changing Python
-      code, publishing a package API, choosing sync or async I/O, defining a
-      Pydantic model, or fixing a Ruff, ty, or pytest failure. Apply
-      ptlam-code-style first for the standard these mechanics satisfy. Use as
-      the foundation for Python framework specializations. Do not use for
-      non-Python code.
+      Write, review, and fix Python library and application code against
+      conventions for language mechanics, project structure, tooling, and
+      tests. Use when starting or standardizing a Python project, changing
+      Python code or its toolchain, reviewing Python-specific design, or
+      resolving code-quality and test failures. Apply ptlam-code-style first for
+      the standard these mechanics satisfy. Use as the foundation for Python
+      framework specializations. Do not use for non-Python code.
     category_id: engineering
     visibility: public
     status: active
