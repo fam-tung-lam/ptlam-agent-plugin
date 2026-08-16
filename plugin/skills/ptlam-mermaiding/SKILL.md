@@ -85,12 +85,12 @@ compatibility, and completion check.
 | Visual question | Type and required reference |
 | --- | --- |
 | Who owns each process step and handoff? | [Swimlanes](references/swimlanes.md) |
-| What happens next, branches, or depends on what? | [Flowchart](references/flowchart.md) |
+| What happens next, branches, depends, or forms a hierarchy without ordered messages? | [Flowchart](references/flowchart.md) |
 | What static types, members, and UML relationships exist? | [Class](references/class.md) |
-| How does one thing change state? | [State](references/state.md) |
-| What data entities, attributes, and cardinalities exist? | [ERD](references/erd.md) |
+| How does one thing change state in response to events or conditions? | [State](references/state.md) |
+| What data entities, attributes, identities, and cardinalities exist? | [ERD](references/erd.md) |
 | Which participant sends what, and in what order? | [Sequence](references/sequence.md) |
-| Where do items sit on two independent dimensions? | [Quadrant](references/quadrant.md) |
+| Where do items sit on two independent dimensions whose combination matters? | [Quadrant](references/quadrant.md) |
 | How do ideas radiate from one central concept? | [Mindmap](references/mindmap.md) |
 | What work currently occupies each workflow stage? | [Kanban](references/kanban.md) |
 | Which deployed services and resources connect across boundaries? | [Architecture](references/architecture.md) |

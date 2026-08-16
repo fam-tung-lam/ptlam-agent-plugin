@@ -1,8 +1,7 @@
 # Note Operations
 
-Read this reference after selecting create, mature, review, split, or merge. It
-owns the action and completion criterion for each operation. Follow only the
-selected section.
+This reference owns the action and completion criterion for create, mature,
+review, split, and merge operations. Follow only the selected section.
 
 ## Create a note
 

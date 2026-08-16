@@ -1,8 +1,8 @@
 # Skill Package Layout
 
-Read this when designing or reshaping a package. It owns what each surface
-holds, how long a file may be, and when detail leaves `SKILL.md`. The target
-host's own layout rules outrank this file.
+This reference owns what each package surface holds, how long a file may be,
+and when detail leaves `SKILL.md`. The target host's own layout rules outrank
+this file.
 
 ## What each surface owns
 

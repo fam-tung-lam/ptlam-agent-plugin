@@ -1,6 +1,7 @@
 # Synchronized State Model
 
-Read this when time or state is part of the lesson. A static artifact skips it.
+This reference owns the synchronized step model for lessons with time or state.
+A static artifact has no state model to implement.
 
 ## One model drives everything
 

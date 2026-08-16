@@ -1,8 +1,7 @@
 # Atomicity Model
 
-Read this reference before evaluating or rewriting note content. It owns the
-definition of atomicity, the knowledge building blocks, the refinement ladder,
-and the rule for matching effort to value.
+This reference owns the definition of atomicity, the knowledge building
+blocks, the refinement ladder, and the rule for matching effort to value.
 
 This model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),

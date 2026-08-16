@@ -68,9 +68,10 @@ Done when the artifact is literal-only or carries one approved analogy.
 
 ## 3. Select contracts and compose the document
 
-Read [visual contract selection](references/visual-contract-selection.md). It
-maps each relationship, composition, control, component, and customization
-concern to the contract that owns it, and it owns how many to load.
+Once the literal learning model is stable, read
+[visual contract selection](references/visual-contract-selection.md). It maps
+each relationship, composition, control, component, and customization concern
+to the contract that owns it, and it owns how many to load.
 
 For a new artifact, resolve `<skill-directory>` to the directory holding this
 `SKILL.md`, use Node.js 22.6 or newer, and run from any working directory:

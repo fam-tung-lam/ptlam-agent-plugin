@@ -1,8 +1,9 @@
 # Visual contract selection
 
-Use this routing reference after the literal learning model is stable. Each
-linked reference owns the detailed anatomy, states, accessibility, and Material
-3 Expressive application for that concern.
+This routing reference owns the contract selection for each relationship,
+composition, control, component, and customization concern. Each linked
+reference owns its detailed anatomy, states, accessibility, and Material 3
+Expressive application.
 
 Choose the smallest visual grammar that exposes the important relationship. Use
 one visual grammar per relationship. Load a contract only when the artifact's
@@ -56,8 +57,8 @@ consumer.
 
 ## Select style and adaptation contracts
 
-Read [icons](design-system/styles/icons/icons.md) whenever icons appear. Read
-only the semantic token contract being customized:
+Icons use the [icons contract](design-system/styles/icons/icons.md). Load only
+the semantic token contract being customized:
 [color](design-system/tokens/color.md),
 [typography](design-system/tokens/typography.md),
 [spacing](design-system/tokens/spacing.md),

@@ -1,7 +1,7 @@
 # The Analogy Explanation Shape
 
-Read this when composing an explanation that uses the analogy device. It owns
-the four components, their order, and the Markdown a direct answer uses.
+This reference owns the four components of an analogy explanation, their
+order, and the Markdown a direct answer uses.
 
 A calling skill may render these components differently, but must preserve their
 meaning and their order.

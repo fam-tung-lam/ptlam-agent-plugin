@@ -1,8 +1,8 @@
 # Kanban
 
-Read this reference when the visual question is what work currently occupies
-each workflow stage. It owns Mermaid kanban columns, tasks, and metadata. The
-shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid kanban columns, tasks, and metadata for the work
+that currently occupies each workflow stage. The shared workflow and acceptance
+rules remain in `SKILL.md`.
 
 ## Model a status snapshot
 

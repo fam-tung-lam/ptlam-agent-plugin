@@ -1,9 +1,8 @@
 # Quadrant
 
-Read this reference when the visual question compares items on two independent
-dimensions and their combination carries meaning. It owns Mermaid quadrant axes,
-labels, coordinates, and evidence rules. The shared workflow and acceptance
-rules remain in `SKILL.md`.
+This reference owns Mermaid quadrant axes, labels, coordinates, and evidence
+rules for comparing items on two independent dimensions whose combination
+carries meaning. The shared workflow and acceptance rules remain in `SKILL.md`.
 
 ## Define the comparison before plotting
 

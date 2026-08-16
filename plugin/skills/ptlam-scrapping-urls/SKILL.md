@@ -68,7 +68,8 @@ Resolve a relative `OUTPUT_DIRECTORY` from the fixed workspace root. Create the
 directory before any retrieval, and stop with the filesystem error if creation
 fails.
 
-Read [output files](references/output-files.md). It owns filename derivation,
+When mapping URLs to target files and deciding which targets are already fresh,
+read [output files](references/output-files.md). It owns filename derivation,
 collision handling, and the cache check that decides which URLs still need
 retrieval.
 

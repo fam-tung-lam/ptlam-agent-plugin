@@ -1,7 +1,7 @@
 # Rendered Inspection
 
-Read this after static validation passes. It owns the browser conditions an
-artifact must survive, and what to do when one fails.
+This reference owns the browser conditions an artifact must survive after
+static validation, and what to do when one fails.
 
 Static validation cannot detect rendered overflow, clipped focus rings, or a
 control that becomes unreachable. Only opening the document finds those.

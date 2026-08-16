@@ -1,9 +1,9 @@
 # Architecture
 
-Read this reference when the visual question is which deployed services and
-resources connect across infrastructure or system boundaries. It owns Mermaid
-architecture groups, services, ports, edges, junctions, and layout constraints.
-The shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid architecture groups, services, ports, edges,
+junctions, and layout constraints for deployed resources across infrastructure
+or system boundaries. The shared workflow and acceptance rules remain in
+`SKILL.md`.
 
 ## Use and compatibility
 

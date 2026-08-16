@@ -1,8 +1,8 @@
 # Swimlanes
 
-Read this reference when the visual question is who owns each process step and
-where responsibility changes. It owns Mermaid swimlane semantics and syntax.
-The shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid swimlane semantics and syntax for process-step
+ownership and responsibility changes. The shared workflow and acceptance rules
+remain in `SKILL.md`.
 
 ## Use and compatibility
 

@@ -1,8 +1,8 @@
 # Class
 
-Read this reference when the visual question concerns static types, their
-members, and UML relationships. It owns Mermaid class-diagram modeling and
-notation. The shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid class-diagram modeling and notation for static
+types, their members, and UML relationships. The shared workflow and acceptance
+rules remain in `SKILL.md`.
 
 ## Set the modeling level
 

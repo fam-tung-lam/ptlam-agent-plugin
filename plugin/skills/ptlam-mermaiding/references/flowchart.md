@@ -1,9 +1,8 @@
 # Flowchart
 
-Read this reference when the visual question concerns process order, branching,
-dependency, hierarchy, or a structural overview without time-ordered messages.
-It owns Mermaid flowchart notation. The shared workflow and acceptance rules
-remain in `SKILL.md`.
+This reference owns Mermaid flowchart notation for process order, branching,
+dependency, hierarchy, and structural overviews without time-ordered messages.
+The shared workflow and acceptance rules remain in `SKILL.md`.
 
 ## Choose direction and scope
 

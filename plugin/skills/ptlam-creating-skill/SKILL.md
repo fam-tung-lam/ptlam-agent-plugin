@@ -46,8 +46,9 @@ named.
 
 ## 2. Prove it is one capability
 
-Read [skill atomicity and composition](references/skill-atomicity.md). It owns
-the capability tests, the keep-or-split decision, and the composition rules.
+When defining or challenging a skill boundary, read
+[skill atomicity and composition](references/skill-atomicity.md). It owns the
+capability tests, the keep-or-split decision, and the composition rules.
 
 Write one line for each: the responsibility, the artifact the skill produces or
 judges, its branches, its inputs, its acceptance standard, and the skills it
@@ -62,7 +63,8 @@ capability you found.
 
 ## 3. Design the package
 
-Read [package layout](references/skill-package-layout.md). It owns what each
+When designing or reshaping a package, read
+[package layout](references/skill-package-layout.md). It owns what each
 directory holds, the file-length limit, and when detail leaves `SKILL.md`.
 
 Choose how the skill starts:

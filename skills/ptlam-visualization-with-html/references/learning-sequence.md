@@ -1,7 +1,6 @@
 # Learning Sequence
 
-Read this when composing or reordering an explainer's sections. It owns the
-order the document teaches in.
+This reference owns the order an explainer teaches its sections in.
 
 ## Order the page top to bottom
 

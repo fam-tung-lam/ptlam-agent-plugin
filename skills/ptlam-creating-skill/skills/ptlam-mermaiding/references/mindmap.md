@@ -1,8 +1,8 @@
 # Mindmap
 
-Read this reference when the visual question is how ideas or concerns radiate
-from one central concept. It owns Mermaid mindmap hierarchy and branch design.
-The shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid mindmap hierarchy and branch design for ideas or
+concerns that radiate from one central concept. The shared workflow and
+acceptance rules remain in `SKILL.md`.
 
 ## Shape the hierarchy
 

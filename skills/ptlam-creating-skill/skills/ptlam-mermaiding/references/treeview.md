@@ -1,9 +1,8 @@
 # Tree view
 
-Read this reference when the visual question is what is nested in a
-directory-like hierarchy. It owns Mermaid tree-view indentation, directory
-markers, descriptions, and icons. The shared workflow and acceptance rules
-remain in `SKILL.md`.
+This reference owns Mermaid tree-view indentation, directory markers,
+descriptions, and icons for directory-like hierarchies. The shared workflow and
+acceptance rules remain in `SKILL.md`.
 
 ## Use and compatibility
 

@@ -1,8 +1,7 @@
 # The Analogy Branch
 
-Read this only when the user explicitly requests an analogy, or supplies one
-already selected. A literal-only artifact skips this file and uses the
-foundation's literal model unchanged.
+This reference owns how an HTML explainer consumes an approved analogy while
+keeping the foundation's literal model authoritative.
 
 ## When the user requests a new analogy
 

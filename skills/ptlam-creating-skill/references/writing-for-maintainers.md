@@ -1,8 +1,7 @@
 # Writing for Maintainers
 
-Read this before writing or revising any prose in a skill package. It owns
-reading order, sentence shape, visuals, and what to cut. The target
-repository's own writing rules outrank this file.
+This reference owns reading order, sentence shape, visuals, and what to cut in
+a skill package. The target repository's own writing rules outrank this file.
 
 Write for the person who will change this skill in six months. They read it
 once, at speed, then act. An agent reading the same text is the easier reader,

@@ -1,8 +1,8 @@
 # Skill Atomicity and Composition
 
-Read this when defining or challenging a skill boundary. It owns the capability
-tests, the keep-or-split decision, the self-contained contract, and the rules
-for composing a foundation with a specialization.
+This reference owns the capability tests, the keep-or-split decision, the
+self-contained contract, and the rules for composing a foundation with a
+specialization.
 
 The model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
