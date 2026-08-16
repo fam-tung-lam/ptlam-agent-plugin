@@ -100,6 +100,59 @@ skills:
           Use this skill only for the Flutter and Dart mechanics that satisfy
           those standards.
           This specialization may be stricter than the foundation, never looser.
+  - id: ptlam-code-style-python
+    description:
+      Write, review, and fix Python source and pytest code against conventions
+      for the project toolchain, package boundaries, imports, typing, async
+      work, Pydantic models, docstrings, logging, and tests. Use when adding or
+      changing Python code, publishing a package API, choosing sync or async
+      I/O, defining a Pydantic model, or fixing a formatter, linter, type-check,
+      or pytest failure. Apply ptlam-code-style first for the standard these
+      mechanics satisfy. Use as the foundation for Python framework
+      specializations. Do not use for non-Python code.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral conventions and testing doctrine the
+          Python mechanics satisfy.
+        instructions: |-
+          Read and apply ptlam-code-style first.
+          Let it own precedence, visibility, documentation and logging
+          standards, the universal behavior contract, test levels, test
+          placement, and test doubles.
+          Use this skill only for Python language, library, and tool mechanics
+          that satisfy those standards.
+          This specialization may be stricter than the foundation, never looser.
+  - id: ptlam-code-style-python-fastapi
+    description:
+      Write, review, and fix FastAPI application code against conventions for
+      application lifespan, routes, request and response contracts, dependency
+      injection, concurrency, service boundaries, errors, observability, and API
+      tests. Use when adding or changing FastAPI endpoints, dependencies,
+      exception handlers, middleware, schemas, background handoffs, or tests, or
+      fixing OpenAPI and runtime failures. Apply ptlam-code-style-python first
+      for the Python mechanics. Do not use for Python services that do not use
+      FastAPI.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-python
+        reason:
+          Provides the Python language, data-model, concurrency, exception, and
+          pytest mechanics underneath the FastAPI boundary.
+        instructions: |-
+          Read and apply ptlam-code-style-python first; it loads
+          ptlam-code-style as its own foundation.
+          Let Python own the interpreter and toolchain, modules, imports,
+          typing, general async work, Pydantic, exception mechanics, docstrings,
+          logging, and pytest.
+          Use this skill only for FastAPI application, HTTP, dependency,
+          lifecycle, and ASGI test mechanics.
+          This specialization may be stricter than Python, never looser.
   - id: ptlam-creating-skill
     description:
       Create, review, or refactor one agent skill so that a human maintainer can

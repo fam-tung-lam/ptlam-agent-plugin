@@ -20,6 +20,8 @@
     "./skills/ptlam-setup",
     "./skills/ptlam-git",
     "./skills/ptlam-code-style-flutter",
+    "./skills/ptlam-code-style-python",
+    "./skills/ptlam-code-style-python-fastapi",
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-grilling",
     "./skills/ptlam-creating-atomic-note",
