@@ -70,8 +70,9 @@ named.
 
 ## 2. Prove it is one capability
 
-Read [skill atomicity and composition](references/skill-atomicity.md). It owns
-the capability tests, the keep-or-split decision, and the composition rules.
+When defining or challenging a skill boundary, read
+[skill atomicity and composition](references/skill-atomicity.md). It owns the
+capability tests, the keep-or-split decision, and the composition rules.
 
 Write one line for each: the responsibility, the artifact the skill produces or
 judges, its branches, its inputs, its acceptance standard, and the skills it
@@ -86,8 +87,14 @@ capability you found.
 
 ## 3. Design the package
 
-Read [package layout](references/skill-package-layout.md). It owns what each
+When designing or reshaping a package, read
+[package layout](references/skill-package-layout.md). It owns what each
 directory holds, the file-length limit, and when detail leaves `SKILL.md`.
+
+Assign guidance for each supporting resource—the tools, services, packages,
+sources, or materials a workflow relies on—to the workflow that uses it. Keep
+guidance shared by the normal path in `SKILL.md`; route conditional guidance to
+that workflow's owning reference and point there instead of repeating it.
 
 Choose how the skill starts:
 
@@ -100,8 +107,14 @@ Choose how the skill starts:
 For each skill this one depends on, state the load order, its inputs, its
 outputs, what it may change, and who wins on conflict.
 
-Done when the file tree and reading order exist, invocation is chosen, and
-every dependency edge is written down.
+When a foundation and specialization compose, build the ownership map required
+by [skill atomicity and composition](references/skill-atomicity.md#compose-without-duplicating-ownership).
+Classify every specialization rule before writing it; link to the foundation
+instead of paraphrasing shared behavior.
+
+Done when the file tree and reading order exist, invocation is chosen, every
+dependency edge is written down, and any foundation-specialization ownership
+map has no unclassified rule.
 
 ## 4. Write it
 
@@ -136,8 +149,9 @@ tree and the diff, and check every changed file:
 | Check | Passes when |
 | --- | --- |
 | Capability | Rule 1 holds and every dependency names its owner. |
-| Layout | Every file has a consumer and fits its length limit. |
-| Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a named condition. |
+| Composition | The foundation stays complete; each specialization rule adds a mechanic, tightens the domain, or links to its owner. |
+| Layout | Every file has a consumer and fits its limit; each split earns its navigation cost through ownership, conditional loading, or readability. |
+| Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a condition named there and nowhere else. |
 | Readability | Titles, headings, and visual labels alone reveal the path and how it ends. |
 | Visual form | Each point sits in the highest form that fits it, replaces the prose it stands in for, and passes `ptlam-mermaiding` when it is a diagram. |
 | Metadata | Name, directory, description, and invocation agree with the host. |

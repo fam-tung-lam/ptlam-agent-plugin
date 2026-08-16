@@ -1,8 +1,8 @@
 # Skill Frontmatter Specification
 
-Read this only when the target supports Claude-style inline YAML frontmatter.
-It owns those fields and their checks. Verify the host's current documentation
-before using an optional field.
+This specification covers only Claude-style inline YAML frontmatter. It owns
+those fields and their checks. Verify the host's current documentation before
+using an optional field.
 
 When a manifest or compiler owns the metadata, edit that source instead. The
 `ptlam-agent-plugin` compiler, for example, rejects frontmatter in authored

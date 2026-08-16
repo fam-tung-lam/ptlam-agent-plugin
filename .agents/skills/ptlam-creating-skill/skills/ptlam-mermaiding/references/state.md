@@ -1,8 +1,8 @@
 # State
 
-Read this reference when the visual question is how one subject changes state in
-response to events or conditions. It owns Mermaid state-diagram semantics and
-syntax. The shared workflow and acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid state-diagram semantics and syntax for how one
+subject changes state in response to events or conditions. The shared workflow
+and acceptance rules remain in `SKILL.md`.
 
 ## Define the lifecycle boundary
 

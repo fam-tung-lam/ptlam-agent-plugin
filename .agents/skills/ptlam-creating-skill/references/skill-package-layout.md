@@ -1,8 +1,8 @@
 # Skill Package Layout
 
-Read this when designing or reshaping a package. It owns what each surface
-holds, how long a file may be, and when detail leaves `SKILL.md`. The target
-host's own layout rules outrank this file.
+This reference owns what each package surface holds, how long a file may be,
+and when detail leaves `SKILL.md`. The target host's own layout rules outrank
+this file.
 
 ## What each surface owns
 
@@ -14,32 +14,74 @@ host's own layout rules outrank this file.
 | `scripts/` | Deterministic operations that repeat |
 | `assets/` | Templates and files the produced output consumes |
 
-Create a directory only when something concrete will live in it. Installation
-guides, changelogs, and process notes belong outside the package. Behavior
-another skill would invoke on its own belongs in its own skill.
+Create a directory only when something concrete will live in it. Changelogs
+and maintainer process notes belong outside the package. Setup or access
+guidance a workflow needs follows the ownership rule below. Behavior another
+skill would invoke on its own belongs in its own skill.
 
-## Keep every file at or under 100 lines
+## Keep related guidance together until splitting pays off
 
-Count physical lines. Table rows and complete fenced blocks do not count.
+Related rules that serve one workflow stay together while the file remains
+readable. An `and` title or an independently nameable paragraph is a warning,
+not a command to create another file.
 
-When a file passes the limit, split it by responsibility or delete from it.
-Compressing prose to fit is the one repair that is never allowed; see
+| Evidence | Decision |
+| --- | --- |
+| Same workflow owner, related rules, and comfortable reading length | Keep together |
+| Same owner and fragments too small to justify separate routing | Merge |
+| A subsection has its own conditional consumer or owner | Split |
+| Another workflow reuses a subsection without the surrounding rules | Split or promote one owner |
+| Separation prevents irrelevant loading or duplicated maintenance | Split |
+| Headings no longer reveal a readable path, or the file exceeds its limit | Split by workflow responsibility or delete |
+| The only benefit is conceptual purity while navigation increases | Keep together |
+
+Keep each file at or under 100 physical lines, excluding table rows and complete
+fenced blocks. The limit is a ceiling and review signal, not a target. Staying
+below it does not justify a split; crossing it identifies a readability problem
+but does not excuse an arbitrary boundary. Never compress prose to fit; see
 [cut instead of compressing](writing-for-maintainers.md#cut-instead-of-compressing).
 
-A file that only fits after compression was two files.
+| Example | Decision |
+| --- | --- |
+| Short public-documentation and explanatory-comment rules serve one code-documentation workflow | Keep `documentation.md` together |
+| Double selection, tool resolution, placement, and safeguards remain readable under one testing workflow | Keep `test-doubles.md` together |
+| A long reference contains setup and publishing branches loaded under different conditions | Split by those conditional workflows |
 
-## Move detail out only when one branch needs it
+`SKILL.md` keeps the outcome, boundary, whole normal path, shared rules, and
+each step's finish condition. Move a conditional workflow behind one pointer to
+the reference that owns it. Use a routing reference only for a large catalog of
+mutually exclusive options.
 
-1. `SKILL.md` keeps the outcome, the boundary, the whole normal path, and each
-   step's finish condition.
-2. A rule every branch needs stays inline.
-3. A rule one branch needs moves behind a single pointer that names its
-   condition and the file that owns it.
-4. Use a routing reference only for a large catalog of mutually exclusive
-   options.
-5. Keep a concept's definition, rules, examples, and caveats in one place.
+Keep a concept's definition, rules, examples, and caveats together. Open a
+reference with what it owns; keep its read condition at the `SKILL.md` pointer.
+Every rule stays one hop from `SKILL.md`, and every condition is written once.
 
-Every rule stays one hop from `SKILL.md`.
+## Place resource guidance with its workflow
+
+A resource list is not a responsibility. Give setup or access, use, procedures
+or commands, links, and caveats to the surface that owns the related workflow.
+
+| Resource's reach | Owner |
+| --- | --- |
+| Every branch uses it, or no conditional workflow reference owns it | `SKILL.md` |
+| One conditional workflow uses it | That workflow's reference |
+
+Do not create a generic `tools.md`, `toolchain.md`, `dependencies.md`, or
+`sources.md` solely to catalog resources. A shared resource section in
+`SKILL.md` is legitimate when it serves the whole normal path. Give each rule
+one owner, and link to that owner anywhere else the resource appears.
+
+| Example | Owner |
+| --- | --- |
+| Interview recorder used only during field research | `field-research.md` |
+| Legal database used only to verify citations | `citation-checking.md` |
+| Rendering tool used only to publish a report | `publishing.md` |
+| Workspace used throughout the skill | `SKILL.md` |
+
+For time-sensitive guidance, link to the current authoritative source, such as
+official documentation for a tool or package. Name a concrete staleness signal,
+such as changed access requirements, a revised policy or version, or a
+procedure that no longer succeeds.
 
 ## Name it after what it does
 
@@ -59,6 +101,4 @@ time. Document its inputs, outputs, dependencies, exit behavior, and recovery.
 Keep the reasoning in the instructions, not in the script.
 
 Put templates and media the output consumes in `assets/`. Put conditional
-rules, schemas, and long examples in `references/`. Label anything
-time-sensitive with its source, its version, and how a reader can tell it went
-stale.
+rules, schemas, and long examples in `references/`.

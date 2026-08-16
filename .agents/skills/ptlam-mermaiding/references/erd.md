@@ -1,9 +1,8 @@
 # Entity-relationship diagram
 
-Read this reference when the visual question concerns data entities,
-attributes, identity, and relationship cardinality. It owns Mermaid `erDiagram`
-modeling and crow's-foot notation. The shared workflow and acceptance rules
-remain in `SKILL.md`.
+This reference owns Mermaid `erDiagram` modeling and crow's-foot notation for
+data entities, attributes, identity, and relationship cardinality. The shared
+workflow and acceptance rules remain in `SKILL.md`.
 
 ## Choose logical or physical scope
 

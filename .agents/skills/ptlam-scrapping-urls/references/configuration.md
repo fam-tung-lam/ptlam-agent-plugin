@@ -1,7 +1,7 @@
 # Configuration
 
-Read this before resolving any path. It owns the workspace root, the canonical
-configuration file, the three keys, and how a prompt override wins.
+This reference owns the workspace root, the canonical configuration file, the
+three keys, and how a prompt override wins.
 
 ## Fix the workspace root first
 

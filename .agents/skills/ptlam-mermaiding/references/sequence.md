@@ -1,9 +1,8 @@
 # Sequence
 
-Read this reference when the visual question is which participant sends what,
-to whom, and in what order. It owns Mermaid sequence-diagram participants,
-messages, temporal blocks, and phase separation. The shared workflow and
-acceptance rules remain in `SKILL.md`.
+This reference owns Mermaid sequence-diagram participants, messages, temporal
+blocks, and phase separation for showing who sends what, to whom, and in what
+order. The shared workflow and acceptance rules remain in `SKILL.md`.
 
 ## Title and participants
 

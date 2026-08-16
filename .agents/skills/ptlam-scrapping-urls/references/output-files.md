@@ -1,7 +1,7 @@
 # Output Files
 
-Read this when mapping URLs to target files and deciding which targets are
-already fresh. It owns filename derivation, collisions, and the cache check.
+This reference owns filename derivation, collisions, and the cache check for
+mapping URLs to unique target files.
 
 ## Derive the base filename
 

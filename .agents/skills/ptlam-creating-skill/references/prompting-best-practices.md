@@ -1,8 +1,8 @@
 # Prompting Best Practices
 
-Read this when a skill must steer non-trivial reasoning, tool use, output
-shape, long context, or autonomy. It owns prompt decisions only, not the
-skill's capability or its package structure.
+This reference owns prompt decisions for skills that steer non-trivial
+reasoning, tool use, output shape, long context, or autonomy. It does not own
+the skill's capability or its package structure.
 
 It adapts durable guidance from Anthropic's
 [Claude prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).

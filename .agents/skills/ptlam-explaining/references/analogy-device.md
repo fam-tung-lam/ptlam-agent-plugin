@@ -1,8 +1,7 @@
 # The Analogy Device
 
-Read this when step 3 selected the analogy device. It owns candidate
-generation, the mapping gate, the selection turn, and the analogy's own
-verification.
+This reference owns analogy candidate generation, the mapping gate, the
+selection turn, and the analogy's own verification.
 
 ## Keep a mapping ledger for every candidate
 

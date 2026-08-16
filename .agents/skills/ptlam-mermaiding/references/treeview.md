@@ -1,15 +1,15 @@
 # Tree view
 
-Read this reference when the visual question is what is nested in a
-directory-like hierarchy. It owns Mermaid tree-view indentation, directory
-markers, descriptions, and icons. The shared workflow and acceptance rules
-remain in `SKILL.md`.
+This reference owns Mermaid tree-view indentation, directory markers,
+descriptions, and icons for directory-like hierarchies. The shared workflow and
+acceptance rules remain in `SKILL.md`.
 
 ## Use and compatibility
 
-Use `treeView-beta` for files, folders, packages, and other inventories whose
-meaning is primarily parent-child nesting. Use a mindmap for conceptual branches
-and a flowchart for dependencies or cross-links.
+Use `treeView-beta` for every folder or file hierarchy and for other inventories
+whose meaning is primarily parent-child nesting. Fence these hierarchies as
+`mermaid`, not `text`. Use a mindmap for conceptual branches and a flowchart for
+dependencies or cross-links.
 
 Tree view requires Mermaid 11.14 or later. When the target lacks it, return a
 plain text tree or a flowchart according to whether visual rendering or exact
@@ -21,7 +21,7 @@ Prefer indentation input because it is easy to revise and review. Use exactly
 four spaces per level. Mark directories with a trailing `/`; Mermaid renders
 them as directories and bold labels. Quote a label when it contains spaces.
 
-```text
+```mermaid
 treeView-beta
     project/
         src/
