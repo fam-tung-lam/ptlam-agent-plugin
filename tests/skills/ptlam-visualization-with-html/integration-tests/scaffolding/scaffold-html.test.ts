@@ -23,7 +23,7 @@ describe("scaffold HTML command", () => {
     // WHEN: Native Node type stripping runs the scaffolding entry point.
     const result = await runTypeScriptProcess(
       scaffoldScript,
-      [outputPath, "--title", "Portable guide"],
+      [outputPath, "--lang", "en", "--title", "Portable guide"],
       root,
     );
 
@@ -49,7 +49,7 @@ describe("scaffold HTML command", () => {
     // WHEN: Node executes the linked entry point.
     const result = await runTypeScriptProcess(
       linkedScript,
-      [outputPath, "--title", "Linked guide"],
+      [outputPath, "--lang", "en", "--title", "Linked guide"],
       root,
     );
 
@@ -79,11 +79,11 @@ describe("scaffold HTML command", () => {
     const helpCode = await runScaffoldHtmlCommand(["--help"], help.options);
     const usageCode = await runScaffoldHtmlCommand([], usage.options);
     const protectedCode = await runScaffoldHtmlCommand(
-      [outputPath],
+      [outputPath, "--lang", "en"],
       protectedOutput.options,
     );
     const replacementCode = await runScaffoldHtmlCommand(
-      [outputPath, "--force"],
+      [outputPath, "--lang", "en", "--force"],
       replacement.options,
     );
 

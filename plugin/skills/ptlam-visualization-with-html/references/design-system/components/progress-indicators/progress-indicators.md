@@ -22,5 +22,5 @@ clear end stop when the visual treatment might make completion ambiguous. Use a
 linear track for ordered progress and a circular presentation only when its
 compact footprint materially helps.
 
-Source snapshot: Material 3 progress-indicator overview, captured with
-Firecrawl on 2026-08-07.
+Source snapshot: Material 3 progress-indicator overview, captured with Firecrawl
+on 2026-08-07.

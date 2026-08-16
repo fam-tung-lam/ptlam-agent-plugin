@@ -11,7 +11,7 @@ site workflow instead.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## At a glance
+## How does an explanation become a portable HTML artifact?
 
 ```mermaid
 flowchart LR
@@ -19,8 +19,8 @@ flowchart LR
     AnalogyBranch -->|"Yes"| ResolveAnalogy["Resolve one approved analogy"]
     AnalogyBranch -->|"No"| ComposeDocument["Select contracts and compose static HTML"]
     ResolveAnalogy --> ComposeDocument
-    ComposeDocument --> StateBranch{"Is state part of the lesson?"}
-    StateBranch -->|"Yes"| ImplementState["Implement the state model"]
+    ComposeDocument --> StateBranch{"Does the learner replay a timeline?"}
+    StateBranch -->|"Yes"| ImplementState["Implement the synchronized stepper"]
     StateBranch -->|"No"| InspectArtifact["Validate and inspect the rendered artifact"]
     ImplementState --> InspectArtifact
     InspectArtifact --> DeliverArtifact["Deliver one portable HTML file"]
@@ -28,20 +28,19 @@ flowchart LR
 
 ## Read for every artifact
 
-| Reference | Owns |
-| --- | --- |
-| [design-system baseline](references/design-system/design-system.md) | The token and component system the scaffold emits, and how to extend it |
-| [accessibility](references/design-system/foundations/accessibility.md) | Contrast, focus, semantics, and assistive-technology behavior |
-| [content design](references/design-system/foundations/content-design.md) | Visible wording, localization, alternative text, and truncation |
-| [interaction](references/design-system/foundations/interaction.md) | States, targets, and input handling |
-| [layout](references/design-system/foundations/layout.md) | Grid, spacing, and responsive structure |
-| [document shell](references/design-system/patterns/layouts/document-shell.md) | Page frame, header, and section rhythm |
+| Reference                                                                     | Owns                                                                    |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [design-system baseline](references/design-system/design-system.md)           | The token and component system the scaffold emits, and how to extend it |
+| [accessibility](references/design-system/foundations/accessibility.md)        | Contrast, focus, semantics, and assistive-technology behavior           |
+| [content design](references/design-system/foundations/content-design.md)      | Visible wording, localization, alternative text, and truncation         |
+| [interaction](references/design-system/foundations/interaction.md)            | States, targets, and input handling                                     |
+| [layout](references/design-system/foundations/layout.md)                      | Grid, spacing, and responsive structure                                 |
+| [document shell](references/design-system/patterns/layouts/document-shell.md) | Page frame, header, and section rhythm                                  |
 
 ## 1. Consume the explanation and resolve the artifact
 
-Start from the required `ptlam-explaining` skill's result. Consume its learning
-goal, learner background, confusing mechanism, depth, language, literal answer,
-literal model, explanatory structure, and stated uncertainty. Do not rebuild or
+Start from the required `ptlam-explaining` skill's explanation package. Consume
+its Goal, Presentation, Model, Explanation, and Limits fields. Do not rebuild or
 quietly change any of them here.
 
 Resolve the output path, and whether the task creates or revises an artifact.
@@ -60,8 +59,14 @@ model into step 3 unchanged.
 
 For either analogy case, follow
 [the analogy branch](references/analogy-branch.md). It owns how to reach that
-skill's analogy branch, how to accept or reject an analogy, and which patterns
-to read.
+skill's analogy branch and how to accept or reject an analogy. Then load the
+selected rendering contracts directly:
+
+| When                                      | Read                                                                                |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- |
+| Any selected analogy                      | [analogy mapping](references/design-system/patterns/content/analogy-mapping.md)     |
+| Two synchronized maps teach the mechanism | [analogy twin](references/design-system/patterns/analogy-twin/analogy-twin.md)      |
+| Lifetime or change cadence is the lesson  | [layered lifetimes](references/design-system/patterns/content/layered-lifetimes.md) |
 
 Done when the artifact is literal-only or carries one approved analogy.
 
@@ -69,22 +74,17 @@ Done when the artifact is literal-only or carries one approved analogy.
 
 Once the literal learning model is stable, read
 [visual contract selection](references/visual-contract-selection.md). It maps
-each relationship, composition, control, component, and customization concern
-to the contract that owns it, and it owns how many to load.
+each relationship, composition, control, component, and customization concern to
+the contract that owns it, and it owns how many to load.
 
-For a new artifact, resolve `<skill-directory>` to the directory holding this
-`SKILL.md`, use Node.js 22.6 or newer, and run from any working directory:
+For a new artifact, read [scaffolding](references/scaffolding.md) and run its
+command. It owns inputs, filesystem effects, output, refusal behavior, and
+recovery.
 
-```bash
-node --experimental-strip-types \
-  "<skill-directory>/scripts/scaffolding/scaffold-html.ts" \
-  output.html --title "How the system works"
-```
-
-The scaffold, not the references above, is the source for exact baseline
-tokens, global CSS, and shell markup. Replace every instructional placeholder.
-For an existing artifact, preserve correct content and interaction state while
-bringing the file into this contract.
+The scaffold, not the references above, is the source for exact baseline tokens,
+global CSS, and shell markup. Replace every instructional placeholder. For an
+existing artifact, preserve correct content and interaction state while bringing
+the file into this contract.
 
 Read [learning sequence](references/learning-sequence.md) for the order the
 document must teach in.
@@ -97,9 +97,12 @@ and no instructional placeholder remains.
 
 Skip this step for a static artifact.
 
-When time or state is part of the lesson, follow
+When the learner must replay or inspect an ordered timeline, follow
 [the synchronized state model](references/state-model.md). It owns the step
 model, the required controls, and the scripts-disabled fallback.
+
+Observable state without playback stays in the static composition selected in
+step 3 and does not require timeline controls.
 
 Done when the artifact is static or its state model passes that file's checks.
 
@@ -120,11 +123,5 @@ Done when validation passes and every rendered condition holds.
 
 ## 6. Deliver and hand off
 
-Return the single `.html` file at the resolved destination. Report what changed
-and where, the selected visual grammar, whether the analogy branch ran, the
-validator command and its result, the browser conditions you inspected, and any
-behavior that remains unverified.
-
-Complete the task when the file opens directly, teaches the lesson with no
-external runtime resource, and the handoff separates static checks from
-rendered browser evidence.
+Read [delivery](references/delivery.md). It owns the final artifact handoff and
+completion check.

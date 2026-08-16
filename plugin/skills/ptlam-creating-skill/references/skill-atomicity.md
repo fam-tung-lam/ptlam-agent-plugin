@@ -25,8 +25,8 @@ files may sit together as long as they only serve that one behavior.
    for being done?
 4. **Completeness.** Can the declared inputs and dependencies reach that
    standard?
-5. **Independent reuse.** Would another caller invoke one branch on its own,
-   for a different responsibility? If yes, split it.
+5. **Independent reuse.** Would another caller invoke one branch on its own, for
+   a different responsibility? If yes, split it.
 6. **Composition.** Can another skill reuse this without copying its
    instructions?
 
@@ -37,14 +37,14 @@ subtopic; package layout owns when a file split earns its navigation cost.
 
 ## Keep, split, or route
 
-| Evidence | Decision |
-| --- | --- |
-| Branches share one artifact and one standard for being done | Keep them together. |
-| A branch has its own callers, result, or standard | Split it. |
-| A domain or host adds mechanics to an already complete capability | Compose a specialization. |
-| Remembering several skills is the real problem, and routing has one result | Create a router. |
-| A file serves only this capability | Keep it internal. |
-| Another caller would invoke a file's workflow | Promote it to a skill. |
+| Evidence                                                                   | Decision                  |
+| -------------------------------------------------------------------------- | ------------------------- |
+| Branches share one artifact and one standard for being done                | Keep them together.       |
+| A branch has its own callers, result, or standard                          | Split it.                 |
+| A domain or host adds mechanics to an already complete capability          | Compose a specialization. |
+| Remembering several skills is the real problem, and routing has one result | Create a router.          |
+| A file serves only this capability                                         | Keep it internal.         |
+| Another caller would invoke a file's workflow                              | Promote it to a skill.    |
 
 For each split, name its capability, trigger, output, standard, boundary, and
 the edges that join it to the others. Give shared behavior exactly one owner.
@@ -53,8 +53,8 @@ the edges that join it to the others. Give shared behavior exactly one owner.
 
 The package must state its invocation conditions and required inputs, its
 ordered actions and branch rules, its outputs and finish conditions, its
-authority and side-effect limits, its stop conditions, and the dependencies
-that supply what it does not own.
+authority and side-effect limits, its stop conditions, and the dependencies that
+supply what it does not own.
 
 Self-contained does not mean dependency-free. A dependency is valid when the
 host loads it, its promises cover what the caller needs, and ownership stays
@@ -65,10 +65,10 @@ explicit.
 Before writing or reviewing a foundation-and-specialization pair, map every
 concern in scope:
 
-| Concern | Foundation owns | Specialization adds | Link and precedence |
-| --- | --- | --- | --- |
-| Test behavior | Observable behavior and double boundaries | `blocTest` and Flutter runner mechanics | Specialization points to the foundation; foundation wins |
-| Documentation | Public contract and explanatory-comment purpose | Dartdoc syntax and analyzer mechanics | Specialization points to the foundation; foundation wins |
+| Concern       | Foundation owns                                 | Specialization adds                     | Link and precedence                                      |
+| ------------- | ----------------------------------------------- | --------------------------------------- | -------------------------------------------------------- |
+| Test behavior | Observable behavior and double boundaries       | `blocTest` and Flutter runner mechanics | Specialization points to the foundation; foundation wins |
+| Documentation | Public contract and explanatory-comment purpose | Dartdoc syntax and analyzer mechanics   | Specialization points to the foundation; foundation wins |
 
 Classify every specialization rule as one of these:
 
@@ -77,8 +77,8 @@ Classify every specialization rule as one of these:
 - a link to the foundation owner.
 
 A paraphrase of a foundation rule is none of the three. Remove it rather than
-keeping a local copy for completeness. Report a rule whose owner remains
-unclear instead of assigning it silently.
+keeping a local copy for completeness. Report a rule whose owner remains unclear
+instead of assigning it silently.
 
 Then confirm that:
 
@@ -86,8 +86,7 @@ Then confirm that:
 2. The specialization owns one domain or host capability, and only that.
 3. The foundation owns the shared behavior, vocabulary, and standard.
 4. The specialization owns only the stricter or additional mechanics.
-5. Both declare load order, inputs, outputs, authority, and conflict
-   precedence.
+5. Both declare load order, inputs, outputs, authority, and conflict precedence.
 6. Each references the owner instead of paraphrasing its rules.
 
 Rule 1 passes when all six tests pass, every branch serves the one capability,

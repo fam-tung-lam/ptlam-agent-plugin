@@ -6,12 +6,12 @@ preserving Material roles, anatomy, states, accessibility, and hierarchy.
 
 ## Ownership
 
-| Surface | Owns |
-| --- | --- |
-| Scaffold renderer | Exact baseline token values, document shell, and global CSS |
-| Token references | Semantic use and customization |
-| Component references | Reusable anatomy and states |
-| Pattern references | Learning-specific compositions |
+| Surface              | Owns                                                        |
+| -------------------- | ----------------------------------------------------------- |
+| Scaffold renderer    | Exact baseline token values, document shell, and global CSS |
+| Token references     | Semantic use and customization                              |
+| Component references | Reusable anatomy and states                                 |
+| Pattern references   | Learning-specific compositions                              |
 
 Run the scaffolder for a new artifact; do not reconstruct its baseline from
 prose.
@@ -46,21 +46,28 @@ predictable interaction behavior remain fixed while expressive intensity
 changes.
 
 The Material catalog groups components by action, containment, communication,
-navigation, selection, and text input. This skill intentionally selects only
-the families needed for focused learning artifacts. A component missing from
-this local catalog is outside the contract, even when Material documents it.
+navigation, selection, and text input. This skill intentionally selects only the
+families needed for focused learning artifacts. A component missing from this
+local catalog is outside the contract, even when Material documents it.
 
 ## Source freshness
+
+| Source family                       | Authoritative source                                                                                            |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Material system and current catalog | [Material Design 3](https://m3.material.io/)                                                                    |
+| Interaction states                  | [Material 3 states](https://m3.material.io/foundations/interaction/states/overview)                             |
+| Expressive research                 | [Google's expressive-design research](https://design.google/library/expressive-material-design-google-research) |
 
 This local contract was reviewed on 2026-08-07 from Firecrawl snapshots of the
 official Material 3 home, foundations, styles, and components catalogs plus
 Google's Expressive design research. The research describes color, shape, size,
-motion, and containment as the main expressive dimensions. Its evidence spans
-46 studies with more than 18,000 participants and warns against breaking
+motion, and containment as the main expressive dimensions. Its evidence spans 46
+studies with more than 18,000 participants and warns against breaking
 established interaction patterns.
 
 This file and its local references are the operational source for artifact
 creation; agents do not need to open the web pages. A maintainer changing or
-upgrading the design system must re-scrape the affected official source paths,
-compare their guidance with the local contract, and record a new review date
-only after resolving differences.
+upgrading the design system must re-scrape the affected official page and its
+linked component, foundation, or style page. Treat a new page update date,
+component availability, anatomy, state, token, or accessibility rule as a review
+trigger. Record a new local review date only after resolving differences.

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "vitest";
 
@@ -16,6 +16,7 @@ describe("createHtmlScaffold", () => {
     // WHEN: The scaffold is created with a markup-sensitive title.
     const result = await createHtmlScaffold({
       outputPath,
+      language: "en",
       title: "Architecture <flow>",
     });
 
@@ -24,7 +25,10 @@ describe("createHtmlScaffold", () => {
     assert.equal(Object.isFrozen(result), true);
     const source = await readFile(outputPath, "utf8");
     assert.equal(source.includes("Architecture &lt;flow&gt;"), true);
-    assert.deepEqual(validateHtmlDocument(source).errors, []);
+    assert.deepEqual(
+      validateHtmlDocument(source, { mode: "scaffold" }).errors,
+      [],
+    );
   });
 
   it("refuses to replace an existing document by default", async () => {
@@ -34,7 +38,7 @@ describe("createHtmlScaffold", () => {
     await writeFile(outputPath, "keep me", "utf8");
 
     // WHEN: Scaffold creation is requested without overwrite authority.
-    const creation = createHtmlScaffold({ outputPath });
+    const creation = createHtmlScaffold({ outputPath, language: "en" });
 
     // THEN: The request fails and the original content remains intact.
     await assert.rejects(
@@ -51,12 +55,15 @@ describe("createHtmlScaffold", () => {
     await writeFile(outputPath, "old", "utf8");
 
     // WHEN: The caller opts into replacement.
-    await createHtmlScaffold({ outputPath, overwrite: true });
+    await createHtmlScaffold({ outputPath, language: "en", overwrite: true });
 
     // THEN: The old content is replaced by a valid scaffold.
     const source = await readFile(outputPath, "utf8");
     assert.notEqual(source, "old");
-    assert.deepEqual(validateHtmlDocument(source).errors, []);
+    assert.deepEqual(
+      validateHtmlDocument(source, { mode: "scaffold" }).errors,
+      [],
+    );
   });
 
   it("rejects a non-HTML output before writing it", async () => {
@@ -66,9 +73,33 @@ describe("createHtmlScaffold", () => {
     // WHEN: Scaffold creation is requested for that path.
     const creation = createHtmlScaffold({
       outputPath: path.join(root, "guide.txt"),
+      language: "en",
     });
 
     // THEN: The contract rejects the output type.
     await assert.rejects(creation, new Error("output must end in .html"));
+  });
+
+  it("refuses to overwrite through a symbolic link", async () => {
+    // GIVEN: The requested path redirects to an existing document.
+    const root = await temporaryDirectory();
+    const targetPath = path.join(root, "target.html");
+    const outputPath = path.join(root, "guide.html");
+    await writeFile(targetPath, "keep me", "utf8");
+    await symlink(targetPath, outputPath);
+
+    // WHEN: Forced scaffold creation addresses the symbolic link.
+    const creation = createHtmlScaffold({
+      outputPath,
+      language: "en",
+      overwrite: true,
+    });
+
+    // THEN: The command refuses the redirect and preserves its target.
+    await assert.rejects(
+      creation,
+      new Error(`refusing to write through symbolic link: ${outputPath}`),
+    );
+    assert.equal(await readFile(targetPath, "utf8"), "keep me");
   });
 });

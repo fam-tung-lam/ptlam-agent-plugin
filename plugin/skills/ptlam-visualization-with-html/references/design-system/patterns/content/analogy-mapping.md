@@ -5,7 +5,7 @@ corresponding shapes or a compact mapping strip; avoid a dense table before the
 learner has seen the topology.
 
 ```html
-<div class="mapping-strip" aria-label="Analogy mapping">
+<div class="mapping-strip" role="group" aria-label="Analogy mapping">
   <div><span>Everyday</span><strong>Service log</strong></div>
   <span aria-hidden="true">↔</span>
   <div><span>Literal</span><strong>messages[]</strong></div>

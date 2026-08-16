@@ -1,12 +1,12 @@
 # PTLam Flutter Code Style
 
 Conventions for Flutter application code: the shared toolchain, architecture,
-state, source tree, widgets, external boundaries, and tests. This skill owns
-the Flutter mechanics only; the foundation owns the standard they satisfy.
+state, source tree, widgets, external boundaries, and tests. This skill owns the
+Flutter mechanics only; the foundation owns the standard they satisfy.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## At a glance
+## How does a Flutter concern reach its project mechanic?
 
 ```mermaid
 flowchart LR
@@ -19,13 +19,13 @@ flowchart LR
 
 ## Before the first edit
 
-1. Resolve the Flutter version through FVM. Never invoke a globally installed
-   `flutter`; every command in this skill runs as `fvm flutter …`.
+1. Resolve the Flutter version through FVM. Invoke Flutter commands as
+   `fvm flutter …` and Dart commands as `fvm dart …`; never use a global SDK.
 2. Establish which project you are in:
 
-   | Project | Version policy |
-   | --- | --- |
-   | New | Latest stable Flutter and latest stable packages |
+   | Project  | Version policy                                                     |
+   | -------- | ------------------------------------------------------------------ |
+   | New      | Latest stable Flutter and latest stable packages                   |
    | Existing | Read `.fvmrc`, `pubspec.yaml`, and `pubspec.lock`, then match them |
 
 3. Read `analysis_options.yaml`. It, `pubspec.lock`, and `.fvmrc` are the source
@@ -46,46 +46,48 @@ project-root `build.yaml`, then regenerate all outputs with:
 fvm dart run build_runner build
 ```
 
-Read and edit only annotated source files. Never edit or commit generated
-outputs such as `*.g.dart`, `*.freezed.dart`, `*.mocks.dart`, route files, or
-`strings.g.dart`.
+Edit the authored source that owns a generated output; never hand-edit generated
+files such as `*.g.dart`, `*.freezed.dart`, `*.mocks.dart`, route files, or
+`strings.g.dart`. After generation, follow the repository's tracked-file policy:
+commit generated outputs when the repository tracks them, and leave ignored
+outputs untracked.
 
 When a build fails, fix the first error before reading the cascade below it.
-Rerun generation after changing any annotation or generator dependency, then
-run analysis.
+Rerun generation after changing any annotation or generator dependency, then run
+analysis.
 
 ## Pick a reference
 
-| Concern | Reference |
-| --- | --- |
-| Placing a layer, defining a repository boundary, or wiring dependencies | [architecture.md](references/architecture.md) |
-| Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md) |
-| Declaring or invoking an application route | [routing.md](references/routing.md) |
-| Adding a file or a feature; deciding what a feature exports | [file-organization.md](references/file-organization.md) |
-| Naming, formatting, imports, `const`, and analyzer exceptions | [dart-style.md](references/dart-style.md) |
-| Building a widget, splitting one, or using `BuildContext` | [widgets.md](references/widgets.md) |
-| Defining a DTO, a domain model, a failure, or a Freezed union | [models.md](references/models.md) |
-| Calling an external API | [networking.md](references/networking.md) |
-| Reading or writing persisted data | [storage.md](references/storage.md) |
-| Adding or changing user-visible text | [localization.md](references/localization.md) |
-| Emitting a log record | [logging.md](references/logging.md) |
-| Writing a Dart doc comment | [documentation.md](references/documentation.md) |
-| Writing, placing, or restructuring a test | [testing.md](references/testing.md) |
+| Concern                                                                   | Reference                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Placing a layer, defining a repository boundary, or wiring dependencies   | [architecture.md](references/architecture.md)           |
+| Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md)   |
+| Declaring or invoking an application route                                | [routing.md](references/routing.md)                     |
+| Adding a file or a feature; deciding what a feature exports               | [file-organization.md](references/file-organization.md) |
+| Naming, formatting, imports, `const`, and analyzer exceptions             | [dart-style.md](references/dart-style.md)               |
+| Building a widget, splitting one, or using `BuildContext`                 | [widgets.md](references/widgets.md)                     |
+| Defining a DTO, a domain model, a failure, or a Freezed union             | [models.md](references/models.md)                       |
+| Calling an external API                                                   | [networking.md](references/networking.md)               |
+| Reading or writing persisted data                                         | [storage.md](references/storage.md)                     |
+| Adding or changing user-visible text                                      | [localization.md](references/localization.md)           |
+| Emitting a log record                                                     | [logging.md](references/logging.md)                     |
+| Writing a Dart doc comment                                                | [documentation.md](references/documentation.md)         |
+| Writing, placing, or restructuring a test                                 | [testing.md](references/testing.md)                     |
 
 ## A check failed — where to look
 
-| Failing check | Reference |
-| --- | --- |
-| `fvm flutter analyze`, a `very_good_analysis` lint | [dart-style.md](references/dart-style.md) |
-| `dart format` reports a diff | [dart-style.md](references/dart-style.md) |
-| `build_runner` fails, or generated output is missing | [Shared toolchain](#shared-toolchain), then the reference that owns the generator |
-| A generated route or `strings.g.dart` symbol is undefined | [localization.md](references/localization.md) (Slang), [routing.md](references/routing.md) (routes) |
-| Flutter SDK or Dart SDK constraint mismatch | [Before the first edit](#before-the-first-edit) |
-| `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md) |
+| Failing check                                                        | Reference                                                                                           |
+| -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `fvm flutter analyze`, a `very_good_analysis` lint                   | [dart-style.md](references/dart-style.md)                                                           |
+| `fvm dart format` reports a diff                                     | [dart-style.md](references/dart-style.md)                                                           |
+| `build_runner` fails, or generated output is missing                 | [Shared toolchain](#shared-toolchain), then the reference that owns the generator                   |
+| A generated route or `strings.g.dart` symbol is undefined            | [localization.md](references/localization.md) (Slang), [routing.md](references/routing.md) (routes) |
+| Flutter SDK or Dart SDK constraint mismatch                          | [Before the first edit](#before-the-first-edit)                                                     |
+| `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md)                                                                 |
 
 ## Finish
 
 Finish when the touched code satisfies the reference for its concern,
-`fvm flutter analyze` and `dart format --output=none --set-exit-if-changed .`
-report nothing, the affected tests pass, and every check you could not run is
-named in the handoff.
+`fvm flutter analyze` and
+`fvm dart format --output=none --set-exit-if-changed .` report nothing, the
+affected tests pass, and every check you could not run is named in the handoff.

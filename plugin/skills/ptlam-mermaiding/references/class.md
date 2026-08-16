@@ -26,12 +26,12 @@ mirroring code. Otherwise list identity and public contract before internal
 details. Parentheses distinguish methods from attributes. Add visibility only
 when it is known:
 
-| Prefix | Visibility |
-| --- | --- |
-| `+` | Public |
-| `-` | Private |
-| `#` | Protected |
-| `~` | Package or internal |
+| Prefix | Visibility          |
+| ------ | ------------------- |
+| `+`    | Public              |
+| `-`    | Private             |
+| `#`    | Protected           |
+| `~`    | Package or internal |
 
 Use `<<interface>>`, `<<abstract>>`, `<<service>>`, or `<<enumeration>>` only
 when that classifier is part of the model. Use namespaces only for real package
@@ -39,15 +39,15 @@ or domain ownership; relationships still reference class ids.
 
 ## Use exact UML relationships
 
-| Syntax | Relationship |
-| --- | --- |
-| `Base <\|-- Derived` | Inheritance |
-| `Owner *-- Part` | Composition; the part's lifetime belongs to the owner |
-| `Whole o-- Part` | Aggregation; the part can exist independently |
-| `Source --> Target` | Navigable association |
-| `Source ..> Target` | Dependency |
-| `Contract <\|.. Implementation` | Realization |
-| `Source -- Target` | Undirected structural link |
+| Syntax                          | Relationship                                          |
+| ------------------------------- | ----------------------------------------------------- |
+| `Base <\|-- Derived`            | Inheritance                                           |
+| `Owner *-- Part`                | Composition; the part's lifetime belongs to the owner |
+| `Whole o-- Part`                | Aggregation; the part can exist independently         |
+| `Source --> Target`             | Navigable association                                 |
+| `Source ..> Target`             | Dependency                                            |
+| `Contract <\|.. Implementation` | Realization                                           |
+| `Source -- Target`              | Undirected structural link                            |
 
 Label a relationship with a concise verb when its role is not evident. Add
 quoted multiplicities beside each endpoint only when cardinality is known. Do

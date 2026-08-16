@@ -2,9 +2,10 @@ import { DESIGN_SYSTEM_FOUNDATION_CSS } from "./design-system-foundation.ts";
 
 const DEFAULT_TITLE = "How the system works";
 const TITLE_PLACEHOLDER = "{{DOCUMENT_TITLE}}";
+const LANGUAGE_PLACEHOLDER = "{{DOCUMENT_LANGUAGE}}";
 
 const HTML_SCAFFOLD = `<!doctype html>
-<html lang="en">
+<html lang="${LANGUAGE_PLACEHOLDER}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,7 @@ const HTML_SCAFFOLD = `<!doctype html>
   <header class="hero">
     <p class="eyebrow">Interactive field guide</p>
     <h1>${TITLE_PLACEHOLDER}</h1>
-    <p class="lede">Name the learner's goal and the smallest complete system in one sentence.</p>
+    <p class="lede" data-scaffold-placeholder>Name the learner's goal and the smallest complete system in one sentence.</p>
   </header>
   <nav class="field-nav" aria-label="Field guide sections">
     <a href="#overview"><span aria-hidden="true">01</span> Overview</a>
@@ -25,28 +26,37 @@ const HTML_SCAFFOLD = `<!doctype html>
   <main id="main">
     <section id="overview" aria-labelledby="overview-title">
       <header><p class="eyebrow">Step 01 · Orientation</p><h2 id="overview-title">See the whole system</h2></header>
-      <div class="visual-stage"><div class="placeholder">Replace with the minimum complete ecosystem.</div></div>
+      <div class="visual-stage"><div class="placeholder" data-scaffold-placeholder>Replace with the minimum complete ecosystem.</div></div>
     </section>
     <section id="mechanism" aria-labelledby="mechanism-title">
       <header><p class="eyebrow">Step 02 · Mechanism</p><h2 id="mechanism-title">Watch one real flow</h2></header>
-      <div class="visual-stage"><div class="placeholder">Replace with an interactive diagram and observable state.</div></div>
+      <div class="visual-stage"><div class="placeholder" data-scaffold-placeholder>Replace with an interactive diagram and observable state.</div></div>
     </section>
   </main>
-  <footer>Scope, sources, and the boundary of any analogy.</footer>
+  <footer data-scaffold-placeholder>Scope, sources, and the boundary of any analogy.</footer>
 </body>
 </html>
 `;
 
 export interface RenderHtmlScaffoldRequest {
+  readonly language: string;
   readonly title?: string;
 }
 
 /** Render a portable visualization shell without performing filesystem I/O. */
-export function renderHtmlScaffold(
-  request: RenderHtmlScaffoldRequest = {},
-): string {
+export function renderHtmlScaffold(request: RenderHtmlScaffoldRequest): string {
   const title = request.title?.trim() || DEFAULT_TITLE;
-  return HTML_SCAFFOLD.replaceAll(TITLE_PLACEHOLDER, escapeHtml(title));
+  const language = request.language.trim();
+  if (!isLanguageTag(language))
+    throw new Error("language must be a BCP 47 tag");
+  return HTML_SCAFFOLD.replaceAll(TITLE_PLACEHOLDER, escapeHtml(title)).replace(
+    LANGUAGE_PLACEHOLDER,
+    escapeHtml(language),
+  );
+}
+
+function isLanguageTag(value: string): boolean {
+  return /^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/i.test(value);
 }
 
 function escapeHtml(value: string): string {

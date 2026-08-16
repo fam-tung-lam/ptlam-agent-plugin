@@ -24,7 +24,11 @@ trigger-synchronized structures.
       </div>
     </dl>
   </article>
-  <div class="relationship" aria-label="one session has many messages">
+  <div
+    class="relationship"
+    role="group"
+    aria-label="one session has many messages"
+  >
     1 ——— N
   </div>
   <article class="entity" data-entity="messages">

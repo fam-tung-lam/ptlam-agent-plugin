@@ -14,13 +14,13 @@ files under `i18n/`.
 
 ## Every user-visible string is a key
 
-No literal user-visible text in a widget. Add the key to `i18n/en.i18n.json`,
-add its translation to `i18n/ru.i18n.json`, and regenerate through the shared
-`build_runner` command in [SKILL.md](../SKILL.md#shared-toolchain).
+No literal user-visible text in a widget. Add the key to the source-locale
+catalog and every supported locale catalog under `i18n/`, then regenerate
+through the shared `build_runner` command in
+[SKILL.md](../SKILL.md#shared-toolchain).
 
-Both locale files carry every key. A key present in one and missing from the
-other is a build-time error, which is the point — it is far cheaper than
-discovering it on a Russian device.
+Every locale file carries every key. A missing translation is a build-time
+error, which is cheaper than discovering it on a user's device.
 
 Name a key for what the text means, not what it says: `orders.emptyState.title`,
 not `orders.noOrdersYet`. The wording changes; the meaning is why the key is
@@ -50,8 +50,8 @@ locale and no `BuildContext`.
 An error shown to the user is a failure variant that the widget maps to a key —
 see [models.md](models.md).
 
-`strings.g.dart` is generated. Do not read or edit it, and do not commit it —
-see [SKILL.md](../SKILL.md#shared-toolchain).
+`strings.g.dart` is generated. Do not edit it; follow the repository's tracked
+generated-output policy in [SKILL.md](../SKILL.md#shared-toolchain).
 
 ## Changing the locale
 

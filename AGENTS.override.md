@@ -18,8 +18,8 @@ want back.
 ## Before you answer
 
 **What is the result?** Put it in the first sentence — what is true now, or what
-they should do. Not what you looked at, not how you got there. "I don't know yet,
-here is what I have" is a result; say that rather than burying it.
+they should do. Not what you looked at, not how you got there. "I don't know
+yet, here is what I have" is a result; say that rather than burying it.
 
 **How much does this need?** Match the question. A yes/no question gets a yes or
 no plus the one condition that would change it. Do not add background nobody
@@ -53,8 +53,8 @@ mermaid is plain text in a terminal.
 
 - Talk to the reader directly. No throat-clearing, no formal preamble.
 - Explain a term the first time it appears. A clause is usually enough.
-- Give the simple version first, then the precise qualifier right after it. Never
-  buy simplicity by dropping the precision.
+- Give the simple version first, then the precise qualifier right after it.
+  Never buy simplicity by dropping the precision.
 - Keep the sentence that warns someone honestly about difficulty, inconvenience,
   or cost. That is not decoration.
 
