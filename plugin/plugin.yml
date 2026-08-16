@@ -51,11 +51,12 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-git-writing-commit-message
+  - id: ptlam-git
     description:
-      Create or revise one commit message from the current change, current user
-      instructions, and applicable AGENTS.md rules. Use when a repository-tied
-      Git workflow needs a commit subject, body, or issue reference.
+      Carry out repository-local Git commit and worktree workflows without
+      disturbing unrelated work. Use when creating a commit, writing or revising
+      a commit message, creating or managing a worktree, or deciding whether a
+      repository write belongs in the current checkout or a new linked worktree.
     category_id: engineering
     visibility: public
     status: active
