@@ -39,31 +39,29 @@ not manually edit `node_modules/` or commit it.
 
 ## Authored and generated files
 
-```text
-plugin/
-├── plugin.yml                         # authored catalog and provider selection
-└── skills/
-    └── <skill-id>/                    # authored skill
-        ├── SKILL.md
-        └── {agents,assets,references,scripts}/
-
-.claude-plugin/
-├── plugin.json                       # generated host metadata
-└── marketplace.json                  # generated host metadata
-
-.codex-plugin/
-└── plugin.json                       # generated host metadata
-
-plugin.json                           # generated Copilot host metadata
-gemini-extension.json                 # generated Gemini host metadata
-kimi.plugin.json                      # generated Kimi host metadata
-
-README.md                              # human-owned project documentation
-skills/
-├── README.md                          # generated available-skills catalog
-└── <public-skill-id>/                 # generated public skill
-    ├── SKILL.md
-    └── skills/
+```mermaid
+treeView-beta
+    ptlam-agent-plugin/
+        plugin/
+            plugin.yml ## Authored catalog and provider selection
+            skills/
+                <skill-id>/ ## Authored skill
+                    SKILL.md
+                    {agents,assets,references,scripts}/
+        .claude-plugin/
+            plugin.json ## Generated host metadata
+            marketplace.json ## Generated host metadata
+        .codex-plugin/
+            plugin.json ## Generated host metadata
+        plugin.json ## Generated Copilot host metadata
+        gemini-extension.json ## Generated Gemini host metadata
+        kimi.plugin.json ## Generated Kimi host metadata
+        README.md ## Human-owned project documentation
+        skills/
+            README.md ## Generated available-skills catalog
+            <public-skill-id>/ ## Generated public skill
+                SKILL.md
+                skills/
 ```
 
 Edit `plugin/plugin.yml` and `plugin/skills/`. The compiler owns the two Claude
