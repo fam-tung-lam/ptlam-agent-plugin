@@ -91,9 +91,10 @@ When designing or reshaping a package, read
 [package layout](references/skill-package-layout.md). It owns what each
 directory holds, the file-length limit, and when detail leaves `SKILL.md`.
 
-Assign each tool and package rule to the workflow that uses it. Keep shared
-guidance on the normal path in `SKILL.md`; route conditional guidance to that
-workflow's owning reference and point there instead of repeating it.
+Assign guidance for each supporting resource—the tools, services, packages,
+sources, or materials a workflow relies on—to the workflow that uses it. Keep
+guidance shared by the normal path in `SKILL.md`; route conditional guidance to
+that workflow's owning reference and point there instead of repeating it.
 
 Choose how the skill starts:
 
