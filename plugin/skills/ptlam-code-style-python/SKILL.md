@@ -20,13 +20,16 @@ the standard they satisfy.
 4. Apply stronger new-code rules to code you add or substantively change.
    Leave unrelated legacy inconsistencies alone.
 
-The configured formatter owns whitespace, line length, quotes, and import
-layout. Match it instead of importing another project's house style.
+For a new Python project, use uv for the environment and dependency lock, Ruff
+for formatting and linting, ty for static type checking, and pytest with
+pytest-mock, pytest-cov, and pytest-asyncio for tests. In an existing project,
+keep its explicit working toolchain until replacing it is part of the task.
 
 ## Pick a reference
 
 | Concern | Reference |
 | --- | --- |
+| Creating or standardizing the project environment, checks, or CI | [project-tooling.md](references/project-tooling.md) |
 | Adding a module, publishing a package name, or resolving an import cycle | [modules-and-imports.md](references/modules-and-imports.md) |
 | Writing or changing annotations and runtime preconditions | [typing.md](references/typing.md) |
 | Performing I/O or managing concurrent work and resource lifetime | [async.md](references/async.md) |

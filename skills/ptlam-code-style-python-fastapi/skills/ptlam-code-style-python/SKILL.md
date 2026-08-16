@@ -1,14 +1,15 @@
 ---
 name: ptlam-code-style-python
 description:
-  Write, review, and fix Python source and pytest code against conventions for
-  the project toolchain, package boundaries, imports, typing, async work,
-  Pydantic models, docstrings, logging, and tests. Use when adding or changing
-  Python code, publishing a package API, choosing sync or async I/O, defining a
-  Pydantic model, or fixing a formatter, linter, type-check, or pytest failure.
-  Apply ptlam-code-style first for the standard these mechanics satisfy. Use as
-  the foundation for Python framework specializations. Do not use for non-Python
-  code.
+  Write, review, and fix Python source and pytest code against conventions for a
+  uv, Ruff, ty, and pytest toolchain with pytest-mock, pytest-cov, and
+  pytest-asyncio; package boundaries; imports; typing; async work; Pydantic
+  models; docstrings; logging; and tests. Use when starting or standardizing a
+  Python project, changing dependencies or CI, adding or changing Python code,
+  publishing a package API, choosing sync or async I/O, defining a Pydantic
+  model, or fixing a Ruff, ty, or pytest failure. Apply ptlam-code-style first
+  for the standard these mechanics satisfy. Use as the foundation for Python
+  framework specializations. Do not use for non-Python code.
 ---
 
 # PTLam Python Code Style
@@ -47,13 +48,16 @@ Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 4. Apply stronger new-code rules to code you add or substantively change.
    Leave unrelated legacy inconsistencies alone.
 
-The configured formatter owns whitespace, line length, quotes, and import
-layout. Match it instead of importing another project's house style.
+For a new Python project, use uv for the environment and dependency lock, Ruff
+for formatting and linting, ty for static type checking, and pytest with
+pytest-mock, pytest-cov, and pytest-asyncio for tests. In an existing project,
+keep its explicit working toolchain until replacing it is part of the task.
 
 ## Pick a reference
 
 | Concern | Reference |
 | --- | --- |
+| Creating or standardizing the project environment, checks, or CI | [project-tooling.md](references/project-tooling.md) |
 | Adding a module, publishing a package name, or resolving an import cycle | [modules-and-imports.md](references/modules-and-imports.md) |
 | Writing or changing annotations and runtime preconditions | [typing.md](references/typing.md) |
 | Performing I/O or managing concurrent work and resource lifetime | [async.md](references/async.md) |
