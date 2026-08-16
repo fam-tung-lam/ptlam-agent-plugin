@@ -5,11 +5,11 @@ durable handoff.
 
 Choose from the whole call graph:
 
-| Calls | Handler or dependency |
-| --- | --- |
-| Awaitable non-blocking I/O | `async def`, with every operation awaited |
+| Calls                                                   | Handler or dependency                           |
+| ------------------------------------------------------- | ----------------------------------------------- |
+| Awaitable non-blocking I/O                              | `async def`, with every operation awaited       |
 | A synchronous database, SDK, filesystem, or network API | `def`, so FastAPI may run it in its thread pool |
-| CPU-heavy or durable work | A process or job system owned by the repository |
+| CPU-heavy or durable work                               | A process or job system owned by the repository |
 
 FastAPI runs ordinary `def` handlers and dependencies in a thread pool. It does
 not move a synchronous utility called from your `async def`; that call blocks

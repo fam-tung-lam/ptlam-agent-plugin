@@ -1,7 +1,7 @@
 # FastAPI Use Cases
 
-One application operation per verb-first file under `<feature>/usecases/`.
-Use cases are the only path from an HTTP handler or durable task to a repository.
+One application operation per verb-first file under `<feature>/usecases/`. Use
+cases are the only path from an HTTP handler or durable task to a repository.
 
 ## Keep the operation transport-neutral
 

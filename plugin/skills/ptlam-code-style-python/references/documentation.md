@@ -2,8 +2,8 @@
 
 Python docstring syntax and tool mechanics.
 
-Use the repository's established docstring convention and documentation tool.
-Do not introduce Google, NumPy, Sphinx, or another section style into a project
+Use the repository's established docstring convention and documentation tool. Do
+not introduce Google, NumPy, Sphinx, or another section style into a project
 that already chose one.
 
 When the repository is silent, use a PEP 257-compatible triple-double-quoted

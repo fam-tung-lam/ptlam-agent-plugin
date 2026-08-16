@@ -17,13 +17,13 @@ must distinguish from the write path.
 
 ## Give each boundary one responsibility
 
-| Boundary | Owns | Does not own |
-| --- | --- | --- |
-| Router | HTTP input, auth, response schema, status | Policy, queries, transaction decisions |
-| Use case | One operation, orchestration, transaction boundary | `Request`, `Depends`, `HTTPException` |
-| Domain | Business values, rules, and failures | FastAPI or persistence mechanics |
-| Repository | One persistence or remote-data contract | Transport schemas, HTTP errors, commit policy |
-| Pydantic schema | Request and response validation and serialization | Database writes or orchestration |
+| Boundary        | Owns                                               | Does not own                                  |
+| --------------- | -------------------------------------------------- | --------------------------------------------- |
+| Router          | HTTP input, auth, response schema, status          | Policy, queries, transaction decisions        |
+| Use case        | One operation, orchestration, transaction boundary | `Request`, `Depends`, `HTTPException`         |
+| Domain          | Business values, rules, and failures               | FastAPI or persistence mechanics              |
+| Repository      | One persistence or remote-data contract            | Transport schemas, HTTP errors, commit policy |
+| Pydantic schema | Request and response validation and serialization  | Database writes or orchestration              |
 
 Dependencies assemble the path at the framework boundary. Convert transport,
 persistence, vendor, and domain values where their meaning changes. Framework

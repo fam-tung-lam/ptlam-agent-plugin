@@ -39,9 +39,9 @@ Use casts and ignores only after narrowing cannot express a fact the checker
 misses. Keep a suppression on the smallest expression, include the exact error
 code when supported, and state the reason the checker cannot prove it.
 
-For a package that promises downstream type information, include and publish
-the repository's `py.typed` marker. Test the built artifact rather than assuming
-the source-tree configuration reaches consumers.
+For a package that promises downstream type information, include and publish the
+repository's `py.typed` marker. Test the built artifact rather than assuming the
+source-tree configuration reaches consumers.
 
 Finish when the configured checker reports no new failure in changed code and
 the annotations describe values the runtime really returns.

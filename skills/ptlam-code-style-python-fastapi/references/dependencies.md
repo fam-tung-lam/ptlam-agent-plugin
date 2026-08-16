@@ -27,7 +27,8 @@ dependency scope option to the installed FastAPI version and the response
 lifetime; streaming responses can outlive the handler return.
 
 The official [dependency](https://fastapi.tiangolo.com/tutorial/dependencies/)
-and [yield dependency](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/)
+and
+[yield dependency](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/)
 guides own current caching, scope, and teardown behavior.
 
 ## Fail closed

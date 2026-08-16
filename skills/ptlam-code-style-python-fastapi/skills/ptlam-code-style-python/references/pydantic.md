@@ -19,8 +19,8 @@ internal state that needs none of those behaviors.
   model when constraints or validators must also run on defaults.
 - Choose coercive or strict validation at the owning boundary and test the
   accepted conversions; do not enable strict mode everywhere by reflex.
-- Set shared behavior with `ConfigDict`; choose the extra-field policy and
-  alias behavior deliberately instead of inheriting them by accident.
+- Set shared behavior with `ConfigDict`; choose the extra-field policy and alias
+  behavior deliberately instead of inheriting them by accident.
 - Use `field_validator` for one field and `model_validator` for a cross-field
   invariant. A validator is deterministic, performs no I/O, and returns the
   value or instance its mode requires.

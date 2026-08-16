@@ -15,8 +15,8 @@ the language-neutral foundation own everything underneath them.
    the installed FastAPI, Starlette, and Pydantic versions and whether each
    database, HTTP, storage, and queue client is synchronous or asynchronous.
 3. Map the current source and test tree. Trace one request through router
-   inclusion, dependencies, the handler, use case, repository, session or
-   remote client, exception handlers, middleware, and tests. Give every prefix,
+   inclusion, dependencies, the handler, use case, repository, session or remote
+   client, exception handlers, middleware, and tests. Give every prefix,
    resource, transaction, and error translation one owner.
 4. Treat working configuration and verified implementation as evidence. Do not
    turn an incidental legacy pattern into a rule or weaken the Python skill to
@@ -24,20 +24,20 @@ the language-neutral foundation own everything underneath them.
 
 ## Pick a reference
 
-| Concern | Reference |
-| --- | --- |
-| Starting or reorganizing the service package, a feature, shared code, or the test tree | [file-organization.md](references/file-organization.md) |
-| Constructing the app, startup and shutdown, settings, routers, or middleware | [application.md](references/application.md) |
-| Declaring a path, request input, response output, status, or OpenAPI operation | [routes.md](references/routes.md) |
-| Injecting authentication, a session, request context, or another capability | [dependencies.md](references/dependencies.md) |
-| Choosing `def`, `async def`, streaming, or a background handoff | [concurrency.md](references/concurrency.md) |
-| Tracing or enforcing the route-to-use-case-to-repository request pipeline | [architecture.md](references/architecture.md) |
-| Designing a use case or choosing its transaction boundary | [use-cases.md](references/use-cases.md) |
-| Publishing a feature facade, enforcing imports, or breaking a feature cycle | [feature-boundaries.md](references/feature-boundaries.md) |
-| Registering SQLAlchemy models or wiring Alembic metadata | [persistence.md](references/persistence.md) |
-| Mapping validation, domain, authentication, or unexpected failures | [errors.md](references/errors.md) |
-| Configuring access logging, correlation, error capture, or body visibility | [application.md](references/application.md) |
-| Testing an endpoint, dependency, lifespan, or generated OpenAPI contract | [testing.md](references/testing.md) |
+| Concern                                                                                | Reference                                                 |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Starting or reorganizing the service package, a feature, shared code, or the test tree | [file-organization.md](references/file-organization.md)   |
+| Constructing the app, startup and shutdown, settings, routers, or middleware           | [application.md](references/application.md)               |
+| Declaring a path, request input, response output, status, or OpenAPI operation         | [routes.md](references/routes.md)                         |
+| Injecting authentication, a session, request context, or another capability            | [dependencies.md](references/dependencies.md)             |
+| Choosing `def`, `async def`, streaming, or a background handoff                        | [concurrency.md](references/concurrency.md)               |
+| Tracing or enforcing the route-to-use-case-to-repository request pipeline              | [architecture.md](references/architecture.md)             |
+| Designing a use case or choosing its transaction boundary                              | [use-cases.md](references/use-cases.md)                   |
+| Publishing a feature facade, enforcing imports, or breaking a feature cycle            | [feature-boundaries.md](references/feature-boundaries.md) |
+| Registering SQLAlchemy models or wiring Alembic metadata                               | [persistence.md](references/persistence.md)               |
+| Mapping validation, domain, authentication, or unexpected failures                     | [errors.md](references/errors.md)                         |
+| Configuring access logging, correlation, error capture, or body visibility             | [application.md](references/application.md)               |
+| Testing an endpoint, dependency, lifespan, or generated OpenAPI contract               | [testing.md](references/testing.md)                       |
 
 SQLAlchemy queries and mappings, Alembic revision contents, Celery execution,
 Sentry capture, and other integrations keep their repository mechanics. This

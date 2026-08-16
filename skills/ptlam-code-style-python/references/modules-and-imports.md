@@ -10,19 +10,20 @@ capability structure under `tests/`.
 
 Python spells an internal module or name with a leading underscore. Publish a
 supported package name deliberately through its package entry point and
-`__all__` when the repository uses it. Do not expose an implementation merely
-to make a test import it.
+`__all__` when the repository uses it. Do not expose an implementation merely to
+make a test import it.
 
 A public re-export is a compatibility promise. Preserve it, deprecate it through
 the project's established mechanism, or treat its removal as a breaking change.
-Keep `__init__.py` focused on package composition; importing the package must not
-start services, read remote state, or perform expensive work.
+Keep `__init__.py` focused on package composition; importing the package must
+not start services, read remote state, or perform expensive work.
 
 ## Keep imports directional
 
 - Let the formatter or import sorter own grouping and order.
 - Match the package's established choice of absolute or explicit relative
-  imports. Do not mix styles within one changed module without a boundary reason.
+  imports. Do not mix styles within one changed module without a boundary
+  reason.
 - A consumer outside the package imports its published surface. Internal code
   may import the owning module directly when re-exporting through `__init__.py`
   would eagerly load unrelated code or create a cycle.

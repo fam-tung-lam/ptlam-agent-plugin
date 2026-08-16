@@ -87,30 +87,30 @@ code review without a renderer-version requirement.
 
 ## Give each package one role
 
-| Path | Owns |
-| --- | --- |
-| `main.py` | Nothing except `app = create_app()` |
-| `app.py` | `FastAPI`, lifespan, middleware, feature routers, and exception handlers; no business policy |
-| `settings.py`, `db.py` | One-time configuration, engine, and session setup |
-| `ops.py` | Unversioned liveness, readiness, and build information |
-| `integrations/` | One client or pool facade per external system; not the feature behavior that consumes it |
-| `shared/` | Framework-neutral code with at least two proven feature consumers |
-| `<feature>/` | One business capability and everything that changes with it |
+| Path                   | Owns                                                                                         |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| `main.py`              | Nothing except `app = create_app()`                                                          |
+| `app.py`               | `FastAPI`, lifespan, middleware, feature routers, and exception handlers; no business policy |
+| `settings.py`, `db.py` | One-time configuration, engine, and session setup                                            |
+| `ops.py`               | Unversioned liveness, readiness, and build information                                       |
+| `integrations/`        | One client or pool facade per external system; not the feature behavior that consumes it     |
+| `shared/`              | Framework-neutral code with at least two proven feature consumers                            |
+| `<feature>/`           | One business capability and everything that changes with it                                  |
 
 ## Give each feature one public surface
 
-| Path | Put here |
-| --- | --- |
-| `__init__.py` | The facade: only use cases, schemas, and exceptions another feature needs |
-| `router.py` | Typed handlers; split to `routers/v1.py` and `routers/v2.py` only after another API version exists |
-| `schemas.py` | Pydantic request and response models, separate from persistence models |
-| `models/` | SQLAlchemy tables, normally one primary table per file, all registered by its initializer |
-| `usecases/` | One application operation per verb-first file |
-| `repository.py` | The storage protocol and adapter; split by backend only when another backend exists |
-| `dependencies.py` | `Depends` providers that assemble use cases from sessions and integration facades |
-| `exceptions.py` | Domain failures raised by this feature |
-| `constants/`, `utils/` | Optional module-local, low-level reuse with no business policy |
-| `tasks.py` | Thin durable-job entry points registered on the shared queue app |
+| Path                   | Put here                                                                                           |
+| ---------------------- | -------------------------------------------------------------------------------------------------- |
+| `__init__.py`          | The facade: only use cases, schemas, and exceptions another feature needs                          |
+| `router.py`            | Typed handlers; split to `routers/v1.py` and `routers/v2.py` only after another API version exists |
+| `schemas.py`           | Pydantic request and response models, separate from persistence models                             |
+| `models/`              | SQLAlchemy tables, normally one primary table per file, all registered by its initializer          |
+| `usecases/`            | One application operation per verb-first file                                                      |
+| `repository.py`        | The storage protocol and adapter; split by backend only when another backend exists                |
+| `dependencies.py`      | `Depends` providers that assemble use cases from sessions and integration facades                  |
+| `exceptions.py`        | Domain failures raised by this feature                                                             |
+| `constants/`, `utils/` | Optional module-local, low-level reuse with no business policy                                     |
+| `tasks.py`             | Thin durable-job entry points registered on the shared queue app                                   |
 
 Use `__init__.py` as the facade instead of a stuttering `<feature>_module.py`.
 Use `schemas.py`, FastAPI's established term, instead of a parallel `dtos/`
@@ -119,15 +119,15 @@ persistence models and justify the mapping cost.
 
 ## Keep optional folders narrow
 
-| Decision | Rule |
-| --- | --- |
-| Create | Start a helper private; create `utils/` or `constants/` only when a second file in the feature consumes it |
-| Promote | Move a framework-neutral item to `shared/` only when a second feature consumes it |
-| Name | Use one concept per file; never `helpers.py`, `misc.py`, `common.py`, or `general.py` |
-| Configure | Put timeouts, page sizes, retries, flags, and URLs in `settings.py`, not `constants/` |
-| Bound | Keep model, repository, and use-case imports out of `utils/`; domain behavior stays in its feature owner |
-| Reuse | Prefer the standard library or an installed dependency before adding another helper |
-| Avoid shadowing | Do not add `types.py`, `logging.py`, `email.py`, `secrets.py`, `queue.py`, `json.py`, or `datetime.py` |
+| Decision        | Rule                                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------- |
+| Create          | Start a helper private; create `utils/` or `constants/` only when a second file in the feature consumes it |
+| Promote         | Move a framework-neutral item to `shared/` only when a second feature consumes it                          |
+| Name            | Use one concept per file; never `helpers.py`, `misc.py`, `common.py`, or `general.py`                      |
+| Configure       | Put timeouts, page sizes, retries, flags, and URLs in `settings.py`, not `constants/`                      |
+| Bound           | Keep model, repository, and use-case imports out of `utils/`; domain behavior stays in its feature owner   |
+| Reuse           | Prefer the standard library or an installed dependency before adding another helper                        |
+| Avoid shadowing | Do not add `types.py`, `logging.py`, `email.py`, `secrets.py`, `queue.py`, `json.py`, or `datetime.py`     |
 
 Finish when the service has one importable package, each feature publishes one
 facade, shared code has proven consumers, optional packages contain real files,

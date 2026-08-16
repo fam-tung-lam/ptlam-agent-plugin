@@ -39,8 +39,8 @@ Starlette version changes.
 - Order middleware deliberately. A middleware that records a response must see
   the exception and response transformations it is meant to observe.
 - Configure access logging, error capture, and correlation once. Record the
-  method, canonical path, status, duration, and correlation identifier needed
-  by operators.
+  method, canonical path, status, duration, and correlation identifier needed by
+  operators.
 - Make query, header, request-body, and error-body capture opt-in, bounded, and
   redacted. Let one outer boundary capture an unexpected error after middleware
   records and re-raises it.
