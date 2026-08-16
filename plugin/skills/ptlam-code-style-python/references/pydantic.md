@@ -1,8 +1,7 @@
 # Pydantic v2
 
-Pydantic v2 mechanics for a Python project that already uses Pydantic. The
-`ptlam-code-style` foundation owns the public contract; this reference owns how
-the model validates and serializes it.
+Pydantic v2 validation and serialization mechanics for a Python project that
+already uses Pydantic.
 
 Check the installed major version and the project's shared base models before
 editing. If the project uses Pydantic v1 or a compatibility layer, follow that

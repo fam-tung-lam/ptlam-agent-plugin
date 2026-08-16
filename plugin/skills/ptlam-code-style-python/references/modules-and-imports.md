@@ -1,7 +1,6 @@
 # Python Modules and Imports
 
-The Python mechanics for the public boundary owned by the `ptlam-code-style`
-foundation, plus import and file placement rules.
+Python import, publication, and file-placement mechanics.
 
 ## Publish one intentional API
 

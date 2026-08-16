@@ -1,7 +1,6 @@
 # FastAPI Testing
 
-ASGI mechanics underneath the test standard owned by `ptlam-code-style` and the
-pytest mechanics owned by `ptlam-code-style-python`.
+ASGI test mechanics for an assembled FastAPI application.
 
 Exercise the assembled application through its HTTP boundary. Assert the exact
 status, response body, important headers, authentication result, and externally
@@ -34,8 +33,8 @@ Install the override in a fixture. In `finally`, restore that key's previous
 value or delete only that key so the test preserves overrides it did not own.
 
 Keep the assembled router, validation, dependency graph, exception handlers,
-and middleware real. Apply the foundation's test-double rule at external
-effects exposed through the selected dependency or application seam.
+and middleware real. Replace external effects only through the selected
+dependency or application seam.
 
 Cover success, malformed and boundary input, missing authentication, denied
 authorization, mapped domain failure, and unexpected external failure when the

@@ -1,9 +1,10 @@
 # PTLam FastAPI Code Style
 
-Conventions for the FastAPI boundary of a Python service: application lifespan,
-router composition, HTTP contracts, dependencies, concurrency, domain seams,
-errors, observability, and API tests. This skill owns FastAPI mechanics only;
-Python and the language-neutral foundation own everything underneath them.
+Conventions for the FastAPI boundary of a Python service: feature-module
+structure, application composition and lifespan, HTTP contracts, dependencies,
+concurrency, domain seams, errors, observability, and API tests. This skill owns
+FastAPI mechanics only; Python and the language-neutral foundation own
+everything underneath them.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -13,10 +14,10 @@ Python and the language-neutral foundation own everything underneath them.
 2. Read `pyproject.toml`, the lockfile, and the application entry point. Record
    the installed FastAPI, Starlette, and Pydantic versions and whether each
    database, HTTP, storage, and queue client is synchronous or asynchronous.
-3. Trace one request through router inclusion, dependencies, the handler,
-   application or service code, persistence, exception handlers, middleware,
-   and tests. Give every prefix, resource, transaction, and error translation
-   one owner.
+3. Map the current source and test tree. Trace one request through router
+   inclusion, dependencies, the handler, application code, persistence,
+   exception handlers, middleware, and tests. Give every prefix, resource,
+   transaction, and error translation one owner.
 4. Treat working configuration and verified implementation as evidence. Do not
    turn an incidental legacy pattern into a rule or weaken the Python skill to
    match it.
@@ -25,6 +26,7 @@ Python and the language-neutral foundation own everything underneath them.
 
 | Concern | Reference |
 | --- | --- |
+| Starting or reorganizing the app, feature modules, shared code, or tests | [file-organization.md](references/file-organization.md) |
 | Constructing the app, startup and shutdown, settings, routers, or middleware | [application.md](references/application.md) |
 | Declaring a path, request input, response output, status, or OpenAPI operation | [routes.md](references/routes.md) |
 | Injecting authentication, a session, request context, or another capability | [dependencies.md](references/dependencies.md) |

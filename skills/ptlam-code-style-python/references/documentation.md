@@ -1,7 +1,6 @@
 # Python Docstrings
 
-Python syntax and tool mechanics for the documentation standard owned by the
-`ptlam-code-style` foundation.
+Python docstring syntax and tool mechanics.
 
 Use the repository's established docstring convention and documentation tool.
 Do not introduce Google, NumPy, Sphinx, or another section style into a project
