@@ -1,7 +1,6 @@
 # Logging
 
-The Flutter logging mechanics. The `ptlam-code-style` foundation owns what a
-record must contain, which level it belongs at, and what never appears in one.
+The Flutter mechanics for emitting, routing, and sanitizing log records.
 
 ## AppLogger is the only entry point
 

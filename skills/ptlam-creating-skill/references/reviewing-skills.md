@@ -17,8 +17,7 @@ compile, stage, or publish files during a review.
    map from `skill-atomicity.md`.
 3. Read `skill-package-layout.md`, `writing-for-maintainers.md`, and
    `prompting-best-practices.md` as review criteria.
-4. Read `ptlam-mermaiding` before judging each existing diagram.
-5. Run read-only validators and inspect headings, links, file consumers, and
+4. Run read-only validators and inspect headings, links, file consumers, and
    declared dependency edges.
 
 ## Return one verdict

@@ -14,8 +14,7 @@ description:
 # PTLam Flutter Code Style
 
 Conventions for Flutter application code: the shared toolchain, architecture,
-state, source tree, widgets, external boundaries, and tests. This skill owns the
-Flutter mechanics only; the foundation owns the standard they satisfy.
+state, source tree, widgets, external boundaries, and tests.
 
 ## Required skills
 

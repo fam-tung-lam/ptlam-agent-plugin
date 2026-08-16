@@ -1,7 +1,7 @@
 # File Organization
 
-Where Flutter puts source and test files, and how a feature spells the published
-surface owned by the `ptlam-code-style` foundation.
+Where Flutter puts source and test files, and how a feature publishes its
+surface.
 
 ## The source tree
 

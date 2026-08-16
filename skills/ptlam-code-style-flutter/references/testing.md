@@ -1,12 +1,12 @@
 # Flutter Testing
 
-The Flutter mechanics underneath the test behavior, level, placement, and double
-rules owned by the `ptlam-code-style` foundation.
+The Flutter mechanics for each test level, test double, BLoC test, and widget
+test.
 
 Use the Flutter SDK's `flutter_test`,
 [`bloc_test`](https://pub.dev/packages/bloc_test) for BLoC behavior, and
-[`mockito`](https://pub.dev/packages/mockito) when the foundation resolves a
-generated mock as the smallest suitable double.
+[`mockito`](https://pub.dev/packages/mockito) when the selected double is a
+generated mock.
 
 ## Supported local levels
 
@@ -17,8 +17,8 @@ generated mock as the smallest suitable double.
 | UI golden         | `fvm flutter test` with a stable surface, deterministic fonts, locale, size, theme, and approved image baseline                                                                   |
 | End-to-end        | `fvm flutter test integration_test` on the smallest real target that exposes the selected journey risk                                                                            |
 
-The foundation selects the level from the risk. Do not classify a test by its
-directory name or assume every local integration test pumps a widget tree.
+The selected level determines the Flutter command. A directory name does not
+select the level, and a local integration test need not pump a widget tree.
 
 ## BLoC tests
 

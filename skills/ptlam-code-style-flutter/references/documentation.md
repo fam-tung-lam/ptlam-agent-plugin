@@ -1,7 +1,6 @@
 # Dartdoc Mechanics
 
-How Flutter code spells the public documentation contract owned by the
-`ptlam-code-style` foundation.
+How Flutter code spells a public documentation contract with Dartdoc.
 
 ## Form
 
