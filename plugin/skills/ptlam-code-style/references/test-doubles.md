@@ -50,23 +50,27 @@ In a separate test-root layout, a level-specific double remains inside that
 level. An identical semantic double already reused across levels belongs at the
 nearest common capability scope:
 
-```text
-<test-root>/<capability>/
-├── <test-doubles>/                 # genuinely shared across levels
-├── <unit-level>/
-│   └── <test-doubles>/             # unit-only
-└── <integration-level>/
-    └── <test-doubles>/             # integration-only
+```mermaid
+treeView-beta
+    <test-root>/
+        <capability>/
+            <test-doubles>/ ## Genuinely shared across levels
+            <unit-level>/
+                <test-doubles>/ ## Unit only
+            <integration-level>/
+                <test-doubles>/ ## Integration only
 ```
 
 In a source-adjacent layout, keep the double beside the nearest common group of
 test files:
 
-```text
-<source-root>/<capability>/
-├── <test-doubles>/                 # used by neighboring tests
-├── first_test.<ext>
-└── second_test.<ext>
+```mermaid
+treeView-beta
+    <source-root>/
+        <capability>/
+            <test-doubles>/ ## Used by neighboring tests
+            first_test.<ext>
+            second_test.<ext>
 ```
 
 Use the repository's established spelling, such as `test-doubles` or

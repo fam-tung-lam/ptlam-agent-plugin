@@ -6,57 +6,58 @@ create-structure-on-demand rule these paths satisfy.
 
 ## The source tree
 
-```text
-<project_name>/
-├── .fvmrc
-├── analysis_options.yaml
-├── build.yaml                              # route, Slang, JSON, and Freezed generators
-├── pubspec.yaml
-├── pubspec.lock
-├── lib/
-│   ├── main.dart                           # runs the app, and nothing else
-│   ├── app/                                # UI shell, routing, and global composition only
-│   │   ├── app.dart                        # installs the design-system ThemeData
-│   │   ├── app_router.dart
-│   │   └── app_dependencies.dart           # get_it registrations; concrete wiring only
-│   ├── packages/                           # boundaries prepared for extraction as real packages
-│   │   ├── <project_name>_logger/
-│   │   │   ├── <project_name>_logger.dart  # public export
-│   │   │   └── src/
-│   │   │       └── app_logger.dart
-│   │   └── <project_name>_design_system/
-│   │       ├── <project_name>_design_system.dart
-│   │       └── src/
-│   │           ├── style/                  # color, typography, icons, elevation, shape, motion
-│   │           ├── theme/                  # light and dark ThemeData
-│   │           └── components/             # shared buttons, indicators, pickers
-│   └── features/
-│       ├── core/                           # what two or more features genuinely share
-│       ├── localization/                   # localization is a feature, not a utility
-│       │   ├── i18n/                       # en.i18n.json, ru.i18n.json
-│       │   ├── localization.dart
-│       │   ├── ui/
-│       │   ├── models/
-│       │   ├── bloc/
-│       │   ├── usecases/
-│       │   └── repositories/
-│       └── <feature_name>/
-│           ├── <feature_name>.dart         # public export
-│           ├── ui/                         # screens and their widgets
-│           ├── models/                     # domain models, DTOs, failures
-│           ├── bloc/
-│           ├── usecases/
-│           └── repositories/
-├── test/                                   # mirrors lib/, then adds the level
-│   ├── packages/
-│   │   └── <project_name>_logger/
-│   │       └── unit/
-│   └── features/
-│       └── <feature_name>/
-│           ├── test_doubles/               # only doubles reused across levels
-│           ├── unit/
-│           └── integration/
-└── tool/                                   # deterministic project scripts, when needed
+```mermaid
+treeView-beta
+    <project_name>/
+        .fvmrc
+        analysis_options.yaml
+        build.yaml ## Configures route, Slang, JSON, and Freezed generators
+        pubspec.yaml
+        pubspec.lock
+        lib/
+            main.dart ## Runs the app only
+            app/ ## UI shell, routing, and global composition only
+                app.dart ## Installs the design-system ThemeData
+                app_router.dart
+                app_dependencies.dart ## Registers concrete get_it dependencies
+            packages/ ## Boundaries prepared for package extraction
+                <project_name>_logger/
+                    <project_name>_logger.dart ## Public export
+                    src/
+                        app_logger.dart
+                <project_name>_design_system/
+                    <project_name>_design_system.dart
+                    src/
+                        style/ ## Color, typography, icons, elevation, shape, and motion
+                        theme/ ## Light and dark ThemeData
+                        components/ ## Shared buttons, indicators, and pickers
+            features/
+                core/ ## What two or more features genuinely share
+                localization/ ## Localization is a feature, not a utility
+                    i18n/ ## Contains en.i18n.json and ru.i18n.json
+                    localization.dart
+                    ui/
+                    models/
+                    bloc/
+                    usecases/
+                    repositories/
+                <feature_name>/
+                    <feature_name>.dart ## Public export
+                    ui/ ## Screens and their widgets
+                    models/ ## Domain models, DTOs, and failures
+                    bloc/
+                    usecases/
+                    repositories/
+        test/ ## Mirrors lib, then adds the level
+            packages/
+                <project_name>_logger/
+                    unit/
+            features/
+                <feature_name>/
+                    test_doubles/ ## Doubles reused across levels only
+                    unit/
+                    integration/
+        tool/ ## Deterministic project scripts, when needed
 ```
 
 ## A feature publishes one file
