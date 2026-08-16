@@ -11,6 +11,10 @@ A widget class can be `const`, and it rebuilds on its own. A build method
 returns a subtree that rebuilds whenever its host does, and can never be
 `const`. The two look alike in the editor and behave nothing alike at runtime.
 
+The feature's `ui/` directory contains one page and a `components/` directory.
+Give each logical part of that page its own component widget instead of nesting
+the whole page in one build method.
+
 Start every widget `StatelessWidget`. Promote to `StatefulWidget` only for state
 the widget itself owns across a rebuild: a controller, an animation, a
 subscription, a focus node. Anything a business rule observes belongs in a BLoC.
@@ -36,7 +40,7 @@ reasons the widget cannot see.
 | Both, on the same state | `BlocConsumer` |
 
 Put the builder as deep in the tree as the state is actually used. Wrapping a
-whole screen in one `BlocBuilder` rebuilds a static app bar to update a counter.
+whole page in one `BlocBuilder` rebuilds a static app bar to update a counter.
 
 Use `buildWhen` and `listenWhen` when a state class carries fields the subtree
 does not read.

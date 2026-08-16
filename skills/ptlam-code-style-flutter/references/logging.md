@@ -6,8 +6,9 @@ record must contain, which level it belongs at, and what never appears in one.
 ## AppLogger is the only entry point
 
 `AppLogger` lives in `lib/packages/<project_name>_logger/` and wraps
-`package:logging`. Application code depends on `AppLogger` and never imports
-`package:logging` directly, so the sink and the format change in one file.
+[`logging`](https://pub.dev/packages/logging). Application code depends on
+`AppLogger` and never imports `package:logging` directly, so the sink and the
+format change in one file.
 
 Never use `print` or `debugPrint` in application code. They ignore the level
 policy, ship to release builds, and cannot be captured by a crash reporter.

@@ -32,11 +32,32 @@ flowchart LR
    of truth for this project; the references below describe the intended
    baseline, not the resolved one.
 
+For a new project, use the latest stable Flutter release and the latest stable
+packages. For an existing project, match `.fvmrc`, `pubspec.yaml`, and
+`pubspec.lock`; an upgrade is a separate change with its own verification.
+
+## Shared toolchain
+
+[`build_runner`](https://pub.dev/packages/build_runner) is the common entry
+point for every package that generates code. Configure its builders in the
+project-root `build.yaml`, then regenerate all outputs with:
+
+```bash
+fvm dart run build_runner build
+```
+
+Read and edit only annotated source files. Never edit or commit generated
+outputs such as `*.g.dart`, `*.freezed.dart`, `*.mocks.dart`, route files, or
+`strings.g.dart`.
+
+When a build fails, fix the first error before reading the cascade below it.
+Rerun generation after changing any annotation or generator dependency, then
+run analysis.
+
 ## Pick a reference
 
 | Concern | Reference |
 | --- | --- |
-| Choosing the SDK, adding a package, running code generation | [toolchain.md](references/toolchain.md) |
 | Placing a layer; choosing `setState`, `Cubit`, or `Bloc`; wiring dependencies | [architecture.md](references/architecture.md) |
 | Adding a file or a feature; deciding what a feature exports | [file-organization.md](references/file-organization.md) |
 | Naming, formatting, imports, `const`, and analyzer exceptions | [dart-style.md](references/dart-style.md) |
@@ -54,9 +75,9 @@ flowchart LR
 | --- | --- |
 | `fvm flutter analyze`, a `very_good_analysis` lint | [dart-style.md](references/dart-style.md) |
 | `dart format` reports a diff | [dart-style.md](references/dart-style.md) |
-| `build_runner` fails, or a `*.g.dart` / `*.freezed.dart` is missing | [toolchain.md](references/toolchain.md) |
+| `build_runner` fails, or generated output is missing | [Shared toolchain](#shared-toolchain), then the reference that owns the generator |
 | A generated route or `strings.g.dart` symbol is undefined | [localization.md](references/localization.md) (Slang), [architecture.md](references/architecture.md) (routes) |
-| Flutter SDK or Dart SDK constraint mismatch | [toolchain.md](references/toolchain.md) |
+| Flutter SDK or Dart SDK constraint mismatch | [Before the first edit](#before-the-first-edit) |
 | `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md) |
 
 ## Finish
