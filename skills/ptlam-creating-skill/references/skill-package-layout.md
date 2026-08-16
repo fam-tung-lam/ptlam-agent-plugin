@@ -15,9 +15,9 @@ this file.
 | `assets/` | Templates and files the produced output consumes |
 
 Create a directory only when something concrete will live in it. Changelogs
-and maintainer process notes belong outside the package. Installation guidance
-a workflow needs follows the ownership rule below. Behavior another skill would
-invoke on its own belongs in its own skill.
+and maintainer process notes belong outside the package. Setup or access
+guidance a workflow needs follows the ownership rule below. Behavior another
+skill would invoke on its own belongs in its own skill.
 
 ## Keep every file at or under 100 lines
 
@@ -46,31 +46,32 @@ Every rule stays one hop from `SKILL.md`, and every condition is written once.
 A reference that repeats its own trigger creates a second place to update when
 the routing changes, and the two drift apart.
 
-## Place tool guidance with its workflow
+## Place resource guidance with its workflow
 
-A package name is not a responsibility. Give its installation, usage,
-commands, links, and caveats to the surface that owns the related workflow.
+A resource list is not a responsibility. Give setup or access, use, procedures
+or commands, links, and caveats to the surface that owns the related workflow.
 
-| Tool's reach | Owner |
+| Resource's reach | Owner |
 | --- | --- |
 | Every branch uses it, or no conditional workflow reference owns it | `SKILL.md` |
 | One conditional workflow uses it | That workflow's reference |
 
-Do not create `toolchain.md`, `dependencies.md`, or another generic reference
-solely to catalog packages. A shared tool section in `SKILL.md` is legitimate
-when it serves the whole normal path. Give each rule one owner, and link to that
-owner anywhere else the tool appears.
+Do not create a generic `tools.md`, `toolchain.md`, `dependencies.md`, or
+`sources.md` solely to catalog resources. A shared resource section in
+`SKILL.md` is legitimate when it serves the whole normal path. Give each rule
+one owner, and link to that owner anywhere else the resource appears.
 
 | Example | Owner |
 | --- | --- |
-| Dart `logging` package | `logging.md` |
-| Mockito generation and usage | `testing.md` |
-| Freezed and JSON serialization packages | `models.md` |
-| `build_runner` as the skill-wide generator entry point | `SKILL.md` |
+| Interview recorder used only during field research | `field-research.md` |
+| Legal database used only to verify citations | `citation-checking.md` |
+| Rendering tool used only to publish a report | `publishing.md` |
+| Workspace used throughout the skill | `SKILL.md` |
 
-For time-sensitive package guidance, link to the current official
-documentation and name a concrete staleness signal, such as a changed version
-constraint, a deprecation notice, or a command that no longer validates.
+For time-sensitive guidance, link to the current authoritative source, such as
+official documentation for a tool or package. Name a concrete staleness signal,
+such as changed access requirements, a revised policy or version, or a
+procedure that no longer succeeds.
 
 ## Name it after what it does
 
