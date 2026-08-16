@@ -2,20 +2,22 @@
 name: ptlam-code-style-python-fastapi
 description:
   Write, review, and fix FastAPI application code against conventions for
-  application lifespan, routes, request and response contracts, dependency
-  injection, concurrency, service boundaries, errors, observability, and API
-  tests. Use when adding or changing FastAPI endpoints, dependencies, exception
-  handlers, middleware, schemas, background handoffs, or tests, or fixing
-  OpenAPI and runtime failures. Apply ptlam-code-style-python first for the
-  Python mechanics. Do not use for Python services that do not use FastAPI.
+  project and feature-module structure, application lifespan, routes, request
+  and response contracts, dependency injection, concurrency, service boundaries,
+  errors, observability, and API tests. Use when starting or reorganizing a
+  FastAPI service or module, adding or changing endpoints, dependencies,
+  exception handlers, middleware, schemas, background handoffs, or tests, or
+  fixing OpenAPI and runtime failures. Apply ptlam-code-style-python first for
+  the Python mechanics. Do not use for Python services that do not use FastAPI.
 ---
 
 # PTLam FastAPI Code Style
 
-Conventions for the FastAPI boundary of a Python service: application lifespan,
-router composition, HTTP contracts, dependencies, concurrency, domain seams,
-errors, observability, and API tests. This skill owns FastAPI mechanics only;
-Python and the language-neutral foundation own everything underneath them.
+Conventions for the FastAPI boundary of a Python service: feature-module
+structure, application composition and lifespan, HTTP contracts, dependencies,
+concurrency, domain seams, errors, observability, and API tests. This skill owns
+FastAPI mechanics only; Python and the language-neutral foundation own
+everything underneath them.
 
 ## Required skills
 
@@ -40,10 +42,10 @@ Read [ptlam-code-style-python](skills/ptlam-code-style-python/SKILL.md).
 2. Read `pyproject.toml`, the lockfile, and the application entry point. Record
    the installed FastAPI, Starlette, and Pydantic versions and whether each
    database, HTTP, storage, and queue client is synchronous or asynchronous.
-3. Trace one request through router inclusion, dependencies, the handler,
-   application or service code, persistence, exception handlers, middleware,
-   and tests. Give every prefix, resource, transaction, and error translation
-   one owner.
+3. Map the current source and test tree. Trace one request through router
+   inclusion, dependencies, the handler, application code, persistence,
+   exception handlers, middleware, and tests. Give every prefix, resource,
+   transaction, and error translation one owner.
 4. Treat working configuration and verified implementation as evidence. Do not
    turn an incidental legacy pattern into a rule or weaken the Python skill to
    match it.
@@ -52,6 +54,7 @@ Read [ptlam-code-style-python](skills/ptlam-code-style-python/SKILL.md).
 
 | Concern | Reference |
 | --- | --- |
+| Starting or reorganizing the app, feature modules, shared code, or tests | [file-organization.md](references/file-organization.md) |
 | Constructing the app, startup and shutdown, settings, routers, or middleware | [application.md](references/application.md) |
 | Declaring a path, request input, response output, status, or OpenAPI operation | [routes.md](references/routes.md) |
 | Injecting authentication, a session, request context, or another capability | [dependencies.md](references/dependencies.md) |

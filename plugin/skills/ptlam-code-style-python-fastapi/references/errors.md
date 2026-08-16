@@ -1,8 +1,7 @@
 # FastAPI Error Boundaries
 
-How Python failures become one stable HTTP response without framework coupling
-below the boundary. The Python skill owns exception chaining and logging
-mechanics.
+How application failures become one stable HTTP response without framework
+coupling below the boundary.
 
 Let domain and infrastructure code raise their own typed failures. Map them
 once in a route only when the mapping is local, or in a registered exception

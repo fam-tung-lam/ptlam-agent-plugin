@@ -1,7 +1,6 @@
 # Python Logging
 
-Python call and configuration mechanics for the logging standard owned by the
-`ptlam-code-style` foundation.
+Python logging call and configuration mechanics.
 
 Obtain one module-scoped logger through the project-owned logging facade. When
 the standard library is the established facade, use

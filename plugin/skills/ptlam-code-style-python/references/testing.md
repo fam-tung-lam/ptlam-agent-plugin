@@ -1,8 +1,7 @@
 # Python Testing
 
-Pytest mechanics underneath the behavior, level, placement, and double rules
-owned by the `ptlam-code-style` foundation. Use the repository's existing test
-runner when it is not pytest.
+Pytest expression, fixture, patching, and cleanup mechanics. Use the
+repository's existing test runner when it is not pytest.
 
 ## Express the behavior
 
@@ -30,8 +29,7 @@ name where the code under test looks it up. Use `AsyncMock` only for an awaited
 contract, and keep one-off patches in the test that needs them.
 
 Use pytest fixtures such as `tmp_path`, `monkeypatch`, `capsys`, and `caplog`
-for the boundaries selected by the foundation instead of creating shared
-mutable test globals.
+for controlled boundaries instead of creating shared mutable test globals.
 
 The official [pytest fixture guide](https://docs.pytest.org/en/stable/how-to/fixtures.html)
 owns current fixture execution and cleanup behavior. Recheck it when the
