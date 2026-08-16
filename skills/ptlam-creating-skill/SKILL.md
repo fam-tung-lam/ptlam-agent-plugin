@@ -137,7 +137,7 @@ tree and the diff, and check every changed file:
 | --- | --- |
 | Capability | Rule 1 holds and every dependency names its owner. |
 | Layout | Every file has a consumer and fits its length limit. |
-| Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a named condition. |
+| Disclosure | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a condition named there and nowhere else. |
 | Readability | Titles, headings, and visual labels alone reveal the path and how it ends. |
 | Visual form | Each point sits in the highest form that fits it, replaces the prose it stands in for, and passes `ptlam-mermaiding` when it is a diagram. |
 | Metadata | Name, directory, description, and invocation agree with the host. |
