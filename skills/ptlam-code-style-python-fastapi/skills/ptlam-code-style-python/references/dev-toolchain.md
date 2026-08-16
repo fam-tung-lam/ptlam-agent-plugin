@@ -1,6 +1,6 @@
-# Python Project Tooling
+# Python Development Toolchain
 
-Use this workflow to establish, migrate, or run the standard Python project
+Use this workflow to establish, migrate, or run the standard Python development
 toolchain:
 
 - uv owns Python environments, dependencies, the lockfile, and command execution.

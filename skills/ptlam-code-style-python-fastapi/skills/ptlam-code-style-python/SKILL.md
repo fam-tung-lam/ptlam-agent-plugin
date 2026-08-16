@@ -12,7 +12,7 @@ description:
 
 # PTLam Python Code Style
 
-Conventions for Python library and application code: the project toolchain,
+Conventions for Python library and application code: the development toolchain,
 package boundaries, imports, typing, async work, data models, docstrings,
 logging, and tests. This skill owns Python mechanics only; the foundation owns
 the standard they satisfy.
@@ -55,7 +55,7 @@ keep its explicit working toolchain until replacing it is part of the task.
 
 | Concern | Reference |
 | --- | --- |
-| Creating or standardizing the project environment, checks, or CI | [project-tooling.md](references/project-tooling.md) |
+| Creating or standardizing the development environment, checks, or CI | [dev-toolchain.md](references/dev-toolchain.md) |
 | Adding a module, publishing a package name, or resolving an import cycle | [modules-and-imports.md](references/modules-and-imports.md) |
 | Writing or changing annotations and runtime preconditions | [typing.md](references/typing.md) |
 | Performing I/O or managing concurrent work and resource lifetime | [async.md](references/async.md) |
