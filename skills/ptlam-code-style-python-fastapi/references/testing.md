@@ -36,8 +36,8 @@ unrelated tests in place.
   policy.
 - Leave application-exception propagation enabled for ordinary tests. Only when
   asserting the outer 500 envelope, use `raise_server_exceptions=False` on
-  `TestClient` or the installed transport's
-  `raise_app_exceptions=False` equivalent.
+  `TestClient` or the installed transport's `raise_app_exceptions=False`
+  equivalent.
 
 The official [async test](https://fastapi.tiangolo.com/advanced/async-tests/)
 and [lifespan test](https://fastapi.tiangolo.com/advanced/testing-events/)
@@ -49,9 +49,9 @@ Override the exact dependency callable stored in `app.dependency_overrides`.
 Install the override in a fixture. In `finally`, restore that key's previous
 value or delete only that key so the test preserves overrides it did not own.
 
-Keep the assembled router, validation, dependency graph, exception handlers,
-and middleware real. Replace external effects only through the selected
-dependency or application seam.
+Keep the assembled router, validation, dependency graph, exception handlers, and
+middleware real. Replace external effects only through the selected dependency
+or application seam.
 
 Cover success, malformed and boundary input, missing authentication, denied
 authorization, mapped domain failure, and unexpected external failure when the

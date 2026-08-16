@@ -31,7 +31,8 @@ contract, and keep one-off patches in the test that needs them.
 Use pytest fixtures such as `tmp_path`, `monkeypatch`, `capsys`, and `caplog`
 for controlled boundaries instead of creating shared mutable test globals.
 
-The official [pytest fixture guide](https://docs.pytest.org/en/stable/how-to/fixtures.html)
+The official
+[pytest fixture guide](https://docs.pytest.org/en/stable/how-to/fixtures.html)
 owns current fixture execution and cleanup behavior. Recheck it when the
 installed major or fixture teardown behavior changes.
 

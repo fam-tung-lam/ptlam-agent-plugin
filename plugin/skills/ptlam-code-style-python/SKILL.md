@@ -17,8 +17,8 @@ the standard they satisfy.
    commands.
 3. Treat executable configuration and CI as the mechanic. A dependency being
    installed does not prove that the project runs it.
-4. Apply stronger new-code rules to code you add or substantively change.
-   Leave unrelated legacy inconsistencies alone.
+4. Apply stronger new-code rules to code you add or substantively change. Leave
+   unrelated legacy inconsistencies alone.
 
 For a new Python project, use uv for the environment and dependency lock, Ruff
 for formatting and linting, ty for static type checking, and pytest with
@@ -27,17 +27,17 @@ keep its explicit working toolchain until replacing it is part of the task.
 
 ## Pick a reference
 
-| Concern | Reference |
-| --- | --- |
-| Creating or standardizing the development environment, checks, or CI | [dev-toolchain.md](references/dev-toolchain.md) |
+| Concern                                                                  | Reference                                                   |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| Creating or standardizing the development environment, checks, or CI     | [dev-toolchain.md](references/dev-toolchain.md)             |
 | Adding a module, publishing a package name, or resolving an import cycle | [modules-and-imports.md](references/modules-and-imports.md) |
-| Writing or changing annotations and runtime preconditions | [typing.md](references/typing.md) |
-| Performing I/O or managing concurrent work and resource lifetime | [async.md](references/async.md) |
-| Raising, translating, or preserving an exception | [errors.md](references/errors.md) |
-| Defining or serializing a Pydantic model when Pydantic v2 is installed | [pydantic.md](references/pydantic.md) |
-| Writing a Python docstring or integrating API documentation | [documentation.md](references/documentation.md) |
-| Emitting or configuring Python logs | [logging.md](references/logging.md) |
-| Writing, placing, or restructuring a pytest test | [testing.md](references/testing.md) |
+| Writing or changing annotations and runtime preconditions                | [typing.md](references/typing.md)                           |
+| Performing I/O or managing concurrent work and resource lifetime         | [async.md](references/async.md)                             |
+| Raising, translating, or preserving an exception                         | [errors.md](references/errors.md)                           |
+| Defining or serializing a Pydantic model when Pydantic v2 is installed   | [pydantic.md](references/pydantic.md)                       |
+| Writing a Python docstring or integrating API documentation              | [documentation.md](references/documentation.md)             |
+| Emitting or configuring Python logs                                      | [logging.md](references/logging.md)                         |
+| Writing, placing, or restructuring a pytest test                         | [testing.md](references/testing.md)                         |
 
 ## Apply the mechanics
 
@@ -57,8 +57,8 @@ keep its explicit working toolchain until replacing it is part of the task.
    environment and smoke-test the changed public imports.
 
 Inspect the diff after any write-mode formatter or hook. Report exact commands,
-their results, configured exclusions that affect confidence, and every check
-you did not run.
+their results, configured exclusions that affect confidence, and every check you
+did not run.
 
 ## Finish
 

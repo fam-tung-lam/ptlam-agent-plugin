@@ -43,8 +43,8 @@ metadata = Base.metadata
 from myapp.registry import metadata as target_metadata
 ```
 
-Tables remain feature-owned; migrations describe the whole database. Preserve
-an established multi-database layout instead of forcing it into one history.
+Tables remain feature-owned; migrations describe the whole database. Preserve an
+established multi-database layout instead of forcing it into one history.
 
 ## Detect missing imports
 

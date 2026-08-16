@@ -68,8 +68,8 @@ contract so the valid router-to-use-case-to-repository path does not fail.
 
 Independent features coordinate in `app.py` or through events. When one caller
 must invoke another feature's facade, ignore only that exact facade import in
-the independent-sibling layer and add a forbidden contract that still blocks
-the target's router, models, repository, dependencies, and tasks. Record the
+the independent-sibling layer and add a forbidden contract that still blocks the
+target's router, models, repository, dependencies, and tasks. Record the
 exception as owned design debt.
 
 ## Break cycles at the boundary

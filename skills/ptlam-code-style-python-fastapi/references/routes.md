@@ -5,11 +5,11 @@ and OpenAPI metadata.
 
 ## Compose the URL once
 
-Give each feature one `APIRouter` in `router.py`. Split it into
-`routers/v1.py`, `routers/v2.py`, and later versions only when a second public
-version exists. Declare each shared prefix and tag either on that router or
-where a parent includes it, never at both levels. Attach the API version once
-near the application boundary.
+Give each feature one `APIRouter` in `router.py`. Split it into `routers/v1.py`,
+`routers/v2.py`, and later versions only when a second public version exists.
+Declare each shared prefix and tag either on that router or where a parent
+includes it, never at both levels. Attach the API version once near the
+application boundary.
 
 For the root operation of an already-prefixed router, use `""` unless the API
 contract intentionally includes a trailing slash. Test canonical paths with
@@ -22,9 +22,9 @@ redirect following disabled so an accidental 307 does not pass invisibly.
   needs constraints, aliases, or documentation beyond the Python type.
 - Group cohesive query fields in a Pydantic query model when the installed
   FastAPI version supports the intended binding.
-- Declare the response through a precise return type or `response_model`.
-  Choose `response_model` when the runtime object differs from the public
-  schema. Never expose an ORM object or internal field accidentally.
+- Declare the response through a precise return type or `response_model`. Choose
+  `response_model` when the runtime object differs from the public schema. Never
+  expose an ORM object or internal field accidentally.
 - Set a non-default success status with `fastapi.status`. A 204 response carries
   no body.
 - Reuse the API's stable error model and declare each promised non-success
@@ -32,7 +32,8 @@ redirect following disabled so an accidental 307 does not pass invisibly.
   customization. Raising `HTTPException` alone does not document that schema.
 
 FastAPI validates, documents, serializes, and filters a declared response. The
-official [response model guide](https://fastapi.tiangolo.com/tutorial/response-model/)
+official
+[response model guide](https://fastapi.tiangolo.com/tutorial/response-model/)
 owns the current details.
 
 Read raw request bytes only when the protocol requires the exact bytes, such as

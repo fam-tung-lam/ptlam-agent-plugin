@@ -3,15 +3,16 @@
 Use this workflow to establish, migrate, or run the standard Python development
 toolchain:
 
-- uv owns Python environments, dependencies, the lockfile, and command execution.
+- uv owns Python environments, dependencies, the lockfile, and command
+  execution.
 - Ruff owns formatting, linting, and import sorting.
 - ty owns static type checking.
-- pytest owns test execution; pytest-mock, pytest-cov, and pytest-asyncio provide
-  mocks, coverage, and asyncio support.
+- pytest owns test execution; pytest-mock, pytest-cov, and pytest-asyncio
+  provide mocks, coverage, and asyncio support.
 
 Apply the complete stack to new projects. When support includes older Python,
-pin compatible tool releases instead of raising the product's support floor.
-An existing repository's executable toolchain remains authoritative until its
+pin compatible tool releases instead of raising the product's support floor. An
+existing repository's executable toolchain remains authoritative until its
 migration is in scope. Never introduce a competing capability owner.
 
 ## Establish the stack
@@ -24,14 +25,15 @@ uv add --dev pytest pytest-mock pytest-cov pytest-asyncio ruff ty
 ```
 
 Use `uv add <package>` and `uv remove <package>` for dependency changes. Commit
-`pyproject.toml` and `uv.lock` together. Never edit `uv.lock` by hand. Pin the uv
-version in CI or the project bootstrap mechanism and update that pin
+`pyproject.toml` and `uv.lock` together. Never edit `uv.lock` by hand. Pin the
+uv version in CI or the project bootstrap mechanism and update that pin
 intentionally.
 
 Keep configuration in `pyproject.toml` unless the repository owns a dedicated
 file. Use `[tool.ruff]`, `[tool.ruff.lint]`, `[tool.ruff.format]`, and
-`[tool.ty]`. Use `[tool.pytest.ini_options]` when supporting pytest 8 or earlier;
-a pytest 9-only project may choose `[tool.pytest]`. Configure pytest in one file.
+`[tool.ty]`. Use `[tool.pytest.ini_options]` when supporting pytest 8 or
+earlier; a pytest 9-only project may choose `[tool.pytest]`. Configure pytest in
+one file.
 
 Configure `pytest-asyncio` deliberately. Use `asyncio_mode = "auto"` when
 asyncio is the project's only async test library. Use strict mode when multiple
