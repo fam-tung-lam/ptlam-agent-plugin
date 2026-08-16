@@ -78,7 +78,7 @@ Complete this step when the note's role, maturity, and next state are explicit.
 
 Read [the atomicity model](references/atomicity-model.md) before evaluating or
 rewriting content. It owns the definition of atomicity, the building-block
-classification, the refinement ladder, and effort calibration.
+classification, the focus tests, maturation stages, and effort calibration.
 
 For a new idea, capture the thought freely before editing it. For supplied
 content, preserve the distinctions among the user's idea, source wording,

@@ -15,8 +15,13 @@ styles, and components.
 - Show a visible keyboard focus indicator and a skip link to `<main>`.
 - Use one meaningful `h1`, keep heading levels sequential, and use native
   landmarks. Label repeated landmarks without repeating the landmark name.
-- Write alt text for an image's meaning and context. Use `alt=""` for a purely
-  decorative image and keep essential information out of image-embedded text.
+- Provide alternative text for an informative image and `alt=""` for a purely
+  decorative one. The content-design reference owns the wording; keep essential
+  information out of image-embedded text.
+
+Support at least 200% text scaling. Scale font size and line height together,
+and let a text-bearing control grow when its label needs more room. Reflow or
+scroll the containing region instead of clipping instructions or state.
 
 Use at least two indicators for interaction state when meaning matters, such as
 shape plus color or border plus label. Support keyboard, screen-reader, switch,

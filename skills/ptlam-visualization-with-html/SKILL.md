@@ -56,12 +56,11 @@ flowchart LR
 
 | Reference | Owns |
 | --- | --- |
-| [portable artifact contract](references/portable-artifact-contract.md) | File boundary, document semantics, accessibility baseline, progressive enhancement, and verification conditions |
 | [design-system baseline](references/design-system/design-system.md) | The token and component system the scaffold emits, and how to extend it |
 | [accessibility](references/design-system/foundations/accessibility.md) | Contrast, focus, semantics, and assistive-technology behavior |
+| [content design](references/design-system/foundations/content-design.md) | Visible wording, localization, alternative text, and truncation |
 | [interaction](references/design-system/foundations/interaction.md) | States, targets, and input handling |
 | [layout](references/design-system/foundations/layout.md) | Grid, spacing, and responsive structure |
-| [usability](references/design-system/foundations/usability.md) | Readability and comprehension defaults |
 | [document shell](references/design-system/patterns/layouts/document-shell.md) | Page frame, header, and section rhythm |
 
 ## 1. Consume the explanation and resolve the artifact

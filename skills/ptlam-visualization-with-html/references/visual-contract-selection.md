@@ -69,11 +69,9 @@ the semantic token contract being customized:
 
 Load an additional foundation only when it materially changes the artifact:
 [building for all](design-system/foundations/building-for-all.md),
-[content design](design-system/foundations/content-design.md),
 [customization](design-system/foundations/customization.md),
 [design tokens](design-system/foundations/design-tokens.md),
 [designing](design-system/foundations/designing.md),
-[writing](design-system/foundations/writing.md), or
 [platform adaptation](design-system/foundations/platform-adaptation.md).
 
 Selection is complete when each material relationship, composition, control,

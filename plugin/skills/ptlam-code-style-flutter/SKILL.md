@@ -1,8 +1,8 @@
 # PTLam Flutter Code Style
 
-Conventions for Flutter application code: the toolchain, the layering, the
-source tree, the widgets, the logging, and the tests. This skill owns the
-Flutter mechanics only; the foundation owns the standard they satisfy.
+Conventions for Flutter application code: the shared toolchain, architecture,
+state, source tree, widgets, external boundaries, and tests. This skill owns
+the Flutter mechanics only; the foundation owns the standard they satisfy.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -58,15 +58,18 @@ run analysis.
 
 | Concern | Reference |
 | --- | --- |
-| Placing a layer; choosing `setState`, `Cubit`, or `Bloc`; wiring dependencies | [architecture.md](references/architecture.md) |
+| Placing a layer, defining a repository boundary, or wiring dependencies | [architecture.md](references/architecture.md) |
+| Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md) |
+| Declaring or invoking an application route | [routing.md](references/routing.md) |
 | Adding a file or a feature; deciding what a feature exports | [file-organization.md](references/file-organization.md) |
 | Naming, formatting, imports, `const`, and analyzer exceptions | [dart-style.md](references/dart-style.md) |
 | Building a widget, splitting one, or using `BuildContext` | [widgets.md](references/widgets.md) |
 | Defining a DTO, a domain model, a failure, or a Freezed union | [models.md](references/models.md) |
-| Calling an API, or reading and writing anything that persists | [networking-and-storage.md](references/networking-and-storage.md) |
+| Calling an external API | [networking.md](references/networking.md) |
+| Reading or writing persisted data | [storage.md](references/storage.md) |
 | Adding or changing user-visible text | [localization.md](references/localization.md) |
 | Emitting a log record | [logging.md](references/logging.md) |
-| Writing a doc comment or an explanatory comment | [documentation.md](references/documentation.md) |
+| Writing a Dart doc comment | [documentation.md](references/documentation.md) |
 | Writing, placing, or restructuring a test | [testing.md](references/testing.md) |
 
 ## A check failed — where to look
@@ -76,7 +79,7 @@ run analysis.
 | `fvm flutter analyze`, a `very_good_analysis` lint | [dart-style.md](references/dart-style.md) |
 | `dart format` reports a diff | [dart-style.md](references/dart-style.md) |
 | `build_runner` fails, or generated output is missing | [Shared toolchain](#shared-toolchain), then the reference that owns the generator |
-| A generated route or `strings.g.dart` symbol is undefined | [localization.md](references/localization.md) (Slang), [architecture.md](references/architecture.md) (routes) |
+| A generated route or `strings.g.dart` symbol is undefined | [localization.md](references/localization.md) (Slang), [routing.md](references/routing.md) (routes) |
 | Flutter SDK or Dart SDK constraint mismatch | [Before the first edit](#before-the-first-edit) |
 | `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md) |
 

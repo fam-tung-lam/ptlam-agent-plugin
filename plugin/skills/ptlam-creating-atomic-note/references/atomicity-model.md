@@ -1,7 +1,8 @@
 # Atomicity Model
 
 This reference owns the definition of atomicity, the knowledge building
-blocks, the refinement ladder, and the rule for matching effort to value.
+blocks, the tests that separate focus from background, the maturation stages,
+and the rule for matching effort to expected value.
 
 This model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
@@ -78,14 +79,13 @@ stateDiagram-v2
    parts and their relationships instead of relying on brevity or intuition.
 4. **Develop:** Add evidence, implications, perspectives, or connections when
    the idea warrants deeper treatment. Extract any independently useful
-   building block revealed by this work, as a new note starting at capture.
+   building block revealed by this work as a new note starting at capture.
 
 The stages describe maturation, not separate storage areas.
 
 ## Match effort to expected value
 
-Do not give every idea maximum treatment. Choose the current stopping point from
-the best available evidence about:
+Choose the current stopping point from the best available evidence about:
 
 - relevance to an active project or responsibility;
 - expected reuse across future work;
@@ -94,7 +94,5 @@ the best available evidence about:
 - the user's interest in developing the idea.
 
 Stop at the last stage whose guard the evidence supports, and preserve the
-provisional status of anything captured cheaply.
-
-Treat this choice as revisable. The value of an idea often becomes visible only
-while writing or after later connections appear.
+provisional status of anything captured cheaply. Revisit the choice when later
+writing or new connections reveal more value.

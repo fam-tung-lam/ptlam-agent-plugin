@@ -1,8 +1,5 @@
 # Layout
 
-Use a top-to-bottom document. Anchor links may change scroll position but must
-not hide the primary learning sequence behind tabs.
-
 Apply `min-width: 0` to every nested grid and flex child. Use `minmax(0, 1fr)`
 rather than `1fr`. Wrap technical text deliberately.
 
