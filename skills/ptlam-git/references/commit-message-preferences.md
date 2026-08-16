@@ -1,7 +1,7 @@
 # Commit Message Preferences
 
-Read this whenever the user asks for a commit or commit message. It owns
-preference precedence, message content, and the final message check.
+This reference owns preference precedence, message content, and the final
+message check.
 
 ## Apply preferences in order
 
@@ -23,6 +23,8 @@ instructions tell you to use it.
   and `ci` as types.
 - Make the subject name the outcome, capability, fixed behavior, or refactor
   reason rather than only the implementation.
+- Start `<description>` with a lowercase imperative verb: `update dependencies`,
+  not `Update dependencies`.
 - Use imperative mood, omit the final period, aim for 50 characters, and never
   exceed 72 characters.
 - Add a short body when the subject cannot carry necessary rationale or impact.
@@ -34,8 +36,9 @@ instructions tell you to use it.
 ## Verify the message
 
 Read the subject in isolation. Confirm that it matches the staged change, uses
-the selected type and scope accurately, satisfies active length and style
-rules, and agrees with the body.
+the selected type and scope accurately, starts its description with a lowercase
+imperative verb, satisfies active length and style rules, and agrees with the
+body.
 
 Verify every issue reference from the request or repository evidence. Return
 the exact subject and body with real line breaks, and disclose anything not

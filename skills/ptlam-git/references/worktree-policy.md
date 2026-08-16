@@ -1,8 +1,7 @@
 # Worktree Policy
 
-Read this before choosing an execution context for repository writes and for
-every worktree operation. It owns the stay-or-create decision, the project-local
-layout, lifecycle commands, and worktree safety checks.
+This reference owns the stay-or-create decision, the project-local layout,
+lifecycle commands, and worktree safety checks.
 
 This policy follows the official
 [Git worktree manual](https://git-scm.com/docs/git-worktree), verified on
