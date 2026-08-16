@@ -7,8 +7,8 @@ Use a 56-pixel minimum row for one line, 72 pixels for two lines, and 88 pixels
 for three lines or richer content. Center one- and two-line content vertically;
 top-align rows of 88 pixels or more. A selected row needs a visible container,
 shape, or label change in addition to color. Use segmented row containers only
-when they improve selection and scanning; otherwise preserve one continuous
-list surface.
+when they improve selection and scanning; otherwise preserve one continuous list
+surface.
 
 ```html
 <ul class="list">

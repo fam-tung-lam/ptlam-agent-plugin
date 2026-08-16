@@ -30,8 +30,8 @@ Use Mermaid Markdown strings for a label that needs a deliberate line break or
 emphasis. Use `::icon(...)` and CSS classes only when the destination registers
 the required icon fonts and styles. Otherwise keep the map portable and textual.
 
-The tidy-tree layout can improve a wide deterministic hierarchy, but use it
-only after confirming the target renderer supports and registers that layout.
+The tidy-tree layout can improve a wide deterministic hierarchy, but use it only
+after confirming the target renderer supports and registers that layout.
 
 ## Template
 

@@ -13,6 +13,12 @@ error text and `aria-describedby`; color alone is insufficient.
 ```
 
 ```css
+label:has(> input[type="checkbox"]) {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  gap: var(--space-2);
+}
 input[type="checkbox"] {
   inline-size: 1.25rem;
   block-size: 1.25rem;

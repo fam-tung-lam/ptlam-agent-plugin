@@ -1,7 +1,7 @@
 # File Organization
 
-Where Flutter puts source and test files, and how a feature spells the
-published surface owned by the `ptlam-code-style` foundation.
+Where Flutter puts source and test files, and how a feature spells the published
+surface owned by the `ptlam-code-style` foundation.
 
 ## The source tree
 
@@ -33,7 +33,7 @@ treeView-beta
             features/
                 core/ ## What two or more features genuinely share
                 localization/ ## Localization is a feature, not a utility
-                    i18n/ ## Contains en.i18n.json and ru.i18n.json
+                    i18n/ ## Contains one catalog per supported locale
                     localization.dart
                     ui/
                         localization_page.dart ## The feature's single page
@@ -41,7 +41,9 @@ treeView-beta
                     models/ ## Domain models and failures
                     bloc/
                     usecases/
-                        dtos/ ## Every DTO owned by the feature
+                    data/
+                        <source>/
+                            dtos/ ## Wire or storage shapes owned by this source
                     repositories/
                     utils/ ## Reusable low-level helpers without business logic
                     constants/ ## Constants reused inside the feature
@@ -53,7 +55,9 @@ treeView-beta
                     models/ ## Domain models and failures
                     bloc/
                     usecases/
-                        dtos/ ## Every DTO owned by the feature
+                    data/
+                        <source>/
+                            dtos/ ## Wire or storage shapes owned by this source
                     repositories/
                     utils/ ## Reusable low-level helpers without business logic
                     constants/ ## Constants reused inside the feature
@@ -85,17 +89,17 @@ and `src/` is private.
 
 ## Where something goes
 
-| Adding | Put it in |
-| --- | --- |
-| The feature's single page | `features/<name>/ui/<name>_page.dart` |
-| A logical UI component used by that page | `features/<name>/ui/components/` |
-| A widget two features render | `packages/<project_name>_design_system/src/components/` |
-| A domain model or failure one feature owns | `features/<name>/models/` |
-| Any DTO one feature owns | `features/<name>/usecases/dtos/` |
-| A small reusable low-level helper with no business logic | `features/<name>/utils/` |
-| A constant reused inside one feature | `features/<name>/constants/` |
-| Something two features genuinely share | `features/core/` |
-| A reusable boundary with no product logic | `packages/<name>/` |
+| Adding                                                   | Put it in                                               |
+| -------------------------------------------------------- | ------------------------------------------------------- |
+| The feature's single page                                | `features/<name>/ui/<name>_page.dart`                   |
+| A logical UI component used by that page                 | `features/<name>/ui/components/`                        |
+| A widget two features render                             | `packages/<project_name>_design_system/src/components/` |
+| A domain model or failure one feature owns               | `features/<name>/models/`                               |
+| A DTO for one external source                            | `features/<name>/data/<source>/dtos/`                   |
+| A small reusable low-level helper with no business logic | `features/<name>/utils/`                                |
+| A constant reused inside one feature                     | `features/<name>/constants/`                            |
+| Something two features genuinely share                   | `features/core/`                                        |
+| A reusable boundary with no product logic                | `packages/<name>/`                                      |
 
 `features/core/` is for what is already shared by two features, not for what
 might be. A file lands there when its second consumer appears — until then it

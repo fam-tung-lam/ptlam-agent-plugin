@@ -15,7 +15,7 @@ disable-model-invocation: true
 
 Build the learner's mental model of one concept, then check they can use it.
 
-## At a glance
+## How does one concept become a usable mental model?
 
 ```mermaid
 flowchart LR
@@ -27,17 +27,7 @@ flowchart LR
     ReconstructionTest -->|"Yes"| HandleFollowUps["Deliver, then handle follow-ups"]
 ```
 
-## Decision ownership
-
-| Decision | Source of truth |
-| --- | --- |
-| Learning goal, depth, literal model, device selection, verification | This skill |
-| Facts about the concept | The authoritative source for that domain |
-| Rendering and delivery format | The calling skill, or the learner's request |
-
 ## 1. Resolve the learning goal
-
-Identify:
 
 - the concept to explain;
 - what the learner already knows that you can build from;
@@ -72,14 +62,14 @@ uncertain claims are verified or excluded.
 
 Choose from the learner's difficulty, not from the concept's subject:
 
-| The learner cannot | Device |
-| --- | --- |
-| Picture the mechanism | One concrete instance, then generalize from it |
-| Tell two neighboring concepts apart | Contrast on the single dimension that separates them |
-| Follow or operate the process | Walk the causal chain in execution order |
-| See why it is built this way | Name the constraint that forced it and the alternative it rejected |
-| Hold the whole system in mind | Whole first, then one level of parts at a time |
-| Reach the mechanism from anything they already know | One real-life analogy, mapped element by element |
+| The learner cannot                                                                       | Device                                                             |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Picture the mechanism                                                                    | One concrete instance, then generalize from it                     |
+| Tell two neighboring concepts apart                                                      | Contrast on the single dimension that separates them               |
+| Follow or operate the process                                                            | Walk the causal chain in execution order                           |
+| See why it is built this way                                                             | Name the constraint that forced it and the alternative it rejected |
+| Hold the whole system in mind                                                            | Whole first, then one level of parts at a time                     |
+| Reach the mechanism from anything they already know, and explicitly requested an analogy | One real-life analogy, mapped element by element                   |
 
 Honor a learner-requested device when it preserves the literal model. When it
 would distort a material relationship, name the mismatch and choose a faithful
@@ -90,6 +80,7 @@ Select the analogy device only when the learner explicitly asked for an analogy;
 a request to explain, define, simplify, or break down a concept is not that ask.
 Then follow [the analogy device](references/analogy-device.md), which owns
 candidate generation, the mapping gate, the selection turn, and verification.
+Without that explicit request, start from one concrete instance and generalize.
 
 Complete this step when one device is selected and any learner-supplied or
 learner-excluded device is honored, or refused for a named reason.
@@ -110,8 +101,17 @@ When the analogy device was selected, compose from
 [the analogy explanation shape](references/analogy-explanation-shape.md)
 instead. It owns the four components, their order, and their finish condition.
 
-When a calling skill invoked this one, return the literal answer, the body, and
-the limits as separate components, and let the caller own their rendering.
+When another skill invokes this one, return one explanation package:
+
+| Field        | Content                                                           |
+| ------------ | ----------------------------------------------------------------- |
+| Goal         | Learning goal, learner background, confusing mechanism, and depth |
+| Presentation | Language and selected explanatory structure                       |
+| Model        | Literal answer, literal relationships, and verified constraints   |
+| Explanation  | Body in teaching order                                            |
+| Limits       | Uncertainty, exclusions, and caveats                              |
+
+Let the caller render these fields without changing their meaning.
 
 Complete this step when the explanation carries no forward reference, every term
 is defined where it first appears, and its limits are stated.
@@ -129,13 +129,5 @@ Complete this step when the reconstruction test passes and both checks hold.
 
 ## 6. Handle follow-ups
 
-| The learner asks for | Response |
-| --- | --- |
-| More depth | Extend the literal model first, then re-select the device for the new depth |
-| A simpler version | Narrow the learning goal; do not delete the qualifiers |
-| A different device | Re-enter step 3 with the used device excluded |
-| A different analogy | Re-enter the analogy device with the used domain excluded |
-| A related concept | Build a new literal model, and link back only where the mechanism is shared |
-| A challenge to the explanation | Name the limitation and its structural reason, then offer the device that closes it |
-
-Complete a follow-up when its new scope passes steps 2 through 5.
+Read [explanation follow-ups](references/follow-ups.md) and apply the branch the
+learner selected. It owns the scope change and re-entry point.

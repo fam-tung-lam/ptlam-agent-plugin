@@ -5,10 +5,10 @@ review, split, and merge operations. Follow only the selected section.
 
 ## Create a note
 
-Capture a new thought freely before imposing structure. Then apply the
-atomicity model and produce one note per independently useful building block.
-Keep a source summary distinct from the user's permanent claim when conflating
-them would change the meaning.
+Capture a new thought freely before imposing structure. Then apply the atomicity
+model and produce one note per independently useful building block. Keep a
+source summary distinct from the user's permanent claim when conflating them
+would change the meaning.
 
 When no verified local shape exists, use this fallback:
 
@@ -38,8 +38,8 @@ draft or saved note and every requested file effect is reported.
 ## Mature a note
 
 Identify whether the note is a thinking capture, a finished thought without a
-clear building block, or an identifiable idea that needs development. Advance
-it only as far as the user's goal and the idea's expected value justify.
+clear building block, or an identifiable idea that needs development. Advance it
+only as far as the user's goal and the idea's expected value justify.
 
 Preserve useful uncertainty and abandoned paths when they explain how to
 continue. If the note remains unfinished, label its state in the local

@@ -5,7 +5,7 @@ import { createHtmlScaffold } from "./create-html-scaffold.ts";
 
 const USAGE =
   "Usage: node --experimental-strip-types scaffold-html.ts <output.html> " +
-  '[--title "How the system works"] [--force]';
+  '--lang <BCP-47> [--title "How the system works"] [--force]';
 
 export interface ScaffoldHtmlCLIOptions {
   readonly stdout?: (message: string) => void;
@@ -27,6 +27,7 @@ export async function runScaffoldHtmlCommand(
       options: {
         force: { type: "boolean", short: "f", default: false },
         help: { type: "boolean", short: "h", default: false },
+        lang: { type: "string", short: "l" },
         title: { type: "string", short: "t" },
       },
       strict: true,
@@ -42,8 +43,11 @@ export async function runScaffoldHtmlCommand(
 
     const outputPath = parsed.positionals[0];
     if (!outputPath) throw new Error(USAGE);
+    const language = parsed.values.lang;
+    if (!language) throw new Error(USAGE);
     const result = await createHtmlScaffold({
       outputPath,
+      language,
       overwrite: parsed.values.force,
       ...(parsed.values.title === undefined
         ? {}

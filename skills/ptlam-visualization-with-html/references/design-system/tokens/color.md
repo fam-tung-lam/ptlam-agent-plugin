@@ -19,8 +19,8 @@ when substituting a dynamic or branded scheme.
   their text and icons.
 - Variant roles provide lower emphasis, outline roles define boundaries, and
   inverse roles create deliberate contrast with surrounding content.
-- Fixed roles retain their tone across light and dark themes; use them only
-  when that stability is intentional.
+- Fixed roles retain their tone across light and dark themes; use them only when
+  that stability is intentional.
 
 Keep each role pairing accessible in every theme. The Material source defines a
 3:1 minimum for paired color roles; this skill keeps the stricter 4.5:1 floor

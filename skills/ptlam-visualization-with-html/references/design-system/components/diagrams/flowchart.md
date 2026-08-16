@@ -57,9 +57,7 @@ with return loops at the side.
 }
 .flow-node text {
   fill: var(--color-on-surface);
-  font:
-    700 14px ui-monospace,
-    monospace;
+  font: var(--type-code);
   text-anchor: middle;
 }
 .flow-edge path {
@@ -71,7 +69,7 @@ with return loops at the side.
 .flow-node.is-active rect {
   stroke: var(--color-primary);
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 7px rgba(232, 184, 76, 0.25));
+  filter: drop-shadow(var(--elevation-active));
 }
 .flow-node.is-complete rect {
   stroke: var(--color-success);
@@ -81,7 +79,7 @@ with return loops at the side.
   stroke: var(--color-primary);
   stroke-width: 2.5;
   stroke-dasharray: none;
-  filter: drop-shadow(0 0 7px rgba(232, 184, 76, 0.25));
+  filter: drop-shadow(var(--elevation-active));
 }
 .flow-edge.is-active path {
   stroke: var(--color-primary);

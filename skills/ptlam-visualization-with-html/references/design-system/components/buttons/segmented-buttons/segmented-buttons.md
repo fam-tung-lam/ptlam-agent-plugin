@@ -1,9 +1,9 @@
 # Segmented buttons
 
-Material 3 Expressive supersedes segmented buttons with connected button
-groups. For new artifacts, use the connected selection contract in
-`button-groups.md`. Retain this pattern only when revising an artifact whose
-existing segmented control must remain compatible.
+Material 3 Expressive supersedes segmented buttons with connected button groups.
+For new artifacts, use the connected selection contract in `button-groups.md`.
+Retain this pattern only when revising an artifact whose existing segmented
+control must remain compatible.
 
 Limit the existing control to two through five related view, sort, or selection
 options. Use `aria-pressed` for independent multi-select segments and a native

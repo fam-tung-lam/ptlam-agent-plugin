@@ -32,8 +32,8 @@ has a measurable value or can change from unknown to known progress.
 ```
 
 The expressive loading indicator uses evolving shape and role color. Keep a
-clear text status and render a stable expressive shape under reduced motion.
-It may be contained or uncontained, but it is never decorative.
+clear text status and render a stable expressive shape under reduced motion. It
+may be contained or uncontained, but it is never decorative.
 
 Source snapshot: Material 3 loading-indicator overview, captured with Firecrawl
 on 2026-08-07. Material's platform shape-morph API is unavailable on the web;

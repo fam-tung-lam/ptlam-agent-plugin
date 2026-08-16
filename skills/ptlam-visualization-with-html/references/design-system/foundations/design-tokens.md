@@ -2,8 +2,8 @@
 
 Use reference, system, and component roles conceptually: raw values feed
 semantic system roles, and components consume those roles. The scaffold owns
-their exact baseline CSS values; the token references selected in `SKILL.md`
-own customization and application rules.
+their exact baseline CSS values; the token references selected in `SKILL.md` own
+customization and application rules.
 
 Do not hard-code a raw color, radius, duration, or type size inside a pattern
 when a semantic token exists.

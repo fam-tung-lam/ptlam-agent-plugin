@@ -16,17 +16,17 @@ flowchart LR
 
 ## What each layer may know
 
-| Layer | May depend on | Never touches |
-| --- | --- | --- |
-| UI | Its own BLoC or Cubit, design system, localization | Repositories, data sources, Dio, plugins |
-| BLoC or Cubit | Use cases, models | `BuildContext`, widgets, another BLoC |
-| Use case | Repositories, models | Widgets, `BuildContext`, HTTP or storage APIs |
-| Repository | API clients, data sources, adapters, models | Widgets, BLoCs, use cases |
-| Client, data source, adapter | Its one external system, boundary types | Anything above it |
+| Layer                        | May depend on                                      | Never touches                                 |
+| ---------------------------- | -------------------------------------------------- | --------------------------------------------- |
+| UI                           | Its own BLoC or Cubit, design system, localization | Repositories, data sources, Dio, plugins      |
+| BLoC or Cubit                | Use cases, models                                  | `BuildContext`, widgets, another BLoC         |
+| Use case                     | Repositories, models                               | Widgets, `BuildContext`, HTTP or storage APIs |
+| Repository                   | API clients, data sources, adapters, models        | Widgets, BLoCs, use cases                     |
+| Client, data source, adapter | Its one external system, boundary types            | Anything above it                             |
 
 Every layer speaks in models. Convert a foreign response, stored record, or
-plugin result at the boundary that owns it, so nothing above the repository
-sees a `Response`, storage key, or plugin exception.
+plugin result at the boundary that owns it, so nothing above the repository sees
+a `Response`, storage key, or plugin exception.
 
 Keep a layer when it names a real boundary. A use case that only forwards to a
 repository is fine when that boundary carries product meaning; a use case that
@@ -43,18 +43,27 @@ should not know:
 - when a local change is mirrored remotely.
 
 A use case asks the repository for a concern. It never chooses between a cache
-and a network call itself. The repository converts boundary exceptions into
-the domain failures owned by [models.md](models.md).
+and a network call itself. The repository converts boundary exceptions into the
+domain failures owned by [models.md](models.md).
 
 ## Dependency composition
 
-`app_dependencies.dart` holds every
-[`get_it`](https://pub.dev/packages/get_it) registration and nothing else.
-Register concrete adapters, repositories, and use-case factories there.
+`app_dependencies.dart` holds every [`get_it`](https://pub.dev/packages/get_it)
+registration and nothing else. Register concrete adapters, repositories, and
+use-case factories there.
 
 Feature code receives dependencies through constructors. Resolving from the
-service locator inside a BLoC, use case, or repository puts the container in
-the call graph and makes the class untestable without it.
+service locator inside a BLoC, use case, or repository puts the container in the
+call graph and makes the class untestable without it.
+
+Treat each constructor edge as an explicit contract:
+
+| Edge                     | Input                          | Output                       | Authority                                                       |
+| ------------------------ | ------------------------------ | ---------------------------- | --------------------------------------------------------------- |
+| UI to state holder       | User intent and view lifecycle | Renderable state             | May dispatch intent; cannot select data sources                 |
+| State holder to use case | Domain command or query        | Domain result or failure     | May coordinate application state; cannot perform I/O            |
+| Use case to repository   | Domain-shaped request          | Domain model or failure      | May apply product policy; cannot select transport mechanics     |
+| Repository to boundary   | DTO or boundary parameters     | Boundary result or exception | May select sources and convert failures; cannot update UI state |
 
 Wrap platform permissions behind a feature-owned adapter built with
 [`permission_handler`](https://pub.dev/packages/permission_handler). Business

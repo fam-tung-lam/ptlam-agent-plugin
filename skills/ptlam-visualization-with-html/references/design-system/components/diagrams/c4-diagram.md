@@ -11,7 +11,7 @@ and the visible boundaries; it is not a CSS scale transform.
 
 ```html
 <div class="c4" data-c4>
-  <div class="c4-toolbar" aria-label="Architecture level">
+  <div class="c4-toolbar" role="group" aria-label="Architecture level">
     <button type="button" data-c4-go="context" aria-pressed="true">
       L1 · Context
     </button>

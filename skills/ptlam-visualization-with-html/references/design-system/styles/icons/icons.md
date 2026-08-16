@@ -12,7 +12,7 @@ Preserve the same end state under reduced motion.
 - Use outlined symbols for dense interfaces and filled symbols for selected
   state or a deliberately stronger visual voice.
 - Use a 20 CSS pixel icon in dense desktop layouts and 24 pixels by default.
-  Keep the interactive target at least 40 pixels for a 20-pixel icon and 48
+  Keep the interactive target at least 44 pixels for a 20-pixel icon and 48
   pixels for a 24-pixel icon.
 - Pair icons smaller than 20 pixels with visible text unless their meaning is
   universally clear in context.

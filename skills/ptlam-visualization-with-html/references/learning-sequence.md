@@ -4,13 +4,13 @@ This reference owns the order an explainer teaches its sections in.
 
 ## Order the page top to bottom
 
-Put orientation before mechanism, then progressively deeper views. A learner
-who scrolls straight through should never meet a term the page has not yet
+Put orientation before mechanism, then progressively deeper views. A learner who
+scrolls straight through should never meet a term the page has not yet
 introduced.
 
 Keep the primary view before observable state and shared controls, in both DOM
-order and narrow-screen order. Those two orders drift apart easily when a
-layout uses grid placement, so check the narrow rendering rather than assuming.
+order and narrow-screen order. Those two orders drift apart easily when a layout
+uses grid placement, so check the narrow rendering rather than assuming.
 
 ## Keep the main sequence visible
 
@@ -22,5 +22,5 @@ an alternate path — not for a step in the main sequence.
 
 ## Finish
 
-Finish when the static document teaches the whole sequence in order, and no
-step of the main explanation is hidden behind a control.
+Finish when the static document teaches the whole sequence in order, and no step
+of the main explanation is hidden behind a control.

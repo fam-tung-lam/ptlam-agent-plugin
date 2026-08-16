@@ -9,12 +9,12 @@ disagree, the config wins and this file is stale.
 
 ## Naming
 
-| Kind | Form | Example |
-| --- | --- | --- |
-| File, directory, package | `lowercase_with_underscores` | `place_order_use_case.dart` |
-| Class, enum, extension, typedef, mixin | `UpperCamelCase` | `OrdersRepository` |
-| Member, variable, parameter, constant | `lowerCamelCase` | `maxRetryCount` |
-| Library-private symbol | Leading underscore | `_OrdersView` |
+| Kind                                   | Form                         | Example                     |
+| -------------------------------------- | ---------------------------- | --------------------------- |
+| File, directory, package               | `lowercase_with_underscores` | `place_order_use_case.dart` |
+| Class, enum, extension, typedef, mixin | `UpperCamelCase`             | `OrdersRepository`          |
+| Member, variable, parameter, constant  | `lowerCamelCase`             | `maxRetryCount`             |
+| Library-private symbol                 | Leading underscore           | `_OrdersView`               |
 
 Constants are `lowerCamelCase` in Dart, never `SCREAMING_CAPS`.
 
@@ -34,10 +34,9 @@ its output in review.
 fvm dart format --output=none --set-exit-if-changed .
 ```
 
-- 80-character lines. The formatter breaks them; you choose where by adding a
-  trailing comma.
-- A trailing comma after the last argument forces one argument per line. Use it
-  on every multi-argument widget constructor — it makes diffs one line wide.
+- Use the page width configured for the repository. Let the installed formatter
+  decide line breaks; add trailing commas where the language or active lint
+  requires them, not to force a particular layout.
 - Single quotes for strings, doubles only to avoid escaping.
 - No `new`. No redundant `this.` outside a constructor initializer.
 
@@ -67,14 +66,14 @@ another feature's `bloc/` or another package's `src/` is a defect — see
 
 ## Common trips
 
-| Analyzer complaint | What it wants |
-| --- | --- |
-| `public_member_api_docs` | A doc comment — see [documentation.md](documentation.md) |
-| `lines_longer_than_80_chars` | A trailing comma so the formatter can break the line |
-| `require_trailing_commas` | The same comma, on a multi-line argument list |
-| `prefer_const_constructors` | `const` on a widget whose arguments are all constant |
-| `sort_pub_dependencies` | Alphabetical order in `pubspec.yaml` |
-| `avoid_dynamic_calls` | A real type instead of `dynamic` |
+| Analyzer complaint           | What it wants                                                         |
+| ---------------------------- | --------------------------------------------------------------------- |
+| `public_member_api_docs`     | A doc comment — see [documentation.md](documentation.md)              |
+| `lines_longer_than_80_chars` | Refactor the expression or use the repository's configured page width |
+| `require_trailing_commas`    | A trailing comma on the construct named by the active lint            |
+| `prefer_const_constructors`  | `const` on a widget whose arguments are all constant                  |
+| `sort_pub_dependencies`      | Alphabetical order in `pubspec.yaml`                                  |
+| `avoid_dynamic_calls`        | A real type instead of `dynamic`                                      |
 
 ## Exceptions
 

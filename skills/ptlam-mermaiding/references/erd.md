@@ -25,7 +25,8 @@ optional verified key and a short quoted comment.
 
 Mermaid accepts implementation-specific type strings, but they must not imply
 precision absent from the source. Use a `?` suffix for a verified optional or
-nullable type only when the target Mermaid version supports it.
+nullable type only after rendering it with the target version; otherwise record
+nullability in a short attribute comment.
 
 ## Encode both cardinalities
 
@@ -36,12 +37,12 @@ present-tense verb:
 CUSTOMER ||--o{ ORDER : places
 ```
 
-| Marker at an endpoint | Cardinality |
-| --- | --- |
-| `o\|` or `\|o` | Zero or one |
-| `\|\|` | Exactly one |
-| `o{` or `}o` | Zero or more |
-| `\|{` or `}\|` | One or more |
+| Marker at an endpoint | Cardinality  |
+| --------------------- | ------------ |
+| `o\|` or `\|o`        | Zero or one  |
+| `\|\|`                | Exactly one  |
+| `o{` or `}o`          | Zero or more |
+| `\|{` or `}\|`        | One or more  |
 
 Use `--` for an identifying relationship, where the child cannot exist without
 the parent's identity. Use `..` for a non-identifying relationship. Do not

@@ -6,15 +6,17 @@ order. The shared workflow and acceptance rules remain in `SKILL.md`.
 
 ## Title and participants
 
-Give every sequence diagram descriptive Mermaid title frontmatter. A generic
+Give every sequence diagram a descriptive surrounding heading. Add matching
+Mermaid title frontmatter only when the target renderer supports frontmatter and
+the destination benefits from a title inside the rendered surface. A generic
 title such as `Sequence diagram` fails because it cannot distinguish diagrams
 when a section contains several phases.
 
-Declare participants before messages and order them left to right along the
-main data flow. For watch or notification flows, place the watched authority to
-the left of its watchers. Use full PascalCase aliases without abbreviations.
-Use `actor` only for a human. Use `participant` for systems unless a verified
-target benefits from Mermaid's optional boundary, control, entity, database,
+Declare participants before messages and order them left to right along the main
+data flow. For watch or notification flows, place the watched authority to the
+left of its watchers. Use full PascalCase aliases without abbreviations. Use
+`actor` only for a human. Use `participant` for systems unless a verified target
+benefits from Mermaid's optional boundary, control, entity, database,
 collection, or queue stereotypes.
 
 Use this label form when a human role and technical component both matter:
@@ -30,12 +32,12 @@ Begin every message with a precise ALL-CAPS verb. Prefer `SUBMITS`, `REQUESTS`,
 `RESPONDS`, `NOTIFIES`, `RECONCILES`, `CONFIGURES`, or a more accurate domain
 verb.
 
-| Arrow | Meaning |
-| --- | --- |
-| `->>` | Active command, call, write, send, or local processing |
-| `-->>` | Passive notification, event, status push, or response |
-| `-)` | Asynchronous send when that distinction matters |
-| `->>+` then `-->>-` | Explicit request-response activation pair |
+| Arrow               | Meaning                                                |
+| ------------------- | ------------------------------------------------------ |
+| `->>`               | Active command, call, write, send, or local processing |
+| `-->>`              | Passive notification, event, status push, or response  |
+| `-)`                | Asynchronous send when that distinction matters        |
+| `->>+` then `-->>-` | Explicit request-response activation pair              |
 
 Use a self-message for internal processing. Use activations only when their
 start and end are meaningful and balanced. Add `<br>` before a parenthetical
@@ -52,13 +54,13 @@ Close an activation once, with `deactivate` after the block, rather than on a
 response inside every branch. Mermaid walks each branch in turn, so the second
 deactivation aborts the whole render.
 
-Use notes for a phase boundary, invariant, or state that messages cannot express.
-Do not use notes as a substitute for missing messages.
+Use notes for a phase boundary, invariant, or state that messages cannot
+express. Do not use notes as a substitute for missing messages.
 
 Split continuous setup from per-request behavior into separate diagrams. Open a
-background phase with `Note over ...: Runs continuously in the background` and
-a request phase with `Note over ...: Happens per request — ...`. Participants
-may differ between phases.
+background phase with `Note over ...: Runs continuously in the background` and a
+request phase with `Note over ...: Happens per request — ...`. Participants may
+differ between phases.
 
 ## Template
 

@@ -36,8 +36,8 @@ review priority; otherwise use the project's established directory ordering.
 
 Add `## description` only when the node's role cannot be inferred from its
 label. Keep descriptions short and parallel. Use `:::highlight` for the one or
-few nodes the visual question emphasizes, not as a substitute for explaining
-the selection.
+few nodes the visual question emphasizes, not as a substitute for explaining the
+selection.
 
 Built-in file and folder icons appear only when `treeView.showIcons` is true.
 Filename and extension icon maps require a registered icon pack. Use explicit
