@@ -41,31 +41,45 @@ treeView-beta
                 exceptions.py
                 logging.py
                 dependencies.py
-                constants.py
-                utils.py
+                constants/
+                    headers.py
+                utils/
+                    identifiers.py
             users/
                 users_module.py
                 routes/
                     v1.py
                     v2.py
-                usecases.py
-                dtos.py
-                entities.py
-                repositories.py
+                usecases/
+                    create_user.py
+                    get_user.py
+                dtos/
+                    requests.py
+                    responses.py
+                entities/
+                    user.py
+                repositories/
+                    protocols.py
+                    sqlalchemy.py
                 dependencies.py
                 tasks.py
-                constants.py
-                utils.py
-                tests/
-            orders/
-                orders_module.py
-                routes/
-                    v1.py
-                usecases.py
-                dtos.py
-                entities.py
-                repositories.py
-                tests/
+                constants/
+                    cache.py
+                utils/
+                    identifiers.py
+        tests/
+            modules/
+                users/
+                    unit/
+                        usecases/
+                            test_create_user.py
+                    integration/
+                        repositories/
+                            test_user_repository.py
+                        routes/
+                            test_users_v1.py
+            api/
+                test_health.py
 ```
 
 ## Give each top-level package one role
@@ -82,23 +96,23 @@ treeView-beta
 `app/application.py`. The composition root imports module facades instead of
 module internals and contains no business policy.
 
-## Start each module compact
+## Give expandable concerns a package
 
 | Module path | Put here |
 | --- | --- |
 | `<name>_module.py` | The public facade: use cases, DTOs, and version routers another module or `app/` may import |
 | `routes/vN.py` | One `APIRouter` for that API version and its typed HTTP handlers |
-| `usecases.py` | Application operations, orchestration, and transaction decisions |
-| `dtos.py` | Pydantic request and response models; keep them separate from entities |
-| `entities.py` | Module-owned domain or SQLAlchemy entities |
-| `repositories.py` | Storage protocols and adapters owned by the module |
+| `usecases/` | One application operation per file, including orchestration and transaction decisions |
+| `dtos/` | Pydantic request and response models grouped by resource or operation; keep them separate from entities |
+| `entities/` | Module-owned domain or SQLAlchemy entities, normally one primary entity per file |
+| `repositories/` | Storage protocols and adapters, split by boundary or implementation |
 | `dependencies.py` | FastAPI providers that assemble request-scoped repositories and use cases |
 | `tasks.py` | Feature-owned durable jobs that call use cases |
-| `constants.py` and `utils.py` | Module-local low-level reuse with no business policy |
+| `constants/` and `utils/` | Module-local low-level reuse, split into narrowly named files with no business policy |
 
-Start with one file per responsibility. Split a file into a same-named package
-only when it gains several independently maintained implementations or becomes
-hard to navigate; do not scaffold empty subpackages.
+Create these packages when the first owned file appears and follow the
+repository's `__init__.py` policy. Do not scaffold empty files or export every
+internal symbol from a package initializer.
 
 ## Share infrastructure without moving feature behavior
 
@@ -117,16 +131,23 @@ through the owning module facade instead of moving it to `shared/`.
 ## Keep one database history
 
 For one database, keep one root `alembic.ini`, one `migrations/env.py`, and one
-revision history. Let `env.py` import each module's `entities.py` through its
-facade or a metadata registry so autogenerate sees every table.
+revision history. Let `env.py` import each module's `entities/` package through
+its facade or a metadata registry so autogenerate sees every table.
 
 Entities remain feature-owned; migrations describe the whole database. Follow
 an established multi-database Alembic layout when the repository already has
 one instead of forcing a single history.
 
-Co-locate feature tests under `<module_name>/tests/` when the configured runner
-collects them. Otherwise mirror the module under the repository's existing test
-root.
+## Mirror modules under the test root
+
+Place feature tests under `tests/modules/<module_name>/`, then separate them by
+the active test level, such as `unit/` or `integration/`. Mirror deeper source
+paths when that helps a test's owner remain obvious. Keep tests for the composed
+ASGI application or unversioned operational endpoints under `tests/api/`.
+
+This layout decides placement only. Choose what each level proves from the
+active testing contract, and preserve a repository's coherent established test
+root instead of relocating unrelated tests.
 
 Finish when feature-to-feature imports use module facades, integrations own
 shared clients, Alembic sees every entity in one database history, shared code
