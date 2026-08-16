@@ -60,44 +60,45 @@ skills:
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-testing
+  - id: ptlam-code-style
     description:
-      Design, write, update, run, review, and diagnose automated tests at unit,
-      integration, and end-to-end levels. Use when an agent needs to select a
-      test level, add or repair tests, improve testability, assess test quality,
-      audit test code for compliance, diagnose failures, or follow an explicitly
-      requested test-first or Red-Green-Refactor workflow. Do not infer TDD
-      merely from a request for tests or integration testing.
+      Hold source and test code to one language-neutral set of conventions for
+      visibility, documentation, logging, and testing. Use when deciding what a
+      test must prove, choosing a test level, placing a test or a test double,
+      setting a public or internal boundary, writing a doc comment, or emitting
+      a log record. Use as the foundation for a stack specialization that adds
+      the mechanics.
     category_id: engineering
     visibility: internal
     status: active
     required_skills: []
-  - id: ptlam-testing-typescript
+  - id: ptlam-code-style-flutter
     description:
-      Design, write, update, run, audit, and diagnose tests for framework-free,
-      browser-free TypeScript libraries, Node.js code, CLIs, and tooling with
-      Vite, Vitest, and Vitest V8 coverage. Use when such a project needs test
-      implementation, Vitest configuration, coverage, mocking, Node
-      environments, type tests, or stack-specific testing review. Apply
-      ptlam-testing first for mode, write authority, testing scope, level,
-      behavior, placement, test doubles, TDD, audit, and diagnosis. Do not use
-      this specialization for web frameworks, DOM code, or browser-runtime
-      testing.
+      Write, review, and fix Flutter application code against conventions for
+      the toolchain, layer boundaries, source tree, widgets, models,
+      networking, storage, localization, logging, doc comments, and tests. Use
+      when adding or changing Dart code in a Flutter project, choosing between
+      setState, Cubit, and Bloc, placing a new file or feature, wiring get_it or
+      go_router, or fixing a flutter analyze, dart format, or build_runner
+      failure. Apply ptlam-code-style first for the standard these mechanics
+      satisfy. Do not use this specialization for Dart outside Flutter or for
+      another stack.
     category_id: engineering
     visibility: public
     status: active
     required_skills:
-      - skill_id: ptlam-testing
-        reason: Provides the universal testing workflow and mandatory rules.
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral conventions and the testing doctrine
+          the Flutter mechanics satisfy.
         instructions: |-
-          Read and apply ptlam-testing first.
-          Let it own mode, write authority, scope, level, public seam, behavior,
-          doubles, TDD, audit, diagnosis, and verification depth.
-          Use the repository's established test layout when one exists;
-          otherwise use this skill's source-adjacent fallback.
-          Use this skill's bundled Vite and Vitest contract for stack mechanics.
-          Apply it only to framework-free, browser-free TypeScript, Vite, Vitest,
-          and coverage mechanics left open by the foundation.
+          Read and apply ptlam-code-style first.
+          Let it own the precedence order, the visibility, documentation, and
+          logging standards, the universal behavior contract, the test levels,
+          test placement, and test doubles.
+          Use this skill only for the Flutter and Dart mechanics that satisfy
+          those standards.
+          This specialization may be stricter than the foundation, never looser.
   - id: ptlam-creating-skill
     description:
       Create, review, or refactor one agent skill so that a human maintainer can

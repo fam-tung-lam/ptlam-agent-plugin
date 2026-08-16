@@ -87,8 +87,8 @@ in alphabetic listings and makes the relationship visible from its ID and
 directory alone.
 
 For example, use `ptlam-git-writing-commit-message` for a Git capability. Use
-`ptlam-testing` as the testing foundation and `ptlam-testing-typescript` for its
-TypeScript specialization.
+`ptlam-code-style` as the code-style foundation and `ptlam-code-style-flutter`
+for its Flutter specialization.
 
 Keep the manifest ID and authored directory name identical. Use a standalone
 `ptlam-<capability>` name only when the skill does not belong to an established
