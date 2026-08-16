@@ -4,9 +4,10 @@ How the app talks to an API and to anything that persists.
 
 ## One client per API source
 
-Each external API gets its own `Dio` instance and its own client class, with its
-own base URL, timeouts, and interceptors. Two APIs never share a client, because
-they never share an auth scheme or a retry policy for long.
+Each external API gets its own [`Dio`](https://pub.dev/packages/dio) instance
+and its own client class, with its own base URL, timeouts, and interceptors. Two
+APIs never share a client, because they never share an auth scheme or a retry
+policy for long.
 
 An API client exposes one method per endpoint, takes and returns DTOs, and
 contains no business rules. Everything cross-cutting — auth headers, token
@@ -16,7 +17,7 @@ repeats it.
 Set connect, send, and receive timeouts explicitly on every client. The default
 is "wait forever", which shows up as a spinner that never stops.
 
-Accept a `CancelToken` on any request a screen can leave, and cancel it when the
+Accept a `CancelToken` on any request a page can leave, and cancel it when the
 BLoC closes.
 
 Nothing above the repository imports `dio` or sees a `Response`, a status code,
@@ -33,8 +34,8 @@ strings appear in exactly one file, as private constants.
 
 | Data | Store |
 | --- | --- |
-| Credentials, tokens, device keys | `flutter_secure_storage` |
-| Locale, theme, onboarding flags, UI preferences | `shared_preferences` |
+| Credentials, tokens, device keys | [`flutter_secure_storage`](https://pub.dev/packages/flutter_secure_storage) |
+| Locale, theme, onboarding flags, UI preferences | [`shared_preferences`](https://pub.dev/packages/shared_preferences) |
 | Anything large, queried, or relational | Neither — it needs a real database |
 
 `shared_preferences` is simple key/value, so use `SharedPreferencesAsync` and

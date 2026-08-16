@@ -58,7 +58,7 @@ platform, or the upstream behavior it compensates for. A reader must be able to
 tell whether it is still needed.
 
 Do not write doc comments on generated files, and do not edit them to add one —
-see [toolchain.md](toolchain.md).
+see [SKILL.md](../SKILL.md#shared-toolchain).
 
 Do not leave commented-out widgets. They rot faster than anything else in the
 file, and Git already has them.

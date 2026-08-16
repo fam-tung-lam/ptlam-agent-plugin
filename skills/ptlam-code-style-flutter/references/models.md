@@ -8,20 +8,25 @@ A DTO mirrors an external shape — a JSON body, a stored record — field for
 field, including the parts you dislike. A domain model says what the application
 means, in the domain's words.
 
-Keep them separate types. The DTO lives at the boundary that owns the external
-system; the domain model travels everywhere above it.
+Keep them separate types. Every feature DTO lives in
+`features/<name>/usecases/dtos/`; the domain model travels everywhere above the
+repository.
 
 Map between them in the repository or the data source, never above it. That
 mapping is the only place that knows the API sends `"created_ts"` as an epoch
 integer, and it is where a contract change gets caught.
 
-Merging the two saves a file today and couples every screen to the vendor's
+Merging the two saves a file today and couples every page to the vendor's
 field names tomorrow.
 
 ## Generate the JSON, write the meaning
 
-Annotate DTOs with `json_serializable` and let `build_runner` produce the
-mapping. Hand-written `fromJson` drifts silently as fields are added.
+Annotate DTOs with
+[`json_annotation`](https://pub.dev/packages/json_annotation) and let
+[`json_serializable`](https://pub.dev/packages/json_serializable) produce the
+mapping through the shared code-generation command in
+[SKILL.md](../SKILL.md#shared-toolchain). Hand-written `fromJson` drifts
+silently as fields are added.
 
 Use `@JsonKey` to record the wire name when it differs from the Dart name. Do
 not rename the Dart field to match a wire name you would not have chosen.
@@ -31,14 +36,19 @@ gets a DTO.
 
 ## Freezed for immutable data
 
-Use Freezed for DTOs, domain models, BLoC events, and BLoC states. It supplies
-equality, `copyWith`, and exhaustive unions, all of which are wrong when
-hand-written under time pressure.
+Use [`freezed_annotation`](https://pub.dev/packages/freezed_annotation) with
+[`freezed`](https://pub.dev/packages/freezed) for DTOs, domain models, BLoC
+events, and BLoC states. It supplies equality, `copyWith`, and exhaustive
+unions, all of which are wrong when hand-written under time pressure.
 
 Check the installed Freezed major version before copying the shape below — both
 the class declaration and the matching API changed across majors. The example
 follows the `abstract`/`sealed` form and Dart 3 pattern matching, which replaced
 `when` and `map`.
+
+[architecture.md](architecture.md#keep-one-bloc-library-in-three-authored-files)
+owns the `part` and `part of` layout that combines a BLoC's event and state into
+one generated `*.freezed.dart` file.
 
 ```dart
 @freezed

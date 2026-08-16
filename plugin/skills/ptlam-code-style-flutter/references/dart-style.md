@@ -2,8 +2,9 @@
 
 Naming, formatting, imports, immutability, and analyzer exceptions.
 
-`analysis_options.yaml` and the installed `very_good_analysis` version are the
-source of truth. This file says what they enforce and why; when the two
+`analysis_options.yaml` and the installed
+[`very_good_analysis`](https://pub.dev/packages/very_good_analysis) version are
+the source of truth. This file says what they enforce and why; when the two
 disagree, the config wins and this file is stale.
 
 ## Naming

@@ -1,7 +1,12 @@
 # Testing
 
-The Flutter testing mechanics. The `ptlam-code-style` foundation owns what a
-test must prove, how to choose a level, and how to place a double.
+The `ptlam-code-style` foundation owns what a test must prove, how to choose a
+level, and how to place a double.
+
+Use the Flutter SDK's `flutter_test`,
+[`bloc_test`](https://pub.dev/packages/bloc_test) for BLoC behavior, and
+[`mockito`](https://pub.dev/packages/mockito) when a generated mock is the
+smallest suitable test double.
 
 ## Two levels, and what each covers
 
@@ -48,27 +53,44 @@ Seed the state you need rather than replaying the events that produce it. A test
 that dispatches four events to reach the case it is testing fails for four
 unrelated reasons.
 
-## Fakes first, Mocktail second
+## Fakes first, generated Mockito mocks second
 
 Write a hand-rolled fake for a boundary you use across several tests: a fake
 repository holding a list in memory reads better and survives refactors.
 
-Reach for Mocktail when you must assert an interaction or force an error path
-that a fake cannot reach cleanly:
+Reach for Mockito when you must assert an interaction or force an error path
+that a fake cannot reach cleanly. Generate nice mocks from an annotation in the
+test source:
 
 ```dart
-class MockOrdersRepository extends Mock implements OrdersRepository {}
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
+@GenerateNiceMocks([MockSpec<OrdersRepository>()])
+import 'place_order_use_case_test.mocks.dart';
 ```
 
-- Call `registerFallbackValue` in `setUpAll` for every custom type used with
-  `any()`. Without it the matcher throws at run time, not at compile time.
-- Mocktail takes closures: `when(() => repo.place(any()))`, `verify(() => …)`.
-- Stub only what the test reads. An over-stubbed mock passes after the real
-  method is deleted.
+Run the shared `build_runner` command from
+[SKILL.md](../SKILL.md#shared-toolchain). Mockito names the output after the
+annotation-holding file, so the example creates
+`place_order_use_case_test.mocks.dart` beside the test. Import the generated
+class, but never edit or commit the generated file.
 
-The foundation owns where a double lives. In this layout that means: keep it in
-the test that uses it, and promote it to `test/features/<name>/test_doubles/`
-only once a second file needs it.
+`@GenerateNiceMocks` is the preferred Mockito API. An unstubbed method returns a
+simple legal value instead of throwing; the test must still stub every value it
+uses. Stub asynchronous methods with `thenAnswer`, not `thenReturn`:
+
+```dart
+when(repository.place(any)).thenAnswer((_) async => confirmation);
+verify(repository.place(order)).called(1);
+```
+
+Stub only what the test reads. An over-stubbed mock passes after the real method
+is deleted.
+
+Keep the generated mock in the test that uses it. When a second file needs it,
+move its annotation and generated import with the double under the foundation's
+nearest-common-owner rule.
 
 ## Widget tests
 
