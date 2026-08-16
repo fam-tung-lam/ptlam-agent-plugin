@@ -19,7 +19,7 @@
   "skills": [
     "./skills/ptlam-setup",
     "./skills/ptlam-git-writing-commit-message",
-    "./skills/ptlam-testing-typescript",
+    "./skills/ptlam-code-style-flutter",
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-grilling",
     "./skills/ptlam-creating-atomic-note",
