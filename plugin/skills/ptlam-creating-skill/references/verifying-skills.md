@@ -15,7 +15,7 @@ inspect the package tree. Inspect the diff only when files changed.
 | Layout      | Every file has a consumer and fits its limit; each split earns its navigation cost through ownership, conditional loading, or readability. |
 | Disclosure  | `SKILL.md` holds the whole normal path; each reference sits one hop away behind a condition named there and nowhere else.                  |
 | Readability | Titles, headings, and visual labels alone reveal the path and how it ends.                                                                 |
-| Visual form | Each point uses the highest form that fits it, replaces the prose it stands in for, and passes `ptlam-mermaiding` when it is a diagram.    |
+| Visual form | Each point uses the highest form that fits it, replaces the prose it stands in for, and passes its diagram-type checks when applicable.    |
 | Metadata    | Name, directory, description, and invocation agree with the host.                                                                          |
 | Freshness   | Nothing duplicated, stale, unused, or placeholder remains; links resolve.                                                                  |
 

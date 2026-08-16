@@ -100,8 +100,14 @@ sources, or materials a workflow relies on—to the workflow that uses it. Keep
 guidance shared by the normal path in `SKILL.md`; route conditional guidance to
 that workflow's owning reference and point there instead of repeating it.
 
-Read [composing skills](references/composing-skills.md). It owns invocation,
-dependency interfaces, and foundation-specialization ownership.
+Write each dependency name, load order, ownership boundary, and precedence rule
+only in the host metadata that generates the top-level `SKILL.md` dependency
+contract. In this repository, `plugin/plugin.yml` owns those fields. A nested
+reference may own conditional stack mechanics, but it must not name, link to, or
+paraphrase a required skill.
+
+Read [composing skills](references/composing-skills.md). It owns invocation and
+foundation-specialization mechanics.
 
 Done when the file tree and reading order exist and the composition contract
 passes.
@@ -111,8 +117,7 @@ passes.
 For create or refactor, read
 [writing for maintainers](references/writing-for-maintainers.md) before any
 prose. It owns reading order, sentence shape, the order to try visual forms in,
-and what to cut. When that order settles on a diagram, apply the required
-`ptlam-mermaiding` skill to author or judge it.
+and what to cut.
 
 Read [prompting best practices](references/prompting-best-practices.md) when the
 skill steers non-trivial reasoning, tool use, output shape, or autonomy.

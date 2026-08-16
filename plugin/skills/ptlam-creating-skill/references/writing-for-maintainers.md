@@ -48,9 +48,6 @@ the point, take the highest one whose row fits.
 | Table           | The point maps one key to one value                           |
 | Prose           | The point is a single rule, definition, or caveat             |
 
-Apply the required `ptlam-mermaiding` skill to every diagram you write or judge.
-It owns the diagram type, the notation, and the syntax check.
-
 A visual replaces the prose it stands in for; it never accompanies it. When a
 nearby paragraph says what the visual already says, delete one of them.
 

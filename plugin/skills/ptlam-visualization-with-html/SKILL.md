@@ -39,28 +39,27 @@ flowchart LR
 
 ## 1. Consume the explanation and resolve the artifact
 
-Start from the required `ptlam-explaining` skill's explanation package. Consume
-its Goal, Presentation, Model, Explanation, and Limits fields. Do not rebuild or
-quietly change any of them here.
+Start from the verified explanation package. Consume its Goal, Presentation,
+Model, Explanation, and Limits fields. Do not rebuild or quietly change any of
+them here.
 
 Resolve the output path, and whether the task creates or revises an artifact.
 Inspect an existing artifact before changing it. Decide whether the result is
 literal-only, needs a new analogy, or already contains a user-supplied one.
 
 Done when the destination and change authority are clear, one verified
-foundation explanation supplies every literal fact, and the analogy branch is
-known.
+explanation supplies every literal fact, and the analogy branch is known.
 
 ## 2. Resolve the optional analogy
 
 Use an analogy only when the user explicitly asks for one, or supplies an
-already selected analogy model. Otherwise carry the `ptlam-explaining` literal
-model into step 3 unchanged.
+already selected analogy model. Otherwise carry the verified literal model into
+step 3 unchanged.
 
 For either analogy case, follow
-[the analogy branch](references/analogy-branch.md). It owns how to reach that
-skill's analogy branch and how to accept or reject an analogy. Then load the
-selected rendering contracts directly:
+[the analogy branch](references/analogy-branch.md). It owns how the renderer
+accepts or rejects the approved analogy. Then load the selected rendering
+contracts directly:
 
 | When                                      | Read                                                                                |
 | ----------------------------------------- | ----------------------------------------------------------------------------------- |

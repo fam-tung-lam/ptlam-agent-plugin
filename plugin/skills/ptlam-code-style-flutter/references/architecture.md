@@ -1,8 +1,6 @@
 # Architecture
 
-The Flutter layer map, repository boundary, and dependency composition. The
-`ptlam-code-style` foundation owns the one-direction dependency rule this map
-satisfies.
+The Flutter layer map, repository boundary, and dependency composition.
 
 ```mermaid
 flowchart LR
