@@ -56,6 +56,10 @@ Build one client or pool per external system under `integrations/` and expose it
 through a typed facade. Features receive that facade through dependencies; they
 do not construct a second Redis, S3, mail, payment, or queue client.
 
+Configure the timeout, the connection limit, and any retry policy on that
+facade, once. A client built without an explicit timeout inherits an unbounded
+one and holds a worker until the far side answers.
+
 Keep the Celery app under `integrations/celery_app.py`. Keep each task beside
 its feature and register or autodiscover it on that app. A task assembles and
 calls the same use case as the HTTP route; business policy stays in neither the

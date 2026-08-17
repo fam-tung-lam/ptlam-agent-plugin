@@ -28,7 +28,7 @@ the language-neutral foundation own everything underneath them.
 | -------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | Starting or reorganizing the service package, a feature, shared code, or the test tree | [file-organization.md](references/file-organization.md)   |
 | Constructing the app, startup and shutdown, settings, routers, or middleware           | [application.md](references/application.md)               |
-| Declaring a path, request input, response output, status, or OpenAPI operation         | [routes.md](references/routes.md)                         |
+| Declaring a path, request input, response output, paging, status, or OpenAPI operation | [routes.md](references/routes.md)                         |
 | Injecting authentication, a session, request context, or another capability            | [dependencies.md](references/dependencies.md)             |
 | Choosing `def`, `async def`, streaming, or a background handoff                        | [concurrency.md](references/concurrency.md)               |
 | Tracing or enforcing the route-to-use-case-to-repository request pipeline              | [architecture.md](references/architecture.md)             |
