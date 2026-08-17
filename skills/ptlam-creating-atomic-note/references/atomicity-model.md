@@ -7,8 +7,8 @@ rule for matching effort to expected value.
 This model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
 retrieved on 2026-08-15. The source frames atomicity as a principle for thinking
-rather than a rigid rule about note length. Recheck the source when its model or
-terminology materially changes.
+rather than a rigid rule about note length. The link records attribution only;
+the local model below is complete for this skill.
 
 ## Define the atom by function
 

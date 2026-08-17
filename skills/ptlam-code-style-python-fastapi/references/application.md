@@ -23,9 +23,10 @@ request path. Let optional or lazy resources follow their established owner.
 Expose a started resource through a typed dependency rather than a mutable
 global that tests must patch before importing the app.
 
-The official [lifespan guide](https://fastapi.tiangolo.com/advanced/events/)
-owns current framework behavior. Recheck it when the installed FastAPI or
-Starlette version changes.
+The [FastAPI lifespan guide](https://fastapi.tiangolo.com/advanced/events/)
+identifies the framework feature; it is not required reading. When the installed
+FastAPI or Starlette behavior differs, inspect the locked packages and prove the
+startup and shutdown contract with a focused local test.
 
 ## Compose once
 

@@ -39,9 +39,11 @@ unrelated tests in place.
   `TestClient` or the installed transport's `raise_app_exceptions=False`
   equivalent.
 
-The official [async test](https://fastapi.tiangolo.com/advanced/async-tests/)
-and [lifespan test](https://fastapi.tiangolo.com/advanced/testing-events/)
-guides own current client behavior.
+The [async test](https://fastapi.tiangolo.com/advanced/async-tests/) and
+[lifespan test](https://fastapi.tiangolo.com/advanced/testing-events/) links
+identify the FastAPI features; they are not required reading. When client or
+lifespan behavior differs, inspect the locked packages and prove startup,
+request, and shutdown behavior with a focused local test.
 
 ## Isolate request dependencies
 
