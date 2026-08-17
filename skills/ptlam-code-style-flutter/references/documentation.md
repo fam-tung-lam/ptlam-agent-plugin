@@ -34,7 +34,7 @@ Reference another symbol in square brackets: `[Order]`, `[placeOrder]`, or
 | BLoC                 | Which events it accepts, which states it emits, and what closes it                  |
 | Use case             | The rule it enforces and every failure it can return                                |
 | Repository           | Which sources answer, the fallback when one fails, and the failures it returns      |
-| Model or DTO         | What the type means and any renamed wire field                                      |
+| Entity or DTO        | What the type means and any renamed wire field                                      |
 | Extension or utility | When to use it and when not to                                                      |
 
 Document failure cases and anything the signature hides, such as stream type,

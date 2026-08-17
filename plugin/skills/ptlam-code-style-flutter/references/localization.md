@@ -8,9 +8,9 @@ Use [`slang`](https://pub.dev/packages/slang),
 Flutter SDK's `flutter_localizations` package.
 
 Localization is a feature, not a utility. It lives at
-`lib/features/localization/`, with the same `ui/`, `models/`, `bloc/`,
-`usecases/`, `repositories/` shape as any other feature, and its translation
-files under `i18n/`.
+`lib/features/localization/`, with the same `widgets/`, `entities/`,
+`failures/`, `dtos/`, `bloc/`, `usecases/`, `repositories/` shape as any other
+feature, and its translation files under `i18n/`.
 
 ## Every user-visible string is a key
 
