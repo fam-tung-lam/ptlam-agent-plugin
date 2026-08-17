@@ -1,20 +1,20 @@
-# Models, DTOs, and Failures
+# DTOs, Entities, and Failures
 
-How data crosses a layer: DTOs, domain models, unions, and failures.
+How data crosses a layer: DTOs, domain entities, unions, and failures.
 
-## A DTO is not a domain model
+## A DTO is not a domain entity
 
 A DTO mirrors an external shape — a JSON body, a stored record — field for
-field, including the parts you dislike. A domain model says what the application
-means, in the domain's words.
+field, including the parts you dislike. A domain entity says what the
+application means, in the domain's words.
 
 Keep them separate types from the first version. Flutter is deliberately
 stricter here than the general rule of splitting once the shapes disagree: a
 vendor owns the wire shape and can change it in a release you do not control.
 
-A feature DTO lives beside the external boundary that owns its shape, under
-`features/<name>/data/<source>/dtos/`; the domain model travels everywhere above
-the repository.
+A feature DTO lives in `features/<name>/dtos/`; the domain entity travels
+everywhere above the repository. Name the DTO file for the external shape it
+represents when a feature has more than one source.
 
 Map between them in the repository or the data source, never above it. That
 mapping is the only place that knows the API sends `"created_ts"` as an epoch
@@ -31,13 +31,13 @@ silently as fields are added.
 Use `@JsonKey` to record the wire name when it differs from the Dart name. Do
 not rename the Dart field to match a wire name you would not have chosen.
 
-Domain models carry no serialization annotations. When one needs persisting, it
-gets a DTO.
+Domain entities carry no serialization annotations. When one needs persisting,
+it gets a DTO.
 
 ## Freezed for immutable data
 
 Use [`freezed_annotation`](https://pub.dev/packages/freezed_annotation) with
-[`freezed`](https://pub.dev/packages/freezed) for DTOs, domain models, BLoC
+[`freezed`](https://pub.dev/packages/freezed) for DTOs, domain entities, BLoC
 events, and BLoC states. It supplies equality, `copyWith`, and exhaustive
 unions, all of which are wrong when hand-written under time pressure.
 
@@ -89,4 +89,4 @@ Name failures for what the user or the caller must do about them:
 `OrdersFailure.rejected(reason)`. `OrdersFailure.error500()` names the wire, not
 the decision.
 
-Keep one failure type per feature, in `features/<name>/models/`.
+Keep one failure type per feature, in `features/<name>/failures/`.

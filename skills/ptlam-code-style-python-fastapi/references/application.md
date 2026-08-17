@@ -1,13 +1,13 @@
 # FastAPI Application Composition
 
-How the application owns lifespan, settings, router assembly, middleware, and
-framework-wide handlers.
+How the application owns lifespan, settings, controller assembly, middleware,
+and framework-wide handlers.
 
 Keep one composition root. In the default new-service layout, `main.py` contains
 only `app = create_app()`, while `app.py` creates `FastAPI`, installs middleware
-and exception handlers, and includes every feature router once. Preserve an
-existing coherent factory location. Feature packages do not mutate the app
-during import.
+and exception handlers, and includes every feature controller's router once.
+Preserve an existing coherent factory location. Feature packages do not mutate
+the app during import.
 
 ## Own process lifetime
 
@@ -30,8 +30,8 @@ Starlette version changes.
 ## Compose once
 
 - Read settings through the project's settings owner. Do not scatter direct
-  environment reads across routers and use cases. In a new service, define one
-  Pydantic Settings model and one cached accessor in `settings.py`.
+  environment reads across controllers and use cases. In a new service, define
+  one Pydantic Settings model and one cached accessor in `settings.py`.
 - Keep `/health`, `/ready`, and build information in one unversioned operations
   router. Do not include operational endpoints under an API version prefix.
 - Give each shared path prefix, version prefix, tag, and dependency one router
@@ -66,4 +66,5 @@ calls the same use case as the HTTP route; business policy stays in neither the
 integration facade nor the task shell.
 
 Finish when app construction is repeatable in tests, startup and shutdown own
-the same resources, and each router, handler, and middleware is installed once.
+the same resources, and each controller, handler, and middleware is installed
+once.

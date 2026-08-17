@@ -9,8 +9,8 @@ cases are the only path from an HTTP handler or durable task to a repository.
 - Receive collaborators in `__init__` and operation input in `__call__`.
 - Use a command dataclass when an operation has several input fields; pass one
   scalar directly when it has one.
-- Return a domain or persistence model. Let the router map it to a response
-  schema.
+- Return a domain or persistence entity. Let the controller map it to a response
+  DTO.
 - Raise domain exceptions and let the application map them once.
 
 ```python
@@ -53,7 +53,7 @@ required, import only the other feature's facade.
 ## Assemble at the FastAPI boundary
 
 ```python
-# users/dependencies.py
+# users/di.py
 def get_create_user(
     session: Annotated[AsyncSession, Depends(get_session)],
 ) -> CreateUser:
@@ -61,7 +61,7 @@ def get_create_user(
 ```
 
 ```python
-# users/router.py
+# users/controller.py
 @router.post("", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 async def create_user(
     body: UserCreate,

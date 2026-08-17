@@ -82,7 +82,7 @@ analysis.
 | Adding a file or a feature; deciding what a feature exports               | [file-organization.md](references/file-organization.md) |
 | Naming, formatting, imports, `const`, and analyzer exceptions             | [dart-style.md](references/dart-style.md)               |
 | Building a widget, splitting one, or using `BuildContext`                 | [widgets.md](references/widgets.md)                     |
-| Defining a DTO, a domain model, a failure, or a Freezed union             | [models.md](references/models.md)                       |
+| Defining a DTO, a domain entity, a failure, or a Freezed union            | [models.md](references/models.md)                       |
 | Calling an external API                                                   | [networking.md](references/networking.md)               |
 | Reading or writing persisted data                                         | [storage.md](references/storage.md)                     |
 | Adding or changing user-visible text                                      | [localization.md](references/localization.md)           |

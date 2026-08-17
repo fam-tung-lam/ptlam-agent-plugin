@@ -5,11 +5,11 @@ and OpenAPI metadata.
 
 ## Compose the URL once
 
-Give each feature one `APIRouter` in `router.py`. Split it into `routers/v1.py`,
-`routers/v2.py`, and later versions only when a second public version exists.
-Declare each shared prefix and tag either on that router or where a parent
-includes it, never at both levels. Attach the API version once near the
-application boundary.
+Give each feature one `APIRouter` in `controller.py`. Split it into
+`controllers/v1.py`, `controllers/v2.py`, and later versions only when a second
+public version exists. Declare each shared prefix and tag either on that router
+or where a parent includes it, never at both levels. Attach the API version once
+near the application boundary.
 
 For the root operation of an already-prefixed router, use `""` unless the API
 contract intentionally includes a trailing slash. Test canonical paths with
@@ -23,14 +23,14 @@ redirect following disabled so an accidental 307 does not pass invisibly.
 - Group cohesive query fields in a Pydantic query model when the installed
   FastAPI version supports the intended binding.
 - Declare the response through a precise return type or `response_model`. Choose
-  `response_model` when the runtime object differs from the public schema. Never
+  `response_model` when the runtime object differs from the public DTO. Never
   expose an ORM object or internal field accidentally.
 - Set a non-default success status with `fastapi.status`. A 204 response carries
   no body.
 - Reuse the API's stable error model and declare each promised non-success
   status and body with `responses=` or the repository's central OpenAPI
-  customization. Raising `HTTPException` alone does not document that schema.
-- Attach one realistic payload to each request and response schema through
+  customization. Raising `HTTPException` alone does not document that DTO.
+- Attach one realistic payload to each request and response DTO through
   `model_config` `json_schema_extra` or `openapi_examples`, so the generated
   documentation shows a concrete example beside the type.
 
@@ -70,6 +70,6 @@ declared response. It imports no repository, session, SQLAlchemy object, or
 integration client. Map a multi-field body to the use case's command; pass a
 single path or query value directly when that is the complete operation input.
 
-Finish when the canonical URL does not redirect, input and output schemas hide
+Finish when the canonical URL does not redirect, input and output DTOs hide
 internal data, every collection response is paged and ordered, a repeated write
 produces one effect, and OpenAPI records the intended status and error contract.

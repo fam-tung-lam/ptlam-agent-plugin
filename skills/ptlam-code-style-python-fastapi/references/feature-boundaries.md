@@ -1,8 +1,8 @@
 # FastAPI Feature Boundaries
 
 Each feature publishes one surface through its package `__init__.py`. Another
-feature may import an exported use case, schema, or domain exception; it never
-reaches into the target's router, repository, models, dependencies, or tasks.
+feature may import an exported use case, DTO, or domain exception; it never
+reaches into the target's controller, repositories, entities, DI, or tasks.
 
 ```python
 # billing/usecases/charge_customer.py
@@ -34,18 +34,18 @@ layers = [
 ]
 
 [[tool.importlinter.contracts]]
-name = "Routers enter through use cases"
+name = "Controllers enter through use cases"
 type = "forbidden"
 source_modules = [
-    "myapp.users.router",
-    "myapp.billing.router",
-    "myapp.orders.router",
+    "myapp.users.controller",
+    "myapp.billing.controller",
+    "myapp.orders.controller",
 ]
 forbidden_modules = [
     "myapp.db",
-    "myapp.users.repository",
-    "myapp.billing.repository",
-    "myapp.orders.repository",
+    "myapp.users.repositories",
+    "myapp.billing.repositories",
+    "myapp.orders.repositories",
     "myapp.integrations",
     "sqlalchemy",
 ]
@@ -63,14 +63,15 @@ forbidden_modules = ["fastapi", "starlette"]
 ```
 
 Run `lint-imports` in CI. The external-package flag is required when a contract
-names SQLAlchemy, FastAPI, or Starlette. Allow indirect imports in the router
-contract so the valid router-to-use-case-to-repository path does not fail.
+names SQLAlchemy, FastAPI, or Starlette. Allow indirect imports in the
+controller contract so the valid controller-to-use-case-to-repository path does
+not fail.
 
 Independent features coordinate in `app.py` or through events. When one caller
 must invoke another feature's facade, ignore only that exact facade import in
 the independent-sibling layer and add a forbidden contract that still blocks the
-target's router, models, repository, dependencies, and tasks. Record the
-exception as owned design debt.
+target's controller, entities, repositories, DI, and tasks. Record the exception
+as owned design debt.
 
 ## Break cycles at the boundary
 

@@ -10,7 +10,7 @@ their cheaper Python test level.
 ## Mirror capability ownership
 
 For the default new-service layout, place use-case tests under
-`tests/<feature>/unit/usecases/` and real repository or router collaboration
+`tests/<feature>/unit/usecases/` and real repository or controller collaboration
 tests under `tests/<feature>/integration/`. Put fixtures owned by one feature in
 that feature's `conftest.py`.
 
@@ -49,9 +49,9 @@ Override the exact dependency callable stored in `app.dependency_overrides`.
 Install the override in a fixture. In `finally`, restore that key's previous
 value or delete only that key so the test preserves overrides it did not own.
 
-Keep the assembled router, validation, dependency graph, exception handlers, and
-middleware real. Replace external effects only through the selected dependency
-or application seam.
+Keep the assembled controller, validation, dependency graph, exception handlers,
+and middleware real. Replace external effects only through the selected
+dependency or application seam.
 
 Cover success, malformed and boundary input, missing authentication, denied
 authorization, mapped domain failure, and unexpected external failure when the
