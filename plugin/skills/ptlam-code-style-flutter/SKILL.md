@@ -5,17 +5,6 @@ state, source tree, widgets, external boundaries, and tests.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## How does a Flutter concern reach its project mechanic?
-
-```mermaid
-flowchart LR
-    ResolveToolchain["Resolve the toolchain"] --> ReadProjectTruth["Read the project's own config"]
-    ReadProjectTruth --> NameConcern["Name the concern"]
-    NameConcern --> ReadReference["Read that one reference"]
-    ReadReference --> ApplyMechanics["Apply the mechanics"]
-    ApplyMechanics --> RunChecks["Run analyze, format, and tests"]
-```
-
 ## Before the first edit
 
 1. Resolve the Flutter version through FVM. Invoke Flutter commands as

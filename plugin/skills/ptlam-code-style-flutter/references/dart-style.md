@@ -22,9 +22,6 @@ Name a class after what it is, and suffix it with its role when the role is part
 of the contract: `OrdersBloc`, `OrdersRepository`, `PlaceOrderUseCase`,
 `AppLocaleLocalStorage`. Do not suffix a model — `Order`, not `OrderModel`.
 
-Name a boolean so it reads as an assertion: `isLoading`, `hasUnsavedChanges`.
-Name a method after what the caller gets, not how it works.
-
 ## Formatting
 
 `dart format` owns whitespace. Never hand-format around it, and never argue with
