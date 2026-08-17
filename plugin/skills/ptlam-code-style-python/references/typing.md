@@ -27,6 +27,20 @@ change owns its compatibility impact.
 Never use a mutable object as a function default. Use `None` as a sentinel or a
 factory owned by the data-model mechanism.
 
+## Put identity, unit, and time in the type
+
+- Give a distinct identifier its own type with `NewType`, such as
+  `UserId = NewType("UserId", str)`, so an order identifier cannot be passed
+  where a user identifier belongs.
+- Use `decimal.Decimal` for money and any exact quantity. Binary floats round in
+  ways an accounting report will eventually surface.
+- Use timezone-aware `datetime` for an instant, `datetime.now(UTC)` to read the
+  clock, and `date` only for a calendar day that has no instant. Reject a naive
+  `datetime` at the boundary that accepts it.
+- Freeze a value object with `@dataclass(frozen=True, slots=True)` and use an
+  `enum.StrEnum` or `enum.Enum` for a closed vocabulary instead of loose
+  strings.
+
 ## Keep static and runtime guarantees distinct
 
 Type hints do not validate untrusted input. Validate at the boundary that owns
