@@ -36,8 +36,9 @@ double in scope.
 
 ## Place a reusable double at the nearest common scope
 
-Start from the test layout resolved by `ptlam-code-style`. Placement follows
-consumer ownership rather than a fixed repository-wide directory:
+Start from the layout resolved by [test-placement.md](test-placement.md).
+Placement follows consumer ownership rather than a fixed repository-wide
+directory:
 
 | Consumers                       | Where the definition lives                                                               |
 | ------------------------------- | ---------------------------------------------------------------------------------------- |

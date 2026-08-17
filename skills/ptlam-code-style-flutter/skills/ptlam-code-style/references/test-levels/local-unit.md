@@ -9,7 +9,7 @@ only on a developer workstation.
 
 ## Rules
 
-- Place the test according to the layout owner resolved by `ptlam-code-style`.
+- Place the test where [test-placement.md](../test-placement.md) resolves.
 - Exercise the unit through its public interface.
 - Keep the environment in-process, fast, deterministic, and isolated.
 - Use real values and controlled in-memory collaborators where practical.

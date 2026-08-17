@@ -16,6 +16,11 @@ Set connect, send, and receive timeouts explicitly. Accept a `CancelToken` on
 any request whose caller can leave, and let that caller cancel through its own
 lifecycle.
 
+Bound retries in the interceptor that owns them: a capped attempt count,
+exponential backoff with jitter, and only for requests the API declares safe to
+repeat. A mobile client on a flaky connection retries far more often than the
+developer who wrote the loop expects.
+
 Nothing above the repository imports Dio or sees a `Response`, status code, or
 `DioException`. [architecture.md](architecture.md#one-repository-per-concern)
 owns the repository boundary, and [models.md](models.md) owns domain failures.

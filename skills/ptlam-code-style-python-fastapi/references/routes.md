@@ -30,6 +30,9 @@ redirect following disabled so an accidental 307 does not pass invisibly.
 - Reuse the API's stable error model and declare each promised non-success
   status and body with `responses=` or the repository's central OpenAPI
   customization. Raising `HTTPException` alone does not document that schema.
+- Attach one realistic payload to each request and response schema through
+  `model_config` `json_schema_extra` or `openapi_examples`, so the generated
+  documentation shows a concrete example beside the type.
 
 FastAPI validates, documents, serializes, and filters a declared response. The
 official
@@ -40,6 +43,26 @@ Read raw request bytes only when the protocol requires the exact bytes, such as
 a signed webhook. Authenticate the raw body before parsing it and document why
 normal typed-body validation is intentionally deferred.
 
+## Bound every collection operation
+
+Give a list endpoint an explicit page size with a default and a maximum, a
+deterministic sort, and the filters the caller actually needs. Return the paging
+state the client needs to request the next page.
+
+Add these when the endpoint is created. Retrofitting paging onto a published
+`GET /items` that returned everything is a breaking change for every consumer
+that already depends on the full list.
+
+## Make a repeated write safe
+
+A mobile client, a proxy, or an operator will send the same write twice. Accept
+an idempotency key, or derive one from the operation's natural key, and return
+the original result for the repeat instead of creating a second row, charge, or
+message.
+
+Declare the key in the signature like any other input, and record which
+operations promise it in the API contract.
+
 ## Delegate one operation
 
 A handler parses transport input, calls one injected use case, and shapes the
@@ -48,4 +71,5 @@ integration client. Map a multi-field body to the use case's command; pass a
 single path or query value directly when that is the complete operation input.
 
 Finish when the canonical URL does not redirect, input and output schemas hide
-internal data, and OpenAPI records the intended status and error contract.
+internal data, every collection response is paged and ordered, a repeated write
+produces one effect, and OpenAPI records the intended status and error contract.

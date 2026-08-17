@@ -29,6 +29,15 @@ alternative that is invisible from the code.
 A comment that restates the line below it goes stale silently and helps nobody.
 Delete it.
 
+## Mark a deliberate deviation
+
+Anything that breaks the local pattern announces itself where it lives. Name the
+rule it departs from and what forced the departure, in a comment beside the code
+that surprises the reader.
+
+A reader who meets the exception without the reason will either copy it into the
+next file or "fix" it back. The note is worth more than the rule it breaks.
+
 ## Do not link out of the codebase
 
 No links to issues, pull requests, design docs, or specifications inside a
