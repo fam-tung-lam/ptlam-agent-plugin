@@ -194,6 +194,19 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-creating-spec
+    description:
+      Create one buildable feature specification from a confirmed PRD scope item
+      or a feature brief inside an existing product. Use when behavior,
+      boundaries, failure handling, interfaces, data, rollout constraints, and
+      required evidence must be fixed before ticket planning. Start a new
+      product or large epic with ptlam-creating-prd; skip this pipeline for a
+      small fix.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-creating-atomic-note
     description:
       Create, mature, review, split, or merge durable atomic notes by

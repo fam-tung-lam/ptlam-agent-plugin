@@ -24,6 +24,7 @@
     "./skills/ptlam-code-style-python-fastapi",
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-grilling",
+    "./skills/ptlam-creating-spec",
     "./skills/ptlam-creating-atomic-note",
     "./skills/ptlam-scraping-urls",
     "./skills/ptlam-explaining",
