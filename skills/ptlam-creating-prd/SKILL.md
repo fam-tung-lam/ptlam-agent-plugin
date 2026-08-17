@@ -1,20 +1,21 @@
 ---
 name: ptlam-creating-prd
 description:
-  Create one product requirements document from a confirmed grilling record for
-  a new product or large epic. Use when product framing, audience, outcomes,
-  scope, non-goals, and success measures must become a durable handoff before
-  feature specifications. Start an existing-product feature at
-  ptlam-creating-spec; skip this pipeline for a small fix.
+  Create one product requirements document from a confirmed grilling record or
+  durable product brief for a new product or large epic. Use when product
+  framing, audience, outcomes, scope, non-goals, and success measures must
+  become a durable handoff before feature specifications. Start an
+  existing-product feature at ptlam-creating-spec; skip this pipeline for a
+  small fix.
 disable-model-invocation: true
 ---
 
 # PTLam Creating Product Requirements
 
-Turn one confirmed grilling record into one product requirements document (PRD)
-for the people who will specify and prioritize the product. The PRD owns product
-framing; it does not own solution mechanics, feature contracts, ticket slices,
-or implementation.
+Turn one confirmed grilling record or durable product brief into one product
+requirements document (PRD) for the people who will specify and prioritize the
+product. The PRD owns product framing; it does not own solution mechanics,
+feature contracts, ticket slices, or implementation.
 
 ## Required skills
 
@@ -23,7 +24,7 @@ or implementation.
 **Reason:** Makes unfamiliar product framing reconstructable for the document's reader without changing confirmed product decisions.
 
 **Instructions:** Read and apply ptlam-explaining before drafting the PRD.
-Infer the reader's likely difficulty from the confirmed record and
+Infer the reader's likely difficulty from the confirmed source and
 project evidence; do not start another interview.
 Let it own the literal model, explanatory structure, teaching order,
 and reconstruction check for unfamiliar or complex content.
@@ -53,7 +54,7 @@ Read [ptlam-mermaiding](skills/ptlam-mermaiding/SKILL.md).
 
 ```mermaid
 flowchart LR
-    ResolveRecord["Resolve the confirmed grilling record"] --> ReadEvidence["Read decisions and product evidence"]
+    ResolveSource["Resolve the confirmed product source"] --> ReadEvidence["Read decisions and product evidence"]
     ReadEvidence --> SynthesizeRequirements["Synthesize product requirements"]
     SynthesizeRequirements --> WritePrd["Write the PRD"]
     WritePrd --> ReadinessCheck{"PRD is ready?"}
@@ -61,7 +62,7 @@ flowchart LR
     ReadinessCheck -->|"Yes"| DeliverPrd["Deliver the PRD"]
 ```
 
-Only `ptlam-grilling` interviews. This skill synthesizes its confirmed record
+Only `ptlam-grilling` interviews. This skill synthesizes its confirmed source
 and never re-asks a settled question. Route an outcome-changing unknown back to
 decision work instead of choosing silently.
 
@@ -75,21 +76,26 @@ Read applicable `AGENTS.md` files before resolving paths. Use their PRD location
 when defined; otherwise write to `<project-root>/docs/prd/<slug>.md`.
 
 Invocation authorizes creating that one file and missing parent directories. It
-does not authorize overwriting an existing PRD, changing the grilling record,
+does not authorize overwriting an existing PRD, changing the source evidence,
 creating specs or tickets, changing code, or performing Git operations. Update
 an existing PRD only when the user requested that effect.
 
-Complete this step when the product, complete grilling record, project root,
+Complete this step when the product, confirmed source, project root,
 destination, and file authority are explicit.
 
 ## 2. Read the confirmed evidence
 
-Read the complete grilling record. Require status `complete` and explicit user
-confirmation. When the record remains active, deferred, blocked, or
-confirmation-pending, stop with the exact missing decision instead of drafting
-around it.
+Use a complete grilling record when one applies. Require status `complete` and
+explicit user confirmation. When the record remains active, deferred, blocked,
+or confirmation-pending, stop with the exact missing decision instead of
+drafting around it.
 
-Read repository and market evidence already named by the record. Keep verified
+A confirmed durable product brief may replace a grilling record when it carries
+the same evidence bar: explicit user confirmation, named evidence, and no hidden
+outcome-changing product question. Record the brief's path and why no grilling
+record applies.
+
+Read repository and market evidence already named by the source. Keep verified
 facts, user-owned decisions, assumptions, risks, and rejected branches distinct.
 Do not conduct fresh discovery or introduce uncited claims.
 
@@ -131,9 +137,9 @@ every schema section has an explicit disposition.
 Check every claim and source reference. Confirm that the explanatory structure
 preserves confirmed meaning and that each visual replaces equivalent prose.
 
-Report the file, status, source record, checks performed, and any blocking
+Report the file, status, source artifact, checks performed, and any blocking
 decision. A PRD is ready for feature specification only when its status is
 `ready` and every readiness check passes.
 
-Complete the task when the file matches the confirmed record and is either ready
+Complete the task when the file matches the confirmed source and is either ready
 for specification or blocked with the exact missing decision exposed.

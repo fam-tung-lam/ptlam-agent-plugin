@@ -78,9 +78,16 @@ flowchart LR
    several records plausibly match, ask which one to continue.
 4. Read a resumed record completely. Recheck drift-prone evidence and continue
    from its next unresolved decision without repeating settled questions.
+5. Before the first substantive question, have each injected artifact owner
+   resolve the additional destination it owns. Present the session-record path
+   and every additional destination together so the user can narrow or refuse
+   the write authority before any file is written there. When an exact future
+   filename depends on a decision not yet known, disclose the resolved directory
+   and naming rule now, then present the exact path before its first write.
 
 Complete this step when the fixed workspace root, schema, one unique new or
-resumable path, prior state, and write authority are known.
+resumable path, every possible write destination, prior state, and write
+authority are known and disclosed.
 
 ## 2. Build the decision map and write the checkpoint
 
@@ -112,16 +119,10 @@ matches that state.
 3. Wait for the user's answer before asking another question.
 4. Record the answer, then update the map to show what it resolves, changes, or
    invalidates downstream.
-5. Apply the domain-modeling dependency when a business term is contested,
-   overloaded, or newly coined, or a context boundary becomes unclear. Persist
-   its glossary or process-map change before continuing.
-6. Apply the ADR dependency's qualification gate when a decision becomes
-   expensive to reverse, constrains future architecture, or carries material
-   rejected alternatives. Persist a qualifying ADR before continuing.
-7. Challenge contradictions with evidence. Reopen an earlier branch when a new
+5. Challenge contradictions with evidence. Reopen an earlier branch when a new
    answer makes it inconsistent.
-8. Persist the checkpoint before yielding with the next substantive question.
-9. Continue until every outcome-changing branch is resolved or explicitly
+6. Persist the checkpoint before yielding with the next substantive question.
+7. Continue until every outcome-changing branch is resolved or explicitly
    deferred with an owner and consequence.
 
 Use concrete scenarios and counterexamples when an abstract answer could hide

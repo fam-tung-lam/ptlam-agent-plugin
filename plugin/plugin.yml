@@ -224,10 +224,11 @@ skills:
   - id: ptlam-creating-prd
     description:
       Create one product requirements document from a confirmed grilling record
-      for a new product or large epic. Use when product framing, audience,
-      outcomes, scope, non-goals, and success measures must become a durable
-      handoff before feature specifications. Start an existing-product feature
-      at ptlam-creating-spec; skip this pipeline for a small fix.
+      or durable product brief for a new product or large epic. Use when product
+      framing, audience, outcomes, scope, non-goals, and success measures must
+      become a durable handoff before feature specifications. Start an
+      existing-product feature at ptlam-creating-spec; skip this pipeline for a
+      small fix.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
@@ -239,7 +240,7 @@ skills:
           reader without changing confirmed product decisions.
         instructions: |-
           Read and apply ptlam-explaining before drafting the PRD.
-          Infer the reader's likely difficulty from the confirmed record and
+          Infer the reader's likely difficulty from the confirmed source and
           project evidence; do not start another interview.
           Let it own the literal model, explanatory structure, teaching order,
           and reconstruction check for unfamiliar or complex content.

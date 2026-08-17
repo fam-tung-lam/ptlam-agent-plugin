@@ -12,7 +12,8 @@ Use every heading. Write `None` with a reason when a section does not apply.
 
 - Status: <draft | blocked | ready>
 - Updated: <timestamp>
-- Source record: <confirmed grilling-record path>
+- Source artifact: <confirmed grilling-record or durable-brief path>
+- Source basis: <grilling record, or why no grilling record applies>
 
 ## At a glance
 
@@ -64,7 +65,7 @@ right product response.>
 
 ## Traceability
 
-<Map each outcome and scope ID to the grilling-record decision or evidence.>
+<Map each outcome and scope ID to the source decision or evidence.>
 ```
 
 Preserve an existing outcome or scope ID when revising its wording. Retire an
@@ -82,17 +83,17 @@ A revision of a ready PRD returns to `draft` until affected sections pass again.
 
 ## Readiness checks
 
-| Check       | The PRD must                                                                |
-| ----------- | --------------------------------------------------------------------------- |
-| Source      | Name one confirmed grilling record and trace every requirement to it.       |
-| Explanation | Make unfamiliar framing reconstructable without changing confirmed meaning. |
-| Visual      | Include one earned visual form that replaces equivalent prose.              |
-| Audience    | Identify affected people, context, evidence, and problem.                   |
-| Framing     | State the value, current alternative, and positioning without mechanics.    |
-| Outcomes    | Give each outcome an observable measure and guardrail disposition.          |
-| Scope       | Separate stable scope IDs from explicit non-goals.                          |
-| Boundary    | Carry no modules, schemas, API shapes, or other solution mechanics.         |
-| Decisions   | Carry no unresolved outcome-changing product decision.                      |
+| Check       | The PRD must                                                                                    |
+| ----------- | ----------------------------------------------------------------------------------------------- |
+| Source      | Name one confirmed source, trace every requirement, and explain why no grilling record applies. |
+| Explanation | Make unfamiliar framing reconstructable without changing confirmed meaning.                     |
+| Visual      | Include one earned visual form that replaces equivalent prose.                                  |
+| Audience    | Identify affected people, context, evidence, and problem.                                       |
+| Framing     | State the value, current alternative, and positioning without mechanics.                        |
+| Outcomes    | Give each outcome an observable measure and guardrail disposition.                              |
+| Scope       | Separate stable scope IDs from explicit non-goals.                                              |
+| Boundary    | Carry no modules, schemas, API shapes, or other solution mechanics.                             |
+| Decisions   | Carry no unresolved outcome-changing product decision.                                          |
 
 Finish with status `blocked` when evidence or a decision prevents a check from
 passing. Finish with status `ready` only when all checks pass.
