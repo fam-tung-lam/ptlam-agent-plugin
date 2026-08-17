@@ -16,6 +16,16 @@ Use every heading. Write `None` with a reason when a section does not apply.
 - Source scope: <PRD path and heading, or durable feature brief>
 - Glossary: <path, or unavailable>
 
+## At a glance
+
+<One literal paragraph that lets the reader reconstruct the feature's purpose
+and observable result.>
+
+## Visual overview
+
+<At least one earned Mermaid diagram or scan-friendly table that replaces the
+equivalent prose.>
+
 ## Feature contract
 
 <Who can do what, under which preconditions, and what observable result
@@ -97,6 +107,8 @@ again.
 | Check        | The specification must                                                         |
 | ------------ | ------------------------------------------------------------------------------ |
 | Source       | Name one confirmed scope source and cite a source heading for every behavior.  |
+| Explanation  | Make unfamiliar content reconstructable without changing source facts.         |
+| Visual       | Include one earned visual form that replaces equivalent prose.                 |
 | Boundary     | Separate included behavior, exclusions, and deliberate implementation freedom. |
 | Vocabulary   | Use glossary terms when available and contain no material term conflict.       |
 | Behavior     | State observable success, validation, failure, and recovery behavior.          |

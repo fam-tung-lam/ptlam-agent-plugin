@@ -2,8 +2,9 @@
 name: ptlam-grilling
 description:
   Stress-test a plan, decision, or idea through a persistent interview that
-  resolves one user-owned decision at a time and records confirmed understanding
-  for later continuation.
+  resolves one user-owned decision at a time, records confirmed understanding
+  for later continuation, sharpens contested business terms, and captures
+  decisions that are expensive to reverse.
 disable-model-invocation: true
 ---
 
@@ -15,6 +16,37 @@ answer; the user owns each outcome-changing decision.
 
 Every session has one persisted record so another agent can resume from the
 latest decision map without relying on chat history.
+
+## Required skills
+
+### `ptlam-modeling-domain`
+
+**Reason:** Keeps contested business language and context boundaries durable while the interview is still resolving them.
+
+**Instructions:** Read ptlam-modeling-domain before the interview loop.
+Apply it when a business term is contested, overloaded, or newly
+coined, or when a business context boundary becomes unclear.
+Let it own the glossary, context boundaries, and business process map
+in CONTEXT.md.
+Keep this skill's ownership of the questions, decision map, session
+record, and confirmation loop.
+
+Read [ptlam-modeling-domain](skills/ptlam-modeling-domain/SKILL.md).
+
+### `ptlam-creating-adr`
+
+**Reason:** Preserves consequential architectural decisions when the interview makes them concrete enough to evaluate and record.
+
+**Instructions:** Read ptlam-creating-adr before the interview loop.
+Apply its qualification gate when a decision becomes expensive to
+reverse, constrains future architecture, or carries material rejected
+alternatives.
+Let it own the ADR qualification verdict, destination, shape, and
+verification.
+Keep this skill's ownership of the questions, decision map, session
+record, and confirmation loop.
+
+Read [ptlam-creating-adr](skills/ptlam-creating-adr/SKILL.md).
 
 ## How does one unresolved decision become persisted shared understanding?
 
@@ -29,12 +61,12 @@ flowchart LR
     ConfirmUnderstanding --> CloseSession["Complete or defer the session"]
 ```
 
-| Concern      | Boundary                                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------- |
-| Decision     | The agent recommends; the user owns every outcome-changing choice.                                      |
-| File effect  | This invocation may write only the selected session record and its canonical directory.                 |
-| Later action | Implementation, Git operations, and publication require separate authority.                             |
-| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence. |
+| Concern      | Boundary                                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| Decision     | The agent recommends; the user owns every outcome-changing choice.                                         |
+| File effect  | This invocation may write its session record, domain context, and qualifying ADRs at their resolved paths. |
+| Later action | Implementation, Git operations, and publication require separate authority.                                |
+| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence.    |
 
 ## 1. Resolve the session record
 
@@ -80,10 +112,16 @@ matches that state.
 3. Wait for the user's answer before asking another question.
 4. Record the answer, then update the map to show what it resolves, changes, or
    invalidates downstream.
-5. Challenge contradictions with evidence. Reopen an earlier branch when a new
+5. Apply the domain-modeling dependency when a business term is contested,
+   overloaded, or newly coined, or a context boundary becomes unclear. Persist
+   its glossary or process-map change before continuing.
+6. Apply the ADR dependency's qualification gate when a decision becomes
+   expensive to reverse, constrains future architecture, or carries material
+   rejected alternatives. Persist a qualifying ADR before continuing.
+7. Challenge contradictions with evidence. Reopen an earlier branch when a new
    answer makes it inconsistent.
-6. Persist the checkpoint before yielding with the next substantive question.
-7. Continue until every outcome-changing branch is resolved or explicitly
+8. Persist the checkpoint before yielding with the next substantive question.
+9. Continue until every outcome-changing branch is resolved or explicitly
    deferred with an owner and consequence.
 
 Use concrete scenarios and counterexamples when an abstract answer could hide

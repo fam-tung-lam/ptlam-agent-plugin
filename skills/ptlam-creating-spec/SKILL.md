@@ -15,6 +15,39 @@ Turn one confirmed feature scope into one buildable feature specification. The
 spec owns solution behavior and constraints; it does not own product discovery,
 market framing, success metrics, ticket slicing, or implementation.
 
+## Required skills
+
+### `ptlam-explaining`
+
+**Reason:** Makes unfamiliar feature behavior reconstructable for the document's reader without changing confirmed product or technical constraints.
+
+**Instructions:** Read and apply ptlam-explaining before drafting the feature spec.
+Infer the reader's likely difficulty from the confirmed scope and
+project evidence; do not start another interview.
+Let it own the literal model, explanatory structure, teaching order,
+and reconstruction check for unfamiliar or complex content.
+Use its explanation package inside the spec without changing facts,
+contracts, schema, destination, or readiness owned by this skill.
+Enter the analogy branch only when the user explicitly requested it.
+
+Read [ptlam-explaining](skills/ptlam-explaining/SKILL.md).
+
+### `ptlam-mermaiding`
+
+**Reason:** Turns material behavior and system relationships into verified visuals that make the specification faster to scan and understand.
+
+**Instructions:** Read ptlam-mermaiding before choosing the spec's visual form.
+Apply it to material sequences, hierarchies, states, dependencies,
+interactions, or other relationships; use a table for exact mappings
+or comparisons.
+Let it own the visual question, diagram type, Mermaid source, and the
+strongest available syntax and rendering verification.
+Keep this skill's ownership of feature facts, document structure,
+visual placement, destination, and readiness.
+Make each visual replace equivalent prose rather than repeat it.
+
+Read [ptlam-mermaiding](skills/ptlam-mermaiding/SKILL.md).
+
 ## How does confirmed scope become a buildable specification?
 
 ```mermaid
