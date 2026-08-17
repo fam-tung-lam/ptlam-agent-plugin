@@ -6,14 +6,15 @@ business layer.
 
 ## Register every feature entity
 
-Put one primary table per file under `<feature>/entities/`, together with its
-association tables and entity-owned enums. Re-export every table from
-`entities/__init__.py` so importing the package registers the complete feature.
+Put one primary table per file under `<feature>/models/entities/`, together with
+its association tables and entity-owned enums. Re-export every table from
+`models/entities/__init__.py` so importing the package registers the complete
+feature.
 
 ```python
-# users/entities/__init__.py
-from myapp.users.entities.profile import Profile
-from myapp.users.entities.user import User
+# users/models/entities/__init__.py
+from myapp.users.models.entities.profile import Profile
+from myapp.users.models.entities.user import User
 
 __all__ = ["Profile", "User"]
 ```
@@ -34,8 +35,8 @@ does not.
 # myapp/alembic_metadata.py
 """Import every feature's entities so Base.metadata is complete."""
 from myapp.db import Base
-from myapp.billing import entities as _billing  # noqa: F401
-from myapp.users import entities as _users  # noqa: F401
+from myapp.billing.models import entities as _billing  # noqa: F401
+from myapp.users.models import entities as _users  # noqa: F401
 
 metadata = Base.metadata
 ```
@@ -67,14 +68,14 @@ def test_alembic_metadata_covers_every_entity_module() -> None:
     root = Path(myapp.__file__).parent
     expected = {
         "myapp." + path.relative_to(root).with_suffix("").as_posix().replace("/", ".")
-        for path in root.glob("*/entities/*.py")
+        for path in root.glob("*/models/entities/*.py")
         if path.stem != "__init__"
     }
     assert expected <= set(sys.modules)
 ```
 
 This test catches a feature omitted from `alembic_metadata.py` and a table file
-omitted from its own `entities/__init__.py`.
+omitted from its own `models/entities/__init__.py`.
 
 Finish when the metadata test passes and `alembic revision --autogenerate`
 against the expected clean schema produces no unintended migration operations.

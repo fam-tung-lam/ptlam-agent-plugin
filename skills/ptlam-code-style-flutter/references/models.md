@@ -12,9 +12,10 @@ Keep them separate types from the first version. Flutter is deliberately
 stricter here than the general rule of splitting once the shapes disagree: a
 vendor owns the wire shape and can change it in a release you do not control.
 
-A feature DTO lives in `features/<name>/dtos/`; the domain entity travels
+A feature DTO lives in `features/<name>/models/dtos/`; the domain entity travels
 everywhere above the repository. Name the DTO file for the external shape it
-represents when a feature has more than one source.
+represents when a feature has more than one source. Put entities, failures, and
+value objects in their matching folders under the same `models/` namespace.
 
 Map between them in the repository or the data source, never above it. That
 mapping is the only place that knows the API sends `"created_ts"` as an epoch
@@ -33,6 +34,16 @@ not rename the Dart field to match a wire name you would not have chosen.
 
 Domain entities carry no serialization annotations. When one needs persisting,
 it gets a DTO.
+
+## Value objects carry meaning without identity
+
+Put an immutable domain value such as an email address, money amount, or date
+range under `features/<name>/models/value_objects/` when it owns validation or
+behavior. Compare it by value. Keep it free of serialization annotations and map
+it to and from a DTO at the repository boundary.
+
+Do not create a value object merely to wrap one primitive. The wrapper earns its
+place when it prevents an invalid value, names a domain concept, or owns a rule.
 
 ## Freezed for immutable data
 
@@ -89,4 +100,4 @@ Name failures for what the user or the caller must do about them:
 `OrdersFailure.rejected(reason)`. `OrdersFailure.error500()` names the wire, not
 the decision.
 
-Keep one failure type per feature, in `features/<name>/failures/`.
+Keep one failure type per feature, in `features/<name>/models/failures/`.

@@ -41,9 +41,11 @@ treeView-beta
                     widgets/
                         localization_page.dart ## The feature's single page
                         components/ ## Logical widgets for the page
-                    entities/ ## Domain entities
-                    failures/ ## Domain failures
-                    dtos/ ## Wire or storage shapes
+                    models/ ## Groups model types; never a miscellaneous bucket
+                        entities/ ## Domain entities
+                        failures/ ## Domain failures
+                        dtos/ ## Wire or storage shapes
+                        value_objects/ ## Immutable domain values
                     bloc/
                     usecases/
                     repositories/
@@ -54,9 +56,11 @@ treeView-beta
                     widgets/
                         <feature_name>_page.dart ## The feature's single page
                         components/ ## Logical widgets for the page
-                    entities/ ## Domain entities
-                    failures/ ## Domain failures
-                    dtos/ ## Wire or storage shapes
+                    models/ ## Groups model types; never a miscellaneous bucket
+                        entities/ ## Domain entities
+                        failures/ ## Domain failures
+                        dtos/ ## Wire or storage shapes
+                        value_objects/ ## Immutable domain values
                     bloc/
                     usecases/
                     repositories/
@@ -95,9 +99,10 @@ and `src/` is private.
 | The feature's single page                                | `features/<name>/widgets/<name>_page.dart`              |
 | A logical widget used by that page                       | `features/<name>/widgets/components/`                   |
 | A widget two features render                             | `packages/<project_name>_design_system/src/components/` |
-| A domain entity one feature owns                         | `features/<name>/entities/`                             |
-| A domain failure one feature owns                        | `features/<name>/failures/`                             |
-| A DTO for wire or storage data                           | `features/<name>/dtos/`                                 |
+| A domain entity one feature owns                         | `features/<name>/models/entities/`                      |
+| A domain failure one feature owns                        | `features/<name>/models/failures/`                      |
+| A DTO for wire or storage data                           | `features/<name>/models/dtos/`                          |
+| A value object one feature owns                          | `features/<name>/models/value_objects/`                 |
 | A small reusable low-level helper with no business logic | `features/<name>/utils/`                                |
 | A constant reused inside one feature                     | `features/<name>/constants/`                            |
 | Something two features genuinely share                   | `lib/shared/`                                           |
@@ -110,10 +115,15 @@ A file lands there when its second consumer appears — until then it belongs to
 the feature that has it. Keep external-system clients and adapters in
 `integrations/`; keep feature behavior in the feature that consumes them.
 
-The names `dtos`, `entities`, `repositories`, and `di` intentionally match the
-backend vocabulary. They describe common architectural concepts instead of
-framework-specific layers, which reduces context switching between mobile and
-backend codebases.
+The names `models`, `dtos`, `entities`, `failures`, `value_objects`,
+`repositories`, and `di` intentionally match the backend vocabulary. They
+describe common architectural concepts instead of framework-specific layers,
+which reduces context switching between mobile and backend codebases.
+
+Use `models/` only as a grouping namespace. Every model belongs to a precisely
+named child such as `dtos/`, `entities/`, `failures/`, or `value_objects/`; do
+not put loose model files directly beside those categories. Add a category only
+when its first concrete type appears.
 
 Keep business rules in use cases, BLoCs, or domain types. A `utils/` helper may
 format, parse, clamp, or adapt a low-level value; it never decides product

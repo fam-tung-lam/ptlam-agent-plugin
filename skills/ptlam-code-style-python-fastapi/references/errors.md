@@ -3,11 +3,11 @@
 How application failures become one stable HTTP response without framework
 coupling below the boundary.
 
-Keep each feature's domain failures in its `exceptions.py` and export only the
-ones another feature may handle. Install their HTTP mappings once through
-registered exception handlers in `app.py`. Keep `HTTPException` in routes and
-dependencies for transport-local failures; do not make a use case, repository,
-or entity import FastAPI to report a status.
+Keep each feature's domain exception types under `models/failures/` and export
+only the ones another feature may handle. Install their HTTP mappings once
+through registered exception handlers in `app.py`. Keep `HTTPException` in
+controllers and dependency providers for transport-local failures; do not make a
+use case, repository, or model import FastAPI to report a status.
 
 Choose validation and domain status codes from the existing API contract.
 FastAPI's default validation status is not permission to change a service that
