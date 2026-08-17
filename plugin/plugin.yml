@@ -64,11 +64,15 @@ skills:
   - id: ptlam-code-style
     description:
       Hold source and test code to one language-neutral set of conventions for
-      visibility, documentation, logging, and testing. Use when deciding what a
-      test must prove, choosing a test level, placing a test or a test double,
-      setting a public or internal boundary, writing a doc comment, or emitting
-      a log record. Use as the foundation for a stack specialization that adds
-      the mechanics.
+      source-tree structure, module boundaries, naming, function readability,
+      domain modeling, cross-boundary contracts, failure design, documentation,
+      logging, and testing. Use when placing or naming a file, setting a public
+      or internal boundary, shaping a domain type or its states, promising an
+      interface across a process or release boundary, designing a failure or a
+      retry, writing a doc comment, emitting a log record, deciding what a test
+      must prove, choosing a test level, placing a test or a test double, or
+      planning how a change migrates. Use as the foundation for a stack
+      specialization that adds the mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -94,9 +98,10 @@ skills:
           Flutter mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own the precedence order, the visibility, documentation, and
-          logging standards, the universal behavior contract, the test levels,
-          test placement, and test doubles.
+          Let it own the precedence order; the structure, boundary, naming,
+          readability, data-modeling, contract, failure, documentation, and
+          logging standards; the universal behavior contract; the test levels;
+          test placement; and test doubles.
           Use this skill only for the Flutter and Dart mechanics that satisfy
           those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -119,9 +124,10 @@ skills:
           Python mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence, visibility, documentation and logging
-          standards, the universal behavior contract, test levels, test
-          placement, and test doubles.
+          Let it own precedence; the structure, boundary, naming, readability,
+          data-modeling, contract, failure, documentation, and logging
+          standards; the universal behavior contract; test levels; test
+          placement; and test doubles.
           Use this skill only for Python language, library, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
