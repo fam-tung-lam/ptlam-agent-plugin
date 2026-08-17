@@ -11,7 +11,7 @@ application and drives a user journey through its real entry point.
 
 ## Rules
 
-- Place the test according to the layout owner resolved by `ptlam-code-style`.
+- Place the test where [test-placement.md](../test-placement.md) resolves.
 - Define the local integration boundary and the behavior visible through its
   public entry point.
 - Run the real collaborators whose compatibility is the subject of the test.
