@@ -11,16 +11,17 @@ the mechanics that satisfy them.
 For any mechanic these conventions leave open, take the first source that
 answers it:
 
-| Order | Source                          | Owns                                                   |
-| ----- | ------------------------------- | ------------------------------------------------------ |
-| 1     | Current user instructions       | Anything the user states for this task                 |
-| 2     | Applicable `AGENTS.md`          | Project requirements and permitted exceptions          |
-| 3     | Current repository files        | Established commands, configuration, and layout        |
-| 4     | The active stack specialization | Stack mechanics the repository leaves open             |
-| 5     | This skill                      | The conventions below, and the fallbacks they point to |
+| Order | Source                                             | Owns                                                                            |
+| ----- | -------------------------------------------------- | ------------------------------------------------------------------------------- |
+| 1     | Current user instructions                          | Anything the user states for this task                                          |
+| 2     | Applicable `AGENTS.md`                             | Project requirements and permitted exceptions                                   |
+| 3     | Current feature specification and repository files | Confirmed behavior and constraints; established commands, configuration, layout |
+| 4     | The active stack specialization                    | Stack mechanics the repository leaves open                                      |
+| 5     | This skill                                         | The conventions below, and the fallbacks they point to                          |
 
-Report an unresolved conflict instead of choosing silently. Repository files are
-evidence, not a second store of preferences.
+Report an unresolved conflict instead of choosing silently. A feature
+specification and repository files are evidence, not another store of
+preferences.
 
 When a higher-precedence source explicitly replaces a rule below, name that
 replacement in the handoff. Silence or an unrelated local example is not a

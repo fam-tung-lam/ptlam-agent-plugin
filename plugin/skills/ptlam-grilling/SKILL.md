@@ -22,12 +22,12 @@ flowchart LR
     ConfirmUnderstanding --> CloseSession["Complete or defer the session"]
 ```
 
-| Concern      | Boundary                                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------- |
-| Decision     | The agent recommends; the user owns every outcome-changing choice.                                      |
-| File effect  | This invocation may write only the selected session record and its canonical directory.                 |
-| Later action | Implementation, Git operations, and publication require separate authority.                             |
-| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence. |
+| Concern      | Boundary                                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| Decision     | The agent recommends; the user owns every outcome-changing choice.                                         |
+| File effect  | This invocation may write its session record, domain context, and qualifying ADRs at their resolved paths. |
+| Later action | Implementation, Git operations, and publication require separate authority.                                |
+| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence.    |
 
 ## 1. Resolve the session record
 
@@ -39,9 +39,16 @@ flowchart LR
    several records plausibly match, ask which one to continue.
 4. Read a resumed record completely. Recheck drift-prone evidence and continue
    from its next unresolved decision without repeating settled questions.
+5. Before the first substantive question, have each injected artifact owner
+   resolve the additional destination it owns. Present the session-record path
+   and every additional destination together so the user can narrow or refuse
+   the write authority before any file is written there. When an exact future
+   filename depends on a decision not yet known, disclose the resolved directory
+   and naming rule now, then present the exact path before its first write.
 
 Complete this step when the fixed workspace root, schema, one unique new or
-resumable path, prior state, and write authority are known.
+resumable path, every possible write destination, prior state, and write
+authority are known and disclosed.
 
 ## 2. Build the decision map and write the checkpoint
 

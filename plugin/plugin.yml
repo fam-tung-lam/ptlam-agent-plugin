@@ -71,8 +71,9 @@ skills:
       interface across a process or release boundary, designing a failure or a
       retry, writing a doc comment, emitting a log record, deciding what a test
       must prove, choosing a test level, placing a test or a test double, or
-      planning how a change migrates. Use as the foundation for a stack
-      specialization that adds the mechanics.
+      planning how a change migrates. Use ptlam-modeling-domain instead for
+      business terminology, context boundaries, and business process maps. Use
+      as the foundation for a stack specialization that adds the mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -213,13 +214,218 @@ skills:
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that
-      resolves one user-owned decision at a time and records confirmed
-      understanding for later continuation.
+      resolves one user-owned decision at a time, records confirmed
+      understanding for later continuation, sharpens contested business terms,
+      and captures decisions that are expensive to reverse.
     disable_model_invocation: true
     category_id: productivity
     visibility: public
     status: active
-    required_skills: []
+    required_skills:
+      - skill_id: ptlam-modeling-domain
+        reason:
+          Keeps contested business language and context boundaries durable while
+          the interview is still resolving them.
+        instructions: |-
+          Read ptlam-modeling-domain before the interview loop.
+          Apply it when a business term is contested, overloaded, or newly
+          coined, or when a business context boundary becomes unclear.
+          Let it own the glossary, context boundaries, and business process map
+          in CONTEXT.md.
+          Keep this skill's ownership of the questions, decision map, session
+          record, and confirmation loop.
+      - skill_id: ptlam-creating-adr
+        reason:
+          Preserves consequential architectural decisions when the interview
+          makes them concrete enough to evaluate and record.
+        instructions: |-
+          Read ptlam-creating-adr before the interview loop.
+          Apply its qualification gate when a decision becomes expensive to
+          reverse, constrains future architecture, or carries material rejected
+          alternatives.
+          Let it own the ADR qualification verdict, destination, shape, and
+          verification.
+          Keep this skill's ownership of the questions, decision map, session
+          record, and confirmation loop.
+  - id: ptlam-creating-prd
+    description:
+      Create one product requirements document from a confirmed grilling record
+      or durable product brief for a new product or large epic. Use when product
+      framing, audience, outcomes, scope, non-goals, and success measures must
+      become a durable handoff before feature specifications. Start an
+      existing-product feature at ptlam-creating-spec; skip this pipeline for a
+      small fix.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar product framing reconstructable for the document's
+          reader without changing confirmed product decisions.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the PRD.
+          Infer the reader's likely difficulty from the confirmed source and
+          project evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check for unfamiliar or complex content.
+          Use its explanation package inside the PRD without changing facts,
+          scope, schema, destination, or readiness owned by this skill.
+          Enter the analogy branch only when the user explicitly requested it.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material product relationships into verified visuals that make
+          the PRD faster to scan and understand.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the PRD's visual form.
+          Apply it to material sequences, hierarchies, states, dependencies,
+          interactions, or other relationships; use a table for exact mappings
+          or comparisons.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering verification.
+          Keep this skill's ownership of product facts, document structure,
+          visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+  - id: ptlam-creating-spec
+    description:
+      Create one buildable feature specification from a confirmed PRD scope item
+      or a feature brief inside an existing product. Use when behavior,
+      boundaries, failure handling, interfaces, data, rollout constraints, and
+      required evidence must be fixed before ticket planning. Start a new
+      product or large epic with ptlam-creating-prd; skip this pipeline for a
+      small fix.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar feature behavior reconstructable for the document's
+          reader without changing confirmed product or technical constraints.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the feature spec.
+          Infer the reader's likely difficulty from the confirmed scope and
+          project evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check for unfamiliar or complex content.
+          Use its explanation package inside the spec without changing facts,
+          contracts, schema, destination, or readiness owned by this skill.
+          Enter the analogy branch only when the user explicitly requested it.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material behavior and system relationships into verified visuals
+          that make the specification faster to scan and understand.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the spec's visual form.
+          Apply it to material sequences, hierarchies, states, dependencies,
+          interactions, or other relationships; use a table for exact mappings
+          or comparisons.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering verification.
+          Keep this skill's ownership of feature facts, document structure,
+          visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+  - id: ptlam-planning-tickets
+    description:
+      Turn one ready feature specification into an ordered set of vertically
+      sliced ticket files with explicit blocking edges. Use after a feature spec
+      is ready for implementation planning. A new product or large epic starts
+      at ptlam-creating-prd, an existing-product feature starts at
+      ptlam-creating-spec, and a small fix skips this pipeline.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar ticket intent and dependencies reconstructable for
+          implementers without changing the source specification.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the ticket set.
+          Infer the implementer's likely difficulty from the ready spec and
+          project evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check for unfamiliar or complex content.
+          Use its explanation package inside the ticket set without changing
+          facts, slices, schema, destination, or readiness owned by this skill.
+          Enter the analogy branch only when the user explicitly requested it.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Makes ticket order and blocking relationships visible as a verified
+          dependency map rather than burying them in prose.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the ticket set's visual form.
+          Apply it to the dependency order and any other material relationship;
+          use a table for exact mappings or comparisons.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering verification.
+          Keep this skill's ownership of ticket facts, vertical slices, document
+          structure, visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+  - id: ptlam-modeling-domain
+    description:
+      Model project business language, context boundaries, and business
+      processes in CONTEXT.md. Use when a business term is contested,
+      overloaded, or newly coined, when two business contexts use one term
+      differently, or when a business process needs a durable map. Do not use
+      for code types, storage schemas, or serialization mechanics.
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-mermaiding
+        reason:
+          Owns the business process diagram that makes the domain's handoffs and
+          decisions visible without duplicating them in prose.
+        instructions: |-
+          Read and apply ptlam-mermaiding for every business process map.
+          Let it own the visual question, diagram type, notation, Mermaid source,
+          and strongest available syntax and rendering verification.
+          Keep this skill's ownership of business facts, vocabulary, context
+          boundaries, document placement, and glossary verification.
+          Make the process diagram replace equivalent prose rather than repeat
+          it.
+  - id: ptlam-creating-adr
+    description:
+      Decide whether a crystallized architectural choice warrants a durable
+      architecture decision record and write the qualifying ADR. Use when a
+      decision constrains future architecture, is expensive to reverse, affects
+      a published boundary, or carries material rejected alternatives. Do not
+      use for local implementation choices with cheap reversal.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes the decision forces and consequences reconstructable for a future
+          reader without changing the accepted choice.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting a qualifying ADR.
+          Infer the reader's likely difficulty from the confirmed decision and
+          project evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check for unfamiliar or complex content.
+          Use its explanation package inside the ADR without changing facts,
+          status, schema, destination, or qualification owned by this skill.
+          Enter the analogy branch only when the user explicitly requested it.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material decision forces or architectural effects into verified
+          visuals that make the ADR faster to scan and understand.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the ADR's visual form.
+          Apply it to material sequences, hierarchies, states, dependencies,
+          interactions, topology, or other relationships; use a table for exact
+          mappings or comparisons.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering verification.
+          Keep this skill's ownership of decision facts, qualification, document
+          structure, visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
   - id: ptlam-creating-atomic-note
     description:
       Create, mature, review, split, or merge durable atomic notes by

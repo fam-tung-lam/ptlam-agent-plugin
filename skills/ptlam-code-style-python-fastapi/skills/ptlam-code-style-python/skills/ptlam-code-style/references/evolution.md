@@ -40,9 +40,10 @@ which is which.
 ## Record what forced the decision
 
 When a choice constrains the future — a format, a boundary, a dependency — write
-down what you chose, what you rejected, and what forced it, where this
-repository keeps decisions. The code survives; the reasoning evaporates in about
-six months.
+down what you chose, what you rejected, and what forced it. Apply
+`ptlam-creating-adr` to decide whether the choice warrants the repository's
+architecture decision record. The code survives; the reasoning evaporates in
+about six months.
 
 ## Finish
 

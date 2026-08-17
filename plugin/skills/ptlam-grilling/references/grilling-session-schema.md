@@ -20,9 +20,10 @@ Use the session's creation date and a short, filesystem-safe title naming the
 decision. Prefer the base filename; otherwise append the first free suffix
 before `.md`, such as `_2` or `_3`. Never overwrite or truncate a record.
 
-Invocation authorizes writes to this directory and the selected record only. Get
-separate authority before staging, committing, publishing, or changing any other
-project file.
+Invocation authorizes writes to this directory and the selected record, the
+domain context resolved by the domain-modeling dependency, and qualifying ADRs
+at the ADR dependency's resolved destination. Get separate authority before
+staging, committing, publishing, or changing any other project file.
 
 The record stores conclusions and evidence. It never stores a turn transcript,
 hidden reasoning, secrets, credentials, or unrelated personal data.

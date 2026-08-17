@@ -4,6 +4,10 @@ How the domain's values are shaped before storage or transport touches them. The
 specialization owns the type system, the data-model library, and the
 serialization mechanics.
 
+This reference owns domain types in code. `ptlam-modeling-domain` owns shared
+business language, context boundaries, and business process maps. Use its terms
+as evidence, then express them with the code types owned here.
+
 ## Model the domain, then persist it
 
 Shape the core types around what the business means, then map them to storage.
