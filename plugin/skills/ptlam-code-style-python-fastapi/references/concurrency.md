@@ -13,8 +13,10 @@ Choose from the whole call graph:
 
 FastAPI runs ordinary `def` handlers and dependencies in a thread pool. It does
 not move a synchronous utility called from your `async def`; that call blocks
-the event loop. The official [async guide](https://fastapi.tiangolo.com/async/)
-owns the current dispatch behavior.
+the event loop. The [FastAPI async guide](https://fastapi.tiangolo.com/async/)
+identifies this framework feature; it is not required reading. When dispatch
+behavior differs, inspect the locked packages and prove the path with a focused
+local test.
 
 Do not call a blocking synchronous API directly on the event loop. Prefer a
 plain `def` handler for a synchronous call path. An approved thread offload is

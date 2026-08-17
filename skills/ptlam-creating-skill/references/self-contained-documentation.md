@@ -50,7 +50,8 @@ Acceptable tool identification:
 Acceptable attribution:
 
 > This locally documented workflow adapts the
-> [Example method](https://example.com/method) under its stated license.
+> [Example method](https://example.com/method) by Example Org under the Example
+> License.
 
 ## Audit without opening links
 

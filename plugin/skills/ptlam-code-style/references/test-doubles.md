@@ -27,9 +27,10 @@ the observable contract.
   runner and add it only within authorized dependency scope.
 - When another mocking library already exists, do not silently add a second one.
   Recommend whether to retain, migrate, or defer, with the material trade-off.
-- Follow the selected tool's current official API for implementation mechanics.
-  Tool terminology does not replace the semantic role, boundary, or placement
-  rules in this reference.
+- Resolve implementation mechanics from the repository-installed tool's local
+  type declarations, command help, or accepted examples. If none verifies the
+  mechanic, report the gap instead of inventing an API. Tool terminology does
+  not replace the semantic role, boundary, or placement rules in this reference.
 
 Complete tool selection when one repository-compatible mechanism owns every new
 double in scope.

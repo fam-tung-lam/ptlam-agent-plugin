@@ -26,10 +26,11 @@ Select sync or async dependency syntax from the resource API. Match any
 dependency scope option to the installed FastAPI version and the response
 lifetime; streaming responses can outlive the handler return.
 
-The official [dependency](https://fastapi.tiangolo.com/tutorial/dependencies/)
-and
+The [dependency](https://fastapi.tiangolo.com/tutorial/dependencies/) and
 [yield dependency](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/)
-guides own current caching, scope, and teardown behavior.
+links identify the FastAPI features; they are not required reading. When
+caching, scope, or teardown behavior differs, inspect the locked packages and
+prove the resource lifetime with a focused local test.
 
 ## Fail closed
 

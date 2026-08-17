@@ -1,8 +1,8 @@
 # Skill Frontmatter Specification
 
 This specification covers only Claude-style inline YAML frontmatter. It owns
-those fields and their checks. Verify the host's current documentation before
-using an optional field.
+those fields and their checks. Use an optional field only when the target's
+local schema, validator, or accepted metadata verifies it.
 
 When a manifest or compiler owns the metadata, edit that source instead. The
 `ptlam-agent-plugin` compiler, for example, rejects frontmatter in authored
@@ -41,11 +41,12 @@ rules live in
 ## Invocation and visibility
 
 Set `disable-model-invocation: true` only when the user must start the workflow.
-Omitting it commonly permits model discovery. Check the host, because discovery
-and menu visibility can use separate fields.
+Omitting it commonly permits model discovery. Use the target's local schema or
+validator to distinguish discovery from menu visibility.
 
 Use `argument-hint` to document expected arguments. Use `user-invocable` only
-after verifying how it interacts with model invocation.
+when a local schema, validator, or accepted example verifies how it interacts
+with model invocation.
 
 ## Tools and execution
 
@@ -53,8 +54,9 @@ Declare the smallest `allowed-tools` set you have verified, using exact host
 identifiers. Use `context: fork` only when isolation helps and you know what
 context and tools the fork receives.
 
-Select an `agent` or a `model` only from the host's current documentation, and
-only when the choice materially changes the workflow.
+Select an `agent` or a `model` only from identifiers exposed by the host's local
+configuration or validator, and only when the choice materially changes the
+workflow.
 
 ## Hooks
 
@@ -73,8 +75,8 @@ Claude-style hosts may support:
 | `$N`                   | Short positional form, where supported |
 | `${CLAUDE_SESSION_ID}` | Current session identifier             |
 
-Omit substitutions and argument hints when the skill consumes no arguments.
-Check how the host handles arguments the skill ignores.
+Omit substitutions and argument hints when the skill consumes no arguments. Use
+only substitutions verified by a local schema, validator, or accepted example.
 
 ## Static checks
 
@@ -82,5 +84,5 @@ Confirm that every field exists on the target; that the name and directory meet
 its constraints; that invocation and visibility match the chosen policy; that
 the description's triggers and reach clause are complete; that every tool,
 agent, model, hook, and substitution is available; that time-sensitive behavior
-names its source and is current; and that no manifest or generator owns this
-metadata instead.
+is locally verifiable; and that no manifest or generator owns this metadata
+instead.

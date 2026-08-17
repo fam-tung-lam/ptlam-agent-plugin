@@ -7,6 +7,8 @@ specialization.
 The model adapts Sascha's
 [Complete Guide to Atomic Note-Taking](https://zettelkasten.de/atomicity/guide/),
 retrieved on 2026-08-15, from knowledge building blocks to agent capabilities.
+The link records attribution only; the local tests below are complete for this
+skill.
 
 ## What counts as one capability
 

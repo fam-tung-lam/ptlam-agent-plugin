@@ -6,8 +6,9 @@ the skill's capability or its package structure.
 
 It adapts durable guidance from Anthropic's
 [Claude prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
-Verify the target's current documentation before relying on model or runtime
-details.
+The link records attribution only; this reference contains the complete rules.
+Use a model or runtime detail only when the target's local schema, tool help, or
+accepted configuration verifies it.
 
 ## State the contract
 

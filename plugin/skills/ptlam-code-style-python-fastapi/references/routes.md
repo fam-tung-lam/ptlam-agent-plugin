@@ -35,9 +35,10 @@ redirect following disabled so an accidental 307 does not pass invisibly.
   documentation shows a concrete example beside the type.
 
 FastAPI validates, documents, serializes, and filters a declared response. The
-official
 [response model guide](https://fastapi.tiangolo.com/tutorial/response-model/)
-owns the current details.
+identifies the framework feature; it is not required reading. When installed
+behavior differs, inspect the locked packages and assert the local response and
+OpenAPI contract.
 
 Read raw request bytes only when the protocol requires the exact bytes, such as
 a signed webhook. Authenticate the raw body before parsing it and document why

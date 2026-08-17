@@ -5,8 +5,9 @@ lifecycle commands, and worktree safety checks.
 
 This policy follows the official
 [Git worktree manual](https://git-scm.com/docs/git-worktree), verified on
-2026-08-16. Recheck the manual when the installed Git rejects a documented
-command or its behavior differs from this reference.
+2026-08-16. The link identifies the canonical command; it is not required
+reading. When installed behavior differs, inspect `git help worktree` and the
+subcommand's local help before changing state.
 
 ## Choose the execution context
 

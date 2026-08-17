@@ -38,11 +38,11 @@ Keep Python field names in the project's Python convention. Centralize wire
 aliases and serialization defaults at the owning external boundary so every
 caller cannot choose a different payload shape.
 
-The current APIs live in the official
-[Pydantic model](https://docs.pydantic.dev/latest/concepts/models/) and
-[validator](https://docs.pydantic.dev/latest/concepts/validators/) guides.
-Recheck them when the installed major changes or a documented operation no
-longer matches the lockfile.
+The [Pydantic model](https://docs.pydantic.dev/latest/concepts/models/) and
+[validator](https://docs.pydantic.dev/latest/concepts/validators/) links
+identify the canonical APIs; they are not required reading. When the locked
+major differs or an operation is unavailable, inspect the installed package and
+prove the version-specific behavior with a focused local test.
 
 Finish when input outside the chosen coercion policy fails, defaults and valid
 input produce the declared types, and round-trip tests cover every alias or

@@ -50,9 +50,9 @@ navigation, selection, and text input. This skill intentionally selects only the
 families needed for focused learning artifacts. A component missing from this
 local catalog is outside the contract, even when Material documents it.
 
-## Source freshness
+## Source attribution and freshness
 
-| Source family                       | Authoritative source                                                                                            |
+| Source family                       | Attribution source                                                                                              |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | Material system and current catalog | [Material Design 3](https://m3.material.io/)                                                                    |
 | Interaction states                  | [Material 3 states](https://m3.material.io/foundations/interaction/states/overview)                             |
@@ -65,9 +65,9 @@ motion, and containment as the main expressive dimensions. Its evidence spans 46
 studies with more than 18,000 participants and warns against breaking
 established interaction patterns.
 
-This file and its local references are the operational source for artifact
-creation; agents do not need to open the web pages. A maintainer changing or
-upgrading the design system must re-scrape the affected official page and its
-linked component, foundation, or style page. Treat a new page update date,
-component availability, anatomy, state, token, or accessibility rule as a review
-trigger. Record a new local review date only after resolving differences.
+The links record attribution and identify the source families; they are not
+required reading. This file and its local references are the operational source
+for artifact creation. New external research may trigger a separate package
+update, but no conclusion becomes operational until its required rules and
+examples are captured locally and the differences are resolved. Record a new
+local review date only after that local update passes verification.
