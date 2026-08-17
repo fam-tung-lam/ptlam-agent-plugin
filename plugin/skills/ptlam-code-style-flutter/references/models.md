@@ -8,16 +8,17 @@ A DTO mirrors an external shape — a JSON body, a stored record — field for
 field, including the parts you dislike. A domain model says what the application
 means, in the domain's words.
 
-Keep them separate types. A feature DTO lives beside the external boundary that
-owns its shape, under `features/<name>/data/<source>/dtos/`; the domain model
-travels everywhere above the repository.
+Keep them separate types from the first version. Flutter is deliberately
+stricter here than the general rule of splitting once the shapes disagree: a
+vendor owns the wire shape and can change it in a release you do not control.
+
+A feature DTO lives beside the external boundary that owns its shape, under
+`features/<name>/data/<source>/dtos/`; the domain model travels everywhere above
+the repository.
 
 Map between them in the repository or the data source, never above it. That
 mapping is the only place that knows the API sends `"created_ts"` as an epoch
 integer, and it is where a contract change gets caught.
-
-Merging the two saves a file today and couples every page to the vendor's field
-names tomorrow.
 
 ## Generate the JSON, write the meaning
 
@@ -66,11 +67,11 @@ silently swallows the new one.
 Write domain services, invariants, and validation by hand. Freezed owns the data
 shape, not the rules about it.
 
-## Model absence honestly
+## Put absence in the Dart type
 
-A nullable field means the value can genuinely be absent, and the code that
-reads it handles that. Do not use `null`, `-1`, or `''` as a marker for "not
-loaded yet" — that is a state, and it belongs in the state union.
+A nullable Dart field means the value can genuinely be absent, and every reader
+handles that. "Not loaded yet" is a state: put it in the Freezed state union
+above, not in a nullable field.
 
 Prefer an empty list to a nullable list.
 
