@@ -160,6 +160,32 @@ skills:
           Use this skill only for FastAPI application, HTTP, dependency,
           lifecycle, and ASGI test mechanics.
           This specialization may be stricter than Python, never looser.
+  - id: ptlam-code-style-typescript
+    description:
+      Write, review, and fix TypeScript library and application code against
+      conventions for language mechanics, module boundaries, tooling, and tests.
+      Use when starting or standardizing a TypeScript project, changing
+      TypeScript code or its toolchain, reviewing TypeScript-specific design, or
+      resolving type-check, lint, or Vitest failures. Apply ptlam-code-style
+      first for the standard these mechanics satisfy. Use as the foundation for
+      TypeScript framework specializations. Do not use for non-TypeScript code.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral conventions and testing doctrine the
+          TypeScript mechanics satisfy.
+        instructions: |-
+          Read and apply ptlam-code-style first.
+          Let it own precedence; the structure, boundary, naming, readability,
+          data-modeling, contract, failure, documentation, and logging
+          standards; the universal behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for TypeScript language, package, and tool
+          mechanics that satisfy those standards.
+          This specialization may be stricter than the foundation, never looser.
   - id: ptlam-creating-skill
     description:
       Create, review, or refactor one agent skill so that a human maintainer can
