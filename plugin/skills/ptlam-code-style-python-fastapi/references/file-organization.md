@@ -8,8 +8,8 @@ requested change. Reorganization is not a deliverable.
 
 Use the full layout around three business capabilities, two developers, or the
 point where one `main.py` stops fitting on a screen. Below that, a flat `app/`
-with `main.py`, `controller.py`, `dtos/`, `entities/`, `repositories/`, and
-`db.py` is the correct answer.
+with `main.py`, `controller.py`, `models/`, `repositories/`, and `db.py` is the
+correct answer.
 
 Create a package when its first owned file appears. Every empty package added
 today is another directory every future maintainer must search.
@@ -30,7 +30,7 @@ project/
 │       ├── app.py                 # composition root
 │       ├── settings.py            # Settings plus one cached accessor
 │       ├── db.py                  # Base, engine, session factory, dependency
-│       ├── alembic_metadata.py    # imports every feature's entities for Alembic
+│       ├── alembic_metadata.py    # imports every feature's model entities for Alembic
 │       ├── ops.py                 # /health, /ready, /version; unversioned
 │       ├── integrations/
 │       │   ├── redis.py
@@ -46,14 +46,22 @@ project/
 │       └── users/                 # one business capability
 │           ├── __init__.py        # facade; the only cross-feature import path
 │           ├── controller.py      # APIRouter plus request handlers
-│           ├── dtos/              # Pydantic request and response DTOs
+│           ├── models/            # Groups model types; never a miscellaneous bucket
 │           │   ├── __init__.py
-│           │   ├── create_user.py
-│           │   └── user.py
-│           ├── entities/
-│           │   ├── __init__.py    # re-exports every feature table
-│           │   ├── user.py
-│           │   └── profile.py
+│           │   ├── dtos/          # Pydantic request and response DTOs
+│           │   │   ├── __init__.py
+│           │   │   ├── create_user.py
+│           │   │   └── user.py
+│           │   ├── entities/
+│           │   │   ├── __init__.py    # re-exports every feature table
+│           │   │   ├── user.py
+│           │   │   └── profile.py
+│           │   ├── failures/      # Domain exception types
+│           │   │   ├── __init__.py
+│           │   │   └── user_not_found.py
+│           │   └── value_objects/
+│           │       ├── __init__.py
+│           │       └── email.py
 │           ├── usecases/
 │           │   ├── __init__.py
 │           │   ├── create_user.py
@@ -64,7 +72,6 @@ project/
 │           │   ├── user_repository.py
 │           │   └── sql_user_repository.py
 │           ├── di.py
-│           ├── exceptions.py
 │           ├── constants/         # optional
 │           │   └── user_status.py
 │           ├── utils/             # optional
@@ -93,11 +100,11 @@ project/
 Keep this tree as plain text so it renders in every editor, terminal, diff, and
 code review without a renderer-version requirement.
 
-The names `controller`, `dtos`, `entities`, `repositories`, and `di` are
-deliberately shared architectural terms rather than FastAPI- or Python-specific
-labels. Keeping the same concepts on mobile and backend reduces context
-switching between codebases. Python package names stay lowercase, so the folder
-is `dtos/`, not `DTOs/`.
+The names `controller`, `models`, `dtos`, `entities`, `failures`,
+`value_objects`, `repositories`, and `di` are deliberately shared architectural
+terms rather than FastAPI- or Python-specific labels. Keeping the same concepts
+on mobile and backend reduces context switching between codebases. Python
+package names stay lowercase, so the folder is `models/dtos/`, not `DTOs/`.
 
 ## Give each package one role
 
@@ -106,7 +113,7 @@ is `dtos/`, not `DTOs/`.
 | `main.py`              | Nothing except `app = create_app()`                                                          |
 | `app.py`               | `FastAPI`, lifespan, middleware, feature routers, and exception handlers; no business policy |
 | `settings.py`, `db.py` | One-time configuration, engine, and session setup                                            |
-| `alembic_metadata.py`  | Imports every feature's entities and exposes complete metadata to Alembic                    |
+| `alembic_metadata.py`  | Imports every feature's model entities and exposes complete metadata to Alembic              |
 | `ops.py`               | Unversioned liveness, readiness, and build information                                       |
 | `integrations/`        | One client or pool facade per external system; not the feature behavior that consumes it     |
 | `shared/`              | Framework-neutral code with at least two proven feature consumers                            |
@@ -114,24 +121,26 @@ is `dtos/`, not `DTOs/`.
 
 ## Give each feature one public surface
 
-| Path                   | Put here                                                                                     |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| `__init__.py`          | The facade: only use cases, DTOs, and exceptions another feature needs                       |
-| `controller.py`        | Typed request handlers around one `APIRouter`; split by API version only when another exists |
-| `dtos/`                | Pydantic request and response DTOs, separate from persistence entities                       |
-| `entities/`            | SQLAlchemy tables, normally one primary table per file, all registered by its initializer    |
-| `usecases/`            | One application operation per verb-first file                                                |
-| `repositories/`        | Storage protocols and adapters, one concrete responsibility per file                         |
-| `di.py`                | `Depends` providers that assemble use cases from sessions and integration facades            |
-| `exceptions.py`        | Domain failures raised by this feature; never persistence entities                           |
-| `constants/`, `utils/` | Optional module-local, low-level reuse with no business policy                               |
-| `tasks/`               | Thin durable-job entry points, with each task in a separate file                             |
+| Path                    | Put here                                                                                     |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| `__init__.py`           | The facade: only use cases and model types another feature needs                             |
+| `controller.py`         | Typed request handlers around one `APIRouter`; split by API version only when another exists |
+| `models/`               | Grouping namespace for explicitly categorized model types; never loose mixed model files     |
+| `models/dtos/`          | Pydantic request and response DTOs, separate from persistence entities                       |
+| `models/entities/`      | SQLAlchemy tables, normally one primary table per file, all registered by its initializer    |
+| `models/failures/`      | Domain exception types that callers may handle                                               |
+| `models/value_objects/` | Immutable domain values identified by their contents rather than an identity                 |
+| `usecases/`             | One application operation per verb-first file                                                |
+| `repositories/`         | Storage protocols and adapters, one concrete responsibility per file                         |
+| `di.py`                 | `Depends` providers that assemble use cases from sessions and integration facades            |
+| `constants/`, `utils/`  | Optional module-local, low-level reuse with no business policy                               |
+| `tasks/`                | Thin durable-job entry points, with each task in a separate file                             |
 
 Use `__init__.py` as the facade instead of a stuttering `<feature>_module.py`.
-Keep `exceptions.py` beside `entities/`, not inside it: an exception describes a
-failed domain operation, while an entity describes domain identity and state.
-Split exceptions into `exceptions/` only when separate files make that boundary
-easier to navigate.
+Use `models/` only as a grouping namespace. Every model belongs to a precisely
+named child such as `dtos/`, `entities/`, `failures/`, or `value_objects/`; do
+not put loose model files directly beside those categories. Add a category only
+when its first concrete type appears.
 
 ## Keep optional folders narrow
 
