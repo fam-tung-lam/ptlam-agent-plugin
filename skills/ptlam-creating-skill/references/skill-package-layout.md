@@ -78,10 +78,12 @@ one owner, and link to that owner anywhere else the resource appears.
 | Rendering tool used only to publish a report       | `publishing.md`        |
 | Workspace used throughout the skill                | `SKILL.md`             |
 
-For time-sensitive guidance, link to the current authoritative source, such as
-official documentation for a tool or package. Name a concrete staleness signal,
-such as changed access requirements, a revised policy or version, or a procedure
-that no longer succeeds.
+For time-sensitive guidance, keep the required procedure local. An external link
+may identify the current authoritative source, but the workflow must remain
+executable without opening it. Name a concrete staleness signal, such as changed
+access requirements, a revised policy or version, or a procedure that no longer
+succeeds. Apply [self-contained documentation](self-contained-documentation.md)
+to every external link.
 
 ## Name it after what it does
 

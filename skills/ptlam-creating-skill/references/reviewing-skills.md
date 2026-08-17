@@ -15,10 +15,12 @@ compile, stage, or publish files during a review.
    inputs, acceptance standard, authority, and dependencies.
 2. Apply the six capability tests and any foundation-specialization ownership
    map from `skill-atomicity.md`.
-3. Read `skill-package-layout.md`, `writing-for-maintainers.md`, and
-   `prompting-best-practices.md` as review criteria.
+3. Read `skill-package-layout.md`, `self-contained-documentation.md`,
+   `writing-for-maintainers.md`, and `prompting-best-practices.md` as review
+   criteria.
 4. Run read-only validators and inspect headings, links, file consumers, and
-   declared dependency edges.
+   declared dependency edges. Audit every external link for required operational
+   knowledge that the package does not contain locally.
 
 ## Return one verdict
 

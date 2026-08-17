@@ -70,6 +70,10 @@ For create or refactor, read
 [package layout](references/skill-package-layout.md). It owns what each
 directory holds, the file-length limit, and when detail leaves `SKILL.md`.
 
+Read [self-contained documentation](references/self-contained-documentation.md)
+when the package uses links, sources, or external material. It owns which
+information must stay local and how to audit external links.
+
 Assign guidance for each supporting resource—the tools, services, packages,
 sources, or materials a workflow relies on—to the workflow that uses it. Keep
 guidance shared by the normal path in `SKILL.md`; route conditional guidance to
@@ -84,8 +88,8 @@ paraphrase a required skill.
 Read [composing skills](references/composing-skills.md). It owns invocation and
 foundation-specialization mechanics.
 
-Done when the file tree and reading order exist and the composition contract
-passes.
+Done when the file tree and reading order exist, the package remains executable
+without external URLs, and the composition contract passes.
 
 ## 4. Write the package
 
