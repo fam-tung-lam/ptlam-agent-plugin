@@ -24,9 +24,10 @@ the standard they satisfy.
 **Reason:** Provides the language-neutral conventions and testing doctrine the Python mechanics satisfy.
 
 **Instructions:** Read and apply ptlam-code-style first.
-Let it own precedence, visibility, documentation and logging
-standards, the universal behavior contract, test levels, test
-placement, and test doubles.
+Let it own precedence; the structure, boundary, naming, readability,
+data-modeling, contract, failure, documentation, and logging
+standards; the universal behavior contract; test levels; test
+placement; and test doubles.
 Use this skill only for Python language, library, and tool mechanics
 that satisfy those standards.
 This specialization may be stricter than the foundation, never looser.
@@ -57,7 +58,7 @@ keep its explicit working toolchain until replacing it is part of the task.
 | ------------------------------------------------------------------------ | ----------------------------------------------------------- |
 | Creating or standardizing the development environment, checks, or CI     | [dev-toolchain.md](references/dev-toolchain.md)             |
 | Adding a module, publishing a package name, or resolving an import cycle | [modules-and-imports.md](references/modules-and-imports.md) |
-| Writing or changing annotations and runtime preconditions                | [typing.md](references/typing.md)                           |
+| Writing or changing annotations, value types, and runtime preconditions  | [typing.md](references/typing.md)                           |
 | Performing I/O or managing concurrent work and resource lifetime         | [async.md](references/async.md)                             |
 | Raising, translating, or preserving an exception                         | [errors.md](references/errors.md)                           |
 | Defining or serializing a Pydantic model when Pydantic v2 is installed   | [pydantic.md](references/pydantic.md)                       |

@@ -23,25 +23,15 @@ state, source tree, widgets, external boundaries, and tests.
 **Reason:** Provides the language-neutral conventions and the testing doctrine the Flutter mechanics satisfy.
 
 **Instructions:** Read and apply ptlam-code-style first.
-Let it own the precedence order, the visibility, documentation, and
-logging standards, the universal behavior contract, the test levels,
-test placement, and test doubles.
+Let it own the precedence order; the structure, boundary, naming,
+readability, data-modeling, contract, failure, documentation, and
+logging standards; the universal behavior contract; the test levels;
+test placement; and test doubles.
 Use this skill only for the Flutter and Dart mechanics that satisfy
 those standards.
 This specialization may be stricter than the foundation, never looser.
 
 Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
-
-## How does a Flutter concern reach its project mechanic?
-
-```mermaid
-flowchart LR
-    ResolveToolchain["Resolve the toolchain"] --> ReadProjectTruth["Read the project's own config"]
-    ReadProjectTruth --> NameConcern["Name the concern"]
-    NameConcern --> ReadReference["Read that one reference"]
-    ReadReference --> ApplyMechanics["Apply the mechanics"]
-    ApplyMechanics --> RunChecks["Run analyze, format, and tests"]
-```
 
 ## Before the first edit
 

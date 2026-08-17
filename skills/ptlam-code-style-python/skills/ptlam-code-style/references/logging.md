@@ -3,6 +3,9 @@
 What a log record must contain and which level it belongs at. The specialization
 owns the logging package and the facade.
 
+Logs are how someone reads the system while it is running. Design them with the
+care you give the code they describe.
+
 ## Log through one owned facade
 
 Application code calls the project's own logging facade, never a logging package
@@ -37,6 +40,17 @@ built when the level is enabled.
 Log an error with its cause and stack trace attached, not flattened into the
 message string.
 
+Write for the person debugging at three in the morning with no context and no
+time. Each record either helps that person act or costs them a search.
+
+## Carry one identifier through the whole operation
+
+Attach the same correlation identifier to every record produced by one request,
+job, or user action, and pass it across process boundaries.
+
+Someone must be able to answer "what happened to order 12345" from a single
+identifier. Records that cannot be joined that way are timestamps, not evidence.
+
 ## Never log a secret or a person
 
 Credentials, tokens, keys, authorization headers, and full request bodies stay
@@ -57,4 +71,5 @@ Rethrowing after logging produces the same failure twice in the record.
 ## Finish
 
 Finish when every record names its operation and outcome, sits at the level
-matching who must act, carries no secret or personal data, and appears once.
+matching who must act, carries the identifier that joins it to the rest of the
+operation, holds no secret or personal data, and appears once.
