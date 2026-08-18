@@ -38,6 +38,11 @@
     "./skills/ptlam-explaining",
     "./skills/ptlam-mermaiding",
     "./skills/ptlam-visualization-with-html",
+    "./skills/ptlam-health-connector-architecture",
+    "./skills/ptlam-health-connector-setup",
+    "./skills/ptlam-health-connector-debug",
+    "./skills/ptlam-health-connector-review",
+    "./skills/ptlam-health-connector-data-type",
     "./skills/ptlam-code-style-dart-health-connector",
     "./skills/ptlam-code-style-kotlin-health-connector",
     "./skills/ptlam-code-style-swift-health-connector"
