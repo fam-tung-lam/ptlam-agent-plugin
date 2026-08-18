@@ -20,6 +20,8 @@ and this project adheres to
 
 ### Changed
 
+- Renamed the Health Connector language code-style skills so the shared project
+  prefix keeps the complete skill family adjacent in skill listings.
 - Expanded the setup skill contract with clearer communication, project
   instruction, and compatibility guidance.
 - Flutter code-style guidance now builds on the Dart foundation instead of

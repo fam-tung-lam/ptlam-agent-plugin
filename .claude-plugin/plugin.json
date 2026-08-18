@@ -43,8 +43,8 @@
     "./skills/ptlam-health-connector-debug",
     "./skills/ptlam-health-connector-review",
     "./skills/ptlam-health-connector-data-type",
-    "./skills/ptlam-code-style-dart-health-connector",
-    "./skills/ptlam-code-style-kotlin-health-connector",
-    "./skills/ptlam-code-style-swift-health-connector"
+    "./skills/ptlam-health-connector-code-style-dart",
+    "./skills/ptlam-health-connector-code-style-kotlin",
+    "./skills/ptlam-health-connector-code-style-swift"
   ]
 }

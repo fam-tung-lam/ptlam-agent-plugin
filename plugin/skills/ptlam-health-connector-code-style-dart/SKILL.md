@@ -1,17 +1,4 @@
----
-name: ptlam-code-style-dart-health-connector
-description:
-  Write, review, and fix Dart source and tests in the Health Connector SDK
-  against its analyzer rules, formatter contract, imports, visibility,
-  documentation shape, structured logging syntax, and package-specific test
-  layout. Use when editing Dart code, changing the shared lint package, or
-  fixing a Dart format, analysis, documentation, or test-convention failure.
-  Apply ptlam-code-style-dart first. Do not use for workspace architecture,
-  public API design, Pigeon ownership, platform support, or an end-to-end health
-  data type change.
----
-
-# PTLam Health Connector Dart Code Style
+# PTLam Health Connector Code Style Dart
 
 Write, review, or fix Dart source and tests in the Health Connector SDK. This
 skill owns only repository-specific Dart expression: analyzer and formatter
@@ -22,22 +9,7 @@ Workspace architecture, public API decisions, platform support, Pigeon
 ownership, domain capabilities, and end-to-end feature completeness are outside
 this skill.
 
-## Required skills
-
-### `ptlam-code-style-dart`
-
-**Reason:** Provides the Dart language, package, analyzer, formatter, dartdoc, and test mechanics this repository's conventions build on.
-
-**Instructions:** Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
-as its own foundation.
-Let Dart own the SDK and toolchain, naming, formatting, imports, const
-and final, visibility, package layout, dartdoc, and package:test
-mechanics.
-Use this skill only for Health Connector Dart source, analyzer,
-formatter, documentation, logging-call, and test conventions.
-This specialization may be stricter than Dart, never looser.
-
-Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
+<!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
 ## Apply the project conventions
 
