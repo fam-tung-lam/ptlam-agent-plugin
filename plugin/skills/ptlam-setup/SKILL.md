@@ -75,9 +75,9 @@ Ensure `AGENTS.md` contains exactly one copy of this managed block:
 ```markdown
 <!-- PTLAM-SETUP-SKILL:START -->
 
-## AGENTS.override.md has precendence
+## AGENTS.override.md has precedence
 
-Read [AGENTS.override.md](AGENTS.override.md). It has precendence over this file.
+Read [AGENTS.override.md](AGENTS.override.md). It has precedence over this file.
 
 <!-- PTLAM-SETUP-SKILL:END -->
 ```
