@@ -1,5 +1,5 @@
 {
   "name": "ptlam-agent-plugin",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "A curated collection of portable agent skills for engineering, productivity, and utility workflows."
 }
