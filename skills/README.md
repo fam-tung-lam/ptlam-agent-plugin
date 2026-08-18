@@ -23,9 +23,14 @@
 | `ptlam-explaining`                         | Productivity         | Explain concepts, mechanisms, and systems through a verified literal model and an explanatory device matched to the learner's difficulty. Use when a learner needs an unfamiliar, abstract, or complex concept made usable, and when a request explicitly asks for a real-life analogy with a stable mapping table, a short story, and explicit caveats. Select the analogy device only on that explicit ask; a request to explain, define, simplify, or break down a concept is not that ask.                                                                                                                                                                                                 | public     | Active | —           |
 | `ptlam-mermaiding`                         | Productivity         | Create, revise, or review Mermaid diagrams whose type, structure, notation, and layout preserve the source relationships and remain readable in raw Markdown. Use directly or from another skill when the output needs a swimlane, flowchart, class, state, ER, sequence, quadrant, mindmap, kanban, architecture, or tree-view diagram.                                                                                                                                                                                                                                                                                                                                                       | public     | Active | —           |
 | `ptlam-visualization-with-html`            | Productivity         | Create or revise one portable HTML explainer that renders a verified explanation as an accessible, optionally interactive artifact using native web technologies and Material 3 Expressive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | public     | Active | —           |
-| `ptlam-code-style-dart-health-connector`   | Health Connector SDK | Write, review, and fix Dart code in the Health Connector Flutter plugin monorepo against its melos workspace layout, package boundaries, sealed record and data-type hierarchies, part-file organization, platform annotations, Pigeon mapper conventions, health_connector_lint rules, and mocktail tests. Use when adding a health data type or record, changing a facade, core, logger, or platform-package Dart file, editing a Pigeon input, or fixing a melos analyze:dart:strict, dart format, or flutter test failure in this repository. Apply ptlam-code-style-dart first for the Dart mechanics. Do not use for another repository or for this plugin's Kotlin or Swift code.       | public     | Active | —           |
-| `ptlam-code-style-kotlin-health-connector` | Health Connector SDK | Write, review, and fix Kotlin code in the Health Connector plugin's Android Health Connect package against its plugin entry point, client facade, handler registry, service, mapper, and exception conventions, its detekt and ktlint configuration, and its JUnit 5, MockK, Kotest, and Robolectric tests. Use when adding a health record handler, changing native Android code under health_connector_hc_android, or fixing a melos analyze:kotlin, ktlintCheck, or test:kotlin failure. Apply ptlam-code-style-kotlin first for the Kotlin mechanics. Do not use for another repository or for this plugin's Dart or Swift code.                                                           | public     | Active | —           |
-| `ptlam-code-style-swift-health-connector`  | Health Connector SDK | Write, review, and fix Swift code in the Health Connector plugin's iOS HealthKit package against its plugin entry point, actor-based client, handler protocol composition, registry, mapper, and error conventions, its SwiftLint and SwiftFormat configuration, and its Pigeon completion-handler threading rules. Use when adding a health record handler, changing native iOS code under health_connector_hk_ios, or fixing a melos analyze:swift or format:swift failure. Apply ptlam-code-style-swift first for the Swift mechanics. Do not use for another repository or for this plugin's Dart or Kotlin code.                                                                          | public     | Active | —           |
+| `ptlam-health-connector-architecture`      | Health Connector SDK | Explain and judge the Health Connector SDK's structure across its Melos packages, Dart API surfaces, Pigeon contracts, Android Health Connect layers, iOS HealthKit layers, failure boundaries, concurrency, and platform limits. Use when tracing a call, deciding where behavior belongs, evaluating a boundary or public API change, or answering how the SDK works internally. Do not use for diagnosing one failure, setting up a checkout, reviewing a whole diff, or implementing a health data type.                                                                                                                                                                                   | public     | Active | —           |
+| `ptlam-health-connector-setup`             | Health Connector SDK | Set up or repair a local Health Connector SDK checkout with its pinned Flutter, Java, and Ruby toolchains, Melos workspace links, Android tools, and macOS-only Swift tools, then prove the available development lanes. Runs only when explicitly requested. Use when bootstrapping a clone, repairing missing dependencies, or preparing a machine to contribute. Do not use for a runtime defect or an already-working checkout's lint failure.                                                                                                                                                                                                                                             | public     | Active | —           |
+| `ptlam-health-connector-debug`             | Health Connector SDK | Diagnose Health Connector SDK failures by reproducing the narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and tracing logs, error codes, generated contracts, handlers, permissions, and platform prerequisites to one failing boundary. Use when a call throws, returns the wrong record or status, hangs, crashes, loses native logs, or behaves differently across platforms. Do not use for toolchain bootstrap, style checks, or a review of an otherwise-working changeset.                                                                                                                                                                                        | public     | Active | —           |
+| `ptlam-health-connector-review`            | Health Connector SDK | Review one Health Connector SDK working-tree changeset and report prioritized correctness, architecture, public API, cross-platform, generated-code, language-convention, test, documentation, and release gaps without editing it. Use when asked to review local changes, perform a pre-PR self-review, judge whether a change is complete, or identify what could break. Do not use for fixing findings or diagnosing one failing run.                                                                                                                                                                                                                                                      | public     | Active | —           |
+| `ptlam-health-connector-data-type`         | Health Connector SDK | Add or extend one Health Connector health data type and record across the core Dart model, public exports, platform annotations, Pigeon contracts, Dart mappers, Android Health Connect handlers, iOS HealthKit handlers, and applicable tests. Use when introducing a record type, adding one platform to an existing type, changing its capabilities, or repairing an incomplete end-to-end registration. Do not use for an unrelated SDK feature or a language-only refactor.                                                                                                                                                                                                               | public     | Active | —           |
+| `ptlam-code-style-dart-health-connector`   | Health Connector SDK | Write, review, and fix Dart source and tests in the Health Connector SDK against its analyzer rules, formatter contract, imports, visibility, documentation shape, structured logging syntax, and package-specific test layout. Use when editing Dart code, changing the shared lint package, or fixing a Dart format, analysis, documentation, or test-convention failure. Apply ptlam-code-style-dart first. Do not use for workspace architecture, public API design, Pigeon ownership, platform support, or an end-to-end health data type change.                                                                                                                                         | public     | Active | —           |
+| `ptlam-code-style-kotlin-health-connector` | Health Connector SDK | Write, review, and fix Kotlin source and tests in Health Connector's Android package against its visibility, file and declaration shape, import order, structured logging syntax, ktlint and detekt configuration, and JUnit 5, MockK, Kotest, and coroutine-test conventions. Use when editing Kotlin code or fixing a Kotlin formatting, analysis, or test-convention failure. Apply ptlam-code-style-kotlin first. Do not use for Android architecture, Health Connect behavior, Pigeon ownership, or end-to-end handler registration.                                                                                                                                                      | public     | Active | —           |
+| `ptlam-code-style-swift-health-connector`  | Health Connector SDK | Write, review, and fix Swift source in Health Connector's iOS package against its access, declaration and extension shape, structured logging syntax, SwiftLint baseline, and SwiftFormat configuration. Use when editing Swift code or fixing a Swift analysis, formatting, or native logging convention failure. Apply ptlam-code-style-swift first. Do not use for iOS architecture, HealthKit behavior, Pigeon threading, failure translation, or end-to-end handler registration.                                                                                                                                                                                                         | public     | Active | —           |
 
 ## Skill dependency graph
 
@@ -55,9 +60,14 @@ flowchart LR
   skill_19["ptlam-explaining [public root]"]
   skill_20["ptlam-mermaiding [public root]"]
   skill_21["ptlam-visualization-with-html [public root]"]
-  skill_22["ptlam-code-style-dart-health-connector [public root]"]
-  skill_23["ptlam-code-style-kotlin-health-connector [public root]"]
-  skill_24["ptlam-code-style-swift-health-connector [public root]"]
+  skill_22["ptlam-health-connector-architecture [public root]"]
+  skill_23["ptlam-health-connector-setup [public root]"]
+  skill_24["ptlam-health-connector-debug [public root]"]
+  skill_25["ptlam-health-connector-review [public root]"]
+  skill_26["ptlam-health-connector-data-type [public root]"]
+  skill_27["ptlam-code-style-dart-health-connector [public root]"]
+  skill_28["ptlam-code-style-kotlin-health-connector [public root]"]
+  skill_29["ptlam-code-style-swift-health-connector [public root]"]
   skill_3 --> skill_2
   skill_4 --> skill_2
   skill_5 --> skill_2
@@ -78,9 +88,18 @@ flowchart LR
   skill_16 --> skill_19
   skill_16 --> skill_20
   skill_21 --> skill_19
-  skill_22 --> skill_3
-  skill_23 --> skill_4
-  skill_24 --> skill_5
+  skill_24 --> skill_22
+  skill_25 --> skill_22
+  skill_25 --> skill_27
+  skill_25 --> skill_28
+  skill_25 --> skill_29
+  skill_26 --> skill_22
+  skill_26 --> skill_27
+  skill_26 --> skill_28
+  skill_26 --> skill_29
+  skill_27 --> skill_3
+  skill_28 --> skill_4
+  skill_29 --> skill_5
   classDef publicRoot fill:#dbeafe,stroke:#1d4ed8,color:#172554
   classDef internalDependency fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
   classDef deprecated fill:#fef3c7,stroke:#b45309,color:#78350f
@@ -109,4 +128,9 @@ flowchart LR
   class skill_22 publicRoot
   class skill_23 publicRoot
   class skill_24 publicRoot
+  class skill_25 publicRoot
+  class skill_26 publicRoot
+  class skill_27 publicRoot
+  class skill_28 publicRoot
+  class skill_29 publicRoot
 ```

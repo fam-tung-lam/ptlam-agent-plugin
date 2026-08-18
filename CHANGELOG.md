@@ -15,6 +15,8 @@ and this project adheres to
   toolchain mechanics that the shared code-style standard leaves open.
 - Added a Health Connector SDK category holding project-specific Dart, Kotlin,
   and Swift code-style skills for that plugin monorepo.
+- Added Health Connector skills for architecture, development setup, runtime
+  diagnosis, changeset review, and end-to-end health data type implementation.
 
 ### Changed
 
@@ -24,6 +26,9 @@ and this project adheres to
   owning Dart language and tooling mechanics itself.
 - Release CI now requires a dated changelog section and current comparison links
   for every version change.
+- Split Health Connector architecture, platform behavior, Pigeon workflows, and
+  feature construction out of the three language code-style skills so those
+  skills own language conventions only.
 
 ## [0.1.0] - 2026-08-18
 
