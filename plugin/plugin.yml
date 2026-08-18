@@ -651,30 +651,30 @@ skills:
           ownership, native layers, failure boundaries, concurrency, and
           platform limits.
           Use this skill to judge the diff against that architecture.
-      - skill_id: ptlam-code-style-dart-health-connector
+      - skill_id: ptlam-health-connector-code-style-dart
         reason:
           Provides Health Connector Dart source, analyzer, documentation, and
           test conventions for changed Dart files.
         instructions: |-
-          Apply ptlam-code-style-dart-health-connector to changed Dart, YAML,
+          Apply ptlam-health-connector-code-style-dart to changed Dart, YAML,
           and Dart-test files.
           Let it own project-specific Dart writing and check conventions.
           Report violations here without copying its rules into this skill.
-      - skill_id: ptlam-code-style-kotlin-health-connector
+      - skill_id: ptlam-health-connector-code-style-kotlin
         reason:
           Provides Health Connector Kotlin source, ktlint, detekt, and unit-test
           conventions for changed Android files.
         instructions: |-
-          Apply ptlam-code-style-kotlin-health-connector to changed Kotlin,
+          Apply ptlam-health-connector-code-style-kotlin to changed Kotlin,
           Gradle, ktlint, detekt, and Kotlin-test files.
           Let it own project-specific Kotlin writing and check conventions.
           Report violations here without copying its rules into this skill.
-      - skill_id: ptlam-code-style-swift-health-connector
+      - skill_id: ptlam-health-connector-code-style-swift
         reason:
           Provides Health Connector Swift source, SwiftLint, SwiftFormat, and
           native logging conventions for changed iOS files.
         instructions: |-
-          Apply ptlam-code-style-swift-health-connector to changed Swift,
+          Apply ptlam-health-connector-code-style-swift to changed Swift,
           SwiftPM, SwiftLint, and SwiftFormat files.
           Let it own project-specific Swift writing and check conventions.
           Report violations here without copying its rules into this skill.
@@ -702,36 +702,36 @@ skills:
           platform limits.
           Use this skill to coordinate one health data type through those
           boundaries.
-      - skill_id: ptlam-code-style-dart-health-connector
+      - skill_id: ptlam-health-connector-code-style-dart
         reason:
           Provides the project-specific Dart conventions for the core model,
           contracts, mappers, documentation, and tests.
         instructions: |-
-          Apply ptlam-code-style-dart-health-connector to every Dart change.
+          Apply ptlam-health-connector-code-style-dart to every Dart change.
           Let it own Dart analyzer, formatter, documentation, logging, and test
           conventions.
           Keep this skill's ownership of the end-to-end feature workflow.
-      - skill_id: ptlam-code-style-kotlin-health-connector
+      - skill_id: ptlam-health-connector-code-style-kotlin
         reason:
           Provides the project-specific Kotlin conventions for the Android
           mapper, handler, registry, and tests.
         instructions: |-
-          Apply ptlam-code-style-kotlin-health-connector when the type supports
+          Apply ptlam-health-connector-code-style-kotlin when the type supports
           Android Health Connect.
           Let it own Kotlin formatting, analysis, visibility, and test
           conventions.
           Keep this skill's ownership of Android feature completeness.
-      - skill_id: ptlam-code-style-swift-health-connector
+      - skill_id: ptlam-health-connector-code-style-swift
         reason:
           Provides the project-specific Swift conventions for the iOS mapper,
           handler, registry, and native logging.
         instructions: |-
-          Apply ptlam-code-style-swift-health-connector when the type supports
+          Apply ptlam-health-connector-code-style-swift when the type supports
           iOS HealthKit.
           Let it own Swift formatting, analysis, visibility, and logging
           conventions.
           Keep this skill's ownership of iOS feature completeness.
-  - id: ptlam-code-style-dart-health-connector
+  - id: ptlam-health-connector-code-style-dart
     description:
       Write, review, and fix Dart source and tests in the Health Connector SDK
       against its analyzer rules, formatter contract, imports, visibility,
@@ -758,7 +758,7 @@ skills:
           Use this skill only for Health Connector Dart source, analyzer,
           formatter, documentation, logging-call, and test conventions.
           This specialization may be stricter than Dart, never looser.
-  - id: ptlam-code-style-kotlin-health-connector
+  - id: ptlam-health-connector-code-style-kotlin
     description:
       Write, review, and fix Kotlin source and tests in Health Connector's
       Android package against its visibility, file and declaration shape,
@@ -784,7 +784,7 @@ skills:
           Use this skill only for Health Connector Kotlin source, ktlint,
           detekt, logging-call, and unit-test conventions.
           This specialization may be stricter than Kotlin, never looser.
-  - id: ptlam-code-style-swift-health-connector
+  - id: ptlam-health-connector-code-style-swift
     description:
       Write, review, and fix Swift source in Health Connector's iOS package
       against its access, declaration and extension shape, structured logging

@@ -1,4 +1,4 @@
-# PTLam Health Connector Kotlin Code Style
+# PTLam Health Connector Code Style Kotlin
 
 Write, review, or fix Kotlin source and unit tests under
 `packages/health_connector_hc_android/android/`. This skill owns only
