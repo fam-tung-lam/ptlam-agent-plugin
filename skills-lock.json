@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "ptlam-code-style-typescript": {
+      "source": "fam-tung-lam/ptlam-agent-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ptlam-code-style-typescript/SKILL.md",
+      "computedHash": "fa08a950aadf6fd6dbfc82a9395a7e4e040730e1fcb3b8af92a0f86b8ec29360"
+    },
     "ptlam-creating-atomic-note": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
@@ -41,7 +47,7 @@
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-grilling/SKILL.md",
-      "computedHash": "cc2860f1db6861910c128ee06ccd912601b38265f92971933349737e28d97d00"
+      "computedHash": "23f1db88b2c7f9d8ef7ab8e13db64fff38015bbce71dc71af2d81566b2dba1ee"
     },
     "ptlam-mermaiding": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
@@ -65,7 +71,7 @@
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
       "skillPath": "skills/ptlam-setup/SKILL.md",
-      "computedHash": "f6cd6eca08535f5ecadb684da33a823fc098a7eeec9535f8ddec55138bbd9d0f"
+      "computedHash": "4bdc0ac142c0e81a47400da9e9a79ffb5664cd80bfebddc01d494cda6cf0f974"
     },
     "ptlam-testing": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
