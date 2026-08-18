@@ -8,6 +8,11 @@ Use the Flutter SDK's `flutter_test`,
 [`mockito`](https://pub.dev/packages/mockito) when the selected double is a
 generated mock.
 
+`flutter_test` layers `testWidgets`, `WidgetTester`, and the Flutter finders and
+matchers on top of the same `group`, `test`, `expect`, and matcher API that
+`package:test` defines, and re-exports `Timeout`, `Skip`, `Tags`, and
+`addTearDown` from it. Only the Flutter additions below belong to this file.
+
 ## Supported local levels
 
 | Selected level    | Flutter mechanic                                                                                                                                                                  |

@@ -71,20 +71,18 @@ sealed class OrdersState with _$OrdersState {
 }
 ```
 
-Match on a union with a `switch` expression and no default branch. The analyzer
-then tells you every place to update when a variant is added; a default branch
-silently swallows the new one.
-
 Write domain services, invariants, and validation by hand. Freezed owns the data
 shape, not the rules about it.
 
-## Put absence in the Dart type
+## "Not loaded yet" is a state, not a null
 
-A nullable Dart field means the value can genuinely be absent, and every reader
-handles that. "Not loaded yet" is a state: put it in the Freezed state union
-above, not in a nullable field.
+Flutter tightens where absence may live. A screen that has no data yet says so
+through a variant of the Freezed state union above, never through a nullable
+field on a loaded state.
 
-Prefer an empty list to a nullable list.
+A widget forced to test `orders == null` before it can render is reading a state
+machine through the wrong type, and it cannot tell "still loading" from "loaded,
+and empty".
 
 ## Failures cross the boundary, exceptions do not
 

@@ -11,11 +11,17 @@ and this project adheres to
 ### Added
 
 - Added a maintained changelog as the source for curated GitHub Release notes.
+- Added Dart, Kotlin, and Swift code-style foundations for the language and
+  toolchain mechanics that the shared code-style standard leaves open.
+- Added a Health Connector SDK category holding project-specific Dart, Kotlin,
+  and Swift code-style skills for that plugin monorepo.
 
 ### Changed
 
 - Expanded the setup skill contract with clearer communication, project
   instruction, and compatibility guidance.
+- Flutter code-style guidance now builds on the Dart foundation instead of
+  owning Dart language and tooling mechanics itself.
 - Release CI now requires a dated changelog section and current comparison links
   for every version change.
 
