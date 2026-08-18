@@ -77,3 +77,20 @@ boundaries.
 - Never add a co-author to a commit message.
 - For completed work, concisely restate it without overloading the response with
   detail.
+
+### 4. Aliases
+
+Aliases are reminders of great communication and patterns we want to uphold.
+
+When you see these exact aliases, expand them and act as if their expansions
+were given to you directly.
+
+If an alias is referenced within a longer string, do not expand it.
+
+- `scr` = Simplify, compress, and repeat your response.
+- `eli` = Explain this like I'm 18. Simplify your language. Shorten your
+  response.
+- `foc` = Focus on what matters most here. What is the true signal? What is the
+  true value? Boil your response down to the most important thing we need to
+  focus on.
+- `ref` = Rewrite your response with reference points.
