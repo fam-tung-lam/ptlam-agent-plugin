@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "ptlam-code-style-python-fastapi": {
+      "source": "fam-tung-lam/ptlam-agent-plugin",
+      "sourceType": "github",
+      "skillPath": "skills/ptlam-code-style-python-fastapi/SKILL.md",
+      "computedHash": "45af9b470e63ba859d0ccf2f30b5f102d2051032a0d66dc985318909f417c605"
+    },
     "ptlam-code-style-typescript": {
       "source": "fam-tung-lam/ptlam-agent-plugin",
       "sourceType": "github",
