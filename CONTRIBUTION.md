@@ -50,10 +50,12 @@ why an existing skill does not cover it, and one or two representative requests.
 4. Edit authored sources, tests, or documentation. Root `README.md` is
    human-owned; do not edit `skills/`, `skills/README.md`, `.claude-plugin/`, or
    `.codex-plugin/` by hand.
-5. Add or update tests for behavior changes.
-6. Run focused checks while working, then the complete
+5. Record notable user or developer changes under `Unreleased` in
+   `CHANGELOG.md`.
+6. Add or update tests for behavior changes.
+7. Run focused checks while working, then the complete
    [quality gates](docs/DEVELOPMENT.md#quality-gates).
-7. If the authored catalog changed, include the reviewed output from
+8. If the authored catalog changed, include the reviewed output from
    `npm run plugin:compile` in the same pull request.
 
 The compiler implementation and its focused tests are not part of this

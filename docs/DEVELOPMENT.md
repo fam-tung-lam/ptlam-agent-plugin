@@ -103,12 +103,14 @@ override; normal repository commands use the committed manifest selection.
 1. Create a focused branch from current `main`.
 2. Change the smallest appropriate authored source, test, or documentation
    surface.
-3. Run focused tests while developing.
-4. If authored catalog data changed, run `npm run plugin:compile`.
-5. Review every generated change. Unexpected generated changes are defects to
+3. Record notable user or developer changes under `Unreleased` in
+   `CHANGELOG.md`.
+4. Run focused tests while developing.
+5. If authored catalog data changed, run `npm run plugin:compile`.
+6. Review every generated change. Unexpected generated changes are defects to
    investigate, not files to accept automatically.
-6. Run the full local quality gates before opening a pull request.
-7. Commit only the files that belong to the change.
+7. Run the full local quality gates before opening a pull request.
+8. Commit only the files that belong to the change.
 
 During normal active development, keep the plugin version unchanged. A
 maintainer preparing a GitHub Release follows the separate
@@ -129,7 +131,7 @@ Run all commands from the repository root.
 | `npm run code:format`     | Apply Biome fixes                                     | Yes    |
 | `npm run markdown:check`  | Check Markdown formatting and lint rules              | No     |
 | `npm run markdown:format` | Format project Markdown                               | Yes    |
-| `npm run release:check`   | Validate version and GitHub Release metadata          | No     |
+| `npm run release:check`   | Validate version, changelog, and release metadata     | No     |
 | `npm test`                | Run the Vitest suite once                             | No     |
 | `npm run test:coverage`   | Run tests and enforce coverage thresholds             | Yes\*  |
 | `npm run test:watch`      | Run Vitest in watch mode                              | No     |
