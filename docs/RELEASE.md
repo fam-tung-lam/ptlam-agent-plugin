@@ -37,12 +37,18 @@ must leave it unchanged.
    npm run plugin:compile
    ```
 
-5. Run the complete quality gates, including `npm run release:check`.
-6. Open and merge a pull request after `CI Required` passes.
+5. Move the pending notes from `Unreleased` into a dated `[<version>]` section
+   in `CHANGELOG.md`. Leave `Unreleased` empty and update its comparison link to
+   start at `v<version>`.
+6. Add the new version comparison link from the previous tag to `v<version>`.
+7. Run the complete quality gates, including `npm run release:check`.
+8. Open and merge a pull request after `CI Required` passes.
 
 CI rejects inconsistent package, lockfile, authored plugin, or generated host
 versions. When a version changes, it must have greater SemVer precedence than
-the version on the pull request base or previous `main` commit.
+the version on the pull request base or previous `main` commit. CI also rejects
+a version change when its changelog section is missing, undated, empty, or
+paired with stale comparison links.
 
 ## Automated release result
 
@@ -50,8 +56,8 @@ After the merge commit passes CI, `.github/workflows/cd.yml`:
 
 - creates the annotated `v<version>` tag at the exact validated commit;
 - creates a release titled `PTLam Agent Plugin v<version>`;
-- generates changelog notes from merged pull requests using
-  `.github/release.yml`;
+- uses the matching version section from `CHANGELOG.md` as the exact release
+  notes;
 - marks SemVer prereleases as GitHub prereleases; and
 - verifies and skips an already matching release on a safe rerun.
 

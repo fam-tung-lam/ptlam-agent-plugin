@@ -34,7 +34,7 @@ jobs:
           persist-credentials: false
       - name: Set up Node.js and dependencies
         uses: ./.github/actions/set-up-node
-      - name: Validate release metadata
+      - name: Validate release metadata and changelog
         run: npm run release:check
       - name: Validate plugin input and generated artifacts
         run: npm run plugin:verify

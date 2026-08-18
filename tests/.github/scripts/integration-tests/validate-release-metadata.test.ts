@@ -9,8 +9,23 @@ import { validateReleaseMetadataFiles } from "../../../../.github/scripts/valida
 
 const execFileAsync = promisify(execFile);
 const VERSION = "0.1.0-alpha.1";
+const VALID_CHANGELOG = `# Changelog
 
-async function createProjectWithoutHistoricalManifest(): Promise<{
+## [Unreleased]
+
+## [${VERSION}] - 2026-08-18
+
+### Added
+
+- Added release automation.
+
+[Unreleased]:
+  https://github.com/example/project/compare/v${VERSION}...HEAD
+[${VERSION}]:
+  https://github.com/example/project/compare/v0.1.0-alpha.0...v${VERSION}
+`;
+
+async function createProject(historicalVersion?: string): Promise<{
   readonly baseSha: string;
   readonly projectRoot: string;
 }> {
@@ -21,7 +36,17 @@ async function createProjectWithoutHistoricalManifest(): Promise<{
 
   await execFileAsync("git", ["init", "--quiet"], { cwd: projectRoot });
   await writeFile(path.join(projectRoot, "README.md"), "# Initial commit\n");
-  await execFileAsync("git", ["add", "README.md"], { cwd: projectRoot });
+  if (historicalVersion !== undefined) {
+    await writeFile(
+      path.join(projectRoot, "package.json"),
+      `${JSON.stringify({
+        name: "ptlam-agent-plugin",
+        private: true,
+        version: historicalVersion,
+      })}\n`,
+    );
+  }
+  await execFileAsync("git", ["add", "."], { cwd: projectRoot });
   await execFileAsync(
     "git",
     [
@@ -67,6 +92,7 @@ async function createProjectWithoutHistoricalManifest(): Promise<{
         version: VERSION,
       })}\n`,
     ),
+    writeFile(path.join(projectRoot, "CHANGELOG.md"), VALID_CHANGELOG),
     writeFile(
       path.join(projectRoot, "plugin/plugin.yml"),
       `name: ${manifest.name}\nversion: ${VERSION}\n`,
@@ -99,8 +125,7 @@ async function createProjectWithoutHistoricalManifest(): Promise<{
 describe("GitHub release metadata files", () => {
   it("validates the first manifest when the base commit predates package.json", async () => {
     // GIVEN a valid project whose base commit has no package manifest
-    const { baseSha, projectRoot } =
-      await createProjectWithoutHistoricalManifest();
+    const { baseSha, projectRoot } = await createProject();
 
     // WHEN release metadata is validated against that base commit
     const result = await validateReleaseMetadataFiles(projectRoot, baseSha);
@@ -111,7 +136,7 @@ describe("GitHub release metadata files", () => {
 
   it("rejects a base SHA that is unavailable in the repository", async () => {
     // GIVEN a valid project and a full SHA that does not identify a commit
-    const { projectRoot } = await createProjectWithoutHistoricalManifest();
+    const { projectRoot } = await createProject();
     const unavailableSha = "f".repeat(40);
 
     // WHEN release metadata is validated against the unavailable base
@@ -120,5 +145,31 @@ describe("GitHub release metadata files", () => {
 
     // THEN the missing Git history still fails the release check
     await expect(validate).rejects.toThrow();
+  });
+
+  it("validates the changelog when the version changes", async () => {
+    // GIVEN a valid version bump with a complete release changelog
+    const { baseSha, projectRoot } = await createProject("0.1.0-alpha.0");
+
+    // WHEN release metadata is validated against the prior version
+    const result = await validateReleaseMetadataFiles(projectRoot, baseSha);
+
+    // THEN the version and its changelog are accepted together
+    expect(result.version).toBe(VERSION);
+  });
+
+  it("rejects a version change with stale changelog comparison links", async () => {
+    // GIVEN a valid version bump whose Unreleased link starts at an older tag
+    const { baseSha, projectRoot } = await createProject("0.1.0-alpha.0");
+    await writeFile(
+      path.join(projectRoot, "CHANGELOG.md"),
+      VALID_CHANGELOG.replace(`v${VERSION}...HEAD`, "v0.1.0-alpha.0...HEAD"),
+    );
+
+    // WHEN release metadata is validated against the prior version
+    const validate = () => validateReleaseMetadataFiles(projectRoot, baseSha);
+
+    // THEN CI rejects the stale release range
+    await expect(validate).rejects.toThrow("Unreleased comparison link");
   });
 });

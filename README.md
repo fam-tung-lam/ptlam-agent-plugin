@@ -77,6 +77,7 @@ npx skills@latest update
 
 ## Project documentation
 
+- [Changelog](CHANGELOG.md): curated notable changes and release notes.
 - [Contribution guide](CONTRIBUTION.md): ways to contribute, pull request
   expectations, and the contributor workflow.
 - [Development guide](docs/DEVELOPMENT.md): local setup, source and generated

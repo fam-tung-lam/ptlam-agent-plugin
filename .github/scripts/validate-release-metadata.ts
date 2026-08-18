@@ -4,6 +4,11 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 
+import {
+  extractReleaseNotes,
+  validateReleaseChangelog,
+} from "./release-notes.ts";
+
 const execFileAsync = promisify(execFile);
 const EXPECTED_PLUGIN_NAME = "ptlam-agent-plugin";
 const SEMVER_PATTERN =
@@ -228,6 +233,7 @@ export async function validateReleaseMetadataFiles(
   const [
     manifestValue,
     lockfileValue,
+    changelog,
     pluginSource,
     claudeValue,
     codexValue,
@@ -237,6 +243,7 @@ export async function validateReleaseMetadataFiles(
   ] = await Promise.all([
     readJson(path.join(projectRoot, "package.json")),
     readJson(path.join(projectRoot, "package-lock.json")),
+    readFile(path.join(projectRoot, "CHANGELOG.md"), "utf8"),
     readFile(path.join(projectRoot, "plugin/plugin.yml"), "utf8"),
     readJson(path.join(projectRoot, ".claude-plugin/plugin.json")),
     readJson(path.join(projectRoot, ".codex-plugin/plugin.json")),
@@ -264,7 +271,7 @@ export async function validateReleaseMetadataFiles(
     baseSha === undefined || /^0{40}$/.test(baseSha)
       ? undefined
       : await readPreviousVersion(projectRoot, baseSha);
-  return validateReleaseMetadata(
+  const metadata = validateReleaseMetadata(
     {
       packageName: manifest["name"],
       packagePrivate: manifest["private"],
@@ -288,6 +295,11 @@ export async function validateReleaseMetadataFiles(
     },
     previousVersion,
   );
+  extractReleaseNotes(changelog, metadata.version);
+  if (previousVersion !== undefined && previousVersion !== metadata.version) {
+    validateReleaseChangelog(changelog, previousVersion, metadata.version);
+  }
+  return metadata;
 }
 
 async function run(): Promise<void> {
