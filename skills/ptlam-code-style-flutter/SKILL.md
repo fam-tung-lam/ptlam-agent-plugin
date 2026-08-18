@@ -3,11 +3,11 @@ name: ptlam-code-style-flutter
 description:
   Write, review, and fix Flutter application code against conventions for the
   toolchain, layer boundaries, source tree, widgets, models, networking,
-  storage, localization, logging, doc comments, and tests. Use when adding or
-  changing Dart code in a Flutter project, choosing between setState, Cubit, and
-  Bloc, placing a new file or feature, wiring get_it or go_router, or fixing a
-  flutter analyze, dart format, or build_runner failure. Apply ptlam-code-style
-  first for the standard these mechanics satisfy. Do not use this specialization
+  storage, localization, logging, widget documentation, and tests. Use when
+  adding or changing Flutter code, choosing between setState, Cubit, and Bloc,
+  placing a new file or feature, wiring get_it or go_router, or fixing a flutter
+  analyze or build_runner failure. Apply ptlam-code-style-dart first for the
+  Dart language, package, and tooling mechanics. Do not use this specialization
   for Dart outside Flutter or for another stack.
 ---
 
@@ -18,25 +18,25 @@ state, source tree, widgets, external boundaries, and tests.
 
 ## Required skills
 
-### `ptlam-code-style`
+### `ptlam-code-style-dart`
 
-**Reason:** Provides the language-neutral conventions and the testing doctrine the Flutter mechanics satisfy.
+**Reason:** Provides the Dart language, package, analyzer, formatter, dartdoc, and test mechanics underneath the Flutter framework boundary.
 
-**Instructions:** Read and apply ptlam-code-style first.
-Let it own the precedence order; the structure, boundary, naming,
-readability, data-modeling, contract, failure, documentation, and
-logging standards; the universal behavior contract; the test levels;
-test placement; and test doubles.
-Use this skill only for the Flutter and Dart mechanics that satisfy
-those standards.
-This specialization may be stricter than the foundation, never looser.
+**Instructions:** Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
+as its own foundation.
+Let Dart own the SDK and toolchain, naming, formatting, imports,
+const and final, package layout, dartdoc, and package:test mechanics.
+Use this skill only for Flutter framework, widget, state, routing,
+localization, and Flutter-runner test mechanics.
+This specialization may be stricter than Dart, never looser.
 
-Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
+Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
 
 ## Before the first edit
 
 1. Resolve the Flutter version through FVM. Invoke Flutter commands as
    `fvm flutter …` and Dart commands as `fvm dart …`; never use a global SDK.
+   Every Dart command named anywhere in this skill runs through that prefix.
 2. Establish which project you are in:
 
    | Project  | Version policy                                                     |
@@ -47,6 +47,9 @@ Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 3. Read `analysis_options.yaml`. It, `pubspec.lock`, and `.fvmrc` are the source
    of truth for this project; the references below describe the intended
    baseline, not the resolved one.
+4. Use [`very_good_analysis`](https://pub.dev/packages/very_good_analysis) as
+   the analyzer rule set for a new project, included at its pinned version. Keep
+   whatever set an existing project already includes.
 
 For a new project, use the latest stable Flutter release and the latest stable
 packages. For an existing project, match `.fvmrc`, `pubspec.yaml`, and
@@ -80,22 +83,23 @@ analysis.
 | Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md)   |
 | Declaring or invoking an application route                                | [routing.md](references/routing.md)                     |
 | Adding a file or a feature; deciding what a feature exports               | [file-organization.md](references/file-organization.md) |
-| Naming, formatting, imports, `const`, and analyzer exceptions             | [dart-style.md](references/dart-style.md)               |
+| Naming, formatting, imports, `const`, analyzer settings, and `// ignore:` | The Dart skill loaded above                             |
 | Building a widget, splitting one, or using `BuildContext`                 | [widgets.md](references/widgets.md)                     |
 | Defining a DTO, a domain entity, a failure, or a Freezed union            | [models.md](references/models.md)                       |
 | Calling an external API                                                   | [networking.md](references/networking.md)               |
 | Reading or writing persisted data                                         | [storage.md](references/storage.md)                     |
 | Adding or changing user-visible text                                      | [localization.md](references/localization.md)           |
 | Emitting a log record                                                     | [logging.md](references/logging.md)                     |
-| Writing a Dart doc comment                                                | [documentation.md](references/documentation.md)         |
+| Documenting a widget, BLoC, use case, or repository                       | [documentation.md](references/documentation.md)         |
 | Writing, placing, or restructuring a test                                 | [testing.md](references/testing.md)                     |
 
 ## A check failed — where to look
 
 | Failing check                                                        | Reference                                                                                           |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `fvm flutter analyze`, a `very_good_analysis` lint                   | [dart-style.md](references/dart-style.md)                                                           |
-| `fvm dart format` reports a diff                                     | [dart-style.md](references/dart-style.md)                                                           |
+| `fvm flutter analyze`, a `very_good_analysis` lint                   | The Dart skill loaded above                                                                         |
+| `fvm dart format` reports a diff                                     | The Dart skill loaded above                                                                         |
+| `use_build_context_synchronously` fires after an `await`             | [widgets.md](references/widgets.md)                                                                 |
 | `build_runner` fails, or generated output is missing                 | [Shared toolchain](#shared-toolchain), then the reference that owns the generator                   |
 | A generated route or `strings.g.dart` symbol is undefined            | [localization.md](references/localization.md) (Slang), [routing.md](references/routing.md) (routes) |
 | Flutter SDK or Dart SDK constraint mismatch                          | [Before the first edit](#before-the-first-edit)                                                     |

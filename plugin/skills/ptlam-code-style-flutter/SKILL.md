@@ -9,6 +9,7 @@ state, source tree, widgets, external boundaries, and tests.
 
 1. Resolve the Flutter version through FVM. Invoke Flutter commands as
    `fvm flutter …` and Dart commands as `fvm dart …`; never use a global SDK.
+   Every Dart command named anywhere in this skill runs through that prefix.
 2. Establish which project you are in:
 
    | Project  | Version policy                                                     |
@@ -19,6 +20,9 @@ state, source tree, widgets, external boundaries, and tests.
 3. Read `analysis_options.yaml`. It, `pubspec.lock`, and `.fvmrc` are the source
    of truth for this project; the references below describe the intended
    baseline, not the resolved one.
+4. Use [`very_good_analysis`](https://pub.dev/packages/very_good_analysis) as
+   the analyzer rule set for a new project, included at its pinned version. Keep
+   whatever set an existing project already includes.
 
 For a new project, use the latest stable Flutter release and the latest stable
 packages. For an existing project, match `.fvmrc`, `pubspec.yaml`, and
@@ -52,22 +56,23 @@ analysis.
 | Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md)   |
 | Declaring or invoking an application route                                | [routing.md](references/routing.md)                     |
 | Adding a file or a feature; deciding what a feature exports               | [file-organization.md](references/file-organization.md) |
-| Naming, formatting, imports, `const`, and analyzer exceptions             | [dart-style.md](references/dart-style.md)               |
+| Naming, formatting, imports, `const`, analyzer settings, and `// ignore:` | The Dart skill loaded above                             |
 | Building a widget, splitting one, or using `BuildContext`                 | [widgets.md](references/widgets.md)                     |
 | Defining a DTO, a domain entity, a failure, or a Freezed union            | [models.md](references/models.md)                       |
 | Calling an external API                                                   | [networking.md](references/networking.md)               |
 | Reading or writing persisted data                                         | [storage.md](references/storage.md)                     |
 | Adding or changing user-visible text                                      | [localization.md](references/localization.md)           |
 | Emitting a log record                                                     | [logging.md](references/logging.md)                     |
-| Writing a Dart doc comment                                                | [documentation.md](references/documentation.md)         |
+| Documenting a widget, BLoC, use case, or repository                       | [documentation.md](references/documentation.md)         |
 | Writing, placing, or restructuring a test                                 | [testing.md](references/testing.md)                     |
 
 ## A check failed — where to look
 
 | Failing check                                                        | Reference                                                                                           |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `fvm flutter analyze`, a `very_good_analysis` lint                   | [dart-style.md](references/dart-style.md)                                                           |
-| `fvm dart format` reports a diff                                     | [dart-style.md](references/dart-style.md)                                                           |
+| `fvm flutter analyze`, a `very_good_analysis` lint                   | The Dart skill loaded above                                                                         |
+| `fvm dart format` reports a diff                                     | The Dart skill loaded above                                                                         |
+| `use_build_context_synchronously` fires after an `await`             | [widgets.md](references/widgets.md)                                                                 |
 | `build_runner` fails, or generated output is missing                 | [Shared toolchain](#shared-toolchain), then the reference that owns the generator                   |
 | A generated route or `strings.g.dart` symbol is undefined            | [localization.md](references/localization.md) (Slang), [routing.md](references/routing.md) (routes) |
 | Flutter SDK or Dart SDK constraint mismatch                          | [Before the first edit](#before-the-first-edit)                                                     |

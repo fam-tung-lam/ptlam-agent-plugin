@@ -19,6 +19,9 @@
   "skills": [
     "./skills/ptlam-setup",
     "./skills/ptlam-git",
+    "./skills/ptlam-code-style-dart",
+    "./skills/ptlam-code-style-kotlin",
+    "./skills/ptlam-code-style-swift",
     "./skills/ptlam-code-style-flutter",
     "./skills/ptlam-code-style-python",
     "./skills/ptlam-code-style-python-fastapi",
@@ -34,6 +37,9 @@
     "./skills/ptlam-scraping-urls",
     "./skills/ptlam-explaining",
     "./skills/ptlam-mermaiding",
-    "./skills/ptlam-visualization-with-html"
+    "./skills/ptlam-visualization-with-html",
+    "./skills/ptlam-code-style-dart-health-connector",
+    "./skills/ptlam-code-style-kotlin-health-connector",
+    "./skills/ptlam-code-style-swift-health-connector"
   ]
 }

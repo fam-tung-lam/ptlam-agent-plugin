@@ -41,6 +41,10 @@ categories:
   - id: utilities
     name: Utilities
     description: Focused helpers for small, repeatable transformations.
+  - id: project-health-connector
+    name: Health Connector SDK
+    description:
+      Project-specific skills for the Health Connector Flutter plugin monorepo.
 
 skills:
   - id: ptlam-setup
@@ -78,34 +82,116 @@ skills:
     visibility: internal
     status: active
     required_skills: []
-  - id: ptlam-code-style-flutter
+  - id: ptlam-code-style-dart
     description:
-      Write, review, and fix Flutter application code against conventions for
-      the toolchain, layer boundaries, source tree, widgets, models, networking,
-      storage, localization, logging, doc comments, and tests. Use when adding
-      or changing Dart code in a Flutter project, choosing between setState,
-      Cubit, and Bloc, placing a new file or feature, wiring get_it or
-      go_router, or fixing a flutter analyze, dart format, or build_runner
-      failure. Apply ptlam-code-style first for the standard these mechanics
-      satisfy. Do not use this specialization for Dart outside Flutter or for
-      another stack.
+      Write, review, and fix Dart library and application code against
+      conventions for language mechanics, package layout, the analyzer and
+      formatter toolchain, dartdoc comments, and package:test tests. Use when
+      starting or standardizing a Dart package, changing Dart code or its
+      analysis options, reviewing Dart-specific design, or resolving a dart
+      analyze, dart format, or dart test failure. Apply ptlam-code-style first
+      for the standard these mechanics satisfy. Use as the foundation for Dart
+      framework and project specializations. Do not use for non-Dart code.
     category_id: engineering
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-code-style
         reason:
-          Provides the language-neutral conventions and the testing doctrine the
-          Flutter mechanics satisfy.
+          Provides the language-neutral conventions and testing doctrine the
+          Dart mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own the precedence order; the structure, boundary, naming,
-          readability, data-modeling, contract, failure, documentation, and
-          logging standards; the universal behavior contract; the test levels;
-          test placement; and test doubles.
-          Use this skill only for the Flutter and Dart mechanics that satisfy
-          those standards.
+          Let it own precedence; the structure, boundary, naming, readability,
+          data-modeling, contract, failure, documentation, and logging
+          standards; the universal behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Dart language, package, and tool mechanics
+          that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
+  - id: ptlam-code-style-kotlin
+    description:
+      Write, review, and fix Kotlin library and application code against
+      conventions for language mechanics, null safety, coroutines, the Gradle,
+      ktlint, and detekt toolchain, KDoc comments, and JUnit tests. Use when
+      starting or standardizing a Kotlin module, changing Kotlin code or its
+      build and lint configuration, reviewing Kotlin-specific design, or
+      resolving a ktlint, detekt, or JUnit failure. Apply ptlam-code-style first
+      for the standard these mechanics satisfy. Use as the foundation for Kotlin
+      platform and project specializations. Do not use for Java or for another
+      JVM language.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral conventions and testing doctrine the
+          Kotlin mechanics satisfy.
+        instructions: |-
+          Read and apply ptlam-code-style first.
+          Let it own precedence; the structure, boundary, naming, readability,
+          data-modeling, contract, failure, documentation, and logging
+          standards; the universal behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Kotlin language, module, and tool mechanics
+          that satisfy those standards.
+          This specialization may be stricter than the foundation, never looser.
+  - id: ptlam-code-style-swift
+    description:
+      Write, review, and fix Swift library and application code against
+      conventions for language mechanics, optionals, error handling, structured
+      concurrency and actor isolation, the Swift Package Manager, SwiftFormat,
+      and SwiftLint toolchain, documentation comments, and tests. Use when
+      starting or standardizing a Swift package, changing Swift code or its
+      lint and format configuration, reviewing Swift-specific design, or
+      resolving a swift build, SwiftLint, or SwiftFormat failure. Apply
+      ptlam-code-style first for the standard these mechanics satisfy. Use as
+      the foundation for Swift platform and project specializations. Do not use
+      for Objective-C.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral conventions and testing doctrine the
+          Swift mechanics satisfy.
+        instructions: |-
+          Read and apply ptlam-code-style first.
+          Let it own precedence; the structure, boundary, naming, readability,
+          data-modeling, contract, failure, documentation, and logging
+          standards; the universal behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Swift language, package, and tool mechanics
+          that satisfy those standards.
+          This specialization may be stricter than the foundation, never looser.
+  - id: ptlam-code-style-flutter
+    description:
+      Write, review, and fix Flutter application code against conventions for
+      the toolchain, layer boundaries, source tree, widgets, models, networking,
+      storage, localization, logging, widget documentation, and tests. Use when
+      adding or changing Flutter code, choosing between setState, Cubit, and
+      Bloc, placing a new file or feature, wiring get_it or go_router, or fixing
+      a flutter analyze or build_runner failure. Apply ptlam-code-style-dart
+      first for the Dart language, package, and tooling mechanics. Do not use
+      this specialization for Dart outside Flutter or for another stack.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-dart
+        reason:
+          Provides the Dart language, package, analyzer, formatter, dartdoc, and
+          test mechanics underneath the Flutter framework boundary.
+        instructions: |-
+          Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
+          as its own foundation.
+          Let Dart own the SDK and toolchain, naming, formatting, imports,
+          const and final, package layout, dartdoc, and package:test mechanics.
+          Use this skill only for Flutter framework, widget, state, routing,
+          localization, and Flutter-runner test mechanics.
+          This specialization may be stricter than Dart, never looser.
   - id: ptlam-code-style-python
     description:
       Write, review, and fix Python library and application code against
@@ -494,3 +580,89 @@ skills:
           without building a parallel analogy.
           Keep this visualization skill's ownership of the portable HTML
           rendering and the visual interaction.
+  - id: ptlam-code-style-dart-health-connector
+    description:
+      Write, review, and fix Dart code in the Health Connector Flutter plugin
+      monorepo against its melos workspace layout, package boundaries, sealed
+      record and data-type hierarchies, part-file organization, platform
+      annotations, Pigeon mapper conventions, health_connector_lint rules, and
+      mocktail tests. Use when adding a health data type or record, changing a
+      facade, core, logger, or platform-package Dart file, editing a Pigeon
+      input, or fixing a melos analyze:dart:strict, dart format, or flutter test
+      failure in this repository. Apply ptlam-code-style-dart first for the Dart
+      mechanics. Do not use for another repository or for this plugin's Kotlin
+      or Swift code.
+    category_id: project-health-connector
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-dart
+        reason:
+          Provides the Dart language, package, analyzer, formatter, dartdoc, and
+          test mechanics this repository's conventions build on.
+        instructions: |-
+          Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
+          as its own foundation.
+          Let Dart own the SDK and toolchain, naming, formatting, imports, const
+          and final, visibility, package layout, dartdoc, and package:test
+          mechanics.
+          Use this skill only for Health Connector repository structure,
+          architecture, model hierarchy, Pigeon boundary, and test conventions.
+          This specialization may be stricter than Dart, never looser.
+  - id: ptlam-code-style-kotlin-health-connector
+    description:
+      Write, review, and fix Kotlin code in the Health Connector plugin's
+      Android Health Connect package against its plugin entry point, client
+      facade, handler registry, service, mapper, and exception conventions, its
+      detekt and ktlint configuration, and its JUnit 5, MockK, Kotest, and
+      Robolectric tests. Use when adding a health record handler, changing
+      native Android code under health_connector_hc_android, or fixing a melos
+      analyze:kotlin, ktlintCheck, or test:kotlin failure. Apply
+      ptlam-code-style-kotlin first for the Kotlin mechanics. Do not use for
+      another repository or for this plugin's Dart or Swift code.
+    category_id: project-health-connector
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-kotlin
+        reason:
+          Provides the Kotlin language, coroutine, Gradle, lint, KDoc, and JUnit
+          mechanics this repository's conventions build on.
+        instructions: |-
+          Read and apply ptlam-code-style-kotlin first; it loads
+          ptlam-code-style as its own foundation.
+          Let Kotlin own the language, null safety, coroutine, Gradle, ktlint,
+          detekt, KDoc, and JUnit mechanics.
+          Use this skill only for Health Connector Android package structure,
+          handler and service architecture, Pigeon boundary, Health Connect SDK,
+          and test-fake conventions.
+          This specialization may be stricter than Kotlin, never looser.
+  - id: ptlam-code-style-swift-health-connector
+    description:
+      Write, review, and fix Swift code in the Health Connector plugin's iOS
+      HealthKit package against its plugin entry point, actor-based client,
+      handler protocol composition, registry, mapper, and error conventions, its
+      SwiftLint and SwiftFormat configuration, and its Pigeon completion-handler
+      threading rules. Use when adding a health record handler, changing native
+      iOS code under health_connector_hk_ios, or fixing a melos analyze:swift or
+      format:swift failure. Apply ptlam-code-style-swift first for the Swift
+      mechanics. Do not use for another repository or for this plugin's Dart or
+      Kotlin code.
+    category_id: project-health-connector
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-swift
+        reason:
+          Provides the Swift language, concurrency, package, lint, format, and
+          documentation mechanics this repository's conventions build on.
+        instructions: |-
+          Read and apply ptlam-code-style-swift first; it loads ptlam-code-style
+          as its own foundation.
+          Let Swift own the language, optionals, error handling, structured
+          concurrency, Swift Package Manager, SwiftLint, SwiftFormat, and
+          documentation-comment mechanics.
+          Use this skill only for Health Connector iOS package structure,
+          handler and service architecture, Pigeon boundary, HealthKit, and
+          threading conventions.
+          This specialization may be stricter than Swift, never looser.

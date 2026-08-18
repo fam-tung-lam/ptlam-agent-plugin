@@ -132,3 +132,12 @@ feature needs it, then move it to `constants/`.
 
 Prefer one public class per file, named after the file. A small private helper
 used only by that class may stay beside it.
+
+## Suffix a class with the layer it belongs to
+
+This tree only reads correctly when a class name says which layer it sits in.
+Suffix every state holder, repository, use case, and data source with its role:
+`OrdersBloc`, `OrdersRepository`, `PlaceOrderUseCase`, `AppLocaleLocalStorage`.
+
+Do not suffix a model. `Order` is the entity; `OrderModel` says nothing the
+directory did not already say, and it reads as a second Order type.
