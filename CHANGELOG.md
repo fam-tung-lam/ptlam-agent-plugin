@@ -20,6 +20,7 @@ and this project adheres to
 
 ### Changed
 
+- Updated the plugin compiler to 0.2.2 and regenerated its owned outputs.
 - Renamed the Health Connector language code-style skills so the shared project
   prefix keeps the complete skill family adjacent in skill listings.
 - Expanded the setup skill contract with clearer communication, project
