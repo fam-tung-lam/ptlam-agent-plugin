@@ -1,20 +1,18 @@
 # PTLam Health Connector Review
 
-Review one working-tree changeset and return a prioritized findings report. Keep
-the review read-only. Do not edit files, regenerate Pigeon output, run a
-formatter in write mode, or offer fixes until the user asks for them.
+Add Health Connector project and platform risks to the loaded code-review
+foundation. Keep its review surface, read-only authority, finding gate,
+severity, output shape, and readiness verdict unchanged.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Resolve the review surface
+## Map the Health Connector surface
 
-1. Read repository instructions, then run `git status --short`, `git diff`, and
-   `git diff --staged`. Name the exact added, changed, deleted, and generated
-   files. Done when staged and unstaged scopes cannot be confused.
-2. Read each changed file with enough surrounding source to judge behavior.
-   Treat committed configuration and code as authoritative over `CLAUDE.md`.
-3. Identify every affected package, language, public library, Pigeon contract,
+1. Identify every affected package, language, public library, Pigeon contract,
    native layer, platform, test suite, document, and changelog.
+2. Treat committed configuration and code as authoritative over `CLAUDE.md`.
+3. Match every generated file in the review surface to its Pigeon source and the
+   Swift post-processor.
 
 ## Review the change
 
@@ -37,7 +35,7 @@ formatter in write mode, or offer fixes until the user asks for them.
 - Flag hand-edited generated files. Compare each Pigeon source change with all
   expected generated outputs and the Swift post-processor.
 
-### Language conventions
+### Project language conventions
 
 Apply the loaded project language guidance only to changed files in that
 language. Report the violated rule and smallest correction; do not repeat the
@@ -52,23 +50,9 @@ whole convention.
   package changelogs, and semantic-version impact where behavior is public.
 - Compare intended verification with the Melos scripts and relevant CI workflow.
 
-Run check-mode analysis or tests only when the user authorizes their local build
-artifacts. Never run `melos run pigeon`, `melos run format`, baseline
-generation, or another rewriting command during review.
+Run Health Connector check-mode analysis or tests only under the foundation's
+authority rules. Keep `melos run pigeon`, `melos run format`, baseline
+generation, and every other rewriting command out of the review.
 
-## Report findings
-
-Order findings by severity. Each finding names the severity, file and line,
-observable impact, evidence, and smallest correction.
-
-| Severity | Use for                                                                                                          |
-| -------- | ---------------------------------------------------------------------------------------------------------------- |
-| Critical | Data corruption, crash, privacy or security exposure, broken public contract, or guaranteed runtime failure      |
-| Major    | Incorrect platform behavior, missing registration or mapping, race, error loss, or architectural boundary breach |
-| Minor    | Maintainability or project-convention defect that can safely follow the functional corrections                   |
-| Coverage | Missing tests, native evidence, documentation, migration notes, changelog, or release proof                      |
-
-Do not report a category with no finding. If no defect survives review, say so
-and list the files, platforms, and checks that were not examined or run.
-
-Finish after the report. Wait for a separate request before changing anything.
+Return project findings and verification limits to the foundation. Let it assign
+severity, order the report, and decide the readiness verdict.

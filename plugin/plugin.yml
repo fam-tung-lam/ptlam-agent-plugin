@@ -297,6 +297,31 @@ skills:
           syntax verification for that diagram.
           Keep this skill's ownership of what the package says, which form
           carries each point, and which file holds it.
+  - id: ptlam-reviewing-code
+    description:
+      Review one bounded code changeset and return an evidence-backed,
+      prioritized findings report and readiness verdict. Use when reviewing a
+      pull request, branch, commit range, or explicit revision comparison. Use
+      when reviewing staged, unstaged, or untracked working-tree changes. Use
+      when judging an implementation against a task, issue, or specification.
+      Compose this skill when a stack or project review needs the general review
+      standard.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style
+        reason:
+          Provides the language-neutral source, boundary, failure,
+          documentation, logging, and testing conventions a code review judges.
+        instructions: |-
+          Read and apply ptlam-code-style before judging source or tests.
+          Let it own precedence; source structure and boundaries; naming and
+          readability; data modeling; contracts; failures; documentation;
+          logging; evolution; test behavior, levels, placement, and doubles.
+          Apply a matching stack specialization when one is available.
+          Let this skill own the review surface, intent, risk examination,
+          finding gate, severity, verification limits, and readiness verdict.
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that
@@ -631,16 +656,28 @@ skills:
           boundary, and report the diagnosis.
   - id: ptlam-health-connector-review
     description:
-      Review one Health Connector SDK working-tree changeset and report
-      prioritized correctness, architecture, public API, cross-platform,
-      generated-code, language-convention, test, documentation, and release
-      gaps without editing it. Use when asked to review local changes, perform a
-      pre-PR self-review, judge whether a change is complete, or identify what
-      could break. Do not use for fixing findings or diagnosing one failing run.
+      Review one Health Connector SDK changeset for project-specific public API,
+      cross-platform, generated-code, privacy, language-convention, test,
+      documentation, and release risks. Use when a code review reaches Health
+      Connector packages, Pigeon contracts, Android Health Connect, or iOS
+      HealthKit. Apply ptlam-reviewing-code for the review surface, finding
+      standard, and verdict. Do not use for fixing findings or diagnosing one
+      failing run.
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills:
+      - skill_id: ptlam-reviewing-code
+        reason:
+          Provides the general read-only review workflow, evidence gate,
+          severity model, verification limits, and readiness verdict.
+        instructions: |-
+          Read and apply ptlam-reviewing-code first.
+          Let it own review scope, intent, general code risks, finding admission,
+          severity, output shape, and the readiness verdict.
+          Use this skill only for Health Connector project and platform risks.
+          Return its findings and verification limits through the foundation's
+          report.
       - skill_id: ptlam-health-connector-architecture
         reason:
           Provides the repository boundaries and cross-platform contracts the

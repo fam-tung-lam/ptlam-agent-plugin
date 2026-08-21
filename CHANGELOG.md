@@ -17,6 +17,9 @@ and this project adheres to
   and Swift code-style skills for that plugin monorepo.
 - Added Health Connector skills for architecture, development setup, runtime
   diagnosis, changeset review, and end-to-end health data type implementation.
+- Added a general code-review foundation that scopes one changeset, separates
+  intent from conventions, examines risk, and reports evidence-backed findings
+  with a readiness verdict.
 
 ### Changed
 
@@ -32,6 +35,8 @@ and this project adheres to
 - Split Health Connector architecture, platform behavior, Pigeon workflows, and
   feature construction out of the three language code-style skills so those
   skills own language conventions only.
+- Composed the Health Connector changeset review with the general code-review
+  foundation so project guidance owns only SDK-specific risks.
 
 ## [0.1.0] - 2026-08-18
 
