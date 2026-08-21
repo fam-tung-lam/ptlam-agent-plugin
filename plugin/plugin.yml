@@ -66,6 +66,34 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-prototyping
+    description:
+      Build one throwaway prototype to answer a design question. Use when a user
+      wants to test a state model, business logic, or data shape through a
+      shareable HTML demo, or explore a UI through structurally different
+      variants on one route. Works from scratch or beside an existing module or
+      page. Do not use for an MVP, production feature, technical benchmark, or
+      durable demo.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-git
+        reason:
+          Isolates tracked prototype changes and preserves an authorized
+          prototype primary source without disturbing production work.
+        instructions: |-
+          Read and apply ptlam-git before a prototype changes a Git repository
+          or the user requests branch capture.
+          Let it own repository and worktree resolution, branch mechanics,
+          unrelated-state protection, staging, commit construction, and Git
+          verification.
+          Keep this skill's ownership of the design question, logic-versus-UI
+          branch, prototype artifact, evaluator handoff, answer, and capture
+          intent.
+          A prototype request authorizes local artifact files, not a commit,
+          push, issue change, or branch cleanup; require explicit authority for
+          those effects.
   - id: ptlam-code-style
     description:
       Hold source and test code to one language-neutral set of conventions for
