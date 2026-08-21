@@ -35,7 +35,9 @@ Read [ptlam-reviewing-code](skills/ptlam-reviewing-code/SKILL.md).
 
 **Reason:** Provides the repository boundaries and cross-platform contracts the review must protect.
 
-**Instructions:** Read and apply ptlam-health-connector-architecture first.
+**Instructions:** After ptlam-reviewing-code, read and apply
+ptlam-health-connector-architecture before judging Health
+Connector-specific risks.
 Let it own package direction, public and internal surfaces, Pigeon
 ownership, native layers, failure boundaries, concurrency, and
 platform limits.

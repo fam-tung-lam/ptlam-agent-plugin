@@ -684,7 +684,9 @@ skills:
           Provides the repository boundaries and cross-platform contracts the
           review must protect.
         instructions: |-
-          Read and apply ptlam-health-connector-architecture first.
+          After ptlam-reviewing-code, read and apply
+          ptlam-health-connector-architecture before judging Health
+          Connector-specific risks.
           Let it own package direction, public and internal surfaces, Pigeon
           ownership, native layers, failure boundaries, concurrency, and
           platform limits.
