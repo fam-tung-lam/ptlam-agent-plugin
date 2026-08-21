@@ -10,6 +10,8 @@ and this project adheres to
 
 ### Added
 
+- Added a prototyping skill for building shareable logic demos or switchable UI
+  variants that answer one design question before production implementation.
 - Added a maintained changelog as the source for curated GitHub Release notes.
 - Added Dart, Kotlin, and Swift code-style foundations for the language and
   toolchain mechanics that the shared code-style standard leaves open.

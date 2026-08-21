@@ -19,6 +19,7 @@
   "skills": [
     "./skills/ptlam-setup",
     "./skills/ptlam-git",
+    "./skills/ptlam-prototyping",
     "./skills/ptlam-code-style-dart",
     "./skills/ptlam-code-style-kotlin",
     "./skills/ptlam-code-style-swift",
