@@ -1,21 +1,35 @@
 ---
 name: ptlam-health-connector-review
 description:
-  Review one Health Connector SDK working-tree changeset and report prioritized
-  correctness, architecture, public API, cross-platform, generated-code,
-  language-convention, test, documentation, and release gaps without editing it.
-  Use when asked to review local changes, perform a pre-PR self-review, judge
-  whether a change is complete, or identify what could break. Do not use for
-  fixing findings or diagnosing one failing run.
+  Review one Health Connector SDK changeset for project-specific public API,
+  cross-platform, generated-code, privacy, language-convention, test,
+  documentation, and release risks. Use when a code review reaches Health
+  Connector packages, Pigeon contracts, Android Health Connect, or iOS
+  HealthKit. Apply ptlam-reviewing-code for the review surface, finding
+  standard, and verdict. Do not use for fixing findings or diagnosing one
+  failing run.
 ---
 
 # PTLam Health Connector Review
 
-Review one working-tree changeset and return a prioritized findings report. Keep
-the review read-only. Do not edit files, regenerate Pigeon output, run a
-formatter in write mode, or offer fixes until the user asks for them.
+Add Health Connector project and platform risks to the loaded code-review
+foundation. Keep its review surface, read-only authority, finding gate,
+severity, output shape, and readiness verdict unchanged.
 
 ## Required skills
+
+### `ptlam-reviewing-code`
+
+**Reason:** Provides the general read-only review workflow, evidence gate, severity model, verification limits, and readiness verdict.
+
+**Instructions:** Read and apply ptlam-reviewing-code first.
+Let it own review scope, intent, general code risks, finding admission,
+severity, output shape, and the readiness verdict.
+Use this skill only for Health Connector project and platform risks.
+Return its findings and verification limits through the foundation's
+report.
+
+Read [ptlam-reviewing-code](skills/ptlam-reviewing-code/SKILL.md).
 
 ### `ptlam-health-connector-architecture`
 
@@ -62,15 +76,13 @@ Report violations here without copying its rules into this skill.
 
 Read [ptlam-health-connector-code-style-swift](skills/ptlam-health-connector-code-style-swift/SKILL.md).
 
-## Resolve the review surface
+## Map the Health Connector surface
 
-1. Read repository instructions, then run `git status --short`, `git diff`, and
-   `git diff --staged`. Name the exact added, changed, deleted, and generated
-   files. Done when staged and unstaged scopes cannot be confused.
-2. Read each changed file with enough surrounding source to judge behavior.
-   Treat committed configuration and code as authoritative over `CLAUDE.md`.
-3. Identify every affected package, language, public library, Pigeon contract,
+1. Identify every affected package, language, public library, Pigeon contract,
    native layer, platform, test suite, document, and changelog.
+2. Treat committed configuration and code as authoritative over `CLAUDE.md`.
+3. Match every generated file in the review surface to its Pigeon source and the
+   Swift post-processor.
 
 ## Review the change
 
@@ -93,7 +105,7 @@ Read [ptlam-health-connector-code-style-swift](skills/ptlam-health-connector-cod
 - Flag hand-edited generated files. Compare each Pigeon source change with all
   expected generated outputs and the Swift post-processor.
 
-### Language conventions
+### Project language conventions
 
 Apply the loaded project language guidance only to changed files in that
 language. Report the violated rule and smallest correction; do not repeat the
@@ -108,23 +120,9 @@ whole convention.
   package changelogs, and semantic-version impact where behavior is public.
 - Compare intended verification with the Melos scripts and relevant CI workflow.
 
-Run check-mode analysis or tests only when the user authorizes their local build
-artifacts. Never run `melos run pigeon`, `melos run format`, baseline
-generation, or another rewriting command during review.
+Run Health Connector check-mode analysis or tests only under the foundation's
+authority rules. Keep `melos run pigeon`, `melos run format`, baseline
+generation, and every other rewriting command out of the review.
 
-## Report findings
-
-Order findings by severity. Each finding names the severity, file and line,
-observable impact, evidence, and smallest correction.
-
-| Severity | Use for                                                                                                          |
-| -------- | ---------------------------------------------------------------------------------------------------------------- |
-| Critical | Data corruption, crash, privacy or security exposure, broken public contract, or guaranteed runtime failure      |
-| Major    | Incorrect platform behavior, missing registration or mapping, race, error loss, or architectural boundary breach |
-| Minor    | Maintainability or project-convention defect that can safely follow the functional corrections                   |
-| Coverage | Missing tests, native evidence, documentation, migration notes, changelog, or release proof                      |
-
-Do not report a category with no finding. If no defect survives review, say so
-and list the files, platforms, and checks that were not examined or run.
-
-Finish after the report. Wait for a separate request before changing anything.
+Return project findings and verification limits to the foundation. Let it assign
+severity, order the report, and decide the readiness verdict.
