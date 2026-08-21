@@ -63,9 +63,10 @@ a commit and nothing is staged, stage only explicit paths that belong to the
 requested outcome. Preserve unrelated changes and never widen the commit merely
 to make the worktree clean.
 
-Read [commit message preferences](references/commit-message-preferences.md).
-Apply its precedence and portable defaults to the inspected change. If the user
-asked only for wording, return the message without changing Git state.
+Read [writing a Git commit message](references/writing-git-commit-message.md).
+Let it own preference precedence, message construction, and final verification.
+If the user asked only for wording, return the message without changing Git
+state.
 
 Before committing, run the checks required by the request and repository rules.
 Report any relevant check that could not be run; do not describe it as passed.
