@@ -57,10 +57,11 @@ skills:
     required_skills: []
   - id: ptlam-git
     description:
-      Carry out repository-local Git commit and worktree workflows without
-      disturbing unrelated work. Use when creating a commit, writing or revising
-      a commit message, creating or managing a worktree, or deciding whether a
-      repository write belongs in the current checkout or a new linked worktree.
+      Carry out repository-local Git commit, worktree, and conflict-resolution
+      workflows without disturbing unrelated work. Use when creating a commit,
+      writing or revising a commit message, creating or managing a worktree,
+      deciding whether a repository write belongs in the current checkout or a
+      new linked worktree, or resolving an in-progress merge or rebase conflict.
     category_id: engineering
     visibility: public
     status: active
