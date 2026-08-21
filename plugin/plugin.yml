@@ -66,6 +66,49 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-implementing
+    description:
+      Deliver one bounded software change through task-specific worker agents
+      and independent reviewer agents in a dedicated Git worktree. Use when
+      asked to implement from the current prompt or confirmed session context.
+      Use when given a specification, ticket file, issue, or equivalent task
+      link. Do not use for a read-only explanation, plan, diagnosis, or review.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-git
+        reason:
+          Isolates the implementation changeset and protects unrelated work
+          while worker and reviewer agents share one task worktree.
+        instructions: |-
+          Read and apply ptlam-git before any worker edits the target
+          repository.
+          Let it own repository, base, branch, and worktree resolution;
+          unrelated-state protection; staging and commit mechanics; and final
+          Git verification.
+          Keep this skill's ownership of the task contract, team sizing, role
+          prompts, worker and reviewer coordination, integration, finding
+          disposition, repair loop, and readiness decision.
+          Local implementation does not authorize a commit, push, pull request,
+          issue update, merge, or cleanup; require explicit authority for those
+          effects.
+      - skill_id: ptlam-reviewing-code
+        reason:
+          Supplies the independent review standard and readiness verdict for the
+          integrated implementation changeset.
+        instructions: |-
+          Read and apply ptlam-reviewing-code before dispatching reviewer
+          agents.
+          Let it own the review surface, intent and risk examination, finding
+          gate, severity, verification limits, and readiness verdict. Apply a
+          matching stack or project review specialization when one is
+          available.
+          Keep this skill's ownership of reviewer count, role independence,
+          lens assignment, report integration, finding disposition, repair
+          delegation, and final completion.
+          Reviewer agents stay read-only. Repair agents act only after the main
+          agent accepts a finding.
   - id: ptlam-prototyping
     description:
       Build one throwaway prototype to answer a design question. Use when a user

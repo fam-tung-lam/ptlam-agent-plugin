@@ -4,6 +4,7 @@
 | ------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ | ----------- |
 | `ptlam-setup`                              | Utilities            | Install or refresh PTLam's general agent instructions for a project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | public     | Active | —           |
 | `ptlam-git`                                | Engineering          | Carry out repository-local Git commit, worktree, and conflict-resolution workflows without disturbing unrelated work. Use when creating a commit, writing or revising a commit message, creating or managing a worktree, deciding whether a repository write belongs in the current checkout or a new linked worktree, or resolving an in-progress merge or rebase conflict.                                                                                                                                                                                                                                                                                                                   | public     | Active | —           |
+| `ptlam-implementing`                       | Engineering          | Deliver one bounded software change through task-specific worker agents and independent reviewer agents in a dedicated Git worktree. Use when asked to implement from the current prompt or confirmed session context. Use when given a specification, ticket file, issue, or equivalent task link. Do not use for a read-only explanation, plan, diagnosis, or review.                                                                                                                                                                                                                                                                                                                        | public     | Active | —           |
 | `ptlam-prototyping`                        | Engineering          | Build one throwaway prototype to answer a design question. Use when a user wants to test a state model, business logic, or data shape through a shareable HTML demo, or explore a UI through structurally different variants on one route. Works from scratch or beside an existing module or page. Do not use for an MVP, production feature, technical benchmark, or durable demo.                                                                                                                                                                                                                                                                                                           | public     | Active | —           |
 | `ptlam-code-style-dart`                    | Engineering          | Write, review, and fix Dart library and application code against conventions for language mechanics, package layout, the analyzer and formatter toolchain, dartdoc comments, and package:test tests. Use when starting or standardizing a Dart package, changing Dart code or its analysis options, reviewing Dart-specific design, or resolving a dart analyze, dart format, or dart test failure. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for Dart framework and project specializations. Do not use for non-Dart code.                                                                                                                 | public     | Active | —           |
 | `ptlam-code-style-kotlin`                  | Engineering          | Write, review, and fix Kotlin library and application code against conventions for language mechanics, null safety, coroutines, the Gradle, ktlint, and detekt toolchain, KDoc comments, and JUnit tests. Use when starting or standardizing a Kotlin module, changing Kotlin code or its build and lint configuration, reviewing Kotlin-specific design, or resolving a ktlint, detekt, or JUnit failure. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for Kotlin platform and project specializations. Do not use for Java or for another JVM language.                                                                                      | public     | Active | —           |
@@ -50,88 +51,92 @@ flowchart TB
             (active/public)
         `"]
         SkillNode2["`
-            ptlam-prototyping
+            ptlam-implementing
             (active/public)
         `"]
         SkillNode3["`
+            ptlam-prototyping
+            (active/public)
+        `"]
+        SkillNode4["`
             ptlam-code-style
             (active/internal)
         `"]
-        SkillNode4["`
+        SkillNode5["`
             ptlam-code-style-dart
             (active/public)
         `"]
-        SkillNode5["`
+        SkillNode6["`
             ptlam-code-style-kotlin
             (active/public)
         `"]
-        SkillNode6["`
+        SkillNode7["`
             ptlam-code-style-swift
             (active/public)
         `"]
-        SkillNode7["`
+        SkillNode8["`
             ptlam-code-style-flutter
             (active/public)
         `"]
-        SkillNode8["`
+        SkillNode9["`
             ptlam-code-style-python
             (active/public)
         `"]
-        SkillNode9["`
+        SkillNode10["`
             ptlam-code-style-python-fastapi
             (active/public)
         `"]
-        SkillNode10["`
+        SkillNode11["`
             ptlam-code-style-typescript
             (active/public)
         `"]
-        SkillNode11["`
+        SkillNode12["`
             ptlam-creating-skill
             (active/public)
         `"]
-        SkillNode12["`
+        SkillNode13["`
             ptlam-reviewing-code
             (active/public)
         `"]
-        SkillNode18["`
+        SkillNode19["`
             ptlam-creating-adr
             (active/public)
         `"]
     end
     subgraph SkillCategory1["Productivity"]
-        SkillNode13["`
+        SkillNode14["`
             ptlam-grilling
             (active/public)
         `"]
-        SkillNode14["`
+        SkillNode15["`
             ptlam-creating-prd
             (active/public)
         `"]
-        SkillNode15["`
+        SkillNode16["`
             ptlam-creating-spec
             (active/public)
         `"]
-        SkillNode16["`
+        SkillNode17["`
             ptlam-planning-tickets
             (active/public)
         `"]
-        SkillNode17["`
+        SkillNode18["`
             ptlam-modeling-domain
             (active/public)
         `"]
-        SkillNode19["`
+        SkillNode20["`
             ptlam-creating-atomic-note
             (active/public)
         `"]
-        SkillNode21["`
+        SkillNode22["`
             ptlam-explaining
             (active/public)
         `"]
-        SkillNode22["`
+        SkillNode23["`
             ptlam-mermaiding
             (active/public)
         `"]
-        SkillNode23["`
+        SkillNode24["`
             ptlam-visualization-with-html
             (active/public)
         `"]
@@ -141,88 +146,90 @@ flowchart TB
             ptlam-setup
             (active/public)
         `"]
-        SkillNode20["`
+        SkillNode21["`
             ptlam-scraping-urls
             (active/public)
         `"]
     end
     subgraph SkillCategory3["Health Connector SDK"]
-        SkillNode24["`
+        SkillNode25["`
             ptlam-health-connector-architecture
             (active/public)
         `"]
-        SkillNode25["`
+        SkillNode26["`
             ptlam-health-connector-setup
             (active/public)
         `"]
-        SkillNode26["`
+        SkillNode27["`
             ptlam-health-connector-debug
             (active/public)
         `"]
-        SkillNode27["`
+        SkillNode28["`
             ptlam-health-connector-review
             (active/public)
         `"]
-        SkillNode28["`
+        SkillNode29["`
             ptlam-health-connector-data-type
             (active/public)
         `"]
-        SkillNode29["`
+        SkillNode30["`
             ptlam-health-connector-code-style-dart
             (active/public)
         `"]
-        SkillNode30["`
+        SkillNode31["`
             ptlam-health-connector-code-style-kotlin
             (active/public)
         `"]
-        SkillNode31["`
+        SkillNode32["`
             ptlam-health-connector-code-style-swift
             (active/public)
         `"]
     end
     SkillNode2 --> SkillNode1
-    SkillNode4 --> SkillNode3
-    SkillNode5 --> SkillNode3
-    SkillNode6 --> SkillNode3
+    SkillNode2 --> SkillNode13
+    SkillNode3 --> SkillNode1
+    SkillNode5 --> SkillNode4
+    SkillNode6 --> SkillNode4
     SkillNode7 --> SkillNode4
-    SkillNode8 --> SkillNode3
-    SkillNode9 --> SkillNode8
-    SkillNode10 --> SkillNode3
-    SkillNode11 --> SkillNode22
-    SkillNode12 --> SkillNode3
-    SkillNode13 --> SkillNode17
-    SkillNode13 --> SkillNode18
-    SkillNode14 --> SkillNode21
-    SkillNode14 --> SkillNode22
-    SkillNode15 --> SkillNode21
+    SkillNode8 --> SkillNode5
+    SkillNode9 --> SkillNode4
+    SkillNode10 --> SkillNode9
+    SkillNode11 --> SkillNode4
+    SkillNode12 --> SkillNode23
+    SkillNode13 --> SkillNode4
+    SkillNode14 --> SkillNode18
+    SkillNode14 --> SkillNode19
     SkillNode15 --> SkillNode22
-    SkillNode16 --> SkillNode21
+    SkillNode15 --> SkillNode23
     SkillNode16 --> SkillNode22
+    SkillNode16 --> SkillNode23
     SkillNode17 --> SkillNode22
-    SkillNode18 --> SkillNode21
-    SkillNode18 --> SkillNode22
-    SkillNode23 --> SkillNode21
-    SkillNode26 --> SkillNode24
-    SkillNode27 --> SkillNode12
-    SkillNode27 --> SkillNode24
-    SkillNode27 --> SkillNode29
-    SkillNode27 --> SkillNode30
-    SkillNode27 --> SkillNode31
-    SkillNode28 --> SkillNode24
-    SkillNode28 --> SkillNode29
+    SkillNode17 --> SkillNode23
+    SkillNode18 --> SkillNode23
+    SkillNode19 --> SkillNode22
+    SkillNode19 --> SkillNode23
+    SkillNode24 --> SkillNode22
+    SkillNode27 --> SkillNode25
+    SkillNode28 --> SkillNode13
+    SkillNode28 --> SkillNode25
     SkillNode28 --> SkillNode30
     SkillNode28 --> SkillNode31
-    SkillNode29 --> SkillNode4
+    SkillNode28 --> SkillNode32
+    SkillNode29 --> SkillNode25
+    SkillNode29 --> SkillNode30
+    SkillNode29 --> SkillNode31
+    SkillNode29 --> SkillNode32
     SkillNode30 --> SkillNode5
     SkillNode31 --> SkillNode6
+    SkillNode32 --> SkillNode7
     classDef publicSkill fill:#dbeafe,stroke:#1d4ed8,color:#172554
     classDef internalSkill fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
     classDef deprecatedSkill fill:#fef3c7,stroke:#b45309,color:#78350f
     class SkillNode0 publicSkill
     class SkillNode1 publicSkill
     class SkillNode2 publicSkill
-    class SkillNode3 internalSkill
-    class SkillNode4 publicSkill
+    class SkillNode3 publicSkill
+    class SkillNode4 internalSkill
     class SkillNode5 publicSkill
     class SkillNode6 publicSkill
     class SkillNode7 publicSkill
@@ -250,4 +257,5 @@ flowchart TB
     class SkillNode29 publicSkill
     class SkillNode30 publicSkill
     class SkillNode31 publicSkill
+    class SkillNode32 publicSkill
 ```
