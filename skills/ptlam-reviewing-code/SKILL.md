@@ -45,10 +45,11 @@ Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 | Branch                   | Compare its merge base with the requested base unless the user says otherwise. |
 | Pull request             | Use its exact base, head, commits, description, linked work, and CI state.     |
 
-1. Resolve intent from the user's task, specification, issue, pull-request
-   description, tests, and documentation. Keep expected behavior separate from
-   repository conventions. When no intent source exists, review internal
-   consistency and state that specification conformance remains unverified.
+1. Resolve expected behavior from the user's task or statement, specification,
+   issue, or linked requirement. Treat the pull-request description, tests, and
+   changed documentation as implementation claims, not as authority for expected
+   behavior. When no independent intent exists, use those claims to understand
+   scope but state that specification conformance remains unverified.
 2. Map the affected behavior, callers, boundaries, configuration, generated
    ownership, tests, and release surfaces. Read tests first when they express
    the changed behavior, then read every changed file with enough surrounding
