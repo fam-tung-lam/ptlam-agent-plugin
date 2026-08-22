@@ -1,4 +1,241 @@
-## Available skills
+## Available Skills
+
+Arrows point from a dependent skill to the skill it requires.
+
+```mermaid
+---
+config:
+  htmlLabels: false
+---
+flowchart TB
+    subgraph SkillCategory0["Engineering"]
+        SkillNode1["`
+            ptlam-git
+            (active/public)
+        `"]
+        SkillNode2["`
+            ptlam-implementing
+            (active/public)
+        `"]
+        SkillNode4["`
+            ptlam-prototyping
+            (active/public)
+        `"]
+        SkillNode5["`
+            ptlam-code-style
+            (active/internal)
+        `"]
+        SkillNode6["`
+            ptlam-code-style-dart
+            (active/public)
+        `"]
+        SkillNode7["`
+            ptlam-code-style-kotlin
+            (active/public)
+        `"]
+        SkillNode8["`
+            ptlam-code-style-swift
+            (active/public)
+        `"]
+        SkillNode9["`
+            ptlam-code-style-flutter
+            (active/public)
+        `"]
+        SkillNode10["`
+            ptlam-code-style-python
+            (active/public)
+        `"]
+        SkillNode11["`
+            ptlam-code-style-python-fastapi
+            (active/public)
+        `"]
+        SkillNode12["`
+            ptlam-code-style-typescript
+            (active/public)
+        `"]
+        SkillNode13["`
+            ptlam-code-style-typescript-nestjs
+            (active/public)
+        `"]
+        SkillNode14["`
+            ptlam-creating-skill
+            (active/public)
+        `"]
+        SkillNode15["`
+            ptlam-reviewing-code
+            (active/public)
+        `"]
+        SkillNode21["`
+            ptlam-creating-adr
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory1["Productivity"]
+        SkillNode3["`
+            ptlam-researching
+            (active/public)
+        `"]
+        SkillNode16["`
+            ptlam-grilling
+            (active/public)
+        `"]
+        SkillNode17["`
+            ptlam-creating-prd
+            (active/public)
+        `"]
+        SkillNode18["`
+            ptlam-creating-spec
+            (active/public)
+        `"]
+        SkillNode19["`
+            ptlam-planning-tickets
+            (active/public)
+        `"]
+        SkillNode20["`
+            ptlam-modeling-domain
+            (active/public)
+        `"]
+        SkillNode22["`
+            ptlam-creating-atomic-note
+            (active/public)
+        `"]
+        SkillNode24["`
+            ptlam-explaining
+            (active/public)
+        `"]
+        SkillNode25["`
+            ptlam-mermaiding
+            (active/public)
+        `"]
+        SkillNode26["`
+            ptlam-visualization-with-html
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory2["Utilities"]
+        SkillNode0["`
+            ptlam-setup
+            (active/public)
+        `"]
+        SkillNode23["`
+            ptlam-scraping-urls
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory3["Health Connector SDK"]
+        SkillNode27["`
+            ptlam-health-connector-architecture
+            (active/public)
+        `"]
+        SkillNode28["`
+            ptlam-health-connector-setup
+            (active/public)
+        `"]
+        SkillNode29["`
+            ptlam-health-connector-debug
+            (active/public)
+        `"]
+        SkillNode30["`
+            ptlam-health-connector-review
+            (active/public)
+        `"]
+        SkillNode31["`
+            ptlam-health-connector-data-type
+            (active/public)
+        `"]
+        SkillNode32["`
+            ptlam-health-connector-code-style-dart
+            (active/public)
+        `"]
+        SkillNode33["`
+            ptlam-health-connector-code-style-kotlin
+            (active/public)
+        `"]
+        SkillNode34["`
+            ptlam-health-connector-code-style-swift
+            (active/public)
+        `"]
+    end
+    SkillNode2 --> SkillNode1
+    SkillNode2 --> SkillNode15
+    SkillNode3 --> SkillNode2
+    SkillNode3 --> SkillNode23
+    SkillNode3 --> SkillNode26
+    SkillNode4 --> SkillNode1
+    SkillNode6 --> SkillNode5
+    SkillNode7 --> SkillNode5
+    SkillNode8 --> SkillNode5
+    SkillNode9 --> SkillNode6
+    SkillNode10 --> SkillNode5
+    SkillNode11 --> SkillNode10
+    SkillNode12 --> SkillNode5
+    SkillNode13 --> SkillNode12
+    SkillNode14 --> SkillNode25
+    SkillNode15 --> SkillNode5
+    SkillNode16 --> SkillNode20
+    SkillNode16 --> SkillNode21
+    SkillNode17 --> SkillNode24
+    SkillNode17 --> SkillNode25
+    SkillNode18 --> SkillNode24
+    SkillNode18 --> SkillNode25
+    SkillNode19 --> SkillNode24
+    SkillNode19 --> SkillNode25
+    SkillNode20 --> SkillNode25
+    SkillNode21 --> SkillNode24
+    SkillNode21 --> SkillNode25
+    SkillNode26 --> SkillNode24
+    SkillNode29 --> SkillNode27
+    SkillNode30 --> SkillNode15
+    SkillNode30 --> SkillNode27
+    SkillNode30 --> SkillNode32
+    SkillNode30 --> SkillNode33
+    SkillNode30 --> SkillNode34
+    SkillNode31 --> SkillNode27
+    SkillNode31 --> SkillNode32
+    SkillNode31 --> SkillNode33
+    SkillNode31 --> SkillNode34
+    SkillNode32 --> SkillNode6
+    SkillNode33 --> SkillNode7
+    SkillNode34 --> SkillNode8
+    classDef publicSkill fill:#dbeafe,stroke:#1d4ed8,color:#172554
+    classDef internalSkill fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
+    classDef deprecatedSkill fill:#fef3c7,stroke:#b45309,color:#78350f
+    class SkillNode0 publicSkill
+    class SkillNode1 publicSkill
+    class SkillNode2 publicSkill
+    class SkillNode3 publicSkill
+    class SkillNode4 publicSkill
+    class SkillNode5 internalSkill
+    class SkillNode6 publicSkill
+    class SkillNode7 publicSkill
+    class SkillNode8 publicSkill
+    class SkillNode9 publicSkill
+    class SkillNode10 publicSkill
+    class SkillNode11 publicSkill
+    class SkillNode12 publicSkill
+    class SkillNode13 publicSkill
+    class SkillNode14 publicSkill
+    class SkillNode15 publicSkill
+    class SkillNode16 publicSkill
+    class SkillNode17 publicSkill
+    class SkillNode18 publicSkill
+    class SkillNode19 publicSkill
+    class SkillNode20 publicSkill
+    class SkillNode21 publicSkill
+    class SkillNode22 publicSkill
+    class SkillNode23 publicSkill
+    class SkillNode24 publicSkill
+    class SkillNode25 publicSkill
+    class SkillNode26 publicSkill
+    class SkillNode27 publicSkill
+    class SkillNode28 publicSkill
+    class SkillNode29 publicSkill
+    class SkillNode30 publicSkill
+    class SkillNode31 publicSkill
+    class SkillNode32 publicSkill
+    class SkillNode33 publicSkill
+    class SkillNode34 publicSkill
+```
 
 | Skill                                      | Category             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Visibility | Status | Replacement |
 | ------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ | ----------- |
@@ -14,6 +251,7 @@
 | `ptlam-code-style-python`                  | Engineering          | Write, review, and fix Python library and application code against conventions for language mechanics, project structure, tooling, and tests. Use when starting or standardizing a Python project, changing Python code or its toolchain, reviewing Python-specific design, or resolving code-quality and test failures. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for Python framework specializations. Do not use for non-Python code.                                                                                                                                                                                                    | public     | Active | —           |
 | `ptlam-code-style-python-fastapi`          | Engineering          | Write, review, and fix FastAPI application code against conventions for service and feature-package structure, application lifespan, routes, request and response contracts, dependency injection, use cases, feature boundaries, model registration, concurrency, errors, observability, and API tests. Use when starting or reorganizing a FastAPI service or feature, adding or changing endpoints, use cases, dependencies, exception handlers, middleware, schemas, SQLAlchemy registration, background handoffs, or tests, or fixing OpenAPI and runtime failures. Apply ptlam-code-style-python first for the Python mechanics. Do not use for Python services that do not use FastAPI. | public     | Active | —           |
 | `ptlam-code-style-typescript`              | Engineering          | Write, review, and fix TypeScript library and application code against conventions for language mechanics, module boundaries, tooling, and tests. Use when starting or standardizing a TypeScript project, changing TypeScript code or its toolchain, reviewing TypeScript-specific design, or resolving type-check, lint, or Vitest failures. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for TypeScript framework specializations. Do not use for non-TypeScript code.                                                                                                                                                                      | public     | Active | —           |
+| `ptlam-code-style-typescript-nestjs`       | Engineering          | Write, review, and fix NestJS TypeScript application code against conventions for modules, dependency injection, application lifecycle, transport contracts, execution pipelines, persistence handoffs, observability, health, and Nest testing. Use when starting or reorganizing a NestJS application or feature, changing controllers, providers, global enhancers, DTO pipes, adapters, transports, transactions, shutdown, or tests, or resolving Nest module and runtime failures. Apply ptlam-code-style-typescript first for TypeScript mechanics. Do not use for TypeScript applications that do not use NestJS.                                                                      | public     | Active | —           |
 | `ptlam-creating-skill`                     | Engineering          | Create, review, or refactor one agent skill so that a human maintainer can read it once and change it later. Use when turning a workflow or reference set into a new skill, revising an existing SKILL.md, splitting a skill that grew too broad, or auditing a package without editing it. Use as the foundation for skills that specialize skill authoring.                                                                                                                                                                                                                                                                                                                                  | public     | Active | —           |
 | `ptlam-reviewing-code`                     | Engineering          | Review one bounded code changeset and return an evidence-backed, prioritized findings report and readiness verdict. Use when reviewing a pull request, branch, commit range, or explicit revision comparison. Use when reviewing staged, unstaged, or untracked working-tree changes. Use when judging an implementation against a task, issue, or specification. Compose this skill when a stack or project review needs the general review standard.                                                                                                                                                                                                                                         | public     | Active | —           |
 | `ptlam-grilling`                           | Productivity         | Stress-test a plan, decision, or idea through a persistent interview that resolves one user-owned decision at a time, records confirmed understanding for later continuation, sharpens contested business terms, and captures decisions that are expensive to reverse.                                                                                                                                                                                                                                                                                                                                                                                                                         | public     | Active | —           |
@@ -35,122 +273,3 @@
 | `ptlam-health-connector-code-style-dart`   | Health Connector SDK | Write, review, and fix Dart source and tests in the Health Connector SDK against its analyzer rules, formatter contract, imports, visibility, documentation shape, structured logging syntax, and package-specific test layout. Use when editing Dart code, changing the shared lint package, or fixing a Dart format, analysis, documentation, or test-convention failure. Apply ptlam-code-style-dart first. Do not use for workspace architecture, public API design, Pigeon ownership, platform support, or an end-to-end health data type change.                                                                                                                                         | public     | Active | —           |
 | `ptlam-health-connector-code-style-kotlin` | Health Connector SDK | Write, review, and fix Kotlin source and tests in Health Connector's Android package against its visibility, file and declaration shape, import order, structured logging syntax, ktlint and detekt configuration, and JUnit 5, MockK, Kotest, and coroutine-test conventions. Use when editing Kotlin code or fixing a Kotlin formatting, analysis, or test-convention failure. Apply ptlam-code-style-kotlin first. Do not use for Android architecture, Health Connect behavior, Pigeon ownership, or end-to-end handler registration.                                                                                                                                                      | public     | Active | —           |
 | `ptlam-health-connector-code-style-swift`  | Health Connector SDK | Write, review, and fix Swift source in Health Connector's iOS package against its access, declaration and extension shape, structured logging syntax, SwiftLint baseline, and SwiftFormat configuration. Use when editing Swift code or fixing a Swift analysis, formatting, or native logging convention failure. Apply ptlam-code-style-swift first. Do not use for iOS architecture, HealthKit behavior, Pigeon threading, failure translation, or end-to-end handler registration.                                                                                                                                                                                                         | public     | Active | —           |
-
-## Skill dependency graph
-
-Arrows point from a dependent skill to the skill it requires.
-
-```mermaid
-flowchart LR
-  skill_0["ptlam-setup [public root]"]
-  skill_1["ptlam-git [public root]"]
-  skill_2["ptlam-implementing [public root]"]
-  skill_3["ptlam-researching [public root]"]
-  skill_4["ptlam-prototyping [public root]"]
-  skill_5["ptlam-code-style [internal dependency]"]
-  skill_6["ptlam-code-style-dart [public root]"]
-  skill_7["ptlam-code-style-kotlin [public root]"]
-  skill_8["ptlam-code-style-swift [public root]"]
-  skill_9["ptlam-code-style-flutter [public root]"]
-  skill_10["ptlam-code-style-python [public root]"]
-  skill_11["ptlam-code-style-python-fastapi [public root]"]
-  skill_12["ptlam-code-style-typescript [public root]"]
-  skill_13["ptlam-creating-skill [public root]"]
-  skill_14["ptlam-reviewing-code [public root]"]
-  skill_15["ptlam-grilling [public root]"]
-  skill_16["ptlam-creating-prd [public root]"]
-  skill_17["ptlam-creating-spec [public root]"]
-  skill_18["ptlam-planning-tickets [public root]"]
-  skill_19["ptlam-modeling-domain [public root]"]
-  skill_20["ptlam-creating-adr [public root]"]
-  skill_21["ptlam-creating-atomic-note [public root]"]
-  skill_22["ptlam-scraping-urls [public root]"]
-  skill_23["ptlam-explaining [public root]"]
-  skill_24["ptlam-mermaiding [public root]"]
-  skill_25["ptlam-visualization-with-html [public root]"]
-  skill_26["ptlam-health-connector-architecture [public root]"]
-  skill_27["ptlam-health-connector-setup [public root]"]
-  skill_28["ptlam-health-connector-debug [public root]"]
-  skill_29["ptlam-health-connector-review [public root]"]
-  skill_30["ptlam-health-connector-data-type [public root]"]
-  skill_31["ptlam-health-connector-code-style-dart [public root]"]
-  skill_32["ptlam-health-connector-code-style-kotlin [public root]"]
-  skill_33["ptlam-health-connector-code-style-swift [public root]"]
-  skill_2 --> skill_1
-  skill_2 --> skill_14
-  skill_3 --> skill_2
-  skill_3 --> skill_22
-  skill_3 --> skill_25
-  skill_4 --> skill_1
-  skill_6 --> skill_5
-  skill_7 --> skill_5
-  skill_8 --> skill_5
-  skill_9 --> skill_6
-  skill_10 --> skill_5
-  skill_11 --> skill_10
-  skill_12 --> skill_5
-  skill_13 --> skill_24
-  skill_14 --> skill_5
-  skill_15 --> skill_19
-  skill_15 --> skill_20
-  skill_16 --> skill_23
-  skill_16 --> skill_24
-  skill_17 --> skill_23
-  skill_17 --> skill_24
-  skill_18 --> skill_23
-  skill_18 --> skill_24
-  skill_19 --> skill_24
-  skill_20 --> skill_23
-  skill_20 --> skill_24
-  skill_25 --> skill_23
-  skill_28 --> skill_26
-  skill_29 --> skill_14
-  skill_29 --> skill_26
-  skill_29 --> skill_31
-  skill_29 --> skill_32
-  skill_29 --> skill_33
-  skill_30 --> skill_26
-  skill_30 --> skill_31
-  skill_30 --> skill_32
-  skill_30 --> skill_33
-  skill_31 --> skill_6
-  skill_32 --> skill_7
-  skill_33 --> skill_8
-  classDef publicRoot fill:#dbeafe,stroke:#1d4ed8,color:#172554
-  classDef internalDependency fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
-  classDef deprecated fill:#fef3c7,stroke:#b45309,color:#78350f
-  class skill_0 publicRoot
-  class skill_1 publicRoot
-  class skill_2 publicRoot
-  class skill_3 publicRoot
-  class skill_4 publicRoot
-  class skill_5 internalDependency
-  class skill_6 publicRoot
-  class skill_7 publicRoot
-  class skill_8 publicRoot
-  class skill_9 publicRoot
-  class skill_10 publicRoot
-  class skill_11 publicRoot
-  class skill_12 publicRoot
-  class skill_13 publicRoot
-  class skill_14 publicRoot
-  class skill_15 publicRoot
-  class skill_16 publicRoot
-  class skill_17 publicRoot
-  class skill_18 publicRoot
-  class skill_19 publicRoot
-  class skill_20 publicRoot
-  class skill_21 publicRoot
-  class skill_22 publicRoot
-  class skill_23 publicRoot
-  class skill_24 publicRoot
-  class skill_25 publicRoot
-  class skill_26 publicRoot
-  class skill_27 publicRoot
-  class skill_28 publicRoot
-  class skill_29 publicRoot
-  class skill_30 publicRoot
-  class skill_31 publicRoot
-  class skill_32 publicRoot
-  class skill_33 publicRoot
-```

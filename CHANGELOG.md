@@ -10,6 +10,9 @@ and this project adheres to
 
 ### Added
 
+- Added a NestJS TypeScript code-style specialization for modules, dependency
+  injection, application lifecycle, transport contracts, execution pipelines,
+  persistence handoffs, operations, and Nest testing.
 - Added a research skill that traces one bounded question to high-trust primary
   sources and delivers an independently reviewed portable HTML evidence report.
 
