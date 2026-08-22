@@ -17,13 +17,132 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  release:
-    name: Create GitHub Release
+  detect:
+    name: Detect GitHub Release
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    outputs:
+      should_release: ${{ steps.release.outputs.should_release }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - name: Check out the validated commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: ./.github/actions/set-up-node-runtime
+      - name: Read and validate release metadata
+        id: metadata
+        run: >-
+          node --experimental-strip-types
+          .github/scripts/validate-release-metadata.ts
+      - name: Prepare changelog release notes
+        env:
+          RELEASE_NOTES_PATH: ${{ runner.temp }}/release-notes.md
+          RELEASE_VERSION: ${{ steps.metadata.outputs.version }}
+        run: >-
+          node --experimental-strip-types .github/scripts/release-notes.ts
+      - name: Detect existing GitHub Release
+        id: release
+        env:
+          PRERELEASE: ${{ steps.metadata.outputs.prerelease }}
+          RELEASE_NOTES_PATH: ${{ runner.temp }}/release-notes.md
+          RELEASE_TITLE: ${{ steps.metadata.outputs.title }}
+          RELEASE_VERSION: ${{ steps.metadata.outputs.version }}
+          TAG_NAME: ${{ steps.metadata.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag_exists=false
+          release_commit="${RELEASE_SHA}"
+          if tag_ref="$(
+            gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG_NAME}" \
+              2>/dev/null
+          )"; then
+            tag_exists=true
+            tag_type="$(jq -r .object.type <<<"${tag_ref}")"
+            tag_sha="$(
+              gh api "repos/${GITHUB_REPOSITORY}/commits/${TAG_NAME}" --jq .sha
+            )"
+            release_commit="${tag_sha}"
+          fi
+
+          if release_json="$(
+            gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG_NAME}" \
+              2>/dev/null
+          )"; then
+            existing_title="$(jq -r .name <<<"${release_json}")"
+            existing_draft="$(jq -r .draft <<<"${release_json}")"
+            existing_prerelease="$(jq -r .prerelease <<<"${release_json}")"
+            existing_body="$(jq -r '.body // ""' <<<"${release_json}")"
+            expected_body="$(<"${RELEASE_NOTES_PATH}")"
+            if [[ "${existing_title}" != "${RELEASE_TITLE}" || \
+              "${existing_draft}" != "false" || \
+              "${existing_prerelease}" != "${PRERELEASE}" ]]; then
+              echo "Existing ${TAG_NAME} release metadata is incompatible." >&2
+              exit 1
+            fi
+            if [[ "${tag_exists}" != "true" ]]; then
+              echo "Existing release ${TAG_NAME} has no matching Git tag." >&2
+              exit 1
+            fi
+            if [[ "${tag_type}" != "tag" ]]; then
+              echo "Existing ${TAG_NAME} is not an annotated Git tag." >&2
+              exit 1
+            fi
+            if [[ "${tag_sha}" == "${RELEASE_SHA}" ]]; then
+              if [[ "${existing_body}" != "${expected_body}" ]]; then
+                echo \
+                  "Existing ${TAG_NAME} notes differ from CHANGELOG.md." \
+                  >&2
+                exit 1
+              fi
+              release_state=verified
+            else
+              release_state=unchanged
+            fi
+            should_release=false
+          else
+            if [[ "${tag_exists}" == "true" ]]; then
+              if [[ "${tag_type}" != "tag" ]]; then
+                echo "Existing ${TAG_NAME} is not an annotated Git tag." >&2
+                exit 1
+              fi
+              if [[ "${tag_sha}" != "${RELEASE_SHA}" ]]; then
+                echo \
+                  "${TAG_NAME} points to ${tag_sha}, not ${RELEASE_SHA}." \
+                  >&2
+                exit 1
+              fi
+            fi
+            release_state=pending
+            should_release=true
+          fi
+
+          echo "should_release=${should_release}" >>"${GITHUB_OUTPUT}"
+          {
+            echo "## ${RELEASE_TITLE}"
+            echo
+            echo "- Version: \`${RELEASE_VERSION}\`"
+            echo "- Tag: \`${TAG_NAME}\`"
+            echo "- Commit: \`${release_commit}\`"
+            echo "- State: ${release_state}"
+          } >>"${GITHUB_STEP_SUMMARY}"
+
+  release:
+    name: Create GitHub Release
+    needs: detect
+    if: ${{ needs.detect.outputs.should_release == 'true' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: github-release
     permissions:
       contents: write
     env:

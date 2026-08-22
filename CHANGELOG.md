@@ -13,6 +13,11 @@ and this project adheres to
 - Added a research skill that traces one bounded question to high-trust primary
   sources and delivers an independently reviewed portable HTML evidence report.
 
+### Changed
+
+- GitHub Release creation now waits for approval through the protected
+  `github-release` environment after CI and release detection pass.
+
 ## [0.2.0] - 2026-08-22
 
 ### Added
