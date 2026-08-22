@@ -1,40 +1,41 @@
 ---
 name: ptlam-implementing
 description:
-  Deliver one bounded software change through task-specific worker agents and
-  independent reviewer agents in a dedicated Git worktree. Use when asked to
-  implement from the current prompt or confirmed session context. Use when given
-  a specification, ticket file, issue, or equivalent task link. Do not use for a
-  read-only explanation, plan, diagnosis, or review.
+  Deliver one bounded software change through task-specific worker agents in
+  isolated Git worktrees and independent reviewer agents on an integration
+  branch. Use when asked to implement from the current prompt or confirmed
+  session context. Use when given a specification, ticket file, issue, or
+  equivalent task link. Do not use for a read-only explanation, plan, diagnosis,
+  or review.
 ---
 
 # PTLam Implementing
 
-Deliver one bounded software change through task-specific worker agents and
-independent reviewer agents in a dedicated Git worktree.
+Deliver one bounded software change through isolated worker worktrees and an
+independently reviewed integration branch.
 
 Use this skill only when the host can launch subagents and the request
-authorizes implementation. Invoking it authorizes scoped local worktree and
-implementation writes. A commit, push, pull request, issue update, merge, or
-cleanup still needs explicit authority.
+authorizes implementation. Invocation authorizes scoped local worktrees,
+branches, writes, commits, and integration operations. Pushes, pull requests,
+issue updates, shared-branch merges, and cleanup still need explicit authority.
 
 ## Required skills
 
 ### `ptlam-git`
 
-**Reason:** Isolates the implementation changeset and protects unrelated work while worker and reviewer agents share one task worktree.
+**Reason:** Isolates the integration changeset and each editing worker while protecting unrelated work across concurrent worktrees.
 
-**Instructions:** Read and apply ptlam-git before any worker edits the target
-repository.
+**Instructions:** Read and apply ptlam-git before the main agent creates the integration
+worktree or any worker branch and worktree.
 Let it own repository, base, branch, and worktree resolution;
 unrelated-state protection; staging and commit mechanics; and final
 Git verification.
 Keep this skill's ownership of the task contract, team sizing, role
 prompts, worker and reviewer coordination, integration, finding
 disposition, repair loop, and readiness decision.
-Local implementation does not authorize a commit, push, pull request,
-issue update, merge, or cleanup; require explicit authority for those
-effects.
+Invoking this skill authorizes scoped local worktrees, branches,
+commits, and integration operations. Require explicit authority for a
+push, pull request, issue update, shared-branch merge, or cleanup.
 
 Read [ptlam-git](skills/ptlam-git/SKILL.md).
 
@@ -61,10 +62,11 @@ Read [ptlam-reviewing-code](skills/ptlam-reviewing-code/SKILL.md).
 ```mermaid
 flowchart LR
     ResolveTask["Resolve the task source"] --> FixContract["Fix one task contract"]
-    FixContract --> IsolateWorktree["Create a dedicated worktree"]
-    IsolateWorktree --> SizeTeam["Size roles from work and risk"]
-    SizeTeam --> RunWorkers["Run worker agents"]
-    RunWorkers --> IntegrateChange["Integrate the combined change"]
+    FixContract --> CreateIntegrationWorktree["Create the integration worktree"]
+    CreateIntegrationWorktree --> SizeTeam["Size roles from work and risk"]
+    SizeTeam --> CreateWorkerWorktrees["Create worker worktrees"]
+    CreateWorkerWorktrees --> RunWorkers["Run worker agents"]
+    RunWorkers --> IntegrateChange["Integrate worker branches"]
     IntegrateChange --> RunReviewers["Run independent reviewer agents"]
     RunReviewers --> BlockingFinding{"Accepted blocking finding?"}
     BlockingFinding -->|"Yes"| DelegateRepair(["Delegate a repair"])
@@ -101,9 +103,15 @@ without recovering hidden chat context.
 
 ## 2. Isolate the change and size the team
 
-Apply the loaded Git workflow to create a dedicated worktree from the intended
-base. Verify its absolute path, branch, base revision, and clean starting status
-before delegating. Every agent command and edit must target that worktree.
+Apply the loaded Git workflow to create and verify this topology before
+delegating.
+
+| Agent              | Execution surface                                                | Starting point or rule                                      |
+| ------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------- |
+| Main               | One integration branch and worktree                              | Task base; integrate worker commits in dependency order     |
+| Independent worker | Its own branch and linked worktree                               | Same pinned integration commit                              |
+| Dependent worker   | Its own branch and linked worktree                               | Exact accepted upstream commit; later commits do not follow |
+| Reviewer           | Integrated changeset, read-only; no separate worktree by default | Current accepted integration commit                         |
 
 Size the smallest useful team from independent workstreams, dependency edges,
 domain risks, and required verification.
@@ -115,32 +123,31 @@ domain risks, and required verification.
 | Large      | Four or more workstreams, or high cross-boundary risk | One per workstream, at most five  | Three     |
 
 Keep overlapping files and integrated design decisions with one worker. Run
-dependent work sequentially and independent work in parallel within the host's
-concurrency limit.
+independent workers in parallel within the host's concurrency limit. Record each
+worker's base commit and dependency edges.
 
 Name each role after its responsibility. Give it an experience lens drawn from
 the task's stack or risk, not an invented biography. Assign exact file or
 contract ownership and the applicable project and stack skills.
 
-Complete this step when every obligation has one owner, reviewer coverage
-matches the risk, and no two concurrent workers can overwrite each other's work.
+Complete this step when every obligation has one owner and every worktree,
+branch, base commit, dependency edge, and reviewer lens is verified.
 
 ## 3. Delegate and integrate the implementation
 
 Give every worker a self-contained prompt with the task contract, exact source
-identities, absolute worktree path, owned files or behavior, relevant experience
-lens, constraints, required checks, and report shape. Require each worker to
-read applicable repository instructions before editing.
+identities, absolute worker worktree path, branch and base commit, owned files
+or behavior, experience lens, constraints, required checks, and report shape.
+Require each worker to read applicable repository instructions before editing.
 
 Workers edit only their assigned surface and run the strongest focused checks
-available. They report changed files, behavior delivered, checks and results,
-assumptions, and blockers. They do not publish or change Git state unless the
-main agent delegates an explicitly authorized Git operation.
+available. They commit only to their worker branch and report the commit range,
+changed files, delivered behavior, check results, assumptions, and blockers.
+They do not publish or edit the integration worktree.
 
-After each worker batch, inspect the worktree and complete diff. Reconcile
-contracts and shared boundaries, remove out-of-scope changes, and run
-integration checks that no individual worker could prove. Delegate a bounded
-follow-up when evidence is missing; do not fill a specialist gap by guessing.
+After each worker batch, inspect every reported commit range. Integrate accepted
+worker commits into the integration branch in dependency order. Reconcile shared
+boundaries, remove out-of-scope changes, and run checks no worker could prove.
 
 Complete this step when the combined changeset is coherent, scoped to the task
 contract, and ready for an independent review.
@@ -148,13 +155,14 @@ contract, and ready for an independent review.
 ## 4. Review, repair, and prove readiness
 
 Choose reviewer agents who did not author the surface they inspect. Give each
-the task contract, exact base and worktree path, verification evidence, and a
-distinct lens from the loaded review contract.
+the task contract, task base, integration branch and worktree, verification
+evidence, and a distinct lens from the loaded review contract.
 
 The main agent checks every finding against the task sources and diff. Keep a
 short disposition for accepted, rejected, and non-blocking findings. Delegate
-each accepted blocking correction to the narrowest qualified worker, integrate
-it, rerun affected checks, and send the revised diff to a non-author reviewer.
+each accepted blocking correction to a worker branch and worktree from the
+latest accepted integration commit. Integrate it, rerun affected checks, and
+send the revised integration branch to a non-author reviewer.
 
 Do not declare readiness while a blocking finding or required proof remains.
 Once review is clear, run the repository's required checks against the combined
