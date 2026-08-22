@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-22
+
 ### Added
 
 - Added an implementation-orchestration skill that turns prompts, session
@@ -28,6 +30,8 @@ and this project adheres to
 
 ### Changed
 
+- Focused the contribution guide on the information plugin users need to report
+  problems, propose skills, and submit changes.
 - Expanded the Git skill with an evidence-led workflow for resolving and
   completing in-progress merge and rebase conflicts.
 - Updated the plugin compiler to 0.2.2 and regenerated its owned outputs.
@@ -71,7 +75,9 @@ and this project adheres to
   compatible hosts.
 
 [Unreleased]:
-  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.1.0...HEAD
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.2.0...HEAD
+[0.2.0]:
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.1.0...v0.2.0
 [0.1.0]:
   https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.1.0-alpha.1...v0.1.0
 [0.1.0-alpha.1]:
