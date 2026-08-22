@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added a research skill that traces one bounded question to high-trust primary
+  sources and delivers an independently reviewed portable HTML evidence report.
+
 ### Changed
 
 - GitHub Release creation now waits for approval through the protected
