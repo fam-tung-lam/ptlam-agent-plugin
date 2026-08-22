@@ -7,9 +7,11 @@ graph.
 
 Use constructor injection for required collaborators. Mark injected references
 `private readonly` when the class owns no public exposure or reassignment.
-Inject concrete local providers by class. Use an exported symbol or established
-token for an interface, external adapter, configured value, or replaceable
-implementation; keep the token in a dependency-light file.
+Inject concrete local providers by class. When constructor metadata supplies
+that class token, import the class as a runtime value; `import type` erases the
+token Nest needs to resolve. For an interface or another type-only contract, use
+`@Inject(stableToken)` and register that exact token. Keep exported symbols and
+other custom tokens in a dependency-light file.
 
 Register one of `useClass`, `useValue`, `useFactory`, or `useExisting` according
 to who owns construction. Give an async factory precise dependencies and let

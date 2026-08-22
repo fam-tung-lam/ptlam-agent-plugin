@@ -11,11 +11,14 @@ the HTTP adapter explicitly when the project does not use the default. Keep
 module imports free of connections, listeners, jobs, and remote registration.
 
 Load environment and file configuration once through the application's
-configuration module. Attach the validator already selected for external input
-to the configuration module's synchronous validation hook. Return a parsed,
-typed configuration object and fail bootstrap before opening listeners when a
-required setting is invalid. Feature providers consume typed configuration; they
-do not read `process.env` directly.
+configuration module, but validate them at their distinct Nest seams.
+`ConfigModule.forRoot({ validate })` receives resolved environment input; parse
+it there and return the typed environment configuration. A factory registered
+through `load` owns custom, namespaced, JSON, or YAML configuration. Nest does
+not pass that factory's result through `validate`, so the factory must parse and
+transform its own input before returning it. Fail bootstrap before opening
+listeners when either contract is invalid. Feature providers consume typed
+configuration; they do not read `process.env` directly.
 
 Keep adapter initialization in this composition path. Adapter plugins,
 middleware syntax, raw-body access, trust-proxy behavior, and response APIs are
@@ -66,14 +69,11 @@ operating system or process manager delivers the same signals.
 
 Await `app.listen()` or the selected microservice start operation. A hybrid
 application starts all connected microservices before or alongside its HTTP
-listener according to one explicit readiness policy. Make inheritance of the
-main application's global configuration deliberate for each connected
-microservice.
-
-After an application starts, liveness proves that its process can answer.
-Readiness proves only the critical dependencies required to accept traffic. Keep
-version and build information separate from either health decision.
+listener according to one explicit startup policy. Make inheritance of the main
+application's global configuration deliberate for each connected microservice.
+When draining begins, notify the operations module before application
+connections close.
 
 Finish when configuration fails closed, application construction is repeatable
 in tests, startup opens each listener once, shutdown drains and closes every
-owned resource, and health state follows the real lifecycle.
+owned resource, and each configured transport follows the same lifecycle.

@@ -53,7 +53,9 @@ Use a dynamic module for reusable infrastructure that needs consumer-supplied
 configuration. Prefer `ConfigurableModuleBuilder` over hand-maintained
 `register` and `registerAsync` variants. When one configured dynamic-module
 instance must be shared, create its registration object once and reuse that same
-reference; current Nest module identity follows object identity.
+reference. Nest 11 and later distinguish dynamic-module definitions by object
+reference. For an earlier supported major, inspect and verify its installed
+identity behavior; reusing one registration object remains safe.
 
 ## Keep dependency direction acyclic
 

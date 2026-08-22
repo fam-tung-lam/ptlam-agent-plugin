@@ -44,7 +44,8 @@ Read [ptlam-code-style-typescript](skills/ptlam-code-style-typescript/SKILL.md).
 2. Read `package.json`, the lockfile, `nest-cli.json`, the covering TypeScript
    configuration, the bootstrap file, the root module, test configuration, and
    CI. Record the installed `@nestjs/*` versions, runtime adapter, transports,
-   validation integration, API-description integration, and real commands.
+   validation integration, API-description integration, compiler decorator and
+   metadata transform, reflection bootstrap, and real commands.
 3. Map the module import graph. Trace one inbound operation through middleware,
    guards, interceptors, pipes, the controller or handler, application
    providers, persistence, and exception translation.
@@ -56,9 +57,12 @@ Read [ptlam-code-style-typescript](skills/ptlam-code-style-typescript/SKILL.md).
    code.
 
 For a new application, select the current stable Nest major, keep official Nest
-packages on compatible majors, and use a Node runtime that satisfies their
-declared engine. Preserve an existing supported major until migration is in
-scope.
+packages on compatible majors, and pin the latest Node LTS that satisfies their
+declared engine. With the official TypeScript legacy decorator pipeline, enable
+`experimentalDecorators` and `emitDecoratorMetadata` in the configuration that
+builds and runs Nest code. Install and load `reflect-metadata` before bootstrap,
+or verify the selected compiler and runtime's equivalent integration. Preserve
+an existing supported runtime and Nest major until migration is in scope.
 
 ## Pick a reference
 

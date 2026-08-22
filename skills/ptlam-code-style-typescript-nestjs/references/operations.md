@@ -33,20 +33,17 @@ transport result only after the durable handoff succeeds.
 
 ## Make the application operable
 
-Route Nest's logger through the project's structured logging owner. Configure
-the application logger once, buffer startup logs until it is attached, and
-preserve framework context as a structured field. A provider does not configure
-destinations, global levels, or redaction.
+When the configured system logger is constructed by Nest, create the application
+with buffered logs, retrieve the logger from the container, and attach it with
+`useLogger` before accepting traffic. Preserve Nest's logger context when the
+bridge converts framework records, and verify that bootstrap, application,
+microservice, and shutdown logs all use the bridge.
 
-Create correlation at the first inbound boundary and carry it through the
-selected context mechanism. Record transport pattern or canonical route, status,
-duration, and stable operation identifiers. Keep raw identifiers, unbounded
-exception messages, query strings, payloads, and tenant-controlled values out of
-metric labels.
-
-Capture an unexpected failure once at the outer boundary. Preserve its error
-object and correlation context for diagnostics. Expected transport or domain
-failures may be counted without duplicate error logs at each layer.
+Register request and message metrics through a Nest interceptor or the selected
+Nest integration. Derive the canonical route template, message pattern, status,
+and duration from the `ExecutionContext` and adapter instead of raw request
+values. Connect the selected correlation carrier to the Nest logger and metric
+bridge at the same boundary.
 
 Expose liveness, readiness, and build information through one operations module.
 Liveness must not depend on a remote system. Readiness checks only dependencies
@@ -55,5 +52,5 @@ application drains. Keep detailed dependency failures out of public health
 responses when they reveal infrastructure.
 
 Finish when each operation owns one transaction, durable effects cannot be
-silently lost, logs and metrics retain correlation without sensitive data, and
-health state reflects startup, readiness, and shutdown.
+silently lost, the Nest logger and metric bridges cover every configured
+transport, and the operations module reports startup, readiness, and shutdown.

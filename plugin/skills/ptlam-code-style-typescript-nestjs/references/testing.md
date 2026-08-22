@@ -45,8 +45,10 @@ headers, body, validation failures, authentication, authorization, mapped domain
 failure, and relevant persisted or queued effect.
 
 For GraphQL, assert the served schema operation and response envelope. For a
-gateway, test connection and event acknowledgement through the configured
-adapter. For a microservice, test the pattern, serialized payload, response or
+gateway, test connection and the configured reply semantics: callback
+acknowledgement when the adapter supports it, an emitted `WsResponse` or
+response event for the native WebSocket adapter, or no reply for a one-way
+event. For a microservice, test the pattern, serialized payload, response or
 event behavior, and broker-specific acknowledgement or retry seam. A hybrid
 application test proves whether main-app global enhancers reach the connected
 transport.
