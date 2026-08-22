@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- GitHub Release creation now waits for approval through the protected
+  `github-release` environment after CI and release detection pass.
+
 ## [0.2.0] - 2026-08-22
 
 ### Added

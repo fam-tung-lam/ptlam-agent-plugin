@@ -10,14 +10,29 @@ flowchart TB
     Review --> Merge[Merge to main]
     Merge --> CI[CI]
     CI ---->|fails| Stop[Stop without release]
-    CI -->|passes| Detect{Version tag exists?}
+    CI -->|passes| Detect{Matching release exists?}
     Detect --->|yes| Verify[Verify existing release]
-    Detect -->|no| Release[Create tag and GitHub Release]
+    Detect -->|no| Approval[Approve github-release deployment]
+    Approval --> Release[Create tag and GitHub Release]
     Release --> Archives[GitHub provides ZIP and tar.gz]
 ```
 
 The version is the release signal. Normal feature, fix, and documentation work
 must leave it unchanged.
+
+## Configure manual approval
+
+The release job targets the `github-release` GitHub environment. Before relying
+on that gate, a repository administrator must create the environment under
+[Settings > Environments](https://github.com/fam-tung-lam/ptlam-agent-plugin/settings/environments),
+enable **Required reviewers**, and add at least one release approver. A workflow
+reference to an environment with no required reviewer does not pause for manual
+approval.
+
+Leave **Prevent self-review** disabled when the person who merges a release may
+also approve it. Enable it only when another required reviewer is available. If
+approval must never be bypassed, disable administrator bypass for the
+environment as well.
 
 ## Prepare a release
 
@@ -52,7 +67,10 @@ paired with stale comparison links.
 
 ## Automated release result
 
-After the merge commit passes CI, `.github/workflows/cd.yml`:
+After the merge commit passes CI, `.github/workflows/cd.yml` checks whether the
+version already has a matching release. If it does not, GitHub pauses the
+`Create GitHub Release` job for approval on the protected `github-release`
+environment. After approval, CD:
 
 - creates the annotated `v<version>` tag at the exact validated commit;
 - creates a release titled `PTLam Agent Plugin v<version>`;
