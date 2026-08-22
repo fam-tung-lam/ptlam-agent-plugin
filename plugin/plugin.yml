@@ -110,6 +110,60 @@ skills:
           delegation, and final completion.
           Reviewer agents stay read-only. Repair agents act only after the main
           agent accepts a finding.
+  - id: ptlam-researching
+    description:
+      Investigate one bounded question against high-trust primary sources and
+      deliver a portable HTML evidence report whose material claims, conflicts,
+      uncertainty, and gaps remain traceable. Runs only when explicitly
+      requested.
+    disable_model_invocation: true
+    category_id: productivity
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-implementing
+        reason:
+          Processes the research run as one isolated, independently reviewed
+          report implementation.
+        instructions: |-
+          Read and apply ptlam-implementing before research begins.
+          Treat the bounded question and portable HTML report as its task
+          contract and changeset.
+          Let it own task-contract capture; repository, branch, and worktree
+          isolation; team sizing; worker and reviewer coordination;
+          integration; finding disposition; repair; and readiness.
+          Keep this skill's ownership of the research question, source
+          inclusion standard, evidence ledger, claim reconciliation, findings,
+          confidence, limits, and research completion.
+          Preserve ptlam-implementing's authority limits for pushes, pull
+          requests, issue updates, shared-branch merges, and cleanup.
+      - skill_id: ptlam-scraping-urls
+        reason:
+          Supplies accounted local full-text retrieval when the selected
+          evidence requires batch scraping or a durable local cache.
+        instructions: |-
+          Apply ptlam-scraping-urls only when batch or local full-text retrieval
+          is needed.
+          Let it own URL collection, scraping, cache configuration, bounded
+          concurrency and fallback, output files, and result accounting.
+          Keep this skill's ownership of source selection, trust
+          classification, evidence use, and research conclusions.
+      - skill_id: ptlam-visualization-with-html
+        reason:
+          Turns the verified findings into the portable HTML evidence report and
+          proves its accessibility, portability, and rendered quality.
+        instructions: |-
+          Read and apply ptlam-visualization-with-html after the research
+          findings and evidence ledger are verified.
+          Pass the research question, audience, conclusion status, findings,
+          evidence ledger, conflicts, assumptions, gaps, confidence, and scope
+          limits forward unchanged.
+          Let that skill and its dependencies own explanatory structure, HTML
+          composition, native artifact implementation, accessibility and design
+          contracts, static validation, rendered inspection, and delivery.
+          Keep this skill's ownership of source inclusion, claim-to-source
+          reconciliation, findings, confidence, limits, and research
+          completion.
   - id: ptlam-prototyping
     description:
       Build one throwaway prototype to answer a design question. Use when a user
