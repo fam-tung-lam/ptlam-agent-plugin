@@ -34,7 +34,7 @@ and this project adheres to
   problems, propose skills, and submit changes.
 - Expanded the Git skill with an evidence-led workflow for resolving and
   completing in-progress merge and rebase conflicts.
-- Updated the plugin compiler to 0.2.2 and regenerated its owned outputs.
+- Updated the plugin compiler to 0.2.3 and regenerated its owned outputs.
 - Renamed the Health Connector language code-style skills so the shared project
   prefix keeps the complete skill family adjacent in skill listings.
 - Expanded the setup skill contract with clearer communication, project
