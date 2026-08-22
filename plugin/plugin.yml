@@ -112,11 +112,10 @@ skills:
           agent accepts a finding.
   - id: ptlam-researching
     description:
-      Investigate one bounded question against high-trust primary sources and
-      deliver a portable HTML evidence report whose material claims, conflicts,
-      uncertainty, and gaps remain traceable. Runs only when explicitly
-      requested.
-    disable_model_invocation: true
+      Research one bounded question against high-trust primary sources and
+      deliver a traceable portable HTML evidence report inside an existing Git
+      repository. Use when a material question needs evidence-led findings,
+      conflict reconciliation, or an explicitly inconclusive result.
     category_id: productivity
     visibility: public
     status: active
@@ -137,6 +136,9 @@ skills:
           confidence, limits, and research completion.
           Preserve ptlam-implementing's authority limits for pushes, pull
           requests, issue updates, shared-branch merges, and cleanup.
+          Keep retrieval configuration, caches, and scraped files outside the
+          report changeset unless the task contract explicitly requests their
+          archival.
       - skill_id: ptlam-scraping-urls
         reason:
           Supplies accounted local full-text retrieval when the selected
@@ -156,8 +158,8 @@ skills:
           Read and apply ptlam-visualization-with-html after the research
           findings and evidence ledger are verified.
           Pass the research question, audience, conclusion status, findings,
-          evidence ledger, conflicts, assumptions, gaps, confidence, and scope
-          limits forward unchanged.
+          evidence ledger including source-admission evidence, conflicts,
+          assumptions, gaps, confidence, and scope limits forward unchanged.
           Let that skill and its dependencies own explanatory structure, HTML
           composition, native artifact implementation, accessibility and design
           contracts, static validation, rendered inspection, and delivery.
