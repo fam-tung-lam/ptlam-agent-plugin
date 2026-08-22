@@ -11,7 +11,7 @@ and this project adheres to
 ### Added
 
 - Added an implementation-orchestration skill that turns prompts, session
-  context, specifications, tickets, and issues into isolated worker changes,
+  context, specifications, tickets, and issues into isolated worker worktrees,
   independent reviews, and evidence-led repair loops.
 - Added a prototyping skill for building shareable logic demos or switchable UI
   variants that answer one design question before production implementation.
