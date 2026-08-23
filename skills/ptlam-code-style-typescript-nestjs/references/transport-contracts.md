@@ -8,7 +8,7 @@ adapter or transporter into the core.
 A controller, resolver, gateway, or message handler owns transport metadata,
 input extraction, authentication context, invocation, and output mapping. It
 does not query persistence, commit a transaction, or construct an integration
-client. Pass ordinary validated values to an injected application provider.
+client. Pass ordinary validated values to one injected use case.
 
 State each operation's identity, input, success output, failure output,
 authentication, authorization, and retry or delivery semantics. Use the

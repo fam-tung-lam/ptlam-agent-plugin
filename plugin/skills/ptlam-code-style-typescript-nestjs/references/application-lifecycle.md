@@ -5,10 +5,12 @@ lifetime compose one Nest process.
 
 ## Keep one composition path
 
-Keep `main.ts` as a thin bootstrap around one root module and, when tests need
-the same application configuration, one typed `configureApp` function. Select
-the HTTP adapter explicitly when the project does not use the default. Keep
-module imports free of connections, listeners, jobs, and remote registration.
+Keep each runnable entry file as a thin bootstrap around one root module. An
+HTTP or hybrid application shares one typed `configureApp` function with its
+tests and selects its adapter explicitly when it does not use the default. A
+worker or CLI creates an application context, resolves one entry shell, runs or
+starts it, and closes the context according to that host's lifetime. Keep module
+imports free of connections, listeners, jobs, and remote registration.
 
 Load environment and file configuration once through the application's
 configuration module, but validate them at their distinct Nest seams.
@@ -24,7 +26,7 @@ Keep adapter initialization in this composition path. Adapter plugins,
 middleware syntax, raw-body access, trust-proxy behavior, and response APIs are
 not portable between Express and Fastify.
 
-## Harden the production adapter
+## Harden a production HTTP adapter
 
 Install security headers through the selected adapter's maintained integration
 before routes. Make middleware and plugin order explicit when headers, raw-body
@@ -67,13 +69,19 @@ operating system or process manager delivers the same signals.
 
 ## Keep bootstrap verifiable
 
-Await `app.listen()` or the selected microservice start operation. A hybrid
-application starts all connected microservices before or alongside its HTTP
-listener according to one explicit startup policy. Make inheritance of the main
-application's global configuration deliberate for each connected microservice.
-When draining begins, notify the operations module before application
-connections close.
+Await `app.listen()` or the selected microservice or worker start operation. A
+hybrid application starts all connected microservices before or alongside its
+HTTP listener according to one explicit startup policy. Make inheritance of the
+main application's global configuration deliberate for each connected
+microservice. When draining begins, notify the operations module before
+application connections close.
 
-Finish when configuration fails closed, application construction is repeatable
-in tests, startup opens each listener once, shutdown drains and closes every
-owned resource, and each configured transport follows the same lifecycle.
+A finite standalone command resolves providers with strict module selection when
+ambiguity is possible, reports its result through the command boundary, and
+calls `app.close()` in `finally`. A long-running standalone worker owns one
+start, drain, and close path. Do not assume HTTP guards, pipes, interceptors, or
+filters run when code is resolved directly from an application context.
+
+Finish when configuration fails closed, construction is repeatable in tests,
+startup opens each listener or worker once, finite commands close their context,
+shutdown drains every long-running host, and each owned resource closes once.

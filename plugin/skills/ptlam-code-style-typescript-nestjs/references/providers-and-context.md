@@ -37,11 +37,11 @@ dependent controller and upstream providers request-scoped. Never put a shared
 database pool, SDK client, schema, or stateless service in request scope.
 
 Prefer passing a typed principal, tenant, correlation identifier, or transaction
-explicitly into the application operation. When ambient context is required
-across many calls, populate one context carrier at the transport edge and expose
-only the typed values consumers need. Use the protocol's real request, GraphQL
-context, gateway client, or job reference; an HTTP request type is not portable
-across transports.
+explicitly into the use case. When ambient context is required across many
+calls, populate one context carrier at the transport edge and expose only the
+typed values consumers need. Use the protocol's real request, GraphQL context,
+gateway client, or job reference; an HTTP request type is not portable across
+transports.
 
 Gateways must remain singleton-scoped. A request-scoped gateway cannot be tied
 to one request because it owns long-lived sockets. Application lifecycle hooks

@@ -5,12 +5,13 @@ part of the contract.
 
 ## Choose the cheapest truthful level
 
-| Test level      | Use it to prove                                                              |
-| --------------- | ---------------------------------------------------------------------------- |
-| Behavioral unit | Domain and application behavior with ordinary construction and test doubles  |
-| Module          | Provider tokens, exports, scopes, factories, overrides, and lifecycle wiring |
-| Application     | Global enhancers, configuration, routing, serialization, and shutdown        |
-| Transport       | The public protocol contract under the real adapter or transporter           |
+| Test level          | Use it to prove                                                               |
+| ------------------- | ----------------------------------------------------------------------------- |
+| Behavioral unit     | Domain and use-case behavior with ordinary construction and test doubles      |
+| Module              | Provider tokens, exports, scopes, factories, overrides, and lifecycle wiring  |
+| Application context | Standalone DI lookup, entry-shell wiring, startup, and cleanup                |
+| Application         | Global enhancers, configuration, routing, serialization, and shutdown         |
+| Entry point         | A transport, queue, schedule, event, or CLI contract under its real Nest seam |
 
 Do not create a `TestingModule` for a class that can be constructed directly.
 Use `@nestjs/testing` only when the container behavior is the subject or the
@@ -36,7 +37,7 @@ function production uses for any globals not registered by modules. Close every
 `TestingModule`, application context, Nest application, and microservice in
 `finally` or suite cleanup, including a failed setup after acquisition.
 
-## Test the selected transport
+## Test the selected entry point
 
 Use the HTTP adapter's supported harness. Exercise Express through its HTTP
 server. Initialize Fastify until its instance is ready, then prefer its inject
@@ -53,13 +54,23 @@ event behavior, and broker-specific acknowledgement or retry seam. A hybrid
 application test proves whether main-app global enhancers reach the connected
 transport.
 
+For a queue processor, assert the job name, validated payload, use-case call,
+acknowledgement or failure, retry boundary, and idempotent effect through the
+configured queue integration. For a schedule, call the thin schedule shell with
+a controlled clock or scheduler and prove overlap policy. For a finite CLI or
+standalone command, create the application context, select the owning module
+strictly when needed, run the command, assert its exit-facing result and effect,
+then close the context. Do not expect HTTP enhancers to wrap a provider resolved
+directly from an application context.
+
 Inspect generated OpenAPI when an HTTP contract changes. Assert only affected
 paths, schemas, security requirements, and responses so unrelated generator
 ordering does not make the test brittle.
 
-Run the configured test runner and type check. A transport test does not replace
-the cheaper failure and boundary cases at the behavioral level.
+Run the configured test runner and type check. An entry-point test does not
+replace cheaper failure and boundary cases at the behavioral level.
 
 Finish when each test proves one framework or behavior contract at the cheapest
-level, overrides enter through public tokens, the real adapter or transporter
-proves its differences, and every Nest resource closes.
+level, overrides enter through public tokens, the real adapter, transporter,
+worker integration, scheduler seam, or application context proves its
+differences, and every Nest resource closes.

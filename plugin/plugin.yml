@@ -423,15 +423,15 @@ skills:
           This specialization may be stricter than the foundation, never looser.
   - id: ptlam-code-style-typescript-nestjs
     description:
-      Write, review, and fix NestJS TypeScript application code against
-      conventions for modules, dependency injection, application lifecycle,
-      transport contracts, execution pipelines, persistence handoffs,
+      Write, review, and fix NestJS TypeScript backend code against conventions
+      for feature-first structure, use cases, integrations, modules, dependency
+      injection, application lifecycle, entry points, persistence handoffs,
       observability, health, and Nest testing. Use when starting or reorganizing
-      a NestJS application or feature, changing controllers, providers, global
-      enhancers, DTO pipes, adapters, transports, transactions, shutdown, or
-      tests, or resolving Nest module and runtime failures. Apply
-      ptlam-code-style-typescript first for TypeScript mechanics. Do not use for
-      TypeScript applications that do not use NestJS.
+      a NestJS backend or feature, changing use cases, controllers, providers,
+      processors, schedules, commands, global enhancers, DTO pipes, adapters,
+      transports, transactions, shutdown, or tests, or resolving Nest module and
+      runtime failures. Apply ptlam-code-style-typescript first for TypeScript
+      mechanics. Do not use for TypeScript applications that do not use NestJS.
     category_id: engineering
     visibility: public
     status: active
@@ -446,9 +446,10 @@ skills:
           Let TypeScript own Node and package tooling, modules and imports,
           typing, validator choice, general async and resource lifetime, error
           and logging mechanics, documentation, and Vitest.
-          Use this skill only for NestJS module, injection, application,
-          lifecycle, execution-pipeline, adapter, transport, persistence
-          handoff, health, and Nest testing mechanics.
+          Use this skill only for NestJS feature structure, use-case assembly,
+          module, injection, application, lifecycle, execution-pipeline, adapter,
+          transport, worker, persistence-handoff, health, and Nest testing
+          mechanics.
           For external input, the TypeScript validator choice wins; this skill
           owns only its Nest pipe and DTO or contract-metadata integration.
           This specialization may be stricter than TypeScript, never looser.
