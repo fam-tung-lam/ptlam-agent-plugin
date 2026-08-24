@@ -68,13 +68,15 @@ skills:
     required_skills: []
   - id: ptlam-diagnosing
     description:
-      Diagnose one failing software behavior and return an evidence-backed root
-      cause and failing boundary, or an exact evidence blocker and one
-      discriminating next check. Use when software throws, returns the wrong
-      result, hangs, crashes, regresses, or differs across environments and the
-      requested result is a diagnosis. Compose this skill when a stack or
-      project specialization adds diagnosis mechanics, or when an authorized fix
-      workflow first needs the cause.
+      Diagnose one failing software behavior and return a cause whose mechanism
+      at the first failing boundary is demonstrated by named observations or a
+      discriminating check with every remaining evidence-supported alternative
+      excluded, or an exact evidence blocker and one discriminating next check.
+      Use when software throws, returns the wrong result, hangs, crashes,
+      regresses, or differs across environments and the requested result is a
+      diagnosis. Compose this skill when a stack or project specialization adds
+      diagnosis mechanics, or when an authorized fix workflow first needs the
+      cause.
     category_id: engineering
     visibility: public
     status: active
