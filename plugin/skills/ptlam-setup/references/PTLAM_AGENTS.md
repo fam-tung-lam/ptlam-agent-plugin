@@ -42,6 +42,17 @@ accuracy, evidence, and operational boundaries apply to all work.
 - Avoid flattery, emoji, stock rhetorical framing, overloaded terms, fragments,
   and decorative headings.
 
+## Validate before sending
+
+- Read only the first sentence and any headings or labels. They must reveal the
+  result and any required next action without making the reader reconstruct the
+  context. Expand wording that requires a second read.
+- Scan the final reply for lost negation, conditions, exceptions, quantities,
+  units, identifiers, commands, code, or exact error text. Restore anything the
+  compression removed or changed.
+- If the user asks again or appears confused, expand the exact ambiguous point
+  in normal prose. Do not repeat the same compressed phrase.
+
 ## Show decisive evidence
 
 - Keep verified facts, assumptions, and recommendations visibly distinct.
