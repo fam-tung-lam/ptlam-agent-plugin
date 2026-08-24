@@ -109,6 +109,21 @@ skills:
           Invoking this skill authorizes scoped local worktrees, branches,
           commits, and integration operations. Require explicit authority for a
           push, pull request, issue update, shared-branch merge, or cleanup.
+      - skill_id: ptlam-code-style
+        reason:
+          Supplies the language-neutral implementation standard, including the
+          code-complexity rules, before workers author source or tests.
+        instructions: |-
+          Read and apply ptlam-code-style before authoring source or test
+          changes.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; and test behavior,
+          levels, placement, and doubles.
+          Apply a matching stack or project specialization when one is
+          available.
+          Keep this skill's ownership of task capture, team sizing, delegation,
+          integration, review coordination, repair, and delivery.
       - skill_id: ptlam-reviewing-code
         reason:
           Supplies the independent review standard and readiness verdict for the
@@ -231,16 +246,18 @@ skills:
   - id: ptlam-code-style
     description:
       Hold source and test code to one language-neutral set of conventions for
-      source-tree structure, module boundaries, naming, function readability,
-      domain modeling, cross-boundary contracts, failure design, documentation,
-      logging, and testing. Use when placing or naming a file, setting a public
-      or internal boundary, shaping a domain type or its states, promising an
-      interface across a process or release boundary, designing a failure or a
-      retry, writing a doc comment, emitting a log record, deciding what a test
-      must prove, choosing a test level, placing a test or a test double, or
-      planning how a change migrates. Use ptlam-modeling-domain instead for
-      business terminology, context boundaries, and business process maps. Use
-      as the foundation for a stack specialization that adds the mechanics.
+      code complexity, source-tree structure, module boundaries, naming,
+      function readability, domain modeling, cross-boundary contracts, failure
+      design, documentation, logging, and testing. Use when choosing sufficient
+      code, reuse, deletion, dependency, or abstraction; placing or naming a
+      file; setting a public or internal boundary; shaping a domain type or its
+      states; promising an interface across a process or release boundary;
+      designing a failure or a retry; writing a doc comment; emitting a log
+      record; deciding what a test must prove; choosing a test level; placing a
+      test or a test double; or planning how a change migrates. Use
+      ptlam-modeling-domain instead for business terminology, context
+      boundaries, and business process maps. Use as the foundation for a stack
+      specialization that adds the mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -265,10 +282,10 @@ skills:
           Dart mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Dart language, package, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -293,10 +310,10 @@ skills:
           Kotlin mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Kotlin language, module, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -322,10 +339,10 @@ skills:
           Swift mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Swift language, package, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -374,10 +391,10 @@ skills:
           Python mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Python language, library, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -429,10 +446,10 @@ skills:
           TypeScript mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for TypeScript language, package, and tool
           mechanics that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -475,13 +492,14 @@ skills:
     required_skills:
       - skill_id: ptlam-code-style
         reason:
-          Provides the language-neutral source, boundary, failure,
+          Provides the language-neutral complexity, source, boundary, failure,
           documentation, logging, and testing conventions a code review judges.
         instructions: |-
           Read and apply ptlam-code-style before judging source or tests.
-          Let it own precedence; source structure and boundaries; naming and
-          readability; data modeling; contracts; failures; documentation;
-          logging; evolution; test behavior, levels, placement, and doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; test behavior, levels,
+          placement, and doubles.
           Apply a matching stack specialization when one is available.
           Let this skill own the review surface, intent, risk examination,
           finding gate, severity, verification limits, and readiness verdict.

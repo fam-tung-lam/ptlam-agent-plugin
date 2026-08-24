@@ -19,12 +19,13 @@ authorize edits, review comments, approvals, pushes, or merges.
 
 ### `ptlam-code-style`
 
-**Reason:** Provides the language-neutral source, boundary, failure, documentation, logging, and testing conventions a code review judges.
+**Reason:** Provides the language-neutral complexity, source, boundary, failure, documentation, logging, and testing conventions a code review judges.
 
 **Instructions:** Read and apply ptlam-code-style before judging source or tests.
-Let it own precedence; source structure and boundaries; naming and
-readability; data modeling; contracts; failures; documentation;
-logging; evolution; test behavior, levels, placement, and doubles.
+Let it own precedence; code complexity; source structure and
+boundaries; naming and readability; data modeling; contracts;
+failures; documentation; logging; evolution; test behavior, levels,
+placement, and doubles.
 Apply a matching stack specialization when one is available.
 Let this skill own the review surface, intent, risk examination,
 finding gate, severity, verification limits, and readiness verdict.

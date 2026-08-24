@@ -157,6 +157,7 @@ flowchart TB
         `"]
     end
     SkillNode3 --> SkillNode1
+    SkillNode3 --> SkillNode6
     SkillNode3 --> SkillNode15
     SkillNode4 --> SkillNode3
     SkillNode4 --> SkillNode23
