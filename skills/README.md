@@ -58,14 +58,18 @@ flowchart TB
             (active/public)
         `"]
         SkillNode14["`
-            ptlam-creating-skill
+            ptlam-code-style-typescript-nestjs
             (active/public)
         `"]
         SkillNode15["`
+            ptlam-creating-skill
+            (active/public)
+        `"]
+        SkillNode16["`
             ptlam-reviewing-code
             (active/public)
         `"]
-        SkillNode21["`
+        SkillNode22["`
             ptlam-creating-adr
             (active/public)
         `"]
@@ -75,39 +79,39 @@ flowchart TB
             ptlam-researching
             (active/public)
         `"]
-        SkillNode16["`
+        SkillNode17["`
             ptlam-grilling
             (active/public)
         `"]
-        SkillNode17["`
+        SkillNode18["`
             ptlam-creating-prd
             (active/public)
         `"]
-        SkillNode18["`
+        SkillNode19["`
             ptlam-creating-spec
             (active/public)
         `"]
-        SkillNode19["`
+        SkillNode20["`
             ptlam-planning-tickets
             (active/public)
         `"]
-        SkillNode20["`
+        SkillNode21["`
             ptlam-modeling-domain
             (active/public)
         `"]
-        SkillNode22["`
+        SkillNode23["`
             ptlam-creating-atomic-note
             (active/public)
         `"]
-        SkillNode24["`
+        SkillNode25["`
             ptlam-explaining
             (active/public)
         `"]
-        SkillNode25["`
+        SkillNode26["`
             ptlam-mermaiding
             (active/public)
         `"]
-        SkillNode26["`
+        SkillNode27["`
             ptlam-visualization-with-html
             (active/public)
         `"]
@@ -117,51 +121,51 @@ flowchart TB
             ptlam-setup
             (active/public)
         `"]
-        SkillNode23["`
+        SkillNode24["`
             ptlam-scraping-urls
             (active/public)
         `"]
     end
     subgraph SkillCategory3["Health Connector SDK"]
-        SkillNode27["`
+        SkillNode28["`
             ptlam-health-connector-architecture
             (active/public)
         `"]
-        SkillNode28["`
+        SkillNode29["`
             ptlam-health-connector-setup
             (active/public)
         `"]
-        SkillNode29["`
+        SkillNode30["`
             ptlam-health-connector-debug
             (active/public)
         `"]
-        SkillNode30["`
+        SkillNode31["`
             ptlam-health-connector-review
             (active/public)
         `"]
-        SkillNode31["`
+        SkillNode32["`
             ptlam-health-connector-data-type
             (active/public)
         `"]
-        SkillNode32["`
+        SkillNode33["`
             ptlam-health-connector-code-style-dart
             (active/public)
         `"]
-        SkillNode33["`
+        SkillNode34["`
             ptlam-health-connector-code-style-kotlin
             (active/public)
         `"]
-        SkillNode34["`
+        SkillNode35["`
             ptlam-health-connector-code-style-swift
             (active/public)
         `"]
     end
     SkillNode3 --> SkillNode1
     SkillNode3 --> SkillNode6
-    SkillNode3 --> SkillNode15
+    SkillNode3 --> SkillNode16
     SkillNode4 --> SkillNode3
-    SkillNode4 --> SkillNode23
-    SkillNode4 --> SkillNode26
+    SkillNode4 --> SkillNode24
+    SkillNode4 --> SkillNode27
     SkillNode5 --> SkillNode1
     SkillNode7 --> SkillNode6
     SkillNode8 --> SkillNode6
@@ -170,34 +174,35 @@ flowchart TB
     SkillNode11 --> SkillNode6
     SkillNode12 --> SkillNode11
     SkillNode13 --> SkillNode6
-    SkillNode14 --> SkillNode25
-    SkillNode15 --> SkillNode6
-    SkillNode16 --> SkillNode20
-    SkillNode16 --> SkillNode21
-    SkillNode17 --> SkillNode24
-    SkillNode17 --> SkillNode25
-    SkillNode18 --> SkillNode24
+    SkillNode14 --> SkillNode13
+    SkillNode15 --> SkillNode26
+    SkillNode16 --> SkillNode6
+    SkillNode17 --> SkillNode21
+    SkillNode17 --> SkillNode22
     SkillNode18 --> SkillNode25
-    SkillNode19 --> SkillNode24
+    SkillNode18 --> SkillNode26
     SkillNode19 --> SkillNode25
+    SkillNode19 --> SkillNode26
     SkillNode20 --> SkillNode25
-    SkillNode21 --> SkillNode24
-    SkillNode21 --> SkillNode25
-    SkillNode26 --> SkillNode24
-    SkillNode29 --> SkillNode2
-    SkillNode29 --> SkillNode27
-    SkillNode30 --> SkillNode15
-    SkillNode30 --> SkillNode27
-    SkillNode30 --> SkillNode32
-    SkillNode30 --> SkillNode33
-    SkillNode30 --> SkillNode34
-    SkillNode31 --> SkillNode27
-    SkillNode31 --> SkillNode32
+    SkillNode20 --> SkillNode26
+    SkillNode21 --> SkillNode26
+    SkillNode22 --> SkillNode25
+    SkillNode22 --> SkillNode26
+    SkillNode27 --> SkillNode25
+    SkillNode30 --> SkillNode2
+    SkillNode30 --> SkillNode28
+    SkillNode31 --> SkillNode16
+    SkillNode31 --> SkillNode28
     SkillNode31 --> SkillNode33
     SkillNode31 --> SkillNode34
-    SkillNode32 --> SkillNode7
-    SkillNode33 --> SkillNode8
-    SkillNode34 --> SkillNode9
+    SkillNode31 --> SkillNode35
+    SkillNode32 --> SkillNode28
+    SkillNode32 --> SkillNode33
+    SkillNode32 --> SkillNode34
+    SkillNode32 --> SkillNode35
+    SkillNode33 --> SkillNode7
+    SkillNode34 --> SkillNode8
+    SkillNode35 --> SkillNode9
     classDef publicSkill fill:#dbeafe,stroke:#1d4ed8,color:#172554
     classDef internalSkill fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
     classDef deprecatedSkill fill:#fef3c7,stroke:#b45309,color:#78350f
@@ -236,6 +241,7 @@ flowchart TB
     class SkillNode32 publicSkill
     class SkillNode33 publicSkill
     class SkillNode34 publicSkill
+    class SkillNode35 publicSkill
 ```
 
 | Skill                                      | Category             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Visibility | Status | Replacement |
@@ -253,6 +259,7 @@ flowchart TB
 | `ptlam-code-style-python`                  | Engineering          | Write, review, and fix Python library and application code against conventions for language mechanics, project structure, tooling, and tests. Use when starting or standardizing a Python project, changing Python code or its toolchain, reviewing Python-specific design, or resolving code-quality and test failures. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for Python framework specializations. Do not use for non-Python code.                                                                                                                                                                                                    | public     | Active | —           |
 | `ptlam-code-style-python-fastapi`          | Engineering          | Write, review, and fix FastAPI application code against conventions for service and feature-package structure, application lifespan, routes, request and response contracts, dependency injection, use cases, feature boundaries, model registration, concurrency, errors, observability, and API tests. Use when starting or reorganizing a FastAPI service or feature, adding or changing endpoints, use cases, dependencies, exception handlers, middleware, schemas, SQLAlchemy registration, background handoffs, or tests, or fixing OpenAPI and runtime failures. Apply ptlam-code-style-python first for the Python mechanics. Do not use for Python services that do not use FastAPI. | public     | Active | —           |
 | `ptlam-code-style-typescript`              | Engineering          | Write, review, and fix TypeScript library and application code against conventions for language mechanics, module boundaries, tooling, and tests. Use when starting or standardizing a TypeScript project, changing TypeScript code or its toolchain, reviewing TypeScript-specific design, or resolving type-check, lint, or Vitest failures. Apply ptlam-code-style first for the standard these mechanics satisfy. Use as the foundation for TypeScript framework specializations. Do not use for non-TypeScript code.                                                                                                                                                                      | public     | Active | —           |
+| `ptlam-code-style-typescript-nestjs`       | Engineering          | Write, review, and fix NestJS TypeScript backend code against conventions for feature-first structure, use cases, integrations, modules, dependency injection, application lifecycle, entry points, persistence handoffs, observability, health, and Nest testing. Use when starting or reorganizing a NestJS backend or feature, changing use cases, controllers, providers, processors, schedules, commands, global enhancers, DTO pipes, adapters, transports, transactions, shutdown, or tests, or resolving Nest module and runtime failures. Apply ptlam-code-style-typescript first for TypeScript mechanics. Do not use for TypeScript applications that do not use NestJS.            | public     | Active | —           |
 | `ptlam-creating-skill`                     | Engineering          | Create, review, or refactor one agent skill so that a human maintainer can read it once and change it later. Use when turning a workflow or reference set into a new skill, revising an existing SKILL.md, splitting a skill that grew too broad, or auditing a package without editing it. Use as the foundation for skills that specialize skill authoring.                                                                                                                                                                                                                                                                                                                                  | public     | Active | —           |
 | `ptlam-reviewing-code`                     | Engineering          | Review one bounded code changeset and return an evidence-backed, prioritized findings report and readiness verdict. Use when reviewing a pull request, branch, commit range, or explicit revision comparison. Use when reviewing staged, unstaged, or untracked working-tree changes. Use when judging an implementation against a task, issue, or specification. Compose this skill when a stack or project review needs the general review standard.                                                                                                                                                                                                                                         | public     | Active | —           |
 | `ptlam-grilling`                           | Productivity         | Stress-test a plan, decision, or idea through a persistent interview that resolves one user-owned decision at a time, records confirmed understanding for later continuation, sharpens contested business terms, and captures decisions that are expensive to reverse.                                                                                                                                                                                                                                                                                                                                                                                                                         | public     | Active | —           |

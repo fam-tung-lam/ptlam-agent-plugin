@@ -30,6 +30,7 @@
     "./skills/ptlam-code-style-python",
     "./skills/ptlam-code-style-python-fastapi",
     "./skills/ptlam-code-style-typescript",
+    "./skills/ptlam-code-style-typescript-nestjs",
     "./skills/ptlam-creating-skill",
     "./skills/ptlam-reviewing-code",
     "./skills/ptlam-grilling",

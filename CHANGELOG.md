@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added a NestJS TypeScript code-style specialization for feature-first
+  hexagonal structure, application use cases and DTOs, domain types,
+  infrastructure adapters, presentation entry points, integrations, modules,
+  dependency injection, lifecycle, operations, and Nest testing.
+
 ## [0.3.0] - 2026-08-24
 
 ### Added
