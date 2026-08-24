@@ -11,8 +11,9 @@ and this project adheres to
 ### Added
 
 - Added a NestJS TypeScript code-style specialization for feature-first
-  structure, use cases, integrations, modules, dependency injection, application
-  lifecycle, entry points, persistence handoffs, operations, and Nest testing.
+  hexagonal structure, application use cases and DTOs, domain types,
+  infrastructure adapters, presentation entry points, integrations, modules,
+  dependency injection, lifecycle, operations, and Nest testing.
 - Added a research skill that traces one bounded question to high-trust primary
   sources and delivers an independently reviewed portable HTML evidence report.
 

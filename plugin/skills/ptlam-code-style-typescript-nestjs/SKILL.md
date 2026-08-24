@@ -1,9 +1,9 @@
 # PTLam NestJS Code Style
 
 Conventions for the NestJS boundary of a TypeScript backend: feature-first
-structure, use cases, modules, dependency injection, application composition,
-entry points, persistence handoffs, integrations, observability, health, and
-Nest tests. This skill owns NestJS mechanics only.
+hexagonal structure, use cases, modules, dependency injection, application
+composition, entry points, persistence handoffs, integrations, observability,
+health, and Nest tests. This skill owns NestJS mechanics only.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -54,15 +54,16 @@ an existing supported runtime and Nest major until migration is in scope.
 1. State the observable entry-point contract. Identify the adapter or
    transporter for a network operation; for a job, schedule, event, or CLI,
    state its trigger, input, result or effect, retry behavior, and concurrency.
-2. Put the operation in one feature module. Keep its DTOs, domain models, use
-   cases, repositories, entry shells, and tests under that feature.
+2. Put the operation in one feature module. Keep its application DTOs, ports,
+   and use cases; domain types; infrastructure adapters; presentation shells;
+   and tests under that feature.
 3. Keep every entry shell at its trigger boundary. Delegate one operation and
    its transaction decision to one injected use case.
 4. Validate external input once with the project's runtime validator. Attach it
    through a pipe for a Nest execution pipeline; invoke the same contract at a
-   queue, schedule, event, or CLI shell resolved from an application context.
-   Keep accepted coercions, rejected fields, metadata, and public contracts
-   aligned.
+   queue, schedule, event, or CLI shell dispatched by its selected runner. A
+   custom standalone host resolves its shell from an application context. Keep
+   accepted coercions, rejected fields, metadata, and public contracts aligned.
 5. Register cross-cutting enhancers through the Nest container when they need
    dependencies. Make their order and transport reach explicit.
 6. Keep providers singleton-scoped unless a measured lifetime requirement
@@ -70,8 +71,8 @@ an existing supported runtime and Nest major until migration is in scope.
 7. Start and stop resources through the application lifecycle. Enable and test
    graceful shutdown for long-running hosts that receive termination signals.
 8. Test domain and use-case behavior without a Nest container. Add module,
-   application-context, worker, application, and transport tests only for the
-   Nest behavior each level can prove.
+   runner-integration, application-context, application, and transport tests
+   only for the Nest behavior each level can prove.
 9. Run focused tests, the configured type and code checks, affected module or
    application tests, public contract checks, then the project-wide gates.
 

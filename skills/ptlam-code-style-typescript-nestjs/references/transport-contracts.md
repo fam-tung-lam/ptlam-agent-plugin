@@ -30,9 +30,14 @@ its request, response, client, payload, or metadata.
 Use the project's one selected runtime validator. This layer owns how its schema
 reaches Nest pipes and runtime metadata.
 
-For a class-validator project, use concrete DTO classes because interfaces and
-type-only imports do not survive for reflection. Install a global
-`ValidationPipe` with `whitelist: true`. Choose `forbidNonWhitelisted`
+Place request and response contracts under the owning feature's
+`application/dtos/`. They may use the selected validator's annotations, but they
+import no `@nestjs/*` package or transport context. Keep Nest pipe, OpenAPI,
+GraphQL, and message metadata in the presentation adapter that attaches the DTO.
+
+For a class-validator project, use concrete DTO classes in `application/dtos/`
+because interfaces and type-only imports do not survive for reflection. Install
+a global `ValidationPipe` with `whitelist: true`. Choose `forbidNonWhitelisted`
 deliberately from the public contract. Enable `transform` only with tested
 coercions; prefer explicit parse pipes for path and query scalars over broad
 implicit conversion.

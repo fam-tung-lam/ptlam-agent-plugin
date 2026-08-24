@@ -8,14 +8,14 @@ modules.
 
 `AppModule` composes configuration, integrations, operations, and feature
 modules. It owns no feature behavior. A feature module registers its controllers
-or other entry shells, repository adapters, and use-case factories. It imports
-modules whose exported contracts it needs and exports only its public use cases,
-facade, or stable injection tokens.
+or other presentation adapters, infrastructure adapters, and application
+use-case factories. It imports modules whose exported contracts it needs and
+exports only its public use cases, facade, or stable injection tokens.
 
 The feature module is the dependency-assembly file for its capability. Shared
 integration modules own reusable clients and pools; feature modules connect
-those clients to feature repository adapters. Register an adapter once under the
-token its use case consumes.
+those clients to feature infrastructure adapters. Register an adapter once under
+the application-port token its use case consumes.
 
 ## Make the module API narrow
 
@@ -41,10 +41,11 @@ identity behavior; reusing one registration object remains safe.
 
 ## Keep dependency direction acyclic
 
-Entry shells depend on use cases. Use cases depend on domain contracts.
-Repositories and integrations implement those contracts and enter through module
-factories and tokens. A feature reaches another feature through its exported
-facade, never through its controller, persistence adapter, or internal provider.
+Presentation adapters depend on application use cases. Use cases depend on
+domain types and application ports. Infrastructure adapters and integrations
+implement those ports and enter through module factories and tokens. A feature
+reaches another feature through its exported facade, never through its
+presentation or infrastructure internals.
 
 Break a cycle by moving the orchestration to a caller, extracting a genuinely
 shared policy, publishing a narrower token, or using an event handoff. Treat
@@ -56,16 +57,17 @@ between providers or modules when direct imports expose the real edge.
 
 Run the repository's architecture or dependency-graph check when one exists. For
 a new backend, configure a CI check that rejects cycles, cross-feature internal
-imports, entry-shell imports of repository adapters or integration clients, and
-use-case imports of Nest transport packages.
+imports, presentation imports of infrastructure adapters or integration clients,
+and application or domain imports of Nest packages.
 
-When no checker exists, search changed controllers, resolvers, gateways,
-handlers, processors, schedules, and CLI shells for repository and integration
-imports. Search cross-feature imports for paths below the target feature's
-public surface. Report the missing automated check instead of implying the graph
-was proven mechanically.
+When no checker exists, search changed presentation adapters for infrastructure
+and integration imports. Search application and domain files for Nest imports.
+Search cross-feature imports for paths below the target feature's public
+surface. Report the missing automated check instead of implying the graph was
+proven mechanically.
 
 Finish when each provider has one registration owner, each cross-module
-dependency enters an explicit export, entry shells reach infrastructure only
-through use cases, the graph check passes when configured, changed code adds no
-cycle, and every touched legacy cycle has an explicit removal seam.
+dependency enters an explicit export, presentation reaches infrastructure only
+through application use cases and ports, the graph check passes when configured,
+changed code adds no cycle, and every touched legacy cycle has an explicit
+removal seam.

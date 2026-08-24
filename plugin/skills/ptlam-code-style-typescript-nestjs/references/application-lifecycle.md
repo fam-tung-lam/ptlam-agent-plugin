@@ -5,12 +5,19 @@ lifetime compose one Nest process.
 
 ## Keep one composition path
 
-Keep each runnable entry file as a thin bootstrap around one root module. An
-HTTP or hybrid application shares one typed `configureApp` function with its
-tests and selects its adapter explicitly when it does not use the default. A
-worker or CLI creates an application context, resolves one entry shell, runs or
-starts it, and closes the context according to that host's lifetime. Keep module
-imports free of connections, listeners, jobs, and remote registration.
+Keep each runnable entry file as a thin bootstrap around one root module. Match
+bootstrap, dispatch, and closure to the selected host:
+
+| Host form                           | Lifecycle ownership                                                                              |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------ |
+| HTTP or hybrid application          | The bootstrap creates the application, applies one typed `configureApp`, starts, and closes it   |
+| Custom standalone command or worker | The bootstrap creates an application context, resolves its shell, and owns run, drain, and close |
+| Queue, schedule, or event runner    | The host supplies a Nest context; the integration discovers and dispatches registered providers  |
+| Runner-managed CLI                  | The runner owns context creation, command dispatch, and closure when its API promises them       |
+
+Do not manually invoke a processor, schedule, listener, or runner-managed
+command that its integration discovers. Keep module imports free of connections,
+listeners, jobs, and remote registration.
 
 Load environment and file configuration once through the application's
 configuration module, but validate them at their distinct Nest seams.
@@ -76,12 +83,16 @@ main application's global configuration deliberate for each connected
 microservice. When draining begins, notify the operations module before
 application connections close.
 
-A finite standalone command resolves providers with strict module selection when
-ambiguity is possible, reports its result through the command boundary, and
-calls `app.close()` in `finally`. A long-running standalone worker owns one
-start, drain, and close path. Do not assume HTTP guards, pipes, interceptors, or
-filters run when code is resolved directly from an application context.
+A finite custom standalone command resolves providers with strict module
+selection when ambiguity is possible, reports its result through the command
+boundary, and calls `app.close()` in `finally`. A long-running custom standalone
+worker owns one start, drain, and close path. A framework runner receives
+registered entry shells and keeps its documented ownership of discovery,
+dispatch, acknowledgement, retry, and any context closure. Do not assume HTTP
+guards, pipes, interceptors, or filters run when code is resolved directly from
+an application context.
 
 Finish when configuration fails closed, construction is repeatable in tests,
-startup opens each listener or worker once, finite commands close their context,
-shutdown drains every long-running host, and each owned resource closes once.
+startup opens each listener or worker once, each runner dispatches registered
+shells once, the lifecycle owner closes its context, shutdown drains every
+long-running host, and each owned resource closes once.

@@ -5,13 +5,14 @@ part of the contract.
 
 ## Choose the cheapest truthful level
 
-| Test level          | Use it to prove                                                               |
-| ------------------- | ----------------------------------------------------------------------------- |
-| Behavioral unit     | Domain and use-case behavior with ordinary construction and test doubles      |
-| Module              | Provider tokens, exports, scopes, factories, overrides, and lifecycle wiring  |
-| Application context | Standalone DI lookup, entry-shell wiring, startup, and cleanup                |
-| Application         | Global enhancers, configuration, routing, serialization, and shutdown         |
-| Entry point         | A transport, queue, schedule, event, or CLI contract under its real Nest seam |
+| Test level          | Use it to prove                                                                 |
+| ------------------- | ------------------------------------------------------------------------------- |
+| Behavioral unit     | Domain and use-case behavior with ordinary construction and test doubles        |
+| Module              | Provider tokens, exports, scopes, factories, overrides, and lifecycle wiring    |
+| Application context | Standalone DI lookup, entry-shell wiring, startup, and cleanup                  |
+| Application         | Global enhancers, configuration, routing, serialization, and shutdown           |
+| Runner integration  | Queue, schedule, event, or CLI discovery and dispatch under its selected runner |
+| Entry point         | A transport or custom standalone contract under its real Nest seam              |
 
 Do not create a `TestingModule` for a class that can be constructed directly.
 Use `@nestjs/testing` only when the container behavior is the subject or the
@@ -56,12 +57,17 @@ transport.
 
 For a queue processor, assert the job name, validated payload, use-case call,
 acknowledgement or failure, retry boundary, and idempotent effect through the
-configured queue integration. For a schedule, call the thin schedule shell with
-a controlled clock or scheduler and prove overlap policy. For a finite CLI or
-standalone command, create the application context, select the owning module
-strictly when needed, run the command, assert its exit-facing result and effect,
-then close the context. Do not expect HTTP enhancers to wrap a provider resolved
-directly from an application context.
+configured queue integration. For a schedule or event, start the narrowest
+configured runner seam, let it discover the registered shell, control its clock
+or trigger, and prove dispatch and overlap or delivery policy. A direct shell
+test proves only its isolated behavior, not runner registration.
+
+Invoke a runner-managed CLI through its supported runner so the test preserves
+that runner's context and dispatch contract. For a finite custom standalone
+command, create the application context, select the owning module strictly when
+needed, run the command, assert its exit-facing result and effect, then close
+the context. Do not expect HTTP enhancers to wrap a provider resolved directly
+from an application context.
 
 Inspect generated OpenAPI when an HTTP contract changes. Assert only affected
 paths, schemas, security requirements, and responses so unrelated generator
@@ -72,5 +78,5 @@ replace cheaper failure and boundary cases at the behavioral level.
 
 Finish when each test proves one framework or behavior contract at the cheapest
 level, overrides enter through public tokens, the real adapter, transporter,
-worker integration, scheduler seam, or application context proves its
-differences, and every Nest resource closes.
+runner integration or application context proves its differences, and every Nest
+resource closes.

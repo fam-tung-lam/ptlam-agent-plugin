@@ -7,8 +7,9 @@ operational state.
 
 Inject a repository contract or unit-of-work into the use case through its
 feature-module factory. Register the adapter in the feature module and acquire
-shared pools or clients from an integration module. An entry shell never injects
-an ORM repository, entity manager, database client, or remote SDK directly.
+shared pools or clients from an integration module. A presentation adapter never
+injects an ORM repository, entity manager, database client, or remote SDK
+directly.
 
 Give one use case the transaction decision. A repository method does not hide an
 unconditional commit. Start the transaction after input and authorization checks
@@ -39,11 +40,11 @@ bridge converts framework records, and verify that bootstrap, application,
 worker, command, and shutdown logs all use the bridge.
 
 Register request and message metrics through a Nest interceptor or the selected
-Nest integration. Wrap a queue, schedule, or command entry shell at its owning
-integration when no execution pipeline runs. Derive a low-cardinality route
-template, message pattern, job name, or command name from the real Nest seam.
-Connect the selected correlation carrier to the Nest logger and metric bridge at
-the same boundary.
+Nest integration. Wrap a queue, schedule, or command presentation adapter at its
+owning integration when no execution pipeline runs. Derive a low-cardinality
+route template, message pattern, job name, or command name from the real Nest
+seam. Connect the selected correlation carrier to the Nest logger and metric
+bridge at the same boundary.
 
 Expose liveness, readiness, and build information through one operations module.
 Liveness must not depend on a remote system. Readiness checks only dependencies
