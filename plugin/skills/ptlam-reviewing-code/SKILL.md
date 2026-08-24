@@ -52,6 +52,12 @@ below to cover risks that code conventions alone cannot settle.
 When a package manifest or lockfile changes, read
 [reviewing dependency changes](references/dependency-changes.md).
 
+When the user explicitly requests an over-engineering, deletion, or
+simplification pass, read
+[reviewing unnecessary complexity](references/unnecessary-complexity.md). Keep
+the complete concern table, finding gate, severity, and readiness verdict in
+force.
+
 Inspect existing CI evidence only when it belongs to the exact revision under
 review. Run check-mode commands only when task authority and repository rules
 allow their local artifacts. Keep formatters, generators, snapshot updates,

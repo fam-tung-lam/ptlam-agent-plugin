@@ -2,23 +2,25 @@
 name: ptlam-code-style
 description:
   Hold source and test code to one language-neutral set of conventions for
-  source-tree structure, module boundaries, naming, function readability, domain
-  modeling, cross-boundary contracts, failure design, documentation, logging,
-  and testing. Use when placing or naming a file, setting a public or internal
+  minimum change, source-tree structure, module boundaries, naming, function
+  readability, domain modeling, cross-boundary contracts, failure design,
+  documentation, logging, and testing. Use when choosing the smallest sufficient
+  implementation, placing or naming a file, setting a public or internal
   boundary, shaping a domain type or its states, promising an interface across a
   process or release boundary, designing a failure or a retry, writing a doc
   comment, emitting a log record, deciding what a test must prove, choosing a
   test level, placing a test or a test double, or planning how a change
-  migrates. Use ptlam-modeling-domain instead for business terminology, context
-  boundaries, and business process maps. Use as the foundation for a stack
-  specialization that adds the mechanics.
+  migrates. Use when reviewing one requested repository or source scope for
+  behavior-preserving complexity reductions. Use ptlam-modeling-domain instead
+  for business terminology, context boundaries, and business process maps. Use
+  as the foundation for a stack specialization that adds the mechanics.
 ---
 
 # PTLam Code Style
 
-Route source and test concerns through one language-neutral standard. This
-foundation owns the shared behavior and vocabulary; a stack specialization owns
-the mechanics that satisfy them.
+Route source, test, and repository complexity concerns through one
+language-neutral standard. This foundation owns the shared behavior and
+vocabulary; a stack specialization owns the mechanics that satisfy them.
 
 ## Who decides what
 
@@ -75,11 +77,13 @@ and owns its rules, its examples, and its caveats.
 | Designing a failure, a retry, or a startup check                | [errors.md](references/errors.md)               |
 | Emitting a log record, naming a logger, or picking a level      | [logging.md](references/logging.md)             |
 
-### Change over time
+### Change selection and repository review
 
-| Concern                                                                    | Reference                               |
-| -------------------------------------------------------------------------- | --------------------------------------- |
-| Abstracting a repeated pattern, migrating a shape, or recording a decision | [evolution.md](references/evolution.md) |
+| Concern                                                                     | Reference                                                                                                             |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Choosing the smallest sufficient implementation before changing code        | [minimum-change.md](references/minimum-change.md)                                                                     |
+| Reviewing one requested repository or source scope for removable complexity | First [minimum-change.md](references/minimum-change.md), then [complexity-review.md](references/complexity-review.md) |
+| Abstracting a repeated pattern, migrating a shape, or recording a decision  | [evolution.md](references/evolution.md)                                                                               |
 
 ### Tests
 
@@ -95,9 +99,9 @@ and owns its rules, its examples, and its caveats.
 
 1. Resolve the target project, then read the current user instructions and every
    applicable `AGENTS.md` from the project root down to the files in scope.
-2. Name the concern in front of you and read its one reference. For every test,
-   read the behavior contract before selecting a level, placement, workflow, or
-   double.
+2. Name the concern in front of you and follow its reference route. For every
+   test, read the behavior contract before selecting a level, placement,
+   workflow, or double.
 3. Select the active stack specialization. When none of the available ones
    matches the project, say so rather than inventing a toolchain.
 4. Apply the standard, then let the specialization supply the mechanics.
@@ -111,7 +115,7 @@ A review changes no files. Fixing what a review found needs separate authority.
 
 ## Finish
 
-Finish when every touched file satisfies the conventions for its concern, every
-open mechanic traces to a named owner in the precedence table, every deliberate
-deviation carries its reason, and the handoff never implies that an unrun check
-passed.
+Finish an edit when every touched file satisfies the conventions for its
+concern, every open mechanic traces to a named owner in the precedence table,
+and every deliberate deviation carries its reason. Finish a review under its
+owning reference or caller. Never imply that an unrun check passed.

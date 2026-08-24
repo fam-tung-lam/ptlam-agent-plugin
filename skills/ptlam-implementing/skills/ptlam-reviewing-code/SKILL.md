@@ -21,13 +21,19 @@ authorize edits, review comments, approvals, pushes, or merges.
 
 **Reason:** Provides the language-neutral source, boundary, failure, documentation, logging, and testing conventions a code review judges.
 
-**Instructions:** Read and apply ptlam-code-style before judging source or tests.
-Let it own precedence; source structure and boundaries; naming and
-readability; data modeling; contracts; failures; documentation;
-logging; evolution; test behavior, levels, placement, and doubles.
+**Instructions:** Read and apply ptlam-code-style before judging source or tests. Read
+its minimum-change reference when judging implementation size or
+simplicity.
+Let it own precedence; minimum-change selection; source structure and
+boundaries; naming and readability; data modeling; contracts;
+failures; documentation; logging; evolution; test behavior, levels,
+placement, and doubles.
+Keep its repository-wide complexity review separate from this skill's
+changeset review surface.
 Apply a matching stack specialization when one is available.
-Let this skill own the review surface, intent, risk examination,
-finding gate, severity, verification limits, and readiness verdict.
+Let this skill own the changeset review surface, intent, risk
+examination, finding gate, severity, verification limits, and
+readiness verdict.
 
 Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 
@@ -76,6 +82,12 @@ below to cover risks that code conventions alone cannot settle.
 
 When a package manifest or lockfile changes, read
 [reviewing dependency changes](references/dependency-changes.md).
+
+When the user explicitly requests an over-engineering, deletion, or
+simplification pass, read
+[reviewing unnecessary complexity](references/unnecessary-complexity.md). Keep
+the complete concern table, finding gate, severity, and readiness verdict in
+force.
 
 Inspect existing CI evidence only when it belongs to the exact revision under
 review. Run check-mode commands only when task authority and repository rules

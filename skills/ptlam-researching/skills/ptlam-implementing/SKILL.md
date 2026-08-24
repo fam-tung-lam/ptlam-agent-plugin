@@ -39,6 +39,23 @@ push, pull request, issue update, shared-branch merge, or cleanup.
 
 Read [ptlam-git](skills/ptlam-git/SKILL.md).
 
+### `ptlam-code-style`
+
+**Reason:** Supplies the language-neutral implementation standard, including the minimum-change hierarchy, before workers author source or tests.
+
+**Instructions:** Read and apply ptlam-code-style and its minimum-change reference
+before authoring source or test changes.
+Let it own precedence; minimum-change selection; source structure and
+boundaries; naming and readability; data modeling; contracts;
+failures; documentation; logging; evolution; and test behavior,
+levels, placement, and doubles.
+Apply a matching stack or project specialization when one is
+available.
+Keep this skill's ownership of task capture, team sizing, delegation,
+integration, review coordination, repair, and delivery.
+
+Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
+
 ### `ptlam-reviewing-code`
 
 **Reason:** Supplies the independent review standard and readiness verdict for the integrated implementation changeset.

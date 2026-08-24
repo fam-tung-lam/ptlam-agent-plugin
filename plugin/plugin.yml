@@ -94,6 +94,21 @@ skills:
           Invoking this skill authorizes scoped local worktrees, branches,
           commits, and integration operations. Require explicit authority for a
           push, pull request, issue update, shared-branch merge, or cleanup.
+      - skill_id: ptlam-code-style
+        reason:
+          Supplies the language-neutral implementation standard, including the
+          minimum-change hierarchy, before workers author source or tests.
+        instructions: |-
+          Read and apply ptlam-code-style and its minimum-change reference
+          before authoring source or test changes.
+          Let it own precedence; minimum-change selection; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; and test behavior,
+          levels, placement, and doubles.
+          Apply a matching stack or project specialization when one is
+          available.
+          Keep this skill's ownership of task capture, team sizing, delegation,
+          integration, review coordination, repair, and delivery.
       - skill_id: ptlam-reviewing-code
         reason:
           Supplies the independent review standard and readiness verdict for the
@@ -216,16 +231,19 @@ skills:
   - id: ptlam-code-style
     description:
       Hold source and test code to one language-neutral set of conventions for
-      source-tree structure, module boundaries, naming, function readability,
-      domain modeling, cross-boundary contracts, failure design, documentation,
-      logging, and testing. Use when placing or naming a file, setting a public
-      or internal boundary, shaping a domain type or its states, promising an
+      minimum change, source-tree structure, module boundaries, naming, function
+      readability, domain modeling, cross-boundary contracts, failure design,
+      documentation, logging, and testing. Use when choosing the smallest
+      sufficient implementation, placing or naming a file, setting a public or
+      internal boundary, shaping a domain type or its states, promising an
       interface across a process or release boundary, designing a failure or a
       retry, writing a doc comment, emitting a log record, deciding what a test
       must prove, choosing a test level, placing a test or a test double, or
-      planning how a change migrates. Use ptlam-modeling-domain instead for
-      business terminology, context boundaries, and business process maps. Use
-      as the foundation for a stack specialization that adds the mechanics.
+      planning how a change migrates. Use when reviewing one requested
+      repository or source scope for behavior-preserving complexity reductions.
+      Use ptlam-modeling-domain instead for business terminology, context
+      boundaries, and business process maps. Use as the foundation for a stack
+      specialization that adds the mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -250,7 +268,8 @@ skills:
           Dart mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
+          Let it own precedence; minimum-change selection; repository-wide
+          complexity review; the structure, boundary, naming, readability,
           data-modeling, contract, failure, documentation, and logging
           standards; the universal behavior contract; test levels; test
           placement; and test doubles.
@@ -278,7 +297,8 @@ skills:
           Kotlin mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
+          Let it own precedence; minimum-change selection; repository-wide
+          complexity review; the structure, boundary, naming, readability,
           data-modeling, contract, failure, documentation, and logging
           standards; the universal behavior contract; test levels; test
           placement; and test doubles.
@@ -307,7 +327,8 @@ skills:
           Swift mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
+          Let it own precedence; minimum-change selection; repository-wide
+          complexity review; the structure, boundary, naming, readability,
           data-modeling, contract, failure, documentation, and logging
           standards; the universal behavior contract; test levels; test
           placement; and test doubles.
@@ -359,7 +380,8 @@ skills:
           Python mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
+          Let it own precedence; minimum-change selection; repository-wide
+          complexity review; the structure, boundary, naming, readability,
           data-modeling, contract, failure, documentation, and logging
           standards; the universal behavior contract; test levels; test
           placement; and test doubles.
@@ -414,7 +436,8 @@ skills:
           TypeScript mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
+          Let it own precedence; minimum-change selection; repository-wide
+          complexity review; the structure, boundary, naming, readability,
           data-modeling, contract, failure, documentation, and logging
           standards; the universal behavior contract; test levels; test
           placement; and test doubles.
@@ -463,13 +486,19 @@ skills:
           Provides the language-neutral source, boundary, failure,
           documentation, logging, and testing conventions a code review judges.
         instructions: |-
-          Read and apply ptlam-code-style before judging source or tests.
-          Let it own precedence; source structure and boundaries; naming and
-          readability; data modeling; contracts; failures; documentation;
-          logging; evolution; test behavior, levels, placement, and doubles.
+          Read and apply ptlam-code-style before judging source or tests. Read
+          its minimum-change reference when judging implementation size or
+          simplicity.
+          Let it own precedence; minimum-change selection; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; test behavior, levels,
+          placement, and doubles.
+          Keep its repository-wide complexity review separate from this skill's
+          changeset review surface.
           Apply a matching stack specialization when one is available.
-          Let this skill own the review surface, intent, risk examination,
-          finding gate, severity, verification limits, and readiness verdict.
+          Let this skill own the changeset review surface, intent, risk
+          examination, finding gate, severity, verification limits, and
+          readiness verdict.
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that

@@ -27,7 +27,8 @@ them.
 **Reason:** Provides the language-neutral conventions and testing doctrine the Kotlin mechanics satisfy.
 
 **Instructions:** Read and apply ptlam-code-style first.
-Let it own precedence; the structure, boundary, naming, readability,
+Let it own precedence; minimum-change selection; repository-wide
+complexity review; the structure, boundary, naming, readability,
 data-modeling, contract, failure, documentation, and logging
 standards; the universal behavior contract; test levels; test
 placement; and test doubles.
