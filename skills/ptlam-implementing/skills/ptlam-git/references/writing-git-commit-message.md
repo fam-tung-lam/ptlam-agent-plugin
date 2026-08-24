@@ -35,8 +35,11 @@ change in isolation.
 
 ## 3. Add the body and issue references
 
-Add a short body only when the subject cannot carry necessary rationale or
-impact. Explain why the change exists instead of replaying its implementation.
+Add a short body when the subject cannot carry necessary rationale or impact.
+Always add a body for a breaking change, security fix, migration, or revert,
+even when its subject appears self-explanatory. Preserve the rationale or impact
+needed to understand the change safely in the future. Explain why the change
+exists instead of replaying its implementation.
 
 Add `Fixes #<issue>` or `Closes #<issue>` only when the change resolves a
 verified issue. Use `Relates #<issue>` when it contributes without closing. Use

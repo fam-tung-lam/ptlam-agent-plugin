@@ -1,6 +1,6 @@
 {
   "name": "ptlam-agent-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A curated collection of portable agent skills for engineering, productivity, and utility workflows.",
   "author": {
     "name": "Pham Tung Lam",
@@ -19,6 +19,7 @@
   "skills": [
     "./skills/ptlam-setup",
     "./skills/ptlam-git",
+    "./skills/ptlam-diagnosing",
     "./skills/ptlam-implementing",
     "./skills/ptlam-researching",
     "./skills/ptlam-prototyping",

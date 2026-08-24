@@ -14,13 +14,30 @@ and this project adheres to
   hexagonal structure, application use cases and DTOs, domain types,
   infrastructure adapters, presentation entry points, integrations, modules,
   dependency injection, lifecycle, operations, and Nest testing.
+
+## [0.3.0] - 2026-08-24
+
+### Added
+
+- Added a read-only diagnosis foundation that returns a cause whose mechanism at
+  the first failing boundary is demonstrated by named observations or a
+  discriminating check after excluding every remaining evidence-supported
+  alternative, or an exact evidence blocker and one discriminating next check.
 - Added a research skill that traces one bounded question to high-trust primary
   sources and delivers an independently reviewed portable HTML evidence report.
 
 ### Changed
 
+- Health Connector debugging now composes the shared diagnosis contract and
+  keeps only SDK-specific evidence mechanics.
+- Git guidance now requires commit bodies for breaking changes, security fixes,
+  migrations, and reverts.
 - GitHub Release creation now waits for approval through the protected
   `github-release` environment after CI and release detection pass.
+- Expanded the shared code-style foundation with complexity rules for choosing
+  sufficient implementations and preserving behavior while deleting, reusing,
+  substituting, or abstracting code. General changeset review applies those
+  rules through its existing code-style dependency.
 
 ## [0.2.0] - 2026-08-22
 
@@ -89,7 +106,9 @@ and this project adheres to
   compatible hosts.
 
 [Unreleased]:
-  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.2.0...HEAD
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.3.0...HEAD
+[0.3.0]:
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.2.0...v0.3.0
 [0.2.0]:
   https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.1.0...v0.2.0
 [0.1.0]:

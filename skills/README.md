@@ -14,100 +14,104 @@ flowchart TB
             (active/public)
         `"]
         SkillNode2["`
+            ptlam-diagnosing
+            (active/public)
+        `"]
+        SkillNode3["`
             ptlam-implementing
             (active/public)
         `"]
-        SkillNode4["`
+        SkillNode5["`
             ptlam-prototyping
             (active/public)
         `"]
-        SkillNode5["`
+        SkillNode6["`
             ptlam-code-style
             (active/internal)
         `"]
-        SkillNode6["`
+        SkillNode7["`
             ptlam-code-style-dart
             (active/public)
         `"]
-        SkillNode7["`
+        SkillNode8["`
             ptlam-code-style-kotlin
             (active/public)
         `"]
-        SkillNode8["`
+        SkillNode9["`
             ptlam-code-style-swift
             (active/public)
         `"]
-        SkillNode9["`
+        SkillNode10["`
             ptlam-code-style-flutter
             (active/public)
         `"]
-        SkillNode10["`
+        SkillNode11["`
             ptlam-code-style-python
             (active/public)
         `"]
-        SkillNode11["`
+        SkillNode12["`
             ptlam-code-style-python-fastapi
             (active/public)
         `"]
-        SkillNode12["`
+        SkillNode13["`
             ptlam-code-style-typescript
             (active/public)
         `"]
-        SkillNode13["`
+        SkillNode14["`
             ptlam-code-style-typescript-nestjs
             (active/public)
         `"]
-        SkillNode14["`
+        SkillNode15["`
             ptlam-creating-skill
             (active/public)
         `"]
-        SkillNode15["`
+        SkillNode16["`
             ptlam-reviewing-code
             (active/public)
         `"]
-        SkillNode21["`
+        SkillNode22["`
             ptlam-creating-adr
             (active/public)
         `"]
     end
     subgraph SkillCategory1["Productivity"]
-        SkillNode3["`
+        SkillNode4["`
             ptlam-researching
             (active/public)
         `"]
-        SkillNode16["`
+        SkillNode17["`
             ptlam-grilling
             (active/public)
         `"]
-        SkillNode17["`
+        SkillNode18["`
             ptlam-creating-prd
             (active/public)
         `"]
-        SkillNode18["`
+        SkillNode19["`
             ptlam-creating-spec
             (active/public)
         `"]
-        SkillNode19["`
+        SkillNode20["`
             ptlam-planning-tickets
             (active/public)
         `"]
-        SkillNode20["`
+        SkillNode21["`
             ptlam-modeling-domain
             (active/public)
         `"]
-        SkillNode22["`
+        SkillNode23["`
             ptlam-creating-atomic-note
             (active/public)
         `"]
-        SkillNode24["`
+        SkillNode25["`
             ptlam-explaining
             (active/public)
         `"]
-        SkillNode25["`
+        SkillNode26["`
             ptlam-mermaiding
             (active/public)
         `"]
-        SkillNode26["`
+        SkillNode27["`
             ptlam-visualization-with-html
             (active/public)
         `"]
@@ -117,86 +121,88 @@ flowchart TB
             ptlam-setup
             (active/public)
         `"]
-        SkillNode23["`
+        SkillNode24["`
             ptlam-scraping-urls
             (active/public)
         `"]
     end
     subgraph SkillCategory3["Health Connector SDK"]
-        SkillNode27["`
+        SkillNode28["`
             ptlam-health-connector-architecture
             (active/public)
         `"]
-        SkillNode28["`
+        SkillNode29["`
             ptlam-health-connector-setup
             (active/public)
         `"]
-        SkillNode29["`
+        SkillNode30["`
             ptlam-health-connector-debug
             (active/public)
         `"]
-        SkillNode30["`
+        SkillNode31["`
             ptlam-health-connector-review
             (active/public)
         `"]
-        SkillNode31["`
+        SkillNode32["`
             ptlam-health-connector-data-type
             (active/public)
         `"]
-        SkillNode32["`
+        SkillNode33["`
             ptlam-health-connector-code-style-dart
             (active/public)
         `"]
-        SkillNode33["`
+        SkillNode34["`
             ptlam-health-connector-code-style-kotlin
             (active/public)
         `"]
-        SkillNode34["`
+        SkillNode35["`
             ptlam-health-connector-code-style-swift
             (active/public)
         `"]
     end
-    SkillNode2 --> SkillNode1
-    SkillNode2 --> SkillNode15
-    SkillNode3 --> SkillNode2
-    SkillNode3 --> SkillNode23
-    SkillNode3 --> SkillNode26
-    SkillNode4 --> SkillNode1
-    SkillNode6 --> SkillNode5
-    SkillNode7 --> SkillNode5
-    SkillNode8 --> SkillNode5
+    SkillNode3 --> SkillNode1
+    SkillNode3 --> SkillNode6
+    SkillNode3 --> SkillNode16
+    SkillNode4 --> SkillNode3
+    SkillNode4 --> SkillNode24
+    SkillNode4 --> SkillNode27
+    SkillNode5 --> SkillNode1
+    SkillNode7 --> SkillNode6
+    SkillNode8 --> SkillNode6
     SkillNode9 --> SkillNode6
-    SkillNode10 --> SkillNode5
-    SkillNode11 --> SkillNode10
-    SkillNode12 --> SkillNode5
-    SkillNode13 --> SkillNode12
-    SkillNode14 --> SkillNode25
-    SkillNode15 --> SkillNode5
-    SkillNode16 --> SkillNode20
-    SkillNode16 --> SkillNode21
-    SkillNode17 --> SkillNode24
-    SkillNode17 --> SkillNode25
-    SkillNode18 --> SkillNode24
+    SkillNode10 --> SkillNode7
+    SkillNode11 --> SkillNode6
+    SkillNode12 --> SkillNode11
+    SkillNode13 --> SkillNode6
+    SkillNode14 --> SkillNode13
+    SkillNode15 --> SkillNode26
+    SkillNode16 --> SkillNode6
+    SkillNode17 --> SkillNode21
+    SkillNode17 --> SkillNode22
     SkillNode18 --> SkillNode25
-    SkillNode19 --> SkillNode24
+    SkillNode18 --> SkillNode26
     SkillNode19 --> SkillNode25
+    SkillNode19 --> SkillNode26
     SkillNode20 --> SkillNode25
-    SkillNode21 --> SkillNode24
-    SkillNode21 --> SkillNode25
-    SkillNode26 --> SkillNode24
-    SkillNode29 --> SkillNode27
-    SkillNode30 --> SkillNode15
-    SkillNode30 --> SkillNode27
-    SkillNode30 --> SkillNode32
-    SkillNode30 --> SkillNode33
-    SkillNode30 --> SkillNode34
-    SkillNode31 --> SkillNode27
-    SkillNode31 --> SkillNode32
+    SkillNode20 --> SkillNode26
+    SkillNode21 --> SkillNode26
+    SkillNode22 --> SkillNode25
+    SkillNode22 --> SkillNode26
+    SkillNode27 --> SkillNode25
+    SkillNode30 --> SkillNode2
+    SkillNode30 --> SkillNode28
+    SkillNode31 --> SkillNode16
+    SkillNode31 --> SkillNode28
     SkillNode31 --> SkillNode33
     SkillNode31 --> SkillNode34
-    SkillNode32 --> SkillNode6
+    SkillNode31 --> SkillNode35
+    SkillNode32 --> SkillNode28
+    SkillNode32 --> SkillNode33
+    SkillNode32 --> SkillNode34
+    SkillNode32 --> SkillNode35
     SkillNode33 --> SkillNode7
     SkillNode34 --> SkillNode8
+    SkillNode35 --> SkillNode9
     classDef publicSkill fill:#dbeafe,stroke:#1d4ed8,color:#172554
     classDef internalSkill fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
     classDef deprecatedSkill fill:#fef3c7,stroke:#b45309,color:#78350f
@@ -205,8 +211,8 @@ flowchart TB
     class SkillNode2 publicSkill
     class SkillNode3 publicSkill
     class SkillNode4 publicSkill
-    class SkillNode5 internalSkill
-    class SkillNode6 publicSkill
+    class SkillNode5 publicSkill
+    class SkillNode6 internalSkill
     class SkillNode7 publicSkill
     class SkillNode8 publicSkill
     class SkillNode9 publicSkill
@@ -235,12 +241,14 @@ flowchart TB
     class SkillNode32 publicSkill
     class SkillNode33 publicSkill
     class SkillNode34 publicSkill
+    class SkillNode35 publicSkill
 ```
 
 | Skill                                      | Category             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Visibility | Status | Replacement |
 | ------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ | ----------- |
 | `ptlam-setup`                              | Utilities            | Install or refresh PTLam's general agent instructions for a project.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | public     | Active | —           |
 | `ptlam-git`                                | Engineering          | Carry out repository-local Git commit, worktree, and conflict-resolution workflows without disturbing unrelated work. Use when creating a commit, writing or revising a commit message, creating or managing a worktree, deciding whether a repository write belongs in the current checkout or a new linked worktree, or resolving an in-progress merge or rebase conflict.                                                                                                                                                                                                                                                                                                                   | public     | Active | —           |
+| `ptlam-diagnosing`                         | Engineering          | Diagnose one failing software behavior and return a cause whose mechanism at the first failing boundary is demonstrated by named observations or a discriminating check with every remaining evidence-supported alternative excluded, or an exact evidence blocker and one discriminating next check. Use when software throws, returns the wrong result, hangs, crashes, regresses, or differs across environments and the requested result is a diagnosis. Compose this skill when a stack or project specialization adds diagnosis mechanics, or when an authorized fix workflow first needs the cause.                                                                                     | public     | Active | —           |
 | `ptlam-implementing`                       | Engineering          | Deliver one bounded software change through task-specific worker agents in isolated Git worktrees and independent reviewer agents on an integration branch. Use when asked to implement from the current prompt or confirmed session context. Use when given a specification, ticket file, issue, or equivalent task link. Do not use for a read-only explanation, plan, diagnosis, or review.                                                                                                                                                                                                                                                                                                 | public     | Active | —           |
 | `ptlam-researching`                        | Productivity         | Research one bounded question against high-trust primary sources and deliver a traceable portable HTML evidence report inside an existing Git repository. Use when a material question needs evidence-led findings, conflict reconciliation, or an explicitly inconclusive result.                                                                                                                                                                                                                                                                                                                                                                                                             | public     | Active | —           |
 | `ptlam-prototyping`                        | Engineering          | Build one throwaway prototype to answer a design question. Use when a user wants to test a state model, business logic, or data shape through a shareable HTML demo, or explore a UI through structurally different variants on one route. Works from scratch or beside an existing module or page. Do not use for an MVP, production feature, technical benchmark, or durable demo.                                                                                                                                                                                                                                                                                                           | public     | Active | —           |
@@ -267,7 +275,7 @@ flowchart TB
 | `ptlam-visualization-with-html`            | Productivity         | Create or revise one portable HTML explainer that renders a verified explanation as an accessible, optionally interactive artifact using native web technologies and Material 3 Expressive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | public     | Active | —           |
 | `ptlam-health-connector-architecture`      | Health Connector SDK | Explain and judge the Health Connector SDK's structure across its Melos packages, Dart API surfaces, Pigeon contracts, Android Health Connect layers, iOS HealthKit layers, failure boundaries, concurrency, and platform limits. Use when tracing a call, deciding where behavior belongs, evaluating a boundary or public API change, or answering how the SDK works internally. Do not use for diagnosing one failure, setting up a checkout, reviewing a whole diff, or implementing a health data type.                                                                                                                                                                                   | public     | Active | —           |
 | `ptlam-health-connector-setup`             | Health Connector SDK | Set up or repair a local Health Connector SDK checkout with its pinned Flutter, Java, and Ruby toolchains, Melos workspace links, Android tools, and macOS-only Swift tools, then prove the available development lanes. Runs only when explicitly requested. Use when bootstrapping a clone, repairing missing dependencies, or preparing a machine to contribute. Do not use for a runtime defect or an already-working checkout's lint failure.                                                                                                                                                                                                                                             | public     | Active | —           |
-| `ptlam-health-connector-debug`             | Health Connector SDK | Diagnose Health Connector SDK failures by reproducing the narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and tracing logs, error codes, generated contracts, handlers, permissions, and platform prerequisites to one failing boundary. Use when a call throws, returns the wrong record or status, hangs, crashes, loses native logs, or behaves differently across platforms. Do not use for toolchain bootstrap, style checks, or a review of an otherwise-working changeset.                                                                                                                                                                                        | public     | Active | —           |
+| `ptlam-health-connector-debug`             | Health Connector SDK | Gather Health Connector SDK diagnosis evidence by reproducing the narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and tracing logs, error codes, generated contracts, handlers, permissions, and platform prerequisites. Use when a call throws, returns the wrong record or status, hangs, crashes, loses native logs, or behaves differently across platforms. Do not use for toolchain bootstrap, style checks, or a review of an otherwise-working changeset.                                                                                                                                                                                                        | public     | Active | —           |
 | `ptlam-health-connector-review`            | Health Connector SDK | Review one Health Connector SDK changeset for project-specific public API, cross-platform, generated-code, privacy, language-convention, test, documentation, and release risks. Use when a code review reaches Health Connector packages, Pigeon contracts, Android Health Connect, or iOS HealthKit. Apply ptlam-reviewing-code for the review surface, finding standard, and verdict. Do not use for fixing findings or diagnosing one failing run.                                                                                                                                                                                                                                         | public     | Active | —           |
 | `ptlam-health-connector-data-type`         | Health Connector SDK | Add or extend one Health Connector health data type and record across the core Dart model, public exports, platform annotations, Pigeon contracts, Dart mappers, Android Health Connect handlers, iOS HealthKit handlers, and applicable tests. Use when introducing a record type, adding one platform to an existing type, changing its capabilities, or repairing an incomplete end-to-end registration. Do not use for an unrelated SDK feature or a language-only refactor.                                                                                                                                                                                                               | public     | Active | —           |
 | `ptlam-health-connector-code-style-dart`   | Health Connector SDK | Write, review, and fix Dart source and tests in the Health Connector SDK against its analyzer rules, formatter contract, imports, visibility, documentation shape, structured logging syntax, and package-specific test layout. Use when editing Dart code, changing the shared lint package, or fixing a Dart format, analysis, documentation, or test-convention failure. Apply ptlam-code-style-dart first. Do not use for workspace architecture, public API design, Pigeon ownership, platform support, or an end-to-end health data type change.                                                                                                                                         | public     | Active | —           |

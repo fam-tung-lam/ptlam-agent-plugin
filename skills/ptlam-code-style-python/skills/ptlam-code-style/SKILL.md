@@ -1,17 +1,18 @@
 ---
 name: ptlam-code-style
 description:
-  Hold source and test code to one language-neutral set of conventions for
-  source-tree structure, module boundaries, naming, function readability, domain
-  modeling, cross-boundary contracts, failure design, documentation, logging,
-  and testing. Use when placing or naming a file, setting a public or internal
-  boundary, shaping a domain type or its states, promising an interface across a
-  process or release boundary, designing a failure or a retry, writing a doc
-  comment, emitting a log record, deciding what a test must prove, choosing a
-  test level, placing a test or a test double, or planning how a change
-  migrates. Use ptlam-modeling-domain instead for business terminology, context
-  boundaries, and business process maps. Use as the foundation for a stack
-  specialization that adds the mechanics.
+  Hold source and test code to one language-neutral set of conventions for code
+  complexity, source-tree structure, module boundaries, naming, function
+  readability, domain modeling, cross-boundary contracts, failure design,
+  documentation, logging, and testing. Use when choosing sufficient code, reuse,
+  deletion, dependency, or abstraction; placing or naming a file; setting a
+  public or internal boundary; shaping a domain type or its states; promising an
+  interface across a process or release boundary; designing a failure or a
+  retry; writing a doc comment; emitting a log record; deciding what a test must
+  prove; choosing a test level; placing a test or a test double; or planning how
+  a change migrates. Use ptlam-modeling-domain instead for business terminology,
+  context boundaries, and business process maps. Use as the foundation for a
+  stack specialization that adds the mechanics.
 ---
 
 # PTLam Code Style
@@ -75,11 +76,12 @@ and owns its rules, its examples, and its caveats.
 | Designing a failure, a retry, or a startup check                | [errors.md](references/errors.md)               |
 | Emitting a log record, naming a logger, or picking a level      | [logging.md](references/logging.md)             |
 
-### Change over time
+### Complexity and evolution
 
-| Concern                                                                    | Reference                               |
-| -------------------------------------------------------------------------- | --------------------------------------- |
-| Abstracting a repeated pattern, migrating a shape, or recording a decision | [evolution.md](references/evolution.md) |
+| Concern                                                                    | Reference                                 |
+| -------------------------------------------------------------------------- | ----------------------------------------- |
+| Choosing sufficient code, reuse, deletion, dependency, or abstraction      | [complexity.md](references/complexity.md) |
+| Abstracting a repeated pattern, migrating a shape, or recording a decision | [evolution.md](references/evolution.md)   |
 
 ### Tests
 

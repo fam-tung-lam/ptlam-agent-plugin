@@ -16,7 +16,7 @@ description:
 
 # Plugin version. Build metadata after "+" does not affect SemVer
 # precedence.
-version: "0.2.0"
+version: "0.3.0"
 
 author:
   name: Pham Tung Lam
@@ -66,6 +66,21 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-diagnosing
+    description:
+      Diagnose one failing software behavior and return a cause whose mechanism
+      at the first failing boundary is demonstrated by named observations or a
+      discriminating check with every remaining evidence-supported alternative
+      excluded, or an exact evidence blocker and one discriminating next check.
+      Use when software throws, returns the wrong result, hangs, crashes,
+      regresses, or differs across environments and the requested result is a
+      diagnosis. Compose this skill when a stack or project specialization adds
+      diagnosis mechanics, or when an authorized fix workflow first needs the
+      cause.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-implementing
     description:
       Deliver one bounded software change through task-specific worker agents
@@ -94,6 +109,21 @@ skills:
           Invoking this skill authorizes scoped local worktrees, branches,
           commits, and integration operations. Require explicit authority for a
           push, pull request, issue update, shared-branch merge, or cleanup.
+      - skill_id: ptlam-code-style
+        reason:
+          Supplies the language-neutral implementation standard, including the
+          code-complexity rules, before workers author source or tests.
+        instructions: |-
+          Read and apply ptlam-code-style before authoring source or test
+          changes.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; and test behavior,
+          levels, placement, and doubles.
+          Apply a matching stack or project specialization when one is
+          available.
+          Keep this skill's ownership of task capture, team sizing, delegation,
+          integration, review coordination, repair, and delivery.
       - skill_id: ptlam-reviewing-code
         reason:
           Supplies the independent review standard and readiness verdict for the
@@ -216,16 +246,18 @@ skills:
   - id: ptlam-code-style
     description:
       Hold source and test code to one language-neutral set of conventions for
-      source-tree structure, module boundaries, naming, function readability,
-      domain modeling, cross-boundary contracts, failure design, documentation,
-      logging, and testing. Use when placing or naming a file, setting a public
-      or internal boundary, shaping a domain type or its states, promising an
-      interface across a process or release boundary, designing a failure or a
-      retry, writing a doc comment, emitting a log record, deciding what a test
-      must prove, choosing a test level, placing a test or a test double, or
-      planning how a change migrates. Use ptlam-modeling-domain instead for
-      business terminology, context boundaries, and business process maps. Use
-      as the foundation for a stack specialization that adds the mechanics.
+      code complexity, source-tree structure, module boundaries, naming,
+      function readability, domain modeling, cross-boundary contracts, failure
+      design, documentation, logging, and testing. Use when choosing sufficient
+      code, reuse, deletion, dependency, or abstraction; placing or naming a
+      file; setting a public or internal boundary; shaping a domain type or its
+      states; promising an interface across a process or release boundary;
+      designing a failure or a retry; writing a doc comment; emitting a log
+      record; deciding what a test must prove; choosing a test level; placing a
+      test or a test double; or planning how a change migrates. Use
+      ptlam-modeling-domain instead for business terminology, context
+      boundaries, and business process maps. Use as the foundation for a stack
+      specialization that adds the mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -250,10 +282,10 @@ skills:
           Dart mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Dart language, package, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -278,10 +310,10 @@ skills:
           Kotlin mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Kotlin language, module, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -307,10 +339,10 @@ skills:
           Swift mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Swift language, package, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -359,10 +391,10 @@ skills:
           Python mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Python language, library, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -414,10 +446,10 @@ skills:
           TypeScript mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; the structure, boundary, naming, readability,
-          data-modeling, contract, failure, documentation, and logging
-          standards; the universal behavior contract; test levels; test
-          placement; and test doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; the universal behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for TypeScript language, package, and tool
           mechanics that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
@@ -492,13 +524,14 @@ skills:
     required_skills:
       - skill_id: ptlam-code-style
         reason:
-          Provides the language-neutral source, boundary, failure,
+          Provides the language-neutral complexity, source, boundary, failure,
           documentation, logging, and testing conventions a code review judges.
         instructions: |-
           Read and apply ptlam-code-style before judging source or tests.
-          Let it own precedence; source structure and boundaries; naming and
-          readability; data modeling; contracts; failures; documentation;
-          logging; evolution; test behavior, levels, placement, and doubles.
+          Let it own precedence; code complexity; source structure and
+          boundaries; naming and readability; data modeling; contracts;
+          failures; documentation; logging; evolution; test behavior, levels,
+          placement, and doubles.
           Apply a matching stack specialization when one is available.
           Let this skill own the review surface, intent, risk examination,
           finding gate, severity, verification limits, and readiness verdict.
@@ -813,27 +846,44 @@ skills:
     required_skills: []
   - id: ptlam-health-connector-debug
     description:
-      Diagnose Health Connector SDK failures by reproducing the narrowest Dart,
-      Pigeon, Android Health Connect, or iOS HealthKit path and tracing logs,
-      error codes, generated contracts, handlers, permissions, and platform
-      prerequisites to one failing boundary. Use when a call throws, returns the
-      wrong record or status, hangs, crashes, loses native logs, or behaves
-      differently across platforms. Do not use for toolchain bootstrap, style
-      checks, or a review of an otherwise-working changeset.
+      Gather Health Connector SDK diagnosis evidence by reproducing the
+      narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and
+      tracing logs, error codes, generated contracts, handlers, permissions, and
+      platform prerequisites. Use when a call throws, returns the wrong record
+      or status, hangs, crashes, loses native logs, or behaves differently
+      across platforms. Do not use for toolchain bootstrap, style checks, or a
+      review of an otherwise-working changeset.
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills:
+      - skill_id: ptlam-diagnosing
+        reason:
+          Provides the general read-only diagnosis workflow, evidence model,
+          hypothesis ranking, failing-boundary standard, report, and stop
+          condition.
+        instructions: |-
+          Read and apply ptlam-diagnosing first.
+          Let it own the diagnosis scope; reproduction and evidence rules;
+          observation, inference, and assumption labels; hypothesis ranking;
+          failing-boundary model; read-only authority; report; and completion.
+          Use this skill only for Health Connector-specific capture fields,
+          commands, logging and privacy mechanics, tracing references, symptom
+          routes, and platform completion mechanics.
+          The foundation's authority, evidence, and completion rules take
+          precedence. This specialization may be stricter, never looser.
       - skill_id: ptlam-health-connector-architecture
         reason:
           Supplies the package, channel, native-layer, and platform-boundary
           model needed to locate a failure without duplicating architecture.
         instructions: |-
-          Read and apply ptlam-health-connector-architecture first.
+          After ptlam-diagnosing, read and apply
+          ptlam-health-connector-architecture.
           Let it own package boundaries, call paths, Pigeon ownership, native
           layers, failure translation, concurrency, and platform constraints.
-          Use this skill only to gather runtime evidence, isolate the failing
-          boundary, and report the diagnosis.
+          Use this specialization only to gather Health Connector runtime
+          evidence against those boundaries and platform constraints. Return
+          that evidence through ptlam-diagnosing's boundary model and report.
   - id: ptlam-health-connector-review
     description:
       Review one Health Connector SDK changeset for project-specific public API,
