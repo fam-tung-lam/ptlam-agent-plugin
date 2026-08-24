@@ -1,4 +1,241 @@
-## Available skills
+## Available Skills
+
+Arrows point from a dependent skill to the skill it requires.
+
+```mermaid
+---
+config:
+  htmlLabels: false
+---
+flowchart TB
+    subgraph SkillCategory0["Engineering"]
+        SkillNode1["`
+            ptlam-git
+            (active/public)
+        `"]
+        SkillNode2["`
+            ptlam-diagnosing
+            (active/public)
+        `"]
+        SkillNode3["`
+            ptlam-implementing
+            (active/public)
+        `"]
+        SkillNode5["`
+            ptlam-prototyping
+            (active/public)
+        `"]
+        SkillNode6["`
+            ptlam-code-style
+            (active/internal)
+        `"]
+        SkillNode7["`
+            ptlam-code-style-dart
+            (active/public)
+        `"]
+        SkillNode8["`
+            ptlam-code-style-kotlin
+            (active/public)
+        `"]
+        SkillNode9["`
+            ptlam-code-style-swift
+            (active/public)
+        `"]
+        SkillNode10["`
+            ptlam-code-style-flutter
+            (active/public)
+        `"]
+        SkillNode11["`
+            ptlam-code-style-python
+            (active/public)
+        `"]
+        SkillNode12["`
+            ptlam-code-style-python-fastapi
+            (active/public)
+        `"]
+        SkillNode13["`
+            ptlam-code-style-typescript
+            (active/public)
+        `"]
+        SkillNode14["`
+            ptlam-creating-skill
+            (active/public)
+        `"]
+        SkillNode15["`
+            ptlam-reviewing-code
+            (active/public)
+        `"]
+        SkillNode21["`
+            ptlam-creating-adr
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory1["Productivity"]
+        SkillNode4["`
+            ptlam-researching
+            (active/public)
+        `"]
+        SkillNode16["`
+            ptlam-grilling
+            (active/public)
+        `"]
+        SkillNode17["`
+            ptlam-creating-prd
+            (active/public)
+        `"]
+        SkillNode18["`
+            ptlam-creating-spec
+            (active/public)
+        `"]
+        SkillNode19["`
+            ptlam-planning-tickets
+            (active/public)
+        `"]
+        SkillNode20["`
+            ptlam-modeling-domain
+            (active/public)
+        `"]
+        SkillNode22["`
+            ptlam-creating-atomic-note
+            (active/public)
+        `"]
+        SkillNode24["`
+            ptlam-explaining
+            (active/public)
+        `"]
+        SkillNode25["`
+            ptlam-mermaiding
+            (active/public)
+        `"]
+        SkillNode26["`
+            ptlam-visualization-with-html
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory2["Utilities"]
+        SkillNode0["`
+            ptlam-setup
+            (active/public)
+        `"]
+        SkillNode23["`
+            ptlam-scraping-urls
+            (active/public)
+        `"]
+    end
+    subgraph SkillCategory3["Health Connector SDK"]
+        SkillNode27["`
+            ptlam-health-connector-architecture
+            (active/public)
+        `"]
+        SkillNode28["`
+            ptlam-health-connector-setup
+            (active/public)
+        `"]
+        SkillNode29["`
+            ptlam-health-connector-debug
+            (active/public)
+        `"]
+        SkillNode30["`
+            ptlam-health-connector-review
+            (active/public)
+        `"]
+        SkillNode31["`
+            ptlam-health-connector-data-type
+            (active/public)
+        `"]
+        SkillNode32["`
+            ptlam-health-connector-code-style-dart
+            (active/public)
+        `"]
+        SkillNode33["`
+            ptlam-health-connector-code-style-kotlin
+            (active/public)
+        `"]
+        SkillNode34["`
+            ptlam-health-connector-code-style-swift
+            (active/public)
+        `"]
+    end
+    SkillNode3 --> SkillNode1
+    SkillNode3 --> SkillNode15
+    SkillNode4 --> SkillNode3
+    SkillNode4 --> SkillNode23
+    SkillNode4 --> SkillNode26
+    SkillNode5 --> SkillNode1
+    SkillNode7 --> SkillNode6
+    SkillNode8 --> SkillNode6
+    SkillNode9 --> SkillNode6
+    SkillNode10 --> SkillNode7
+    SkillNode11 --> SkillNode6
+    SkillNode12 --> SkillNode11
+    SkillNode13 --> SkillNode6
+    SkillNode14 --> SkillNode25
+    SkillNode15 --> SkillNode6
+    SkillNode16 --> SkillNode20
+    SkillNode16 --> SkillNode21
+    SkillNode17 --> SkillNode24
+    SkillNode17 --> SkillNode25
+    SkillNode18 --> SkillNode24
+    SkillNode18 --> SkillNode25
+    SkillNode19 --> SkillNode24
+    SkillNode19 --> SkillNode25
+    SkillNode20 --> SkillNode25
+    SkillNode21 --> SkillNode24
+    SkillNode21 --> SkillNode25
+    SkillNode26 --> SkillNode24
+    SkillNode29 --> SkillNode2
+    SkillNode29 --> SkillNode27
+    SkillNode30 --> SkillNode15
+    SkillNode30 --> SkillNode27
+    SkillNode30 --> SkillNode32
+    SkillNode30 --> SkillNode33
+    SkillNode30 --> SkillNode34
+    SkillNode31 --> SkillNode27
+    SkillNode31 --> SkillNode32
+    SkillNode31 --> SkillNode33
+    SkillNode31 --> SkillNode34
+    SkillNode32 --> SkillNode7
+    SkillNode33 --> SkillNode8
+    SkillNode34 --> SkillNode9
+    classDef publicSkill fill:#dbeafe,stroke:#1d4ed8,color:#172554
+    classDef internalSkill fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
+    classDef deprecatedSkill fill:#fef3c7,stroke:#b45309,color:#78350f
+    class SkillNode0 publicSkill
+    class SkillNode1 publicSkill
+    class SkillNode2 publicSkill
+    class SkillNode3 publicSkill
+    class SkillNode4 publicSkill
+    class SkillNode5 publicSkill
+    class SkillNode6 internalSkill
+    class SkillNode7 publicSkill
+    class SkillNode8 publicSkill
+    class SkillNode9 publicSkill
+    class SkillNode10 publicSkill
+    class SkillNode11 publicSkill
+    class SkillNode12 publicSkill
+    class SkillNode13 publicSkill
+    class SkillNode14 publicSkill
+    class SkillNode15 publicSkill
+    class SkillNode16 publicSkill
+    class SkillNode17 publicSkill
+    class SkillNode18 publicSkill
+    class SkillNode19 publicSkill
+    class SkillNode20 publicSkill
+    class SkillNode21 publicSkill
+    class SkillNode22 publicSkill
+    class SkillNode23 publicSkill
+    class SkillNode24 publicSkill
+    class SkillNode25 publicSkill
+    class SkillNode26 publicSkill
+    class SkillNode27 publicSkill
+    class SkillNode28 publicSkill
+    class SkillNode29 publicSkill
+    class SkillNode30 publicSkill
+    class SkillNode31 publicSkill
+    class SkillNode32 publicSkill
+    class SkillNode33 publicSkill
+    class SkillNode34 publicSkill
+```
 
 | Skill                                      | Category             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Visibility | Status | Replacement |
 | ------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------ | ----------- |
@@ -36,125 +273,3 @@
 | `ptlam-health-connector-code-style-dart`   | Health Connector SDK | Write, review, and fix Dart source and tests in the Health Connector SDK against its analyzer rules, formatter contract, imports, visibility, documentation shape, structured logging syntax, and package-specific test layout. Use when editing Dart code, changing the shared lint package, or fixing a Dart format, analysis, documentation, or test-convention failure. Apply ptlam-code-style-dart first. Do not use for workspace architecture, public API design, Pigeon ownership, platform support, or an end-to-end health data type change.                                                                                                                                         | public     | Active | —           |
 | `ptlam-health-connector-code-style-kotlin` | Health Connector SDK | Write, review, and fix Kotlin source and tests in Health Connector's Android package against its visibility, file and declaration shape, import order, structured logging syntax, ktlint and detekt configuration, and JUnit 5, MockK, Kotest, and coroutine-test conventions. Use when editing Kotlin code or fixing a Kotlin formatting, analysis, or test-convention failure. Apply ptlam-code-style-kotlin first. Do not use for Android architecture, Health Connect behavior, Pigeon ownership, or end-to-end handler registration.                                                                                                                                                      | public     | Active | —           |
 | `ptlam-health-connector-code-style-swift`  | Health Connector SDK | Write, review, and fix Swift source in Health Connector's iOS package against its access, declaration and extension shape, structured logging syntax, SwiftLint baseline, and SwiftFormat configuration. Use when editing Swift code or fixing a Swift analysis, formatting, or native logging convention failure. Apply ptlam-code-style-swift first. Do not use for iOS architecture, HealthKit behavior, Pigeon threading, failure translation, or end-to-end handler registration.                                                                                                                                                                                                         | public     | Active | —           |
-
-## Skill dependency graph
-
-Arrows point from a dependent skill to the skill it requires.
-
-```mermaid
-flowchart LR
-  skill_0["ptlam-setup [public root]"]
-  skill_1["ptlam-git [public root]"]
-  skill_2["ptlam-diagnosing [public root]"]
-  skill_3["ptlam-implementing [public root]"]
-  skill_4["ptlam-researching [public root]"]
-  skill_5["ptlam-prototyping [public root]"]
-  skill_6["ptlam-code-style [internal dependency]"]
-  skill_7["ptlam-code-style-dart [public root]"]
-  skill_8["ptlam-code-style-kotlin [public root]"]
-  skill_9["ptlam-code-style-swift [public root]"]
-  skill_10["ptlam-code-style-flutter [public root]"]
-  skill_11["ptlam-code-style-python [public root]"]
-  skill_12["ptlam-code-style-python-fastapi [public root]"]
-  skill_13["ptlam-code-style-typescript [public root]"]
-  skill_14["ptlam-creating-skill [public root]"]
-  skill_15["ptlam-reviewing-code [public root]"]
-  skill_16["ptlam-grilling [public root]"]
-  skill_17["ptlam-creating-prd [public root]"]
-  skill_18["ptlam-creating-spec [public root]"]
-  skill_19["ptlam-planning-tickets [public root]"]
-  skill_20["ptlam-modeling-domain [public root]"]
-  skill_21["ptlam-creating-adr [public root]"]
-  skill_22["ptlam-creating-atomic-note [public root]"]
-  skill_23["ptlam-scraping-urls [public root]"]
-  skill_24["ptlam-explaining [public root]"]
-  skill_25["ptlam-mermaiding [public root]"]
-  skill_26["ptlam-visualization-with-html [public root]"]
-  skill_27["ptlam-health-connector-architecture [public root]"]
-  skill_28["ptlam-health-connector-setup [public root]"]
-  skill_29["ptlam-health-connector-debug [public root]"]
-  skill_30["ptlam-health-connector-review [public root]"]
-  skill_31["ptlam-health-connector-data-type [public root]"]
-  skill_32["ptlam-health-connector-code-style-dart [public root]"]
-  skill_33["ptlam-health-connector-code-style-kotlin [public root]"]
-  skill_34["ptlam-health-connector-code-style-swift [public root]"]
-  skill_3 --> skill_1
-  skill_3 --> skill_15
-  skill_4 --> skill_3
-  skill_4 --> skill_23
-  skill_4 --> skill_26
-  skill_5 --> skill_1
-  skill_7 --> skill_6
-  skill_8 --> skill_6
-  skill_9 --> skill_6
-  skill_10 --> skill_7
-  skill_11 --> skill_6
-  skill_12 --> skill_11
-  skill_13 --> skill_6
-  skill_14 --> skill_25
-  skill_15 --> skill_6
-  skill_16 --> skill_20
-  skill_16 --> skill_21
-  skill_17 --> skill_24
-  skill_17 --> skill_25
-  skill_18 --> skill_24
-  skill_18 --> skill_25
-  skill_19 --> skill_24
-  skill_19 --> skill_25
-  skill_20 --> skill_25
-  skill_21 --> skill_24
-  skill_21 --> skill_25
-  skill_26 --> skill_24
-  skill_29 --> skill_2
-  skill_29 --> skill_27
-  skill_30 --> skill_15
-  skill_30 --> skill_27
-  skill_30 --> skill_32
-  skill_30 --> skill_33
-  skill_30 --> skill_34
-  skill_31 --> skill_27
-  skill_31 --> skill_32
-  skill_31 --> skill_33
-  skill_31 --> skill_34
-  skill_32 --> skill_7
-  skill_33 --> skill_8
-  skill_34 --> skill_9
-  classDef publicRoot fill:#dbeafe,stroke:#1d4ed8,color:#172554
-  classDef internalDependency fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-dasharray:5 5
-  classDef deprecated fill:#fef3c7,stroke:#b45309,color:#78350f
-  class skill_0 publicRoot
-  class skill_1 publicRoot
-  class skill_2 publicRoot
-  class skill_3 publicRoot
-  class skill_4 publicRoot
-  class skill_5 publicRoot
-  class skill_6 internalDependency
-  class skill_7 publicRoot
-  class skill_8 publicRoot
-  class skill_9 publicRoot
-  class skill_10 publicRoot
-  class skill_11 publicRoot
-  class skill_12 publicRoot
-  class skill_13 publicRoot
-  class skill_14 publicRoot
-  class skill_15 publicRoot
-  class skill_16 publicRoot
-  class skill_17 publicRoot
-  class skill_18 publicRoot
-  class skill_19 publicRoot
-  class skill_20 publicRoot
-  class skill_21 publicRoot
-  class skill_22 publicRoot
-  class skill_23 publicRoot
-  class skill_24 publicRoot
-  class skill_25 publicRoot
-  class skill_26 publicRoot
-  class skill_27 publicRoot
-  class skill_28 publicRoot
-  class skill_29 publicRoot
-  class skill_30 publicRoot
-  class skill_31 publicRoot
-  class skill_32 publicRoot
-  class skill_33 publicRoot
-  class skill_34 publicRoot
-```
