@@ -61,11 +61,12 @@ and owns its rules, its examples, and its caveats.
 | Designing a failure, a retry, or a startup check                | [errors.md](references/errors.md)               |
 | Emitting a log record, naming a logger, or picking a level      | [logging.md](references/logging.md)             |
 
-### Change over time
+### Complexity and evolution
 
-| Concern                                                                    | Reference                               |
-| -------------------------------------------------------------------------- | --------------------------------------- |
-| Abstracting a repeated pattern, migrating a shape, or recording a decision | [evolution.md](references/evolution.md) |
+| Concern                                                                    | Reference                                 |
+| -------------------------------------------------------------------------- | ----------------------------------------- |
+| Choosing sufficient code, reuse, deletion, dependency, or abstraction      | [complexity.md](references/complexity.md) |
+| Abstracting a repeated pattern, migrating a shape, or recording a decision | [evolution.md](references/evolution.md)   |
 
 ### Tests
 

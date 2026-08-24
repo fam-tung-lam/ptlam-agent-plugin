@@ -79,6 +79,7 @@ flowchart LR
   skill_33["ptlam-health-connector-code-style-kotlin [public root]"]
   skill_34["ptlam-health-connector-code-style-swift [public root]"]
   skill_3 --> skill_1
+  skill_3 --> skill_6
   skill_3 --> skill_15
   skill_4 --> skill_3
   skill_4 --> skill_23

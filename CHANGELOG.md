@@ -25,6 +25,10 @@ and this project adheres to
   migrations, and reverts.
 - GitHub Release creation now waits for approval through the protected
   `github-release` environment after CI and release detection pass.
+- Expanded the shared code-style foundation with complexity rules for choosing
+  sufficient implementations and preserving behavior while deleting, reusing,
+  substituting, or abstracting code. General changeset review applies those
+  rules through its existing code-style dependency.
 
 ## [0.2.0] - 2026-08-22
 
