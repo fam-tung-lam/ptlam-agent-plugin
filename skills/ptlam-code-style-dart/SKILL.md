@@ -25,10 +25,10 @@ mechanics only; the foundation owns the standard they satisfy.
 **Reason:** Provides the language-neutral conventions and testing doctrine the Dart mechanics satisfy.
 
 **Instructions:** Read and apply ptlam-code-style first.
-Let it own precedence; the structure, boundary, naming, readability,
-data-modeling, contract, failure, documentation, and logging
-standards; the universal behavior contract; test levels; test
-placement; and test doubles.
+Let it own precedence; code complexity; source structure and
+boundaries; naming and readability; data modeling; contracts;
+failures; documentation; logging; the universal behavior contract;
+test levels; test placement; and test doubles.
 Use this skill only for Dart language, package, and tool mechanics
 that satisfy those standards.
 This specialization may be stricter than the foundation, never looser.
