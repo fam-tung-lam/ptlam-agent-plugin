@@ -10,11 +10,17 @@ and this project adheres to
 
 ### Added
 
+- Added a read-only diagnosis foundation that returns an evidence-backed root
+  cause or an exact evidence blocker and one discriminating next check.
 - Added a research skill that traces one bounded question to high-trust primary
   sources and delivers an independently reviewed portable HTML evidence report.
 
 ### Changed
 
+- Health Connector debugging now composes the shared diagnosis contract and
+  keeps only SDK-specific evidence mechanics.
+- Git guidance now requires commit bodies for breaking changes, security fixes,
+  data migrations, and reverts.
 - GitHub Release creation now waits for approval through the protected
   `github-release` environment after CI and release detection pass.
 
