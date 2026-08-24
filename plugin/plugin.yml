@@ -66,6 +66,19 @@ skills:
     visibility: public
     status: active
     required_skills: []
+  - id: ptlam-diagnosing
+    description:
+      Diagnose one failing software behavior and return an evidence-backed root
+      cause and failing boundary, or an exact evidence blocker and one
+      discriminating next check. Use when software throws, returns the wrong
+      result, hangs, crashes, regresses, or differs across environments and the
+      requested result is a diagnosis. Compose this skill when a stack or
+      project specialization adds diagnosis mechanics, or when an authorized fix
+      workflow first needs the cause.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills: []
   - id: ptlam-implementing
     description:
       Deliver one bounded software change through task-specific worker agents
@@ -781,27 +794,44 @@ skills:
     required_skills: []
   - id: ptlam-health-connector-debug
     description:
-      Diagnose Health Connector SDK failures by reproducing the narrowest Dart,
-      Pigeon, Android Health Connect, or iOS HealthKit path and tracing logs,
-      error codes, generated contracts, handlers, permissions, and platform
-      prerequisites to one failing boundary. Use when a call throws, returns the
-      wrong record or status, hangs, crashes, loses native logs, or behaves
-      differently across platforms. Do not use for toolchain bootstrap, style
-      checks, or a review of an otherwise-working changeset.
+      Gather Health Connector SDK diagnosis evidence by reproducing the
+      narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and
+      tracing logs, error codes, generated contracts, handlers, permissions, and
+      platform prerequisites. Use when a call throws, returns the wrong record
+      or status, hangs, crashes, loses native logs, or behaves differently
+      across platforms. Do not use for toolchain bootstrap, style checks, or a
+      review of an otherwise-working changeset.
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills:
+      - skill_id: ptlam-diagnosing
+        reason:
+          Provides the general read-only diagnosis workflow, evidence model,
+          hypothesis ranking, failing-boundary standard, report, and stop
+          condition.
+        instructions: |-
+          Read and apply ptlam-diagnosing first.
+          Let it own the diagnosis scope; reproduction and evidence rules;
+          observation, inference, and assumption labels; hypothesis ranking;
+          failing-boundary model; read-only authority; report; and completion.
+          Use this skill only for Health Connector-specific capture fields,
+          commands, logging and privacy mechanics, tracing references, symptom
+          routes, and platform completion mechanics.
+          The foundation's authority, evidence, and completion rules take
+          precedence. This specialization may be stricter, never looser.
       - skill_id: ptlam-health-connector-architecture
         reason:
           Supplies the package, channel, native-layer, and platform-boundary
           model needed to locate a failure without duplicating architecture.
         instructions: |-
-          Read and apply ptlam-health-connector-architecture first.
+          After ptlam-diagnosing, read and apply
+          ptlam-health-connector-architecture.
           Let it own package boundaries, call paths, Pigeon ownership, native
           layers, failure translation, concurrency, and platform constraints.
-          Use this skill only to gather runtime evidence, isolate the failing
-          boundary, and report the diagnosis.
+          Use this specialization only to gather Health Connector runtime
+          evidence against those boundaries and platform constraints. Return
+          that evidence through ptlam-diagnosing's boundary model and report.
   - id: ptlam-health-connector-review
     description:
       Review one Health Connector SDK changeset for project-specific public API,
