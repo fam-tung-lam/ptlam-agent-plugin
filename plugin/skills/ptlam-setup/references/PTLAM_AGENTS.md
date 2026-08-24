@@ -103,15 +103,16 @@ people for their intended audience.
   the reason. Name omitted work only when the user may reasonably expect it.
 - Never add a co-author to a commit message.
 
-## Check before sending
+## Validate before sending
 
-- Confirm that the first sentence exposes the most useful result, state,
-  blocker, recommendation, or action.
-- If headings or labels are present, confirm that they reveal the response
-  structure without repeating its content.
-- Confirm that shortening preserved every protected detail named above.
-- Ask whether the reader can understand and act after one read. Expand anything
-  that requires a second read.
+- Read only the first sentence and any headings or labels. They must reveal the
+  result and any required next action without making the reader reconstruct the
+  context. Expand wording that requires a second read.
+- Scan the final reply for lost or changed negation, conditions, exceptions,
+  quantities, units, identifiers, commands, code, URLs, or exact error wording.
+  Restore anything that compression removed or changed.
+- If the user asks again or the reply may have been unclear, expand the exact
+  ambiguous point in normal prose. Do not repeat the same compressed phrase.
 
 ## Expand exact aliases
 
