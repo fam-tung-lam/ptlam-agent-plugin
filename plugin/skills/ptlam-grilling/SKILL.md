@@ -14,20 +14,23 @@ latest decision map without relying on chat history.
 ```mermaid
 flowchart LR
     ResolveRecord["Resolve one session record"] --> BuildDecisionMap["Build and persist the decision map"]
-    BuildDecisionMap --> AskQuestion["Ask one consequential question"]
+    BuildDecisionMap --> ExpensiveStructure{"Fixes a structure expensive to reverse?"}
+    ExpensiveStructure -->|"Yes"| TakeJudgment["Take the architecture judgment"]
+    TakeJudgment --> AskQuestion["Ask one consequential question"]
+    ExpensiveStructure -->|"No"| AskQuestion
     AskQuestion --> PersistAnswer["Persist the answer and updated map"]
     PersistAnswer --> ChoiceRemains{"Outcome-changing choice remains?"}
-    ChoiceRemains -->|"Yes"| AskQuestion
+    ChoiceRemains -->|"Yes"| ExpensiveStructure
     ChoiceRemains -->|"No"| ConfirmUnderstanding["Confirm shared understanding"]
     ConfirmUnderstanding --> CloseSession["Complete or defer the session"]
 ```
 
-| Concern      | Boundary                                                                                                   |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
-| Decision     | The agent recommends; the user owns every outcome-changing choice.                                         |
-| File effect  | This invocation may write its session record, domain context, and qualifying ADRs at their resolved paths. |
-| Later action | Implementation, Git operations, and publication require separate authority.                                |
-| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence.    |
+| Concern      | Boundary                                                                                                                                                                           |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decision     | The agent recommends; the user owns every outcome-changing choice.                                                                                                                 |
+| File effect  | This invocation may write its session record, domain context, and qualifying ADRs at their resolved paths. The architecture judgment writes no file; it enters the session record. |
+| Later action | Implementation, Git operations, and publication require separate authority.                                                                                                        |
+| Done         | The user confirms the persisted decision map, or the record names each deferred choice and consequence.                                                                            |
 
 ## 1. Resolve the session record
 
@@ -75,23 +78,26 @@ matches that state.
 ## 3. Interview one decision at a time
 
 1. Select the highest-impact unresolved decision whose prerequisites are known.
-2. Ask exactly one question. State why it matters now, the recommended answer
+2. When that decision fixes a structure that is expensive to reverse, take the
+   recommendation from the loaded architecture skill's judgment. That skill
+   recommends; this skill asks and records; the user decides.
+3. When that judgment leaves one open question, ask it before the structural
+   decision.
+4. Ask exactly one question. State why it matters now, the recommended answer
    and rationale, the strongest material alternative, and the main trade-off.
-3. Wait for the user's answer before asking another question.
-4. Record the answer, then update the map to show what it resolves, changes, or
+5. Wait for the user's answer before asking another question.
+6. Record the answer, then update the map to show what it resolves, changes, or
    invalidates downstream.
-5. Challenge contradictions with evidence. Reopen an earlier branch when a new
+7. Challenge contradictions with evidence. Reopen an earlier branch when a new
    answer makes it inconsistent.
-6. Persist the checkpoint before yielding with the next substantive question.
-7. Continue until every outcome-changing branch is resolved or explicitly
-   deferred with an owner and consequence.
+8. Persist the checkpoint before yielding with the next substantive question.
 
 Use concrete scenarios and counterexamples when an abstract answer could hide
-different interpretations. Recommend decisively, but never present the
-recommendation as the user's decision.
+different interpretations.
 
 Complete this step when no answerable outcome-changing decision remains and the
-record reflects every resolved, invalidated, deferred, or open branch.
+record reflects every resolved, invalidated, or open branch and every deferred
+branch with its owner and consequence.
 
 ## 4. Confirm shared understanding
 
@@ -102,13 +108,12 @@ whether it represents the shared understanding, and wait.
 If the user corrects it, update the map and resume from the highest-impact open
 decision. If the user asks to stop or act before confirmation, persist the
 session as `deferred` and report the unresolved decisions and consequences. An
-early action request is not confirmation. Treat later implementation as a
-separate task with new authority.
+early action request is not confirmation. Do not act on the map until the user
+confirms it.
 
-Act on the result only after explicit confirmation. Complete the session when
-every outcome-changing decision is resolved or explicitly deferred, the user has
-confirmed the shared understanding, the confirmation is persisted, and the
-status is `complete`.
+Complete the session when every outcome-changing decision is resolved or
+explicitly deferred, the user has confirmed the shared understanding, the
+confirmation is persisted, and the status is `complete`.
 
 See [acknowledgements](ACKNOWLEDGEMENTS.md) for the source that inspired this
 workflow.

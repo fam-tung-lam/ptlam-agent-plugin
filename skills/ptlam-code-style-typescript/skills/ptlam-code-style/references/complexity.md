@@ -26,10 +26,13 @@ installation, update, security, licensing, and removal costs add.
 - Fix a shared cause once when every affected caller already reaches that owner.
 - Keep one coherent responsibility together even when splitting it would make an
   individual file or diff shorter.
-- Leave speculative behavior unbuilt until a confirmed contract requires it.
+- Defer speculative behavior until a confirmed contract requires it.
 - Prefer direct established code over clever compression or indirection.
 - Add an abstraction only for a demonstrated variation. Apply the evolution
   rules when repeated cases may justify one.
+
+A confirmed contract is the signal to add code. `ptlam-architecturing` owns the
+signal to add system structure such as a runtime, a store, or a second platform.
 
 ## Require preservation evidence
 

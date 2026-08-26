@@ -32,6 +32,22 @@ finding gate, severity, verification limits, and readiness verdict.
 
 Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 
+### `ptlam-architecturing`
+
+**Reason:** Supplies the judging-suitability standard for a changeset that introduces a structure expensive to reverse.
+
+**Instructions:** Read ptlam-architecturing while examining the change.
+Apply only its judging-suitability standard, and only when the
+changeset introduces a component, runtime, or data-store split, a
+published surface, state ownership, or a platform commitment.
+Let it own the verdict on that structure and the stale heuristics
+to revalidate.
+Keep this skill's ownership of the review surface, finding gate,
+severity, and readiness verdict.
+Skip it for a changeset that introduces no such structure.
+
+Read [ptlam-architecturing](skills/ptlam-architecturing/SKILL.md).
+
 ## Establish the review contract
 
 1. Resolve the target repository and worktree. Read the current request and
@@ -77,6 +93,12 @@ below to cover risks that code conventions alone cannot settle.
 
 When a package manifest or lockfile changes, read
 [reviewing dependency changes](references/dependency-changes.md).
+
+When the changeset introduces a component, runtime, or data-store split, a
+published surface, state ownership, or a platform commitment, read the loaded
+architecture skill's judging-suitability standard. Admit a finding on that
+structure only when that standard's verdict is not yet suitable. Report an
+unknown need as missing intent rather than a finding.
 
 Inspect existing CI evidence only when it belongs to the exact revision under
 review. Run check-mode commands only when task authority and repository rules

@@ -22,6 +22,8 @@ flowchart LR
 
 Only `ptlam-grilling` interviews. Apply this skill after a choice is confirmed;
 route an unresolved outcome-changing decision back to the parent decision work.
+This skill records a confirmed decision, preferring an architecture judgment
+from `ptlam-architecturing` as its source; it does not re-open the judgment.
 
 ## 1. Resolve the decision and destination
 
@@ -44,11 +46,17 @@ destination, and file authority are explicit.
 
 Write an ADR when the choice materially does at least one of these:
 
-- constrains architecture across components, teams, or release boundaries;
-- publishes or changes a contract, data format, identity scheme, or dependency;
-- is costly or risky to reverse after adoption;
-- lasts beyond the current implementation task; or
+- splits or merges a component, runtime, or data store;
+- publishes or changes a surface such as an API, SDK, CLI, schema, file format,
+  or plugin interface;
+- moves where authoritative state lives;
+- commits to a platform such as an OS, store, device, or offline operation;
+- binds other teams, releases, or a shared dependency beyond the current task;
+  or
 - rejects a plausible alternative for a non-obvious trade-off.
+
+`ptlam-architecturing` owns that list; the first four bullets repeat it so the
+gate runs without that skill loaded.
 
 A local name, private helper, routine library use, or cheaply reversible
 mechanic does not earn an ADR without wider consequences. Return the verdict and
@@ -62,6 +70,20 @@ explicit and supported by evidence.
 
 Read the confirmed record, relevant product or feature specification, existing
 ADRs, repository constraints, and evidence for each considered alternative.
+Prefer an existing architecture judgment as the source of forces and
+alternatives, and map its fields:
+
+| Judgment field                | ADR section               |
+| ----------------------------- | ------------------------- |
+| Question                      | Context                   |
+| Constraints                   | Decision drivers          |
+| Frame                         | Options considered        |
+| Recommendation                | Decision                  |
+| Assumptions                   | Context                   |
+| Trade-offs                    | Consequences              |
+| Deferred and redesign trigger | Reversal and supersession |
+
+Take each option's rejection reason from the judgment's alternatives probe.
 Separate decision drivers, assumptions, rejected alternatives, consequences, and
 unknowns.
 
@@ -78,8 +100,7 @@ Read [the ADR schema](references/adr-schema.md). It owns the file shape, status,
 visual placement, and completion checks.
 
 Keep the decision statement short and put explanatory structure around the
-forces, alternatives, and consequences. Record both benefits and liabilities.
-Name how a future record supersedes this one; do not edit history silently.
+forces, alternatives, and consequences.
 
 Complete this step when the unique destination contains one accepted ADR and
 every schema section has an explicit disposition.

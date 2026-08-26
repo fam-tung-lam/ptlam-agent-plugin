@@ -3,6 +3,11 @@
 What a unit publishes, which way dependencies run, and what belongs on each side
 of a seam. The specialization owns how the language spells each boundary.
 
+Where a boundary falls between components, runtimes, or stores, or what a
+published surface such as an API or file format commits to, is an architecture
+decision; `ptlam-architecturing` owns it. This reference owns what each crossing
+must obey.
+
 ## Publish a small surface
 
 A new symbol, file, or module stays internal until a consumer outside its own

@@ -48,6 +48,25 @@ Make each visual replace equivalent prose rather than repeat it.
 
 Read [ptlam-mermaiding](skills/ptlam-mermaiding/SKILL.md).
 
+### `ptlam-architecturing`
+
+**Reason:** Supplies the suitability judgment behind any interface, data, compatibility, rollout, or migration structure the spec fixes and that is expensive to reverse.
+
+**Instructions:** Read and apply ptlam-architecturing while modeling the feature
+contract, whenever a contract element fixes a structure that is
+expensive to reverse and no confirmed judgment or ADR already covers
+it; otherwise record that source under the architecture constraints.
+Let it own the constraints, solution-space frame, options,
+trade-offs, sizing, recommendation, deferred concerns, and redesign
+trigger.
+Keep this skill's ownership of the feature contract, schema,
+destination, status, and readiness.
+Write the accepted recommendation into the spec as an architecture
+constraint with its trade-offs, deferred concerns, and redesign
+trigger, not as implementation mechanics.
+
+Read [ptlam-architecturing](skills/ptlam-architecturing/SKILL.md).
+
 ## How does confirmed scope become a buildable specification?
 
 ```mermaid
@@ -98,9 +117,8 @@ keep business terms exactly as the confirmed source and repository use them. A
 missing glossary alone does not block the spec. Conflicting or materially
 ambiguous terms do.
 
-Treat the PRD as product evidence, not a draft specification. Never copy market
-framing, positioning, or success metrics into the spec. Never push modules,
-schemas, API shapes, or other solution mechanics back into the PRD.
+Treat the PRD as product evidence, not a draft specification. Never push
+solution mechanics back into it.
 
 Complete this step when each requirement and constraint has a traceable source,
 and every material term is clear or recorded as a blocker.
@@ -114,13 +132,15 @@ Describe the externally observable contract before solution detail:
 - validation, failure, recovery, idempotency, and concurrency behavior;
 - data ownership, lifecycle, privacy, and retention constraints;
 - interfaces and compatibility promises;
-- operational signals, rollout, migration, and rollback constraints; and
+- operational signals, rollout, migration, and rollback constraints;
+- structures expensive to reverse, judged by the loaded architecture skill and
+  recorded as architecture constraints with their trade-offs, deferred concerns,
+  and redesign trigger; and
 - behaviors that evidence must prove.
 
 Add only mechanics required to remove an implementation decision or protect a
-contract. Preserve deliberate implementation freedom. Record which behaviors
-must be proven, but leave test levels, placement, doubles, and tool mechanics to
-`ptlam-code-style`.
+contract. Preserve deliberate implementation freedom. Leave test levels,
+placement, doubles, and tool mechanics to `ptlam-code-style`.
 
 Complete this step when an implementer can distinguish required behavior from
 permitted implementation choice.
@@ -134,21 +154,18 @@ repository evidence, assumptions, and unresolved decisions as distinct kinds of
 information.
 
 Do not conduct discovery to fill a gap. When a missing decision changes
-behavior, scope, data, compatibility, or rollout, persist the spec with status
-`blocked` and name the exact decision owner and consequence.
+behavior, scope, data, structure, compatibility, or rollout, persist the spec
+with status `blocked` and name the exact decision owner and consequence.
 
 Complete this step when the destination contains one self-contained spec and
 every section in the schema has an explicit disposition.
 
 ## 5. Verify and deliver
 
-Check the spec against the schema and its cited evidence. Confirm that every
-requirement is testable, every failure path is accounted for, every deliberate
-freedom is visible, and every source reference resolves.
+Check the spec against the schema's readiness checks and its cited evidence.
 
 Report the file, status, source scope, glossary state, checks performed, and any
-blocking decision. A spec is ready for `ptlam-planning-tickets` only when its
-status is `ready` and every readiness check passes.
+blocking decision.
 
 Complete the task when the written file matches its evidence and is either ready
 for ticket planning or blocked with the exact missing decision exposed.

@@ -22,6 +22,38 @@ and this project adheres to
 
 ### Changed
 
+- Feature specification creation now composes the architecture skill whenever a
+  contract element fixes a structure that is expensive to reverse, records the
+  result under a new architecture-constraints section, and blocks on an
+  unconfirmed recommendation.
+- Grilling now composes the architecture skill: a decision that fixes a
+  structure expensive to reverse takes its recommendation, strongest
+  alternative, and trade-off from the suitability judgment; the user decides.
+- Implementing now stops on a change to a component, runtime, or data-store
+  split, a published surface, state ownership, or a platform commitment that no
+  spec, ADR, or confirmed decision covers, and routes it to the architecture
+  skill.
+- Diagnosing names the architecture skill as the handoff when the demonstrated
+  cause is a misplaced boundary, a missing or shared state owner, or a
+  published-surface contract that cannot hold.
+- ADR creation prefers an architecture judgment as its evidence source, maps its
+  fields onto ADR sections, and qualifies on the same expensive-to-reverse
+  structures.
+- Ticket planning maps deferred concerns as work no ticket owns and slices a
+  migration as expand, migrate, contract with each stage shippable.
+- PRD creation captures demand, growth, platform and compliance limits,
+  lifespan, and cost of failure as numbered product facts.
+- Code-style boundaries, structure, evolution, and complexity guidance name the
+  architecture skill as the owner of component splits, published surfaces, and
+  expensive-to-reverse decisions, and share its defer-until-a-signal vocabulary.
+- Changeset review reads the architecture skill's judging-suitability standard
+  when a change introduces a component, runtime, or data-store split, a
+  published surface, state ownership, or a platform commitment.
+- Domain modeling names its context boundaries as candidate component boundaries
+  for the architecture skill and receives contested terms back.
+- Health Connector architecture composes the architecture skill for judging
+  where a change belongs, supplies its project constraints as inputs, and keeps
+  a contract-conformance check for a change inside one layer.
 - Renamed `ptlam-code-style-flutter` to `ptlam-code-style-dart-flutter` and
   restructured its guidance with FastAPI around feature-local application,
   domain, infrastructure, and presentation layers. Flutter BLoCs and Cubits live

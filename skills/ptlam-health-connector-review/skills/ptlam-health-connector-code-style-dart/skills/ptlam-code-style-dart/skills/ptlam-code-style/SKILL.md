@@ -10,9 +10,11 @@ description:
   interface across a process or release boundary; designing a failure or a
   retry; writing a doc comment; emitting a log record; deciding what a test must
   prove; choosing a test level; placing a test or a test double; or planning how
-  a change migrates. Use ptlam-modeling-domain instead for business terminology,
-  context boundaries, and business process maps. Use as the foundation for a
-  stack specialization that adds the mechanics.
+  a change migrates. Use ptlam-modeling-domain instead for business terms,
+  context boundaries, and process maps. Use ptlam-architecturing instead for a
+  component, runtime, or data-store split, a published surface, state ownership,
+  or a platform commitment. Use as the foundation for a stack specialization
+  that adds the mechanics.
 ---
 
 # PTLam Code Style

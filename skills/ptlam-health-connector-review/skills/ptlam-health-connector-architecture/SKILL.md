@@ -17,9 +17,35 @@ which boundary should own a proposed change. Base every answer on the current
 checkout; paths and committed configuration outrank neighboring `CLAUDE.md`
 summaries.
 
-This skill owns system structure and contracts. It does not own environment
-installation, diagnosis of one failing run, whole-diff review, feature
-implementation, or language style.
+This skill owns the repository's structure and contracts: package direction,
+library audiences, the Pigeon channel, the Android and iOS layers, and the
+platform limits. The loaded architecture skill owns the judgment a change
+receives; this skill supplies the structure and constraints it judges. This
+skill does not own environment installation, diagnosis of one failing run,
+whole-diff review, feature implementation, or language style.
+
+## Required skills
+
+### `ptlam-architecturing`
+
+**Reason:** Provides the suitability judgment behind a boundary, ownership, or public API decision, with its constraints, solution-space frame, positioned options, sizing, assumptions, verdict, trade-offs, and redesign trigger.
+
+**Instructions:** After tracing the packages, channel, and native layers a proposed
+change touches, read and apply ptlam-architecturing when the request
+asks where the change belongs or whether a boundary or public API
+change is suitable.
+Let it own the question, constraints, solution-space frame, options,
+sizing, assumptions, reasoning probes, verdict, trade-offs, deferred
+concerns, redesign trigger, and report.
+Keep this skill's ownership of package direction, library audiences,
+Pigeon and generated-file ownership, Android and iOS layers, failure
+translation, concurrency, platform limit sources, and the layers a
+change must leave unchanged.
+Skip it for an explanation of a call path that judges nothing.
+The foundation's verdict and report rules take precedence. This
+specialization may add project constraints, never loosen them.
+
+Read [ptlam-architecturing](skills/ptlam-architecturing/SKILL.md).
 
 ## How does one SDK call reach a platform store?
 
@@ -46,7 +72,7 @@ flowchart LR
 The return path reverses the same boundaries through platform records, native
 DTOs, Pigeon, Dart DTO mappers, and domain records.
 
-## Resolve an architecture question
+## Explain a call path
 
 1. Name the observable operation, caller, supported platforms, and public result
    or failure. Done when the contract can be stated without naming an
@@ -60,17 +86,37 @@ DTOs, Pigeon, Dart DTO mappers, and domain records.
 4. Read the native branch that applies: [Android](references/android.md),
    [iOS](references/ios.md), or both. Done when the client, service or handler,
    mapper, concurrency boundary, and host-app precondition are accounted for.
-5. Judge the proposal against the public API, error-code, platform-support,
-   privacy, and generated-code contracts. Done when the answer names the
-   smallest owning layer and every other layer that must remain unchanged.
+5. For a proposed change, check it against the public API, error-code,
+   platform-support, privacy, and generated-code contracts those references
+   name. Done when the change is placed by one layer's table or found to add,
+   move, or publish a boundary.
 
-## Return the result
+Return the literal path and the state transformed at each boundary. Finish when
+each claim points to current source or committed configuration and every
+material platform difference is visible.
 
-For an explanation, give the literal path and the state transformed at each
-boundary. For a placement decision, name the owner, the interfaces it may use,
-and the layers it must not absorb. For a compatibility judgment, separate the
-verified current behavior, the proposed behavior, and the breaking or
+## Judge where a change belongs
+
+Enter this branch when the request asks where a change belongs, or whether a
+boundary or public API change is suitable. Run the explanation steps for the
+behavior it touches, then hand the loaded architecture skill that path as the
+current state and these project facts as its inputs:
+
+| Its input                        | This project supplies                                                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Question: system boundary        | The packages, libraries, channel surfaces, and native layers the change touches                                                      |
+| Current state: published surface | Public Dart exports and `@since` history, data-type ids, Pigeon DTOs and methods, error-code strings, and `supportedHealthPlatforms` |
+| Demand                           | Consumers of the public library and the Flutter, Android, and iOS versions they run                                                  |
+| Platform limits                  | The Health Connect and HealthKit constraints in the native references and the platform promises in workspace and API surfaces        |
+| Compatibility window             | Consumers of the public library, the Android API floor, and the iOS deployment floor, read from committed configuration              |
+| Data sensitivity                 | Health values, record identifiers, user-owned dates, and device names, which never cross the logging boundary                        |
+| Cost of failure                  | A breaking SDK release, a hand-edited generated file, or an error code that differs between Dart, Kotlin, and Swift                  |
+
+Treat package dependency direction, generated-file ownership, and the
+cross-language error-code contract as fixed constraints, never as options on the
+frame. Add to the loaded architecture skill's report the smallest owning layer,
+the interfaces it may use, every layer that must stay unchanged, and each
 platform-specific consequence.
 
-Finish when each claim points to current source or committed configuration and
-every material platform difference is visible.
+Finish when the judgment rests on the traced path and every input above points
+to current source or committed configuration.

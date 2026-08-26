@@ -55,6 +55,14 @@ right product response.>
 
 <Confirmed policy, time, cost, compatibility, or operational constraints.>
 
+| Constraint                        | Value                                                | Source     |
+| --------------------------------- | ---------------------------------------------------- | ---------- |
+| Demand: <unit the product counts> | <current value, or unknown>                          | <evidence> |
+| Growth curve                      | <measured or projected curve, or unknown>            | <evidence> |
+| Platform and compliance limits    | <OS, store, device, or regulatory limits, or None>   | <evidence> |
+| Expected lifespan                 | <years, or unknown>                                  | <evidence> |
+| Cost of failure                   | <cost of an outage, breaking release, or lost batch> | <evidence> |
+
 ## Assumptions and risks
 
 <Assumptions with evidence, plus risks and consequences.>
@@ -93,6 +101,7 @@ A revision of a ready PRD returns to `draft` until affected sections pass again.
 | Outcomes    | Give each outcome an observable measure and guardrail disposition.                              |
 | Scope       | Separate stable scope IDs from explicit non-goals.                                              |
 | Boundary    | Carry no modules, schemas, API shapes, or other solution mechanics.                             |
+| Numbers     | Give each constraint a number with its source, or mark it unknown, without estimating.          |
 | Decisions   | Carry no unresolved outcome-changing product decision.                                          |
 
 Finish with status `blocked` when evidence or a decision prevents a check from

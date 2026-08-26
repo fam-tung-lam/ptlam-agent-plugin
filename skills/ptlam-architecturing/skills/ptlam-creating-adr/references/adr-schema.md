@@ -14,7 +14,7 @@ heading below and write `None` with a reason where a section does not apply.
 - Status: accepted
 - Date: <YYYY-MM-DD>
 - Decision owners: <people or role>
-- Source decision: <confirmed record, spec, or evidence>
+- Source decision: <architecture judgment, confirmed record, spec, or evidence>
 
 ## At a glance
 
@@ -55,7 +55,8 @@ the visual when no faithful relationship diagram exists.>
 
 ## Reversal and supersession
 
-<Reversal cost, migration path, and how a later ADR supersedes this record.>
+<Reversal cost, migration path, deferred concerns with their signals, the
+redesign trigger, and how a later ADR supersedes this record.>
 
 ## Traceability
 
@@ -67,16 +68,16 @@ alternatives, or reversal paths differ.
 
 ## Completion checks
 
-| Check         | The ADR must                                                                |
-| ------------- | --------------------------------------------------------------------------- |
-| Qualification | Name the future constraint that earned a durable record.                    |
-| Source        | Trace the accepted choice, drivers, and alternatives to confirmed evidence. |
-| Explanation   | Let a future reader reconstruct why the chosen option won.                  |
-| Visual        | Include one earned visual form that replaces equivalent prose.              |
-| Decision      | State one accepted choice and its constrained boundary.                     |
-| Alternatives  | Preserve each material option and its rejection reason.                     |
-| Consequences  | Record benefits, liabilities, risks, owners, and reversal cost.             |
-| History       | Explain supersession without rewriting the old record.                      |
+| Check         | The ADR must                                                                         |
+| ------------- | ------------------------------------------------------------------------------------ |
+| Qualification | Name the future constraint that earned a durable record.                             |
+| Source        | Trace the accepted choice, drivers, and alternatives to confirmed evidence.          |
+| Explanation   | Let a future reader reconstruct why the chosen option won.                           |
+| Visual        | Include one earned visual form that replaces equivalent prose.                       |
+| Decision      | State one accepted choice and its constrained boundary.                              |
+| Alternatives  | Preserve each material option and its rejection reason.                              |
+| Consequences  | Record benefits, liabilities, risks, owners, and reversal cost.                      |
+| History       | Name the redesign trigger and explain supersession without rewriting the old record. |
 
 Finish only when every check passes. When the decision fails qualification or
 lacks confirmed rationale, return the verdict without creating an ADR.

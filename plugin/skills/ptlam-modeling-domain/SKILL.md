@@ -62,8 +62,11 @@ the translation at their boundary.
 
 For each context, state its responsibility, language, invariants, incoming and
 outgoing business information, and relationship to other contexts. Keep
-technical modules and deployment boundaries out unless they are also verified
-business boundaries.
+technical modules and deployment boundaries out of `CONTEXT.md` unless they are
+also verified business boundaries. Boundaries flow one way:
+`ptlam-architecturing` reads each verified context boundary as a candidate
+component boundary. It returns a contested business term to this skill rather
+than defining it.
 
 Complete this step when a reader can use every term and cross each context
 boundary without guessing which meaning applies.
