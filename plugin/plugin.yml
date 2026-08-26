@@ -751,6 +751,46 @@ skills:
           Keep this skill's ownership of decision facts, qualification, document
           structure, visual placement, destination, and readiness.
           Make each visual replace equivalent prose rather than repeat it.
+  - id: ptlam-architecturing
+    description:
+      Answer one system-level architecture question, for any kind of system
+      from backend and full-stack to web frontend, mobile, SDK, CLI, data
+      pipeline, desktop, embedded, or internal platform, with a suitability
+      judgment that frames the solution space, positions the options, sizes the
+      recommendation for the next order of magnitude, and names its trade-offs,
+      assumptions, and redesign trigger. Use when choosing component, runtime,
+      data-store, deployment, or integration structure; when designing a
+      published surface such as an API, SDK, CLI, schema, or file format; when
+      deciding where authoritative state lives; when a platform limit shapes
+      the design; when a design debate is stuck on technology names; or when
+      judging an existing architecture or proposal against its needs. Compose it
+      from any skill that meets a structure expensive to reverse. Do not use for
+      code structure one team changes in one release, business vocabulary,
+      diagnosing one failure, or writing the ADR alone.
+    category_id: engineering
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns the solution-space frame and the system topology into verified
+          visuals that replace the prose describing them.
+        instructions: |-
+          Read ptlam-mermaiding before drawing the frame or topology visual.
+          Let it own the diagram type, Mermaid source, and syntax verification.
+          Keep this skill's ownership of the dimensions, positions, semantics
+          each mark carries, and the judgment the visual supports.
+      - skill_id: ptlam-creating-adr
+        reason:
+          Preserves a confirmed architecture recommendation as a durable record
+          when it constrains the future or is expensive to reverse.
+        instructions: |-
+          Read ptlam-creating-adr after the user confirms the recommendation.
+          Apply its qualification gate; let it own the ADR verdict, destination,
+          shape, and verification.
+          Keep this skill's ownership of the question, constraints, frame,
+          options, trade-offs, assumptions, and redesign trigger, and pass them
+          as the decision evidence.
   - id: ptlam-creating-atomic-note
     description:
       Create, mature, review, split, or merge durable atomic notes by

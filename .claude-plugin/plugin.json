@@ -39,6 +39,7 @@
     "./skills/ptlam-planning-tickets",
     "./skills/ptlam-modeling-domain",
     "./skills/ptlam-creating-adr",
+    "./skills/ptlam-architecturing",
     "./skills/ptlam-creating-atomic-note",
     "./skills/ptlam-scraping-urls",
     "./skills/ptlam-explaining",

@@ -10,6 +10,11 @@ and this project adheres to
 
 ### Added
 
+- Added an architecture skill that answers one system-level question with a
+  suitability judgment: a framed solution space, positioned options, a
+  recommendation sized for the next order of magnitude, and its trade-offs,
+  assumptions, deferred concerns, and redesign trigger.
+
 - Added a NestJS TypeScript code-style specialization for feature-first
   hexagonal structure, application use cases and DTOs, domain types,
   infrastructure adapters, presentation entry points, integrations, modules,
