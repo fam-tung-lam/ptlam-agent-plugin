@@ -1,7 +1,8 @@
 # FastAPI Use Cases
 
-One application operation per verb-first file under `<feature>/usecases/`. Use
-cases are the only path from an HTTP handler or durable task to a repository.
+One application operation per verb-first file under
+`<feature>/application/use_cases/`. Use cases are the only path from an HTTP
+handler or durable task to an application port.
 
 ## Keep the operation transport-neutral
 
@@ -9,12 +10,12 @@ cases are the only path from an HTTP handler or durable task to a repository.
 - Receive collaborators in `__init__` and operation input in `__call__`.
 - Use a command dataclass when an operation has several input fields; pass one
   scalar directly when it has one.
-- Return a domain or persistence entity. Let the controller map it to a response
-  DTO.
+- Return a domain entity or application DTO. Let presentation map it to the
+  public response contract.
 - Raise domain exceptions and let the application map them once.
 
 ```python
-# users/usecases/create_user.py
+# users/application/use_cases/create_user.py
 @dataclass(frozen=True)
 class CreateUserCommand:
     email: str
@@ -53,7 +54,7 @@ required, import only the other feature's facade.
 ## Assemble at the FastAPI boundary
 
 ```python
-# users/di.py
+# users/di.py -- the feature composition seam
 def get_create_user(
     session: Annotated[AsyncSession, Depends(get_session)],
 ) -> CreateUser:
@@ -61,7 +62,7 @@ def get_create_user(
 ```
 
 ```python
-# users/controller.py
+# users/presentation/http/controller.py
 @router.post("", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 async def create_user(
     body: UserCreate,
@@ -70,9 +71,10 @@ async def create_user(
     return await create(CreateUserCommand(**body.model_dump()))
 ```
 
-Use cases are the local-unit test surface: construct one with controlled
-repository and integration fakes, call it directly, and assert its observable
-result or failure.
+Use cases are the local-unit test surface: construct one with controlled port
+and integration fakes, call it directly, and assert its observable result or
+failure.
 
-Finish when each operation has one file, one transaction decision, ordinary
-typed inputs, no framework import, and one boundary provider that assembles it.
+Finish when each operation has one file under `application/use_cases/`, one
+transaction decision, ordinary typed inputs, no framework or infrastructure
+import, and one feature-root provider that assembles it.

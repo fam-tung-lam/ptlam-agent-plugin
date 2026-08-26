@@ -349,13 +349,14 @@ skills:
   - id: ptlam-code-style-flutter
     description:
       Write, review, and fix Flutter application code against conventions for
-      the toolchain, layer boundaries, source tree, widgets, models, networking,
-      storage, localization, logging, widget documentation, and tests. Use when
-      adding or changing Flutter code, choosing between setState, Cubit, and
-      Bloc, placing a new file or feature, wiring get_it or go_router, or fixing
-      a flutter analyze or build_runner failure. Apply ptlam-code-style-dart
-      first for the Dart language, package, and tooling mechanics. Do not use
-      this specialization for Dart outside Flutter or for another stack.
+      the toolchain, four-layer feature structure, application-layer BLoC and
+      Cubit state, widgets, models, networking, storage, localization, logging,
+      widget documentation, and tests. Use when adding or changing Flutter code,
+      choosing between setState, Cubit, and Bloc, placing a new file or feature,
+      wiring get_it or go_router, or fixing a flutter analyze or build_runner
+      failure. Apply ptlam-code-style-dart first for the Dart language, package,
+      and tooling mechanics. Do not use this specialization for Dart outside
+      Flutter or for another stack.
     category_id: engineering
     visibility: public
     status: active
@@ -401,15 +402,15 @@ skills:
   - id: ptlam-code-style-python-fastapi
     description:
       Write, review, and fix FastAPI application code against conventions for
-      service and feature-package structure, application lifespan, routes,
-      request and response contracts, dependency injection, use cases, feature
-      boundaries, model registration, concurrency, errors, observability, and
-      API tests. Use when starting or reorganizing a FastAPI service or feature,
-      adding or changing endpoints, use cases, dependencies, exception
-      handlers, middleware, schemas, SQLAlchemy registration, background
-      handoffs, or tests, or fixing OpenAPI and runtime failures. Apply
-      ptlam-code-style-python first for the Python mechanics. Do not use for
-      Python services that do not use FastAPI.
+      service and four-layer feature-package structure, application lifespan,
+      routes, request and response contracts, dependency injection, use cases,
+      feature boundaries, model registration, concurrency, errors,
+      observability, and API tests. Use when starting or reorganizing a FastAPI
+      service or feature, adding or changing endpoints, use cases, dependencies,
+      exception handlers, middleware, schemas, SQLAlchemy registration,
+      background handoffs, or tests, or fixing OpenAPI and runtime failures.
+      Apply ptlam-code-style-python first for the Python mechanics. Do not use
+      for Python services that do not use FastAPI.
     category_id: engineering
     visibility: public
     status: active

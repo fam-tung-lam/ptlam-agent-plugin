@@ -11,9 +11,10 @@ A widget class can be `const`, and it rebuilds on its own. A build method
 returns a subtree that rebuilds whenever its host does, and can never be
 `const`. The two look alike in the editor and behave nothing alike at runtime.
 
-The feature's `widgets/` directory contains one page and a `components/`
-directory. Give each logical part of that page its own component widget instead
-of nesting the whole page in one build method.
+The feature's `presentation/pages/` directory contains route-level pages, and
+`presentation/widgets/` contains their logical component widgets. Give each
+logical part of a page its own widget instead of nesting the whole page in one
+build method.
 
 Start every widget `StatelessWidget`. Promote to `StatefulWidget` only for state
 the widget itself owns across a rebuild: a controller, an animation, a

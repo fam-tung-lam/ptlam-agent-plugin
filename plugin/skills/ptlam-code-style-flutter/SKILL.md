@@ -1,7 +1,7 @@
 # PTLam Flutter Code Style
 
-Conventions for Flutter application code: the shared toolchain, architecture,
-state, source tree, widgets, external boundaries, and tests.
+Conventions for Flutter application code: the shared toolchain, four-layer
+feature structure, application state, widgets, external boundaries, and tests.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -50,21 +50,21 @@ analysis.
 
 ## Pick a reference
 
-| Concern                                                                   | Reference                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------- |
-| Placing a layer, defining a repository boundary, or wiring dependencies   | [architecture.md](references/architecture.md)           |
-| Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state | [state-management.md](references/state-management.md)   |
-| Declaring or invoking an application route                                | [routing.md](references/routing.md)                     |
-| Adding a file or a feature; deciding what a feature exports               | [file-organization.md](references/file-organization.md) |
-| Naming, formatting, imports, `const`, analyzer settings, and `// ignore:` | The Dart skill loaded above                             |
-| Building a widget, splitting one, or using `BuildContext`                 | [widgets.md](references/widgets.md)                     |
-| Defining a DTO, a domain entity, a failure, or a Freezed union            | [models.md](references/models.md)                       |
-| Calling an external API                                                   | [networking.md](references/networking.md)               |
-| Reading or writing persisted data                                         | [storage.md](references/storage.md)                     |
-| Adding or changing user-visible text                                      | [localization.md](references/localization.md)           |
-| Emitting a log record                                                     | [logging.md](references/logging.md)                     |
-| Documenting a widget, BLoC, use case, or repository                       | [documentation.md](references/documentation.md)         |
-| Writing, placing, or restructuring a test                                 | [testing.md](references/testing.md)                     |
+| Concern                                                                    | Reference                                               |
+| -------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Placing a layer, defining a repository boundary, or wiring dependencies    | [architecture.md](references/architecture.md)           |
+| Choosing, structuring, or connecting `setState`, `Cubit`, or `Bloc` state  | [state-management.md](references/state-management.md)   |
+| Declaring or invoking an application route                                 | [routing.md](references/routing.md)                     |
+| Adding a file or feature, placing BLoC, or deciding what a feature exports | [file-organization.md](references/file-organization.md) |
+| Naming, formatting, imports, `const`, analyzer settings, and `// ignore:`  | The Dart skill loaded above                             |
+| Building a widget, splitting one, or using `BuildContext`                  | [widgets.md](references/widgets.md)                     |
+| Defining a DTO, a domain entity, a failure, or a Freezed union             | [models.md](references/models.md)                       |
+| Calling an external API                                                    | [networking.md](references/networking.md)               |
+| Reading or writing persisted data                                          | [storage.md](references/storage.md)                     |
+| Adding or changing user-visible text                                       | [localization.md](references/localization.md)           |
+| Emitting a log record                                                      | [logging.md](references/logging.md)                     |
+| Documenting a widget, BLoC, use case, or repository                        | [documentation.md](references/documentation.md)         |
+| Writing, placing, or restructuring a test                                  | [testing.md](references/testing.md)                     |
 
 ## A check failed — where to look
 
@@ -80,7 +80,8 @@ analysis.
 
 ## Finish
 
-Finish when the touched code satisfies the reference for its concern,
-`fvm flutter analyze` and
+Finish when touched feature implementation code sits under its owning
+`application/`, `domain/`, `infrastructure/`, or `presentation/` layer and
+satisfies the reference for its concern, `fvm flutter analyze` and
 `fvm dart format --output=none --set-exit-if-changed .` report nothing, the
 affected tests pass, and every check you could not run is named in the handoff.

@@ -10,9 +10,10 @@ their cheaper Python test level.
 ## Mirror capability ownership
 
 For the default new-service layout, place use-case tests under
-`tests/<feature>/unit/usecases/` and real repository or controller collaboration
-tests under `tests/<feature>/integration/`. Put fixtures owned by one feature in
-that feature's `conftest.py`.
+`tests/<feature>/unit/application/use_cases/`, domain tests under
+`tests/<feature>/unit/domain/`, and real adapter or presentation collaboration
+tests under the matching layer in `tests/<feature>/integration/`. Put fixtures
+owned by one feature in that feature's `conftest.py`.
 
 Put composed application, lifespan, and unversioned operations tests under
 `tests/app/integration/`. Keep a reusable test double at the nearest common

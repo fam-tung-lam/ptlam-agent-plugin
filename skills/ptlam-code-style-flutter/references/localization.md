@@ -8,10 +8,12 @@ Use [`slang`](https://pub.dev/packages/slang),
 Flutter SDK's `flutter_localizations` package.
 
 Localization is a feature, not a utility. It lives at
-`lib/features/localization/`, with the same `widgets/`, `models/`, `bloc/`,
-`usecases/`, `repositories/` shape as any other feature, and its translation
-files under `i18n/`. Its `models/` directory groups `entities/`, `failures/`,
-`dtos/`, and `value_objects/` when those categories exist.
+`lib/features/localization/`, with the same `application/`, `domain/`,
+`infrastructure/`, and `presentation/` layers as any other feature, plus its
+translation files under `i18n/`. Its locale BLoC lives in `application/bloc/`,
+the repository port in `application/ports/`, the implementation in
+`infrastructure/adapters/`, storage in `infrastructure/data_sources/`, and
+widgets in `presentation/`.
 
 ## Every user-visible string is a key
 
@@ -44,9 +46,9 @@ formatter, not through string interpolation.
 
 ## Reading a translation
 
-Read translations in the widget layer. A BLoC, use case, or repository emits a
-key or a domain value; it never emits a translated sentence, because it has no
-locale and no `BuildContext`.
+Read translations in the presentation layer. A BLoC, use case, or repository
+adapter emits a key or domain value; it never emits a translated sentence,
+because it has no locale and no `BuildContext`.
 
 An error shown to the user is a failure variant that the widget maps to a key —
 see [models.md](models.md).
@@ -57,6 +59,6 @@ generated-output policy in [SKILL.md](../SKILL.md#shared-toolchain).
 ## Changing the locale
 
 The locale is application state: `AppLocaleRepository` persists it through
-`AppLocaleLocalStorage`, a BLoC in this feature owns it, and the app applies it
-at the root. Do not call the locale setter from a page directly — dispatch an
+`AppLocaleLocalDataSource`, a BLoC in this feature owns it, and the app applies
+it at the root. Do not call the locale setter from a page directly—dispatch an
 event, as with any other state change.

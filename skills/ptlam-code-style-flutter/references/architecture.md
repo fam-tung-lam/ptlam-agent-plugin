@@ -1,68 +1,102 @@
 # Architecture
 
-The Flutter layer map, repository boundary, and dependency composition.
+The Flutter feature-layer map, application ports, infrastructure adapters, and
+dependency composition.
+
+## See the feature dependency direction
 
 ```mermaid
 flowchart LR
-    Widgets["Widgets: page and components"] --> StateHolder["BLoC or Cubit"]
-    StateHolder --> UseCase["Use case"]
-    UseCase --> Repository["Repository"]
-    Repository --> ApiClient["API client"]
-    Repository --> LocalDataSource["Local data source"]
-    Repository --> PlatformAdapter["Platform adapter"]
+    subgraph PresentationLayer["Presentation"]
+        Widget["Page or widget"]
+    end
+
+    subgraph ApplicationLayer["Application"]
+        StateHolder["BLoC or Cubit"]
+        UseCase["Use case"]
+        RepositoryPort["Repository port"]
+    end
+
+    subgraph DomainLayer["Domain"]
+        DomainTypes["Entities, values, and failures"]
+    end
+
+    subgraph InfrastructureLayer["Infrastructure"]
+        RepositoryAdapter["Repository adapter"]
+        BoundaryAdapter["Client, data source, or platform adapter"]
+    end
+
+    Widget --> StateHolder
+    StateHolder --> UseCase
+    StateHolder --> DomainTypes
+    UseCase --> RepositoryPort
+    UseCase --> DomainTypes
+    RepositoryAdapter -->|"Implements"| RepositoryPort
+    RepositoryAdapter --> DomainTypes
+    RepositoryAdapter --> BoundaryAdapter
 ```
 
-## What each layer may know
+BLoCs and Cubits are application state holders. They translate user intent into
+use-case calls and expose renderable state without owning widget or I/O
+mechanics.
 
-| Layer                        | May depend on                                        | Never touches                                 |
-| ---------------------------- | ---------------------------------------------------- | --------------------------------------------- |
-| Widgets                      | Their own BLoC or Cubit, design system, localization | Repositories, data sources, Dio, plugins      |
-| BLoC or Cubit                | Use cases, entities                                  | `BuildContext`, widgets, another BLoC         |
-| Use case                     | Repositories, entities                               | Widgets, `BuildContext`, HTTP or storage APIs |
-| Repository                   | API clients, data sources, adapters, entities        | Widgets, BLoCs, use cases                     |
-| Client, data source, adapter | Its one external system, boundary types              | Anything above it                             |
+## Make dependencies point inward
 
-Every layer above the repository speaks in entities. Convert a foreign response,
-stored record, or plugin result at the boundary that owns it, so nothing above
-the repository sees a `Response`, storage key, or plugin exception.
+| Layer             | Owns                                                               | May depend on                                  | Never touches                                   |
+| ----------------- | ------------------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------- |
+| `presentation/`   | Pages, widgets, feature routes, and UI effects                     | Application state holders and domain values    | Ports, repositories, data sources, Dio, plugins |
+| `application/`    | BLoCs, Cubits, use cases, and ports                                | Domain types                                   | Widgets, `BuildContext`, HTTP or storage APIs   |
+| `domain/`         | Entities, value objects, business rules, and stable failures       | Nothing outside the domain                     | Flutter, application, persistence, or plugins   |
+| `infrastructure/` | Port implementations, DTOs, clients, data sources, and SDK bridges | Application ports, domain types, external APIs | Presentation or application orchestration       |
+
+Presentation dispatches intent to one application state holder. A state holder
+calls use cases, and use cases depend on application ports. Infrastructure
+adapters implement those ports and map external values to domain values.
 
 Keep a layer when it names a real boundary. A use case that only forwards to a
-repository is fine when that boundary carries product meaning; a use case that
-exists only to satisfy the diagram should be inlined.
+repository port is valid when that operation carries product meaning; one that
+exists only to satisfy the tree should be inlined.
 
-## One repository per concern
+## One repository port per concern
 
-A repository composes the clients, data sources, and platform adapters for one
-concern and presents one domain-shaped API. It owns policy the layers above
-should not know:
+Put the repository contract under `application/ports/` and its implementation
+under `infrastructure/adapters/`. The adapter composes clients, data sources,
+and platform adapters for one concern and presents one domain-shaped API.
+
+The implementation owns infrastructure policy the layers above should not know:
 
 - which source answers first and what happens when it fails;
 - what a missing stored value falls back to; and
 - when a local change is mirrored remotely.
 
-A use case asks the repository for a concern. It never chooses between a cache
-and a network call itself. The repository converts boundary exceptions into the
-domain failures owned by [models.md](models.md).
+A use case calls the port. It never chooses between a cache and a network call.
+The infrastructure adapter converts boundary exceptions into the domain failures
+owned by [models.md](models.md).
 
-## Dependency composition
+## Compose dependencies at the application root
 
 `app/di.dart` holds every [`get_it`](https://pub.dev/packages/get_it)
-registration and nothing else. Register concrete adapters, repositories, and
-use-case factories there.
+registration and nothing else. Register infrastructure adapters under their
+application-port types, then construct use cases and application state holders.
 
 Feature code receives dependencies through constructors. Resolving from the
-service locator inside a BLoC, use case, or repository puts the container in the
-call graph and makes the class untestable without it.
+service locator inside a BLoC, use case, port implementation, or widget hides
+the dependency edge and makes the class untestable without the container.
 
 Treat each constructor edge as an explicit contract:
 
-| Edge                     | Input                          | Output                       | Authority                                                      |
-| ------------------------ | ------------------------------ | ---------------------------- | -------------------------------------------------------------- |
-| Widget to state holder   | User intent and view lifecycle | Renderable state             | May dispatch intent; cannot select data sources                |
-| State holder to use case | Domain command or query        | Domain result or failure     | May coordinate application state; cannot perform I/O           |
-| Use case to repository   | Domain-shaped request          | Domain entity or failure     | May apply product policy; cannot select transport mechanics    |
-| Repository to boundary   | DTO or boundary parameters     | Boundary result or exception | May select sources and convert failures; cannot update widgets |
+| Edge                     | Input                          | Output                       | Authority                                                    |
+| ------------------------ | ------------------------------ | ---------------------------- | ------------------------------------------------------------ |
+| Widget to state holder   | User intent and view lifecycle | Renderable state             | Dispatches intent; cannot select data sources                |
+| State holder to use case | Domain command or query        | Domain result or failure     | Coordinates application state; cannot perform I/O            |
+| Use case to port         | Domain-shaped request          | Domain entity or failure     | Applies product policy; cannot select transport mechanics    |
+| Adapter to boundary      | DTO or boundary parameters     | Boundary result or exception | Selects sources and converts failures; cannot update widgets |
 
-Wrap platform permissions behind a feature-owned adapter built with
-[`permission_handler`](https://pub.dev/packages/permission_handler). Business
-layers depend on the adapter contract, never the package API.
+Wrap platform permissions behind a feature-owned infrastructure adapter built
+with [`permission_handler`](https://pub.dev/packages/permission_handler).
+Application and domain code depend on the port, never the package API.
+
+Finish when every feature dependency points inward, BLoCs and Cubits live in
+`application/`, presentation reaches infrastructure only through application
+state holders and use cases, infrastructure implements application ports, and
+domain code imports no Flutter or external-system mechanic.

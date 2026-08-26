@@ -5,11 +5,11 @@ and OpenAPI metadata.
 
 ## Compose the URL once
 
-Give each feature one `APIRouter` in `controller.py`. Split it into
-`controllers/v1.py`, `controllers/v2.py`, and later versions only when a second
-public version exists. Declare each shared prefix and tag either on that router
-or where a parent includes it, never at both levels. Attach the API version once
-near the application boundary.
+Give each feature one `APIRouter` in `presentation/http/controller.py`. Split it
+into `presentation/http/v1.py`, `presentation/http/v2.py`, and later versions
+only when a second public version exists. Declare each shared prefix and tag
+either on that router or where a parent includes it, never at both levels.
+Attach the API version once near the application boundary.
 
 For the root operation of an already-prefixed router, use `""` unless the API
 contract intentionally includes a trailing slash. Test canonical paths with
@@ -68,8 +68,9 @@ operations promise it in the API contract.
 
 A handler parses transport input, calls one injected use case, and shapes the
 declared response. It imports no repository, session, SQLAlchemy object, or
-integration client. Map a multi-field body to the use case's command; pass a
-single path or query value directly when that is the complete operation input.
+integration client. Map a multi-field body to an application DTO or command;
+pass a single path or query value directly when that is the complete operation
+input.
 
 Finish when the canonical URL does not redirect, input and output DTOs hide
 internal data, every collection response is paged and ordered, a repeated write
