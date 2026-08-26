@@ -42,10 +42,6 @@ subfolder only when its first owned file appears.
 │       └── orders/                  # one business capability
 │           ├── orders.dart          # public feature export
 │           ├── application/
-│           │   ├── bloc/            # BLoCs, Cubits, events, and states
-│           │   │   ├── orders_bloc.dart
-│           │   │   ├── orders_event.dart
-│           │   │   └── orders_state.dart
 │           │   ├── ports/           # repository and outbound contracts
 │           │   │   └── orders_repository.dart
 │           │   └── use_cases/       # one application operation per file
@@ -66,6 +62,10 @@ subfolder only when its first owned file appears.
 │           │   └── dtos/            # wire, storage, and plugin shapes
 │           │       └── order_response_dto.dart
 │           └── presentation/
+│               ├── bloc/            # BLoCs, Cubits, events, and states
+│               │   ├── orders_bloc.dart
+│               │   ├── orders_event.dart
+│               │   └── orders_state.dart
 │               ├── pages/
 │               │   └── orders_page.dart
 │               └── widgets/
@@ -79,9 +79,10 @@ subfolder only when its first owned file appears.
 │           ├── test_doubles/         # doubles genuinely shared across levels
 │           ├── unit/
 │           │   ├── application/
-│           │   │   ├── bloc/
 │           │   │   └── use_cases/
-│           │   └── domain/
+│           │   ├── domain/
+│           │   └── presentation/
+│           │       └── bloc/
 │           └── integration/
 │               ├── infrastructure/
 │               └── presentation/
@@ -96,25 +97,25 @@ It adds its translation catalogs under `localization/i18n/`.
 
 ## Give each layer one role
 
-| Path                           | Owns                                                                |
-| ------------------------------ | ------------------------------------------------------------------- |
-| `<feature>.dart`               | The capability's deliberate public exports                          |
-| `application/bloc/`            | BLoCs, Cubits, events, and states                                   |
-| `application/ports/`           | Repository and outbound contracts consumed by use cases             |
-| `application/use_cases/`       | One transport-neutral application operation per file                |
-| `domain/entities/`             | Domain values with identity                                         |
-| `domain/failures/`             | Stable failures application and presentation code may handle        |
-| `domain/value_objects/`        | Immutable domain values defined by their contents                   |
-| `infrastructure/adapters/`     | Implementations of application ports                                |
-| `infrastructure/clients/`      | Remote API clients with no product policy                           |
-| `infrastructure/data_sources/` | Storage and platform-plugin access                                  |
-| `infrastructure/dtos/`         | Wire, storage, and plugin-owned shapes                              |
-| `presentation/pages/`          | Route-level pages that provide or observe application state holders |
-| `presentation/widgets/`        | Feature widgets and UI effects                                      |
+| Path                           | Owns                                                                 |
+| ------------------------------ | -------------------------------------------------------------------- |
+| `<feature>.dart`               | The capability's deliberate public exports                           |
+| `application/ports/`           | Repository and outbound contracts consumed by use cases              |
+| `application/use_cases/`       | One transport-neutral application operation per file                 |
+| `domain/entities/`             | Domain values with identity                                          |
+| `domain/failures/`             | Stable failures application and presentation code may handle         |
+| `domain/value_objects/`        | Immutable domain values defined by their contents                    |
+| `infrastructure/adapters/`     | Implementations of application ports                                 |
+| `infrastructure/clients/`      | Remote API clients with no product policy                            |
+| `infrastructure/data_sources/` | Storage and platform-plugin access                                   |
+| `infrastructure/dtos/`         | Wire, storage, and plugin-owned shapes                               |
+| `presentation/bloc/`           | BLoCs, Cubits, events, and states                                    |
+| `presentation/pages/`          | Route-level pages that provide or observe presentation state holders |
+| `presentation/widgets/`        | Feature widgets and UI effects                                       |
 
-BLoC is part of the application layer, not the presentation layer. Widgets
-provide and observe it, but the state holder owns application coordination and
-has no `BuildContext` or widget dependency.
+BLoC is part of the presentation layer. Widgets provide and observe it, but the
+state holder delegates product operations to application use cases and has no
+`BuildContext` or widget dependency.
 
 ## Publish one feature surface
 
@@ -124,7 +125,7 @@ cross the boundary. It never exports infrastructure implementations.
 
 Another feature imports that file rather than reaching into the feature's layer
 directories. [state-management.md](state-management.md) owns the authored file
-layout inside `application/bloc/`.
+layout inside `presentation/bloc/`.
 
 The same rule governs `packages/`: the barrel file at its root is the surface,
 and `src/` is private.
@@ -133,7 +134,7 @@ and `src/` is private.
 
 | Adding                                       | Put it in                                               |
 | -------------------------------------------- | ------------------------------------------------------- |
-| A BLoC or Cubit                              | `features/<name>/application/bloc/`                     |
+| A BLoC or Cubit                              | `features/<name>/presentation/bloc/`                    |
 | A repository or outbound contract            | `features/<name>/application/ports/`                    |
 | A use case                                   | `features/<name>/application/use_cases/`                |
 | A domain entity                              | `features/<name>/domain/entities/`                      |
@@ -172,6 +173,6 @@ Do not suffix a domain type or DTO with a vague `Model`. Use `Order` for the
 domain entity and `OrderResponseDto` for the external shape.
 
 Finish when every feature source file apart from its public export sits in one
-explicit layer, BLoCs and Cubits sit under `application/`, public imports enter
+explicit layer, BLoCs and Cubits sit under `presentation/`, public imports enter
 the feature export, infrastructure stays private, and tests mirror capability
 and layer ownership.

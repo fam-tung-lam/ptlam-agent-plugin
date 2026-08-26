@@ -1,8 +1,8 @@
 ---
-name: ptlam-code-style-flutter
+name: ptlam-code-style-dart-flutter
 description:
   Write, review, and fix Flutter application code against conventions for the
-  toolchain, four-layer feature structure, application-layer BLoC and Cubit
+  toolchain, four-layer feature structure, presentation-layer BLoC and Cubit
   state, widgets, models, networking, storage, localization, logging, widget
   documentation, and tests. Use when adding or changing Flutter code, choosing
   between setState, Cubit, and Bloc, placing a new file or feature, wiring
@@ -12,10 +12,10 @@ description:
   another stack.
 ---
 
-# PTLam Flutter Code Style
+# PTLam Dart Flutter Code Style
 
 Conventions for Flutter application code: the shared toolchain, four-layer
-feature structure, application state, widgets, external boundaries, and tests.
+feature structure, presentation state, widgets, external boundaries, and tests.
 
 ## Required skills
 

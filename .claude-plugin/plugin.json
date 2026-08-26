@@ -26,7 +26,7 @@
     "./skills/ptlam-code-style-dart",
     "./skills/ptlam-code-style-kotlin",
     "./skills/ptlam-code-style-swift",
-    "./skills/ptlam-code-style-flutter",
+    "./skills/ptlam-code-style-dart-flutter",
     "./skills/ptlam-code-style-python",
     "./skills/ptlam-code-style-python-fastapi",
     "./skills/ptlam-code-style-typescript",

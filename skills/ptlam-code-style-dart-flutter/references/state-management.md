@@ -5,9 +5,9 @@ How Flutter chooses, structures, and connects state holders. Use
 and [`bloc_concurrency`](https://pub.dev/packages/bloc_concurrency) when an
 event handler needs an explicit ordering policy.
 
-BLoCs and Cubits belong under `<feature>/application/bloc/`. They are
-application state holders: presentation creates and observes them, but they own
-no widget, `BuildContext`, route, dialog, or snackbar behavior.
+BLoCs and Cubits belong under `<feature>/presentation/bloc/`. They are
+presentation state holders: widgets create and observe them, but they own no
+widget, `BuildContext`, route, dialog, or snackbar behavior.
 
 ## Choose the smallest state holder
 
@@ -81,5 +81,5 @@ Do not inject one BLoC into another. Let a `BlocListener` observe the first and
 dispatch an event to the second. This keeps the edge visible where the widget
 lifecycle already owns both state holders.
 
-Finish when the state holder lives in `application/bloc/`, depends only on
+Finish when the state holder lives in `presentation/bloc/`, depends only on
 application use cases and domain types, and presentation owns every UI effect.

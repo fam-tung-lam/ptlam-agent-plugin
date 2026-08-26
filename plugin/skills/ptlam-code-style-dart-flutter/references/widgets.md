@@ -18,7 +18,8 @@ build method.
 
 Start every widget `StatelessWidget`. Promote to `StatefulWidget` only for state
 the widget itself owns across a rebuild: a controller, an animation, a
-subscription, a focus node. Anything a business rule observes belongs in a BLoC.
+subscription, a focus node. State that outlives a widget belongs in a BLoC;
+product rules belong in an application use case or domain type.
 
 Dispose in `dispose()` everything you created in `initState()`.
 
