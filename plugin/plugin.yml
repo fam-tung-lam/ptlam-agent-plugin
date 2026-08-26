@@ -346,10 +346,10 @@ skills:
           Use this skill only for Swift language, package, and tool mechanics
           that satisfy those standards.
           This specialization may be stricter than the foundation, never looser.
-  - id: ptlam-code-style-flutter
+  - id: ptlam-code-style-dart-flutter
     description:
       Write, review, and fix Flutter application code against conventions for
-      the toolchain, four-layer feature structure, application-layer BLoC and
+      the toolchain, four-layer feature structure, presentation-layer BLoC and
       Cubit state, widgets, models, networking, storage, localization, logging,
       widget documentation, and tests. Use when adding or changing Flutter code,
       choosing between setState, Cubit, and Bloc, placing a new file or feature,

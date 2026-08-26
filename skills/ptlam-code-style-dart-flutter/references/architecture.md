@@ -9,10 +9,10 @@ dependency composition.
 flowchart LR
     subgraph PresentationLayer["Presentation"]
         Widget["Page or widget"]
+        StateHolder["BLoC or Cubit"]
     end
 
     subgraph ApplicationLayer["Application"]
-        StateHolder["BLoC or Cubit"]
         UseCase["Use case"]
         RepositoryPort["Repository port"]
     end
@@ -36,7 +36,7 @@ flowchart LR
     RepositoryAdapter --> BoundaryAdapter
 ```
 
-BLoCs and Cubits are application state holders. They translate user intent into
+BLoCs and Cubits are presentation state holders. They translate user intent into
 use-case calls and expose renderable state without owning widget or I/O
 mechanics.
 
@@ -44,14 +44,14 @@ mechanics.
 
 | Layer             | Owns                                                               | May depend on                                  | Never touches                                   |
 | ----------------- | ------------------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------- |
-| `presentation/`   | Pages, widgets, feature routes, and UI effects                     | Application state holders and domain values    | Ports, repositories, data sources, Dio, plugins |
-| `application/`    | BLoCs, Cubits, use cases, and ports                                | Domain types                                   | Widgets, `BuildContext`, HTTP or storage APIs   |
+| `presentation/`   | Pages, widgets, routes, UI effects, BLoCs, and Cubits              | Application use cases and domain values        | Ports, repositories, data sources, Dio, plugins |
+| `application/`    | Use cases and ports                                                | Domain types                                   | Widgets, `BuildContext`, HTTP or storage APIs   |
 | `domain/`         | Entities, value objects, business rules, and stable failures       | Nothing outside the domain                     | Flutter, application, persistence, or plugins   |
 | `infrastructure/` | Port implementations, DTOs, clients, data sources, and SDK bridges | Application ports, domain types, external APIs | Presentation or application orchestration       |
 
-Presentation dispatches intent to one application state holder. A state holder
-calls use cases, and use cases depend on application ports. Infrastructure
-adapters implement those ports and map external values to domain values.
+Widgets dispatch intent to one presentation state holder. The state holder calls
+use cases, and use cases depend on application ports. Infrastructure adapters
+implement those ports and map external values to domain values.
 
 Keep a layer when it names a real boundary. A use case that only forwards to a
 repository port is valid when that operation carries product meaning; one that
@@ -77,7 +77,7 @@ owned by [models.md](models.md).
 
 `app/di.dart` holds every [`get_it`](https://pub.dev/packages/get_it)
 registration and nothing else. Register infrastructure adapters under their
-application-port types, then construct use cases and application state holders.
+application-port types, then construct use cases and presentation state holders.
 
 Feature code receives dependencies through constructors. Resolving from the
 service locator inside a BLoC, use case, port implementation, or widget hides
@@ -88,7 +88,7 @@ Treat each constructor edge as an explicit contract:
 | Edge                     | Input                          | Output                       | Authority                                                    |
 | ------------------------ | ------------------------------ | ---------------------------- | ------------------------------------------------------------ |
 | Widget to state holder   | User intent and view lifecycle | Renderable state             | Dispatches intent; cannot select data sources                |
-| State holder to use case | Domain command or query        | Domain result or failure     | Coordinates application state; cannot perform I/O            |
+| State holder to use case | Domain command or query        | Domain result or failure     | Coordinates presentation state; cannot perform I/O           |
 | Use case to port         | Domain-shaped request          | Domain entity or failure     | Applies product policy; cannot select transport mechanics    |
 | Adapter to boundary      | DTO or boundary parameters     | Boundary result or exception | Selects sources and converts failures; cannot update widgets |
 
@@ -97,6 +97,6 @@ with [`permission_handler`](https://pub.dev/packages/permission_handler).
 Application and domain code depend on the port, never the package API.
 
 Finish when every feature dependency points inward, BLoCs and Cubits live in
-`application/`, presentation reaches infrastructure only through application
-state holders and use cases, infrastructure implements application ports, and
-domain code imports no Flutter or external-system mechanic.
+`presentation/`, presentation reaches infrastructure only through application
+use cases, infrastructure implements application ports, and domain code imports
+no Flutter or external-system mechanic.

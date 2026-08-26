@@ -1,7 +1,7 @@
-# PTLam Flutter Code Style
+# PTLam Dart Flutter Code Style
 
 Conventions for Flutter application code: the shared toolchain, four-layer
-feature structure, application state, widgets, external boundaries, and tests.
+feature structure, presentation state, widgets, external boundaries, and tests.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 

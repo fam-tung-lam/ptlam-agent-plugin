@@ -10,7 +10,7 @@ Flutter SDK's `flutter_localizations` package.
 Localization is a feature, not a utility. It lives at
 `lib/features/localization/`, with the same `application/`, `domain/`,
 `infrastructure/`, and `presentation/` layers as any other feature, plus its
-translation files under `i18n/`. Its locale BLoC lives in `application/bloc/`,
+translation files under `i18n/`. Its locale BLoC lives in `presentation/bloc/`,
 the repository port in `application/ports/`, the implementation in
 `infrastructure/adapters/`, storage in `infrastructure/data_sources/`, and
 widgets in `presentation/`.
@@ -58,7 +58,7 @@ generated-output policy in [SKILL.md](../SKILL.md#shared-toolchain).
 
 ## Changing the locale
 
-The locale is application state: `AppLocaleRepository` persists it through
-`AppLocaleLocalDataSource`, a BLoC in this feature owns it, and the app applies
-it at the root. Do not call the locale setter from a page directly—dispatch an
-event, as with any other state change.
+The locale selection is presentation state: `AppLocaleRepository` persists it
+through `AppLocaleLocalDataSource`, a BLoC in this feature owns it, and the app
+applies it at the root. Do not call the locale setter from a page
+directly—dispatch an event, as with any other state change.

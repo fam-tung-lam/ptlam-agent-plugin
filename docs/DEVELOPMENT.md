@@ -85,8 +85,8 @@ in alphabetic listings and makes the relationship visible from its ID and
 directory alone.
 
 For example, use `ptlam-git` for the Git workflow skill. Use `ptlam-code-style`
-as the code-style foundation and `ptlam-code-style-flutter` for its Flutter
-specialization.
+as the code-style foundation and `ptlam-code-style-dart-flutter` for the Flutter
+specialization of the Dart code-style skill.
 
 Keep the manifest ID and authored directory name identical. Use a standalone
 `ptlam-<capability>` name only when the skill does not belong to an established

@@ -17,10 +17,11 @@ and this project adheres to
 
 ### Changed
 
-- Restructured Flutter and FastAPI code-style guidance around feature-local
-  application, domain, infrastructure, and presentation layers. Flutter BLoCs
-  and Cubits now live in the application layer, and FastAPI domain entities stay
-  separate from SQLAlchemy persistence models.
+- Renamed `ptlam-code-style-flutter` to `ptlam-code-style-dart-flutter` and
+  restructured its guidance with FastAPI around feature-local application,
+  domain, infrastructure, and presentation layers. Flutter BLoCs and Cubits live
+  in presentation, and FastAPI domain entities stay separate from SQLAlchemy
+  persistence models.
 
 ## [0.3.0] - 2026-08-24
 
