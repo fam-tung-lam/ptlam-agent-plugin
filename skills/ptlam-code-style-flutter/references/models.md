@@ -12,14 +12,16 @@ Keep them separate types from the first version. Flutter is deliberately
 stricter here than the general rule of splitting once the shapes disagree: a
 vendor owns the wire shape and can change it in a release you do not control.
 
-A feature DTO lives in `features/<name>/models/dtos/`; the domain entity travels
-everywhere above the repository. Name the DTO file for the external shape it
-represents when a feature has more than one source. Put entities, failures, and
-value objects in their matching folders under the same `models/` namespace.
+A feature DTO lives in `features/<name>/infrastructure/dtos/`; the domain entity
+travels through application and presentation code. Name the DTO file for the
+external shape it represents when a feature has more than one source. Put
+entities, failures, and value objects in their matching folders under
+`features/<name>/domain/`.
 
-Map between them in the repository or the data source, never above it. That
-mapping is the only place that knows the API sends `"created_ts"` as an epoch
-integer, and it is where a contract change gets caught.
+Map between them in an infrastructure adapter or data source, never in
+application or presentation code. That mapping is the only place that knows the
+API sends `"created_ts"` as an epoch integer, and it is where a contract change
+gets caught.
 
 ## Generate the JSON, write the meaning
 
@@ -38,9 +40,9 @@ it gets a DTO.
 ## Value objects carry meaning without identity
 
 Put an immutable domain value such as an email address, money amount, or date
-range under `features/<name>/models/value_objects/` when it owns validation or
+range under `features/<name>/domain/value_objects/` when it owns validation or
 behavior. Compare it by value. Keep it free of serialization annotations and map
-it to and from a DTO at the repository boundary.
+it to and from a DTO inside infrastructure.
 
 Do not create a value object merely to wrap one primitive. The wrapper earns its
 place when it prevents an invalid value, names a domain concept, or owns a rule.
@@ -86,16 +88,16 @@ and empty".
 
 ## Failures cross the boundary, exceptions do not
 
-Below the repository, code throws whatever its library throws: `DioException`, a
-platform exception, a parse error.
+Inside infrastructure, code throws whatever its library throws: `DioException`,
+a platform exception, or a parse error.
 
-The repository catches those and returns a domain failure — a sealed type the
-use case and the BLoC can match on. Nothing above the repository ever sees a
-library exception type, catches `Exception`, or inspects a status code.
+The infrastructure adapter catches those and returns a domain failure—a sealed
+type the use case and BLoC can match on. Application and presentation code never
+see a library exception type, catch `Exception`, or inspect a status code.
 
 Name failures for what the user or the caller must do about them:
 `OrdersFailure.offline()`, `OrdersFailure.unauthorized()`,
 `OrdersFailure.rejected(reason)`. `OrdersFailure.error500()` names the wire, not
 the decision.
 
-Keep one failure type per feature, in `features/<name>/models/failures/`.
+Keep one failure type per feature in `features/<name>/domain/failures/`.

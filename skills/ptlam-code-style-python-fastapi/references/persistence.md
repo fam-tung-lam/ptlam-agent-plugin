@@ -1,42 +1,49 @@
 # FastAPI Persistence Registration
 
-Feature-owned SQLAlchemy entities and one explicit Alembic metadata module make
-Alembic autogeneration complete without moving persistence into a shared
-business layer.
+Feature-owned SQLAlchemy models and one explicit Alembic metadata module make
+autogeneration complete while domain entities remain persistence-independent.
 
-## Register every feature entity
+## Keep persistence models in infrastructure
 
-Put one primary table per file under `<feature>/models/entities/`, together with
-its association tables and entity-owned enums. Re-export every table from
-`models/entities/__init__.py` so importing the package registers the complete
-feature.
+Put one primary mapped table per file under
+`<feature>/infrastructure/persistence/models/`, together with its association
+tables and persistence-owned enums. Re-export every mapped table from that
+package's `__init__.py` so importing it registers the complete feature.
 
 ```python
-# users/models/entities/__init__.py
-from myapp.users.models.entities.profile import Profile
-from myapp.users.models.entities.user import User
+# users/infrastructure/persistence/models/__init__.py
+from myapp.users.infrastructure.persistence.models.profile_table import (
+    ProfileTable,
+)
+from myapp.users.infrastructure.persistence.models.user_table import UserTable
 
-__all__ = ["Profile", "User"]
+__all__ = ["ProfileTable", "UserTable"]
 ```
 
-Use `enum.StrEnum` for a closed string vocabulary that belongs to one entity.
-Move an enum to the feature's `constants/` only after another entity consumes
-it.
+These mapped classes are infrastructure records, not domain entities. An
+`infrastructure/adapters/` repository maps them to and from types under
+`domain/entities/` before returning through an application port.
+
+Keep a closed string vocabulary that belongs to a domain concept under
+`domain/`, using `enum.StrEnum` when its mechanics fit. Keep a database-only
+enum beside its mapped table and translate it at the adapter boundary.
 
 ## Keep one Alembic metadata module
 
 For one database, keep one root `alembic.ini`, one `migrations/env.py`, and one
 revision history. `alembic_metadata.py` is the explicit exception to the facade
-rule: it imports every feature's entity package solely to populate the shared
-declarative base. The concrete name says why the imports exist; `registry.py`
-does not.
+rule: it imports every feature's persistence-model package solely to populate
+the shared declarative base. The concrete name says why the imports exist;
+`registry.py` does not.
 
 ```python
 # myapp/alembic_metadata.py
-"""Import every feature's entities so Base.metadata is complete."""
+"""Import every feature's persistence models so Base.metadata is complete."""
 from myapp.db import Base
-from myapp.billing.models import entities as _billing  # noqa: F401
-from myapp.users.models import entities as _users  # noqa: F401
+from myapp.billing.infrastructure.persistence import (
+    models as _billing,  # noqa: F401
+)
+from myapp.users.infrastructure.persistence import models as _users  # noqa: F401
 
 metadata = Base.metadata
 ```
@@ -62,20 +69,22 @@ from pathlib import Path
 import myapp
 
 
-def test_alembic_metadata_covers_every_entity_module() -> None:
+def test_alembic_metadata_covers_every_model_module() -> None:
     import myapp.alembic_metadata  # noqa: F401
 
     root = Path(myapp.__file__).parent
     expected = {
         "myapp." + path.relative_to(root).with_suffix("").as_posix().replace("/", ".")
-        for path in root.glob("*/models/entities/*.py")
+        for path in root.glob("*/infrastructure/persistence/models/*.py")
         if path.stem != "__init__"
     }
     assert expected <= set(sys.modules)
 ```
 
-This test catches a feature omitted from `alembic_metadata.py` and a table file
-omitted from its own `models/entities/__init__.py`.
+This test catches a feature omitted from `alembic_metadata.py` and a mapped
+table file omitted from its own `models/__init__.py`.
 
-Finish when the metadata test passes and `alembic revision --autogenerate`
-against the expected clean schema produces no unintended migration operations.
+Finish when domain entities import no SQLAlchemy mechanic, every mapped table is
+owned by feature infrastructure, the metadata test passes, and
+`alembic revision --autogenerate` against the expected clean schema produces no
+unintended migration operations.

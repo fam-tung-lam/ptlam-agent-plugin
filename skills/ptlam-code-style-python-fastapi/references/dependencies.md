@@ -14,6 +14,11 @@ borrowed for the request. A feature provider assembles its repository and use
 case from those capabilities. Use cases and domain code receive ordinary typed
 arguments and never import `Depends`.
 
+Put feature providers in `<feature>/di.py`. This composition file is the only
+feature surface that imports both FastAPI dependency mechanics and concrete
+infrastructure adapters. Presentation imports the provider and use-case type;
+application code depends on the port; infrastructure implements it.
+
 ## Own cleanup with yield
 
 A dependency that acquires a resource yields once. Put cleanup in `finally` or

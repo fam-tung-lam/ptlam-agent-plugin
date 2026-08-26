@@ -5,9 +5,10 @@ and framework-wide handlers.
 
 Keep one composition root. In the default new-service layout, `main.py` contains
 only `app = create_app()`, while `app.py` creates `FastAPI`, installs middleware
-and exception handlers, and includes every feature controller's router once.
-Preserve an existing coherent factory location. Feature packages do not mutate
-the app during import.
+and exception handlers, and includes every feature router from
+`presentation/http/` once. This composition-root import is not a cross-feature
+dependency. Preserve an existing coherent factory location. Feature packages do
+not mutate the app during import.
 
 ## Own process lifetime
 
@@ -61,10 +62,10 @@ Configure the timeout, the connection limit, and any retry policy on that
 facade, once. A client built without an explicit timeout inherits an unbounded
 one and holds a worker until the far side answers.
 
-Keep the Celery app under `integrations/celery_app.py`. Keep each task beside
-its feature and register or autodiscover it on that app. A task assembles and
-calls the same use case as the HTTP route; business policy stays in neither the
-integration facade nor the task shell.
+Keep the Celery app under `integrations/celery_app.py`. Keep each task under
+`<feature>/presentation/tasks/` and register or autodiscover it on that app. A
+task assembles and calls the same use case as the HTTP route; business policy
+stays in neither the integration facade nor the task shell.
 
 Finish when app construction is repeatable in tests, startup and shutdown own
 the same resources, and each controller, handler, and middleware is installed

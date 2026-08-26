@@ -5,8 +5,12 @@ How Flutter persists one concern through an owned data source.
 ## One data source per concern
 
 Give every persisted concern its own named data source instead of a shared
-storage service with a bag of keys. `AppLocaleLocalStorage` owns the locale key;
-`AppThemeLocalStorage` owns the theme key.
+storage service with a bag of keys. `AppLocaleLocalDataSource` owns the locale
+key; `AppThemeLocalDataSource` owns the theme key.
+
+Put the data source under `<feature>/infrastructure/data_sources/`. An
+application port exposes the domain-shaped operation; the infrastructure adapter
+composes the data source with any other boundary.
 
 A data source owns its key names, encoding, and defaults. Keep each key string
 in exactly one file as a private constant.
@@ -20,5 +24,5 @@ in exactly one file as a private constant.
 Use `SharedPreferencesAsync` for small, non-critical key/value data.
 `flutter_secure_storage` holds small opaque secrets; it is not a blob store.
 
-[architecture.md](architecture.md#one-repository-per-concern) owns how a
-repository composes storage with other sources and converts boundary failures.
+[architecture.md](architecture.md#one-repository-port-per-concern) owns how an
+adapter composes storage with other sources and converts boundary failures.

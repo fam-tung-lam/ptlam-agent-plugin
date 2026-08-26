@@ -1,18 +1,15 @@
 # FastAPI Project Structure
 
-A feature-first default for a FastAPI service that has no stronger layout.
-Preserve a coherent existing structure and reorganize only files owned by the
-requested change. Reorganization is not a deliverable.
+A feature-first, four-layer default for a FastAPI service that has no stronger
+layout. Preserve a coherent existing structure and reorganize only files owned
+by the requested change. Reorganization is not a deliverable.
 
 ## Grow into this structure
 
-Use the full layout around three business capabilities, two developers, or the
-point where one `main.py` stops fitting on a screen. Below that, a flat `app/`
-with `main.py`, `controller.py`, `models/`, `repositories/`, and `db.py` is the
-correct answer.
-
-Create a package when its first owned file appears. Every empty package added
-today is another directory every future maintainer must search.
+Keep a small application flat until a second business capability makes feature
+packages useful. Once a capability owns a feature package, put its code under
+`application/`, `domain/`, `infrastructure/`, or `presentation/`. Create a
+package when its first owned file appears.
 
 ## The project tree
 
@@ -24,136 +21,147 @@ project/
 │   ├── env.py
 │   └── versions/
 ├── src/
-│   └── myapp/                     # one importable package named for the service
+│   └── myapp/                         # one importable package named for the service
 │       ├── __init__.py
-│       ├── main.py                # ASGI entrypoint: app = create_app()
-│       ├── app.py                 # composition root
-│       ├── settings.py            # Settings plus one cached accessor
-│       ├── db.py                  # Base, engine, session factory, dependency
-│       ├── alembic_metadata.py    # imports every feature's model entities for Alembic
-│       ├── ops.py                 # /health, /ready, /version; unversioned
+│       ├── main.py                    # ASGI entrypoint: app = create_app()
+│       ├── app.py                     # application composition root
+│       ├── settings.py                # Settings plus one cached accessor
+│       ├── db.py                      # Base, engine, session factory, dependency
+│       ├── alembic_metadata.py        # imports every feature's persistence models
+│       ├── ops.py                     # /health, /ready, /version; unversioned
 │       ├── integrations/
 │       │   ├── redis.py
 │       │   ├── celery_app.py
 │       │   └── s3.py
-│       ├── shared/
+│       ├── shared/                    # framework-neutral, proven cross-feature reuse
 │       │   ├── errors.py
 │       │   ├── logging_config.py
-│       │   ├── constants/         # optional
-│       │   └── utils/             # optional
-│       │       ├── pagination.py
-│       │       └── clock.py
-│       └── users/                 # one business capability
-│           ├── __init__.py        # facade; the only cross-feature import path
-│           ├── controller.py      # APIRouter plus request handlers
-│           ├── models/            # Groups model types; never a miscellaneous bucket
+│       │   ├── pagination.py
+│       │   └── clock.py
+│       └── users/                     # one business capability
+│           ├── __init__.py            # facade; the only cross-feature import path
+│           ├── di.py                  # FastAPI feature composition and providers
+│           ├── application/
 │           │   ├── __init__.py
-│           │   ├── dtos/          # Pydantic request and response DTOs
+│           │   ├── dtos/              # validated application input and output
 │           │   │   ├── __init__.py
 │           │   │   ├── create_user.py
 │           │   │   └── user.py
+│           │   ├── ports/             # repository and outbound contracts
+│           │   │   ├── __init__.py
+│           │   │   └── user_repository.py
+│           │   └── use_cases/         # one application operation per file
+│           │       ├── __init__.py
+│           │       ├── create_user.py
+│           │       └── get_user.py
+│           ├── domain/
+│           │   ├── __init__.py
 │           │   ├── entities/
-│           │   │   ├── __init__.py    # re-exports every feature table
-│           │   │   ├── user.py
-│           │   │   └── profile.py
-│           │   ├── failures/      # Domain exception types
+│           │   │   ├── __init__.py
+│           │   │   └── user.py
+│           │   ├── failures/
 │           │   │   ├── __init__.py
 │           │   │   └── user_not_found.py
 │           │   └── value_objects/
 │           │       ├── __init__.py
 │           │       └── email.py
-│           ├── usecases/
+│           ├── infrastructure/
 │           │   ├── __init__.py
-│           │   ├── create_user.py
-│           │   ├── get_user.py
-│           │   └── deactivate_user.py
-│           ├── repositories/
-│           │   ├── __init__.py
-│           │   ├── user_repository.py
-│           │   └── sql_user_repository.py
-│           ├── di.py
-│           ├── constants/         # optional
-│           │   └── user_status.py
-│           ├── utils/             # optional
-│           │   └── email_normalization.py
-│           └── tasks/
+│           │   ├── adapters/          # application-port implementations
+│           │   │   ├── __init__.py
+│           │   │   └── sql_user_repository.py
+│           │   └── persistence/
+│           │       ├── __init__.py
+│           │       └── models/        # SQLAlchemy mapped tables
+│           │           ├── __init__.py
+│           │           ├── user_table.py
+│           │           └── profile_table.py
+│           └── presentation/          # inbound FastAPI and worker adapters
 │               ├── __init__.py
-│               └── send_welcome_email.py
+│               ├── http/
+│               │   ├── __init__.py
+│               │   └── controller.py
+│               └── tasks/
+│                   ├── __init__.py
+│                   └── send_welcome_email.py
 └── tests/
     ├── conftest.py
     ├── app/
     │   └── integration/
     │       └── test_ops.py
-    └── users/                     # mirrors src/myapp/users/
+    └── users/                         # mirrors src/myapp/users/
         ├── conftest.py
         ├── test_doubles/
         │   └── fake_user_repository.py
         ├── unit/
-        │   └── usecases/
-        │       ├── test_create_user.py
-        │       └── test_get_user.py
+        │   ├── application/
+        │   │   └── use_cases/
+        │   │       ├── test_create_user.py
+        │   │       └── test_get_user.py
+        │   └── domain/
         └── integration/
-            ├── test_sql_user_repository.py
-            └── test_controller.py
+            ├── infrastructure/
+            │   └── test_sql_user_repository.py
+            └── presentation/
+                └── test_controller.py
 ```
 
 Keep this tree as plain text so it renders in every editor, terminal, diff, and
-code review without a renderer-version requirement.
+code review without a renderer-version requirement. Python package names stay
+lowercase with underscores, so the folder is `use_cases/`, not `use-cases/`.
 
-The names `controller`, `models`, `dtos`, `entities`, `failures`,
-`value_objects`, `repositories`, and `di` are deliberately shared architectural
-terms rather than FastAPI- or Python-specific labels. Keeping the same concepts
-on mobile and backend reduces context switching between codebases. Python
-package names stay lowercase, so the folder is `models/dtos/`, not `DTOs/`.
-
-## Give each package one role
+## Give each service location one role
 
 | Path                   | Owns                                                                                         |
 | ---------------------- | -------------------------------------------------------------------------------------------- |
 | `main.py`              | Nothing except `app = create_app()`                                                          |
 | `app.py`               | `FastAPI`, lifespan, middleware, feature routers, and exception handlers; no business policy |
 | `settings.py`, `db.py` | One-time configuration, engine, and session setup                                            |
-| `alembic_metadata.py`  | Imports every feature's model entities and exposes complete metadata to Alembic              |
+| `alembic_metadata.py`  | Imports every feature's persistence models and exposes complete metadata to Alembic          |
 | `ops.py`               | Unversioned liveness, readiness, and build information                                       |
 | `integrations/`        | One client or pool facade per external system; not the feature behavior that consumes it     |
 | `shared/`              | Framework-neutral code with at least two proven feature consumers                            |
-| `<feature>/`           | One business capability and everything that changes with it                                  |
+| `<feature>/`           | One business capability, its facade, composition file, and four layers                       |
 
-## Give each feature one public surface
+## Give each feature layer one role
 
-| Path                    | Put here                                                                                     |
-| ----------------------- | -------------------------------------------------------------------------------------------- |
-| `__init__.py`           | The facade: only use cases and model types another feature needs                             |
-| `controller.py`         | Typed request handlers around one `APIRouter`; split by API version only when another exists |
-| `models/`               | Grouping namespace for explicitly categorized model types; never loose mixed model files     |
-| `models/dtos/`          | Pydantic request and response DTOs, separate from persistence entities                       |
-| `models/entities/`      | SQLAlchemy tables, normally one primary table per file, all registered by its initializer    |
-| `models/failures/`      | Domain exception types that callers may handle                                               |
-| `models/value_objects/` | Immutable domain values identified by their contents rather than an identity                 |
-| `usecases/`             | One application operation per verb-first file                                                |
-| `repositories/`         | Storage protocols and adapters, one concrete responsibility per file                         |
-| `di.py`                 | `Depends` providers that assemble use cases from sessions and integration facades            |
-| `constants/`, `utils/`  | Optional module-local, low-level reuse with no business policy                               |
-| `tasks/`                | Thin durable-job entry points, with each task in a separate file                             |
+| Path                                 | Owns                                                                              |
+| ------------------------------------ | --------------------------------------------------------------------------------- |
+| `__init__.py`                        | Public facade: selected application and domain types with real external consumers |
+| `di.py`                              | `Depends` providers that connect presentation, use cases, ports, and adapters     |
+| `application/dtos/`                  | Pydantic application input and output contracts; no FastAPI transport context     |
+| `application/ports/`                 | Repository and outbound protocols consumed by use cases                           |
+| `application/use_cases/`             | One transport-neutral application operation per verb-first file                   |
+| `domain/entities/`                   | Persistence-independent business entities with identity                           |
+| `domain/failures/`                   | Stable failures callers may handle                                                |
+| `domain/value_objects/`              | Immutable domain values identified by their contents                              |
+| `infrastructure/adapters/`           | SQL, storage, and vendor implementations of application ports                     |
+| `infrastructure/persistence/models/` | SQLAlchemy mapped tables and persistence-owned enums                              |
+| `presentation/http/`                 | `APIRouter`, request handlers, auth context, and HTTP mapping                     |
+| `presentation/tasks/`                | Thin durable-job, schedule, listener, and command entry points                    |
 
 Use `__init__.py` as the facade instead of a stuttering `<feature>_module.py`.
-Use `models/` only as a grouping namespace. Every model belongs to a precisely
-named child such as `dtos/`, `entities/`, `failures/`, or `value_objects/`; do
-not put loose model files directly beside those categories. Add a category only
-when its first concrete type appears.
+Export no presentation or infrastructure internals. `di.py` is the feature
+composition seam, like a Nest feature module; it may know both framework
+dependencies and concrete adapters, but it owns no policy.
+
+Keep SQLAlchemy models distinct from domain entities. Infrastructure adapters
+map persistence rows and vendor responses to domain types before returning
+through an application port.
 
 ## Keep optional folders narrow
 
-| Decision        | Rule                                                                                                       |
-| --------------- | ---------------------------------------------------------------------------------------------------------- |
-| Create          | Start a helper private; create `utils/` or `constants/` only when a second file in the feature consumes it |
-| Promote         | Move a framework-neutral item to `shared/` only when a second feature consumes it                          |
-| Name            | Use one concept per file; never `helpers.py`, `misc.py`, `common.py`, or `general.py`                      |
-| Configure       | Put timeouts, page sizes, retries, flags, and URLs in `settings.py`, not `constants/`                      |
-| Bound           | Keep entity, repository, and use-case imports out of `utils/`; domain behavior stays in its feature owner  |
-| Reuse           | Prefer the standard library or an installed dependency before adding another helper                        |
-| Avoid shadowing | Do not add `types.py`, `logging.py`, `email.py`, `secrets.py`, `queue.py`, `json.py`, or `datetime.py`     |
+Keep a helper or constant beside its only consumer. When a second file in the
+same layer needs it, create a narrowly named folder inside that layer. Never add
+feature-root `utils/`, `helpers/`, `models/`, or `constants/` buckets that hide
+layer ownership.
+
+Prefer one concept per file. Do not add `helpers.py`, `misc.py`, `common.py`, or
+`general.py`, and do not shadow standard-library modules such as `types.py`,
+`logging.py`, `email.py`, `secrets.py`, `queue.py`, `json.py`, or `datetime.py`.
 
 Finish when the service has one importable package, each feature publishes one
-facade, shared code has proven consumers, optional packages contain real files,
-and the source and test trees expose the same capability ownership.
+facade, every feature implementation file apart from `__init__.py` and `di.py`
+sits in one explicit layer, shared code has proven consumers, SQLAlchemy models
+stay in infrastructure, and source and test trees expose the same capability and
+layer ownership.

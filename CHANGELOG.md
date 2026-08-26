@@ -15,6 +15,13 @@ and this project adheres to
   infrastructure adapters, presentation entry points, integrations, modules,
   dependency injection, lifecycle, operations, and Nest testing.
 
+### Changed
+
+- Restructured Flutter and FastAPI code-style guidance around feature-local
+  application, domain, infrastructure, and presentation layers. Flutter BLoCs
+  and Cubits now live in the application layer, and FastAPI domain entities stay
+  separate from SQLAlchemy persistence models.
+
 ## [0.3.0] - 2026-08-24
 
 ### Added

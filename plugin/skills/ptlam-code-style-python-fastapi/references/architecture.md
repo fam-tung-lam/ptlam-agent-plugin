@@ -1,41 +1,48 @@
 # FastAPI Request Pipeline
 
-The default boundary for a new feature-first service. Preserve an existing
-coherent architecture, but do not introduce a second request path inside it.
+The default layered boundary for a new feature-first service. Preserve an
+existing coherent architecture, but do not introduce a second request path
+inside it.
 
 ```text
-controller -> use case -> repository -> session or HTTP client
+presentation adapter -> application DTO -> use case -> application port -> infrastructure adapter
 ```
 
-Every request follows this path. A controller imports no repository, session, or
-integration client. A repository imports no use case. Reads and writes use the
-same lane, including a read whose use case only maps absence to a domain error.
+Every request follows this path. A presentation adapter imports no repository
+adapter, session, SQLAlchemy model, or integration client. Application and
+domain code import no infrastructure or FastAPI mechanic. Reads and writes use
+the same lane, including a read whose use case only maps absence to a domain
+failure.
 
 The short use cases required by simple reads are the deliberate cost of making
 the boundary predictable. Do not create a direct read path that future handlers
 must distinguish from the write path.
 
-## Give each boundary one responsibility
+## Give each layer one responsibility
 
-| Boundary     | Owns                                               | Does not own                               |
-| ------------ | -------------------------------------------------- | ------------------------------------------ |
-| Controller   | HTTP input, auth, response DTO, status             | Policy, queries, transaction decisions     |
-| Use case     | One operation, orchestration, transaction boundary | `Request`, `Depends`, `HTTPException`      |
-| Domain       | Business values, rules, and failures               | FastAPI or persistence mechanics           |
-| Repository   | One persistence or remote-data contract            | Transport DTOs, HTTP errors, commit policy |
-| Pydantic DTO | Request and response validation and serialization  | Database writes or orchestration           |
+| Layer                  | Owns                                                         | Does not own                                          |
+| ---------------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
+| Presentation           | HTTP or task input, auth context, status, and output mapping | Policy, queries, or transaction decisions             |
+| Application DTO        | Validated operation input and output                         | `Request`, `Depends`, writes, or orchestration        |
+| Use case               | One operation, orchestration, and transaction boundary       | FastAPI, SQLAlchemy, or transport errors              |
+| Domain                 | Business entities, values, rules, and stable failures        | FastAPI, Pydantic transport, or persistence mechanics |
+| Application port       | One persistence or remote-effect contract                    | Transport DTOs, HTTP errors, or commit policy         |
+| Infrastructure adapter | Implements a port with database or vendor mechanics          | Presentation mapping or business policy               |
+| Feature `di.py`        | FastAPI dependency providers and feature assembly            | Business policy                                       |
 
-Dependency injection assembles the path at the framework boundary. Convert
-transport, persistence, vendor, and domain values where their meaning changes.
-Framework types stop at the controller and dependency provider.
+Dependency injection assembles the path at the feature root. Convert transport,
+persistence, vendor, and domain values where their meaning changes. FastAPI
+types stop at presentation and `di.py`; SQLAlchemy and client types stay in
+infrastructure.
 
 ## Review the pipeline mechanically
 
-Search every changed controller for repository, session, SQLAlchemy, and
-integration imports. Search every use-case package for FastAPI and Starlette
-imports. Search controllers for commits and repositories for unconditional or
-hidden commit calls. Each result must either be removed or be an already-owned
-legacy exception outside the requested change.
+Search changed presentation files for infrastructure, session, SQLAlchemy, and
+integration imports. Search `application/` and `domain/` for FastAPI, Starlette,
+SQLAlchemy, and feature infrastructure imports. Search presentation adapters for
+commits and infrastructure adapters for hidden commits. Remove each result or
+identify it as untouched legacy code outside the change.
 
-Finish when every changed route reaches data through one use case, every use
-case owns one transaction decision, and no lower boundary imports its caller.
+Finish when every changed entry point calls one use case, each use case owns one
+transaction decision, application depends on ports rather than adapters,
+infrastructure implements those ports, and no inner layer imports its caller.
