@@ -73,6 +73,16 @@ behavior.>
 
 <Signals, migration, rollout, rollback, and support constraints.>
 
+## Architecture constraints
+
+### <A-01: structure expensive to reverse>
+
+- Accepted structure: <the confirmed judgment and the boundary it fixes>
+- Trade-offs: <what the structure gives up and why that is acceptable now>
+- Deferred: <concern left out and the signal that adds it, or None>
+- Redesign trigger: <the measured number, curve, or named event>
+- Source: <architecture judgment, ADR, or confirmed statement>
+
 ## Assumptions and risks
 
 <Assumptions with evidence, plus risks and their consequences.>
@@ -86,9 +96,9 @@ behavior.>
 <Map each behavior ID to its source heading and affected contract or constraint.>
 ```
 
-Use stable behavior IDs within the file. Preserve an existing ID when revising
-its wording. Retire an invalidated behavior explicitly instead of silently
-reusing its ID for another contract.
+Use stable behavior and structure IDs within the file. Preserve an existing ID
+when revising its wording. Retire an invalidated behavior explicitly instead of
+silently reusing its ID for another contract.
 
 ## Status rules
 
@@ -102,22 +112,26 @@ Move directly from `draft` to `blocked` or `ready` after verification. A
 revision of a ready spec returns to `draft` until its affected sections pass
 again.
 
+An architecture recommendation the user has not confirmed is a blocking
+decision: record it under Blocking decisions and set status `blocked`.
+
 ## Readiness checks
 
-| Check        | The specification must                                                         |
-| ------------ | ------------------------------------------------------------------------------ |
-| Source       | Name one confirmed scope source and cite a source heading for every behavior.  |
-| Explanation  | Make unfamiliar content reconstructable without changing source facts.         |
-| Visual       | Include one earned visual form that replaces equivalent prose.                 |
-| Boundary     | Separate included behavior, exclusions, and deliberate implementation freedom. |
-| Vocabulary   | Use glossary terms when available and contain no material term conflict.       |
-| Behavior     | State observable success, validation, failure, and recovery behavior.          |
-| Data         | Account for ownership, lifecycle, privacy, retention, and deletion.            |
-| Contracts    | State interface and compatibility promises without accidental design choices.  |
-| Operations   | Account for signals, migration, rollout, rollback, and support impact.         |
-| Proof        | Name evidence required for each behavior without prescribing test mechanics.   |
-| Decisions    | Carry no unresolved outcome-changing decision.                                 |
-| Traceability | Map each behavior ID back to its source and affected contract.                 |
+| Check        | The specification must                                                                                               |
+| ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| Source       | Name one confirmed scope source and cite a source heading for every behavior.                                        |
+| Explanation  | Make unfamiliar content reconstructable without changing source facts.                                               |
+| Visual       | Include one earned visual form that replaces equivalent prose.                                                       |
+| Boundary     | Separate included behavior, exclusions, and deliberate implementation freedom.                                       |
+| Vocabulary   | Use glossary terms when available and contain no material term conflict.                                             |
+| Behavior     | State observable success, validation, failure, and recovery behavior.                                                |
+| Data         | Account for ownership, lifecycle, privacy, retention, and deletion.                                                  |
+| Contracts    | State interface and compatibility promises without accidental design choices.                                        |
+| Operations   | Account for signals, migration, rollout, rollback, and support impact.                                               |
+| Architecture | Record each structure expensive to reverse with its trade-offs, deferred concerns and signals, and redesign trigger. |
+| Proof        | Name evidence required for each behavior without prescribing test mechanics.                                         |
+| Decisions    | Carry no unresolved outcome-changing decision.                                                                       |
+| Traceability | Map each behavior ID back to its source and affected contract.                                                       |
 
 Finish with status `blocked` when any check fails because evidence or a decision
 is missing. Finish with status `ready` only when all checks pass.

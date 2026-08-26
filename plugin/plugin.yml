@@ -140,6 +140,22 @@ skills:
           delegation, and final completion.
           Reviewer agents stay read-only. Repair agents act only after the main
           agent accepts a finding.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the suitability judgment for a change to a structure
+          expensive to reverse that no spec, ADR, or confirmed decision covers.
+        instructions: |-
+          Read ptlam-architecturing while fixing the task contract.
+          Apply it only when the task changes a component, runtime, or
+          data-store split, a published surface, where authoritative state
+          lives, or a platform commitment, and no spec, ADR, or confirmed
+          decision covers that change.
+          Let it own the constraints, solution-space frame, options,
+          trade-offs, sizing, recommendation, and open question.
+          Keep this skill's ownership of the task contract, the focused
+          question to the user, team sizing, delegation, integration, review,
+          repair, and delivery.
+          Skip it when a source already covers the structure.
   - id: ptlam-researching
     description:
       Research one bounded question against high-trust primary sources and
@@ -255,9 +271,11 @@ skills:
       designing a failure or a retry; writing a doc comment; emitting a log
       record; deciding what a test must prove; choosing a test level; placing a
       test or a test double; or planning how a change migrates. Use
-      ptlam-modeling-domain instead for business terminology, context
-      boundaries, and business process maps. Use as the foundation for a stack
-      specialization that adds the mechanics.
+      ptlam-modeling-domain instead for business terms, context boundaries, and
+      process maps. Use ptlam-architecturing instead for a component, runtime,
+      or data-store split, a published surface, state ownership, or a platform
+      commitment. Use as the foundation for a stack specialization that adds the
+      mechanics.
     category_id: engineering
     visibility: internal
     status: active
@@ -536,6 +554,20 @@ skills:
           Apply a matching stack specialization when one is available.
           Let this skill own the review surface, intent, risk examination,
           finding gate, severity, verification limits, and readiness verdict.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the judging-suitability standard for a changeset that
+          introduces a structure expensive to reverse.
+        instructions: |-
+          Read ptlam-architecturing while examining the change.
+          Apply only its judging-suitability standard, and only when the
+          changeset introduces a component, runtime, or data-store split, a
+          published surface, state ownership, or a platform commitment.
+          Let it own the verdict on that structure and the stale heuristics
+          to revalidate.
+          Keep this skill's ownership of the review surface, finding gate,
+          severity, and readiness verdict.
+          Skip it for a changeset that introduces no such structure.
   - id: ptlam-grilling
     description:
       Stress-test a plan, decision, or idea through a persistent interview that
@@ -559,14 +591,30 @@ skills:
           in CONTEXT.md.
           Keep this skill's ownership of the questions, decision map, session
           record, and confirmation loop.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the defensible recommendation, strongest alternative, and
+          main trade-off for a decision that fixes a structure expensive to
+          reverse.
+        instructions: |-
+          Read ptlam-architecturing before the interview loop.
+          Apply it when the selected decision fixes a component, runtime, or
+          data-store split, a published surface, where authoritative state
+          lives, or a platform commitment.
+          Let it own the constraints, solution-space frame, options,
+          trade-offs, sizing, recommendation, and redesign trigger.
+          Keep this skill's ownership of the questions, decision map, session
+          record, and confirmation loop.
+          Let it write no file; record its judgment in the session record.
       - skill_id: ptlam-creating-adr
         reason:
           Preserves consequential architectural decisions when the interview
           makes them concrete enough to evaluate and record.
         instructions: |-
           Read ptlam-creating-adr before the interview loop.
-          Apply its qualification gate when a decision becomes expensive to
-          reverse, constrains future architecture, or carries material rejected
+          Apply its qualification gate when a decision splits a component,
+          runtime, or data store, publishes a surface, moves authoritative
+          state, commits to a platform, or carries material rejected
           alternatives.
           Let it own the ADR qualification verdict, destination, shape, and
           verification.
@@ -652,6 +700,24 @@ skills:
           Keep this skill's ownership of feature facts, document structure,
           visual placement, destination, and readiness.
           Make each visual replace equivalent prose rather than repeat it.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the suitability judgment behind any interface, data,
+          compatibility, rollout, or migration structure the spec fixes and
+          that is expensive to reverse.
+        instructions: |-
+          Read and apply ptlam-architecturing while modeling the feature
+          contract, whenever a contract element fixes a structure that is
+          expensive to reverse and no confirmed judgment or ADR already covers
+          it; otherwise record that source under the architecture constraints.
+          Let it own the constraints, solution-space frame, options,
+          trade-offs, sizing, recommendation, deferred concerns, and redesign
+          trigger.
+          Keep this skill's ownership of the feature contract, schema,
+          destination, status, and readiness.
+          Write the accepted recommendation into the spec as an architecture
+          constraint with its trade-offs, deferred concerns, and redesign
+          trigger, not as implementation mechanics.
   - id: ptlam-planning-tickets
     description:
       Turn one ready feature specification into an ordered set of vertically
@@ -695,8 +761,10 @@ skills:
       Model project business language, context boundaries, and business
       processes in CONTEXT.md. Use when a business term is contested,
       overloaded, or newly coined, when two business contexts use one term
-      differently, or when a business process needs a durable map. Do not use
-      for code types, storage schemas, or serialization mechanics.
+      differently, or when a business process needs a durable map. Compose this
+      skill when an interview or an architecture judgment meets a contested
+      business term. Do not use for code types, storage schemas, or
+      serialization mechanics.
     category_id: productivity
     visibility: public
     status: active
@@ -717,9 +785,11 @@ skills:
     description:
       Decide whether a crystallized architectural choice warrants a durable
       architecture decision record and write the qualifying ADR. Use when a
-      decision constrains future architecture, is expensive to reverse, affects
-      a published boundary, or carries material rejected alternatives. Do not
-      use for local implementation choices with cheap reversal.
+      confirmed decision splits a component, runtime, or data store, publishes
+      a surface such as an API, SDK, CLI, schema, or file format, moves
+      authoritative state, commits to a platform, or carries material rejected
+      alternatives. Do not use for local implementation choices with cheap
+      reversal.
     category_id: engineering
     visibility: public
     status: active
@@ -871,7 +941,28 @@ skills:
     category_id: project-health-connector
     visibility: public
     status: active
-    required_skills: []
+    required_skills:
+      - skill_id: ptlam-architecturing
+        reason:
+          Provides the suitability judgment behind a boundary, ownership, or
+          public API decision, with its constraints, solution-space frame,
+          positioned options, sizing, assumptions, verdict, trade-offs, and
+          redesign trigger.
+        instructions: |-
+          After tracing the packages, channel, and native layers a proposed
+          change touches, read and apply ptlam-architecturing when the request
+          asks where the change belongs or whether a boundary or public API
+          change is suitable.
+          Let it own the question, constraints, solution-space frame, options,
+          sizing, assumptions, reasoning probes, verdict, trade-offs, deferred
+          concerns, redesign trigger, and report.
+          Keep this skill's ownership of package direction, library audiences,
+          Pigeon and generated-file ownership, Android and iOS layers, failure
+          translation, concurrency, platform limit sources, and the layers a
+          change must leave unchanged.
+          Skip it for an explanation of a call path that judges nothing.
+          The foundation's verdict and report rules take precedence. This
+          specialization may add project constraints, never loosen them.
   - id: ptlam-health-connector-setup
     description:
       Set up or repair a local Health Connector SDK checkout with its pinned
@@ -879,7 +970,8 @@ skills:
       and macOS-only Swift tools, then prove the available development lanes.
       Runs only when explicitly requested. Use when bootstrapping a clone,
       repairing missing dependencies, or preparing a machine to contribute. Do
-      not use for a runtime defect or an already-working checkout's lint failure.
+      not use for a runtime defect or an already-working checkout's lint
+      failure.
     disable_model_invocation: true
     category_id: project-health-connector
     visibility: public
@@ -1098,11 +1190,11 @@ skills:
     description:
       Write, review, and fix Swift source in Health Connector's iOS package
       against its access, declaration and extension shape, structured logging
-      syntax, SwiftLint baseline, and SwiftFormat configuration. Use when editing
-      Swift code or fixing a Swift analysis, formatting, or native logging
-      convention failure. Apply ptlam-code-style-swift first. Do not use for iOS
-      architecture, HealthKit behavior, Pigeon threading, failure translation,
-      or end-to-end handler registration.
+      syntax, SwiftLint baseline, and SwiftFormat configuration. Use when
+      editing Swift code or fixing a Swift analysis, formatting, or native
+      logging convention failure. Apply ptlam-code-style-swift first. Do not use
+      for iOS architecture, HealthKit behavior, Pigeon threading, failure
+      translation, or end-to-end handler registration.
     category_id: project-health-connector
     visibility: public
     status: active

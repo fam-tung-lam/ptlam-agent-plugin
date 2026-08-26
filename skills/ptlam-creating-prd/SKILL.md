@@ -112,6 +112,8 @@ Keep this boundary explicit in the artifact:
 
 - the PRD carries product audience, problem, evidence, outcomes, success
   measures, scope, non-goals, constraints, assumptions, and risks;
+- the PRD carries, as product facts, the numbered constraints in the schema's
+  constraint table;
 - the PRD carries no modules, schemas, API shapes, storage choices, or other
   solution mechanics; and
 - the grilling record remains a decision map, not a draft PRD.

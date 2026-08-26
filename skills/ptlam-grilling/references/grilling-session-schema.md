@@ -66,6 +66,10 @@ session facts.
 
 <User-owned decisions with answers, rationale, and consequences.>
 
+For a structural decision, keep the judgment's constraints, frame, deferred
+concerns with their signals, and redesign trigger with the answer. A deferred
+concern is not a deferred decision.
+
 ### Assumptions, risks, and contradictions
 
 <Accepted assumptions, current risks, contradictions, and invalidated branches.>

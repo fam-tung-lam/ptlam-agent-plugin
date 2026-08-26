@@ -21,6 +21,10 @@ A stored data format, a published API, and an identifier scheme deserve a week.
 A folder layout, an internal name, and a private helper deserve a decision and a
 move on. Ask what reversal would cost, then spend accordingly.
 
+Apply `ptlam-architecturing` to decide what you cannot undo. Record the
+confirmed decision as
+[Record what forced the decision](#record-what-forced-the-decision) says.
+
 ## Migrate in parallel
 
 Expand, migrate, contract: add the new shape beside the old one, move readers

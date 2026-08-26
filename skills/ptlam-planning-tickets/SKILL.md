@@ -89,11 +89,15 @@ Read the complete spec and the repository evidence it cites. Build a map from
 behavior IDs to contracts, data lifecycles, failure paths, rollout constraints,
 and required evidence. Preserve deliberate implementation freedom.
 
+Read the spec's architecture constraints. Map each deferred concern, with its
+signal, and the redesign trigger as work no ticket owns.
+
 Record missing outcome-changing detail as a spec blocker. Do not repair the spec
 inside a ticket or convert an assumption into a requirement.
 
 Complete this step when every spec behavior and constraint has one disposition
-in the work map and no ticket needs to invent product behavior.
+in the work map, every deferred concern is mapped as work no ticket owns, and no
+ticket needs to invent product behavior.
 
 ## 3. Slice vertically
 
@@ -106,6 +110,9 @@ handling, data lifecycle, compatibility, and rollout in coherent increments.
 Avoid separate database, API, UI, or test tickets that have no user- or
 operator-visible outcome. When enabling work cannot be vertical, name its first
 consumer and keep it smaller than that consumer.
+
+Slice a migration as expand, then migrate, then contract, as the
+`ptlam-code-style` evolution rules require. Each stage must ship on its own.
 
 Complete this step when every ticket owns one outcome, every spec behavior is
 covered once or deliberately shared, and no slice is merely a technical layer.

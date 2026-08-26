@@ -3,6 +3,10 @@
 Where code lives, and how a directory listing reads to someone who arrived
 today. The specialization owns the directory names a framework requires.
 
+Where a system splits into components, runtimes, or stores is an architecture
+decision; `ptlam-architecturing` owns it. This reference owns where files live
+inside code one team changes in one release.
+
 ## Name the top level after the domain
 
 `billing/`, `scheduling/`, `ingest/` — not `controllers/`, `services/`, or

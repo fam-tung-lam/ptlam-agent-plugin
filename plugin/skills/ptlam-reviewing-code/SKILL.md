@@ -52,6 +52,12 @@ below to cover risks that code conventions alone cannot settle.
 When a package manifest or lockfile changes, read
 [reviewing dependency changes](references/dependency-changes.md).
 
+When the changeset introduces a component, runtime, or data-store split, a
+published surface, state ownership, or a platform commitment, read the loaded
+architecture skill's judging-suitability standard. Admit a finding on that
+structure only when that standard's verdict is not yet suitable. Report an
+unknown need as missing intent rather than a finding.
+
 Inspect existing CI evidence only when it belongs to the exact revision under
 review. Run check-mode commands only when task authority and repository rules
 allow their local artifacts. Keep formatters, generators, snapshot updates,

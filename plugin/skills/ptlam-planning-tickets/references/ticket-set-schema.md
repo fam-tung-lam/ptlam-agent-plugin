@@ -29,7 +29,8 @@ Write `<tickets-directory>/README.md` with:
 
 ## Shared constraints and risks
 
-<Cross-ticket constraints, risks, and their owners.>
+<Cross-ticket constraints, deferred concerns with their signals, the redesign
+trigger, risks, and their owners.>
 
 ## Blocking decisions
 
@@ -63,7 +64,8 @@ to the dependency order. Use this shape:
 
 ## Out of scope
 
-<Adjacent work deliberately left to another ticket or outside the feature.>
+<Adjacent work left to another ticket, deferred until its signal, or outside the
+feature.>
 
 ## Acceptance
 
@@ -80,16 +82,18 @@ to the dependency order. Use this shape:
 
 ## Readiness checks
 
-| Check        | The ticket set must                                                     |
-| ------------ | ----------------------------------------------------------------------- |
-| Source       | Trace every ticket and acceptance statement to the ready spec.          |
-| Explanation  | Make unfamiliar intent reconstructable without changing spec facts.     |
-| Visual       | Show every blocking edge once in a verified dependency map.             |
-| Verticality  | Give each ticket one observable path rather than one technical layer.   |
-| Coverage     | Account for every spec behavior, constraint, and failure path.          |
-| Dependencies | Be acyclic, bidirectional at endpoints, and consistent with file order. |
-| Proof        | Record required evidence without prescribing testing mechanics.         |
-| Decisions    | Carry no unresolved outcome-changing decision.                          |
+| Check        | The ticket set must                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| Source       | Trace every ticket and acceptance statement to the ready spec.                                 |
+| Explanation  | Make unfamiliar intent reconstructable without changing spec facts.                            |
+| Visual       | Show every blocking edge once in a verified dependency map.                                    |
+| Verticality  | Give each ticket one observable path rather than one technical layer.                          |
+| Coverage     | Account for every spec behavior, constraint, and failure path.                                 |
+| Dependencies | Be acyclic, bidirectional at endpoints, and consistent with file order.                        |
+| Deferral     | Implement no concern the spec defers; carry it, with its signal, in the overview.              |
+| Migration    | Slice each migration as expand, migrate, then contract, with every stage shippable on its own. |
+| Proof        | Record required evidence without prescribing testing mechanics.                                |
+| Decisions    | Carry no unresolved outcome-changing decision.                                                 |
 
 Set the overview status to `blocked` when a source defect or decision prevents a
 check from passing. Use `ready` only when all ticket files pass together.
