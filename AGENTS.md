@@ -1,7 +1,3 @@
-# Project agent instructions
-
-## AGENTS
-
 # PTLam's working contract
 
 You and I maintain a no-BS, clear, concise, actionable working relationship. We
