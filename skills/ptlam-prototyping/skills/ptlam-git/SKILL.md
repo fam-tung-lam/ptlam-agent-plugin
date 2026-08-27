@@ -3,86 +3,99 @@ name: ptlam-git
 description:
   Carry out repository-local Git commit, worktree, and conflict-resolution
   workflows without disturbing unrelated work. Use when creating a commit,
-  writing or revising a commit message, creating or managing a worktree,
+  writing or revising a commit message, creating, using, or removing a worktree,
   deciding whether a repository write belongs in the current checkout or a new
-  linked worktree, or resolving an in-progress merge or rebase conflict.
+  linked worktree, or resolving an in-progress merge or rebase conflict. Compose
+  this skill from any workflow that needs isolated branches, worktrees, or
+  commits.
 ---
 
-# PTLam Using Git
+# PTLam Git
 
 Carry out one requested commit, worktree, or conflict-resolution workflow in the
-correct repository and worktree without disturbing unrelated work. This skill
-may create local branches, linked worktrees, and commits when the user's request
-authorizes that state change.
+right repository and worktree without disturbing unrelated work. This skill may
+create local branches, linked worktrees, and commits when the request allows
+that change.
 
 It does not push, start a merge or rebase, delete a branch, or discard changes
-unless the user explicitly asks for that operation. A read-only Git question
-never authorizes a worktree or commit.
+unless the user explicitly asks. A read-only Git question never allows a
+worktree or a commit.
 
-## 1. Resolve the repository and authority
+## Which Git workflow does the request need?
 
-Resolve one repository from the user's paths and current directory. Read the
-current request and every applicable `AGENTS.md` or equivalent repository
-instruction from the repository root to the files in scope.
+```mermaid
+flowchart LR
+    ResolveRepository["Resolve the repository and permission"] --> InProgressConflict{"Merge or rebase in progress?"}
+    InProgressConflict -->|"Yes"| ResolveConflicts["Resolve the conflicts and finish the operation"]
+    InProgressConflict -->|"No"| ChooseWorktree["Choose or create the worktree"]
+    ChooseWorktree --> CommitRequested{"Commit or message requested?"}
+    CommitRequested -->|"Yes"| PrepareCommit["Prepare and create the commit"]
+    CommitRequested -->|"No"| ReportState["Report the Git state"]
+    PrepareCommit --> ReportState
+    ResolveConflicts --> ReportState
+```
 
-Inspect `git status --short --branch` and `git worktree list --porcelain` before
-choosing where to work. Keep user changes, active branches, and existing
+## 1. Resolve the repository and permission
+
+Resolve one repository from the user's paths and the current directory. Read the
+request and every applicable `AGENTS.md` or similar instruction from the
+repository root down to the files in scope.
+
+Run `git status --short --branch` and `git worktree list --porcelain` before
+choosing where to work. Leave user changes, active branches, and existing
 worktrees outside the request untouched.
 
-Complete this step when the repository, requested Git operation, permitted side
-effects, and unrelated state are known.
+Done when the repository, the requested operation, the permitted side effects,
+and the unrelated state are known.
 
 ## 2. Resolve an in-progress conflict
 
-When Git reports an in-progress merge or rebase with unmerged paths, read
-[resolving merge conflicts](references/resolving-merge-conflicts.md). Keep the
-work in that exact conflicted worktree. Let the reference own intent research,
-hunk resolution, project checks, and completion of the Git operation.
+When Git reports a merge or rebase in progress with unmerged paths, read
+[resolving merge conflicts](references/resolving-merge-conflicts.md). Stay in
+that exact worktree. The reference owns finding both intents, resolving each
+hunk, running project checks, and finishing the operation.
 
-Complete this branch when Git no longer reports an in-progress operation or an
-unmerged path. Do not continue into the worktree or standalone commit branches.
+Done when Git reports no in-progress operation and no unmerged path. Do not
+continue into the worktree or commit steps.
 
 ## 3. Choose the worktree
 
-Read [worktree policy](references/worktree-policy.md) whenever the user asks to
-create, use, move, repair, remove, or prune a worktree, or before a repository
-write when the existing worktree may not be the right execution context. Let it
-decide whether to stay or create `.worktrees/<task-slug>` and how to manage that
-linked worktree safely.
+Read [the worktree policy](references/worktree-policy.md) when the user asks to
+create, use, move, repair, remove, or prune a worktree, or before any write when
+the current worktree may not be the right place. It decides whether to stay or
+to create `.worktrees/<task-slug>`, and how to manage a linked worktree safely.
 
-After creating or selecting a linked worktree, run all task commands from that
-worktree. Do not continue editing from the checkout that dispatched the work.
+After creating or picking a linked worktree, run every task command from it. Do
+not keep editing from the checkout that started the work.
 
-Complete this step when one exact worktree and branch own the requested change.
+Done when one exact worktree and branch own the requested change.
 
 ## 4. Prepare the commit
 
-Enter this step only when the user asks for a commit or commit message. Inspect
-the complete diff, using the staged diff when it exists. If the user authorized
-a commit and nothing is staged, stage only explicit paths that belong to the
-requested outcome. Preserve unrelated changes and never widen the commit merely
-to make the worktree clean.
+Enter this step only when the user asks for a commit or a commit message.
+Inspect the whole diff, using the staged diff when one exists. If a commit is
+allowed and nothing is staged, stage only the explicit paths that belong to the
+requested outcome. Never widen the commit just to make the worktree clean.
 
 Read [writing a Git commit message](references/writing-git-commit-message.md).
-Let it own preference precedence, message construction, and final verification.
-If the user asked only for wording, return the message without changing Git
-state.
+It owns which preference wins, how to build the message, and the final check. If
+the user asked only for wording, return the message without changing Git.
 
-Before committing, run the checks required by the request and repository rules.
-Report any relevant check that could not be run; do not describe it as passed.
+Before committing, run the checks the request and repository rules require.
+Report any check you could not run; never call it passed.
 
-Complete this step when the exact staged patch, message, and verification state
-all describe one coherent outcome.
+Done when the staged patch, the message, and the check results describe one
+coherent outcome.
 
 ## 5. Commit and report
 
-Create the commit only when the user authorized it. Let repository hooks run. If
-a hook changes files or rejects the commit, inspect the resulting status and
-report the failure instead of bypassing the hook or silently retrying.
+Create the commit only when the user allowed it. Let repository hooks run. If a
+hook changes files or rejects the commit, inspect the result and report it
+instead of bypassing the hook or retrying quietly.
 
-Verify the result with `git status --short --branch` and `git log -1 --oneline`.
-Report the worktree path, branch, commit hash and subject when created, checks
-run, and any remaining changes or uncertainty.
+Verify with `git status --short --branch` and `git log -1 --oneline`. Report the
+worktree path, branch, commit hash and subject when created, checks run, and any
+remaining changes or doubt.
 
-Complete the task when the requested Git state exists, unrelated work is
-unchanged, and the report matches the verified repository state.
+Finish when the requested Git state exists, unrelated work is unchanged, and the
+report matches the verified repository state.

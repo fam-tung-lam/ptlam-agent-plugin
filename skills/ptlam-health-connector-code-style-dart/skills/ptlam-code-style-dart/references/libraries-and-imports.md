@@ -5,8 +5,6 @@ another.
 
 ## `lib/src/` is the private half of the package
 
-Dart gives a package two visibility levels above the underscore:
-
 | Location                      | Who may import it                                 |
 | ----------------------------- | ------------------------------------------------- |
 | `lib/<name>.dart` and `lib/*` | Any package, through `package:<name>/<file>.dart` |
@@ -40,15 +38,14 @@ declaration only once something outside the package needs it.
 
 Mark a public declaration inside `lib/src/` with `@internal` from `package:meta`
 when it must stay usable across the package's own libraries but carries no
-promise to consumers. The analyzer reports `invalid_internal_annotation` if you
-place it on a declaration that is already publicly exported, so `@internal`
-documents the private half rather than narrowing the public one.
+promise to consumers. The analyzer reports `invalid_internal_annotation` on a
+declaration that is already publicly exported.
 
 ## Use `part` only where the language requires it
 
-A `part` file is not a module. It cannot carry a single directive of its own —
-the analyzer reports `non_part_of_directive_in_part` for any `import` inside one
-— so every part shares the library's imports and its private names.
+A `part` file is not a module. It cannot carry a directive of its own (the
+analyzer reports `non_part_of_directive_in_part` for an `import` inside one), so
+every part shares the library's imports and private names.
 
 Reserve parts for generated output and for a split the generator dictates. Use
 the string form, `part of 'orders.dart';`, which
@@ -59,7 +56,7 @@ library with its own imports.
 
 Write `dart:` imports, then `package:` imports, then relative imports, each
 group alphabetized and separated by a blank line. Put every `export` after every
-`import`. The `directives_ordering` lint checks all of it.
+`import`. `directives_ordering` checks all of it.
 
 Choose one style for reaching another file inside the same package and enable
 its lint. `always_use_package_imports` and `prefer_relative_imports` contradict

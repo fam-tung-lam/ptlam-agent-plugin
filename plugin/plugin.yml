@@ -31,255 +31,537 @@ keywords:
   - productivity
   - utilities
 
+# Categories name the layer of work a skill belongs to, so a reader can tell
+# deciding from specifying from building at a glance.
 categories:
-  - id: engineering
-    name: Engineering
-    description: Skills for reviewing and delivering software changes.
-  - id: productivity
-    name: Productivity
-    description: Skills for planning work and communicating ideas clearly.
+  - id: deciding
+    name: Deciding
+    description: Turn an open question into a confirmed decision.
+  - id: specifying
+    name: Specifying
+    description: Turn a confirmed decision into a durable document.
+  - id: building
+    name: Building
+    description: Change code and prove the change.
+  - id: conventions
+    name: Conventions
+    description: The shared code standard and its stack specializations.
+  - id: communicating
+    name: Communicating
+    description: Make a concept, a system, or evidence understandable.
   - id: utilities
     name: Utilities
-    description: Focused helpers for small, repeatable transformations.
+    description: Focused helpers for small, repeatable jobs.
   - id: project-health-connector
     name: Health Connector SDK
     description:
       Project-specific skills for the Health Connector Flutter plugin monorepo.
 
 skills:
-  - id: ptlam-setup
+  # --- Deciding -------------------------------------------------------------
+  - id: ptlam-grilling
     description:
-      Install or refresh PTLam's general agent instructions for a project.
+      Stress-test a plan, decision, or idea by asking the user one
+      consequential question at a time, saving a resumable session record,
+      sharpening contested business terms, and capturing decisions that are
+      expensive to reverse. This is the only skill that interviews the user.
     disable_model_invocation: true
-    category_id: utilities
+    category_id: deciding
     visibility: public
     status: active
-    required_skills: []
-  - id: ptlam-git
+    required_skills:
+      - skill_id: ptlam-modeling-domain
+        reason:
+          Keeps contested business language and context boundaries durable
+          while the interview is still resolving them.
+        instructions: |-
+          Read ptlam-modeling-domain before the interview loop.
+          Apply it when a business term is contested, overloaded, or new, or
+          when a business context boundary becomes unclear.
+          Let it own the glossary, context boundaries, and business process map
+          in CONTEXT.md.
+          Keep this skill's ownership of the questions, decision map, session
+          record, and confirmation loop.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the recommendation, strongest alternative, and main
+          trade-off for a decision that fixes a structure expensive to reverse.
+        instructions: |-
+          Read ptlam-architecturing before the interview loop.
+          Apply it when the selected decision fixes a component, runtime, or
+          data-store split, a published surface, where the true copy of state
+          lives, or a platform commitment.
+          Let it own the constraints, frame, options, trade-offs, sizing,
+          recommendation, and redesign trigger, and let it decide whether the
+          confirmed decision earns an architecture decision record.
+          Keep this skill's ownership of the questions, decision map, session
+          record, and confirmation loop.
+          Let it write no file; record its judgment in the session record.
+
+  - id: ptlam-architecturing
     description:
-      Carry out repository-local Git commit, worktree, and conflict-resolution
-      workflows without disturbing unrelated work. Use when creating a commit,
-      writing or revising a commit message, creating or managing a worktree,
-      deciding whether a repository write belongs in the current checkout or a
-      new linked worktree, or resolving an in-progress merge or rebase conflict.
-    category_id: engineering
+      Answer one system-level architecture question with a suitability
+      judgment that frames the solution space, positions the options, sizes
+      the recommendation for the next order of magnitude, and names its
+      trade-offs, assumptions, and redesign trigger. Works for any kind of
+      system, from backend and web frontend to mobile, SDK, CLI, data
+      pipeline, desktop, embedded, and internal platform. Use when choosing
+      component, runtime, data-store, deployment, or integration structure;
+      when designing a published surface such as an API, SDK, CLI, schema, or
+      file format; when deciding where the true copy of state lives; when a
+      platform limit shapes the design; when a debate is stuck on technology
+      names; or when judging an existing architecture. Compose it from any
+      skill that meets a structure expensive to reverse. Do not use for code
+      structure one team changes in one release, business vocabulary, or
+      diagnosing one failure.
+    category_id: deciding
     visibility: public
     status: active
-    required_skills: []
-  - id: ptlam-diagnosing
+    required_skills:
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns the solution-space frame and the system topology into verified
+          visuals that replace the prose describing them.
+        instructions: |-
+          Read ptlam-mermaiding before drawing the frame or topology visual.
+          Let it own the diagram type, Mermaid source, and syntax check.
+          Keep this skill's ownership of the dimensions, positions, the meaning
+          each mark carries, and the judgment the visual supports.
+      - skill_id: ptlam-creating-adr
+        reason:
+          Preserves a confirmed recommendation as a durable record when it
+          constrains the future or is expensive to reverse.
+        instructions: |-
+          Read ptlam-creating-adr after the user confirms the recommendation.
+          Apply its qualification gate; let it own the verdict, destination,
+          shape, and checks.
+          Keep this skill's ownership of the question, constraints, frame,
+          options, trade-offs, assumptions, and redesign trigger, and pass them
+          as the decision evidence.
+
+  - id: ptlam-creating-adr
     description:
-      Diagnose one failing software behavior and return a cause whose mechanism
-      at the first failing boundary is demonstrated by named observations or a
-      discriminating check with every remaining evidence-supported alternative
-      excluded, or an exact evidence blocker and one discriminating next check.
-      Use when software throws, returns the wrong result, hangs, crashes,
-      regresses, or differs across environments and the requested result is a
-      diagnosis. Compose this skill when a stack or project specialization adds
-      diagnosis mechanics, or when an authorized fix workflow first needs the
-      cause.
-    category_id: engineering
+      Decide whether one confirmed architecture choice deserves a durable
+      architecture decision record, and write the record when it does. Use
+      when a confirmed decision splits a component, runtime, or data store,
+      publishes a surface such as an API, SDK, CLI, schema, or file format,
+      moves where the true copy of state lives, commits to a platform, or
+      rejects a plausible alternative for a non-obvious reason. Compose this
+      skill from any workflow that needs the record-or-not verdict. Do not use
+      for a local implementation choice that is cheap to reverse.
+    category_id: deciding
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes the decision forces and consequences understandable to a future
+          reader without changing the accepted choice.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting a qualifying record.
+          Infer the reader's difficulty from the confirmed decision and project
+          evidence; do not start an interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check.
+          Use its explanation package inside the record without changing facts,
+          status, schema, destination, or qualification owned by this skill.
+          Enter the analogy branch only when the user explicitly asked for one.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material decision forces or architectural effects into verified
+          visuals that make the record faster to scan.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the record's visual form.
+          Apply it to material sequences, hierarchies, states, dependencies,
+          interactions, or topology; use a table for exact mappings.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering check.
+          Keep this skill's ownership of decision facts, qualification,
+          document structure, visual placement, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+
+  - id: ptlam-modeling-domain
+    description:
+      Model a project's business words, context boundaries, and business
+      processes in CONTEXT.md. Use when a business term is contested,
+      overloaded, or new, when two contexts use one word differently, or when
+      a business process needs a durable map. Compose this skill when an
+      interview or an architecture judgment meets a contested business term.
+      Do not use for code types, storage schemas, or serialization mechanics.
+    category_id: deciding
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-mermaiding
+        reason:
+          Owns the business process diagram that makes handoffs and decisions
+          visible without repeating them in prose.
+        instructions: |-
+          Read and apply ptlam-mermaiding for every business process map.
+          Let it own the visual question, diagram type, notation, Mermaid
+          source, and the strongest available syntax and rendering check.
+          Keep this skill's ownership of business facts, vocabulary, context
+          boundaries, document placement, and glossary checks.
+          Make the process diagram replace equivalent prose rather than repeat
+          it.
+
+  # --- Specifying -----------------------------------------------------------
+  - id: ptlam-creating-prd
+    description:
+      Create one product requirements document from a confirmed grilling
+      record or product brief, for a new product or a large epic. Use when
+      product framing, audience, outcomes, scope, non-goals, and success
+      measures must become a durable handoff before feature specifications.
+      Start a feature inside an existing product at ptlam-creating-spec; skip
+      this pipeline for a small fix.
+    disable_model_invocation: true
+    category_id: specifying
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar product framing understandable to the document's
+          reader without changing confirmed decisions.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the document.
+          Infer the reader's difficulty from the confirmed source and project
+          evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check.
+          Use its explanation package inside the document without changing
+          facts, scope, schema, destination, or readiness owned by this skill.
+          Enter the analogy branch only when the user explicitly asked for one.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material product relationships into verified visuals that make
+          the document faster to scan.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the document's visual form.
+          Apply it to material sequences, hierarchies, states, dependencies, or
+          interactions; use a table for exact mappings.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering check.
+          Keep this skill's ownership of product facts, document structure,
+          visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+
+  - id: ptlam-creating-spec
+    description:
+      Create one buildable feature specification from a confirmed product
+      scope item or feature brief inside an existing product. Use when
+      behavior, boundaries, failure handling, interfaces, data, rollout
+      constraints, and required evidence must be fixed before ticket planning.
+      Start a new product or large epic with ptlam-creating-prd; skip this
+      pipeline for a small fix.
+    disable_model_invocation: true
+    category_id: specifying
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar feature behavior understandable to the document's
+          reader without changing confirmed constraints.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the specification.
+          Infer the reader's difficulty from the confirmed scope and project
+          evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check.
+          Use its explanation package inside the specification without changing
+          facts, contracts, schema, destination, or readiness owned by this
+          skill.
+          Enter the analogy branch only when the user explicitly asked for one.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Turns material behavior and system relationships into verified
+          visuals that make the specification faster to scan.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the specification's visual
+          form.
+          Apply it to material sequences, hierarchies, states, dependencies, or
+          interactions; use a table for exact mappings.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering check.
+          Keep this skill's ownership of feature facts, document structure,
+          visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+      - skill_id: ptlam-architecturing
+        reason:
+          Supplies the suitability judgment behind any interface, data,
+          compatibility, rollout, or migration structure the specification
+          fixes that is expensive to reverse.
+        instructions: |-
+          Read and apply ptlam-architecturing while modeling the feature
+          contract, whenever a contract element fixes a structure expensive to
+          reverse and no confirmed judgment or record already covers it;
+          otherwise record that source under the architecture constraints.
+          Let it own the constraints, frame, options, trade-offs, sizing,
+          recommendation, deferred concerns, and redesign trigger.
+          Keep this skill's ownership of the feature contract, schema,
+          destination, status, and readiness.
+          Write the accepted recommendation into the specification as an
+          architecture constraint, not as implementation mechanics.
+
+  - id: ptlam-planning-tickets
+    description:
+      Turn one ready feature specification into an ordered set of vertically
+      sliced ticket files with explicit blocking edges. Use after a feature
+      specification is ready for implementation planning. A new product or
+      large epic starts at ptlam-creating-prd, an existing-product feature
+      starts at ptlam-creating-spec, and a small fix skips this pipeline.
+    disable_model_invocation: true
+    category_id: specifying
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Makes unfamiliar ticket intent and dependencies understandable to
+          implementers without changing the source specification.
+        instructions: |-
+          Read and apply ptlam-explaining before drafting the ticket set.
+          Infer the implementer's difficulty from the ready specification and
+          project evidence; do not start another interview.
+          Let it own the literal model, explanatory structure, teaching order,
+          and reconstruction check.
+          Use its explanation package inside the ticket set without changing
+          facts, slices, schema, destination, or readiness owned by this skill.
+          Enter the analogy branch only when the user explicitly asked for one.
+      - skill_id: ptlam-mermaiding
+        reason:
+          Makes ticket order and blocking relationships visible as a verified
+          dependency map instead of burying them in prose.
+        instructions: |-
+          Read ptlam-mermaiding before choosing the ticket set's visual form.
+          Apply it to the dependency order and any other material
+          relationship; use a table for exact mappings.
+          Let it own the visual question, diagram type, Mermaid source, and the
+          strongest available syntax and rendering check.
+          Keep this skill's ownership of ticket facts, vertical slices,
+          document structure, visual placement, destination, and readiness.
+          Make each visual replace equivalent prose rather than repeat it.
+
+  - id: ptlam-creating-atomic-note
+    description:
+      Create, mature, review, split, or merge durable atomic notes by finding
+      one knowledge building block per note, keeping the context it needs, and
+      following the local vault's conventions.
+    disable_model_invocation: true
+    category_id: specifying
     visibility: public
     status: active
     required_skills: []
+
+  # --- Building -------------------------------------------------------------
   - id: ptlam-implementing
     description:
       Deliver one bounded software change through task-specific worker agents
-      in isolated Git worktrees and independent reviewer agents on an
-      integration branch. Use when asked to implement from the current prompt or
-      confirmed session context. Use when given a specification, ticket file,
-      issue, or equivalent task link. Do not use for a read-only explanation,
-      plan, diagnosis, or review.
-    category_id: engineering
+      in isolated Git worktrees and independent reviewer agents on one
+      integration branch. Use when asked to implement from the current prompt
+      or confirmed session context. Use when given a specification, ticket
+      file, issue, or equivalent task link. Do not use for a read-only
+      explanation, plan, diagnosis, or review.
+    category_id: building
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-git
         reason:
-          Isolates the integration changeset and each editing worker while
-          protecting unrelated work across concurrent worktrees.
+          Isolates the integration changeset and each worker while protecting
+          unrelated work, and disposes of the worktrees afterwards.
         instructions: |-
-          Read and apply ptlam-git before the main agent creates the integration
-          worktree or any worker branch and worktree.
+          Read and apply ptlam-git before creating the integration worktree or
+          any worker branch and worktree, and again when disposing of the
+          worker worktrees after integration.
           Let it own repository, base, branch, and worktree resolution;
-          unrelated-state protection; staging and commit mechanics; and final
-          Git verification.
+          unrelated-state protection; staging and commit mechanics; worktree
+          removal safety; and the final Git check.
           Keep this skill's ownership of the task contract, team sizing, role
           prompts, worker and reviewer coordination, integration, finding
-          disposition, repair loop, and readiness decision.
-          Invoking this skill authorizes scoped local worktrees, branches,
-          commits, and integration operations. Require explicit authority for a
-          push, pull request, issue update, shared-branch merge, or cleanup.
+          disposition, repair loop, and readiness.
+          Running this skill allows scoped local worktrees, branches, commits,
+          and integration. Require explicit permission for a push, pull
+          request, issue update, or shared-branch merge, and ask once before
+          removing worker worktrees.
       - skill_id: ptlam-code-style
         reason:
-          Supplies the language-neutral implementation standard, including the
-          code-complexity rules, before workers author source or tests.
+          Supplies the language-neutral implementation standard before workers
+          author source or tests.
         instructions: |-
-          Read and apply ptlam-code-style before authoring source or test
-          changes.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; evolution; and test behavior,
-          levels, placement, and doubles.
-          Apply a matching stack or project specialization when one is
-          available.
-          Keep this skill's ownership of task capture, team sizing, delegation,
-          integration, review coordination, repair, and delivery.
+          Read and apply ptlam-code-style before authoring source or tests.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; evolution; and test behavior, levels,
+          placement, and doubles.
+          Apply a matching stack or project specialization when one exists.
+          Keep this skill's ownership of task capture, team sizing,
+          delegation, integration, review coordination, repair, and delivery.
       - skill_id: ptlam-reviewing-code
         reason:
-          Supplies the independent review standard and readiness verdict for the
-          integrated implementation changeset.
+          Supplies the independent review standard and readiness verdict for
+          the integrated changeset.
         instructions: |-
-          Read and apply ptlam-reviewing-code before dispatching reviewer
-          agents.
+          Read and apply ptlam-reviewing-code before dispatching reviewers.
           Let it own the review surface, intent and risk examination, finding
           gate, severity, verification limits, and readiness verdict. Apply a
-          matching stack or project review specialization when one is
-          available.
+          matching stack or project review specialization when one exists.
           Keep this skill's ownership of reviewer count, role independence,
           lens assignment, report integration, finding disposition, repair
-          delegation, and final completion.
-          Reviewer agents stay read-only. Repair agents act only after the main
+          delegation, and completion.
+          Reviewers stay read-only. Repair workers act only after the main
           agent accepts a finding.
       - skill_id: ptlam-architecturing
         reason:
           Supplies the suitability judgment for a change to a structure
-          expensive to reverse that no spec, ADR, or confirmed decision covers.
+          expensive to reverse that no specification, record, or confirmed
+          decision covers.
         instructions: |-
           Read ptlam-architecturing while fixing the task contract.
           Apply it only when the task changes a component, runtime, or
-          data-store split, a published surface, where authoritative state
-          lives, or a platform commitment, and no spec, ADR, or confirmed
-          decision covers that change.
-          Let it own the constraints, solution-space frame, options,
-          trade-offs, sizing, recommendation, and open question.
+          data-store split, a published surface, where the true copy of state
+          lives, or a platform commitment, and no specification, record, or
+          confirmed decision covers that change.
+          Let it own the constraints, frame, options, trade-offs, sizing,
+          recommendation, and open question.
           Keep this skill's ownership of the task contract, the focused
           question to the user, team sizing, delegation, integration, review,
           repair, and delivery.
           Skip it when a source already covers the structure.
-  - id: ptlam-researching
+      - skill_id: ptlam-diagnosing
+        reason:
+          Supplies the demonstrated cause before a defect fix is delegated, so
+          workers repair a cause instead of a symptom.
+        instructions: |-
+          Read and apply ptlam-diagnosing while fixing the task contract, but
+          only when the task is a defect fix whose cause is not already
+          demonstrated by the request, a specification, or the session.
+          Let it own the reproduction, evidence labels, failing-boundary model,
+          hypothesis ranking, read-only limits, and the cause-or-blocker
+          report.
+          Put its demonstrated cause, or its evidence blocker, into the task
+          contract before sizing the team.
+          Keep this skill's ownership of the contract, delegation, integration,
+          review, repair, and delivery.
+          Skip it for a new capability, a refactor, or an already-diagnosed
+          defect.
+
+  - id: ptlam-reviewing-code
     description:
-      Research one bounded question against high-trust primary sources and
-      deliver a traceable portable HTML evidence report inside an existing Git
-      repository. Use when a material question needs evidence-led findings,
-      conflict reconciliation, or an explicitly inconclusive result.
-    category_id: productivity
+      Review one bounded code changeset and return an evidence-backed,
+      prioritized findings report and readiness verdict. Use when reviewing a
+      pull request, branch, commit range, or explicit revision comparison. Use
+      when reviewing staged, unstaged, or untracked working-tree changes. Use
+      when judging an implementation against a task, issue, or specification.
+      Compose this skill when a stack or project review needs the general
+      review standard.
+    category_id: building
     visibility: public
     status: active
     required_skills:
-      - skill_id: ptlam-implementing
+      - skill_id: ptlam-code-style
         reason:
-          Processes the research run as one isolated, independently reviewed
-          report implementation.
+          Provides the language-neutral conventions a code review judges.
         instructions: |-
-          Read and apply ptlam-implementing before research begins.
-          Treat the bounded question and portable HTML report as its task
-          contract and changeset.
-          Let it own task-contract capture; repository, branch, and worktree
-          isolation; team sizing; worker and reviewer coordination;
-          integration; finding disposition; repair; and readiness.
-          Keep this skill's ownership of the research question, source
-          inclusion standard, evidence ledger, claim reconciliation, findings,
-          confidence, limits, and research completion.
-          Treat supplied, discovered, fetched, and scraped research sources as
-          evidence inputs owned by this skill, not as ptlam-implementing
-          task-authority sources.
-          Apply this skill's conflict, gap, and inconclusive rules when research
-          evidence is inaccessible or contradictory.
-          Treat the direct request, confirmed current-session decisions,
-          governing specifications, tickets, or issues, and repository
-          instructions as task-authority sources when they define task intent or
-          authority.
-          Apply ptlam-implementing's stop gate only when a required
-          task-authority source remains inaccessible or those sources contradict
-          each other.
-          Preserve ptlam-implementing's authority limits for pushes, pull
-          requests, issue updates, shared-branch merges, and cleanup.
-          Keep retrieval configuration, caches, and scraped files outside the
-          report changeset unless the task contract explicitly requests their
-          archival.
-      - skill_id: ptlam-scraping-urls
+          Read and apply ptlam-code-style before judging source or tests.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; evolution; and test behavior, levels,
+          placement, and doubles.
+          Apply a matching stack specialization when one exists.
+          Keep this skill's ownership of the review surface, intent, risk
+          examination, finding gate, severity, verification limits, and
+          readiness verdict.
+      - skill_id: ptlam-architecturing
         reason:
-          Supplies accounted local full-text retrieval when the selected
-          evidence requires batch scraping or a durable local cache.
+          Supplies the judging-suitability standard for a changeset that
+          introduces a structure expensive to reverse.
         instructions: |-
-          Apply ptlam-scraping-urls only when batch or local full-text retrieval
-          is needed.
-          Let it own URL collection, scraping, cache configuration, bounded
-          concurrency and fallback, output files, and result accounting.
-          Keep this skill's ownership of source selection, trust
-          classification, evidence use, and research conclusions.
-          Pass the research contract's recency or as-of requirement into its
-          effective cache policy.
-          Reuse a cached capture only when its original retrieval time and source
-          identity satisfy that requirement; otherwise set CACHE_TTL_HOURS=0 for
-          that run.
-          Preserve the original retrieval time as evidence metadata instead of
-          substituting the current cache-access time.
-      - skill_id: ptlam-visualization-with-html
-        reason:
-          Turns the verified findings into the portable HTML evidence report and
-          proves its accessibility, portability, and rendered quality.
-        instructions: |-
-          Read and apply ptlam-visualization-with-html after the research
-          findings and evidence ledger are verified.
-          Pass the research question, audience, conclusion status, findings,
-          evidence ledger including source-admission evidence, conflicts,
-          assumptions, gaps, confidence, and scope limits forward unchanged.
-          Let that skill and its dependencies own explanatory structure, HTML
-          composition, native artifact implementation, accessibility and design
-          contracts, static validation, rendered inspection, and delivery.
-          Keep this skill's ownership of source inclusion, claim-to-source
-          reconciliation, findings, confidence, limits, and research
-          completion.
+          Read ptlam-architecturing while examining the change.
+          Apply only its judging-suitability standard, and only when the
+          changeset introduces a component, runtime, or data-store split, a
+          published surface, state ownership, or a platform commitment.
+          Let it own the verdict on that structure and the stale rules of
+          thumb to re-check.
+          Keep this skill's ownership of the review surface, finding gate,
+          severity, and readiness verdict.
+          Skip it for a changeset that introduces no such structure.
+
+  - id: ptlam-diagnosing
+    description:
+      Diagnose one failing software behavior and return a cause whose
+      mechanism at the first failing boundary is shown by named observations
+      or a deciding check, with every remaining supported alternative ruled
+      out, or an exact evidence blocker and one deciding next check. Use when
+      software throws, returns the wrong result, hangs, crashes, regresses, or
+      behaves differently across environments and the request is for a
+      diagnosis. Compose this skill when a stack or project specialization
+      adds diagnosis mechanics, or when a fix workflow first needs the cause.
+    category_id: building
+    visibility: public
+    status: active
+    required_skills: []
+
   - id: ptlam-prototyping
     description:
-      Build one throwaway prototype to answer a design question. Use when a user
-      wants to test a state model, business logic, or data shape through a
-      shareable HTML demo, or explore a UI through structurally different
-      variants on one route. Works from scratch or beside an existing module or
-      page. Do not use for an MVP, production feature, technical benchmark, or
+      Build one throwaway prototype to answer one design question. Use when a
+      user wants to test a state model, business logic, or data shape through
+      a shareable HTML demo, or explore a UI through structurally different
+      variants on one route. Works from scratch or beside an existing module
+      or page. Do not use for an MVP, production feature, benchmark, or
       durable demo.
-    category_id: engineering
+    category_id: building
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-git
         reason:
-          Isolates tracked prototype changes and preserves an authorized
-          prototype primary source without disturbing production work.
+          Isolates tracked prototype changes and preserves an approved
+          prototype as evidence without disturbing production work.
         instructions: |-
           Read and apply ptlam-git before a prototype changes a Git repository
-          or the user requests branch capture.
+          or the user asks to capture it on a branch.
           Let it own repository and worktree resolution, branch mechanics,
-          unrelated-state protection, staging, commit construction, and Git
-          verification.
+          unrelated-state protection, staging, commit construction, and the
+          Git check.
           Keep this skill's ownership of the design question, logic-versus-UI
-          branch, prototype artifact, evaluator handoff, answer, and capture
-          intent.
-          A prototype request authorizes local artifact files, not a commit,
-          push, issue change, or branch cleanup; require explicit authority for
-          those effects.
-  - id: ptlam-code-style
+          branch, artifact, handover, answer, and capture intent.
+          A prototype request allows local artifact files, not a commit, push,
+          issue change, or branch cleanup; require explicit permission for
+          those.
+
+  - id: ptlam-git
     description:
-      Hold source and test code to one language-neutral set of conventions for
-      code complexity, source-tree structure, module boundaries, naming,
-      function readability, domain modeling, cross-boundary contracts, failure
-      design, documentation, logging, and testing. Use when choosing sufficient
-      code, reuse, deletion, dependency, or abstraction; placing or naming a
-      file; setting a public or internal boundary; shaping a domain type or its
-      states; promising an interface across a process or release boundary;
-      designing a failure or a retry; writing a doc comment; emitting a log
-      record; deciding what a test must prove; choosing a test level; placing a
-      test or a test double; or planning how a change migrates. Use
-      ptlam-modeling-domain instead for business terms, context boundaries, and
-      process maps. Use ptlam-architecturing instead for a component, runtime,
-      or data-store split, a published surface, state ownership, or a platform
-      commitment. Use as the foundation for a stack specialization that adds the
-      mechanics.
-    category_id: engineering
-    visibility: internal
+      Carry out repository-local Git commit, worktree, and conflict-resolution
+      workflows without disturbing unrelated work. Use when creating a commit,
+      writing or revising a commit message, creating, using, or removing a
+      worktree, deciding whether a repository write belongs in the current
+      checkout or a new linked worktree, or resolving an in-progress merge or
+      rebase conflict. Compose this skill from any workflow that needs
+      isolated branches, worktrees, or commits.
+    category_id: building
+    visibility: public
     status: active
     required_skills: []
+
+  # --- Conventions ----------------------------------------------------------
+  - id: ptlam-code-style
+    description:
+      Hold source and test code to one language-neutral standard for
+      complexity, source structure, boundaries, naming, readability, domain
+      modeling, cross-boundary contracts, failure design, documentation,
+      logging, evolution, and testing. Use when no stack specialization
+      matches the project, and as the foundation every stack specialization
+      composes. Use ptlam-modeling-domain instead for business terms and
+      context boundaries, and ptlam-architecturing instead for a component,
+      runtime, or data-store split, a published surface, state ownership, or a
+      platform commitment.
+    category_id: conventions
+    visibility: public
+    status: active
+    required_skills: []
+
   - id: ptlam-code-style-dart
     description:
       Write, review, and fix Dart library and application code against
@@ -287,10 +569,10 @@ skills:
       formatter toolchain, dartdoc comments, and package:test tests. Use when
       starting or standardizing a Dart package, changing Dart code or its
       analysis options, reviewing Dart-specific design, or resolving a dart
-      analyze, dart format, or dart test failure. Apply ptlam-code-style first
-      for the standard these mechanics satisfy. Use as the foundation for Dart
-      framework and project specializations. Do not use for non-Dart code.
-    category_id: engineering
+      analyze, dart format, or dart test failure. Use as the foundation for
+      Dart framework and project specializations. Do not use for non-Dart
+      code.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -300,13 +582,14 @@ skills:
           Dart mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; the universal behavior contract;
-          test levels; test placement; and test doubles.
-          Use this skill only for Dart language, package, and tool mechanics
-          that satisfy those standards.
-          This specialization may be stricter than the foundation, never looser.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; the behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Dart language, package, and tool mechanics.
+          This specialization may be stricter than the foundation, never
+          looser.
+
   - id: ptlam-code-style-kotlin
     description:
       Write, review, and fix Kotlin library and application code against
@@ -314,11 +597,10 @@ skills:
       ktlint, and detekt toolchain, KDoc comments, and JUnit tests. Use when
       starting or standardizing a Kotlin module, changing Kotlin code or its
       build and lint configuration, reviewing Kotlin-specific design, or
-      resolving a ktlint, detekt, or JUnit failure. Apply ptlam-code-style first
-      for the standard these mechanics satisfy. Use as the foundation for Kotlin
-      platform and project specializations. Do not use for Java or for another
-      JVM language.
-    category_id: engineering
+      resolving a ktlint, detekt, or JUnit failure. Use as the foundation for
+      Kotlin platform and project specializations. Do not use for Java or
+      another JVM language.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -328,26 +610,26 @@ skills:
           Kotlin mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; the universal behavior contract;
-          test levels; test placement; and test doubles.
-          Use this skill only for Kotlin language, module, and tool mechanics
-          that satisfy those standards.
-          This specialization may be stricter than the foundation, never looser.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; the behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Kotlin language, module, and tool mechanics.
+          This specialization may be stricter than the foundation, never
+          looser.
+
   - id: ptlam-code-style-swift
     description:
       Write, review, and fix Swift library and application code against
-      conventions for language mechanics, optionals, error handling, structured
-      concurrency and actor isolation, the Swift Package Manager, SwiftFormat,
-      and SwiftLint toolchain, documentation comments, and tests. Use when
-      starting or standardizing a Swift package, changing Swift code or its
-      lint and format configuration, reviewing Swift-specific design, or
-      resolving a swift build, SwiftLint, or SwiftFormat failure. Apply
-      ptlam-code-style first for the standard these mechanics satisfy. Use as
-      the foundation for Swift platform and project specializations. Do not use
-      for Objective-C.
-    category_id: engineering
+      conventions for language mechanics, optionals, error handling,
+      structured concurrency and actor isolation, the Swift Package Manager,
+      SwiftFormat, and SwiftLint toolchain, documentation comments, and tests.
+      Use when starting or standardizing a Swift package, changing Swift code
+      or its lint and format configuration, reviewing Swift-specific design,
+      or resolving a swift build, SwiftLint, or SwiftFormat failure. Use as
+      the foundation for Swift platform and project specializations. Do not
+      use for Objective-C.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -357,32 +639,32 @@ skills:
           Swift mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; the universal behavior contract;
-          test levels; test placement; and test doubles.
-          Use this skill only for Swift language, package, and tool mechanics
-          that satisfy those standards.
-          This specialization may be stricter than the foundation, never looser.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; the behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Swift language, package, and tool mechanics.
+          This specialization may be stricter than the foundation, never
+          looser.
+
   - id: ptlam-code-style-dart-flutter
     description:
       Write, review, and fix Flutter application code against conventions for
       the toolchain, four-layer feature structure, presentation-layer BLoC and
-      Cubit state, widgets, models, networking, storage, localization, logging,
-      widget documentation, and tests. Use when adding or changing Flutter code,
-      choosing between setState, Cubit, and Bloc, placing a new file or feature,
-      wiring get_it or go_router, or fixing a flutter analyze or build_runner
-      failure. Apply ptlam-code-style-dart first for the Dart language, package,
-      and tooling mechanics. Do not use this specialization for Dart outside
-      Flutter or for another stack.
-    category_id: engineering
+      Cubit state, widgets, routes, models, networking, storage, localization,
+      logging, widget documentation, and tests. Use when adding or changing
+      Flutter code, choosing between setState, Cubit, and Bloc, placing a new
+      file or feature, wiring get_it or go_router, or fixing a flutter analyze
+      or build_runner failure. Do not use for Dart outside Flutter or for
+      another stack.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-code-style-dart
         reason:
-          Provides the Dart language, package, analyzer, formatter, dartdoc, and
-          test mechanics underneath the Flutter framework boundary.
+          Provides the Dart language, package, analyzer, formatter, dartdoc,
+          and test mechanics underneath the Flutter boundary.
         instructions: |-
           Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
           as its own foundation.
@@ -391,16 +673,16 @@ skills:
           Use this skill only for Flutter framework, widget, state, routing,
           localization, and Flutter-runner test mechanics.
           This specialization may be stricter than Dart, never looser.
+
   - id: ptlam-code-style-python
     description:
       Write, review, and fix Python library and application code against
       conventions for language mechanics, project structure, tooling, and
       tests. Use when starting or standardizing a Python project, changing
       Python code or its toolchain, reviewing Python-specific design, or
-      resolving code-quality and test failures. Apply ptlam-code-style first for
-      the standard these mechanics satisfy. Use as the foundation for Python
-      framework specializations. Do not use for non-Python code.
-    category_id: engineering
+      resolving code-quality and test failures. Use as the foundation for
+      Python framework specializations. Do not use for non-Python code.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -410,26 +692,27 @@ skills:
           Python mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; the universal behavior contract;
-          test levels; test placement; and test doubles.
-          Use this skill only for Python language, library, and tool mechanics
-          that satisfy those standards.
-          This specialization may be stricter than the foundation, never looser.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; the behavior contract; test levels; test
+          placement; and test doubles.
+          Use this skill only for Python language, library, and tool mechanics.
+          This specialization may be stricter than the foundation, never
+          looser.
+
   - id: ptlam-code-style-python-fastapi
     description:
       Write, review, and fix FastAPI application code against conventions for
       service and four-layer feature-package structure, application lifespan,
       routes, request and response contracts, dependency injection, use cases,
       feature boundaries, model registration, concurrency, errors,
-      observability, and API tests. Use when starting or reorganizing a FastAPI
-      service or feature, adding or changing endpoints, use cases, dependencies,
-      exception handlers, middleware, schemas, SQLAlchemy registration,
-      background handoffs, or tests, or fixing OpenAPI and runtime failures.
-      Apply ptlam-code-style-python first for the Python mechanics. Do not use
-      for Python services that do not use FastAPI.
-    category_id: engineering
+      observability, and API tests. Use when starting or reorganizing a
+      FastAPI service or feature, adding or changing endpoints, use cases,
+      dependencies, exception handlers, middleware, schemas, SQLAlchemy
+      registration, background handoffs, or tests, or fixing OpenAPI and
+      runtime failures. Do not use for Python services that do not use
+      FastAPI.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -441,21 +724,22 @@ skills:
           Read and apply ptlam-code-style-python first; it loads
           ptlam-code-style as its own foundation.
           Let Python own the interpreter and toolchain, modules, imports,
-          typing, general async work, Pydantic, exception mechanics, docstrings,
-          logging, and pytest.
+          typing, general async work, Pydantic, exception mechanics,
+          docstrings, logging, and pytest.
           Use this skill only for FastAPI application, HTTP, dependency,
           lifecycle, and ASGI test mechanics.
           This specialization may be stricter than Python, never looser.
+
   - id: ptlam-code-style-typescript
     description:
       Write, review, and fix TypeScript library and application code against
-      conventions for language mechanics, module boundaries, tooling, and tests.
-      Use when starting or standardizing a TypeScript project, changing
-      TypeScript code or its toolchain, reviewing TypeScript-specific design, or
-      resolving type-check, lint, or Vitest failures. Apply ptlam-code-style
-      first for the standard these mechanics satisfy. Use as the foundation for
-      TypeScript framework specializations. Do not use for non-TypeScript code.
-    category_id: engineering
+      conventions for language mechanics, module boundaries, tooling, and
+      tests. Use when starting or standardizing a TypeScript project, changing
+      TypeScript code or its toolchain, reviewing TypeScript-specific design,
+      or resolving type-check, lint, or Vitest failures. Use as the foundation
+      for TypeScript framework specializations. Do not use for non-TypeScript
+      code.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -465,25 +749,27 @@ skills:
           TypeScript mechanics satisfy.
         instructions: |-
           Read and apply ptlam-code-style first.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; the universal behavior contract;
-          test levels; test placement; and test doubles.
+          Let it own precedence; complexity; source structure and boundaries;
+          naming and readability; data modeling; contracts; failures;
+          documentation; logging; the behavior contract; test levels; test
+          placement; and test doubles.
           Use this skill only for TypeScript language, package, and tool
-          mechanics that satisfy those standards.
-          This specialization may be stricter than the foundation, never looser.
+          mechanics.
+          This specialization may be stricter than the foundation, never
+          looser.
+
   - id: ptlam-code-style-typescript-nestjs
     description:
-      Write, review, and fix NestJS TypeScript backend code against conventions
-      for feature-first structure, use cases, integrations, modules, dependency
-      injection, application lifecycle, entry points, persistence handoffs,
-      observability, health, and Nest testing. Use when starting or reorganizing
-      a NestJS backend or feature, changing use cases, controllers, providers,
-      processors, schedules, commands, global enhancers, DTO pipes, adapters,
-      transports, transactions, shutdown, or tests, or resolving Nest module and
-      runtime failures. Apply ptlam-code-style-typescript first for TypeScript
-      mechanics. Do not use for TypeScript applications that do not use NestJS.
-    category_id: engineering
+      Write, review, and fix NestJS TypeScript backend code against
+      conventions for feature-first structure, use cases, integrations,
+      modules, dependency injection, application lifecycle, entry points,
+      persistence handoffs, observability, health, and Nest testing. Use when
+      starting or reorganizing a NestJS backend or feature, changing use
+      cases, controllers, providers, processors, schedules, commands, global
+      enhancers, DTO pipes, adapters, transports, transactions, shutdown, or
+      tests, or resolving Nest module and runtime failures. Do not use for
+      TypeScript applications that do not use NestJS.
+    category_id: conventions
     visibility: public
     status: active
     required_skills:
@@ -498,446 +784,182 @@ skills:
           typing, validator choice, general async and resource lifetime, error
           and logging mechanics, documentation, and Vitest.
           Use this skill only for NestJS feature structure, use-case assembly,
-          module, injection, application, lifecycle, execution-pipeline, adapter,
-          transport, worker, persistence-handoff, health, and Nest testing
-          mechanics.
+          module, injection, application, lifecycle, execution-pipeline,
+          adapter, transport, worker, persistence-handoff, health, and Nest
+          testing mechanics.
           For external input, the TypeScript validator choice wins; this skill
-          owns only its Nest pipe and DTO or contract-metadata integration.
+          owns only its Nest pipe and DTO integration.
           This specialization may be stricter than TypeScript, never looser.
-  - id: ptlam-creating-skill
+
+  # --- Communicating --------------------------------------------------------
+  - id: ptlam-explaining
     description:
-      Create, review, or refactor one agent skill so that a human maintainer can
-      read it once and change it later. Use when turning a workflow or reference
-      set into a new skill, revising an existing SKILL.md, splitting a skill
-      that grew too broad, or auditing a package without editing it. Use as the
-      foundation for skills that specialize skill authoring.
-    disable_model_invocation: true
-    category_id: engineering
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-mermaiding
-        reason:
-          Owns every Mermaid diagram a skill package carries, from type
-          selection to syntax verification.
-        instructions: |-
-          Read ptlam-mermaiding before judging an existing diagram or deciding
-          whether a new diagram is warranted.
-          Apply its authoring workflow only when the selected form is a diagram.
-          Let it own the visual question, diagram type, notation, layout, and
-          syntax verification for that diagram.
-          Keep this skill's ownership of what the package says, which form
-          carries each point, and which file holds it.
-  - id: ptlam-reviewing-code
-    description:
-      Review one bounded code changeset and return an evidence-backed,
-      prioritized findings report and readiness verdict. Use when reviewing a
-      pull request, branch, commit range, or explicit revision comparison. Use
-      when reviewing staged, unstaged, or untracked working-tree changes. Use
-      when judging an implementation against a task, issue, or specification.
-      Compose this skill when a stack or project review needs the general review
-      standard.
-    category_id: engineering
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-code-style
-        reason:
-          Provides the language-neutral complexity, source, boundary, failure,
-          documentation, logging, and testing conventions a code review judges.
-        instructions: |-
-          Read and apply ptlam-code-style before judging source or tests.
-          Let it own precedence; code complexity; source structure and
-          boundaries; naming and readability; data modeling; contracts;
-          failures; documentation; logging; evolution; test behavior, levels,
-          placement, and doubles.
-          Apply a matching stack specialization when one is available.
-          Let this skill own the review surface, intent, risk examination,
-          finding gate, severity, verification limits, and readiness verdict.
-      - skill_id: ptlam-architecturing
-        reason:
-          Supplies the judging-suitability standard for a changeset that
-          introduces a structure expensive to reverse.
-        instructions: |-
-          Read ptlam-architecturing while examining the change.
-          Apply only its judging-suitability standard, and only when the
-          changeset introduces a component, runtime, or data-store split, a
-          published surface, state ownership, or a platform commitment.
-          Let it own the verdict on that structure and the stale heuristics
-          to revalidate.
-          Keep this skill's ownership of the review surface, finding gate,
-          severity, and readiness verdict.
-          Skip it for a changeset that introduces no such structure.
-  - id: ptlam-grilling
-    description:
-      Stress-test a plan, decision, or idea through a persistent interview that
-      resolves one user-owned decision at a time, records confirmed
-      understanding for later continuation, sharpens contested business terms,
-      and captures decisions that are expensive to reverse.
-    disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-modeling-domain
-        reason:
-          Keeps contested business language and context boundaries durable while
-          the interview is still resolving them.
-        instructions: |-
-          Read ptlam-modeling-domain before the interview loop.
-          Apply it when a business term is contested, overloaded, or newly
-          coined, or when a business context boundary becomes unclear.
-          Let it own the glossary, context boundaries, and business process map
-          in CONTEXT.md.
-          Keep this skill's ownership of the questions, decision map, session
-          record, and confirmation loop.
-      - skill_id: ptlam-architecturing
-        reason:
-          Supplies the defensible recommendation, strongest alternative, and
-          main trade-off for a decision that fixes a structure expensive to
-          reverse.
-        instructions: |-
-          Read ptlam-architecturing before the interview loop.
-          Apply it when the selected decision fixes a component, runtime, or
-          data-store split, a published surface, where authoritative state
-          lives, or a platform commitment.
-          Let it own the constraints, solution-space frame, options,
-          trade-offs, sizing, recommendation, and redesign trigger.
-          Keep this skill's ownership of the questions, decision map, session
-          record, and confirmation loop.
-          Let it write no file; record its judgment in the session record.
-      - skill_id: ptlam-creating-adr
-        reason:
-          Preserves consequential architectural decisions when the interview
-          makes them concrete enough to evaluate and record.
-        instructions: |-
-          Read ptlam-creating-adr before the interview loop.
-          Apply its qualification gate when a decision splits a component,
-          runtime, or data store, publishes a surface, moves authoritative
-          state, commits to a platform, or carries material rejected
-          alternatives.
-          Let it own the ADR qualification verdict, destination, shape, and
-          verification.
-          Keep this skill's ownership of the questions, decision map, session
-          record, and confirmation loop.
-  - id: ptlam-creating-prd
-    description:
-      Create one product requirements document from a confirmed grilling record
-      or durable product brief for a new product or large epic. Use when product
-      framing, audience, outcomes, scope, non-goals, and success measures must
-      become a durable handoff before feature specifications. Start an
-      existing-product feature at ptlam-creating-spec; skip this pipeline for a
-      small fix.
-    disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-explaining
-        reason:
-          Makes unfamiliar product framing reconstructable for the document's
-          reader without changing confirmed product decisions.
-        instructions: |-
-          Read and apply ptlam-explaining before drafting the PRD.
-          Infer the reader's likely difficulty from the confirmed source and
-          project evidence; do not start another interview.
-          Let it own the literal model, explanatory structure, teaching order,
-          and reconstruction check for unfamiliar or complex content.
-          Use its explanation package inside the PRD without changing facts,
-          scope, schema, destination, or readiness owned by this skill.
-          Enter the analogy branch only when the user explicitly requested it.
-      - skill_id: ptlam-mermaiding
-        reason:
-          Turns material product relationships into verified visuals that make
-          the PRD faster to scan and understand.
-        instructions: |-
-          Read ptlam-mermaiding before choosing the PRD's visual form.
-          Apply it to material sequences, hierarchies, states, dependencies,
-          interactions, or other relationships; use a table for exact mappings
-          or comparisons.
-          Let it own the visual question, diagram type, Mermaid source, and the
-          strongest available syntax and rendering verification.
-          Keep this skill's ownership of product facts, document structure,
-          visual placement, destination, and readiness.
-          Make each visual replace equivalent prose rather than repeat it.
-  - id: ptlam-creating-spec
-    description:
-      Create one buildable feature specification from a confirmed PRD scope item
-      or a feature brief inside an existing product. Use when behavior,
-      boundaries, failure handling, interfaces, data, rollout constraints, and
-      required evidence must be fixed before ticket planning. Start a new
-      product or large epic with ptlam-creating-prd; skip this pipeline for a
-      small fix.
-    disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-explaining
-        reason:
-          Makes unfamiliar feature behavior reconstructable for the document's
-          reader without changing confirmed product or technical constraints.
-        instructions: |-
-          Read and apply ptlam-explaining before drafting the feature spec.
-          Infer the reader's likely difficulty from the confirmed scope and
-          project evidence; do not start another interview.
-          Let it own the literal model, explanatory structure, teaching order,
-          and reconstruction check for unfamiliar or complex content.
-          Use its explanation package inside the spec without changing facts,
-          contracts, schema, destination, or readiness owned by this skill.
-          Enter the analogy branch only when the user explicitly requested it.
-      - skill_id: ptlam-mermaiding
-        reason:
-          Turns material behavior and system relationships into verified visuals
-          that make the specification faster to scan and understand.
-        instructions: |-
-          Read ptlam-mermaiding before choosing the spec's visual form.
-          Apply it to material sequences, hierarchies, states, dependencies,
-          interactions, or other relationships; use a table for exact mappings
-          or comparisons.
-          Let it own the visual question, diagram type, Mermaid source, and the
-          strongest available syntax and rendering verification.
-          Keep this skill's ownership of feature facts, document structure,
-          visual placement, destination, and readiness.
-          Make each visual replace equivalent prose rather than repeat it.
-      - skill_id: ptlam-architecturing
-        reason:
-          Supplies the suitability judgment behind any interface, data,
-          compatibility, rollout, or migration structure the spec fixes and
-          that is expensive to reverse.
-        instructions: |-
-          Read and apply ptlam-architecturing while modeling the feature
-          contract, whenever a contract element fixes a structure that is
-          expensive to reverse and no confirmed judgment or ADR already covers
-          it; otherwise record that source under the architecture constraints.
-          Let it own the constraints, solution-space frame, options,
-          trade-offs, sizing, recommendation, deferred concerns, and redesign
-          trigger.
-          Keep this skill's ownership of the feature contract, schema,
-          destination, status, and readiness.
-          Write the accepted recommendation into the spec as an architecture
-          constraint with its trade-offs, deferred concerns, and redesign
-          trigger, not as implementation mechanics.
-  - id: ptlam-planning-tickets
-    description:
-      Turn one ready feature specification into an ordered set of vertically
-      sliced ticket files with explicit blocking edges. Use after a feature spec
-      is ready for implementation planning. A new product or large epic starts
-      at ptlam-creating-prd, an existing-product feature starts at
-      ptlam-creating-spec, and a small fix skips this pipeline.
-    disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-explaining
-        reason:
-          Makes unfamiliar ticket intent and dependencies reconstructable for
-          implementers without changing the source specification.
-        instructions: |-
-          Read and apply ptlam-explaining before drafting the ticket set.
-          Infer the implementer's likely difficulty from the ready spec and
-          project evidence; do not start another interview.
-          Let it own the literal model, explanatory structure, teaching order,
-          and reconstruction check for unfamiliar or complex content.
-          Use its explanation package inside the ticket set without changing
-          facts, slices, schema, destination, or readiness owned by this skill.
-          Enter the analogy branch only when the user explicitly requested it.
-      - skill_id: ptlam-mermaiding
-        reason:
-          Makes ticket order and blocking relationships visible as a verified
-          dependency map rather than burying them in prose.
-        instructions: |-
-          Read ptlam-mermaiding before choosing the ticket set's visual form.
-          Apply it to the dependency order and any other material relationship;
-          use a table for exact mappings or comparisons.
-          Let it own the visual question, diagram type, Mermaid source, and the
-          strongest available syntax and rendering verification.
-          Keep this skill's ownership of ticket facts, vertical slices, document
-          structure, visual placement, destination, and readiness.
-          Make each visual replace equivalent prose rather than repeat it.
-  - id: ptlam-modeling-domain
-    description:
-      Model project business language, context boundaries, and business
-      processes in CONTEXT.md. Use when a business term is contested,
-      overloaded, or newly coined, when two business contexts use one term
-      differently, or when a business process needs a durable map. Compose this
-      skill when an interview or an architecture judgment meets a contested
-      business term. Do not use for code types, storage schemas, or
-      serialization mechanics.
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-mermaiding
-        reason:
-          Owns the business process diagram that makes the domain's handoffs and
-          decisions visible without duplicating them in prose.
-        instructions: |-
-          Read and apply ptlam-mermaiding for every business process map.
-          Let it own the visual question, diagram type, notation, Mermaid source,
-          and strongest available syntax and rendering verification.
-          Keep this skill's ownership of business facts, vocabulary, context
-          boundaries, document placement, and glossary verification.
-          Make the process diagram replace equivalent prose rather than repeat
-          it.
-  - id: ptlam-creating-adr
-    description:
-      Decide whether a crystallized architectural choice warrants a durable
-      architecture decision record and write the qualifying ADR. Use when a
-      confirmed decision splits a component, runtime, or data store, publishes
-      a surface such as an API, SDK, CLI, schema, or file format, moves
-      authoritative state, commits to a platform, or carries material rejected
-      alternatives. Do not use for local implementation choices with cheap
-      reversal.
-    category_id: engineering
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-explaining
-        reason:
-          Makes the decision forces and consequences reconstructable for a future
-          reader without changing the accepted choice.
-        instructions: |-
-          Read and apply ptlam-explaining before drafting a qualifying ADR.
-          Infer the reader's likely difficulty from the confirmed decision and
-          project evidence; do not start another interview.
-          Let it own the literal model, explanatory structure, teaching order,
-          and reconstruction check for unfamiliar or complex content.
-          Use its explanation package inside the ADR without changing facts,
-          status, schema, destination, or qualification owned by this skill.
-          Enter the analogy branch only when the user explicitly requested it.
-      - skill_id: ptlam-mermaiding
-        reason:
-          Turns material decision forces or architectural effects into verified
-          visuals that make the ADR faster to scan and understand.
-        instructions: |-
-          Read ptlam-mermaiding before choosing the ADR's visual form.
-          Apply it to material sequences, hierarchies, states, dependencies,
-          interactions, topology, or other relationships; use a table for exact
-          mappings or comparisons.
-          Let it own the visual question, diagram type, Mermaid source, and the
-          strongest available syntax and rendering verification.
-          Keep this skill's ownership of decision facts, qualification, document
-          structure, visual placement, destination, and readiness.
-          Make each visual replace equivalent prose rather than repeat it.
-  - id: ptlam-architecturing
-    description:
-      Answer one system-level architecture question, for any kind of system
-      from backend and full-stack to web frontend, mobile, SDK, CLI, data
-      pipeline, desktop, embedded, or internal platform, with a suitability
-      judgment that frames the solution space, positions the options, sizes the
-      recommendation for the next order of magnitude, and names its trade-offs,
-      assumptions, and redesign trigger. Use when choosing component, runtime,
-      data-store, deployment, or integration structure; when designing a
-      published surface such as an API, SDK, CLI, schema, or file format; when
-      deciding where authoritative state lives; when a platform limit shapes
-      the design; when a design debate is stuck on technology names; or when
-      judging an existing architecture or proposal against its needs. Compose it
-      from any skill that meets a structure expensive to reverse. Do not use for
-      code structure one team changes in one release, business vocabulary,
-      diagnosing one failure, or writing the ADR alone.
-    category_id: engineering
-    visibility: public
-    status: active
-    required_skills:
-      - skill_id: ptlam-mermaiding
-        reason:
-          Turns the solution-space frame and the system topology into verified
-          visuals that replace the prose describing them.
-        instructions: |-
-          Read ptlam-mermaiding before drawing the frame or topology visual.
-          Let it own the diagram type, Mermaid source, and syntax verification.
-          Keep this skill's ownership of the dimensions, positions, semantics
-          each mark carries, and the judgment the visual supports.
-      - skill_id: ptlam-creating-adr
-        reason:
-          Preserves a confirmed architecture recommendation as a durable record
-          when it constrains the future or is expensive to reverse.
-        instructions: |-
-          Read ptlam-creating-adr after the user confirms the recommendation.
-          Apply its qualification gate; let it own the ADR verdict, destination,
-          shape, and verification.
-          Keep this skill's ownership of the question, constraints, frame,
-          options, trade-offs, assumptions, and redesign trigger, and pass them
-          as the decision evidence.
-  - id: ptlam-creating-atomic-note
-    description:
-      Create, mature, review, split, or merge durable atomic notes by
-      identifying one knowledge building block, preserving useful context, and
-      following local vault conventions.
-    disable_model_invocation: true
-    category_id: productivity
+      Explain a concept, mechanism, or system through a verified literal model
+      and a teaching device matched to what the learner cannot do. Use when a
+      learner needs an unfamiliar, abstract, or complex concept made usable,
+      and when a request explicitly asks for a real-life analogy with a stable
+      mapping table, a short story, and explicit caveats. Select the analogy
+      device only on that explicit ask; a request to explain, define,
+      simplify, or break down a concept is not that ask. Compose this skill
+      from any workflow whose output a reader must understand.
+    category_id: communicating
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-scraping-urls
+
+  - id: ptlam-mermaiding
     description:
-      Batch-scrape URLs supplied in a prompt or input file into cached local
-      Markdown files with configurable output, concurrency, and cache lifetime.
+      Create, revise, or review Mermaid diagrams whose type, structure,
+      notation, and layout keep the source relationships and stay readable in
+      raw Markdown. Use directly, or from another skill, when the output needs
+      a swimlane, flowchart, class, state, ER, sequence, quadrant, mindmap,
+      kanban, architecture, or tree-view diagram.
+    category_id: communicating
+    visibility: public
+    status: active
+    required_skills: []
+
+  - id: ptlam-visualizing-with-html
+    description:
+      Create or revise one portable HTML explainer that renders a verified
+      explanation as an accessible, optionally interactive page using native
+      web technologies and Material 3 Expressive. Use when a learner needs to
+      see or operate a system rather than read about it. Compose this skill
+      from any workflow that delivers a rendered report or explainer.
+    category_id: communicating
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-explaining
+        reason:
+          Supplies the verified explanation the page renders, including its
+          optional analogy branch.
+        instructions: |-
+          Read and apply ptlam-explaining for every page. Let it own the
+          learning goal, depth, literal answer, literal model, explanatory
+          structure, and reconstruction check.
+          Enter its analogy branch only when the user explicitly asks for an
+          analogy or supplies one. Let that branch own the candidates, the
+          user's choice, the mapping, the story, and the caveats. Consume those
+          outputs without building a second analogy.
+          Keep this skill's ownership of the portable HTML rendering and the
+          visual interaction.
+
+  - id: ptlam-researching
+    description:
+      Research one bounded question against high-trust primary sources and
+      deliver a traceable portable HTML evidence report. Use when a material
+      question needs evidence-led findings, conflict reconciliation, or an
+      explicitly inconclusive result.
+    category_id: communicating
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-git
+        reason:
+          Isolates the report inside a repository worktree without disturbing
+          unrelated work.
+        instructions: |-
+          Read and apply ptlam-git when the report's destination is a Git
+          repository.
+          Let it own repository, base, branch, and worktree resolution;
+          unrelated-state protection; and the final Git check.
+          Keep this skill's ownership of the question, source standard,
+          evidence ledger, findings, confidence, and limits.
+          Writing the report file is in scope. Require explicit permission for
+          a commit, push, pull request, or publication.
+      - skill_id: ptlam-scraping-urls
+        reason:
+          Supplies accounted local full-text retrieval when the selected
+          evidence needs batch scraping or a durable local cache.
+        instructions: |-
+          Apply ptlam-scraping-urls only when batch or local full-text
+          retrieval is needed.
+          Let it own URL collection, scraping, cache configuration, bounded
+          concurrency and fallback, output files, and result accounting.
+          Keep this skill's ownership of source selection, trust
+          classification, evidence use, and conclusions.
+          Pass the research contract's recency requirement into its cache
+          policy.
+          Reuse a cached capture only when its original retrieval time and
+          source identity satisfy that requirement; otherwise set
+          CACHE_TTL_HOURS=0 for that run.
+          Keep the original retrieval time as evidence metadata instead of the
+          cache-access time.
+      - skill_id: ptlam-visualizing-with-html
+        reason:
+          Turns the verified findings into the portable HTML report and proves
+          its accessibility, portability, and rendered quality.
+        instructions: |-
+          Read and apply ptlam-visualizing-with-html after the findings and
+          evidence ledger are verified.
+          Pass the question, audience, conclusion status, findings, evidence
+          ledger, conflicts, assumptions, gaps, confidence, and scope limits
+          forward unchanged.
+          Let it and its dependencies own explanatory structure, HTML
+          composition, accessibility and design contracts, static validation,
+          rendered inspection, and delivery.
+          Keep this skill's ownership of source inclusion, claim-to-source
+          reconciliation, findings, confidence, limits, and completion.
+
+  # --- Utilities ------------------------------------------------------------
+  - id: ptlam-setup
+    description:
+      Install or refresh PTLam's general agent instructions in one project.
     disable_model_invocation: true
     category_id: utilities
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-explaining
+
+  - id: ptlam-creating-skill
     description:
-      Explain concepts, mechanisms, and systems through a verified literal model
-      and an explanatory device matched to the learner's difficulty. Use when a
-      learner needs an unfamiliar, abstract, or complex concept made usable, and
-      when a request explicitly asks for a real-life analogy with a stable
-      mapping table, a short story, and explicit caveats. Select the analogy
-      device only on that explicit ask; a request to explain, define, simplify,
-      or break down a concept is not that ask.
+      Create, review, or refactor one agent skill so a human maintainer can
+      read it once and change it later. Use when turning a workflow or
+      reference set into a new skill, revising an existing SKILL.md, splitting
+      a skill that grew too broad, or auditing a package without editing it.
+      Use as the foundation for skills that specialize skill authoring.
     disable_model_invocation: true
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills: []
-  - id: ptlam-mermaiding
-    description:
-      Create, revise, or review Mermaid diagrams whose type, structure,
-      notation, and layout preserve the source relationships and remain readable
-      in raw Markdown. Use directly or from another skill when the output needs
-      a swimlane, flowchart, class, state, ER, sequence, quadrant, mindmap,
-      kanban, architecture, or tree-view diagram.
-    category_id: productivity
-    visibility: public
-    status: active
-    required_skills: []
-  - id: ptlam-visualization-with-html
-    description:
-      Create or revise one portable HTML explainer that renders a verified
-      explanation as an accessible, optionally interactive artifact using native
-      web technologies and Material 3 Expressive.
-    disable_model_invocation: true
-    category_id: productivity
+    category_id: utilities
     visibility: public
     status: active
     required_skills:
-      - skill_id: ptlam-explaining
+      - skill_id: ptlam-mermaiding
         reason:
-          Supplies the verified explanation the artifact renders, including its
-          optional analogy branch.
+          Owns every Mermaid diagram a skill package carries, from type choice
+          to syntax check.
         instructions: |-
-          Read and apply ptlam-explaining for every artifact. Let it own the
-          learning goal, depth, literal answer, literal model, explanatory
-          structure, and reconstruction verification.
-          Enter its analogy branch only when the user explicitly asks for an
-          analogy or supplies one. Let that branch own candidates, user choice,
-          the stable mapping, the story, and the caveats. Consume those outputs
-          without building a parallel analogy.
-          Keep this visualization skill's ownership of the portable HTML
-          rendering and the visual interaction.
+          Read ptlam-mermaiding before judging an existing diagram or deciding
+          whether a new diagram is warranted.
+          Apply its authoring workflow only when the chosen form is a diagram.
+          Let it own the visual question, diagram type, notation, layout, and
+          syntax check for that diagram.
+          Keep this skill's ownership of what the package says, which form
+          carries each point, and which file holds it.
+
+  - id: ptlam-scraping-urls
+    description:
+      Batch-scrape URLs supplied in a prompt or an input file into cached
+      local Markdown files with configurable output, concurrency, and cache
+      lifetime. Compose this skill from any workflow that needs accounted
+      local copies of many pages.
+    category_id: utilities
+    visibility: public
+    status: active
+    required_skills: []
+
+  # --- Health Connector SDK -------------------------------------------------
   - id: ptlam-health-connector-architecture
     description:
       Explain and judge the Health Connector SDK's structure across its Melos
       packages, Dart API surfaces, Pigeon contracts, Android Health Connect
       layers, iOS HealthKit layers, failure boundaries, concurrency, and
-      platform limits. Use when tracing a call, deciding where behavior belongs,
-      evaluating a boundary or public API change, or answering how the SDK works
-      internally. Do not use for diagnosing one failure, setting up a checkout,
-      reviewing a whole diff, or implementing a health data type.
+      platform limits. Use when tracing a call, deciding where behavior
+      belongs, evaluating a boundary or public API change, or answering how
+      the SDK works internally. Compose this skill from any Health Connector
+      workflow that must respect those boundaries. Do not use for diagnosing
+      one failure, setting up a checkout, reviewing a whole diff, or adding a
+      health data type.
     category_id: project-health-connector
     visibility: public
     status: active
@@ -945,47 +967,47 @@ skills:
       - skill_id: ptlam-architecturing
         reason:
           Provides the suitability judgment behind a boundary, ownership, or
-          public API decision, with its constraints, solution-space frame,
-          positioned options, sizing, assumptions, verdict, trade-offs, and
-          redesign trigger.
+          public API decision.
         instructions: |-
           After tracing the packages, channel, and native layers a proposed
           change touches, read and apply ptlam-architecturing when the request
           asks where the change belongs or whether a boundary or public API
           change is suitable.
-          Let it own the question, constraints, solution-space frame, options,
-          sizing, assumptions, reasoning probes, verdict, trade-offs, deferred
-          concerns, redesign trigger, and report.
+          Let it own the question, constraints, frame, options, sizing,
+          assumptions, probes, verdict, trade-offs, deferred concerns,
+          redesign trigger, and report.
           Keep this skill's ownership of package direction, library audiences,
           Pigeon and generated-file ownership, Android and iOS layers, failure
-          translation, concurrency, platform limit sources, and the layers a
-          change must leave unchanged.
-          Skip it for an explanation of a call path that judges nothing.
-          The foundation's verdict and report rules take precedence. This
-          specialization may add project constraints, never loosen them.
+          translation, concurrency, platform limits, and the layers a change
+          must leave unchanged.
+          Skip it for an explanation that judges nothing.
+          The foundation's verdict and report rules win. This specialization
+          may add project constraints, never loosen them.
+
   - id: ptlam-health-connector-setup
     description:
       Set up or repair a local Health Connector SDK checkout with its pinned
-      Flutter, Java, and Ruby toolchains, Melos workspace links, Android tools,
-      and macOS-only Swift tools, then prove the available development lanes.
-      Runs only when explicitly requested. Use when bootstrapping a clone,
-      repairing missing dependencies, or preparing a machine to contribute. Do
-      not use for a runtime defect or an already-working checkout's lint
-      failure.
+      Flutter, Java, and Ruby toolchains, Melos workspace links, Android
+      tools, and macOS-only Swift tools, then prove the available development
+      lanes. Runs only when explicitly requested. Use when bootstrapping a
+      clone, repairing missing dependencies, or preparing a machine to
+      contribute. Do not use for a runtime defect or a lint failure in a
+      working checkout.
     disable_model_invocation: true
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills: []
-  - id: ptlam-health-connector-debug
+
+  - id: ptlam-health-connector-diagnosing
     description:
       Gather Health Connector SDK diagnosis evidence by reproducing the
-      narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path and
-      tracing logs, error codes, generated contracts, handlers, permissions, and
-      platform prerequisites. Use when a call throws, returns the wrong record
-      or status, hangs, crashes, loses native logs, or behaves differently
-      across platforms. Do not use for toolchain bootstrap, style checks, or a
-      review of an otherwise-working changeset.
+      narrowest Dart, Pigeon, Android Health Connect, or iOS HealthKit path
+      and tracing logs, error codes, generated contracts, handlers,
+      permissions, and platform prerequisites. Use when a call throws, returns
+      the wrong record or status, hangs, crashes, loses native logs, or
+      behaves differently across platforms. Do not use for toolchain
+      bootstrap, style checks, or a review of an otherwise-working changeset.
     category_id: project-health-connector
     visibility: public
     status: active
@@ -999,33 +1021,32 @@ skills:
           Read and apply ptlam-diagnosing first.
           Let it own the diagnosis scope; reproduction and evidence rules;
           observation, inference, and assumption labels; hypothesis ranking;
-          failing-boundary model; read-only authority; report; and completion.
-          Use this skill only for Health Connector-specific capture fields,
-          commands, logging and privacy mechanics, tracing references, symptom
-          routes, and platform completion mechanics.
-          The foundation's authority, evidence, and completion rules take
-          precedence. This specialization may be stricter, never looser.
+          failing-boundary model; read-only limits; report; and completion.
+          Use this skill only for Health Connector capture fields, commands,
+          logging and privacy mechanics, tracing references, symptom routes,
+          and platform completion mechanics.
+          The foundation's permission, evidence, and completion rules win. This
+          specialization may be stricter, never looser.
       - skill_id: ptlam-health-connector-architecture
         reason:
           Supplies the package, channel, native-layer, and platform-boundary
-          model needed to locate a failure without duplicating architecture.
+          model needed to locate a failure.
         instructions: |-
           After ptlam-diagnosing, read and apply
           ptlam-health-connector-architecture.
           Let it own package boundaries, call paths, Pigeon ownership, native
           layers, failure translation, concurrency, and platform constraints.
-          Use this specialization only to gather Health Connector runtime
-          evidence against those boundaries and platform constraints. Return
-          that evidence through ptlam-diagnosing's boundary model and report.
-  - id: ptlam-health-connector-review
+          Use this skill only to gather Health Connector runtime evidence
+          against those boundaries. Return that evidence through
+          ptlam-diagnosing's boundary model and report.
+
+  - id: ptlam-health-connector-reviewing
     description:
-      Review one Health Connector SDK changeset for project-specific public API,
-      cross-platform, generated-code, privacy, language-convention, test,
+      Review one Health Connector SDK changeset for project-specific public
+      API, cross-platform, generated-code, privacy, language-convention, test,
       documentation, and release risks. Use when a code review reaches Health
       Connector packages, Pigeon contracts, Android Health Connect, or iOS
-      HealthKit. Apply ptlam-reviewing-code for the review surface, finding
-      standard, and verdict. Do not use for fixing findings or diagnosing one
-      failing run.
+      HealthKit. Do not use for fixing findings or diagnosing one failing run.
     category_id: project-health-connector
     visibility: public
     status: active
@@ -1036,8 +1057,8 @@ skills:
           severity model, verification limits, and readiness verdict.
         instructions: |-
           Read and apply ptlam-reviewing-code first.
-          Let it own review scope, intent, general code risks, finding admission,
-          severity, output shape, and the readiness verdict.
+          Let it own the review scope, intent, general code risks, finding
+          admission, severity, output shape, and readiness verdict.
           Use this skill only for Health Connector project and platform risks.
           Return its findings and verification limits through the foundation's
           report.
@@ -1047,8 +1068,7 @@ skills:
           review must protect.
         instructions: |-
           After ptlam-reviewing-code, read and apply
-          ptlam-health-connector-architecture before judging Health
-          Connector-specific risks.
+          ptlam-health-connector-architecture before judging project risks.
           Let it own package direction, public and internal surfaces, Pigeon
           ownership, native layers, failure boundaries, concurrency, and
           platform limits.
@@ -1064,8 +1084,8 @@ skills:
           Report violations here without copying its rules into this skill.
       - skill_id: ptlam-health-connector-code-style-kotlin
         reason:
-          Provides Health Connector Kotlin source, ktlint, detekt, and unit-test
-          conventions for changed Android files.
+          Provides Health Connector Kotlin source, ktlint, detekt, and
+          unit-test conventions for changed Android files.
         instructions: |-
           Apply ptlam-health-connector-code-style-kotlin to changed Kotlin,
           Gradle, ktlint, detekt, and Kotlin-test files.
@@ -1080,33 +1100,34 @@ skills:
           SwiftPM, SwiftLint, and SwiftFormat files.
           Let it own project-specific Swift writing and check conventions.
           Report violations here without copying its rules into this skill.
-  - id: ptlam-health-connector-data-type
+
+  - id: ptlam-health-connector-adding-data-type
     description:
-      Add or extend one Health Connector health data type and record across the
-      core Dart model, public exports, platform annotations, Pigeon contracts,
-      Dart mappers, Android Health Connect handlers, iOS HealthKit handlers, and
-      applicable tests. Use when introducing a record type, adding one platform
-      to an existing type, changing its capabilities, or repairing an incomplete
-      end-to-end registration. Do not use for an unrelated SDK feature or a
-      language-only refactor.
+      Add or extend one Health Connector health data type and record across
+      the core Dart model, public exports, platform annotations, Pigeon
+      contracts, Dart mappers, Android Health Connect handlers, iOS HealthKit
+      handlers, and applicable tests. Use when introducing a record type,
+      adding one platform to an existing type, changing its capabilities, or
+      repairing an incomplete end-to-end registration. Do not use for an
+      unrelated SDK feature or a language-only refactor.
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-health-connector-architecture
         reason:
-          Provides the package, channel, platform, public API, and compatibility
-          boundaries the end-to-end change must preserve.
+          Provides the package, channel, platform, public API, and
+          compatibility boundaries the end-to-end change must preserve.
         instructions: |-
           Read and apply ptlam-health-connector-architecture first.
           Let it own package direction, public and internal surfaces, Pigeon
           ownership, native layers, failure translation, concurrency, and
           platform limits.
-          Use this skill to coordinate one health data type through those
+          Use this skill to carry one health data type through those
           boundaries.
       - skill_id: ptlam-health-connector-code-style-dart
         reason:
-          Provides the project-specific Dart conventions for the core model,
+          Provides the project's Dart conventions for the core model,
           contracts, mappers, documentation, and tests.
         instructions: |-
           Apply ptlam-health-connector-code-style-dart to every Dart change.
@@ -1115,8 +1136,8 @@ skills:
           Keep this skill's ownership of the end-to-end feature workflow.
       - skill_id: ptlam-health-connector-code-style-kotlin
         reason:
-          Provides the project-specific Kotlin conventions for the Android
-          mapper, handler, registry, and tests.
+          Provides the project's Kotlin conventions for the Android mapper,
+          handler, registry, and tests.
         instructions: |-
           Apply ptlam-health-connector-code-style-kotlin when the type supports
           Android Health Connect.
@@ -1125,7 +1146,7 @@ skills:
           Keep this skill's ownership of Android feature completeness.
       - skill_id: ptlam-health-connector-code-style-swift
         reason:
-          Provides the project-specific Swift conventions for the iOS mapper,
+          Provides the project's Swift conventions for the iOS mapper,
           handler, registry, and native logging.
         instructions: |-
           Apply ptlam-health-connector-code-style-swift when the type supports
@@ -1133,14 +1154,16 @@ skills:
           Let it own Swift formatting, analysis, visibility, and logging
           conventions.
           Keep this skill's ownership of iOS feature completeness.
+
   - id: ptlam-health-connector-code-style-dart
     description:
       Write, review, and fix Dart source and tests in the Health Connector SDK
       against its analyzer rules, formatter contract, imports, visibility,
-      documentation shape, structured logging syntax, and package-specific test
-      layout. Use when editing Dart code, changing the shared lint package, or
-      fixing a Dart format, analysis, documentation, or test-convention failure.
-      Apply ptlam-code-style-dart first. Do not use for workspace architecture,
+      documentation shape, structured logging syntax, and package-specific
+      test layout. Use when editing Dart code, changing the shared lint
+      package, or fixing a Dart format, analysis, documentation, or
+      test-convention failure. Compose this skill from any Health Connector
+      workflow that changes Dart files. Do not use for workspace architecture,
       public API design, Pigeon ownership, platform support, or an end-to-end
       health data type change.
     category_id: project-health-connector
@@ -1149,35 +1172,37 @@ skills:
     required_skills:
       - skill_id: ptlam-code-style-dart
         reason:
-          Provides the Dart language, package, analyzer, formatter, dartdoc, and
-          test mechanics this repository's conventions build on.
+          Provides the Dart language, package, analyzer, formatter, dartdoc,
+          and test mechanics this repository's conventions build on.
         instructions: |-
           Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
           as its own foundation.
-          Let Dart own the SDK and toolchain, naming, formatting, imports, const
-          and final, visibility, package layout, dartdoc, and package:test
-          mechanics.
+          Let Dart own the SDK and toolchain, naming, formatting, imports,
+          const and final, visibility, package layout, dartdoc, and
+          package:test mechanics.
           Use this skill only for Health Connector Dart source, analyzer,
           formatter, documentation, logging-call, and test conventions.
           This specialization may be stricter than Dart, never looser.
+
   - id: ptlam-health-connector-code-style-kotlin
     description:
       Write, review, and fix Kotlin source and tests in Health Connector's
       Android package against its visibility, file and declaration shape,
-      import order, structured logging syntax, ktlint and detekt configuration,
-      and JUnit 5, MockK, Kotest, and coroutine-test conventions. Use when
-      editing Kotlin code or fixing a Kotlin formatting, analysis, or
-      test-convention failure. Apply ptlam-code-style-kotlin first. Do not use
-      for Android architecture, Health Connect behavior, Pigeon ownership, or
-      end-to-end handler registration.
+      import order, structured logging syntax, ktlint and detekt
+      configuration, and JUnit 5, MockK, Kotest, and coroutine-test
+      conventions. Use when editing Kotlin code or fixing a Kotlin formatting,
+      analysis, or test-convention failure. Compose this skill from any Health
+      Connector workflow that changes Kotlin files. Do not use for Android
+      architecture, Health Connect behavior, Pigeon ownership, or end-to-end
+      handler registration.
     category_id: project-health-connector
     visibility: public
     status: active
     required_skills:
       - skill_id: ptlam-code-style-kotlin
         reason:
-          Provides the Kotlin language, coroutine, Gradle, lint, KDoc, and JUnit
-          mechanics this repository's conventions build on.
+          Provides the Kotlin language, coroutine, Gradle, lint, KDoc, and
+          JUnit mechanics this repository's conventions build on.
         instructions: |-
           Read and apply ptlam-code-style-kotlin first; it loads
           ptlam-code-style as its own foundation.
@@ -1186,15 +1211,17 @@ skills:
           Use this skill only for Health Connector Kotlin source, ktlint,
           detekt, logging-call, and unit-test conventions.
           This specialization may be stricter than Kotlin, never looser.
+
   - id: ptlam-health-connector-code-style-swift
     description:
       Write, review, and fix Swift source in Health Connector's iOS package
       against its access, declaration and extension shape, structured logging
       syntax, SwiftLint baseline, and SwiftFormat configuration. Use when
       editing Swift code or fixing a Swift analysis, formatting, or native
-      logging convention failure. Apply ptlam-code-style-swift first. Do not use
-      for iOS architecture, HealthKit behavior, Pigeon threading, failure
-      translation, or end-to-end handler registration.
+      logging convention failure. Compose this skill from any Health Connector
+      workflow that changes Swift files. Do not use for iOS architecture,
+      HealthKit behavior, Pigeon threading, failure translation, or end-to-end
+      handler registration.
     category_id: project-health-connector
     visibility: public
     status: active
@@ -1204,8 +1231,8 @@ skills:
           Provides the Swift language, concurrency, package, lint, format, and
           documentation mechanics this repository's conventions build on.
         instructions: |-
-          Read and apply ptlam-code-style-swift first; it loads ptlam-code-style
-          as its own foundation.
+          Read and apply ptlam-code-style-swift first; it loads
+          ptlam-code-style as its own foundation.
           Let Swift own the language, optionals, error handling, structured
           concurrency, Swift Package Manager, SwiftLint, SwiftFormat, and
           documentation-comment mechanics.

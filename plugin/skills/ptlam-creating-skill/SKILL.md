@@ -1,27 +1,27 @@
 # PTLam Creating Skills
 
 Create, review, or refactor one agent-skill package that a maintainer can read
-once and a future agent can execute.
+once and a future agent can run.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
 ## Two rules
 
-**Rule 1 — one skill, one capability.** A skill owns one responsibility, one
-kind of result, and one standard for being done. Keep create, review, and repair
+**Rule 1: one skill, one capability.** A skill owns one responsibility, one kind
+of result, and one standard for being done. Keep create, review, and repair
 branches together only when all three match.
 
-**Rule 2 — the maintainer reads it first.** Someone has to understand this
-package well enough to change it later. A package only an agent can follow is
-not finished.
+**Rule 2: the maintainer reads it first.** Someone has to understand the package
+well enough to change it later. A package only an agent can follow is not
+finished.
 
-## How does a skill reach a verdict or finished package?
+## How does a skill reach a verdict or a finished package?
 
 ```mermaid
 flowchart LR
     ResolveTarget["Resolve the target"] --> ReviewOnly{"Review only?"}
-    ReviewOnly -->|"Yes"| AuditPackage["Audit the existing package"]
-    AuditPackage --> ReportVerdict["Report verdict and corrections"]
+    ReviewOnly -->|"Yes"| AuditPackage["Audit the package"]
+    AuditPackage --> ReportVerdict["Report the verdict and fixes"]
     ReviewOnly -->|"No"| ProveCapability["Prove one capability"]
     ProveCapability --> RuleOneCheck{"Rule 1 passes?"}
     RuleOneCheck -->|"No"| SplitSkills["Split into separate skills"]
@@ -34,69 +34,61 @@ flowchart LR
 ## 1. Resolve the target
 
 1. Name the operation: create, refactor, or review.
-2. Find the target repository, skill directory, and host. The current directory
-   is not automatically the target.
+2. Find the target repository, skill folder, and host. The current folder is not
+   automatically the target.
 3. Read the target's repository instructions, its neighboring skills, and its
    host schema, generator, and validators.
 4. Write down which files you author, which a generator owns, who owns the
-   metadata, and which side effects you are allowed.
+   metadata, and which side effects you may cause.
 
 Done when the operation, the files you may change, and the available checks are
 named.
 
-For a review, read [reviewing skills](references/reviewing-skills.md), apply
-step 2, skip steps 3 and 4, then finish with the review branch of step 5.
+For a review, read [reviewing skills](references/reviewing-skills.md), do step
+2, skip steps 3 and 4, then finish with the review branch of step 5.
 
 ## 2. Prove it is one capability
 
-When defining or challenging a skill boundary, read
-[skill atomicity and composition](references/skill-atomicity.md). It owns the
-capability tests, the keep-or-split decision, and the composition rules.
+Read [skill atomicity and composition](references/skill-atomicity.md). It owns
+the capability tests, the keep-or-split decision, and how a foundation and a
+specialization share ownership.
 
-Write one line for each: the responsibility, the artifact the skill produces or
-judges, its branches, its inputs, its acceptance standard, and the skills it
+Write one line for each: the responsibility, the result the skill produces or
+judges, its branches, its inputs, its standard for being done, and the skills it
 depends on. Then apply Rule 1 to what you wrote.
 
 If Rule 1 fails, list each resulting skill with its capability, trigger, output,
-and composition edge. A review reports that split. A change continues only with
-the skills the user approves.
+and edges. A review reports that split. A change continues only with the skills
+the user approves.
 
-Done when Rule 1 passes for one capability, or the split map accounts for every
+Done when Rule 1 passes for one capability, or the split map covers every
 capability you found.
 
 ## 3. Design the package
 
-For create or refactor, read
-[package layout](references/skill-package-layout.md). It owns what each
-directory holds, the file-length limit, and when detail leaves `SKILL.md`.
+Read [package layout](references/skill-package-layout.md). It owns what each
+folder holds, the file-length limit, and when detail leaves `SKILL.md`. Read
+[self-contained documentation](references/self-contained-documentation.md) when
+the package uses links, sources, or outside material.
 
-Read [self-contained documentation](references/self-contained-documentation.md)
-when the package uses links, sources, or external material. It owns which
-information must stay local and how to audit external links.
+Give each tool, service, package, or source to the workflow that uses it. Keep
+guidance the normal path shares in `SKILL.md`; put conditional guidance in the
+reference that owns that workflow and point there.
 
-Assign guidance for each supporting resource—the tools, services, packages,
-sources, or materials a workflow relies on—to the workflow that uses it. Keep
-guidance shared by the normal path in `SKILL.md`; route conditional guidance to
-that workflow's owning reference and point there instead of repeating it.
+Write each dependency's name, load order, ownership boundary, and precedence
+rule only in the host metadata that generates the `SKILL.md` dependency block.
+In this repository that is `plugin/plugin.yml`. No `SKILL.md` body or reference
+may name, link to, or restate a required skill; say what is outside this skill
+instead.
 
-Write each dependency name, load order, ownership boundary, and precedence rule
-only in the host metadata that generates the top-level `SKILL.md` dependency
-contract. In this repository, `plugin/plugin.yml` owns those fields. A nested
-reference may own conditional stack mechanics, but it must not name, link to, or
-paraphrase a required skill.
-
-Read [composing skills](references/composing-skills.md). It owns invocation and
-foundation-specialization mechanics.
-
-Done when the file tree and reading order exist, the package remains executable
-without external URLs, and the composition contract passes.
+Done when the file tree and reading order exist, the package runs without
+external URLs, and every dependency lives in the metadata.
 
 ## 4. Write the package
 
-For create or refactor, read
-[writing for maintainers](references/writing-for-maintainers.md) before any
-prose. It owns reading order, sentence shape, the order to try visual forms in,
-and what to cut.
+Read [writing for maintainers](references/writing-for-maintainers.md) before any
+prose. It owns the file template, reading order, sentence shape, the order to
+try visual forms in, and what to cut.
 
 Read [prompting best practices](references/prompting-best-practices.md) when the
 skill steers non-trivial reasoning, tool use, output shape, or autonomy.
@@ -118,4 +110,8 @@ someone can check, and the target accepts the metadata.
 ## 5. Prune and verify
 
 Read [verifying skills](references/verifying-skills.md). It owns pruning,
-package checks, the final report, and completion for every operation.
+package checks, and the final report for every operation.
+
+Finish when both rules hold, every check in that file passes or the review
+accounts for each failure, and the report names the checks run and anything left
+unverified.

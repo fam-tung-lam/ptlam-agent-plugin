@@ -79,18 +79,26 @@ source of truth.
 
 ## Skill naming
 
-Name related skills with one shared concept prefix:
-`ptlam-<concept>-<capability>`. The shared prefix keeps a skill family adjacent
-in alphabetic listings and makes the relationship visible from its ID and
-directory alone.
+Every skill ID starts with `ptlam-`. After the prefix, the name says what the
+skill does, in one of two shapes:
 
-For example, use `ptlam-git` for the Git workflow skill. Use `ptlam-code-style`
-as the code-style foundation and `ptlam-code-style-dart-flutter` for the Flutter
-specialization of the Dart code-style skill.
+| Shape                              | Use for                                                         | Examples                                            |
+| ---------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| `ptlam-<verb-ing>[-<qualifier>]`   | A workflow the agent runs                                       | `ptlam-diagnosing`, `ptlam-visualizing-with-html`   |
+| `ptlam-<concept>-<specialization>` | A member of a family that shares one concept and one foundation | `ptlam-code-style`, `ptlam-code-style-dart-flutter` |
 
-Keep the manifest ID and authored directory name identical. Use a standalone
-`ptlam-<capability>` name only when the skill does not belong to an established
-concept family.
+A family name keeps its members adjacent in an alphabetical listing and makes
+the relationship visible from the ID alone. A project family adds the project
+after the prefix and then follows the same two shapes, as in
+`ptlam-health-connector-diagnosing` and
+`ptlam-health-connector-code-style-swift`.
+
+Use the same verb for the same job across the catalog: a skill that finds a
+cause is `diagnosing`, not `debug`; a skill that judges a changeset is
+`reviewing`, not `review`. `ptlam-git` and `ptlam-setup` are the two
+tool-and-task names the verb shape does not improve.
+
+Keep the manifest ID and the authored directory name identical.
 
 The required top-level `providers` list in `plugin/plugin.yml` selects generated
 provider manifests. This repository selects `claude`, `codex`, `copilot`,

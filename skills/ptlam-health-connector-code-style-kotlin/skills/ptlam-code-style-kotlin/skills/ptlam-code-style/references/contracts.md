@@ -13,32 +13,31 @@ upgrade schedule is not yours.
 ## Change additively
 
 Adding a field is safe. Deprecating one is manageable. Repurposing an existing
-field is how you break the consumer nobody knew about, silently, in production.
+field is how you break the consumer nobody knew about, quietly, in production.
 
 ## Validate once, at the edge
 
 Check input where it enters, reject it with a message that names what was wrong,
-and let the inside trust it. The same check repeated in every layer is noise
-that hides where the real gate is.
+and let the inside trust it. The same check repeated in every layer hides where
+the real gate is.
 
 ## Make the safe path the easy one
 
 The default value, the default call, and the shortest correct usage are the safe
-ones. When doing the right thing requires remembering an extra argument, the
-wrong thing ships.
+ones. When doing the right thing needs an extra argument, the wrong thing ships.
 
 ## Make a repeated request boring
 
 Anything crossing a network will be retried by a client, a proxy, or an
-operator. Give a write a natural key or an idempotency key so a duplicate
-returns the original outcome instead of creating a second one.
-[errors.md](errors.md) owns the retry policy on the calling side.
+operator. Give a write a natural key or an idempotency key (a value that makes a
+repeat return the original result) so a duplicate does not create a second
+outcome. [errors.md](errors.md) owns the retry policy on the calling side.
 
 ## Bound every collection
 
 Design paging, a maximum page size, filtering, and a stable order when the
-operation is created. "It returns all of them" is a design that expires quietly
-the first time real data arrives.
+operation is created. "It returns all of them" is a design that expires the
+first time real data arrives.
 
 ## Name the capability, not the consumer
 
@@ -48,8 +47,8 @@ every client owns a private copy of the system and no change is safe anywhere.
 ## Put one real example beside the schema
 
 Show one concrete request and one concrete response next to the specification.
-People pattern-match from an example far faster than they parse a type
-definition, and a stale example is caught the first time someone runs it.
+People pattern-match from an example faster than they parse a type definition,
+and a stale example is caught the first time someone runs it.
 
 ## Finish
 

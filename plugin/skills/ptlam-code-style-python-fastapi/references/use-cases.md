@@ -2,7 +2,7 @@
 
 One application operation per verb-first file under
 `<feature>/application/use_cases/`. Use cases are the only path from an HTTP
-handler or durable task to an application port.
+handler or a durable task to an application port.
 
 ## Keep the operation transport-neutral
 
@@ -10,8 +10,8 @@ handler or durable task to an application port.
 - Receive collaborators in `__init__` and operation input in `__call__`.
 - Use a command dataclass when an operation has several input fields; pass one
   scalar directly when it has one.
-- Return a domain entity or application DTO. Let presentation map it to the
-  public response contract.
+- Return a domain entity or an application DTO, and let presentation map it to
+  the public response.
 - Raise domain exceptions and let the application map them once.
 
 ```python
@@ -38,16 +38,16 @@ class CreateUser:
 
 ## Own one transaction boundary
 
-A write use case commits once after its transactional work succeeds. A read use
+A write use case commits once, after its transactional work succeeds. A read use
 case makes the no-commit decision explicit. Routers and repositories never
-commit on behalf of the operation.
+commit on the operation's behalf.
 
-Keep a non-transactional remote effect after commit only when failure and retry
-semantics are safe. Use an outbox or durable handoff when the database change
-and effect must not drift apart.
+Keep a non-transactional remote effect after the commit only when its failure
+and retry behavior is safe. Use an outbox or another durable handoff when the
+database change and the effect must not drift apart.
 
 Do not call a sibling use case. Extract shared rules into a narrowly named
-feature policy so transaction boundaries remain visible. Prefer events or
+feature policy so transaction boundaries stay visible. Prefer events or
 composition-root coordination between features; when direct orchestration is
 required, import only the other feature's facade.
 
@@ -71,9 +71,8 @@ async def create_user(
     return await create(CreateUserCommand(**body.model_dump()))
 ```
 
-Use cases are the local-unit test surface: construct one with controlled port
-and integration fakes, call it directly, and assert its observable result or
-failure.
+Use cases are the local-unit test surface: build one with controlled port and
+integration fakes, call it directly, and assert its result or failure.
 
 Finish when each operation has one file under `application/use_cases/`, one
 transaction decision, ordinary typed inputs, no framework or infrastructure

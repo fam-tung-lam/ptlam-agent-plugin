@@ -5,7 +5,7 @@ language constructs that spell each rule.
 
 ## One screen, one held thought
 
-A function fits in a screen and in one thought. The limit is not a line count:
+A function fits in a screen and in one thought. The limit is not a line count;
 it is whether a reader can still hold the beginning while reading the end.
 
 ## One level of abstraction per function
@@ -16,8 +16,8 @@ skipping lines.
 
 ## Put the story first
 
-High-level flow at the top of the file, supporting detail below it. A reader
-should be able to stop as soon as they know enough.
+High-level flow at the top of the file, supporting detail below. A reader should
+be able to stop as soon as they know enough.
 
 ## Keep the happy path down the left margin
 
@@ -28,8 +28,8 @@ three conditions hides the thing the file exists for.
 ## Keep the reader's mental stack small
 
 Deep nesting plus mutable state forces someone to simulate execution in their
-head, which is the most expensive thing you can ask of a reader. Prefer
-straight-line flow and values that do not change underneath them.
+head, the most expensive thing you can ask of a reader. Prefer straight-line
+flow and values that do not change underneath them.
 
 ## Say it in the code, not around it
 

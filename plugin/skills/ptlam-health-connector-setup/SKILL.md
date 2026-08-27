@@ -1,34 +1,45 @@
 # PTLam Health Connector Setup
 
-Prepare one Health Connector checkout for Dart, Android, and—on macOS—iOS
+Prepare one Health Connector checkout for Dart, Android, and (on macOS) iOS
 development. This workflow may install missing local tools only after the user
-has explicitly requested setup and approved downloads outside the checkout.
+explicitly asked for setup and approved downloads outside the checkout.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Resolve the checkout and lanes
+## How does a clone become a working checkout?
 
-1. Confirm the repository root contains `pubspec.yaml` with
+```mermaid
+flowchart LR
+    ResolveCheckout["Confirm the checkout and its lanes"] --> InstallToolchains["Install the pinned toolchains"]
+    InstallToolchains --> Bootstrap["Bootstrap the workspace"]
+    Bootstrap --> ProveLanes["Prove each available lane"]
+```
+
+## 1. Confirm the checkout and its lanes
+
+1. Confirm the repository root holds `pubspec.yaml` with
    `name: health_connector_workspace`, `.fvmrc`, `.sdkmanrc`, and
-   `.ruby-version`. Stop before changing another checkout.
-2. Read those three pin files and the root `pubspec.yaml`; do not copy versions
-   from this skill. Record whether the machine will support Dart only, Dart and
-   Android, or all three lanes. iOS requires macOS and Xcode.
-3. Inspect `git status` and leave existing work untouched. Setup output such as
-   `.fvm/`, `.dart_tool/`, and build directories remains uncommitted.
+   `.ruby-version`. Stop before touching any other checkout.
+2. Read those three pin files and the root `pubspec.yaml`; never copy versions
+   from this skill. Record whether the machine supports Dart only, Dart and
+   Android, or all three lanes. iOS needs macOS and Xcode.
+3. Run `git status` and leave existing work alone. Setup output such as `.fvm/`,
+   `.dart_tool/`, and build folders stays uncommitted.
 
-## Install the pinned toolchains
+Done when the root is confirmed, the pins are read, and the lanes are known.
+
+## 2. Install the pinned toolchains
 
 Use an existing tool manager when present. Ask before downloading a missing
 manager or changing user-level global packages.
 
-| Lane             | Required checks                                                                       | Configuration owner                       |
+| Lane             | Checks                                                                                | Configuration owner                       |
 | ---------------- | ------------------------------------------------------------------------------------- | ----------------------------------------- |
 | Dart and Flutter | `fvm --version`, `fvm flutter --version`                                              | `.fvmrc`                                  |
 | Workspace        | `melos --version`                                                                     | `dev_dependencies` in root `pubspec.yaml` |
 | Android          | `java -version`                                                                       | `.sdkmanrc`                               |
 | iOS              | `xcodebuild -version`, `ruby --version`, `swiftlint version`, `swiftformat --version` | Xcode plus `.ruby-version`                |
-| Documentation    | `node --version`, `npm --version`                                                     | `package.json` and lockfile               |
+| Documentation    | `node --version`, `npm --version`                                                     | `package.json` and its lockfile           |
 
 Install and activate the project Flutter SDK:
 
@@ -38,15 +49,15 @@ fvm use
 fvm flutter --version
 ```
 
-If Melos is unavailable after Flutter is active, install it with the pinned Dart
-toolchain, then verify the executable:
+If Melos is missing after Flutter is active, install it with the pinned Dart
+toolchain and verify it:
 
 ```bash
 fvm dart pub global activate melos
 melos --version
 ```
 
-For Android, use SDKMAN to install and activate the `.sdkmanrc` candidate:
+For Android, install and activate the `.sdkmanrc` candidate with SDKMAN:
 
 ```bash
 sdk env install
@@ -54,14 +65,15 @@ sdk env
 java -version
 ```
 
-For iOS, activate the Ruby version through the machine's existing rbenv or RVM
-installation. Install SwiftLint and SwiftFormat through the machine's existing
-package manager, then verify both versions. Do not claim the iOS lane on a
-non-macOS host.
+For iOS, activate the Ruby version through the machine's rbenv or RVM. Install
+SwiftLint and SwiftFormat through the machine's package manager, then verify
+both versions. Never claim the iOS lane on a non-macOS host.
 
-## Bootstrap the workspace
+Done when every requested lane's checks print the pinned versions.
 
-Run from the repository root:
+## 3. Bootstrap the workspace
+
+From the repository root:
 
 ```bash
 melos bootstrap
@@ -69,10 +81,9 @@ melos bootstrap
 
 Done when Melos links every workspace package without adding
 `dependency_overrides` to member packages. For documentation work, also run
-`npm ci`; it installs the exact VitePress dependency graph from
-`package-lock.json`.
+`npm ci` to install the exact VitePress dependencies from `package-lock.json`.
 
-## Prove each available lane
+## 4. Prove each available lane
 
 Run the strongest lane the machine supports:
 
@@ -91,6 +102,6 @@ Skip Kotlin only when Android is outside the requested setup. Skip Swift only
 when the host cannot run it. Report each skipped lane and its missing
 prerequisite.
 
-Finish when bootstrap succeeds, every requested available lane passes its
-checks, `git status` contains no unexpected tracked change, and the handoff
-names versions, commands, failures, and unsupported lanes.
+Finish when bootstrap succeeds, every requested available lane passes,
+`git status` shows no unexpected tracked change, and the handoff names versions,
+commands, failures, and unsupported lanes.

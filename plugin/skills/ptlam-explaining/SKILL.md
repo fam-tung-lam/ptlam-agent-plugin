@@ -1,6 +1,7 @@
 # PTLam Explaining
 
-Build the learner's mental model of one concept, then check they can use it.
+Build the learner's mental model of one concept, then check that they can use
+it.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
@@ -8,9 +9,9 @@ Build the learner's mental model of one concept, then check they can use it.
 
 ```mermaid
 flowchart LR
-    ResolveGoal["Resolve the learning goal"] --> LiteralModel["Establish the literal model"]
-    LiteralModel --> SelectDevice["Select the explanatory device"]
-    SelectDevice --> ComposeExplanation["Compose the explanation"]
+    ResolveGoal["Resolve the learning goal"] --> LiteralModel["Build the literal model"]
+    LiteralModel --> SelectDevice["Pick the teaching device"]
+    SelectDevice --> ComposeExplanation["Write the explanation"]
     ComposeExplanation --> ReconstructionTest{"Reconstruction test passes?"}
     ReconstructionTest -->|"No"| LiteralModel
     ReconstructionTest -->|"Yes"| HandleFollowUps["Deliver, then handle follow-ups"]
@@ -18,105 +19,114 @@ flowchart LR
 
 ## 1. Resolve the learning goal
 
+Find out:
+
 - the concept to explain;
-- what the learner already knows that you can build from;
-- the specific mechanism that is confusing;
-- the depth, language, and output constraints; and
+- what the learner already knows that you can build on;
+- the exact part that confuses them;
+- the depth, language, and output limits; and
 - any device the learner asked for or ruled out.
 
-Ask only when the concept is missing or too vague to explain accurately. Infer
+Ask only when the concept is missing or too vague to explain correctly. Infer
 ordinary presentation choices and continue.
 
-Complete this step when the concept, prior knowledge, confusing mechanism,
-depth, language, and requested or excluded devices are known or safely inferred.
+Done when these are known or safely inferred.
 
-## 2. Establish the literal model
+## 2. Build the literal model
 
 Capture the real structure before choosing how to present it:
 
-- essential actors, objects, and boundaries;
-- ownership, containment, dependencies, and cardinality;
-- inputs, outputs, order, handoffs, and causal rules;
-- relevant states, transitions, lifetimes, and failure behavior; and
-- exact constraints, facts, and names that must stay literal.
+- the essential actors, objects, and boundaries;
+- ownership, containment, dependencies, and how many of each;
+- inputs, outputs, order, handoffs, and cause-and-effect rules;
+- the states, transitions, lifetimes, and failure behavior that matter; and
+- the exact facts, names, and limits that must stay literal.
 
-Cover only the mechanism needed at the requested depth. Verify a claim when the
-request or the risk requires it. Exclude an uncertain detail rather than
-inventing one that makes the explanation tidier.
+Cover only the mechanism the requested depth needs. Verify a claim when the
+request or the risk requires it. Leave out an uncertain detail rather than
+inventing one that makes the story tidier.
 
-Complete this step when every material relationship within scope is captured and
-uncertain claims are verified or excluded.
+Done when every material relationship in scope is captured and uncertain claims
+are verified or left out.
 
-## 3. Select the explanatory device
+## 3. Pick the teaching device
 
-Choose from the learner's difficulty, not from the concept's subject:
+Choose from what the learner cannot do, not from the subject:
 
-| The learner cannot                                                                       | Device                                                             |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Picture the mechanism                                                                    | One concrete instance, then generalize from it                     |
-| Tell two neighboring concepts apart                                                      | Contrast on the single dimension that separates them               |
-| Follow or operate the process                                                            | Walk the causal chain in execution order                           |
-| See why it is built this way                                                             | Name the constraint that forced it and the alternative it rejected |
-| Hold the whole system in mind                                                            | Whole first, then one level of parts at a time                     |
-| Reach the mechanism from anything they already know, and explicitly requested an analogy | One real-life analogy, mapped element by element                   |
+| The learner cannot                                                   | Device                                                             |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Picture the mechanism                                                | One concrete example, then the general rule                        |
+| Tell two neighboring concepts apart                                  | Contrast them on the one dimension that separates them             |
+| Follow or operate the process                                        | Walk the chain of causes in execution order                        |
+| See why it is built this way                                         | Name the constraint that forced it and the alternative it rejected |
+| Hold the whole system in mind                                        | The whole first, then one level of parts at a time                 |
+| Connect it to anything familiar, and explicitly asked for an analogy | One real-life analogy, mapped element by element                   |
 
-Honor a learner-requested device when it preserves the literal model. When it
-would distort a material relationship, name the mismatch and choose a faithful
+Honor a learner-requested device when it keeps the literal model intact. When it
+would distort a material relationship, name the mismatch and pick a faithful
 alternative. Combine two devices only when the first leaves a named gap the
 second closes.
 
-Select the analogy device only when the learner explicitly asked for an analogy;
-a request to explain, define, simplify, or break down a concept is not that ask.
-Then follow [the analogy device](references/analogy-device.md), which owns
-candidate generation, the mapping gate, the selection turn, and verification.
-Without that explicit request, start from one concrete instance and generalize.
+Use the analogy device only when the learner explicitly asked for an analogy.
+"Explain", "define", "simplify", or "break down" is not that ask. Then follow
+[the analogy device](references/analogy-device.md); it owns candidates, the
+mapping gate, the choice turn, and its own checks. Without that ask, start from
+one concrete example and generalize.
 
-Complete this step when one device is selected and any learner-supplied or
-learner-excluded device is honored, or refused for a named reason.
+Done when one device is selected and every learner-supplied or excluded device
+is honored or refused for a named reason.
 
-## 4. Compose the explanation
+## 4. Write the explanation
 
-Order the material so every sentence is understandable from what came before it:
+Order the material so every sentence makes sense from what came before it:
 
 - Open with the one-sentence literal answer, before any device.
-- Build from what the learner already knows toward what they do not.
+- Build from what the learner knows toward what they do not.
 - Introduce one new idea at a time, and name it where it is first needed.
-- Give the simple version first and the precise qualifier immediately after.
-- Keep exact facts, names, and constraints literal wherever the device pulls
-  toward paraphrase.
+- Give the simple version first and the precise qualifier right after it.
+- Keep exact facts, names, and limits literal even where the device pulls toward
+  paraphrase.
 - End with what the explanation does not cover.
 
-When the analogy device was selected, compose from
+When the analogy device was selected, follow
 [the analogy explanation shape](references/analogy-explanation-shape.md)
-instead. It owns the four components, their order, and their finish condition.
+instead. It owns the four parts, their order, and their finish condition.
 
-When another skill invokes this one, return one explanation package:
+When another skill calls this one, return one explanation package:
 
-| Field        | Content                                                           |
-| ------------ | ----------------------------------------------------------------- |
-| Goal         | Learning goal, learner background, confusing mechanism, and depth |
-| Presentation | Language and selected explanatory structure                       |
-| Model        | Literal answer, literal relationships, and verified constraints   |
-| Explanation  | Body in teaching order                                            |
-| Limits       | Uncertainty, exclusions, and caveats                              |
+| Field        | Content                                                  |
+| ------------ | -------------------------------------------------------- |
+| Goal         | Learning goal, learner background, confusing part, depth |
+| Presentation | Language and the selected device                         |
+| Model        | Literal answer, literal relationships, verified limits   |
+| Explanation  | The body, in teaching order                              |
+| Limits       | Uncertainty, exclusions, caveats                         |
 
-Let the caller render these fields without changing their meaning.
+The caller renders these fields without changing their meaning.
 
-Complete this step when the explanation carries no forward reference, every term
-is defined where it first appears, and its limits are stated.
+Done when the explanation has no forward reference, every term is defined where
+it first appears, and its limits are stated.
 
-## 5. Verify the explanation
+## 5. Check the explanation
 
 Run the reconstruction test: name a case the explanation did not cover, then
 check whether its own content predicts the behavior. When it does not, the model
-is incomplete — return to step 2 instead of adding more words.
+is incomplete; go back to step 2 instead of adding words.
 
-Then confirm that exact facts survived the device intact, and that step 4's
-finish condition still holds.
+Then confirm that the exact facts survived the device, and that step 4's finish
+condition still holds.
 
-Complete this step when the reconstruction test passes and both checks hold.
+Done when the reconstruction test passes and both checks hold.
 
 ## 6. Handle follow-ups
 
-Read [explanation follow-ups](references/follow-ups.md) and apply the branch the
-learner selected. It owns the scope change and re-entry point.
+| The learner asks for           | Do this                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------ |
+| More depth                     | Extend the literal model first, then re-pick the device for the new depth      |
+| A simpler version              | Narrow the learning goal; do not drop the qualifiers                           |
+| A different device             | Re-enter step 3 with the used device excluded                                  |
+| A different analogy            | Re-enter the analogy device with the used domain excluded                      |
+| A related concept              | Build a new literal model; link back only where the mechanism is shared        |
+| A challenge to the explanation | Name the limit and its structural reason, then offer the device that closes it |
+
+Finish when the follow-up's new scope passes steps 2 through 5.

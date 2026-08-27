@@ -1,7 +1,7 @@
 # Product requirements schema
 
-This reference owns the PRD shape, stable identifiers, status transitions, and
-readiness standard. Read it before writing or revising the PRD.
+This file covers the PRD shape, stable IDs, status rules, and readiness checks.
+Read it before writing or revising a PRD.
 
 ## File shape
 
@@ -12,7 +12,7 @@ Use every heading. Write `None` with a reason when a section does not apply.
 
 - Status: <draft | blocked | ready>
 - Updated: <timestamp>
-- Source artifact: <confirmed grilling-record or durable-brief path>
+- Source artifact: <confirmed grilling-record or product-brief path>
 - Source basis: <grilling record, or why no grilling record applies>
 
 ## At a glance
@@ -39,7 +39,7 @@ right product response.>
 
 - Evidence: <confirmed source>
 - Measure: <observable product result>
-- Guardrail: <result that must not worsen, or None with reason>
+- Guardrail: <result that must not get worse, or None with reason>
 
 ## Scope
 
@@ -49,7 +49,7 @@ right product response.>
 
 ## Non-goals
 
-<Excluded product outcomes and adjacent scope.>
+<Excluded product outcomes and neighboring scope.>
 
 ## Constraints
 
@@ -76,33 +76,34 @@ right product response.>
 <Map each outcome and scope ID to the source decision or evidence.>
 ```
 
-Preserve an existing outcome or scope ID when revising its wording. Retire an
-invalidated ID explicitly instead of assigning it to another requirement.
+Keep an existing outcome or scope ID when revising its wording. Retire an
+invalid ID explicitly instead of reusing it for another requirement.
 
 ## Status rules
 
-| Status    | Meaning                                                           |
-| --------- | ----------------------------------------------------------------- |
-| `draft`   | Product requirements are being synthesized and remain unchecked.  |
-| `blocked` | An outcome-changing product decision is missing or contradictory. |
-| `ready`   | Every readiness check passes and feature specification may begin. |
+| Status    | Meaning                                                          |
+| --------- | ---------------------------------------------------------------- |
+| `draft`   | Requirements are being written and are not yet checked           |
+| `blocked` | An outcome-changing product decision is missing or contradictory |
+| `ready`   | Every readiness check passes and feature specification may begin |
 
-A revision of a ready PRD returns to `draft` until affected sections pass again.
+A revision of a ready PRD returns to `draft` until the affected sections pass
+again.
 
 ## Readiness checks
 
-| Check       | The PRD must                                                                                    |
-| ----------- | ----------------------------------------------------------------------------------------------- |
-| Source      | Name one confirmed source, trace every requirement, and explain why no grilling record applies. |
-| Explanation | Make unfamiliar framing reconstructable without changing confirmed meaning.                     |
-| Visual      | Include one earned visual form that replaces equivalent prose.                                  |
-| Audience    | Identify affected people, context, evidence, and problem.                                       |
-| Framing     | State the value, current alternative, and positioning without mechanics.                        |
-| Outcomes    | Give each outcome an observable measure and guardrail disposition.                              |
-| Scope       | Separate stable scope IDs from explicit non-goals.                                              |
-| Boundary    | Carry no modules, schemas, API shapes, or other solution mechanics.                             |
-| Numbers     | Give each constraint a number with its source, or mark it unknown, without estimating.          |
-| Decisions   | Carry no unresolved outcome-changing product decision.                                          |
+| Check       | The PRD must                                                                               |
+| ----------- | ------------------------------------------------------------------------------------------ |
+| Source      | Name one confirmed source, trace every requirement, and say why no grilling record applies |
+| Explanation | Make unfamiliar framing understandable without changing confirmed meaning                  |
+| Visual      | Include one earned visual that replaces equivalent prose                                   |
+| Audience    | Identify affected people, context, evidence, and problem                                   |
+| Framing     | State the value, current alternative, and positioning without mechanics                    |
+| Outcomes    | Give each outcome an observable measure and a guardrail disposition                        |
+| Scope       | Separate stable scope IDs from explicit non-goals                                          |
+| Boundary    | Carry no modules, schemas, API shapes, or other solution mechanics                         |
+| Numbers     | Give each constraint a number with its source, or mark it unknown, without estimating      |
+| Decisions   | Carry no unresolved outcome-changing product decision                                      |
 
-Finish with status `blocked` when evidence or a decision prevents a check from
+Finish with status `blocked` when evidence or a decision stops a check from
 passing. Finish with status `ready` only when all checks pass.

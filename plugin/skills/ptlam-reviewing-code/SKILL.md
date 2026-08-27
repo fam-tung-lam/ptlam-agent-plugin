@@ -1,109 +1,129 @@
 # PTLam Reviewing Code
 
-Review one bounded code changeset and return a prioritized findings report and
-readiness verdict. Keep the review read-only. A review request does not
-authorize edits, review comments, approvals, pushes, or merges.
+Review one bounded code changeset and return a prioritized findings report and a
+readiness verdict. A review is read-only: it does not edit, comment on the pull
+request, approve, push, or merge.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Establish the review contract
+## How does a changeset become a verdict?
 
-1. Resolve the target repository and worktree. Read the current request and
-   every applicable repository instruction from the root to the changed files.
-2. Pin one review surface with the table below. Resolve every revision before
-   reading the diff, then name the exact comparison and changed-file list.
+```mermaid
+flowchart LR
+    PinSurface["Pin the review surface"] --> ResolveIntent["Resolve expected behavior"]
+    ResolveIntent --> ExamineChange["Examine the change"]
+    ExamineChange --> AdmitFindings{"Finding passes all four gates?"}
+    AdmitFindings -->|"No"| DropLead["Drop it or record it as an unverified risk"]
+    AdmitFindings -->|"Yes"| ReportFindings["Report findings and verdict"]
+    DropLead --> ReportFindings
+```
 
-| Surface                  | Comparison                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------ |
-| Uncommitted working tree | Inspect staged and unstaged changes separately, including untracked files.     |
-| Commit or tag            | Compare the requested revisions with the user's stated semantics.              |
-| Branch                   | Compare its merge base with the requested base unless the user says otherwise. |
-| Pull request             | Use its exact base, head, commits, description, linked work, and CI state.     |
+## 1. Pin the review surface
 
-1. Resolve expected behavior from the user's task or statement, specification,
-   issue, or linked requirement. Treat the pull-request description, tests, and
-   changed documentation as implementation claims, not as authority for expected
-   behavior. When no independent intent exists, use those claims to understand
-   scope but state that specification conformance remains unverified.
-2. Map the affected behavior, callers, boundaries, configuration, generated
-   ownership, tests, and release surfaces. Read tests first when they express
-   the changed behavior, then read every changed file with enough surrounding
-   code to trace its effects.
+1. Resolve the repository and worktree. Read the request and every applicable
+   repository instruction from the root down to the changed files.
+2. Pin one surface. Resolve every revision before reading the diff, then name
+   the exact comparison and the changed-file list.
 
-Stop and report the unresolved surface when a revision is invalid, the diff is
-empty, generated ownership is ambiguous, or the requested scope cannot be
-distinguished from unrelated work.
+| Surface                  | Comparison                                                             |
+| ------------------------ | ---------------------------------------------------------------------- |
+| Uncommitted working tree | Staged and unstaged changes separately, including untracked files      |
+| Commit or tag            | The requested revisions, with the user's stated meaning                |
+| Branch                   | Its merge base with the requested base, unless the user says otherwise |
+| Pull request             | Its exact base, head, commits, description, linked work, and CI state  |
 
-## Examine the change
+Stop and report when a revision is invalid, the diff is empty, generated-file
+ownership is unclear, or the requested scope cannot be separated from unrelated
+work.
 
-Apply the loaded code-style guidance to changed source and tests. Use the table
-below to cover risks that code conventions alone cannot settle.
+Done when the comparison and the changed files are exact.
 
-| Concern                     | Examine                                                                                                  |
-| --------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Intent and correctness      | Required behavior, edge inputs, state transitions, error paths, and unintended scope                     |
-| Regression evidence         | Whether tests fail without the change, cover the risk, and assert behavior rather than implementation    |
-| Architecture and simplicity | Ownership, dependency direction, duplicated paths, speculative abstractions, and complexity merely moved |
-| Security and privacy        | Trust boundaries, validation, authorization, injection, secrets, sensitive output, and unsafe defaults   |
-| Concurrency and reliability | Races, cancellation, idempotency, retries, resource lifetime, partial failure, and migration safety      |
-| Performance                 | Unbounded work, repeated I/O, N+1 access, blocking hot paths, large allocations, and missing pagination  |
-| Compatibility               | Public contracts, persisted data, configuration, supported platforms, generated files, and rollout       |
+## 2. Resolve expected behavior
 
-When a package manifest or lockfile changes, read
+Take the expected behavior from the user's task, a specification, an issue, or a
+linked requirement. The pull-request description, tests, and changed docs are
+claims about the implementation, not the source of truth. Without independent
+intent, use those claims to understand the scope and say that conformance to a
+specification is unverified.
+
+Map the affected behavior, callers, boundaries, configuration, generated
+ownership, tests, and release surfaces. Read tests first when they express the
+changed behavior, then every changed file with enough surrounding code to trace
+its effects.
+
+Done when you can say what the change is supposed to do and what it touches.
+
+## 3. Examine the change
+
+Apply the loaded code-style skill to changed source and tests. Then cover the
+risks conventions cannot settle:
+
+| Concern                     | Look at                                                                                      |
+| --------------------------- | -------------------------------------------------------------------------------------------- |
+| Intent and correctness      | Required behavior, edge inputs, state changes, error paths, unintended scope                 |
+| Regression evidence         | Whether tests fail without the change, cover the risk, and assert behavior, not structure    |
+| Architecture and simplicity | Ownership, dependency direction, duplicate paths, speculative abstractions, moved complexity |
+| Security and privacy        | Trust boundaries, validation, authorization, injection, secrets, sensitive output, defaults  |
+| Concurrency and reliability | Races, cancellation, repeat-safety, retries, resource lifetime, partial failure, migrations  |
+| Performance                 | Unbounded work, repeated I/O, N+1 access, blocking hot paths, large allocations, no paging   |
+| Compatibility               | Public contracts, stored data, configuration, platforms, generated files, rollout            |
+
+When a manifest or lockfile changes, read
 [reviewing dependency changes](references/dependency-changes.md).
 
-When the changeset introduces a component, runtime, or data-store split, a
-published surface, state ownership, or a platform commitment, read the loaded
-architecture skill's judging-suitability standard. Admit a finding on that
-structure only when that standard's verdict is not yet suitable. Report an
-unknown need as missing intent rather than a finding.
+When the change introduces a structure the loaded architecture skill's trigger
+names, read that skill's judging-suitability standard. Admit a finding on that
+structure only when the verdict is "not yet suitable". Report an unknown need as
+missing intent, not as a finding.
 
-Inspect existing CI evidence only when it belongs to the exact revision under
-review. Run check-mode commands only when task authority and repository rules
-allow their local artifacts. Keep formatters, generators, snapshot updates,
-baseline creation, dependency installation, and every other rewriting command
-out of a review. A passing check narrows uncertainty; it never proves the
-implementation correct.
+Use CI evidence only when it belongs to the exact revision under review. Run
+check-mode commands only when permission and repository rules allow their files.
+Never run formatters, generators, snapshot updates, baseline creation,
+dependency installs, or any other rewriting command during a review. A passing
+check narrows doubt; it never proves the change correct.
 
-## Admit a finding
+Done when every concern has been examined against the changed code.
 
-Report a finding only when all four conditions hold:
+## 4. Admit a finding
 
-1. The changeset introduces the defect or makes a pre-existing defect reachable.
-2. The impact is concrete and matters to behavior, safety, operability, or
-   maintainability.
-3. The evidence identifies the affected file and smallest useful line or range.
-4. The correction is specific and no wider than the defect.
+Report a finding only when all four hold:
 
-Treat a code smell as a lead to investigate, never as a finding by itself.
-Exclude taste, speculative future concerns, unrelated pre-existing defects, and
-deterministic tool output that adds no diagnosis. Name a structural remedy when
-the defect is structural. Prefer the remedy that removes moving pieces.
+1. The change introduces the defect or makes an existing one reachable.
+2. The impact is concrete and matters to behavior, safety, operations, or
+   maintenance.
+3. The evidence names the file and the smallest useful line or range.
+4. The fix is specific and no wider than the defect.
 
-| Severity | Threshold                                                                                                |
-| -------- | -------------------------------------------------------------------------------------------------------- |
-| Critical | Exploitable security or privacy exposure, data loss, broken public contract, crash, or certain outage    |
-| Major    | Reachable incorrect behavior, race, error loss, compatibility break, or material architecture regression |
-| Minor    | Local maintainability or convention defect with a concrete cost and no present behavior failure          |
+A code smell is a lead to investigate, never a finding on its own. Leave out
+taste, speculative future concerns, unrelated existing defects, and tool output
+that adds no diagnosis. Name a structural remedy when the defect is structural;
+prefer the remedy that removes moving parts.
+
+| Severity | Threshold                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------- |
+| Critical | Exploitable security or privacy exposure, data loss, broken public contract, crash, or outage |
+| Major    | Reachable wrong behavior, race, lost error, compatibility break, or architecture regression   |
+| Minor    | Local maintainability or convention defect with a concrete cost and no present failure        |
 
 Severity reflects impact, not confidence. Investigate uncertain evidence or
-record it as an unverified risk instead of promoting a guess into a finding.
+record it as an unverified risk; never promote a guess to a finding.
 
-## Report the verdict
+Done when every surviving finding passes all four gates and has a severity.
 
-Lead with findings from highest to lowest severity. For each one, give a short
-title, severity, file and line, observable impact, evidence, and smallest
-correction. Do not add a category with no finding.
+## 5. Report the verdict
 
-After the findings, list the exact evidence inspected, checks run, checks not
-run, and any missing intent or platform coverage. End with one verdict:
+Lead with findings from highest to lowest severity. For each: a short title,
+severity, file and line, observable impact, evidence, and the smallest fix. Do
+not add a category with no finding.
 
-| Verdict                          | Use when                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------- |
-| Not ready                        | A Critical or Major finding remains, or required evidence is missing.     |
-| Ready with non-blocking findings | Only Minor findings remain and the required evidence supports the change. |
-| Ready                            | No finding survives review and the required evidence supports the change. |
+Then list the evidence inspected, checks run, checks not run, and any missing
+intent or platform coverage. End with one verdict:
 
-If no finding survives, say so plainly before the verification limits. Finish
-after the report; wait for a separate request before changing code or GitHub
-state.
+| Verdict                          | Use when                                                             |
+| -------------------------------- | -------------------------------------------------------------------- |
+| Not ready                        | A Critical or Major finding remains, or required evidence is missing |
+| Ready with non-blocking findings | Only Minor findings remain and the evidence supports the change      |
+| Ready                            | No finding survives and the evidence supports the change             |
+
+If nothing survives, say so plainly before the verification limits. Finish after
+the report; wait for a separate request before changing code or GitHub state.

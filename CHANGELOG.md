@@ -22,6 +22,39 @@ and this project adheres to
 
 ### Changed
 
+- Rewrote every authored skill and reference for plain language and one
+  consistent shape: a two-to-four-sentence outcome, one Mermaid diagram of the
+  whole path, numbered steps that each end in an observable result, and one
+  closing finish condition. `ptlam-creating-skill` now records that template.
+- Reserved user-only invocation for skills a person must start. `explaining`,
+  `mermaiding`, `scraping-urls`, and `visualizing-with-html` are model-invocable
+  again, so a skill that depends on them can actually load them.
+- Moved every dependency name out of skill bodies and into `plugin/plugin.yml`,
+  which is the only place a required skill may be named. Skill text now says
+  what is outside its scope instead of naming the neighbor.
+- Gave `ptlam-implementing` a disposal step for worker worktrees after
+  integration, and a diagnosis dependency so a defect fix starts from a
+  demonstrated cause.
+- Replaced `ptlam-researching`'s dependency on the whole implementation
+  orchestrator with a direct Git dependency.
+- Made `ptlam-code-style` public, so a project with no matching stack
+  specialization still gets the foundation.
+- Regrouped categories by layer of work: deciding, specifying, building,
+  conventions, communicating, utilities, and the Health Connector project.
+- Renamed four skills so one verb names one job across the catalog:
+  `ptlam-visualization-with-html` to `ptlam-visualizing-with-html`,
+  `ptlam-health-connector-debug` to `ptlam-health-connector-diagnosing`,
+  `ptlam-health-connector-review` to `ptlam-health-connector-reviewing`, and
+  `ptlam-health-connector-data-type` to
+  `ptlam-health-connector-adding-data-type`. The development guide records the
+  naming shapes.
+- Moved `PTLAM_AGENTS.md` from `references/` to `assets/`, because `ptlam-setup`
+  installs it verbatim rather than reading it as guidance.
+- Merged fourteen single-purpose fragments into the files that own their
+  workflow, and dropped the duplicated Flutter version policy and generated-file
+  rules.
+- Dropped user-facing paths that embedded a category segment, which is manifest
+  metadata rather than a directory.
 - Feature specification creation now composes the architecture skill whenever a
   contract element fixes a structure that is expensive to reverse, records the
   result under a new architecture-constraints section, and blocks on an

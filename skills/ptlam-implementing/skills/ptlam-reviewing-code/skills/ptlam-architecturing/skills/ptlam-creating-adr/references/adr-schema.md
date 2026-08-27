@@ -1,11 +1,11 @@
 # Architecture decision record schema
 
-This reference owns the ADR shape, accepted status, visual placement, and
-completion standard. Read it before writing the record.
+This file covers the ADR shape, its accepted status, where the visual goes, and
+the completion checks. Read it before writing the record.
 
 ## File shape
 
-Follow a verified repository template when it exists. Otherwise use every
+Follow a verified repository template when one exists. Otherwise use every
 heading below and write `None` with a reason where a section does not apply.
 
 ```markdown
@@ -18,11 +18,12 @@ heading below and write `None` with a reason where a section does not apply.
 
 ## At a glance
 
-<One literal paragraph stating the constraint, choice, and main consequence.>
+<One literal paragraph stating the constraint, the choice, and the main
+consequence.>
 
 ## Context
 
-<Problem, current conditions, scope, and why a decision is required now.>
+<Problem, current conditions, scope, and why a decision is needed now.>
 
 ## Decision drivers
 
@@ -40,8 +41,8 @@ heading below and write `None` with a reason where a section does not apply.
 
 ## Visual impact
 
-<An earned Mermaid diagram for material relationships, or the options table as
-the visual when no faithful relationship diagram exists.>
+<A Mermaid diagram for material relationships, or the options table as the
+visual when no faithful diagram exists.>
 
 ## Consequences
 
@@ -51,12 +52,12 @@ the visual when no faithful relationship diagram exists.>
 
 ### Liabilities and risks
 
-<Costs, limitations, failure modes, and risk owners.>
+<Costs, limits, failure modes, and risk owners.>
 
 ## Reversal and supersession
 
 <Reversal cost, migration path, deferred concerns with their signals, the
-redesign trigger, and how a later ADR supersedes this record.>
+redesign trigger, and how a later ADR supersedes this one.>
 
 ## Traceability
 
@@ -68,16 +69,16 @@ alternatives, or reversal paths differ.
 
 ## Completion checks
 
-| Check         | The ADR must                                                                         |
-| ------------- | ------------------------------------------------------------------------------------ |
-| Qualification | Name the future constraint that earned a durable record.                             |
-| Source        | Trace the accepted choice, drivers, and alternatives to confirmed evidence.          |
-| Explanation   | Let a future reader reconstruct why the chosen option won.                           |
-| Visual        | Include one earned visual form that replaces equivalent prose.                       |
-| Decision      | State one accepted choice and its constrained boundary.                              |
-| Alternatives  | Preserve each material option and its rejection reason.                              |
-| Consequences  | Record benefits, liabilities, risks, owners, and reversal cost.                      |
-| History       | Name the redesign trigger and explain supersession without rewriting the old record. |
+| Check         | The ADR must                                                                        |
+| ------------- | ----------------------------------------------------------------------------------- |
+| Qualification | Name the future constraint that earned a durable record                             |
+| Source        | Trace the choice, drivers, and alternatives to confirmed evidence                   |
+| Explanation   | Let a future reader rebuild why the chosen option won                               |
+| Visual        | Include one earned visual that replaces equivalent prose                            |
+| Decision      | State one accepted choice and its constrained boundary                              |
+| Alternatives  | Keep each material option and its rejection reason                                  |
+| Consequences  | Record benefits, liabilities, risks, owners, and reversal cost                      |
+| History       | Name the redesign trigger and explain supersession without rewriting the old record |
 
 Finish only when every check passes. When the decision fails qualification or
-lacks confirmed rationale, return the verdict without creating an ADR.
+lacks confirmed reasons, return the verdict without creating an ADR.
