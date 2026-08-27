@@ -3,30 +3,27 @@
 What a unit publishes, which way dependencies run, and what belongs on each side
 of a seam. The specialization owns how the language spells each boundary.
 
-Where a boundary falls between components, runtimes, or stores, or what a
-published surface such as an API or file format commits to, is an architecture
-decision; `ptlam-architecturing` owns it. This reference owns what each crossing
-must obey.
+Where a boundary falls between components, runtimes, or stores, and what a
+published surface such as an API or file format promises, are architecture
+decisions outside this skill. This file owns what each crossing must obey.
 
 ## Publish a small surface
 
-A new symbol, file, or module stays internal until a consumer outside its own
-unit needs it. Widening later is cheap. Narrowing after someone depends on it is
-not.
+A new symbol, file, or module stays internal until a consumer outside its unit
+needs it. Widening later is cheap; narrowing after someone depends on it is not.
 
-Each unit publishes through one entry point — an export file, a package index,
-an explicit export list. Reaching past that entry point into an implementation
-file is a defect even when the language allows it.
+Each unit publishes through one entry point: an export file, a package index, an
+explicit export list. Reaching past that entry point into an implementation file
+is a defect even when the language allows it.
 
 What you export is a promise. What you keep unexported is yours to change today,
-and that freedom is the whole reason the boundary exists.
+and that freedom is why the boundary exists.
 
 ## Draw the seam where the work splits
 
 Put a boundary where responsibility for the work divides, not where the nouns
-divide. A seam that cuts across how people actually divide the work gets
-violated within a quarter, and that violation is an honest signal about the
-seam.
+divide. A seam that cuts across how people really divide the work gets violated
+within a quarter, and that violation is an honest signal.
 
 ## Depend in one direction
 
@@ -40,11 +37,9 @@ head.
 
 ## Never keep a cycle
 
-A cycle silently merges the modules it joins into one unit that can no longer be
-tested, reasoned about, or deleted separately. It says the boundary is in the
-wrong place, not that the tool needs configuring.
-
-Move the shared concept to a unit both may depend on, or merge the two.
+A cycle quietly merges the modules it joins into one unit that can no longer be
+tested, understood, or deleted separately. It says the boundary is in the wrong
+place. Move the shared concept to a unit both may depend on, or merge the two.
 
 ## Push I/O to the edges
 
@@ -61,8 +56,8 @@ errors at that adapter so nothing above it names the vendor.
 ## Duplicate rather than couple through a seam
 
 Removing duplication is a virtue inside a module. Across a boundary, a little
-copied code is often the correct price for independence — the copy is visible,
-while the shared dependency introduced to avoid it is not.
+copied code is often the right price for independence: the copy is visible, the
+shared dependency introduced to avoid it is not.
 
 ## Give every piece of state one owner
 

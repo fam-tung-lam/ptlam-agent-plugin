@@ -1,11 +1,8 @@
 # Local Unit Testing
 
 Use a local unit test for one function, class, state transition, or other small
-public behavior whose risk can be established without a real multi-component
-runtime.
-
-Local names the isolated test-harness boundary. It does not mean the test runs
-only on a developer workstation.
+public behavior whose risk can be shown without a real multi-component runtime.
+"Local" names the isolated test-harness boundary, not where the test runs.
 
 ## Rules
 
@@ -15,17 +12,17 @@ only on a developer workstation.
 - Use real values and controlled in-memory collaborators where practical.
 - Replace external dependencies at their boundary. Do not mock internal
   collaborators merely because they are separate classes.
-- Cover meaningful normal, boundary, and failure behavior. Avoid enumerating
+- Cover meaningful normal, boundary, and failure behavior. Do not enumerate
   implementation branches without a behavioral reason.
 - Assert returned values, exposed state, emitted events, or contractually
   observable outgoing interactions.
-- Do not access disk, network, platform UI, or uncontrolled clocks and random
+- Do not touch disk, network, platform UI, or uncontrolled clocks and random
   sources. Move to a local integration test when those real collaborations are
-  the risk being tested.
+  the risk.
 - Keep setup local to the test unless proven reuse justifies a broader fixture.
 
 ## Exit criteria
 
 - The test fails when the specified behavior is broken.
-- Internal refactoring that preserves behavior does not require rewriting it.
-- No higher test level is needed to prove the same risk.
+- An internal refactor that keeps behavior does not require rewriting it.
+- No higher level is needed to prove the same risk.

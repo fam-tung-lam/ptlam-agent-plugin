@@ -1,96 +1,92 @@
 # PTLam Modeling Business Domains
 
-Maintain one project's shared business language, context boundaries, and
-business process map in `CONTEXT.md`. This skill owns business meaning; it does
-not own source-code types, database schemas, transport models, or serialization.
+Keep one project's business words, context boundaries, and business process map
+in `CONTEXT.md`. This skill owns business meaning. It does not own code types,
+database schemas, transport models, or serialization.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## How does ambiguous business language become shared context?
+## How does an unclear business word become shared context?
 
 ```mermaid
 flowchart LR
-    ResolveTrigger["Resolve the term, boundary, or process trigger"] --> GatherEvidence["Gather business evidence"]
-    GatherEvidence --> ModelLanguage["Model vocabulary and contexts"]
+    ResolveTrigger["Resolve the term, boundary, or process"] --> GatherEvidence["Gather business evidence"]
+    GatherEvidence --> ModelLanguage["Model words and contexts"]
     ModelLanguage --> MapProcess["Map the business process"]
     MapProcess --> UpdateContext["Update CONTEXT.md"]
     UpdateContext --> VerifyContext{"Ambiguity removed?"}
-    VerifyContext -->|"No"| ExposeQuestion["Expose the exact domain question"]
-    VerifyContext -->|"Yes"| DeliverContext["Deliver the domain context"]
+    VerifyContext -->|"No"| ExposeQuestion["Return the one open question"]
+    VerifyContext -->|"Yes"| DeliverContext["Deliver the context"]
 ```
 
-Only `ptlam-grilling` interviews. When a domain ambiguity needs a user-owned
-decision, return that one exact question to the parent workflow.
+Use this skill when a business term is contested, overloaded, or new; when two
+contexts use one word differently; or when a business process needs a durable
+map. This skill does not interview. When a decision belongs to the user, return
+that one question to the caller.
 
-Use this skill when a business term is contested, overloaded, or newly coined,
-when contexts use one word differently, or when a business process needs a
-durable map. Use code-style guidance for code types and persistence mechanics.
+## 1. Resolve the trigger and permission
 
-## 1. Resolve the trigger and authority
+Name the term, boundary, or process that started the work. Read the applicable
+`AGENTS.md` files before choosing the destination. Use their domain-context
+location when defined; otherwise use `<project-root>/CONTEXT.md`.
 
-Name the term, context boundary, or business process that triggered the work.
-Read applicable `AGENTS.md` files before resolving the project root and
-destination. Use their domain-context location when defined; otherwise use
-`<project-root>/CONTEXT.md`.
+A direct request or a parent skill may allow creating or updating the managed
+sections of that file. Without that permission, return a proposed patch and the
+exact destination. Never overwrite unrelated content.
 
-A direct user request or a parent skill may authorize creating or updating the
-domain sections in that file. Without file authority, return a proposed patch
-and the exact destination. Never overwrite unrelated `CONTEXT.md` content.
-
-Complete this step when the business question, project root, destination,
-existing content, and write authority are explicit.
+Done when the business question, project root, destination, existing content,
+and write permission are explicit.
 
 ## 2. Gather business evidence
 
-Read the confirmed conversation record, product documents, existing
-`CONTEXT.md`, user-facing language, and code only where it reveals current
-business usage. Treat code names as evidence, not as definitions.
+Read the confirmed conversation record, product documents, the existing
+`CONTEXT.md`, user-facing text, and code only where it shows current business
+usage. Treat code names as evidence, not definitions.
 
-Separate verified meaning, user-owned decisions, current usage, contradictions,
-and assumptions. Search before claiming that a term is shared or that two
-contexts differ.
+Keep verified meaning, user decisions, current usage, contradictions, and
+assumptions apart. Search before claiming a term is shared or that two contexts
+differ.
 
-Complete this step when every proposed definition, boundary, process step, and
-handoff has a source or is marked as an unresolved domain question.
+Done when every proposed definition, boundary, step, and handoff has a source or
+is marked as an open question.
 
-## 3. Model vocabulary and context boundaries
+## 3. Model words and context boundaries
 
-Give each business term one precise meaning inside one named context. State what
-the term does not mean when a neighboring interpretation could recur. When two
-contexts legitimately use one word differently, keep both definitions and name
-the translation at their boundary.
+Give each term one precise meaning inside one named context. Say what the term
+does not mean when a neighboring meaning could creep back. When two contexts use
+one word differently, keep both definitions and name the translation at their
+boundary.
 
-For each context, state its responsibility, language, invariants, incoming and
-outgoing business information, and relationship to other contexts. Keep
-technical modules and deployment boundaries out of `CONTEXT.md` unless they are
-also verified business boundaries. Boundaries flow one way:
-`ptlam-architecturing` reads each verified context boundary as a candidate
-component boundary. It returns a contested business term to this skill rather
-than defining it.
+For each context, state its responsibility, its words, its invariants, what
+business information comes in and goes out, and how it relates to other
+contexts. Keep technical modules and deployment boundaries out of `CONTEXT.md`
+unless they are also verified business boundaries. A verified context boundary
+is a candidate component boundary for architecture work; a contested business
+term comes back here to be defined.
 
-Complete this step when a reader can use every term and cross each context
-boundary without guessing which meaning applies.
+Done when a reader can use every term and cross each boundary without guessing
+which meaning applies.
 
 ## 4. Map the business process
 
 Model the process from the business event that starts it through actors,
 decisions, handoffs, outcomes, and material exceptions. Show business
-responsibility rather than implementation calls.
+responsibility, not implementation calls.
 
-When an outcome-changing ambiguity remains, expose one exact question to the
-parent interview. Outside an interview, record it as open.
+When an ambiguity would change the outcome, return one exact question to the
+caller. Outside an interview, record it as open.
 
-Complete this step when the process map accounts for the normal path and each
-material branch, or names the evidence needed to finish it.
+Done when the map covers the normal path and each material branch, or names the
+evidence needed to finish it.
 
 ## 5. Update and verify the context
 
 Read [the domain context schema](references/domain-context-schema.md). It owns
-the managed sections, merge rules, and completion checks. Preserve all content
-outside those sections.
+the managed sections, merge rules, and completion checks. Keep everything
+outside those sections unchanged.
 
-Report the file or proposed patch, changed terms and boundaries, process-map
-verification, open questions, and checks performed.
+Report the file or proposed patch, changed terms and boundaries, the process map
+check, open questions, and checks performed.
 
-Complete the task when the managed sections match their evidence and either
-remove the triggering ambiguity or expose its one exact unresolved decision.
+Finish when the managed sections match their evidence and the triggering
+ambiguity is removed or reduced to one exact open decision.

@@ -1,8 +1,7 @@
 # Feature specification schema
 
-This reference owns the feature-spec file shape, status transitions, and the
-standard for ticket-planning readiness. Read it before writing or revising the
-spec.
+This file covers the feature-spec shape, status rules, and the readiness checks
+for ticket planning. Read it before writing or revising a spec.
 
 ## File shape
 
@@ -13,13 +12,13 @@ Use every heading. Write `None` with a reason when a section does not apply.
 
 - Status: <draft | blocked | ready>
 - Updated: <timestamp>
-- Source scope: <PRD path and heading, or durable feature brief>
+- Source scope: <PRD path and heading, or feature brief>
 - Glossary: <path, or unavailable>
 
 ## At a glance
 
-<One literal paragraph that lets the reader reconstruct the feature's purpose
-and observable result.>
+<One literal paragraph that lets the reader rebuild the feature's purpose and
+observable result.>
 
 ## Visual overview
 
@@ -39,7 +38,7 @@ follows.>
 
 ### Excluded
 
-<Adjacent behavior this feature deliberately leaves out.>
+<Neighboring behavior this feature deliberately leaves out.>
 
 ## Behavior
 
@@ -66,7 +65,7 @@ freedom.>
 
 ## Failure and recovery
 
-<Validation, error visibility, retry, idempotency, concurrency, and degraded
+<Validation, error visibility, retry, repeat-safety, concurrency, and degraded
 behavior.>
 
 ## Operations and rollout
@@ -96,42 +95,39 @@ behavior.>
 <Map each behavior ID to its source heading and affected contract or constraint.>
 ```
 
-Use stable behavior and structure IDs within the file. Preserve an existing ID
-when revising its wording. Retire an invalidated behavior explicitly instead of
-silently reusing its ID for another contract.
+Use stable behavior and structure IDs. Keep an existing ID when revising its
+wording. Retire an invalid behavior explicitly instead of reusing its ID.
 
 ## Status rules
 
-| Status    | Meaning                                                             |
-| --------- | ------------------------------------------------------------------- |
-| `draft`   | The feature contract is being synthesized and has not been checked. |
-| `blocked` | An outcome-changing decision is missing or contradictory.           |
-| `ready`   | Every readiness check passes and ticket planning may begin.         |
+| Status    | Meaning                                                    |
+| --------- | ---------------------------------------------------------- |
+| `draft`   | The contract is being written and is not yet checked       |
+| `blocked` | An outcome-changing decision is missing or contradictory   |
+| `ready`   | Every readiness check passes and ticket planning may begin |
 
-Move directly from `draft` to `blocked` or `ready` after verification. A
-revision of a ready spec returns to `draft` until its affected sections pass
-again.
-
-An architecture recommendation the user has not confirmed is a blocking
-decision: record it under Blocking decisions and set status `blocked`.
+Move from `draft` straight to `blocked` or `ready` after checking. A revision of
+a ready spec returns to `draft` until the affected sections pass again. An
+architecture recommendation the user has not confirmed is a blocking decision:
+record it under Blocking decisions and set status `blocked`.
 
 ## Readiness checks
 
-| Check        | The specification must                                                                                               |
-| ------------ | -------------------------------------------------------------------------------------------------------------------- |
-| Source       | Name one confirmed scope source and cite a source heading for every behavior.                                        |
-| Explanation  | Make unfamiliar content reconstructable without changing source facts.                                               |
-| Visual       | Include one earned visual form that replaces equivalent prose.                                                       |
-| Boundary     | Separate included behavior, exclusions, and deliberate implementation freedom.                                       |
-| Vocabulary   | Use glossary terms when available and contain no material term conflict.                                             |
-| Behavior     | State observable success, validation, failure, and recovery behavior.                                                |
-| Data         | Account for ownership, lifecycle, privacy, retention, and deletion.                                                  |
-| Contracts    | State interface and compatibility promises without accidental design choices.                                        |
-| Operations   | Account for signals, migration, rollout, rollback, and support impact.                                               |
-| Architecture | Record each structure expensive to reverse with its trade-offs, deferred concerns and signals, and redesign trigger. |
-| Proof        | Name evidence required for each behavior without prescribing test mechanics.                                         |
-| Decisions    | Carry no unresolved outcome-changing decision.                                                                       |
-| Traceability | Map each behavior ID back to its source and affected contract.                                                       |
+| Check        | The spec must                                                                                  |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| Source       | Name one confirmed scope source and cite a source heading for every behavior                   |
+| Explanation  | Make unfamiliar content understandable without changing source facts                           |
+| Visual       | Include one earned visual that replaces equivalent prose                                       |
+| Boundary     | Separate included behavior, exclusions, and deliberate implementation freedom                  |
+| Vocabulary   | Use glossary terms when available and hold no material term conflict                           |
+| Behavior     | State observable success, validation, failure, and recovery behavior                           |
+| Data         | Cover ownership, lifecycle, privacy, retention, and deletion                                   |
+| Contracts    | State interface and compatibility promises without accidental design choices                   |
+| Operations   | Cover signals, migration, rollout, rollback, and support impact                                |
+| Architecture | Record each expensive-to-reverse structure with its trade-offs, deferred concerns, and trigger |
+| Proof        | Name the evidence each behavior needs without prescribing test mechanics                       |
+| Decisions    | Carry no unresolved outcome-changing decision                                                  |
+| Traceability | Map each behavior ID back to its source and affected contract                                  |
 
-Finish with status `blocked` when any check fails because evidence or a decision
-is missing. Finish with status `ready` only when all checks pass.
+Finish with status `blocked` when any check fails for missing evidence or a
+missing decision. Finish with status `ready` only when all checks pass.

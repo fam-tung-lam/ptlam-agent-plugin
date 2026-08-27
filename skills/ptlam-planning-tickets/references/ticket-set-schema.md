@@ -1,11 +1,11 @@
 # Ticket set schema
 
-This reference owns the ticket-set overview, ticket-file shape, filename rule,
-and readiness standard. Read it before writing any ticket file.
+This file covers the overview file, the ticket-file shape, the filename rule,
+and the readiness checks. Read it before writing any ticket file.
 
 ## Overview file
 
-Write `<tickets-directory>/README.md` with:
+Write `<tickets-directory>/README.md`:
 
 ```markdown
 # Ticket plan: <feature>
@@ -40,7 +40,7 @@ trigger, risks, and their owners.>
 ## Ticket files
 
 Name each ticket `<NN>-<slug>.md`. Start at `01`; keep the filename order equal
-to the dependency order. Use this shape:
+to the dependency order.
 
 ```markdown
 # <T-01: observable slice outcome>
@@ -56,7 +56,7 @@ to the dependency order. Use this shape:
 
 ## Context
 
-<Only the source facts needed to implement this slice.>
+<Only the source facts needed to build this slice.>
 
 ## In scope
 
@@ -64,8 +64,8 @@ to the dependency order. Use this shape:
 
 ## Out of scope
 
-<Adjacent work left to another ticket, deferred until its signal, or outside the
-feature.>
+<Neighboring work left to another ticket, deferred until its signal, or outside
+the feature.>
 
 ## Acceptance
 
@@ -73,7 +73,7 @@ feature.>
 
 ## Evidence required
 
-<What must be proven, without selecting test levels, placement, or doubles.>
+<What must be proven, without choosing test levels, placement, or doubles.>
 
 ## Implementation freedom
 
@@ -82,18 +82,19 @@ feature.>
 
 ## Readiness checks
 
-| Check        | The ticket set must                                                                            |
-| ------------ | ---------------------------------------------------------------------------------------------- |
-| Source       | Trace every ticket and acceptance statement to the ready spec.                                 |
-| Explanation  | Make unfamiliar intent reconstructable without changing spec facts.                            |
-| Visual       | Show every blocking edge once in a verified dependency map.                                    |
-| Verticality  | Give each ticket one observable path rather than one technical layer.                          |
-| Coverage     | Account for every spec behavior, constraint, and failure path.                                 |
-| Dependencies | Be acyclic, bidirectional at endpoints, and consistent with file order.                        |
-| Deferral     | Implement no concern the spec defers; carry it, with its signal, in the overview.              |
-| Migration    | Slice each migration as expand, migrate, then contract, with every stage shippable on its own. |
-| Proof        | Record required evidence without prescribing testing mechanics.                                |
-| Decisions    | Carry no unresolved outcome-changing decision.                                                 |
+| Check        | The ticket set must                                                                     |
+| ------------ | --------------------------------------------------------------------------------------- |
+| Source       | Trace every ticket and acceptance line to the ready spec                                |
+| Explanation  | Make unfamiliar intent understandable without changing spec facts                       |
+| Visual       | Show every blocking edge once in a verified dependency map                              |
+| Verticality  | Give each ticket one observable path rather than one technical layer                    |
+| Coverage     | Cover every spec behavior, constraint, and failure path                                 |
+| Dependencies | Have no cycle, appear at both ends of each edge, and match the file order               |
+| Deferral     | Build no concern the spec defers; carry it, with its signal, in the overview            |
+| Migration    | Slice each migration as expand, migrate, then contract, each stage shippable on its own |
+| Proof        | Record required evidence without prescribing test mechanics                             |
+| Decisions    | Carry no unresolved outcome-changing decision                                           |
 
-Set the overview status to `blocked` when a source defect or decision prevents a
-check from passing. Use `ready` only when all ticket files pass together.
+Set the overview status to `blocked` when a source defect or a missing decision
+stops a check from passing. Use `ready` only when every ticket file passes
+together.

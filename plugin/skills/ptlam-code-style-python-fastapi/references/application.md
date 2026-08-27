@@ -1,72 +1,69 @@
 # FastAPI Application Composition
 
-How the application owns lifespan, settings, controller assembly, middleware,
-and framework-wide handlers.
+How the application owns its lifetime, settings, router assembly, middleware,
+framework-wide handlers, and observability.
 
-Keep one composition root. In the default new-service layout, `main.py` contains
-only `app = create_app()`, while `app.py` creates `FastAPI`, installs middleware
-and exception handlers, and includes every feature router from
-`presentation/http/` once. This composition-root import is not a cross-feature
-dependency. Preserve an existing coherent factory location. Feature packages do
-not mutate the app during import.
+Keep one composition root. In the default layout, `main.py` holds only
+`app = create_app()`, while `app.py` creates `FastAPI`, installs middleware and
+exception handlers, and includes every feature router from `presentation/http/`
+once. That import is composition, not a cross-feature dependency. Keep a
+coherent existing factory location. Feature packages never change the app while
+being imported.
 
-## Own process lifetime
+## Own the process lifetime
 
 Use `FastAPI(lifespan=...)` with an async context manager for application-wide
-resources supported by the installed version. Acquire before `yield` and close
-after it. Do not mix lifespan with deprecated startup and shutdown event
-handlers; FastAPI runs one model or the other.
+resources. Acquire before `yield` and close after it. Do not mix lifespan with
+the deprecated startup and shutdown event handlers; FastAPI runs one model or
+the other.
 
-Acquire only required application-wide, concurrency-safe clients and pools in
-lifespan, not at module import. Acquire request-specific sessions and
-connections in dependencies, and leave request-specific remote work in the
-request path. Let optional or lazy resources follow their established owner.
-Expose a started resource through a typed dependency rather than a mutable
-global that tests must patch before importing the app.
+Acquire only application-wide, concurrency-safe clients and pools in lifespan,
+never at module import. Acquire request-specific sessions and connections in
+dependencies. Expose a started resource through a typed dependency rather than a
+mutable global that tests must patch before importing the app.
 
 The [FastAPI lifespan guide](https://fastapi.tiangolo.com/advanced/events/)
-identifies the framework feature; it is not required reading. When the installed
-FastAPI or Starlette behavior differs, inspect the locked packages and prove the
-startup and shutdown contract with a focused local test.
+identifies the feature; it is not required reading. When the installed FastAPI
+or Starlette behaves differently, read the locked packages and prove the startup
+and shutdown contract with a focused local test.
+
+Importing a module for a unit test must not open a connection, dispatch a job,
+or register anything remotely.
 
 ## Compose once
 
 - Read settings through the project's settings owner. Do not scatter direct
-  environment reads across controllers and use cases. In a new service, define
-  one Pydantic Settings model and one cached accessor in `settings.py`.
+  environment reads across handlers and use cases. In a new service, define one
+  Pydantic Settings model and one cached accessor in `settings.py`.
 - Keep `/health`, `/ready`, and build information in one unversioned operations
-  router. Do not include operational endpoints under an API version prefix.
-- Give each shared path prefix, version prefix, tag, and dependency one router
+  router, never under an API version prefix.
+- Give each shared path prefix, version prefix, tag, and dependency one
   inclusion site.
-- Order middleware deliberately. A middleware that records a response must see
-  the exception and response transformations it is meant to observe.
+- Order middleware on purpose. Middleware that records a response must see the
+  exception and response transformations it is meant to observe.
 - Configure access logging, error capture, and correlation once. Record the
-  method, canonical path, status, duration, and correlation identifier needed by
-  operators.
+  method, canonical path, status, duration, and correlation identifier that
+  operators need.
 - Make query, header, request-body, and error-body capture opt-in, bounded, and
   redacted. Let one outer boundary capture an unexpected error after middleware
   records and re-raises it.
-- Mount static files and optional subsystems only when their configured
-  resources exist; make missing required resources fail startup clearly.
-
-Importing a module for a unit test must not start a connection, dispatch a job,
-or perform remote registration.
+- Mount static files and optional subsystems only when their files exist; make a
+  missing required file fail startup clearly.
 
 ## Share infrastructure, not feature behavior
 
 Build one client or pool per external system under `integrations/` and expose it
 through a typed facade. Features receive that facade through dependencies; they
-do not construct a second Redis, S3, mail, payment, or queue client.
+never build a second Redis, S3, mail, payment, or queue client.
 
 Configure the timeout, the connection limit, and any retry policy on that
 facade, once. A client built without an explicit timeout inherits an unbounded
 one and holds a worker until the far side answers.
 
-Keep the Celery app under `integrations/celery_app.py`. Keep each task under
-`<feature>/presentation/tasks/` and register or autodiscover it on that app. A
-task assembles and calls the same use case as the HTTP route; business policy
-stays in neither the integration facade nor the task shell.
+Keep the Celery app in `integrations/celery_app.py`. Keep each task under
+`<feature>/presentation/tasks/` and register it on that app. A task assembles
+and calls the same use case as the HTTP route; business policy lives in neither
+the facade nor the task shell.
 
 Finish when app construction is repeatable in tests, startup and shutdown own
-the same resources, and each controller, handler, and middleware is installed
-once.
+the same resources, and each router, handler, and middleware is installed once.

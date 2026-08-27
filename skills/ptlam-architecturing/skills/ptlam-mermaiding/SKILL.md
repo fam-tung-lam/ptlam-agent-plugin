@@ -2,171 +2,160 @@
 name: ptlam-mermaiding
 description:
   Create, revise, or review Mermaid diagrams whose type, structure, notation,
-  and layout preserve the source relationships and remain readable in raw
-  Markdown. Use directly or from another skill when the output needs a swimlane,
+  and layout keep the source relationships and stay readable in raw Markdown.
+  Use directly, or from another skill, when the output needs a swimlane,
   flowchart, class, state, ER, sequence, quadrant, mindmap, kanban,
   architecture, or tree-view diagram.
 ---
 
 # PTLam Mermaiding
 
-Create, revise, or review Mermaid diagrams so each answers one visual question
-with faithful relationships, readable source, valid syntax, and a layout that
-survives its target renderer. This skill owns diagram selection and authoring;
-the surrounding document owns its argument, prose, and placement.
+Create, revise, or review Mermaid diagrams. Each diagram answers one visual
+question, keeps the real relationships, reads as plain text, has valid syntax,
+and renders on its target. This skill owns diagram choice and source; the
+surrounding document owns its argument, prose, and placement.
 
-## How does one visual question become a verified Mermaid diagram?
+A review is read-only. Change a file only with the user's permission; otherwise
+return a fenced `mermaid` block.
+
+## How does one visual question become a verified diagram?
 
 ```mermaid
 flowchart LR
-    ResolveQuestion["Resolve the question and renderer"] --> ModelRelationships["Model literal relationships"]
-    ModelRelationships --> SelectType["Select one diagram type"]
+    ResolveQuestion["Resolve the question and the renderer"] --> ModelRelationships["List the real relationships"]
+    ModelRelationships --> SelectType["Pick one diagram type"]
     SelectType --> ReadTypeReference["Read its reference"]
-    ReadTypeReference --> AuthorSource["Author or revise Mermaid source"]
+    ReadTypeReference --> AuthorSource["Write or revise the source"]
     AuthorSource --> VerifySource{"Syntax and meaning pass?"}
     VerifySource -->|"No"| AuthorSource
-    VerifySource -->|"Yes"| DeliverDiagram["Deliver with verification state"]
+    VerifySource -->|"Yes"| DeliverDiagram["Deliver with the verification state"]
 ```
 
-| Concern                                 | Owner                                            |
-| --------------------------------------- | ------------------------------------------------ |
-| Facts and relationships                 | Supplied source or authoritative domain evidence |
-| Selection, notation, and Mermaid source | This skill and the selected type reference       |
-| Feature and version support             | Target Mermaid renderer                          |
-| Explanation and document structure      | User or calling skill                            |
+| Concern                            | Owner                                      |
+| ---------------------------------- | ------------------------------------------ |
+| Facts and relationships            | The supplied source or domain evidence     |
+| Type, notation, and Mermaid source | This skill and the selected type reference |
+| Feature and version support        | The target Mermaid renderer                |
+| Explanation and document structure | The user or the calling skill              |
 
-Keep reviews read-only. Change files only with user authority; otherwise return
-a fenced `mermaid` block.
+## 1. Resolve the question and the target
 
-## 1. Resolve the visual question and target
+State the one question the diagram must answer. Then find out who reads it and
+how much detail they need, what evidence it draws on, where it goes and whether
+you may write that file, the type the user asked for if any, and the target
+renderer with its Mermaid version.
 
-State the one question the diagram must answer. Then identify:
+When the target is unknown, prefer long-established syntax. When it lacks a
+requested type, keep the question in the closest supported type and name the
+substitution. The type reference owns the exact version boundary.
 
-- who reads it, and how much detail they need;
-- the evidence the diagram draws on;
-- where it goes, and whether you may write that file;
-- the diagram type the user asked for, if any; and
-- the target renderer and its Mermaid version.
+Done when the question, audience, evidence, destination, permission, and version
+boundary are known or safely bounded.
 
-When the target is unknown, prefer established syntax. When it lacks a requested
-type, preserve the visual question in the closest supported type and name the
-substitution. The selected type reference owns its exact feature and version
-boundary.
+## 2. List the real relationships
 
-Complete this step when the question, audience, evidence, destination,
-authority, and compatibility boundary are known or safely constrained.
+List only the objects and relationships the question needs.
 
-## 2. Model the literal relationships
-
-List only the objects and relationships needed to answer the question.
-
-| Dimension     | Capture when material                                     |
+| Dimension     | Capture when it matters                                   |
 | ------------- | --------------------------------------------------------- |
-| Flow          | Order, causality, branches, loops, concurrency            |
+| Flow          | Order, cause, branches, loops, parallel work              |
 | Structure     | Ownership, handoffs, boundaries, containment, hierarchy   |
-| Interaction   | Messages, direction, synchronicity, participant lifetimes |
-| Lifecycle     | States, events, guards, entry, terminal conditions        |
+| Interaction   | Messages, direction, sync or async, participant lifetimes |
+| Lifecycle     | States, events, guards, entry, end conditions             |
 | Type and data | Members, associations, cardinality, identity              |
-| Work          | Stages, status, assignee, priority, ticket identity       |
+| Work          | Stages, status, assignee, priority, ticket id             |
 | Plot          | Axes, scale, coordinates, placement evidence              |
 
-Keep verified facts, user assumptions, and diagram simplifications distinct.
-Omit a missing material fact or mark it in surrounding prose; never invent a
-relationship to balance the layout.
+Keep verified facts, user assumptions, and simplifications apart. Leave out or
+flag a missing fact; never invent a relationship to balance the picture.
 
-Complete this step when every node, edge, group, coordinate, and annotation has
-a source or an explicit modeling assumption.
+Done when every node, edge, group, coordinate, and note has a source or a stated
+assumption.
 
-## 3. Select and route one diagram type
+## 3. Pick one type and read its reference
 
-Use a requested type when it answers the question faithfully and this catalog
-supports it. Otherwise choose from this map, then read the selected reference
-before writing or judging source. Each reference owns that type's semantics,
-syntax, layout, compatibility, and completion check. For a Mermaid type outside
-this catalog, either use the closest supported type and name the substitution or
-stop and report that this skill has no maintained contract for it.
+Use the requested type when it answers the question faithfully and this catalog
+supports it. Otherwise pick from this table, then read the reference before
+writing or judging source. Each reference owns its type's meaning, syntax,
+layout, compatibility, and completion check.
 
-| Visual question                                                                      | Type and required reference                |
-| ------------------------------------------------------------------------------------ | ------------------------------------------ |
-| Who owns each process step and handoff?                                              | [Swimlanes](references/swimlanes.md)       |
-| What happens next, branches, depends, or forms a hierarchy without ordered messages? | [Flowchart](references/flowchart.md)       |
-| What static types, members, and UML relationships exist?                             | [Class](references/class.md)               |
-| How does one thing change state in response to events or conditions?                 | [State](references/state.md)               |
-| What data entities, attributes, identities, and cardinalities exist?                 | [ERD](references/erd.md)                   |
-| Which participant sends what, and in what order?                                     | [Sequence](references/sequence.md)         |
-| Where do items sit on two independent dimensions whose combination matters?          | [Quadrant](references/quadrant.md)         |
-| How do ideas radiate from one central concept?                                       | [Mindmap](references/mindmap.md)           |
-| What work currently occupies each workflow stage?                                    | [Kanban](references/kanban.md)             |
-| Which deployed services and resources connect across boundaries?                     | [Architecture](references/architecture.md) |
-| What is nested in a directory-like hierarchy?                                        | [Tree view](references/treeview.md)        |
+| Visual question                                                         | Type and reference                         |
+| ----------------------------------------------------------------------- | ------------------------------------------ |
+| Who owns each step and handoff?                                         | [Swimlanes](references/swimlanes.md)       |
+| What happens next, branches, depends, or nests, without timed messages? | [Flowchart](references/flowchart.md)       |
+| What static types, members, and UML relationships exist?                | [Class](references/class.md)               |
+| How does one thing change state on events or conditions?                | [State](references/state.md)               |
+| What data entities, attributes, keys, and cardinalities exist?          | [ERD](references/erd.md)                   |
+| Who sends what to whom, in what order?                                  | [Sequence](references/sequence.md)         |
+| Where do items sit on two independent dimensions?                       | [Quadrant](references/quadrant.md)         |
+| How do ideas radiate from one central concept?                          | [Mindmap](references/mindmap.md)           |
+| What work sits in each workflow stage right now?                        | [Kanban](references/kanban.md)             |
+| Which deployed services and resources connect across boundaries?        | [Architecture](references/architecture.md) |
+| What nests inside what, like folders?                                   | [Tree view](references/treeview.md)        |
 
-| Ambiguous choice                                     | Prefer                                                |
-| ---------------------------------------------------- | ----------------------------------------------------- |
-| Messages over time versus generic flow               | Sequence                                              |
-| One entity's lifecycle versus generic flow           | State                                                 |
-| Ownership changes versus generic flow                | Swimlanes                                             |
-| Deployment topology versus labeled process semantics | Architecture only for topology; flowchart for process |
+When two types could fit: messages over time are a sequence; one thing's
+lifecycle is a state diagram; changing owners is a swimlane; deployment topology
+is an architecture diagram, and a process with labels is a flowchart. For a
+Mermaid type outside this catalog, use the closest supported type and name the
+substitution, or report that this skill has no contract for it.
 
-Split independent visual questions, abstraction levels, or unreadable paths into
-separate diagrams with their own question and context.
+Split independent questions, abstraction levels, or unreadable paths into
+separate diagrams, each with its own question.
 
-Complete this step when one type owns each question and every selected type
-reference has been read.
+Done when one type owns each question and its reference has been read.
 
-## 4. Author the Mermaid source
+## 4. Write the source
 
-Apply the selected reference, then these shared rules.
+Apply the type reference, then these shared rules:
 
-| Concern      | Required authoring behavior                                                                                       |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- |
-| Identifiers  | Use stable descriptive ids without unexplained abbreviations; separate ids from labels when possible.             |
-| Declarations | Declare important objects before relationships.                                                                   |
-| Statements   | Put one semantic statement on each line unless indentation defines structure.                                     |
-| Text source  | Use four-space nesting, protect grammar-sensitive labels, and add a comment only to explain context you left out. |
-| Notation     | Give shape, line, arrow, cardinality, group, and position only the meaning owned by the type reference.           |
-| Labels       | Label relationships or conditions that endpoints do not make clear; keep node labels concise.                     |
-| Direction    | Use left-to-right for pipelines or time and top-to-bottom for hierarchy unless the domain requires otherwise.     |
-| Grouping     | Group only real boundaries, owners, namespaces, or containment.                                                   |
-| Density      | Split before using invisible edges, decorative nodes, or dense styling to force layout.                           |
-| Styling      | Use the renderer theme by default; style semantic distinctions with reusable classes and more than color.         |
-| Icons        | Prefer built-ins; use external packs only after confirming registration.                                          |
-| Interaction  | Add links, callbacks, or animation only when requested and supported by target security.                          |
+| Concern     | Rule                                                                                                |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| Ids         | Descriptive and stable, no unexplained abbreviations; keep ids separate from labels                 |
+| Order       | Declare important objects before relationships; one statement per line                              |
+| Text        | Four-space nesting; quote labels with punctuation; comment only to explain what you left out        |
+| Notation    | Give shape, line, arrow, cardinality, group, and position only the meaning the reference allows     |
+| Labels      | Label relationships or conditions the endpoints do not make clear; keep node labels short           |
+| Direction   | Left-to-right for pipelines and time; top-to-bottom for hierarchy, unless the domain says otherwise |
+| Grouping    | Group only real boundaries, owners, namespaces, or containment                                      |
+| Density     | Split before using invisible edges, decorative nodes, or styling to force layout                    |
+| Styling     | Use the renderer theme; mark a semantic difference with a reusable class and more than color        |
+| Icons       | Prefer built-ins; use an external pack only after confirming it is registered                       |
+| Interaction | Add links, callbacks, or animation only when asked and allowed by the target                        |
 
-Raw Mermaid source must remain understandable without rendering. Move prose that
-does not express a visual relationship into the surrounding document.
+Raw source must be understandable without rendering. Move prose that does not
+express a relationship into the surrounding document.
 
-Complete this step when the source expresses the literal model, follows the type
-reference, and remains readable as text.
+Done when the source expresses the listed model, follows the reference, and
+reads as text.
 
-## 5. Verify syntax, meaning, and rendering
+## 5. Check syntax, meaning, and rendering
 
-Run the strongest available check: the destination's Mermaid version, then
-installed compatible project tooling, then static source review. Correct every
-syntax error and rerun the check. Never claim rendering passed after only static
-review.
+Run the strongest available check: the destination's Mermaid version, then a
+compatible tool installed in the project, then a static read of the source. Fix
+every syntax error and rerun. Never claim rendering passed after only a static
+read.
 
-| Audit           | Pass condition                                                                                        |
-| --------------- | ----------------------------------------------------------------------------------------------------- |
-| Rendered layout | No clipping, overlap, false proximity, excessive crossing, illegible density, or misleading direction |
-| Objects         | Every required object appears once unless repetition is intentional                                   |
-| Relationships   | Endpoints, direction, notation, and label match the literal model                                     |
-| Semantics       | Boundaries, branches, states, cardinalities, coordinates, and task status match evidence              |
-| Styling         | Adds no unsupported meaning                                                                           |
-| Type-specific   | The selected reference's completion check passes                                                      |
+| Check           | Passes when                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------- |
+| Rendered layout | No clipping, overlap, false closeness, heavy crossing, unreadable density, or misleading direction |
+| Objects         | Every required object appears once unless repetition is intended                                   |
+| Relationships   | Endpoints, direction, notation, and labels match the listed model                                  |
+| Semantics       | Boundaries, branches, states, cardinalities, coordinates, and statuses match the evidence          |
+| Styling         | Adds no unsupported meaning                                                                        |
+| Type-specific   | The reference's completion check passes                                                            |
 
-For a review, report findings by severity with the affected line or construct
-and smallest correction. State when no defect was found and whether rendering
-was checked.
+For a review, report findings by severity with the affected line and the
+smallest fix. Say when nothing was found and whether rendering was checked.
 
-Complete this step when syntax and meaning pass, rendered layout passes when a
-compatible renderer exists, and unavailable verification is named.
+Done when syntax and meaning pass, rendering passes where a renderer exists, and
+any unavailable check is named.
 
-## 6. Deliver the diagram
+## 6. Deliver
 
-Place each diagram under a heading that states its visual question. Include only
-the prose needed for assumptions, substitutions, or verification limits.
-Preserve established Markdown and Mermaid frontmatter when editing.
+Put each diagram under a heading that states its visual question. Add only the
+prose needed for assumptions, substitutions, or verification limits. Keep
+existing Markdown and Mermaid front matter when editing.
 
-For changed files, report what changed, where, checks used, and what remains
-unverified. Complete the task when every diagram is source-traceable, readable
-as text, valid under the strongest available check, and fit for its question.
+For changed files, report what changed, where, which checks ran, and what stays
+unverified. Finish when every diagram traces to its source, reads as text,
+passes the strongest available check, and fits its question.

@@ -21,32 +21,32 @@ then has nothing to await and no way to see it fail.
 ## Every `Future` gets an owner
 
 Await it, return it, or hand it to `unawaited` from `dart:async` with a comment
-saying why nobody is waiting. Enable `unawaited_futures` so a dropped future is
-a diagnostic rather than a silent lost failure — an unawaited future that throws
-reaches the zone's error handler, far from the code that started it.
+saying why nobody waits. Enable `unawaited_futures` so a dropped future is a
+diagnostic, not a lost failure: an unawaited future that throws reaches the
+zone's error handler, far from the code that started it.
 
-Await independent work together rather than in sequence:
+Await independent work together:
 
 ```dart
 final results = await Future.wait([fetchOrders(), fetchCustomer()]);
 ```
 
-`Future.wait` starts every future immediately and completes when all of them do.
-It surfaces the first error, so use it for work you would abandon together, not
-for calls whose failures need separate handling.
+`Future.wait` starts every future at once and completes when all do. It surfaces
+the first error, so use it for work you would abandon together, not for calls
+whose failures need separate handling.
 
 Bound anything that leaves the isolate with `.timeout(...)`, and give
 `onTimeout` a value or let it throw `TimeoutException`. A request with no
-timeout waits as long as the other side is willing to keep the socket open.
+timeout waits as long as the other side keeps the socket open.
 
 Prefer `return future;` to `return await future;` inside an `async` function
-where no surrounding `try` needs the result; `unnecessary_await_in_return`
+when no surrounding `try` needs the result; `unnecessary_await_in_return`
 reports the difference.
 
 ## Whoever listens, cancels
 
-A `StreamSubscription` lives until someone cancels it. Store the subscription in
-the object that created it and cancel it in that object's teardown:
+A `StreamSubscription` lives until someone cancels it. Store it in the object
+that created it and cancel it in that object's teardown:
 
 ```dart
 class Watcher {
@@ -68,31 +68,28 @@ subscription keeps its source alive and keeps handling events after the owner is
 gone.
 
 A plain `StreamController` accepts one listener and throws on the second. Use
-`StreamController.broadcast()` only when several listeners are genuinely
-expected, and remember that a broadcast stream drops events emitted while nobody
-is listening.
-
-Prefer `async*` and `yield` to driving a controller by hand when the source is a
-loop you own.
+`StreamController.broadcast()` only when several listeners are really expected;
+a broadcast stream drops events emitted while nobody listens. Prefer `async*`
+and `yield` to driving a controller by hand when the source is a loop you own.
 
 ## Never block the isolate
 
 Use the asynchronous form of every I/O call. `avoid_slow_async_io` flags the
 async file and directory calls that are slower than their synchronous
-counterparts, which is the one place the synchronous form is the right answer.
+counterparts, which is the one place the synchronous form is right.
 
-Move CPU-bound work off the isolate entirely with `Isolate.run`:
+Move CPU-bound work off the isolate with `Isolate.run`:
 
 ```dart
 final total = await Isolate.run(() => sumEveryLine(rawCsv));
 ```
 
-Anything that keeps the turn — a long loop, a large parse, a synchronous socket
-read — freezes every other callback in that isolate until it returns.
+Anything that keeps the turn, such as a long loop, a large parse, or a
+synchronous socket read, freezes every other callback in that isolate.
 
 ## Finish
 
 Finish when every future is awaited, returned, or explicitly unawaited, every
-call leaving the isolate carries a timeout, every subscription and controller is
+call leaving the isolate has a timeout, every subscription and controller is
 cancelled or closed by its owner, and no synchronous call holds the turn for
 long.

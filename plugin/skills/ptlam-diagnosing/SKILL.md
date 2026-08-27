@@ -1,76 +1,84 @@
 # PTLam Diagnosing
 
-Diagnose one failing software behavior and return an evidence-backed report that
-identifies a cause whose mechanism at the first failing boundary is demonstrated
-by named observations or a discriminating check and excludes every remaining
-evidence-supported alternative, or the exact evidence blocker and one
-discriminating next check.
+Find the cause of one failing software behavior and report it with evidence. The
+report either names a cause whose mechanism at the first wrong boundary is shown
+by observations or a deciding check, with every other supported alternative
+ruled out, or it names the exact evidence blocker and one next check.
 
-Keep the diagnosis read-only. A diagnosis request authorizes inspection and
-scoped diagnostic checks; it does not authorize a fix or another intentional
-change to source, configuration, dependencies, data, or external state.
+A diagnosis is read-only. It allows inspection and scoped diagnostic checks. It
+does not allow a fix or any other intentional change to source, configuration,
+dependencies, data, or external state.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Establish the failure
+## How does a failure become a demonstrated cause?
 
-1. Name one observable failure. Record the expected behavior, actual behavior,
-   environment, smallest available reproduction, and applicable repository
-   sources. Done when the diagnosis has one bounded symptom and evidence
-   surface.
-2. Preserve the original failure before enabling existing diagnostics or
-   narrowing inputs. Use the narrowest safe reproduction or existing evidence
-   when reproduction is unavailable. Done when the symptom is repeatable or the
-   missing evidence is explicit.
-3. Label every material claim by evidence status:
+```mermaid
+flowchart LR
+    EstablishFailure["Establish one failure"] --> LocateBoundary["Locate the first wrong boundary"]
+    LocateBoundary --> RankHypotheses["Rank the causes"]
+    RankHypotheses --> RunCheck["Run the best safe check"]
+    RunCheck --> CauseShown{"Mechanism shown and alternatives excluded?"}
+    CauseShown -->|"No, and a safe check remains"| RankHypotheses
+    CauseShown -->|"No, and the next check is blocked"| ReportBlocker["Report the blocker and the next check"]
+    CauseShown -->|"Yes"| ReportCause["Report the cause"]
+```
 
-| Status      | Meaning                                                         |
-| ----------- | --------------------------------------------------------------- |
-| Observation | Directly seen in runtime output, logs, tests, source, or state. |
-| Inference   | A conclusion supported by named observations.                   |
-| Assumption  | An unverified condition the diagnosis currently relies on.      |
+## 1. Establish one failure
 
-Done when a reader can distinguish what was observed from what was concluded or
-assumed.
+1. Name one observable failure: expected behavior, actual behavior, environment,
+   the smallest reproduction you have, and the repository sources that apply.
+2. Keep the original failure intact before turning on diagnostics or narrowing
+   inputs. Use the narrowest safe reproduction, or existing evidence when you
+   cannot reproduce it.
+3. Label every material claim:
 
-## Locate the failing boundary
+| Label       | Meaning                                                   |
+| ----------- | --------------------------------------------------------- |
+| Observation | Seen directly in output, logs, tests, source, or state    |
+| Inference   | A conclusion supported by named observations              |
+| Assumption  | An unverified condition the diagnosis currently relies on |
 
-Trace the observable path from the caller toward the symptom. At each boundary,
-compare the input, output, side effect, completion, and failure mapping that
-matter to the expected behavior. Record the last boundary that remains correct
-and the first boundary that becomes wrong or loses evidence.
+Done when the symptom is repeatable or the missing evidence is explicit, and a
+reader can tell what was seen from what was concluded or assumed.
 
-Complete this step when the failure is localized to the smallest supported
-boundary, or when one missing observation prevents further localization.
+## 2. Locate the first wrong boundary
 
-## Rank and test hypotheses
+Trace the path from the caller toward the symptom. At each boundary, compare the
+input, output, side effect, completion, and failure mapping that matter to the
+expected behavior. Record the last boundary that is still correct and the first
+that is wrong or loses evidence.
 
-1. List plausible causes at the unresolved boundary. Rank them by supporting
-   evidence, then by how cheaply and decisively a safe check can falsify them.
-2. Run the highest-value check within the available authority. Update the
-   evidence status and ranking before exploring another hypothesis.
-3. Admit a cause only when named observations or a discriminating check
-   demonstrate its causal mechanism at the first wrong boundary and exclude
-   every remaining evidence-supported alternative.
+Done when the failure is narrowed to the smallest boundary you can support, or
+one missing observation stops you from narrowing further.
 
-Stop exploring and report a cause only when it meets that threshold. Otherwise,
-when the next discriminating check is unavailable or needs new authority, stop
-with the exact evidence blocker and that next check. Do not turn a plausible
-correction into a verified fix.
+## 3. Rank and test the causes
 
-## Report and stop
+1. List the plausible causes at that boundary. Rank them by supporting evidence,
+   then by how cheaply and decisively a safe check can rule them out.
+2. Run the most valuable check you are allowed to run. Update the labels and the
+   ranking before trying another cause.
+3. Accept a cause only when observations or a deciding check show its mechanism
+   at the first wrong boundary and rule out every other supported alternative.
 
-| Field        | Required content                                                                                                                                                                                                                                                                                                                       |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Scope        | Expected behavior, actual behavior, environment, and reproduction status.                                                                                                                                                                                                                                                              |
-| Observations | Relevant runtime and source evidence with commands or locations.                                                                                                                                                                                                                                                                       |
-| Boundary     | Last correct boundary and first wrong or unobserved boundary.                                                                                                                                                                                                                                                                          |
-| Diagnosis    | Cause, named observations or discriminating check demonstrating its mechanism at the first wrong boundary, and excluded evidence-supported alternatives; or exact blocker and one next check.                                                                                                                                          |
-| Inferences   | Conclusions drawn from the observations.                                                                                                                                                                                                                                                                                               |
-| Assumptions  | Unverified conditions that could change the diagnosis.                                                                                                                                                                                                                                                                                 |
-| Limits       | Checks not run, inaccessible evidence, and remaining uncertainty.                                                                                                                                                                                                                                                                      |
-| Handoff      | `ptlam-architecturing` when the demonstrated cause is a component, runtime, or store boundary in the wrong place, a missing or shared owner of authoritative state, or a published-surface contract that cannot hold; the code-style boundaries rules for a module-level boundary or owner; otherwise none. Name the skill, not a fix. |
+Stop exploring and report a cause only when it meets that bar. When the next
+deciding check is unavailable or needs new permission, stop with the exact
+blocker and that next check. Never turn a plausible fix into a verified one.
 
-Finish after this report. Never present an unrun check or guessed fix as
-observed. Never call a cause demonstrated unless it meets the diagnosis
-threshold above.
+Done when a cause meets the bar, or the blocker and next check are named.
+
+## 4. Report and stop
+
+| Field        | Content                                                                                                                                                                                                                                                                                                   |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Scope        | Expected behavior, actual behavior, environment, reproduction status                                                                                                                                                                                                                                      |
+| Observations | Runtime and source evidence with commands or locations                                                                                                                                                                                                                                                    |
+| Boundary     | Last correct boundary and first wrong or unobserved boundary                                                                                                                                                                                                                                              |
+| Diagnosis    | The cause, the evidence for its mechanism, and the excluded alternatives; or the blocker and the next check                                                                                                                                                                                               |
+| Inferences   | Conclusions drawn from the observations                                                                                                                                                                                                                                                                   |
+| Assumptions  | Unverified conditions that could change the diagnosis                                                                                                                                                                                                                                                     |
+| Limits       | Checks not run, unreachable evidence, remaining doubt                                                                                                                                                                                                                                                     |
+| Handoff      | Which kind of work should follow: an architecture judgment when the cause is a component, runtime, or store boundary in the wrong place, a missing or shared owner of state, or a published contract that cannot hold; the code-style boundary rules for a module-level boundary or owner; otherwise none |
+
+Finish after this report. Never present an unrun check or a guessed fix as an
+observation.

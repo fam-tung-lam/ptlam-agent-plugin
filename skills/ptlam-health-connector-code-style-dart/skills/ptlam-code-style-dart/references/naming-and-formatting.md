@@ -7,21 +7,18 @@ argues about it.
 
 | Kind                                           | Form                         | Example                     |
 | ---------------------------------------------- | ---------------------------- | --------------------------- |
-| File, directory, package                       | `lowercase_with_underscores` | `place_order_use_case.dart` |
+| File, folder, package                          | `lowercase_with_underscores` | `place_order_use_case.dart` |
 | Class, enum, extension, mixin, typedef         | `UpperCamelCase`             | `OrdersRepository`          |
 | Member, variable, parameter, named constructor | `lowerCamelCase`             | `maxRetryCount`             |
 | Constant                                       | `lowerCamelCase`             | `defaultTimeout`            |
 | Library-private declaration                    | Leading underscore           | `_OrdersView`               |
 | Import prefix                                  | `lowercase_with_underscores` | `as http_client`            |
 
-A Dart constant is `lowerCamelCase`, never `SCREAMING_CAPS`. Dart spells privacy
-with a leading underscore and scopes it to the library, not to the class: a
-private member is visible to every declaration in the same library file and its
-parts.
+A Dart constant is `lowerCamelCase`, never `SCREAMING_CAPS`. Privacy is a
+leading underscore scoped to the library, not the class.
 
-Name a file after the single public declaration it holds, in the snake-case form
-of that declaration's name. `OrdersRepository` lives in
-`orders_repository.dart`.
+Name a file after the single public declaration it holds, in snake case.
+`OrdersRepository` lives in `orders_repository.dart`.
 
 ## The formatter owns whitespace
 
@@ -33,8 +30,8 @@ dart format --output=none --set-exit-if-changed .
 ```
 
 The check form exits `1` when any file would change, which is what CI should
-run. `dart format` rewrites files in place even when the analyzer excludes them,
-so keep generated output out of its path rather than out of the analyzer.
+run. `dart format` rewrites files even when the analyzer excludes them, so keep
+generated output out of its path.
 
 The formatter reads `page_width` and `trailing_commas` from
 `analysis_options.yaml`. Never hand-wrap around it: under the default
@@ -48,12 +45,11 @@ splits to survive.
 - Use single quotes. Switch to double quotes only to avoid escaping an inner
   apostrophe; `prefer_single_quotes` and `avoid_escaping_inner_quotes` enforce
   the pair.
-- Omit `new`. It has been optional since Dart 2 and adds nothing.
-- Omit `const` inside an already-constant context, such as a `const` list's
-  elements.
+- Omit `new`; it has been optional since Dart 2.
+- Omit `const` inside an already-constant context.
 - Omit `this.` outside a constructor initializer or a shadowed parameter.
-- Use a `//` line comment for explanation and `///` for a doc comment. Reserve
-  `/* */` for temporarily disabling code you are about to delete anyway.
+- Use `//` for an explanation and `///` for a doc comment. Reserve `/* */` for
+  temporarily disabling code you are about to delete.
 
 ## Finish
 

@@ -1,77 +1,73 @@
 # PTLam Creating Architecture Decision Records
 
-Judge one crystallized architectural choice and write one architecture decision
-record (ADR) when the choice warrants durable reasoning. This skill owns the
-qualification verdict and ADR; it does not own the interview, implementation, or
-Git history.
+Decide whether one confirmed architecture choice deserves a durable record, and
+write that record (an ADR) when it does. This skill owns the yes-or-no verdict
+and the ADR. It does not interview, implement, or touch Git history; send an
+open decision back to the caller.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## When does one architectural choice become an ADR?
+## When does a choice become an ADR?
 
 ```mermaid
 flowchart LR
-    ResolveDecision["Resolve the confirmed decision"] --> QualifyDecision{"Decision warrants an ADR?"}
-    QualifyDecision -->|"No"| ReportVerdict["Report why no ADR is needed"]
+    ResolveDecision["Resolve the confirmed decision"] --> QualifyDecision{"Deserves an ADR?"}
+    QualifyDecision -->|"No"| ReportVerdict["Report why not"]
     QualifyDecision -->|"Yes"| GatherEvidence["Gather forces and alternatives"]
     GatherEvidence --> WriteAdr["Write the ADR"]
-    WriteAdr --> VerifyRecord{"Record is reconstructable?"}
+    WriteAdr --> VerifyRecord{"A future reader can rebuild the reasoning?"}
     VerifyRecord -->|"No"| GatherEvidence
     VerifyRecord -->|"Yes"| DeliverAdr["Deliver the ADR"]
 ```
 
-Only `ptlam-grilling` interviews. Apply this skill after a choice is confirmed;
-route an unresolved outcome-changing decision back to the parent decision work.
-This skill records a confirmed decision, preferring an architecture judgment
-from `ptlam-architecturing` as its source; it does not re-open the judgment.
+Apply this skill after a choice is confirmed. It records the decision; it does
+not reopen it. When an architecture judgment exists, use it as the source.
 
 ## 1. Resolve the decision and destination
 
-Name the accepted choice, its owner, source evidence, and the future constraint
-it may create. Stop when the choice is still open, contradictory, or missing a
-material alternative.
+Name the accepted choice, its owner, its evidence, and the future constraint it
+creates. Stop when the choice is still open, contradicts itself, or is missing a
+real alternative.
 
-Read applicable `AGENTS.md` files and existing ADR conventions. Use their
-destination and numbering when defined; otherwise use the next free four-digit
-number at `<project-root>/docs/adr/<NNNN>-<slug>.md`.
+Read the applicable `AGENTS.md` files and any existing ADR convention. Use their
+location and numbering; otherwise use the next free four-digit number at
+`<project-root>/docs/adr/<NNNN>-<slug>.md`.
 
-A direct user request or parent skill may authorize creating one new ADR and
-missing parent directories. Never overwrite an ADR. Changing code, superseding
-another record, staging, committing, or publishing requires separate authority.
+A direct request or a parent skill allows creating one new ADR and its missing
+parent folders. Never overwrite an ADR. Changing code, superseding another
+record, staging, committing, or publishing needs separate permission.
 
-Complete this step when the confirmed decision, evidence, convention, unique
-destination, and file authority are explicit.
+Done when the decision, evidence, convention, unique destination, and write
+permission are explicit.
 
 ## 2. Apply the qualification gate
 
-Write an ADR when the choice materially does at least one of these:
+Write an ADR when the choice does at least one of these:
 
 - splits or merges a component, runtime, or data store;
 - publishes or changes a surface such as an API, SDK, CLI, schema, file format,
   or plugin interface;
-- moves where authoritative state lives;
-- commits to a platform such as an OS, store, device, or offline operation;
-- binds other teams, releases, or a shared dependency beyond the current task;
-  or
-- rejects a plausible alternative for a non-obvious trade-off.
+- moves where the true copy of state lives;
+- commits to a platform such as an OS, store, device, or offline use;
+- binds other teams, releases, or a shared dependency beyond this task; or
+- rejects a plausible alternative for a reason that is not obvious.
 
-`ptlam-architecturing` owns that list; the first four bullets repeat it so the
-gate runs without that skill loaded.
+The first four bullets repeat the architecture skill's trigger on purpose, so
+this gate works when that skill is not loaded.
 
-A local name, private helper, routine library use, or cheaply reversible
-mechanic does not earn an ADR without wider consequences. Return the verdict and
-reason without creating a file when the gate fails. A parent workflow persists
-that disposition in its own decision record.
+A local name, a private helper, routine library use, or a cheaply reversible
+choice earns no ADR. When the gate fails, return the verdict and the reason
+without creating a file. The parent workflow keeps that disposition in its own
+record.
 
-Complete this step when the qualifying consequence or the no-ADR reason is
-explicit and supported by evidence.
+Done when the qualifying consequence, or the reason for no ADR, is explicit and
+backed by evidence.
 
 ## 3. Gather the decision evidence
 
-Read the confirmed record, relevant product or feature specification, existing
-ADRs, repository constraints, and evidence for each considered alternative.
-Prefer an existing architecture judgment as the source of forces and
-alternatives, and map its fields:
+Read the confirmed record, the relevant product or feature specification,
+existing ADRs, repository constraints, and the evidence for each alternative.
+When an architecture judgment exists, map its fields:
 
 | Judgment field                | ADR section               |
 | ----------------------------- | ------------------------- |
@@ -83,36 +79,30 @@ alternatives, and map its fields:
 | Trade-offs                    | Consequences              |
 | Deferred and redesign trigger | Reversal and supersession |
 
-Take each option's rejection reason from the judgment's alternatives probe.
-Separate decision drivers, assumptions, rejected alternatives, consequences, and
-unknowns.
+Keep decision drivers, assumptions, rejected alternatives, consequences, and
+unknowns apart. Do not invent a tidy reason after the fact. When the evidence
+cannot explain why the choice won, stop and name the missing input.
 
-Do not reconstruct a convenient rationale after the fact. When the accepted
-choice lacks enough evidence to explain why it won, stop with the missing input
-instead of writing an authoritative record.
-
-Complete this step when a future reader can compare the accepted choice with
-each material alternative using the evidence available at decision time.
+Done when a future reader can compare the accepted choice with each real
+alternative using the evidence available at decision time.
 
 ## 4. Write the ADR
 
 Read [the ADR schema](references/adr-schema.md). It owns the file shape, status,
-visual placement, and completion checks.
+where the visual goes, and the completion checks. Keep the decision statement
+short; put the explanation around the forces, alternatives, and consequences.
 
-Keep the decision statement short and put explanatory structure around the
-forces, alternatives, and consequences.
-
-Complete this step when the unique destination contains one accepted ADR and
-every schema section has an explicit disposition.
+Done when the destination holds one accepted ADR and every schema section has an
+explicit disposition.
 
 ## 5. Verify and deliver
 
-Check the record against its sources and existing ADR convention. Confirm that
-the explanation predicts the consequences and each visual preserves the literal
+Check the record against its sources and the existing ADR convention. Confirm
+the explanation predicts the consequences and each visual keeps the real
 relationships.
 
-Report the qualification verdict, file when created, status, sources, checks,
-and unresolved risk.
+Report the verdict, the file when created, its status, sources, checks, and any
+open risk.
 
-Complete the task when the no-ADR verdict is supported or the created ADR lets a
-future reader reconstruct what was chosen, why, and what it costs.
+Finish when the no-ADR verdict is supported, or the ADR lets a future reader
+rebuild what was chosen, why, and what it costs.
