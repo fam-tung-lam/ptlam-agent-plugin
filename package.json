@@ -28,7 +28,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.8",
     "@fam-tung-lam/ptlam-agent-plugin-compiler": "0.4.0-alpha.1",
-    "@types/node": "22.20.1",
+    "@types/node": "26.3.0",
     "@vitest/coverage-v8": "4.1.10",
     "markdownlint-cli2": "0.23.2",
     "prettier": "3.9.6",
