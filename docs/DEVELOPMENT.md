@@ -48,12 +48,7 @@ treeView-beta
                 communication/
                     <skill-id>/ ## Authored skill root
                 engineering/
-                    conventions/
-                        <skill-id>/
-                    design/
-                        <skill-id>/
-                    delivery/
-                        <skill-id>/
+                    <skill-id>/
                 productivity/
                     <skill-id>/
                 projects/
