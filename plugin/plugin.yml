@@ -9,6 +9,9 @@ providers:
   - gemini
   - kimi
 
+config:
+  skill_dependency_depth_limit: 4
+
 name: ptlam-agent-plugin
 description:
   A curated collection of portable agent skills for engineering, productivity,
@@ -92,8 +95,7 @@ skills:
           data-store split, a published surface, where the true copy of state
           lives, or a platform commitment.
           Let it own the constraints, frame, options, trade-offs, sizing,
-          recommendation, and redesign trigger, and let it decide whether the
-          confirmed decision earns an architecture decision record.
+          recommendation, and redesign trigger.
           Keep this skill's ownership of the questions, decision map, session
           record, and confirmation loop.
           Let it write no file; record its judgment in the session record.
@@ -127,17 +129,6 @@ skills:
           Let it own the diagram type, Mermaid source, and syntax check.
           Keep this skill's ownership of the dimensions, positions, the meaning
           each mark carries, and the judgment the visual supports.
-      - skill_id: ptlam-creating-adr
-        reason:
-          Preserves a confirmed recommendation as a durable record when it
-          constrains the future or is expensive to reverse.
-        instructions: |-
-          Read ptlam-creating-adr after the user confirms the recommendation.
-          Apply its qualification gate; let it own the verdict, destination,
-          shape, and checks.
-          Keep this skill's ownership of the question, constraints, frame,
-          options, trade-offs, assumptions, and redesign trigger, and pass them
-          as the decision evidence.
 
   - id: ptlam-creating-adr
     description:

@@ -45,19 +45,6 @@ each mark carries, and the judgment the visual supports.
 
 Read [ptlam-mermaiding](skills/ptlam-mermaiding/SKILL.md).
 
-### `ptlam-creating-adr`
-
-**Reason:** Preserves a confirmed recommendation as a durable record when it constrains the future or is expensive to reverse.
-
-**Instructions:** Read ptlam-creating-adr after the user confirms the recommendation.
-Apply its qualification gate; let it own the verdict, destination,
-shape, and checks.
-Keep this skill's ownership of the question, constraints, frame,
-options, trade-offs, assumptions, and redesign trigger, and pass them
-as the decision evidence.
-
-Read [ptlam-creating-adr](skills/ptlam-creating-adr/SKILL.md).
-
 ## How does a question become a judgment?
 
 ```mermaid
@@ -161,9 +148,8 @@ Use the loaded diagram skill for the frame or topology picture.
 | Redesign trigger | The measured number, curve, or event that starts the next investment   |
 | Open decision    | At most one user-owned question with a recommended answer, or none     |
 
-After the user confirms the recommendation, run the loaded ADR skill's
-qualification gate and return its verdict. Create the ADR file only when the
-user asks for it.
+After the user confirms the recommendation, return the completed judgment as
+handoff evidence for any separate decision-record workflow.
 
 Finish when every field is filled and the recommendation fits the stated needs
 at the next order of magnitude.
