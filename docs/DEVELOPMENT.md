@@ -45,9 +45,20 @@ treeView-beta
         plugin/
             plugin.yml ## Authored catalog and provider selection
             skills/
-                <skill-id>/ ## Authored skill
-                    SKILL.md
-                    {agents,assets,references,scripts}/
+                communication/
+                    <skill-id>/ ## Authored skill root
+                engineering/
+                    conventions/
+                        <skill-id>/
+                    design/
+                        <skill-id>/
+                    delivery/
+                        <skill-id>/
+                productivity/
+                    <skill-id>/
+                projects/
+                    health-connector/
+                        <skill-id>/
         .claude-plugin/
             plugin.json ## Generated host metadata
             marketplace.json ## Generated host metadata
@@ -71,11 +82,13 @@ including its catalog. Never edit those generated surfaces manually. Root
 `README.md` remains normal human-owned project documentation and is never read
 or changed by compiler operations.
 
-Both authored and generated skill directories are flat. `category_id` is
-metadata, not a path segment. The
-[plugin manifest v1 schema](https://github.com/fam-tung-lam/ptlam-agent-plugin-compiler/blob/main/src/core/validation/schemas/plugin-manifest-v1.schema.ts)
-defines the authored data contract; its JSON Schema is the machine-readable
-source of truth.
+Authored skill roots may sit at any depth below `plugin/skills/`. Each root's
+final directory name matches its manifest skill ID and directly contains
+`SKILL.md`; transparent grouping directories contain only directories leading to
+skill roots. The compiler still writes flat generated `skills/<skill-id>/`
+paths. `category_id` remains metadata independent of source location. The
+[manifest reference](https://agent-plugin-compiler.phamtunglam.com/reference/manifest#skill-source-layout)
+defines the authored layout contract and its validation failures.
 
 ## Skill naming
 

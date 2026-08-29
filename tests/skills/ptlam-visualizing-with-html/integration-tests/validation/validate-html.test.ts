@@ -3,8 +3,8 @@ import { symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "vitest";
 
-import { renderHtmlScaffold } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/scaffolding/render-html-scaffold.ts";
-import { runValidateHtmlCommand } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/validation/validate-html.ts";
+import { renderHtmlScaffold } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/scaffolding/render-html-scaffold.ts";
+import { runValidateHtmlCommand } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/validation/validate-html.ts";
 import {
   outputCapture,
   runTypeScriptProcess,
@@ -12,7 +12,7 @@ import {
 } from "../test-fixtures/cli-command-fixture.ts";
 
 const validateScript = path.resolve(
-  "plugin/skills/ptlam-visualizing-with-html/scripts/validation/validate-html.ts",
+  "plugin/skills/communication/ptlam-visualizing-with-html/scripts/validation/validate-html.ts",
 );
 
 describe("validate HTML command", () => {

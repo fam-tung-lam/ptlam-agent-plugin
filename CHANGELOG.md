@@ -24,6 +24,8 @@ and this project adheres to
 
 - Updated the plugin compiler to `0.4.0-alpha.1` and set the exclusive skill
   dependency-depth boundary to `4`.
+- Grouped authored skills under engineering, communication, productivity, and
+  project directories while keeping generated installation paths flat.
 - Kept architecture judgments and architecture decision records as separate
   capabilities. A confirmed judgment is now handoff evidence for a later record
   workflow instead of loading that workflow automatically.

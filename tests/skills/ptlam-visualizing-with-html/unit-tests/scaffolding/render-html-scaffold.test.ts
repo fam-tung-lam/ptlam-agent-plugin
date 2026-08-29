@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "vitest";
 
-import { renderHtmlScaffold } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/scaffolding/render-html-scaffold.ts";
-import { validateHtmlDocument } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
+import { renderHtmlScaffold } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/scaffolding/render-html-scaffold.ts";
+import { validateHtmlDocument } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
 
 describe("renderHtmlScaffold", () => {
   it("renders a valid portable document with an escaped title", () => {
