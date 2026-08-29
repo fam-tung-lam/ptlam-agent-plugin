@@ -173,7 +173,6 @@ flowchart TB
     SkillNode0 --> SkillNode3
     SkillNode0 --> SkillNode1
     SkillNode1 --> SkillNode23
-    SkillNode1 --> SkillNode2
     SkillNode2 --> SkillNode22
     SkillNode2 --> SkillNode23
     SkillNode3 --> SkillNode23

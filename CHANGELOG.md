@@ -22,6 +22,11 @@ and this project adheres to
 
 ### Changed
 
+- Updated the plugin compiler to `0.4.0-alpha.1` and set the exclusive skill
+  dependency-depth boundary to `4`.
+- Kept architecture judgments and architecture decision records as separate
+  capabilities. A confirmed judgment is now handoff evidence for a later record
+  workflow instead of loading that workflow automatically.
 - Rewrote every authored skill and reference for plain language and one
   consistent shape: a two-to-four-sentence outcome, one Mermaid diagram of the
   whole path, numbered steps that each end in an observable result, and one

@@ -43,8 +43,7 @@ Apply it when the selected decision fixes a component, runtime, or
 data-store split, a published surface, where the true copy of state
 lives, or a platform commitment.
 Let it own the constraints, frame, options, trade-offs, sizing,
-recommendation, and redesign trigger, and let it decide whether the
-confirmed decision earns an architecture decision record.
+recommendation, and redesign trigger.
 Keep this skill's ownership of the questions, decision map, session
 record, and confirmation loop.
 Let it write no file; record its judgment in the session record.

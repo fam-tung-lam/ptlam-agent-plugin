@@ -120,9 +120,8 @@ Use the loaded diagram skill for the frame or topology picture.
 | Redesign trigger | The measured number, curve, or event that starts the next investment   |
 | Open decision    | At most one user-owned question with a recommended answer, or none     |
 
-After the user confirms the recommendation, run the loaded ADR skill's
-qualification gate and return its verdict. Create the ADR file only when the
-user asks for it.
+After the user confirms the recommendation, return the completed judgment as
+handoff evidence for any separate decision-record workflow.
 
 Finish when every field is filled and the recommendation fits the stated needs
 at the next order of magnitude.
