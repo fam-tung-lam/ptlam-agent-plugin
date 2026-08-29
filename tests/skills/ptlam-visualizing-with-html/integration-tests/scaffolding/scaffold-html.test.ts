@@ -3,7 +3,7 @@ import { readFile, symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "vitest";
 
-import { runScaffoldHtmlCommand } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/scaffolding/scaffold-html.ts";
+import { runScaffoldHtmlCommand } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/scaffolding/scaffold-html.ts";
 import {
   outputCapture,
   runTypeScriptProcess,
@@ -11,7 +11,7 @@ import {
 } from "../test-fixtures/cli-command-fixture.ts";
 
 const scaffoldScript = path.resolve(
-  "plugin/skills/ptlam-visualizing-with-html/scripts/scaffolding/scaffold-html.ts",
+  "plugin/skills/communication/ptlam-visualizing-with-html/scripts/scaffolding/scaffold-html.ts",
 );
 
 describe("scaffold HTML command", () => {

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "vitest";
 
-import { validateHtmlDocument } from "../../../../../plugin/skills/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
+import { validateHtmlDocument } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
 
 describe("validateHtmlDocument", () => {
   it("accepts a complete portable interactive visualization", () => {
