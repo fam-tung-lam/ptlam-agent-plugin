@@ -3,8 +3,8 @@ import { readFile, symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "vitest";
 
-import { createHtmlScaffold } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/scaffolding/create-html-scaffold.ts";
-import { validateHtmlDocument } from "../../../../../plugin/skills/communication/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
+import { createHtmlScaffold } from "../../../../../plugin/skills/productivity/ptlam-visualizing-with-html/scripts/scaffolding/create-html-scaffold.ts";
+import { validateHtmlDocument } from "../../../../../plugin/skills/productivity/ptlam-visualizing-with-html/scripts/validation/validate-html-document.ts";
 import { temporaryDirectory } from "../test-fixtures/cli-command-fixture.ts";
 
 describe("createHtmlScaffold", () => {
