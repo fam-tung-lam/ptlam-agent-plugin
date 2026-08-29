@@ -46,8 +46,6 @@ treeView-beta
             plugin.yml ## Authored catalog and provider selection
             skills/
                 ptlam-creating-skill/ ## Authored skill root
-                communication/
-                    <skill-id>/
                 engineering/
                     <skill-id>/
                 product-development/
