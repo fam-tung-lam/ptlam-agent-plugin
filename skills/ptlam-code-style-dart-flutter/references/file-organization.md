@@ -42,6 +42,8 @@ subfolder only when its first owned file appears.
 │       └── orders/                  # one business capability
 │           ├── orders.dart          # public feature export
 │           ├── application/
+│           │   ├── dtos/            # wire, storage, and plugin shapes
+│           │   │   └── order_response_dto.dart
 │           │   ├── ports/           # repository and outbound contracts
 │           │   │   └── orders_repository.dart
 │           │   └── use_cases/       # one application operation per file
@@ -57,10 +59,8 @@ subfolder only when its first owned file appears.
 │           │   │   └── cached_orders_repository.dart
 │           │   ├── clients/         # remote API mechanics
 │           │   │   └── orders_api_client.dart
-│           │   ├── data_sources/    # storage and platform-plugin mechanics
-│           │   │   └── orders_local_data_source.dart
-│           │   └── dtos/            # wire, storage, and plugin shapes
-│           │       └── order_response_dto.dart
+│           │   └── data_sources/    # storage and platform-plugin mechanics
+│           │       └── orders_local_data_source.dart
 │           └── presentation/
 │               ├── bloc/            # BLoCs, Cubits, events, and states
 │               │   ├── orders_bloc.dart
@@ -98,6 +98,7 @@ export; it adds its translation catalogs under `localization/i18n/`.
 | Path                           | Owns                                                         |
 | ------------------------------ | ------------------------------------------------------------ |
 | `<feature>.dart`               | The capability's deliberate public exports                   |
+| `application/dtos/`            | Wire, storage, and plugin shapes without SDK dependencies    |
 | `application/ports/`           | Repository and outbound contracts consumed by use cases      |
 | `application/use_cases/`       | One transport-neutral application operation per file         |
 | `domain/entities/`             | Domain values with identity                                  |
@@ -106,7 +107,6 @@ export; it adds its translation catalogs under `localization/i18n/`.
 | `infrastructure/adapters/`     | Implementations of application ports                         |
 | `infrastructure/clients/`      | Remote API clients with no product policy                    |
 | `infrastructure/data_sources/` | Storage and platform-plugin access                           |
-| `infrastructure/dtos/`         | Wire, storage, and plugin-owned shapes                       |
 | `presentation/bloc/`           | BLoCs, Cubits, events, and states                            |
 | `presentation/pages/`          | Route-level pages that provide or observe state holders      |
 | `presentation/widgets/`        | Feature widgets and UI effects                               |
@@ -130,6 +130,7 @@ surface, and `src/` is private.
 | Adding                                       | Put it in                                               |
 | -------------------------------------------- | ------------------------------------------------------- |
 | A BLoC or Cubit                              | `features/<name>/presentation/bloc/`                    |
+| A wire, storage, or plugin DTO               | `features/<name>/application/dtos/`                     |
 | A repository or outbound contract            | `features/<name>/application/ports/`                    |
 | A use case                                   | `features/<name>/application/use_cases/`                |
 | A domain entity                              | `features/<name>/domain/entities/`                      |
@@ -138,7 +139,6 @@ surface, and `src/` is private.
 | A repository or platform-port implementation | `features/<name>/infrastructure/adapters/`              |
 | A remote API client                          | `features/<name>/infrastructure/clients/`               |
 | A storage or platform data source            | `features/<name>/infrastructure/data_sources/`          |
-| A wire, storage, or plugin DTO               | `features/<name>/infrastructure/dtos/`                  |
 | The feature's route-level page               | `features/<name>/presentation/pages/`                   |
 | A logical widget used by that page           | `features/<name>/presentation/widgets/`                 |
 | A widget two features render                 | `packages/<project_name>_design_system/src/components/` |

@@ -42,12 +42,12 @@ mechanics.
 
 ## Make dependencies point inward
 
-| Layer             | Owns                                                               | May depend on                                  | Never touches                                   |
-| ----------------- | ------------------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------- |
-| `presentation/`   | Pages, widgets, routes, UI effects, BLoCs, and Cubits              | Application use cases and domain values        | Ports, repositories, data sources, Dio, plugins |
-| `application/`    | Use cases and ports                                                | Domain types                                   | Widgets, `BuildContext`, HTTP or storage APIs   |
-| `domain/`         | Entities, value objects, business rules, and stable failures       | Nothing outside the domain                     | Flutter, application, persistence, or plugins   |
-| `infrastructure/` | Port implementations, DTOs, clients, data sources, and SDK bridges | Application ports, domain types, external APIs | Presentation or application orchestration       |
+| Layer             | Owns                                                         | May depend on                                           | Never touches                                   |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------- | ----------------------------------------------- |
+| `presentation/`   | Pages, widgets, routes, UI effects, BLoCs, and Cubits        | Application use cases and domain values                 | Ports, repositories, data sources, Dio, plugins |
+| `application/`    | DTOs, use cases, and ports                                   | Domain types and serialization annotations              | Widgets, `BuildContext`, HTTP or storage APIs   |
+| `domain/`         | Entities, value objects, business rules, and stable failures | Nothing outside the domain                              | Flutter, application, persistence, or plugins   |
+| `infrastructure/` | Port implementations, clients, data sources, and SDK bridges | Application DTOs and ports, domain types, external APIs | Presentation or application orchestration       |
 
 Widgets dispatch intent to one state holder. The state holder calls use cases,
 and use cases depend on application ports. Infrastructure adapters implement

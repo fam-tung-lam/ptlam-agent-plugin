@@ -8,6 +8,9 @@ and reorganize only files owned by the requested change.
 Keep a small application flat until a second business capability makes feature
 directories useful. Add a directory when its first owned file appears.
 
+Keep the feature's `dtos/` folder under `application/`, never under
+`infrastructure/`.
+
 ```text
 project/
 ├── src/

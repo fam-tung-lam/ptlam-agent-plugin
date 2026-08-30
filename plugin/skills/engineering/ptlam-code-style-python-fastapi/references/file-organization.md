@@ -11,6 +11,9 @@ packages useful. Once a capability owns a feature package, put its code under
 `application/`, `domain/`, `infrastructure/`, or `presentation/`. Create a
 package when its first owned file appears.
 
+Keep the feature's `dtos/` folder under `application/`, never under
+`infrastructure/`.
+
 ## The project tree
 
 ```text

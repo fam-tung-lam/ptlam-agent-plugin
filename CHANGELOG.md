@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Placed DTOs in `application/dtos/` across the layout, architecture,
+  model, and networking guidance.
+
 ## [0.4.0] - 2026-08-30
 
 ### Added

@@ -12,10 +12,6 @@ A client exposes one method per endpoint, takes and returns DTOs, and holds no
 business rules. Put cross-cutting headers, token refresh, retry, and request
 logging in interceptors so endpoint methods do not repeat them.
 
-Put a feature-owned client under `<feature>/infrastructure/clients/` and its
-wire DTOs under `<feature>/infrastructure/dtos/`. Keep only a client or SDK
-facade with several feature consumers under `lib/integrations/`.
-
 Set connect, send, and receive timeouts explicitly. Accept a `CancelToken` on
 any request whose caller can leave, and let that caller cancel through its own
 lifecycle.

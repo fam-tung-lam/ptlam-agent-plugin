@@ -12,13 +12,6 @@ Keep them separate from the first version. Flutter is stricter here than the
 general rule of splitting once the shapes disagree: a vendor owns the wire shape
 and can change it in a release you do not control.
 
-A feature DTO lives in `features/<name>/infrastructure/dtos/`; the entity
-travels through application and presentation code. Put entities, failures, and
-value objects in their folders under `features/<name>/domain/`. Map between them
-in an infrastructure adapter or data source, never in application or
-presentation code. That mapping is the only place that knows the API sends
-`"created_ts"` as an epoch integer.
-
 ## Generate the JSON, write the meaning
 
 Annotate DTOs with [`json_annotation`](https://pub.dev/packages/json_annotation)
