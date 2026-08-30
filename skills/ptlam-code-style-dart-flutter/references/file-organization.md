@@ -140,7 +140,8 @@ surface, and `src/` is private.
 | A remote API client                          | `features/<name>/infrastructure/clients/`               |
 | A storage or platform data source            | `features/<name>/infrastructure/data_sources/`          |
 | The feature's route-level page               | `features/<name>/presentation/pages/`                   |
-| A logical widget used by that page           | `features/<name>/presentation/widgets/`                 |
+| A private widget used only by one owner      | The owning widget's file                                |
+| A public component widget                    | `features/<name>/presentation/widgets/`                 |
 | A widget two features render                 | `packages/<project_name>_design_system/src/components/` |
 | Something two features really share          | `lib/shared/`                                           |
 | A shared client or SDK facade                | `lib/integrations/`                                     |
@@ -149,10 +150,10 @@ surface, and `src/` is private.
 what might be shared later. Keep shared external-system setup in
 `integrations/`; keep feature mapping and policy in the owning feature.
 
-Keep a helper or constant beside its only consumer. When a second file in the
-same layer needs it, create a narrowly named folder inside that layer. Never add
-feature-root `utils/`, `helpers/`, `models/`, or `constants/` buckets. Prefer
-one public class per file, named after the file.
+Keep a helper or constant in its only consumer's file. When another file in the
+same layer needs it, give it a narrowly named file there; add a folder only for
+a real grouping. Never add feature-root `utils/`, `helpers/`, `models/`, or
+`constants/` buckets.
 
 ## Suffix a class with its role
 

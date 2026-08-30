@@ -17,7 +17,7 @@ argues about it.
 A Dart constant is `lowerCamelCase`, never `SCREAMING_CAPS`. Privacy is a
 leading underscore scoped to the library, not the class.
 
-Name a file after the single public declaration it holds, in snake case.
+Name an implementation file after the API it owns, in snake case.
 `OrdersRepository` lives in `orders_repository.dart`.
 
 ## The formatter owns whitespace
@@ -54,5 +54,5 @@ splits to survive.
 ## Finish
 
 Finish when every new declaration matches the case for its kind, each file is
-named after its one public declaration, and
+named after its owning API, and
 `dart format --output=none --set-exit-if-changed .` reports no difference.

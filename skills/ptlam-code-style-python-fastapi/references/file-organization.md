@@ -154,14 +154,19 @@ through an application port.
 
 ## Keep optional folders narrow
 
-Keep a helper or constant beside its only consumer. When a second file in the
-same layer needs it, create a narrowly named folder inside that layer. Never add
-feature-root `utils/`, `helpers/`, `models/`, or `constants/` buckets that hide
-layer ownership.
+Keep a helper or constant in its only consumer's file. When another file in the
+same layer needs it, give it a narrowly named module there; add a package only
+for a real grouping. Never add feature-root `utils/`, `helpers/`, `models/`, or
+`constants/` buckets that hide layer ownership.
 
-Prefer one concept per file. Do not add `helpers.py`, `misc.py`, `common.py`, or
-`general.py`, and do not shadow standard-library modules such as `types.py`,
-`logging.py`, `email.py`, `secrets.py`, `queue.py`, `json.py`, or `datetime.py`.
+The tree's `controller.py` may own related handlers on one `APIRouter`;
+[routes.md](routes.md) owns splitting independent HTTP resources. Keep `di.py`
+as provider composition, with use-case and adapter implementations in their
+layer files.
+
+Do not add `helpers.py`, `misc.py`, `common.py`, or `general.py`, and do not
+shadow standard-library modules such as `types.py`, `logging.py`, `email.py`,
+`secrets.py`, `queue.py`, `json.py`, or `datetime.py`.
 
 Finish when the service has one importable package, each feature publishes one
 facade, every feature implementation file apart from `__init__.py` and `di.py`

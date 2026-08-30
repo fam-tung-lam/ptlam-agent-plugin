@@ -21,6 +21,28 @@ called reconciliation. Every gap between the spoken word and the written one is
 paid again in every conversation, review, and incident. When the domain renames
 a concept, rename the code in a change of its own.
 
+## Give each independently used API a file
+
+Prefer a separate file for each class, component, or top-level operation callers
+use independently, even when the file holds only one small declaration. An API
+here includes a surface consumed by other files inside the same package; it need
+not be published outside that package.
+
+Name the file after that API so a folder listing reveals available behavior
+without opening its implementations.
+
+Keep a class's methods, tightly coupled contract types, and private helpers used
+only by that API together. Several declarations may share a file when they form
+one cohesive API; a shared topic alone does not make separate APIs one unit.
+
+A thin export or index facade may publish several APIs while their
+implementations remain in separate files.
+
+Split an oversized implementation along named subresponsibilities a reader can
+follow. Do not extract every method, add wrapper abstractions, or widen private
+access just to meet a file, symbol, or line-count quota. Preserve
+language-required declaration relationships and generator-owned layouts.
+
 ## Leave one obvious front door
 
 Someone new should find the entry point and follow the main flow outward without
@@ -29,10 +51,10 @@ screen.
 
 ## Keep each listing readable at its own level
 
-A folder is a table of contents. Aim for about five to nine meaningful entries
-per level, each named after what it holds. Add a folder when its first real file
-needs it. An empty layer tree invites files that do not belong, and a folder
-holding one file is a rename waiting to happen.
+A folder is a table of contents, with each entry named after what it holds. Add
+a folder when a real responsibility needs it, not to reduce the visible file
+count. An empty layer tree invites files that do not belong. A folder holding
+one file needs a domain or framework reason beyond satisfying a layout pattern.
 
 ## Match nesting to conceptual depth
 
@@ -65,6 +87,6 @@ it.
 
 ## Finish
 
-Finish when the top level names the domain, every new file sits with what it
-changes with, each listing reads at its own level, and a capability can be
-removed by deleting its folder and its registration.
+Finish when the top level names the domain, independently used APIs are
+discoverable by file, each listing reads at its own level, and a capability can
+be removed by deleting its folder and its registration.

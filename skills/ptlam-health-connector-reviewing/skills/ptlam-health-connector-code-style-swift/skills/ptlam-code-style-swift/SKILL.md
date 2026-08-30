@@ -59,7 +59,7 @@ working toolchain until replacing it is part of the task.
 | Creating or changing the manifest, a target, or a dependency     | [package-manifest.md](references/package-manifest.md)   |
 | Configuring SwiftFormat, or fixing a formatting failure          | [swiftformat.md](references/swiftformat.md)             |
 | Configuring SwiftLint, reading its baseline, or silencing a rule | [swiftlint.md](references/swiftlint.md)                 |
-| Naming a declaration, or choosing its access level               | [naming-and-access.md](references/naming-and-access.md) |
+| Naming symbols or files, splitting files, or choosing access     | [naming-and-access.md](references/naming-and-access.md) |
 | Choosing struct, class, enum, or actor, or designing a protocol  | [types.md](references/types.md)                         |
 | Reading, binding, or defaulting an optional                      | [optionals.md](references/optionals.md)                 |
 | Throwing, catching, or converting an error                       | [errors.md](references/errors.md)                       |
