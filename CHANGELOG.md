@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-30
+
 ### Added
 
 - Added an architecture skill that answers one system-level question with a
@@ -192,7 +194,9 @@ and this project adheres to
   compatible hosts.
 
 [Unreleased]:
-  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.3.0...HEAD
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.4.0...HEAD
+[0.4.0]:
+  https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.3.0...v0.4.0
 [0.3.0]:
   https://github.com/fam-tung-lam/ptlam-agent-plugin/compare/v0.2.0...v0.3.0
 [0.2.0]:
