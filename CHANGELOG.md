@@ -8,10 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Clarified file boundaries across code-style skills: give independently used
+  APIs small, discoverable files while keeping cohesive declarations and private
+  helpers with their owner. Flutter now explicitly separates public widgets, and
+  language and framework guidance preserves privacy and composition.
+
 ### Fixed
 
-- Placed DTOs in `application/dtos/` across the layout, architecture,
-  model, and networking guidance.
+- Placed DTOs in `application/dtos/` across the layout, architecture, model, and
+  networking guidance.
 
 ## [0.4.0] - 2026-08-30
 

@@ -25,6 +25,11 @@ consumes.
 | `providers`   | Providers built in this module's container scope    |
 | `exports`     | The deliberate public surface for importing modules |
 
+Nest's `exports` list publishes injection contracts, not TypeScript file
+exports. A module file may register and export several providers while their
+implementations stay in separate use-case, adapter, or client files. Keep
+controller methods with their controller, not in the module's assembly file.
+
 Import the owning module instead of registering its service again. Duplicate
 registration creates a second instance and bypasses the module's configuration.
 Keep global modules rare; explicit imports make dependencies and tests visible.

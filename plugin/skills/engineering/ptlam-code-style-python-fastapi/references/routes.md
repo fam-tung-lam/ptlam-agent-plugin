@@ -5,11 +5,17 @@ and OpenAPI metadata.
 
 ## Compose the URL once
 
-Give each feature one `APIRouter` in `presentation/http/controller.py`. Split it
-into `presentation/http/v1.py`, `v2.py`, and later versions only when a second
-public version exists. Declare each shared prefix and tag either on that router
-or where a parent includes it, never at both levels. Attach the API version once
-near the application boundary.
+Start a feature's cohesive HTTP surface with one `APIRouter` in
+`presentation/http/controller.py`. Related handlers may stay together; split
+independently owned resources into named router modules and compose them with
+`include_router`. The feature HTTP router may assemble those routers without
+holding their handlers. Do not create one file for every endpoint merely to
+count fewer functions.
+
+Add `presentation/http/v1.py`, `v2.py`, and later version composition only when
+a second public version exists. Declare each shared prefix and tag either on a
+router or where its parent includes it, never at both levels. Attach the API
+version once near the application boundary.
 
 For the root operation of an already-prefixed router, use `""` unless the
 contract intentionally includes a trailing slash. Test canonical paths with

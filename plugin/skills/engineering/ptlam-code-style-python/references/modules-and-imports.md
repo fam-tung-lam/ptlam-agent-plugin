@@ -18,6 +18,10 @@ project's mechanism, or treat its removal as a breaking change. Keep
 `__init__.py` about package composition; importing the package must not start
 services, read remote state, or do expensive work.
 
+When splitting an implementation module, preserve supported import paths with
+explicit re-exports. Keep `_` helpers out of those facades and `__all__`; moving
+code does not make its implementation part of the package contract.
+
 ## Keep imports directional
 
 - Let the formatter or import sorter own grouping and order.
