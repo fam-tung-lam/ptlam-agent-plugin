@@ -51,6 +51,13 @@ from another module and a `public` method cannot be overridden there; only
 Prefer `private` over `fileprivate`. SwiftLint's `private_over_fileprivate`
 flags the redundant case and `strict_fileprivate` flags every use.
 
+## Preserve access when separating files
+
+Name a type's file `<Type>.swift`, such as `OrdersRepository.swift`. Keep
+extensions that need its `private` members in that file. A conformance may move
+to `<Type>+<Protocol>.swift` when the existing access permits it and the split
+helps navigation. Do not widen access just to move the conformance or a helper.
+
 ## Close a class unless something extends it
 
 Mark every class `final` unless a subclass already exists in the codebase.

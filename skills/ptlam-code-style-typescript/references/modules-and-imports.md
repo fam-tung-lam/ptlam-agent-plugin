@@ -12,6 +12,11 @@ outside it is internal, even when a consumer can reach it by path. Declare each
 supported entry point explicitly, with its type declarations, and add `files` so
 the tarball carries only what the entry points need.
 
+A source-file `export` lets another file import a declaration; it does not add a
+package entry point. Use it for an API shared inside the package without adding
+that implementation file to `package.json` exports. Keep helpers used only by
+the declaring file unexported.
+
 ```json
 {
   "exports": {

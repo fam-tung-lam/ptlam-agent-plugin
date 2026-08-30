@@ -24,8 +24,9 @@ install, update, security, licensing, and removal costs add.
 
 - Put new behavior at the boundary already responsible for it.
 - Fix a shared cause once when every affected caller already reaches that owner.
-- Keep one coherent responsibility together even when splitting it would make a
-  file or a diff shorter.
+- Keep one coherent responsibility under one owner. Use
+  [structure.md](structure.md) for file boundaries; a separate source file does
+  not require another abstraction.
 - Defer speculative behavior until a confirmed contract requires it.
 - Prefer direct, established code over clever compression or indirection.
 - Add an abstraction only for a demonstrated variation. Apply the evolution

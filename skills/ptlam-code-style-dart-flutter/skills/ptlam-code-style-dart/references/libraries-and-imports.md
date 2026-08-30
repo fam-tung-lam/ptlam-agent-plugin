@@ -19,6 +19,11 @@ Underscore privacy is library-scoped, not class-scoped: every declaration in the
 same file, including its parts, can read a `_private` member of any other
 declaration in that file.
 
+Keep `_` helpers with their owning library. Moving them into an imported file
+changes that privacy boundary; do not remove the underscore just to split a
+file. Keep a sealed root and its direct subtypes in the same library, including
+any parts required by the existing generator.
+
 ## Publish through one entry-point library
 
 Give the package one `lib/<package_name>.dart` that re-exports the supported

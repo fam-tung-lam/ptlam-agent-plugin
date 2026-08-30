@@ -9,8 +9,15 @@ Extract a subtree into its own widget class, never into a
 its own; a build method rebuilds whenever its host does and can never be
 `const`.
 
+Give each logical part of a page its own widget. Put each public widget in its
+own file, even when it is small. Keep its private `State` class and private
+widgets or helpers used only by that widget in the same file. Extracting a
+subtree into a private widget does not require a new file.
+
 `presentation/pages/` holds route-level pages; `presentation/widgets/` holds
-their component widgets. Give each logical part of a page its own widget.
+public component widgets. For example, `OrderCard` belongs in `order_card.dart`,
+while its `_OrderPrice` widget may stay beside it. A second public widget gets
+its own file, rather than joining `order_card.dart`.
 
 Start every widget as a `StatelessWidget`. Promote to `StatefulWidget` only for
 state the widget itself owns across a rebuild: a controller, an animation, a

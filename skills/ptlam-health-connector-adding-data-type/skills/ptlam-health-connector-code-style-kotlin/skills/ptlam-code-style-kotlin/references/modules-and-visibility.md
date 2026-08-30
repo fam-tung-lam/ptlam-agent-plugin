@@ -16,8 +16,9 @@ and record that reason where the rule is disabled. [ktlint.md](ktlint.md) and
 
 - A file with one top-level type takes that type's name.
   `ktlint_standard_filename` enforces it.
-- A file holding several small related declarations, such as a set of conversion
-  extensions, takes the name of the responsibility they share.
+- Conversion extensions that form one mapping API may share a file named after
+  that mapping. Independent mappings get separate files even when each is small;
+  a shared receiver type alone is not a grouping rule.
 - Prefer a top-level function or extension over a class that exists only to hold
   functions. Kotlin has no reason for a holder type, and the holder attracts
   unrelated code.
@@ -43,6 +44,9 @@ the modifier, and that is exactly why it gets forgotten.
 The module's own `src/test/kotlin` source set sees its `internal` declarations.
 Never widen a declaration to `public` so a unit test can reach it.
 
+Top-level `private` declarations are file-scoped. Keep helpers with their only
+owner rather than making them `internal` just to move them to another file.
+
 ## Keep constants where their scope is
 
 Use `private const val` at file scope for a compile-time constant one file uses,
@@ -52,4 +56,4 @@ of the same problem.
 
 Finish when every declaration you added states the narrowest visibility its real
 consumers allow, no test forced a widening, and each new file is named after the
-one thing it holds.
+API it owns.
