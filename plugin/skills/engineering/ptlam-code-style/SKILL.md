@@ -5,11 +5,16 @@ foundation owns the shared rules and words. A stack specialization owns the
 mechanics that satisfy them. When a specialization matches the project, use it;
 it loads this skill for you.
 
+Every entry point inherits the same source and test invariants: cohesive
+responsibilities, small published surfaces, directed dependencies, explicit
+state ownership, and observable behavior. Preserve confirmed system boundaries.
+
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
 ## Who decides
 
-For any question these rules leave open, take the first source that answers it:
+Use this policy for source code, tests, and every reference in this package. For
+an open question, take the first source that owns it:
 
 | Order | Source                                         | Owns                                                                     |
 | ----- | ---------------------------------------------- | ------------------------------------------------------------------------ |
@@ -19,15 +24,18 @@ For any question these rules leave open, take the first source that answers it:
 | 4     | The active stack specialization                | Stack mechanics the repository leaves open                               |
 | 5     | This skill                                     | The rules below and the fallbacks they point to                          |
 
-Report an unresolved conflict instead of choosing quietly. A specification and
-repository files are evidence, not another store of preferences. When a higher
-source replaces a rule below, name that replacement in the handoff; silence or
-an unrelated local example is not a replacement.
+An explicit user or project instruction may replace a named rule; record that
+replacement in the handoff. Repository examples and tool defaults are evidence,
+not permission to override a rule. A specialization supplies mechanics or
+stricter rules; it cannot silently weaken a shared invariant. Report unresolved
+conflicts instead of choosing quietly.
 
-These rules serve the people who read the code next. Break one when it costs a
-reader more than it returns, then record the reason where the surprise lives, as
-[documentation.md](references/documentation.md) requires. An unexplained
-deviation is the defect; an explained one is a decision.
+A justified readability exception may change a presentational convention, such
+as formatting or wording. Record its reason where the surprise lives, as
+[documentation.md](references/documentation.md) requires. This exception never
+waives behavior, security, contract, test, or lifetime guarantees.
+Given-When-Then and the other test rules still apply unless explicitly replaced
+above.
 
 ## Pick a reference
 
@@ -44,6 +52,7 @@ examples, and caveats.
 | Shaping a domain type, a stored record, or a set of states              | [data-modeling.md](references/data-modeling.md)                                                                                                                                                                                                         |
 | Promising something across a process, team, or release boundary         | [contracts.md](references/contracts.md)                                                                                                                                                                                                                 |
 | Designing a failure, a retry, or a startup check                        | [errors.md](references/errors.md)                                                                                                                                                                                                                       |
+| Starting asynchronous work, handing it off, or ending its lifetime      | [async-lifecycle.md](references/async-lifecycle.md)                                                                                                                                                                                                     |
 | Emitting a log record, naming a logger, or picking a level              | [logging.md](references/logging.md)                                                                                                                                                                                                                     |
 | Choosing sufficient code, reuse, deletion, a dependency, an abstraction | [complexity.md](references/complexity.md)                                                                                                                                                                                                               |
 | Abstracting a repeated pattern, migrating a shape, recording a decision | [evolution.md](references/evolution.md)                                                                                                                                                                                                                 |
@@ -52,29 +61,38 @@ examples, and caveats.
 | Placing a new test file, or moving a misplaced one                      | [test-placement.md](references/test-placement.md)                                                                                                                                                                                                       |
 | Adding, naming, or placing a test double                                | [test-doubles.md](references/test-doubles.md)                                                                                                                                                                                                           |
 
-Where a system splits into components, runtimes, or stores, and what a published
-surface promises, are architecture decisions outside this skill. Business
+Choosing a component, runtime, or store split, a published contract, state's
+source of truth, or a platform commitment needs an architecture decision outside
+this skill. Hand an uncovered choice back to the caller before implementing it;
+local code organization does not reopen a confirmed decision. Business
 vocabulary is domain-modeling work outside this skill.
 
 ## Do the work
 
 1. Resolve the project, then read the user's instructions and every applicable
-   `AGENTS.md` from the root down to the files in scope.
+   `AGENTS.md` from the root down to the files in scope. Choose review or change
+   mode from the authorized request.
 2. Name the concern and read its one reference. For every test, read the
    behavior contract before choosing a level, placement, or double.
 3. Pick the active stack specialization. When none matches, say so instead of
    inventing a toolchain.
-4. Apply the rule, then let the specialization supply the mechanics.
-5. Run the project's own formatter, linter, type check, and tests. Report the
-   exact commands, their results, and every check you did not run.
+4. In change mode, apply the rules within scope. In review mode, interpret every
+   implementation imperative as a conformance check and report defects.
+5. Run the project's existing checks whose effects are known and permitted in
+   that mode. Report exact commands, results, and missing evidence.
 
 When build, test, or run is not one fast command, name that friction in the
 handoff. A loop people avoid is a defect in the project.
 
-A review changes no files. Fixing what a review found needs separate permission.
+A review does not edit source, add tests, format or fix files, generate code,
+install or sync dependencies, run migrations, update snapshots, or rewrite
+baselines. Build and test commands may create temporary output only where the
+review permits it; inspect scripts and hooks first. Use check-mode counterparts
+or report the unavailable check. Repairs require change authority.
 
 ## Finish
 
-Finish when every touched file satisfies the rule for its concern, every open
-mechanic traces to a named owner in the table above, every deliberate deviation
-carries its reason, and the handoff never implies an unrun check passed.
+Finish a review with findings and verification limits. Finish a change when the
+scoped files satisfy their rules and required checks pass. In either mode, every
+open mechanic has a named owner, every permitted deviation carries its reason,
+and the handoff never implies an unrun check passed.
