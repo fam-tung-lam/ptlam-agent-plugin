@@ -12,6 +12,9 @@ Pigeon ownership, domain capabilities, or end-to-end feature completeness.
 
 ## Apply the project conventions
 
+Choose review or change using the inherited mode policy. In review, inspect
+conformance and the Melos scripts' effects before running the existing checks.
+
 1. Find the changed Dart file and its package `analysis_options.yaml`. Confirm
    whether it is handwritten source, a part file, a test, or generated output.
    Leave generated `*.g.dart` alone.
@@ -31,7 +34,8 @@ Pigeon ownership, domain capabilities, or end-to-end feature completeness.
    melos run test:dart
    ```
 
-Run `melos run doc:generate` when public documentation changed.
+In change mode, run `melos run doc:generate` when public documentation changed.
+In review, inspect existing docs and report any missing generated-doc check.
 
 ## Finish
 

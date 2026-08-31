@@ -8,7 +8,11 @@ underneath.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, inspect
+migration setup and use the persistence reference's schema comparison; never
+generate or apply a revision to satisfy a review check.
 
 1. Resolve the service root and read every applicable `AGENTS.md`.
 2. Read `pyproject.toml`, the lockfile, and the application entry point. Note

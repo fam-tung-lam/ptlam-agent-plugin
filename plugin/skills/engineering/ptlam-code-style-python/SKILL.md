@@ -7,7 +7,11 @@ the standard.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, use
+installed tools without dependency sync, package builds, or installation. The
+toolchain reference gives the check-mode commands.
 
 1. Resolve the package root and read every applicable `AGENTS.md` from the
    repository root down to the files in scope.
@@ -49,10 +53,10 @@ replacing it is part of the task.
 4. Add or update behavior tests in the existing test home for the normal,
    boundary, and failure cases the change touches.
 5. Run checks narrow to broad: focused tests, configured checks on changed
-   files, then project-wide gates. Run the package build and the supported
-   version matrix when the change affects distribution or compatibility.
-6. For a distributed package, install the built artifact in a throwaway
-   environment and smoke-test the changed public imports.
+   files, then project-wide gates. In change mode, run the package build and
+   supported version matrix when distribution or compatibility is affected.
+6. In change mode, install a changed distributed package's built artifact in a
+   throwaway environment and smoke-test its changed public imports.
 
 Inspect the diff after any write-mode formatter or hook. Report the exact
 commands, their results, configured exclusions that affect confidence, and every
