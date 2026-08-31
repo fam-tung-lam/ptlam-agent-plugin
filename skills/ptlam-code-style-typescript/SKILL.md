@@ -25,8 +25,8 @@ only; the foundation owns the standard.
 **Instructions:** Read and apply ptlam-code-style first.
 Let it own precedence; complexity; source structure and boundaries;
 naming and readability; data modeling; contracts; failures;
-documentation; logging; the behavior contract; test levels; test
-placement; and test doubles.
+asynchronous lifetime; documentation; logging; the behavior contract;
+test levels; test placement; and test doubles.
 Use this skill only for TypeScript language, package, and tool
 mechanics.
 This specialization may be stricter than the foundation, never
@@ -34,7 +34,11 @@ looser.
 
 Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, use
+installed tools without dependency installation or package builds. The toolchain
+reference gives the check-mode commands.
 
 1. Resolve the package root and read every applicable `AGENTS.md` from the
    repository root down to the files in scope.
@@ -79,11 +83,11 @@ replacing it is part of the task.
 4. Add or update behavior tests in the existing test home for the normal,
    boundary, and failure cases the change touches.
 5. Run checks narrow to broad: focused tests, the type check, the formatter and
-   linter on changed files, then project-wide gates. Run the build when the
-   change affects distribution.
-6. For a published-package change, install the built artifact in a throwaway
-   project and import the changed entry points under every module system the
-   package declares.
+   linter on changed files, then project-wide gates. In change mode, run the
+   build when the change affects distribution.
+6. In change mode, install a changed published package's built artifact in a
+   throwaway project and import its changed entry points under every module
+   system the package declares.
 
 Inspect the diff after any write-mode formatter, linter fix, or hook. Report the
 exact commands, their results, configured exclusions that affect confidence, and

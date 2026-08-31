@@ -3,6 +3,10 @@
 How a Dart package declares which SDK and dependencies it runs on, and how a
 build reproduces that resolution.
 
+Resolution, dependency edits, and fix application below are change-mode work. In
+review, inspect the SDK, lockfile, and installed packages; report any unverified
+resolution instead of running `dart pub get`.
+
 ## The SDK constraint is a gate, not a note
 
 `environment: sdk:` in `pubspec.yaml` decides which SDKs may resolve the
@@ -61,6 +65,8 @@ diff. An automated fix that changes behavior is your change once you commit it.
 
 ## Finish
 
-Finish when `dart pub get --enforce-lockfile` succeeds, every import has a
-declared dependency, the lockfile's tracked state matches the package's kind,
-and the SDK constraint names the lowest version you really tested.
+Finish when every import has a declared dependency, the lockfile's tracked state
+matches the package's kind, and the SDK constraint names the lowest tested
+version. In change mode, verify resolution with
+`dart pub get --enforce-lockfile`; in review, report unavailable resolution
+evidence without installing packages.

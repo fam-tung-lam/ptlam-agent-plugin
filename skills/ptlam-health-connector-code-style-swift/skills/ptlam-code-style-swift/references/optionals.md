@@ -14,9 +14,12 @@ unsafe without touching the line.
 `force_cast` flags it, and `force_try` flags the `try!` form that the errors
 reference owns.
 
-An implicitly unwrapped optional `T!` is a force-unwrap on every read. Use it
-only for a property a framework assigns between allocation and first use, such
-as an Interface Builder outlet. Enable `implicitly_unwrapped_optional`.
+An implicitly unwrapped optional `T!` can be unwrapped implicitly when used as a
+non-optional value. Reserve it for a framework-managed property such as an
+Interface Builder outlet. Document and verify that the framework assigns a
+non-`nil` value before every use that requires unwrapping, across all supported
+creation paths. Enable `implicitly_unwrapped_optional`; any needed suppression
+must carry that lifecycle reason.
 
 ## Bind at the top, then run unindented
 
@@ -62,6 +65,7 @@ find the existing ones.
 
 ## Finish
 
-Finish when no code you touched contains `!`, `as!`, or `T!`, every optional is
-bound by `guard let` or `if let` before use, and no optional Boolean stands in
-for a named set of states.
+Finish when the scoped code has no explicit value force-unwrap or `as!`, and
+every remaining `T!` is framework-managed with the verified assignment lifecycle
+above. Other optional uses handle absence through binding, chaining, mapping, or
+a deliberate default, and no optional Boolean replaces a named set of states.

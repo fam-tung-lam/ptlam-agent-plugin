@@ -40,6 +40,9 @@ Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
 
 ## Apply the project conventions
 
+Choose review or change using the inherited mode policy. In review, inspect
+conformance and the Melos scripts' effects before running the existing checks.
+
 1. Find the changed Dart file and its package `analysis_options.yaml`. Confirm
    whether it is handwritten source, a part file, a test, or generated output.
    Leave generated `*.g.dart` alone.
@@ -59,7 +62,8 @@ Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
    melos run test:dart
    ```
 
-Run `melos run doc:generate` when public documentation changed.
+In change mode, run `melos run doc:generate` when public documentation changed.
+In review, inspect existing docs and report any missing generated-doc check.
 
 ## Finish
 

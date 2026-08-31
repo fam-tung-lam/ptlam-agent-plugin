@@ -32,7 +32,11 @@ This specialization may be stricter than Dart, never looser.
 
 Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, use the
+installed FVM SDK and existing generated output; report missing prerequisites
+instead of installing an SDK or running a generator.
 
 1. Resolve the Flutter version through FVM. Run Flutter as `fvm flutter …` and
    Dart as `fvm dart …`; never use a global SDK. Every Dart command named in
@@ -53,8 +57,8 @@ Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
 ## Shared toolchain
 
 [`build_runner`](https://pub.dev/packages/build_runner) runs every code
-generator. Configure the builders in the root `build.yaml`, then regenerate
-everything with:
+generator. In change mode, configure the builders in the root `build.yaml`, then
+regenerate everything with:
 
 ```bash
 fvm dart run build_runner build
@@ -64,9 +68,10 @@ Edit the source that owns a generated file; never hand-edit `*.g.dart`,
 `*.freezed.dart`, `*.mocks.dart`, route files, or `strings.g.dart`. Follow the
 repository's tracked-file policy for generated output.
 
-When a build fails, fix the first error before reading the rest. Rerun
+In change mode, fix the first build error before reading the rest. Rerun
 generation after changing any annotation or generator dependency, then run
-analysis.
+analysis. In review, inspect source and existing output; report generation that
+would be needed as missing verification.
 
 ## Pick a reference
 
@@ -94,7 +99,7 @@ analysis.
 | `use_build_context_synchronously` fires after an `await`             | [widgets.md](references/widgets.md)                                                                     |
 | `build_runner` fails, or generated output is missing                 | [Shared toolchain](#shared-toolchain), then the generator's owner                                       |
 | A generated route or `strings.g.dart` symbol is undefined            | [widgets.md](references/widgets.md) for routes, [localization.md](references/localization.md) for Slang |
-| Flutter or Dart SDK constraint mismatch                              | [Before the first edit](#before-the-first-edit)                                                         |
+| Flutter or Dart SDK constraint mismatch                              | [Before review or change](#before-review-or-change)                                                     |
 | `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md)                                                                     |
 
 ## Finish

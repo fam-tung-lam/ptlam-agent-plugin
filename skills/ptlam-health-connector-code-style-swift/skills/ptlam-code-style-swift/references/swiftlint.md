@@ -63,6 +63,11 @@ swiftlint analyze --strict --compile-commands compile_commands.json
 `swiftlint lint` silently runs none of them, so a package that lists analyzer
 rules and never calls `analyze` is not enforcing them.
 
+For review, prefer an existing compatible build log or compilation database.
+Creating one needs the build's effects to be permitted; otherwise report the
+analyzer gap. Use `swiftlint lint --strict --no-cache` for lint-only checks when
+cache writes are outside scope.
+
 ## Fail on warnings, and freeze old debt in a baseline
 
 `swiftlint lint --strict` turns every warning into an error. Use it in CI so
@@ -78,7 +83,8 @@ warnings cannot accumulate below the failure line.
 A baseline exists so new code is held to the full rule set while legacy code is
 scheduled. It may shrink and never grow. Rewriting it to absorb a violation you
 introduced turns the gate off without changing a line of configuration, so
-regenerate it only when the recorded count goes down.
+regenerate it only when the recorded count goes down. Baseline creation or
+regeneration is a change-mode operation, never a way to complete a review.
 
 ## Suppress one line, with its reason
 

@@ -6,14 +6,17 @@ specialization owns the doc-comment syntax and the tool that renders it.
 ## Document every public symbol
 
 A doc comment on a public symbol says what the caller gets, not how the code
-works. Cover:
+works. Document the caller semantics the name and signature do not express:
 
 - what it does, in the domain's words;
-- every parameter, including what an invalid one does;
+- parameter meaning, units, valid ranges, and what invalid input does;
 - what it returns, and what an empty or absent result means;
-- every error a caller can catch; and
+- expected rejections and other failures the caller must handle; and
 - any constraint the signature cannot express: ordering, lifetime, threading, or
   the cost of calling it.
+
+Do not restate an obvious parameter name or type just to fill a tag. Cover every
+caller obligation once, using the stack's documentation syntax.
 
 Add a short example only when the signature alone leaves the usage unclear. Skip
 the doc comment on an internal symbol whose name and signature already say

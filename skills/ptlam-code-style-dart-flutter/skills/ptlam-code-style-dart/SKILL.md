@@ -26,15 +26,19 @@ the foundation owns the standard they satisfy.
 **Instructions:** Read and apply ptlam-code-style first.
 Let it own precedence; complexity; source structure and boundaries;
 naming and readability; data modeling; contracts; failures;
-documentation; logging; the behavior contract; test levels; test
-placement; and test doubles.
+asynchronous lifetime; documentation; logging; the behavior contract;
+test levels; test placement; and test doubles.
 Use this skill only for Dart language, package, and tool mechanics.
 This specialization may be stricter than the foundation, never
 looser.
 
 Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, use the
+formatter check below and inspect installed dependency state without running pub
+resolution.
 
 1. Resolve the package root, then read every applicable `AGENTS.md` from the
    repository root down to the files in scope.
@@ -79,12 +83,13 @@ Read [ptlam-code-style](skills/ptlam-code-style/SKILL.md).
    ```bash
    dart test test/orders_test.dart
    dart analyze lib/orders.dart
-   dart format .
+   dart format --output=none --set-exit-if-changed .
    dart analyze
    dart test
    ```
 
-6. When you touched `pubspec.yaml`, rerun `dart pub get` and commit the pubspec
+6. In change mode, format the scoped files with `dart format` before checking.
+   When you touched `pubspec.yaml`, rerun `dart pub get` and commit the pubspec
    with its lockfile wherever the package tracks one.
 
 Inspect the diff after `dart format` or `dart fix --apply`; both rewrite files.

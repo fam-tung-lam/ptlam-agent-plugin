@@ -9,11 +9,16 @@ Find the axis the work really moves along, such as a new payment method, a new
 report, or a new locale, and make that one cheap. A structure tuned for a change
 nobody repeats charges rent on every change somebody does.
 
-## Wait for the third case before abstracting
+## Use the third case to test a repeated pattern
 
-Two similar blocks are a coincidence. The third shows the shape. A wrong
-abstraction costs far more than duplication, because duplication is visible and
-a load-bearing abstraction is not.
+For repeated implementation, waiting for a third case is a useful heuristic: it
+tests whether the apparent common shape survives another real use. Two similar
+blocks alone can hide different responsibilities. A wrong abstraction costs more
+than duplication because its callers become coupled.
+
+[complexity.md](complexity.md) owns whether an abstraction is justified. Case
+count is not a prerequisite for a required boundary, and a third copy is not
+permission to couple unrelated work.
 
 ## Spend deliberation on what you cannot undo
 
@@ -48,6 +53,6 @@ evaporates in about six months.
 
 ## Finish
 
-Finish when the frequent change is the cheap one, every new abstraction has a
-third case behind it, each migration ships in stages, and any constraining
+Finish when the frequent change is the cheap one, every new abstraction meets
+the complexity rule, each migration ships in stages, and any constraining
 decision is written down with its cause.

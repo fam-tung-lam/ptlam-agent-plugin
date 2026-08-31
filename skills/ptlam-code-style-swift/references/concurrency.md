@@ -54,8 +54,9 @@ declaration; the next reader cannot recover that from the code.
 - `withThrowingTaskGroup(of:)` handles a count known only at runtime.
   `group.addTask { }` starts each child; `for try await value in group` collects
   them.
-- `Task { }` is unstructured and outlives the function that created it. Keep the
-  handle, cancel it when the owner goes away, or do not create it.
+- `Task { }` is unstructured and can outlive the function that created it. Keep
+  its handle with the owner; await `value` to observe completion and any thrown
+  failure. Request cancellation when the owner's work ends before completion.
 - `Task.detached { }` also drops the actor context and the task-local values. It
   is rarely the right tool.
 
@@ -101,5 +102,5 @@ around the resume, or an `AsyncStream` instead of a continuation.
 
 Finish when the target compiles under its declared language mode with no
 concurrency diagnostic, every `@unchecked Sendable` names what makes it safe,
-every unstructured task has an owner that cancels it, and every continuation
-resumes exactly once on each path.
+every unstructured task's owner observes completion and handles cancellation,
+and every continuation resumes exactly once on each path.

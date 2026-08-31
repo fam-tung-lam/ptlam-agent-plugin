@@ -1,8 +1,8 @@
 # Universal Behavior Contract
 
-What a test must prove, whatever the language or runner. No repository
-convention, specialization, or tool document may remove these rules; they may
-only refine the mechanics underneath.
+What a test must prove, whatever the language or runner. The package's
+[precedence and exception policy](../SKILL.md#who-decides) governs these rules,
+including Given-When-Then; this reference adds no separate hierarchy.
 
 ## Every test must
 

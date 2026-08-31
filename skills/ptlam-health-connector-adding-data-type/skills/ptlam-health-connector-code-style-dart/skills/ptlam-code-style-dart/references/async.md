@@ -1,6 +1,6 @@
 # Dart Futures, Streams, and Isolates
 
-How Dart code hands off work, and who is responsible for stopping it.
+How Dart futures, streams, and isolates satisfy an owned asynchronous lifetime.
 
 Dart runs one isolate's code on one thread. Nothing else in that isolate runs
 while your function holds the turn, so any wait that is not an `await` stops the
@@ -20,10 +20,15 @@ then has nothing to await and no way to see it fail.
 
 ## Every `Future` gets an owner
 
-Await it, return it, or hand it to `unawaited` from `dart:async` with a comment
-saying why nobody waits. Enable `unawaited_futures` so a dropped future is a
-diagnostic, not a lost failure: an unawaited future that throws reaches the
-zone's error handler, far from the code that started it.
+Await the future, return it to its caller, or hand it to a supervisor that
+observes errors and owns completion and shutdown. `unawaited` from `dart:async`
+only marks intentional omission of `await`; it does not handle errors or supply
+an owner. Use it only after that supervision exists, and name the handoff where
+it is not obvious. Enable `unawaited_futures` to detect accidental omissions.
+
+Attach failure handling before a future can fail. An unhandled asynchronous
+error reaches the zone's error handler; a comment saying nobody waits does not
+make that a recovery path.
 
 Await independent work together:
 
@@ -31,13 +36,15 @@ Await independent work together:
 final results = await Future.wait([fetchOrders(), fetchCustomer()]);
 ```
 
-`Future.wait` starts every future at once and completes when all do. It surfaces
-the first error, so use it for work you would abandon together, not for calls
-whose failures need separate handling.
+`Future.wait` joins the supplied futures. By default it waits for all to settle
+and surfaces the first error, discarding later errors. Handle each future's
+failure separately when the contract needs every outcome.
 
-Bound anything that leaves the isolate with `.timeout(...)`, and give
-`onTimeout` a value or let it throw `TimeoutException`. A request with no
-timeout waits as long as the other side keeps the socket open.
+Bound external waits with `.timeout(...)`, and give `onTimeout` a value or let
+it throw `TimeoutException`. This ends the wait, not the source operation. An
+arbitrary `Future` has no cancellation method. Use the underlying API's
+cancellation when available; otherwise keep the continuing work supervised
+through bounded completion or handoff to a longer-lived owner.
 
 Prefer `return future;` to `return await future;` inside an `async` function
 when no surrounding `try` needs the result; `unnecessary_await_in_return`
@@ -89,7 +96,7 @@ synchronous socket read, freezes every other callback in that isolate.
 
 ## Finish
 
-Finish when every future is awaited, returned, or explicitly unawaited, every
-call leaving the isolate has a timeout, every subscription and controller is
-cancelled or closed by its owner, and no synchronous call holds the turn for
-long.
+Finish when each future is awaited, returned, or supervised, and `unawaited`
+never substitutes for failure handling. External waits are bounded without
+claiming the source work stopped, subscriptions and controllers are cancelled or
+closed by their owner, and no synchronous call holds the turn for long.

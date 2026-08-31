@@ -31,5 +31,6 @@ Use `/// @nodoc` for an exported internal helper that must satisfy documentation
 lints without appearing in generated docs.
 
 `comment_references` requires each `[Symbol]` to resolve. Dartdoc also treats
-broken links as errors. Run strict analysis after a rename and
-`melos run doc:generate` after a public documentation change.
+broken links as errors. Run strict analysis after a rename. In change mode, run
+`melos run doc:generate` after a public documentation change; in review, inspect
+the existing output and report any unverified rendering or links.

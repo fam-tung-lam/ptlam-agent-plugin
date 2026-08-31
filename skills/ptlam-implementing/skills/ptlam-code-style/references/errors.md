@@ -24,9 +24,14 @@ into a batch job, far from its cause.
 
 ## Separate an expected outcome from a bug
 
-"Card declined" is business flow. "Column missing" is an alarm. Mixing them
-teaches everyone to ignore both: the expected outcome belongs in the return
-type, the bug in the alert.
+"Card declined" is business flow. "Column missing" is a defect. Represent an
+expected rejection as a named, typed, stable outcome the caller can distinguish
+from a defect without parsing a message.
+
+Use one consistent reporting channel at each boundary. The language and boundary
+mechanics choose a return value, result type, or typed domain exception. A
+thrown business rejection does not become a program defect merely because it
+throws; translate it into the promised public outcome at the boundary.
 
 ## Never swallow a failure
 
@@ -48,6 +53,7 @@ data for hours. When an invariant is gone, stop instead of guessing.
 
 ## Finish
 
-Finish when every failure a caller can act on is named and typed, every remote
-call has a timeout and a retry budget, invalid configuration stops startup, and
+Finish when actionable failures are named and typed, expected rejections are
+distinct from defects, and each boundary uses its promised reporting channel.
+Remote waits and retries are bounded, invalid configuration stops startup, and
 no path discards a cause.

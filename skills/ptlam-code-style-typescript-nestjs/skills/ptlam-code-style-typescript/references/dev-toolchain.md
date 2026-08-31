@@ -14,6 +14,15 @@ Apply the complete stack to new projects. An existing repository's executable
 toolchain remains authoritative until its migration is in scope. Never introduce
 a competing capability owner.
 
+## Select the mode
+
+In review, invoke installed executables or verified check-mode package scripts:
+`tsc` with the project's no-emit configuration, `biome check` without `--write`,
+and existing tests. Do not run `npm ci`, `npm install`, package builds, or `npx`
+commands that can fetch tools. Report missing prerequisites or unavailable
+artifact checks. The setup, local fix loop, and CI environment provisioning
+below require change mode or separate provisioning permission.
+
 ## Establish the stack
 
 Pin the exact Node version in `.nvmrc` and declare the supported floor in the
@@ -93,7 +102,7 @@ gate that a bundler and a test run do not provide: a transpile-only pipeline
 strips types without checking them, so a passing test suite proves nothing about
 type errors.
 
-## Gate CI without mutation
+## Gate CI without rewriting project files
 
 Install from the lockfile, then run the same checked-in configuration:
 

@@ -65,11 +65,12 @@ An `.editorconfig` section for the same glob that sets `ktlint = disabled` does
 the same job for editors as well as the build. Use one of the two and say which
 in a comment; keeping both in step is manual work.
 
-## Run format before check
+## Select check or format by mode
 
-Run `./gradlew ktlintFormat`, read the resulting diff, then run
-`./gradlew ktlintCheck`. `ktlintFormat` rewrites sources, so an unreviewed run
-lands unrelated changes in your commit.
+In review, run the configured `./gradlew ktlintCheck` task without formatting.
+In change mode, run `./gradlew ktlintFormat`, read the resulting diff, then run
+`./gradlew ktlintCheck`. `ktlintFormat` rewrites sources, so scope it to the
+requested change.
 
 A ktlint failure names the file, the position, and the rule id. Fix the code
 against that rule id; reach for configuration only when the rule is wrong for

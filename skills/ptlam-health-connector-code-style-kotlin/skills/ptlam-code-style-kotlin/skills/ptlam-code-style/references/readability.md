@@ -39,8 +39,9 @@ context, make that context an argument.
 
 ## Let the tool own formatting
 
-The repository's formatter decides whitespace, wrapping, and quotes. Run it,
-take its output, and never spend a review comment on it.
+The repository's formatter decides whitespace, wrapping, and quotes. Verify with
+its check mode and apply its output only in change mode. Report a failed
+formatting check instead of debating whitespace in review.
 
 ## Match the code you are standing in
 

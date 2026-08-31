@@ -40,13 +40,15 @@ Read [ptlam-code-style-swift](skills/ptlam-code-style-swift/SKILL.md).
 
 ## Apply the project conventions
 
-1. Confirm the file is handwritten Swift under the package source tree. Leave
-   generated `*.g.swift` alone.
+1. Choose review or change mode under the inherited policy. Confirm the file is
+   handwritten Swift under the package source tree. Leave generated `*.g.swift`
+   alone.
 2. Apply the source conventions below. Read [Swift checks](references/checks.md)
    for configuration or a check failure, and
    [native logging](references/logging.md) for a log call.
-3. Make the smallest language-level fix. Do not move behavior between plugin,
-   client, service, registry, handler, or mapper layers to fix a style finding.
+3. In review, report conformance findings. In change mode, make the smallest
+   language-level fix. Do not move behavior between plugin, client, service,
+   registry, handler, or mapper layers to fix a style finding.
 4. Run from the monorepo root:
 
    ```bash

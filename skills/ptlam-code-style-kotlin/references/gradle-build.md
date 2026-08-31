@@ -57,11 +57,14 @@ Run `./gradlew`, never a locally installed Gradle, so every machine and CI job
 compiles with the version the repository pinned.
 
 ```shell
-./gradlew ktlintFormat
 ./gradlew ktlintCheck
 ./gradlew detekt
 ./gradlew tasks --group verification
 ```
+
+In review, inspect task dependencies and permitted outputs before invoking the
+wrapper; a check task can depend on generation or fetch missing tools.
+`ktlintFormat` and baseline generation belong to change mode only.
 
 The ktlint plugin registers `ktlintCheck` and `ktlintFormat`; the detekt plugin
 registers `detekt` and `detektBaseline`. The test task name comes from the JVM

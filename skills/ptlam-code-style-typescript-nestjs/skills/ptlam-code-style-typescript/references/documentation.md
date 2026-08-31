@@ -22,12 +22,10 @@ export function applyDiscount(total: Money, percentage: number): Money {
 }
 ```
 
-Write a `@param` line only when it adds what the name and type cannot: a unit, a
-range, an ownership rule, or a caller obligation. Drop the tag when it would
-only restate the parameter name.
-
-Document what a caller needs and cannot see: the failures it must handle, the
-values it must not pass, and the state it now owns.
+Use `@param name - description` for parameter documentation and `@returns` for
+the result. Keep TypeScript type annotations in the signature, not in the tags.
+Use `@throws` to describe a promised failure; the tag does not constrain what
+JavaScript can throw at runtime.
 
 Use `@deprecated` with the replacement and the release that removes it, so the
 comment tells a reader what to do rather than only that something is wrong.

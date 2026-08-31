@@ -15,6 +15,15 @@ pin compatible tool releases instead of raising the product's support floor. An
 existing repository's executable toolchain remains authoritative until its
 migration is in scope. Never introduce a competing capability owner.
 
+## Select the mode
+
+In review, use the existing environment's executables directly: `ruff check`,
+`ruff format --check`, the configured type checker, and existing tests. Do not
+use `uv sync` or plain `uv run`, which can sync the environment, or build and
+install a package. If the tools or permitted test outputs are unavailable,
+report the missing evidence. The setup, local fix loop, and CI environment
+provisioning below require change mode or separate provisioning permission.
+
 ## Establish the stack
 
 Declare the supported Python range in `pyproject.toml`. Put development tools in
@@ -71,7 +80,7 @@ Use pytest-mock's `mocker` fixture at external boundaries and patch the name the
 code under test resolves. Use `AsyncMock` only for an awaited contract. Coverage
 is evidence about exercised lines, not a replacement for behavioral assertions.
 
-## Gate CI without mutation
+## Gate CI without rewriting project files
 
 Run the same checked-in configuration in CI and reject stale dependency state:
 

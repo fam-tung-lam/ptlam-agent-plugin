@@ -73,6 +73,11 @@ test needs no extra setup; the test runs in its own task.
 
 ## Run them
 
+These commands can build targets, resolve dependencies, and execute package
+plugins or test setup. Apply the entry point's build/test effect check before
+running them in review mode. Missing coverage is a finding, not permission to
+add a test.
+
 | Command                                  | Runs                                            |
 | ---------------------------------------- | ----------------------------------------------- |
 | `swift test`                             | Every test target in the package                |
@@ -85,6 +90,7 @@ reports success.
 
 ## Finish
 
-Finish when the test target builds, the new tests fail for the broken behavior
-and pass for the implemented one, no test depends on another's ordering under
-parallel execution, and `swift test` passes for the whole package.
+For a change, finish when the test target builds, new tests distinguish broken
+from implemented behavior, tests remain independent under parallel execution,
+and `swift test` passes. For a review, report coverage findings and the results
+of permitted existing checks, naming every unavailable check.
