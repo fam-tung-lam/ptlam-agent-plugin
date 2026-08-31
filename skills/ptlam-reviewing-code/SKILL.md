@@ -24,8 +24,8 @@ request, approve, push, or merge.
 **Instructions:** Read and apply ptlam-code-style before judging source or tests.
 Let it own precedence; complexity; source structure and boundaries;
 naming and readability; data modeling; contracts; failures;
-documentation; logging; evolution; and test behavior, levels,
-placement, and doubles.
+asynchronous lifetime; documentation; logging; evolution; and test
+behavior, levels, placement, and doubles.
 Apply a matching stack specialization when one exists.
 Keep this skill's ownership of the review surface, intent, risk
 examination, finding gate, severity, verification limits, and

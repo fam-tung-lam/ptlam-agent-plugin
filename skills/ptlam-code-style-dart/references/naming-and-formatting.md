@@ -22,12 +22,12 @@ Name an implementation file after the API it owns, in snake case.
 
 ## The formatter owns whitespace
 
-Run it, take its output, and never spend a review comment on it:
+Use check mode for review; apply formatting only in change mode:
 
-```bash
-dart format .
-dart format --output=none --set-exit-if-changed .
-```
+| Mode                   | Command                                             |
+| ---------------------- | --------------------------------------------------- |
+| Review or verification | `dart format --output=none --set-exit-if-changed .` |
+| Change                 | `dart format <scoped-paths>`                        |
 
 The check form exits `1` when any file would change, which is what CI should
 run. `dart format` rewrites files even when the analyzer excludes them, so keep

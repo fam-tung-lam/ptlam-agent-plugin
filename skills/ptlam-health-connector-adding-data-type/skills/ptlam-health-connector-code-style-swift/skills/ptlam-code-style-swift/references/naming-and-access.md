@@ -58,9 +58,13 @@ extensions that need its `private` members in that file. A conformance may move
 to `<Type>+<Protocol>.swift` when the existing access permits it and the split
 helps navigation. Do not widen access just to move the conformance or a helper.
 
-## Close a class unless something extends it
+## Close a class unless subclassing is required or promised
 
-Mark every class `final` unless a subclass already exists in the codebase.
+Mark a class `final` unless it has a real subclass, a framework must subclass
+it, or the published contract promises subclassing to external consumers. That
+external promise does not require a subclass in this repository. Keep `open`
+limited to the classes and members the promise covers.
+
 `final` lets the compiler dispatch directly instead of through a vtable, and it
 tells the next reader that behavior cannot change under them.
 
@@ -81,4 +85,5 @@ which of the two the package uses, so set it once.
 
 Finish when every name you added follows the Swift casing and grammar rules,
 every declaration you touched sits at the narrowest level its consumers allow,
-and every class you added is `final` or has a subclass in this codebase.
+and every class you added is `final` or preserves required or promised
+subclassing, including the external-consumer contract above.

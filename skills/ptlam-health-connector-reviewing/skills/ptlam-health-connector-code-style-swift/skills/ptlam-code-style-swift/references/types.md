@@ -38,11 +38,11 @@ reference owns its rules.
 - Prefer `map`, `filter`, and `reduce` over building a result in a `var`
   accumulator, so the binding stays `let`.
 
-## Define a protocol for a seam that has two sides
+## Express a justified seam with a protocol
 
-Add a protocol when more than one real implementation exists, counting a test
-double as one. A protocol with a single conformer and no double is indirection
-without a seam.
+Use a protocol to spell an abstraction that the shared complexity rule
+justifies. Conformer count is not an admission rule, and adding a test double
+does not by itself justify introducing a protocol.
 
 - Use an `associatedtype` when the conformer chooses the type, and constrain it
   in the protocol rather than at every use site.
@@ -67,6 +67,5 @@ subclassing it, and extend a protocol instead of adding a base class.
 ## Finish
 
 Finish when each type you added is the least powerful one that carries its
-concept, every binding that is never reassigned is `let`, every protocol you
-added has at least two conformers, and no conformer silently loses to a protocol
-extension.
+concept, every binding that is never reassigned is `let`, every protocol serves
+a justified seam, and no conformer silently loses to a protocol extension.

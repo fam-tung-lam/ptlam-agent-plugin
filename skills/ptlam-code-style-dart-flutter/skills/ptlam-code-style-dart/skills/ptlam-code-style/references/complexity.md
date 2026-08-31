@@ -29,8 +29,11 @@ install, update, security, licensing, and removal costs add.
   not require another abstraction.
 - Defer speculative behavior until a confirmed contract requires it.
 - Prefer direct, established code over clever compression or indirection.
-- Add an abstraction only for a demonstrated variation. Apply the evolution
-  rules when repeated cases may justify one.
+- Add an abstraction for a verified responsibility or contract boundary, or
+  demonstrated variation. A boundary can be necessary with one implementation;
+  similar syntax or a test double alone does not establish the need.
+- Use [evolution.md](evolution.md) when deciding whether repeated implementation
+  has revealed a stable pattern to extract.
 
 A confirmed contract is the signal to add code. Adding system structure such as
 a runtime, a store, or a second platform is an architecture decision outside
@@ -41,13 +44,13 @@ this skill.
 A deletion, reuse, substitution, or abstraction change is acceptable only when
 the matching evidence supports it.
 
-| Decision                  | Required evidence                                                                                    |
-| ------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Delete code               | No reachable caller, registration, external contract, migration role, or required side effect        |
-| Reuse repository behavior | The same inputs, outputs, failures, lifecycle, and ownership                                         |
-| Use a library or platform | Supported runtimes and targets provide the needed semantics, edge cases, and fallback                |
-| Remove a dependency       | All call sites, targets, license duties, supply-chain needs, and lifecycle duties are covered        |
-| Add or remove abstraction | Present independent behavior, a required boundary, or demonstrated variation justifies the new shape |
+| Decision                  | Required evidence                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------- |
+| Delete code               | No reachable caller, registration, external contract, migration role, or required side effect     |
+| Reuse repository behavior | The same inputs, outputs, failures, lifecycle, and ownership                                      |
+| Use a library or platform | Supported runtimes and targets provide the needed semantics, edge cases, and fallback             |
+| Remove a dependency       | All call sites, targets, license duties, supply-chain needs, and lifecycle duties are covered     |
+| Add or remove abstraction | A verified responsibility or contract boundary, or demonstrated variation justifies the new shape |
 
 Trace callers, shared implementations, boundaries, tests, configuration, and
 generated owners before changing a responsibility. Account for reflection,
