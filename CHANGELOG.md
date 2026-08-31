@@ -14,6 +14,14 @@ and this project adheres to
   APIs small, discoverable files while keeping cohesive declarations and private
   helpers with their owner. Flutter now explicitly separates public widgets, and
   language and framework guidance preserves privacy and composition.
+- Unified code-style rules for precedence and exceptions, abstraction
+  boundaries, expected failures, asynchronous ownership, and public
+  documentation. Swift completion criteria now preserve supported framework and
+  inheritance cases.
+- Separated read-only review from formatting, dependency setup, generation, and
+  migration workflows. Git now accepts explicitly authorized local operations
+  from its caller, and FastAPI metadata checks assert schema contracts instead
+  of Python import structure.
 
 ### Fixed
 
