@@ -41,7 +41,7 @@ same file.
 Run `swiftformat --options` to print every option this installed version accepts
 before you add one. An unknown option fails the run with a suggestion.
 
-## Check in CI, write locally
+## Choose check or change mode
 
 | Command                          | Effect                                                    |
 | -------------------------------- | --------------------------------------------------------- |
@@ -50,8 +50,10 @@ before you add one. An unknown option fails the run with a suggestion.
 | `swiftformat --lenient --lint .` | Lists violations and exits zero                           |
 | `swiftformat --verbose .`        | Names each rule that fired, for diagnosing one file       |
 
-Use `--lint` in every verification job. A job that rewrites source cannot fail
-on unformatted code, because it fixed the evidence before checking it.
+Use `--lint` for review and verification, with `--cache ignore` when a cache
+write is outside scope. Add `--verbose` to that check for rule diagnostics;
+`--verbose` alone still formats files. Reserve rewriting for change mode, then
+inspect the diff before verification.
 
 ## Give a conflict to the formatter
 
