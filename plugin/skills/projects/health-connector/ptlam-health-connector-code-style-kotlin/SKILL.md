@@ -12,6 +12,9 @@ handler capabilities, failure translation, or end-to-end registration.
 
 ## Apply the project conventions
 
+Choose review or change using the inherited mode policy. In review, inspect
+conformance and the Melos scripts' effects before running the existing checks.
+
 1. Confirm the file is handwritten Kotlin under `src/main/kotlin` or
    `src/test/kotlin`. Leave generated `*.g.kt` alone.
 2. Apply [source conventions](references/source-conventions.md). Read

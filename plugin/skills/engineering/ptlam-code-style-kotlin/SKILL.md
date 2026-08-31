@@ -8,7 +8,11 @@ repository specialization owns everything above.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, inspect
+Gradle task dependencies before running check tasks; report a required generator
+or dependency installation instead of invoking it.
 
 1. Resolve the Gradle module that owns the files, then read every applicable
    `AGENTS.md` from the repository root down to those files.
@@ -58,9 +62,9 @@ keep its working toolchain until replacing it is part of the task.
    scope something owns.
 5. Add or update JUnit 5 tests in the module's test home for the normal,
    boundary, and failure cases the change touches.
-6. Run checks narrow to broad: the focused test class, then `ktlintFormat` and
-   `ktlintCheck`, then `detekt`, then the module's test task, then the module
-   build.
+6. Run checks narrow to broad: the focused test class, then `ktlintCheck`, then
+   `detekt`, then the module's test task. In change mode, run `ktlintFormat`
+   before checking and finish with the module build.
 
 Inspect the diff after `ktlintFormat` or any other write-mode task. Report the
 exact commands, their results, the lint exclusions that affect confidence, and

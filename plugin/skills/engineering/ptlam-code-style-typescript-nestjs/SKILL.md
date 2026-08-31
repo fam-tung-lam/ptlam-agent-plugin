@@ -7,7 +7,11 @@ Nest tests. This skill owns NestJS mechanics only.
 
 <!-- PLUGIN-COMPILER:REQUIRED-SKILLS -->
 
-## Before the first edit
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, inspect
+bootstrap and test setup before running existing checks; starting a Nest host
+can open resources or trigger external work.
 
 1. Resolve the application root and read every applicable `AGENTS.md`.
 2. Read `package.json`, the lockfile, the workspace and Nest CLI configuration
