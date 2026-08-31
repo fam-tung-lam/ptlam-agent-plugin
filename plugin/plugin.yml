@@ -384,8 +384,8 @@ skills:
           Read and apply ptlam-code-style before authoring source or tests.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; evolution; and test behavior, levels,
-          placement, and doubles.
+          asynchronous lifetime; documentation; logging; evolution; and test
+          behavior, levels, placement, and doubles.
           Apply a matching stack or project specialization when one exists.
           Keep this skill's ownership of task capture, team sizing,
           delegation, integration, review coordination, repair, and delivery.
@@ -458,8 +458,8 @@ skills:
           Read and apply ptlam-code-style before judging source or tests.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; evolution; and test behavior, levels,
-          placement, and doubles.
+          asynchronous lifetime; documentation; logging; evolution; and test
+          behavior, levels, placement, and doubles.
           Apply a matching stack specialization when one exists.
           Keep this skill's ownership of the review surface, intent, risk
           examination, finding gate, severity, verification limits, and
@@ -528,9 +528,10 @@ skills:
       workflows without disturbing unrelated work. Use when creating a commit,
       writing or revising a commit message, creating, using, or removing a
       worktree, deciding whether a repository write belongs in the current
-      checkout or a new linked worktree, or resolving an in-progress merge or
-      rebase conflict. Compose this skill from any workflow that needs
-      isolated branches, worktrees, or commits.
+      checkout or a new linked worktree, or resolving an in-progress merge,
+      rebase, or cherry-pick conflict. Compose this skill from an authorized
+      workflow for explicitly delegated local branches, worktrees, commits,
+      or cherry-picks into a dedicated integration branch.
     category_id: building
     visibility: public
     status: active
@@ -541,13 +542,13 @@ skills:
     description:
       Hold source and test code to one language-neutral standard for
       complexity, source structure, boundaries, naming, readability, domain
-      modeling, cross-boundary contracts, failure design, documentation,
-      logging, evolution, and testing. Use when no stack specialization
-      matches the project, and as the foundation every stack specialization
-      composes. Use ptlam-modeling-domain instead for business terms and
-      context boundaries, and ptlam-architecturing instead for a component,
-      runtime, or data-store split, a published surface, state ownership, or a
-      platform commitment.
+      modeling, cross-boundary contracts, failure design, asynchronous lifetime,
+      documentation, logging, evolution, and testing. Use when no stack
+      specialization matches the project, and as the foundation every stack
+      specialization composes. Use ptlam-modeling-domain instead for business
+      terms and context boundaries, and ptlam-architecturing instead for a
+      component, runtime, or data-store split, a published surface, state
+      ownership, or a platform commitment.
     category_id: conventions
     visibility: public
     status: active
@@ -575,8 +576,8 @@ skills:
           Read and apply ptlam-code-style first.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; the behavior contract; test levels; test
-          placement; and test doubles.
+          asynchronous lifetime; documentation; logging; the behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Dart language, package, and tool mechanics.
           This specialization may be stricter than the foundation, never
           looser.
@@ -603,8 +604,8 @@ skills:
           Read and apply ptlam-code-style first.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; the behavior contract; test levels; test
-          placement; and test doubles.
+          asynchronous lifetime; documentation; logging; the behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Kotlin language, module, and tool mechanics.
           This specialization may be stricter than the foundation, never
           looser.
@@ -632,8 +633,8 @@ skills:
           Read and apply ptlam-code-style first.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; the behavior contract; test levels; test
-          placement; and test doubles.
+          asynchronous lifetime; documentation; logging; the behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Swift language, package, and tool mechanics.
           This specialization may be stricter than the foundation, never
           looser.
@@ -685,8 +686,8 @@ skills:
           Read and apply ptlam-code-style first.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; the behavior contract; test levels; test
-          placement; and test doubles.
+          asynchronous lifetime; documentation; logging; the behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for Python language, library, and tool mechanics.
           This specialization may be stricter than the foundation, never
           looser.
@@ -742,8 +743,8 @@ skills:
           Read and apply ptlam-code-style first.
           Let it own precedence; complexity; source structure and boundaries;
           naming and readability; data modeling; contracts; failures;
-          documentation; logging; the behavior contract; test levels; test
-          placement; and test doubles.
+          asynchronous lifetime; documentation; logging; the behavior contract;
+          test levels; test placement; and test doubles.
           Use this skill only for TypeScript language, package, and tool
           mechanics.
           This specialization may be stricter than the foundation, never
