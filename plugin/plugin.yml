@@ -59,6 +59,11 @@ categories:
     name: Health Connector SDK
     description:
       Project-specific skills for the Health Connector Flutter plugin monorepo.
+  - id: project-ptlam-agent-os
+    name: PTLam Agent OS
+    description:
+      Project-specific skills for the PTLam Agent OS Flutter and NestJS
+      monorepos.
 
 skills:
   # --- Deciding -------------------------------------------------------------
@@ -1231,3 +1236,79 @@ skills:
           Use this skill only for Health Connector Swift source, access,
           declaration, logging-call, SwiftLint, and SwiftFormat conventions.
           This specialization may be stricter than Swift, never looser.
+
+  # --- PTLam Agent OS -------------------------------------------------------
+  - id: ptlam-agent-os-code-style-dart-flutter
+    description:
+      Write, review, and fix Flutter code in the PTLam Agent OS src/app
+      monorepo against its app, feature, and package kinds and their
+      dependency direction, the ptlam_agent_os_lints rule set and Melos
+      commands, feature registration and routing across packages, per-feature
+      localization ownership, the project's highest-level-first test order,
+      and its charter vocabulary and decision-record rules. Use when creating
+      an app, feature, or package there, placing a file, wiring a feature into
+      the app router or get_it, adding translations, choosing a test level, or
+      fixing a melos or workspace resolution failure. Compose this skill from
+      any PTLam Agent OS workflow that changes Dart files. Do not use for the
+      four feature layers, widgets, models, or Dart mechanics on their own, or
+      for another repository.
+    category_id: project-ptlam-agent-os
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-dart-flutter
+        reason:
+          Provides the four-layer feature structure, BLoC and widget rules,
+          models, networking, storage, localization, logging, documentation,
+          and Flutter test mechanics this monorepo's conventions build on.
+        instructions: |-
+          Read and apply ptlam-code-style-dart-flutter first; it loads
+          ptlam-code-style-dart and ptlam-code-style as its own foundations.
+          Let it own the four feature layers, state holders, widgets, models,
+          networking, storage, Slang, AppLogger, dartdoc, and Flutter test
+          mechanics.
+          Use this skill only for the src/app monorepo: package kinds and
+          dependency direction, the lints package and Melos commands, feature
+          registration and routing across packages, localization ownership,
+          the project's test-level order, and charter rules.
+          Where this skill names a monorepo mechanic that replaces the
+          single-package layout, route placement, or test-level order, this
+          skill wins. Everywhere else it may be stricter, never looser.
+
+  - id: ptlam-agent-os-code-style-typescript-nestjs
+    description:
+      Write, review, and fix NestJS code in the PTLam Agent OS src/api monorepo
+      against its app, feature, and package kinds and their dependency
+      direction, the pnpm catalog, Turbo, Biome, and Vitest facts, feature
+      composition through the root module and join adapters, feature-owned
+      persistence, the project's highest-level-first test order, and its
+      charter vocabulary and decision-record rules. Use when creating an app,
+      feature, or package there, placing a file, wiring a feature module into
+      the app, letting one feature reach another, choosing a test level, or
+      fixing a pnpm, Turbo, Biome, or Vitest project failure. Compose this
+      skill from any PTLam Agent OS workflow that changes TypeScript files. Do
+      not use for the four feature layers, use cases, providers, transports,
+      or TypeScript mechanics on their own, or for another repository.
+    category_id: project-ptlam-agent-os
+    visibility: public
+    status: active
+    required_skills:
+      - skill_id: ptlam-code-style-typescript-nestjs
+        reason:
+          Provides the feature-first hexagonal structure, use cases, module
+          API, providers, enhancers, lifecycle, transports, operations, and
+          Nest test mechanics this monorepo's conventions build on.
+        instructions: |-
+          Read and apply ptlam-code-style-typescript-nestjs first; it loads
+          ptlam-code-style-typescript and ptlam-code-style as its own
+          foundations.
+          Let it own the four feature layers, use cases, module API, tokens
+          and scopes, enhancers, lifecycle, transport contracts, operations,
+          and Nest test mechanics.
+          Use this skill only for the src/api monorepo: package kinds and
+          dependency direction, toolchain facts, root-module composition and
+          join adapters, feature-owned persistence, the project's test-level
+          order, and charter rules.
+          Where this skill names a monorepo mechanic that replaces the
+          single-application layout, test placement, or test-level order,
+          this skill wins. Everywhere else it may be stricter, never looser.

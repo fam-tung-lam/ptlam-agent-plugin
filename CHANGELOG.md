@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added two PTLam Agent OS project skills that specialize the Flutter and NestJS
+  code-style skills for the `src/app` and `src/api` monorepos: app, feature, and
+  package kinds with one dependency direction, feature composition through the
+  app, per-package tooling facts, and a highest-level-first test order.
+
 ### Changed
 
 - Clarified file boundaries across code-style skills: give independently used

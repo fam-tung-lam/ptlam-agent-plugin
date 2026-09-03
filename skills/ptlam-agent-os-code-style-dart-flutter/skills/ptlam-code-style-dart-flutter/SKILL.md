@@ -1,0 +1,111 @@
+---
+name: ptlam-code-style-dart-flutter
+description:
+  Write, review, and fix Flutter application code against conventions for the
+  toolchain, four-layer feature structure, presentation-layer BLoC and Cubit
+  state, widgets, routes, models, networking, storage, localization, logging,
+  widget documentation, and tests. Use when adding or changing Flutter code,
+  choosing between setState, Cubit, and Bloc, placing a new file or feature,
+  wiring get_it or go_router, or fixing a flutter analyze or build_runner
+  failure. Do not use for Dart outside Flutter or for another stack.
+---
+
+# PTLam Dart Flutter Code Style
+
+Rules for Flutter application code: the shared toolchain, the four-layer feature
+structure, presentation state, widgets, routes, external boundaries, and tests.
+This skill owns Flutter mechanics only.
+
+## Required skills
+
+### `ptlam-code-style-dart`
+
+**Reason:** Provides the Dart language, package, analyzer, formatter, dartdoc, and test mechanics underneath the Flutter boundary.
+
+**Instructions:** Read and apply ptlam-code-style-dart first; it loads ptlam-code-style
+as its own foundation.
+Let Dart own the SDK and toolchain, naming, formatting, imports,
+const and final, package layout, dartdoc, and package:test mechanics.
+Use this skill only for Flutter framework, widget, state, routing,
+localization, and Flutter-runner test mechanics.
+This specialization may be stricter than Dart, never looser.
+
+Read [ptlam-code-style-dart](skills/ptlam-code-style-dart/SKILL.md).
+
+## Before review or change
+
+Choose review or change using the inherited mode policy. In review, use the
+installed FVM SDK and existing generated output; report missing prerequisites
+instead of installing an SDK or running a generator.
+
+1. Resolve the Flutter version through FVM. Run Flutter as `fvm flutter …` and
+   Dart as `fvm dart …`; never use a global SDK. Every Dart command named in
+   this skill runs through that prefix.
+2. Find out which project you are in:
+
+   | Project  | Version policy                                                                                                          |
+   | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+   | New      | Latest stable Flutter and latest stable packages                                                                        |
+   | Existing | Read `.fvmrc`, `pubspec.yaml`, and `pubspec.lock`, then match them; an upgrade is a separate change with its own checks |
+
+3. Read `analysis_options.yaml`. It, `pubspec.lock`, and `.fvmrc` are the
+   project's truth; the references describe the intended baseline.
+4. For a new project, include
+   [`very_good_analysis`](https://pub.dev/packages/very_good_analysis) at its
+   pinned version as the lint set. Keep whatever set an existing project uses.
+
+## Shared toolchain
+
+[`build_runner`](https://pub.dev/packages/build_runner) runs every code
+generator. In change mode, configure the builders in the root `build.yaml`, then
+regenerate everything with:
+
+```bash
+fvm dart run build_runner build
+```
+
+Edit the source that owns a generated file; never hand-edit `*.g.dart`,
+`*.freezed.dart`, `*.mocks.dart`, route files, or `strings.g.dart`. Follow the
+repository's tracked-file policy for generated output.
+
+In change mode, fix the first build error before reading the rest. Rerun
+generation after changing any annotation or generator dependency, then run
+analysis. In review, inspect source and existing output; report generation that
+would be needed as missing verification.
+
+## Pick a reference
+
+| Concern                                                                      | Reference                                               |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Placing a layer, defining a repository boundary, or wiring dependencies      | [architecture.md](references/architecture.md)           |
+| Choosing or connecting `setState`, `Cubit`, or `Bloc` state                  | [state-management.md](references/state-management.md)   |
+| Adding a file or feature, placing a BLoC, or choosing what a feature exports | [file-organization.md](references/file-organization.md) |
+| Naming, formatting, imports, `const`, analyzer settings, `// ignore:`        | The Dart skill loaded above                             |
+| Building a widget, splitting one, declaring a route, or using `BuildContext` | [widgets.md](references/widgets.md)                     |
+| Defining a DTO, a domain entity, a failure, or a Freezed union               | [models.md](references/models.md)                       |
+| Calling an external API                                                      | [networking.md](references/networking.md)               |
+| Reading or writing stored data                                               | [storage.md](references/storage.md)                     |
+| Adding or changing user-visible text                                         | [localization.md](references/localization.md)           |
+| Emitting a log record                                                        | [logging.md](references/logging.md)                     |
+| Documenting a widget, BLoC, use case, or repository                          | [documentation.md](references/documentation.md)         |
+| Writing, placing, or reshaping a test                                        | [testing.md](references/testing.md)                     |
+
+## A check failed: where to look
+
+| Failing check                                                        | Reference                                                                                               |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `fvm flutter analyze`, a `very_good_analysis` lint                   | The Dart skill loaded above                                                                             |
+| `fvm dart format` reports a diff                                     | The Dart skill loaded above                                                                             |
+| `use_build_context_synchronously` fires after an `await`             | [widgets.md](references/widgets.md)                                                                     |
+| `build_runner` fails, or generated output is missing                 | [Shared toolchain](#shared-toolchain), then the generator's owner                                       |
+| A generated route or `strings.g.dart` symbol is undefined            | [widgets.md](references/widgets.md) for routes, [localization.md](references/localization.md) for Slang |
+| Flutter or Dart SDK constraint mismatch                              | [Before review or change](#before-review-or-change)                                                     |
+| `pumpAndSettle` times out, or a `blocTest` expectation never arrives | [testing.md](references/testing.md)                                                                     |
+
+## Finish
+
+Finish when touched feature code sits under its `application/`, `domain/`,
+`infrastructure/`, or `presentation/` layer and follows its reference,
+`fvm flutter analyze` and
+`fvm dart format --output=none --set-exit-if-changed .` report nothing, the
+affected tests pass, and every check you could not run is named.

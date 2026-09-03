@@ -53,6 +53,8 @@
     "./skills/ptlam-health-connector-adding-data-type",
     "./skills/ptlam-health-connector-code-style-dart",
     "./skills/ptlam-health-connector-code-style-kotlin",
-    "./skills/ptlam-health-connector-code-style-swift"
+    "./skills/ptlam-health-connector-code-style-swift",
+    "./skills/ptlam-agent-os-code-style-dart-flutter",
+    "./skills/ptlam-agent-os-code-style-typescript-nestjs"
   ]
 }
